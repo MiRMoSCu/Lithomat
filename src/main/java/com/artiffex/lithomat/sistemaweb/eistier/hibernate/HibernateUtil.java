@@ -1,7 +1,5 @@
 package com.artiffex.lithomat.sistemaweb.eistier.hibernate;
 
-import java.io.File;
-
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,19 +17,12 @@ public class HibernateUtil {
 	
 	private static synchronized void initSessionFactory() {
 		try {
-			
-			File file = new File(SERVER_CONFIG_FILE_LOCATION);
-			System.out.println(file.getParent());
-			System.out.println(file.getPath());
-			
-			
 			Configuration configuration = new Configuration().configure(SERVER_CONFIG_FILE_LOCATION);
 			StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
 			sessionFactory = configuration.buildSessionFactory(builder.build());
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public static SessionFactory getInstance() {
