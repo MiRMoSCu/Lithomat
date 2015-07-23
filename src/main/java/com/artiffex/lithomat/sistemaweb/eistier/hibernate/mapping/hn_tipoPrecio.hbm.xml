@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPrecio" table="tipo_precio" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idTipoPrecio">
+			<column name="id_tipo_precio"/>
+			<type name="integer"/>
+			<generator class="increment"/>
+		</id>
+		<property name="nombre">
+			<column name="nombre" length="45"/>
+			<type name="string"/>
+		</property>
+		<property name="descripcion">
+			<column name="descripcion" length="80"/>
+			<type name="string"/>
+		</property>
+		<property name="factorDivisor">
+			<column name="factor_divisor"/>
+			<type name="integer"/>
+		</property>
+		<property name="activo">
+			<column name="activo"/>
+			<type name="boolean"/>
+		</property>
+		<!-- relaciones de identidad uno a muchos que esta clase mantiene con otras clases -->
+		<set name="tipoCliente" table="tipo_cliente" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_tipo_precio" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoCliente"/>
+		</set>
+		<set name="costosExtras" table="costos_extras" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_tipo_precio" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.CostosExtras"/>
+		</set>
+		<set name="tipoComprobanteFiscal" table="tipo_comprobante_fiscal" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_tipo_precio" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoComprobanteFiscal"/>
+		</set>
+		<set name="tipoPapelExtendido" table="tipo_papel_extendido" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_tipo_precio" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPapelExtendido"/>
+		</set>
+		<set name="tintaEspecial" table="tinta_especial" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_tipo_precio" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TintaEspecial"/>
+		</set>
+		<set name="tipoBarniz" table="tipo_barniz" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_tipo_precio" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoBarniz"/>
+		</set>
+		<set name="tipoPlaca" table="tipo_placa" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_tipo_precio" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPlaca"/>
+		</set>
+		<set name="tabuladorPrecios" table="tabulador_precios" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_tipo_precio" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TabuladorPrecios"/>
+		</set>
+		<set name="procesoExterno" table="proceso_externo" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_tipo_precio" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.ProcesoExterno"/>
+		</set>
+		<set name="procesoTransporte" table="proceso_transporte" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_tipo_precio" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.ProcesoTransporte"/>
+		</set>
+		<set name="procesoDisenio" table="proceso_disenio" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_tipo_precio" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.ProcesoDisenio"/>
+		</set>
+		<set name="procesoPreprensa" table="proceso_preprensa" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_tipo_precio" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.ProcesoPreprensa"/>
+		</set>
+		<set name="parametrosConfig" table="parametros_config" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_tipo_precio" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.ParametrosConfig"/>
+		</set>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,219 @@
+body {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background-color: #006198;
+    font-family: Arial;
+    font-size:14px;
+}
+
+
+/** estilos para todas las hojas **/
+
+img {
+    margin:0;
+    border:0;
+    padding:0;
+}
+
+table {
+    width:100%;
+    height:100%;
+}		
+
+select {
+    width: 100%;
+}
+
+/* notifiacion tipo growl */
+
+#notificacion_tipo_growl {
+    top: 50px;
+    right: 80px;
+    width: 300px;
+    height: 75px;
+    position: fixed;
+    color: #FFF;
+    background-color: rgb(1,97,157);
+    overflow: scroll;
+    display: none;
+}
+
+/****/
+
+.linea {
+    width: 100%;
+    height: 35px;
+}
+
+
+.casilla {
+    width:100%;
+    height:30px;
+    background: transparent;
+    margin: 0px 0px 5px 0px;
+}
+
+.doble_linea {
+    width: 100%;
+    height: 70px;
+}
+
+.casilla_doble_alto {
+    width:100%;
+    height:65px;
+    background: transparent;
+    margin: 0px 0px 5px 0px;
+}
+
+/******/
+
+
+
+/*****/
+
+.titulo {
+    padding: 0px 0px 5px 0px;
+}
+
+.div_separador_grande {
+    width: 571px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 0px 20px 0px;
+}
+
+.div_separador_mediano {
+    width: 337px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 0px 20px 0px;
+}
+
+.div_separador_chico {
+    width: 247px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 0px 20px 0px;
+}
+
+/******/
+
+.columna_completa {
+    height:100%;
+    background: #e2e2e2;
+    color:#898989;
+}
+
+.columna_izquierda {
+    width: 421px;
+    height: 100%;
+    float: left;
+}
+
+.columna_derecha {
+    width: 421px;
+    height: 100%;
+    float: right;
+}
+
+.mitad_columna_izquierda {
+    width:205px;
+    height:100%;
+    float: left;
+}
+
+.mitad_columna_derecha {
+    width:205px;
+    height:100%;
+    float:right;
+}
+
+.cuarto_columna_izquierda {
+    width:123px;
+    height:100%;
+    float:left;
+}
+
+.cuarto_columna_derecha {
+    width:123px;
+    height:100%;
+    float:right;
+}
+
+.columna_izquierda_tres_cuartos {
+    width:649px;
+    height:100%;
+    float:left;
+}
+
+.columna_derecha_tres_cuartos {
+    width:649px;
+    height:100%;
+    float:right;
+}
+
+.columna_centrales_juntas {
+    width:433px;
+    height:100%;
+    float:left;
+    margin-left:0px; /*11px;*/
+}
+
+
+
+
+
+
+/******/
+
+.input {
+    border-style: none;
+    background-color: transparent; /*transparent*/
+    height: 23px;
+    font-size: 14px;
+    width: 100%;	
+}
+
+.input[type="file"] {
+	/*background:transparent;*/
+}
+
+.textarea_doble {
+    border-style: none;
+    background-color: transparent;
+    resize: none;
+    font-size: 14px;
+    width: 100%;
+    height: 55px;
+}
+
+.textarea_triple {
+    border-style: none;
+    background-color: transparent;
+    resize: none;
+    font-size: 14px;
+    width: 100%;
+    height: 80px;
+}
+
+table th {
+    font-weight: normal;
+    color: #fff;
+    background-color: #7faadc;
+    border: 1px solid #fff;
+}
+
+table tr.l1 {
+    background-color: #fff;	
+}
+
+table tr.l2 {
+    background-color: #d8e7ff;
+}
+
+table td {
+    text-align: center;
+}
+
+

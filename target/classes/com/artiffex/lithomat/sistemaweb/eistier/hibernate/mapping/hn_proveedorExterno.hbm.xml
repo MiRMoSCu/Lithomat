@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.ProveedorExterno" table="proveedor_externo" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idProveedorExterno">
+			<column name="id_proveedor_externo"/>
+			<type name="integer"/>
+			<generator class="increment"/>
+		</id>
+		<property name="razonSocial">
+			<column name="razon_social" length="80"/>
+			<type name="string"/>
+		</property>
+		<property name="calle">
+			<column name="calle" length="45"/>
+			<type name="string"/>
+		</property>
+		<property name="numExterior">
+			<column name="num_exterior" length="15"/>
+			<type name="string"/>
+		</property>
+		<property name="numInterior">
+			<column name="num_interior" length="15"/>
+			<type name="string"/>
+		</property>
+		<property name="colonia">
+			<column name="colonia" length="45"/>
+			<type name="string"/>
+		</property>
+		<property name="delegacionMunicipio">
+			<column name="delegacion_municipio" length="45"/>
+			<type name="string"/>
+		</property>
+		<property name="estado">
+			<column name="estado" length="45"/>
+			<type name="string"/>
+		</property>
+		<property name="codigoPostal">
+			<column name="codigo_postal" length="10"/>
+			<type name="string"/>
+		</property>
+		<property name="pais">
+			<column name="pais" length="45"/>
+			<type name="string"/>
+		</property>
+		<property name="telefono">
+			<column name="telefono" length="20"/>
+			<type name="string"/>
+		</property>
+		<property name="email">
+			<column name="email" length="120"/>
+			<type name="string"/>
+		</property>
+		<property name="observaciones">
+			<column name="observaciones" length="250"/>
+			<type name="string"/>
+		</property>
+		<property name="activo">
+			<column name="activo"/>
+			<type name="boolean"/>
+		</property>
+		<!-- relaciones de identidad uno a muchos que esta clase mantiene con otras clases -->
+		<set name="procesoExterno" table="proceso_externo" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_proveedor_externo" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.ProcesoExterno"/>
+		</set>
+	</class>
+</hibernate-mapping>

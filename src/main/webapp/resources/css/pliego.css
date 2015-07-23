@@ -1,0 +1,157 @@
+
+#div_area {
+    width:528px;
+    height: 594px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 77px;
+}
+
+#div_ancho {
+    width: 528px;
+    height: 565px;
+}
+
+#div_hoja {
+    width: 499px;
+    height: 565px;
+    float: left;
+    background-color: #fff;
+}
+
+#div_derecha3d {
+    width: 29px;
+    height: 265px;
+    float: left;
+}
+
+#div_fondo_esq_sup {
+    width: 29px;
+    height: 31px;
+    background-image: url('../image/s_esq_sup.png');
+    background-repeat: no-repeat;
+}
+
+#div_fondo_der{
+    width: 29px;
+    height: 534px;
+    background-image: url('../image/s_der.png');
+    background-repeat: repeat-y;
+}
+
+#div_abajo3d {
+    width: 528px;
+    height: 29px;
+    float: left;
+}
+
+#div_fondo_esq_izq {
+    width: 32px;
+    height: 29px;
+    float: left;
+    background-image: url('../image/s_esq_izq.png');
+}
+
+#div_fondo_abajo {
+    width: 467px;
+    height: 29px;
+    float: left;
+    background-image: url('../image/s_inf.png');
+}
+
+#div_fondo_esq_der {
+    width: 29px;
+    height: 29px;
+    float: left;
+    background-image: url('../image/s_esq_der.png');
+}
+
+/***/
+
+#div_contenido {
+    width: 455px;
+    height: 550px;
+    position: relative;
+    top: 15px;
+    background-color: transparent;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#div_pliego {
+    background-color: transparent;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/***/
+
+#div_tabla_pliego {
+    height: 130px;
+    overflow-x: scroll;
+    background-color: transparent;
+}
+
+table#tabla_hojas_pliego tr:hover td {
+    cursor: pointer;
+    background-color: #99CCFF;
+}
+
+/***/
+
+/*
+.columna_izquierda {
+    width: 211px;
+    height: 100%;
+    background: transparent;
+    float: left;
+}
+
+.columna_derecha {
+    width: 211px;
+    height: 100%;
+    background: transparent;
+    float: right;
+}
+*/
+
+.columna_pliego_izquierda {
+    width: 141px;
+    height: 100%;
+    background: #e2e2e2;
+    float: left;
+    margin-right: 5px;
+}
+
+.columna_pliego_centro {
+    width: 143px;
+    height: 100%;
+    background: #e2e2e2;
+    float: left;
+    margin-left: 5px;
+    margin-right: 5px;   
+}
+
+.columna_pliego_derecha {
+    width: 141px;
+    height: 100%;
+    background: #e2e2e2;
+    float: left;
+    margin-left: 5px;
+}
+
+
+
+.mitad_columna_derecha {
+    
+}
+
+.mitad_columna_izquierda {
+    
+}
+
+/**********/
+
+
+

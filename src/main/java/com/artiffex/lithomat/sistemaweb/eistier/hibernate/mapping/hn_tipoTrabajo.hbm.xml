@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajo" table="tipo_trabajo" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idTipoTrabajo">
+			<column name="id_tipo_trabajo"/>
+			<type name="integer"/>
+			<generator class="increment"/>
+		</id>
+		<property name="nombre">
+			<column name="nombre" length="45"/>
+			<type name="string"></type>
+		</property>
+		<property name="activo">
+			<column name="activo"/>
+			<type name="boolean"/>
+		</property>
+		<!-- relaciones de identidad uno a muchos que esta clase mantiene con otras clases -->
+		<set name="partida" table="partida" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_tipo_trabajo" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Partida"/>
+		</set>
+	</class>
+</hibernate-mapping>

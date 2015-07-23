@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.TintaEspecial" table="tinta_especial" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idTintaEspecial">
+			<column name="id_tinta_especial"/>
+			<type name="integer"/>
+			<generator class="increment"/>
+		</id>
+		<property name="precio">
+			<column name="precio"/>
+			<type name="float"/>
+		</property>
+		<many-to-one name="tipoPrecio" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPrecio" fetch="select">
+			<column name="id_tipo_precio"/>
+		</many-to-one>
+		<property name="activo">
+			<column name="activo"/>
+			<type name="boolean"/>
+		</property>
+	</class>
+</hibernate-mapping>

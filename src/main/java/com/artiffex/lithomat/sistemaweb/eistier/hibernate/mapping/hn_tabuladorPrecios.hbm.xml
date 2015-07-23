@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.TabuladorPrecios" table="tabulador_precios" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idTabuladorPrecios">
+			<column name="id_tabulador_precios"/>
+			<type name="integer"/>
+			<generator class="increment"/>
+		</id>
+		<many-to-one name="maquina" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Maquina" fetch="select">
+			<column name="id_maquina"/>
+		</many-to-one>
+		<property name="nombreInsumo">
+			<column name="nombre_insumo" length="80"/>
+			<type name="string"/>
+		</property>
+		<property name="descripcion">
+			<column name="descripcion" length="250"/>
+			<type name="string"/>
+		</property>
+		<property name="inicioTabulador">
+			<column name="inicio_tabulador"/>
+			<type name="integer"/>
+		</property>
+		<property name="finTabulador">
+			<column name="fin_tabulador"/>
+			<type name="integer"/>
+		</property>
+		<property name="precio">
+			<column name="precio"/>
+			<type name="float"/>
+		</property>
+		<many-to-one name="tipoPrecio" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPrecio" fetch="select">
+			<column name="id_tipo_precio"/>
+		</many-to-one>
+		<property name="activo">
+			<column name="activo"/>
+			<type name="boolean"/>
+		</property>
+	</class>
+</hibernate-mapping>

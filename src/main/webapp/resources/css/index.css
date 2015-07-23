@@ -1,0 +1,186 @@
+img {
+	margin: 0px;
+	border: 0px;
+	padding: 0px;
+	border-width: 0px;
+	border-style: solid;
+	border-color: #fff;
+}
+
+input {
+	margin: 0px;
+	border: 0px;
+	padding: 10px;
+}
+
+#div_login {
+	width: 1196px;
+	height: 585px;
+	margin-left: auto;
+	margin-right: auto;
+	background-image: url('../image/inicio.jpg');
+}
+
+#div_cuadro_formulario {
+	width: 553px;
+	height: 250px;
+	position: relative;
+	top: 253px;
+	left: 479px;
+}
+
+#div_espacio {
+	width: 400px;
+	height: 15px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#div_usuario  {
+	width: 400px;
+	height: 73px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#div_imagen_usuario {
+	width: 71px;
+	height: 73px;
+	float:left;
+}
+
+#div_contenedor_input_usuario {
+	width: 315px;
+	height: 73px;
+	float: left;
+}
+
+#div_curva_derecha {
+	width: 14px;
+	height: 73px;
+	float: left;
+}
+
+#div_input_usuario {
+	background: gray;
+	width: 315px;
+	height: 40px;
+	position: relative;
+	top: 17px;
+}
+
+input[name=usuario] {
+	width: 295px;
+	height: 20px;
+	text-align:	right;
+	font: 16px sans-serif;
+	color: gray;
+}
+
+input[name=usuario]:focus {
+	outline: none;
+	border: 0px;
+}
+
+img[name=esquina_derecha] {
+	position: relative;
+	top: 17px;
+}
+
+#div_contrasenia {
+	width: 400px;
+	height: 73px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#div_curva_izquierda {
+	width: 13px;
+	height: 73px;
+	float: left;
+}
+
+img[name=esquina_izquierda] {
+	position: relative;
+	top: 17px;
+}
+
+#div_contenedor_input_contrasenia {
+	width: 316px;
+	height: 73px;
+	float: left;
+}
+
+#div_input_contrasenia {
+	width: 315px;
+	height: 40px;
+	position: relative;
+	top: 17px;
+}
+
+input[name=contrasenia] {
+	width: 296px;
+	height: 20px;
+	text-align:	left;
+	font: 16px sans-serif;
+	color: gray;
+}
+
+input[name=contrasenia]:focus {
+	outline: none;
+	border: 0px;
+}
+
+#div_imagen_contrasenia {
+	width: 71px;
+	height: 72px;
+	float:left;
+}
+
+#div_enviar {
+	width: 400px;
+	height: 70px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#div_mensajes {
+	width: 287px;
+	height: 100%;
+	float: left;
+}
+
+#div_boton_enviar {
+	width: 113px;
+	height: 100%;
+	float: left;
+}
+
+img[name="boton_inicio_sesion"] {
+	position: relative;
+	top: 10px;
+}
+
+#mensaje_contraseña_incorrecta {
+	margin-right: auto;
+	margin-left: auto;
+	position: relative;
+	top: 13px;
+	color: #fff;
+}
+
+#mensaje_usuario_incorrecto {
+	margin-right: auto;
+	margin-left: auto;
+	position: relative;
+	top: 20px;
+	color: #fff;
+}
+
+#mensaje_llenar_campos {
+	margin-right: auto;
+	margin-left: auto;
+	position: relative;
+	top: 20px;
+	color: #fff;
+}

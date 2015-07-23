@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.ParametrosConfig" table="parametros_config" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idParametrosConfig">
+			<column name="id_parametros_config"/>
+			<type name="integer"/>
+			<generator class="increment"/>
+		</id>
+		<property name="nombre">
+			<column name="nombre" length="45"/>
+			<type name="string"/>
+		</property>
+		<property name="descripcion">
+			<column name="descripcion" length="80"/>
+			<type name="string"/>
+		</property>
+		<property name="fillerVarchar1">
+			<column name="filler_varchar_1" length="250"/>
+			<type name="string"/>
+		</property>
+		<property name="fillerVarchar2">
+			<column name="filler_varchar_2" length="250"/>
+			<type name="string"/>
+		</property>
+		<property name="fillerInt1">
+			<column name="filler_int_1"/>
+			<type name="integer"/>
+		</property>
+		<property name="fillerInt2">
+			<column name="filler_int_2"/>
+			<type name="integer"/>
+		</property>
+		<property name="fillerNumeric1">
+			<column name="filler_numeric_1"/>
+			<type name="double"/>
+		</property>
+		<property name="fillerNumeric2">
+			<column name="filler_numeric_2"/>
+			<type name="double"/>
+		</property>
+		<property name="fillerBool1">
+			<column name="filler_bool_1"/>
+			<type name="boolean"/>
+		</property>
+		<property name="fillerBool2">
+			<column name="filler_bool_2"/>
+			<type name="boolean"/>
+		</property>
+		<many-to-one name="tipoPrecio" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPrecio" fetch="select">
+			<column name="id_tipo_precio"/>
+		</many-to-one>
+		<property name="activo">
+			<column name="activo"/>
+			<type name="boolean"/>
+		</property>
+	</class>
+</hibernate-mapping>

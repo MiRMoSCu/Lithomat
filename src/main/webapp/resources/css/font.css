@@ -1,0 +1,41 @@
+@charset "utf-8";
+
+@font-face {
+    font-family:HelveticaUltraComp;
+    src:url("../fonts/HelveticaUltraComp.otf");
+}
+
+@font-face {
+    font-family:HelveticaLTStdLightCond;
+    src:url("../fonts/HelveticaLTStdLightCond.otf");
+}
+
+.HelveticaUltraComp {
+    font-family:HelveticaUltraComp;
+    font-size:100%;
+}
+
+.HelveticaLight {
+    font-family:HelveticaLTStdLightCond;
+}
+
+.Times {
+    font-family:Times, serif;
+}
+
+.Arial {
+    font-family:'Arial Narrow', sans-serif;
+    font-stretch:ultra-condensed;
+    font-size:100%;
+}
+
+.titulo {
+    color:#467abc;
+    font-size:43pt;
+}
+
+.blanco {
+    color:#fff;
+    font-size:23px;
+}
+

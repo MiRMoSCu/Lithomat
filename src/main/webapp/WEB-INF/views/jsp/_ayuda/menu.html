@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>Orden de Producción</title>
+		<style type="text/css" media="screen">
+		
+			#div_contenido_menu {
+				width:284px;
+				height: 402px;
+				margin-left: auto;
+				margin-right: auto;
+				background: transparent; /*#fff*/
+				position:relative;
+			}
+
+			#div_cerrar_sesion {
+				width:202px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			.div_menu_item {
+				margin-bottom: 10px;
+				border:0;
+				padding:0;
+			}
+
+			.div_menu_item ul {
+				margin:0;
+				border:0;
+				padding:0;
+				width:85%;
+				margin-right: auto;
+				margin-left: auto;
+				background: #68ACDF; /*68AEE0*/
+				line-height: 30px;
+				height: 0px;
+				list-style-type: none;
+				overflow: hidden;
+			/*Animation*/
+			/*transition:[Propiedad CSS] [Duración] [Función de Tiempo] [Retardo];*/
+				-webkit-transition: height 1s ease; /*chrome, safari*/
+				-moz-transition: height 1s ease; 	/*firefox*/
+				-o-transition: height 1s ease; 		/*opera*/
+				-ms-transition: height 1s ease;		/*internet explorer*/
+				transition: height 1s ease;
+			}
+
+			.div_menu_item:hover ul#menu_produccion {
+				height: 323px;
+			}
+
+			.div_menu_item:hover ul#menu_reportes {
+				height: 120px;
+			}
+
+			.div_menu_item:hover ul#menu_seguridad {
+				height: 120px;
+			}
+
+
+			.div_menu_item li {
+				margin:0;
+				border:0;
+				padding:0;	
+				text-align: center;
+			}
+
+			.div_menu_item li a {
+				margin:0;
+				border:0;
+				padding: 10px 0px 0px 0px;
+				text-decoration: none;
+				display: block;
+			}
+
+			.div_menu_item li:hover {
+				background: #006198;
+			}
+
+			.div_menu_item img {
+				margin-left: auto;
+				margin-right: auto;
+				display: block;
+			}
+			
+		</style>
+		<link rel="stylesheet" href="../../../../resources/css/orden_produccion.css" type="text/css">
+		<script type="text/javascript">
+
+		</script>
+	</head>
+	<body>
+		<div id="div_cuerpo">
+			<div id="div_menu">
+				<div id="div_contenido_menu">
+					<div class="div_menu_item">
+						<img alt="" src="../../../../resources/image/boton_menu_produccion.png">
+						<ul id="menu_produccion">
+							<li>
+								<a href="#"><img alt="" src="../../../../resources/image/menu_diseno.png"></a>
+								<img alt="" src="../../../../resources/image/menu_separador.png">
+							</li>
+							<li>
+								<a href="#"><img alt="" src="../../../../resources/image/menu_preprensa.png"></a>
+								<img alt="" src="../../../../resources/image/menu_separador.png">
+							</li>
+							<li>
+								<a href="#"><img alt="" src="../../../../resources/image/menu_transporte.png"></a>
+								<img alt="" src="../../../../resources/image/menu_separador.png">
+							</li>
+							<li>
+								<a href="#"><img alt="" src="../../../../resources/image/menu_acabado.png"></a>
+								<img alt="" src="../../../../resources/image/menu_separador.png">
+							</li>
+							<li>
+								<a href="#"><img alt="" src="../../../../resources/image/menu_offset.png"></a>
+								<img alt="" src="../../../../resources/image/menu_separador.png">
+							</li>
+							<li>
+								<a href="#"><img alt="" src="../../../../resources/image/menu_procesos.png"></a>
+								<img alt="" src="../../../../resources/image/menu_separador.png">
+							</li>
+						</ul>
+					</div>
+					<div class="div_menu_item">
+						<img alt="" src="../../../../resources/image/boton_menu_reportes.png">
+						<ul id="menu_reportes">
+							<li><a href="#">Plantilla</a></li>
+							<li><a href="#">Clasificación</a></li>
+							<li><a href="#">Resultados</a></li>
+							<li><a href="#">Calendario</a></li>
+							<li><a href="#">Calendario</a></li>
+							<li><a href="#">Calendario</a></li>
+							<li><a href="#">Calendario</a></li>
+							<li><a href="#">Calendario</a></li>
+							<li><a href="#">Calendario</a></li>
+						</ul>
+					</div>
+					<div class="div_menu_item">
+						<img alt="" src="../../../../resources/image/boton_menu_seguridad.png">
+						<ul id="menu_seguridad">
+							<li><a href="#">T.V.</a></li>
+							<li><a href="#">Radio</a></li>
+						</ul>
+					</div>
+					<div id="div_cerrar_sesion">
+						<a href="#">
+							<img alt="" src="../../../../resources/image/boton_cerrar.jpg">
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

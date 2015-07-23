@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionOrdenProduccion" table="calificacion_orden_produccion" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idCalificacionOrdenProduccion">
+			<column name="id_calificacion_orden_produccion"/>
+			<type name="integer"/>
+			<generator class="increment"/>
+		</id>
+		<many-to-one name="ordenProduccion" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.OrdenProduccion">
+			<column name="id_orden_produccion"/>
+		</many-to-one>
+		<property name="precioBruto">
+			<column name="precio_bruto"/>
+			<type name="double"/>
+		</property>
+		<property name="tipoClientePrecio">
+			<column name="tipo_cliente_precio"/>
+			<type name="float"/>
+		</property>
+		<property name="tipoClienteIdTipoPrecio">
+			<column name="tipo_cliente_id_tipo_precio"/>
+			<type name="integer"/>
+		</property>
+		<property name="precioCliente">
+			<column name="precio_cliente"/>
+			<type name="double"/>
+		</property>
+		<property name="porcentajeDescuento">
+			<column name="porcentaje_descuento"/>
+			<type name="integer"/>
+		</property>
+		<property name="precioBrutoConDescuento">
+			<column name="precio_bruto_con_descuento"/>
+			<type name="double"/>
+		</property>
+		<property name="precioNeto">
+			<column name="precio_neto"/>
+			<type name="double"/>
+		</property>
+		<property name="observaciones">
+			<column name="observaciones" length="200"/>
+			<type name="string"/>
+		</property>
+		<property name="condicionesProduccion">
+			<column name="condiciones_produccion" length="1000"/>
+			<type name="string"/>
+		</property>
+		<property name="fechaGeneracion">
+			<column name="fecha_generacion"/>
+			<type name="timestamp"/>
+		</property>
+		<property name="activo">
+			<column name="activo"/>
+			<type name="boolean"/>
+		</property>
+	</class>
+</hibernate-mapping>

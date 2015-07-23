@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.SubModulo" table="sub_modulo" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idSubModulo">
+			<column name="id_sub_modulo"/>
+			<type name="integer"/>
+			<generator class="increment"/>
+		</id>
+		<property name="nombre">
+			<column name="nombre" length="45"/>
+			<type name="string"/>
+		</property>
+		<property name="descripcion">
+			<column name="descripcion" length="80"/>
+			<type name="string"/>
+		</property>
+		<property name="path">
+			<column name="path" length="80"/>
+			<type name="string"/>
+		</property>
+		<property name="activo">
+			<column name="activo"/>
+			<type name="boolean"/>
+		</property>
+		<!-- relaciones de identidad uno a muchos que esta clase mantiene con otras clases -->
+		<set name="moduloXPerfilXUsuario" table="modulo_x_perfil_x_usuario" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_sub_modulo" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.ModuloXPerfilXUsuario"/>
+		</set>
+	</class>
+</hibernate-mapping>

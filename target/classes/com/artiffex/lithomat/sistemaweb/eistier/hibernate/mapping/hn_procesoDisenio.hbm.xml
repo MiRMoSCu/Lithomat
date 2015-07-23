@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.ProcesoDisenio" table="proceso_disenio" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idProcesoDisenio">
+			<column name="id_proceso_disenio"/>
+			<type name="integer"/>
+			<generator class="increment"/>
+		</id>
+		<property name="nombreProceso">
+			<column name="nombre_proceso" length="45"/>
+			<type name="string"/>
+		</property>
+		<property name="descripcion">
+			<column name="descripcion" length="250"/>
+			<type name="string"/>
+		</property>
+		<property name="precio">
+			<column name="precio"/>
+			<type name="float"/>
+		</property>
+		<many-to-one name="tipoPrecio" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPrecio" fetch="select">
+			<column name="id_tipo_precio"/>
+		</many-to-one>
+		<property name="activo">
+			<column name="activo"/>
+			<type name="boolean"/>
+		</property>
+		<!-- relaciones de identidad uno a muchos que esta clase mantiene con otras clases -->
+		<set name="disenioDetalle" table="disenio_detalle" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_proceso_disenio" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.DisenioDetalle"/>
+		</set>
+	</class>
+</hibernate-mapping>

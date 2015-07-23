@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.Cobranza" table="cobranza" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idCobranza">
+			<column name="id_cobranza"/>
+			<type name="integer"/>
+			<generator class="increment"/>
+		</id>
+		<many-to-one name="ordenProduccion" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.OrdenProduccion" fetch="select">
+			<column name="id_orden_produccion"/>
+		</many-to-one>
+		<property name="fecha">
+			<column name="fecha"/>
+			<type name="date"/>
+		</property>
+		<property name="pendiente">
+			<column name="pendiente"/>
+			<type name="boolean"/>
+		</property>
+		<property name="cargo">
+			<column name="cargo"/>
+			<type name="double"/>
+		</property>
+		<property name="abono">
+			<column name="abono"/>
+			<type name="double"/>
+		</property>
+		<property name="saldo">
+			<column name="saldo"/>
+			<type name="double"/>
+		</property>
+		<property name="activo">
+			<column name="activo"/>
+			<type name="boolean"/>
+		</property>
+	</class>
+</hibernate-mapping>

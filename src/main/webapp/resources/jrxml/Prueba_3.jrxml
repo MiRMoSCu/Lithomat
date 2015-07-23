@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 5.6.2.final using JasperReports Library version 5.6.1  -->
+<!-- 2015-04-07T23:29:40 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Prueba_2" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="30" uuid="ee08b45b-ee7f-433c-a569-65c1610a376d">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="parametro_uno" class="java.lang.String"/>
+	<parameter name="path_logo" class="java.lang.String"/>
+	<field name="papelCantidadTotal" class="java.lang.Integer"/>
+	<field name="papelPrecioUnitario" class="java.lang.Float"/>
+	<field name="papelCosteTotal" class="java.lang.Float"/>
+	<title>
+		<band height="108">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="390" y="0" width="150" height="24" uuid="a39a2b3a-bfce-44ae-a388-c1a1826b0d6c">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte 3.]]></text>
+			</staticText>
+			<image>
+				<reportElement x="10" y="0" width="100" height="90" uuid="75b786c7-5065-4ba6-a6bb-84598f7bc15f"/>
+				<imageExpression><![CDATA["/Users/Lithomat/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/Lithomat/resources/image/logo.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="130" y="0" width="111" height="91" uuid="7ad82274-16f4-438b-a76d-e63407ac7c0b"/>
+				<imageExpression><![CDATA[$P{path_logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="48" splitType="Stretch">
+			<staticText>
+				<reportElement x="20" y="11" width="140" height="18" forecolor="#3228F7" uuid="73632f4b-4683-4ae9-8e70-895fff332c5d"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad papel.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="220" y="0" width="140" height="18" backcolor="#F71F1B" uuid="93f0ea6d-29ef-415a-8ad1-dbdaefdeae42"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio unitario.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="414" y="0" width="140" height="18" uuid="4b9cddb1-2f93-4159-91bb-c4e0b1ae2c37"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Costo total.]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="171" height="41" uuid="b27842a1-a3a4-4004-961c-657a80c15551"/>
+			</rectangle>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="140" height="14" uuid="14c7d86f-26e4-4e5c-b0b0-7de62b17a0fa"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{papelCantidadTotal})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="0" width="140" height="14" uuid="43f98111-f13a-4028-8246-bbb12dfd66d5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.0000").format(Double.valueOf($F{papelPrecioUnitario}))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="414" y="2" width="140" height="14" uuid="adbff29d-841e-4f00-becd-c9698b1e9f92"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(Double.valueOf($F{papelCosteTotal}))]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="1" width="480" height="14" uuid="1c0c009c-5bf5-4edb-96fc-96122e9be708"/>
+				<textFieldExpression><![CDATA[$P{parametro_uno}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

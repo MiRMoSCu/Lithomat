@@ -1,0 +1,247 @@
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>tabla_cotizacion</title>
+		
+		<style type="text/css" media="screen">
+			#contenedor {
+				width: 800px;
+				height: 500px;
+				margin-left: auto;
+				margin-right: auto;
+				background: transparent;
+				border: 1px solid #999;
+			}
+			
+			/* -------------------------------------------- */
+			/* ----------- Pagination: Digg Style --------- */
+			/* -------------------------------------------- */
+			#div_paginador_lithomat ul 					{ border:0; margin:0; padding:0; }
+			#paginacion_lithomat li 					{ border:0; margin-right:3px; padding:0; font-size:13px; list-style:none; float:left;  }
+			#paginacion_lithomat li.bold 				{ font-weight:bold; }
+			#paginacion_lithomat li.activo 				{ border:solid 1px #9aafe5; padding:4px 6px; color:#0e509e; }
+			#paginacion_lithomat li.activo:hover		{ border:solid 1px #0e509e; cursor:pointer; }
+			#paginacion_lithomat li.inactivo 			{ border:solid 1px #DEDEDE; padding:4px 6px; color:#888888; }
+			#paginacion_lithomat li.seleccionado		{ border:solid 1px #9aafe5; padding:4px 6px; background:#2e6ab1; color:#FFFFFF; font-weight:bold; }
+			#paginacion_resultados						{ color:#888888; font-family:Arial, Helvetica, sans-serif; font-size:14px; clear:both; padding:4px }
+			
+		</style>
+		<script type="text/javascript">
+			
+		// variables del paginador
+			var numero_registros_total	= 147;
+			var numero_registros_pagina	= 10;
+			var tamanio_maximo_arreglo	= 7;	// DEBE SER MAYOR A 2
+			var numero_pagina			= 1;	// NO DEBE MODIFICARSE
+			
+			var tamanio_arreglo			= 0; 	// se inicializan en carga_datos()
+			var numero_pagina_total		= 0; 	// se inicializan en carga_datos()
+			var mitad_tamanio_arreglo	= 0;	// se inicializan en carga_datos()
+			
+		// funciones del paginador
+			function actualiza_variables() {
+				numero_pagina_total		= Math.ceil( numero_registros_total / numero_registros_pagina );
+				mitad_tamanio_arreglo	= Math.floor( tamanio_arreglo / 2 );
+			}
+			
+			function string_elementos_encontrados() {
+				var cadena = numero_registros_total + " elementos encontrados. Mostrando del " + ( ( (numero_pagina - 1 ) * numero_registros_pagina ) + 1 ) + " al ";
+				if( parseInt(numero_pagina * numero_registros_pagina) < numero_registros_total ) {
+					cadena = cadena + parseInt(numero_pagina * numero_registros_pagina) + ".";
+				} else {
+					cadena = cadena + numero_registros_total + ".";
+				}
+				return cadena;
+			}
+			
+			function cambia_selector( numPag ) {
+				document.getElementsByClassName("seleccionado")[0].setAttribute("class","activo");
+				
+				var limite_inferior 	= parseInt(numPag) - mitad_tamanio_arreglo;
+				var limite_superior		= parseInt(numPag) + mitad_tamanio_arreglo;
+				var modifica_arreglo	= true;
+				
+				if( limite_inferior <= 0 ) {
+					modifica_arreglo = false;
+					for( var i = 0; i < document.getElementsByName("arreglo").length; i++ ) {
+						document.getElementsByName("arreglo")[i].innerHTML = parseInt(i) + 1;
+					}
+				}
+				
+				if( limite_superior >= ( parseInt(numero_pagina_total) + 1 ) ) {
+					modifica_arreglo = false;
+					for( var i = 0; i < document.getElementsByName("arreglo").length; i++ ) {
+						document.getElementsByName("arreglo")[i].innerHTML =  parseInt(numero_pagina_total - tamanio_arreglo + 1) + parseInt(i);
+					}					
+				}
+				
+				if( modifica_arreglo ) {
+					for( var i = 0; i < document.getElementsByName("arreglo").length; i++ ) {
+						document.getElementsByName("arreglo")[i].innerHTML = parseInt(limite_inferior) + parseInt(i);
+					}
+				}
+				
+				for( var i = 0; i < document.getElementsByName("arreglo").length; i++ ) {
+					if( document.getElementsByName("arreglo")[i].innerHTML == numPag ) {
+						document.getElementsByName("arreglo")[i].setAttribute("class","seleccionado");
+						break;
+					}
+				}
+				
+				delete limite_inferior;
+				delete limite_superior;
+				delete modifica_arreglo;
+			}
+			
+			function paginador( obj ) {	
+				//console.log( obj );
+				if( obj.className != "seleccionado" ) {
+					switch( obj.innerHTML ) {
+						case 'Primero':
+							numero_pagina = 1;
+							// aqui hace el ajax;
+							document.getElementById('paginacion_resultados').innerHTML = string_elementos_encontrados();
+							cambia_selector( numero_pagina );
+							break;
+							
+						case '« Anterior':
+							if( (numero_pagina - 1) > 0 ) {
+								numero_pagina = numero_pagina - 1;
+								// aqui hace el ajax;
+								document.getElementById('paginacion_resultados').innerHTML = string_elementos_encontrados();
+								cambia_selector( numero_pagina );
+							}
+							break;
+						
+						case 'Siguiente »':
+							if( parseInt(numero_pagina) + 1 <= numero_pagina_total ) {
+								numero_pagina = parseInt(numero_pagina) + 1;
+								// aqui hace el ajax;
+								document.getElementById('paginacion_resultados').innerHTML = string_elementos_encontrados();
+								cambia_selector( numero_pagina );
+							}
+							break;
+						
+						case 'Último':
+							numero_pagina = numero_pagina_total;
+							// aqui hace el ajax;
+							document.getElementById('paginacion_resultados').innerHTML = string_elementos_encontrados();
+							cambia_selector( numero_pagina );
+							break;
+						
+						default:
+							numero_pagina = obj.innerHTML;
+							// aqui hace el ajax;
+							document.getElementById('paginacion_resultados').innerHTML = string_elementos_encontrados();
+							cambia_selector( obj.innerHTML );
+							break;
+					}	
+				}
+			}
+			
+			function carga_datos() {
+				
+				if( numero_registros_total < tamanio_maximo_arreglo * numero_registros_pagina ) {
+					tamanio_arreglo = Math.ceil( numero_registros_total / numero_registros_pagina );
+				} else {
+					tamanio_arreglo = tamanio_maximo_arreglo;
+				}
+				// actualiza variables
+				actualiza_variables();
+				
+				// Obtiene elemento div_paginador
+				var objDiv 	= document.getElementById('div_paginador_lithomat');
+				// crea objeto ul
+				var objUl 	= document.createElement('ul');
+				objUl.setAttribute("id","paginacion_lithomat");
+				
+				// crea boton primero
+				var objLi = document.createElement('li');
+				objLi.setAttribute("onclick","paginador( this );");
+				objLi.setAttribute("class","activo bold");
+				objLi.innerHTML = "Primero";
+				objUl.appendChild( objLi );
+				delete objLi;
+				// crea boton anterior
+				var objLi = document.createElement('li');
+				objLi.setAttribute("onclick","paginador( this );");
+				objLi.setAttribute("class","activo bold");
+				objLi.innerHTML = "« Anterior";
+				objUl.appendChild( objLi );
+				delete objLi;
+				
+				// crea botones
+				for( var i = 0; i < tamanio_arreglo; i++ ) {
+					var objLi = document.createElement('li');
+					objLi.setAttribute("onclick","paginador( this );");
+					objLi.setAttribute("name","arreglo");
+					objLi.innerHTML = parseInt(i + 1);
+					if( i == 0 ) {
+						objLi.setAttribute("class","seleccionado");
+					} else {
+						objLi.setAttribute("class","activo");
+					}
+					objUl.appendChild( objLi );
+					delete objLi;
+				}
+				
+				// crea boton siguiente
+				var objLi = document.createElement('li');
+				objLi.setAttribute("onclick","paginador( this );");
+				objLi.setAttribute("class","activo bold");
+				objLi.innerHTML = "Siguiente »";
+				objUl.appendChild( objLi );
+				delete objLi;
+				
+				// crea boton ultimo
+				var objLi = document.createElement('li');
+				objLi.setAttribute("onclick","paginador( this );");
+				objLi.setAttribute("class","activo bold");
+				objLi.innerHTML = "&Uacute;ltimo";
+				objUl.appendChild( objLi );
+				delete objLi;
+				
+				// agrega ul a div
+				objDiv.appendChild( objUl );
+				delete objUl;
+				
+				// crea div 
+				var div_2 = document.createElement('div');
+				div_2.setAttribute("id","paginacion_resultados");
+				
+				// agrega div_2 a div principal
+				objDiv.appendChild( div_2 );
+				delete div_2;
+				document.getElementById('paginacion_resultados').innerHTML = string_elementos_encontrados();
+				
+				delete objDiv;
+			}
+			
+		</script>
+		
+	</head>
+	<body id="tabla_cotizacion" onload="carga_datos();">
+		<div id="contenedor">
+			<br><br><br>
+			<br><br><br>
+			<div id="div_paginador_lithomat">
+			<!--
+				<ul id="paginacion_lithomat">
+					<li onclick="paginador( this );" 					class="activo bold">Primero</li>
+					<li onclick="paginador( this );"					class="activo bold">« Anterior</li>
+					<li onclick="paginador( this );"	name="arreglo"	class="seleccionado">1</li>
+					<li onclick="paginador( this );"	name="arreglo"	class="activo">2</li>
+					<li onclick="paginador( this );"	name="arreglo"	class="activo">3</li>
+					<li onclick="paginador( this );"	name="arreglo"	class="activo">4</li>
+					<li onclick="paginador( this );"	name="arreglo"	class="activo">5</li>
+					<li onclick="paginador( this );"	name="arreglo"	class="activo">6</li>
+					<li onclick="paginador( this );"	name="arreglo"	class="activo">7</li>
+					<li onclick="paginador( this );"					class="activo bold">Siguiente »</li>
+					<li onclick="paginador( this );"					class="activo bold">&Uacute;ltimo</li>
+				</ul>
+				<div id="paginacion_resultados"></div>
+			-->
+			</div>
+		</div>
+	</body>
+</html>

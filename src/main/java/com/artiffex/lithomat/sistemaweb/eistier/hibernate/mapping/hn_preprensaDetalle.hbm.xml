@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.PreprensaDetalle" table="preprensa_detalle" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idPreprensaDetalle">
+			<column name="id_preprensa_detalle"/>
+			<type name="integer"/>
+			<generator class="increment"/>
+		</id>
+		<many-to-one name="preprensa" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Preprensa" fetch="select">
+			<column name="id_preprensa"/>
+		</many-to-one>
+		<many-to-one name="procesoPreprensa" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.ProcesoPreprensa" fetch="select">
+			<column name="id_proceso_preprensa"/>
+		</many-to-one>
+		<property name="cantidad">
+			<column name="cantidad"/>
+			<type name="integer"/>
+		</property>
+		<property name="especificaciones">
+			<column name="especificaciones" length="250"/>
+			<type name="string"/>
+		</property>
+		<property name="precioTotalPesos">
+			<column name="precio_total_pesos"/>
+			<type name="float"/>
+		</property>
+		<property name="activo">
+			<column name="activo"/>
+			<type name="boolean"/>
+		</property>
+	</class>
+</hibernate-mapping>

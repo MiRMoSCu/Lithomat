@@ -1,0 +1,199 @@
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>slider</title>
+		<script type="text/javascript" src="../../../../resources/js/jquery-1_9_1.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			$(document).ready(function(){
+				$('#div_otro').hide();
+				$('#div_revista').hide();
+				$('#div_flyer').hide();
+				$(":radio[name=tipo_trabajo]").click( function(){
+					//alert( $('input[type=radio][name=tipo_trabajo]:checked').val() );
+					//alert( $('input[type=radio][name=tipo_trabajo]:checked').val() );
+					if( $('input[type=radio][name=tipo_trabajo]:checked').val() == "otro" ) {
+						$('#div_revista').slideUp('slow');
+						$('#div_flyer').slideUp('slow');
+					} else if( $('input[type=radio][name=tipo_trabajo]:checked').val() == "revista" ) {
+						//alert("entro");
+						$('#div_flyer').slideUp('slow', function(){
+							$('#div_revista').slideDown('slow');
+						});
+					} else if( $('input[type=radio][name=tipo_trabajo]:checked').val() == "flyer" ) {
+						$('#div_revista').slideUp('slow', function(){
+							$('#div_flyer').slideDown('slow');
+						});
+					}
+				});
+			});
+		</script>
+		<style type="text/css" media="screen">
+			#contenido {
+				width:800px;
+				height:500px;
+				background:pink;
+				margin-right: auto;
+				margin-left: auto;
+			}
+			
+			.no_importa {
+				width:800px;
+				height:100px;
+				background:yellow;
+			}
+			
+			#especificaciones_tipo_revista {
+				overflow:auto;
+			}
+			
+			#div_otro {
+				width:100%;
+				height:200px;
+				background:blue;
+				overflow:hidden;
+			}
+
+			#div_revista {
+				width:100%;
+				height:200px;
+				background:green;
+				overflow:hidden;
+			}
+			
+			#div_flyer {
+				width:100%;
+				height:200px;
+				background:red;
+				overflow:hidden;
+			}
+			
+			#div_otro:target {
+				/*
+				height:0px;
+				
+				-webkit-transition: height 1s ease;
+				-moz-transition: height 1s ease;
+				-o-transition: height 1s ease;
+				-ms-transition: height 1s ease;
+				transition: height 1s ease;
+				*/
+			}			
+
+			#div_revista:target {
+				/*
+				height:200px;
+				
+				-webkit-transition: height 1s ease;
+				-moz-transition: height 1s ease;
+				-o-transition: height 1s ease;
+				-ms-transition: height 1s ease;
+				transition: height 1s ease;
+				*/
+			}
+						
+			#div_flyer:target {
+				/*
+				height:200px;
+				
+				-webkit-transition: height 1s ease;
+				-moz-transition: height 1s ease;
+				-o-transition: height 1s ease;
+				-ms-transition: height 1s ease;
+				transition: height 1s ease;
+				*/
+			}			
+			
+		</style>
+	</head>
+	<body>
+		<div id="contenido">
+			<div id="radio_button">
+				<div id="name">
+					<input type="radio" name="otro" value="1" id="otro">1
+					<input type="radio" name="otro" value="2" id="otro">2
+					<input type="radio" name="otro" value="3" id="otro">3
+				</div>
+				
+				<table border="0">
+					<tr>
+						<td width="33%" align="center">
+							<div style="width:20%">
+								<table>
+									<tr>
+										<td>
+											<input type="radio" id="tipo_trabajo" name="tipo_trabajo" value="otro" checked >
+										</td>
+										<td>
+											<img alt="" src="../../../../resources/image/titulo_otros.png" style="padding-top:6px;cursor:pointer;" onclick="document.getElementsByName('tipo_trabajo')[0].click();">
+											<!-- NO RECOMIENDO USAR <a href> PORQUE HACE QUE LA PAGINA SE SITUA AUTOMATICAMENTE EN EL DIV-->
+											<!--
+											<a href="#div_otro" onclick="document.getElementsByName('tipo_trabajo')[0].click();">
+												<img alt="" src="../../../../resources/image/titulo_otro.png" style="padding-top:6px;">
+											</a>
+											-->
+										</td>
+									</tr>
+								</table>
+							</div>
+						</td>
+						<td width="33%" align="center">
+							<div style="width:25%">
+								<table>
+									<tr>
+										<td width="1%">
+											<input type="radio" id="tipo_trabajo" name="tipo_trabajo" value="revista" >
+										</td>
+										<td>
+											<img alt="" src="../../../../resources/image/titulo_revista.png" style="padding-top:5px;cursor:pointer;" onclick="document.getElementsByName('tipo_trabajo')[1].click();">
+											<!--
+											<a href="#div_revista" onclick="document.getElementsByName('tipo_trabajo')[1].click();">
+												<img alt="" src="../../../../resources/image/titulo_revista.png" style="padding-top:5px;">
+											</a>
+											-->
+										</td>
+									</tr>
+								</table>
+							</div>													
+						</td>
+						<td width="33%" align="center">
+							<div style="width:20%">
+								<table>
+									<tr>
+										<td width="1%">
+											<input type="radio" id="tipo_trabajo" name="tipo_trabajo" value="flyer" >
+										</td>
+										<td>
+											<img alt="" src="../../../../resources/image/titulo_flyer.png" style="padding-top:5px;cursor:pointer;" onclick="document.getElementsByName('tipo_trabajo')[2].click();">
+											<!--
+											<a href="#div_flyer" onclick="document.getElementsByName('tipo_trabajo')[2].click();">
+												<img alt="" src="../../../../resources/image/titulo_flyer.png" style="padding-top:5px;">
+											</a>
+											-->
+										</td>
+									</tr>
+								</table>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="no_importa">
+				NO IMPORTA
+			</div>
+			<div id="especificaciones_tipo_revista">
+				<div id="div_otro">
+					otro
+				</div>
+				<div id="div_revista">
+					revista
+				</div>
+				<div id="div_flyer">
+					flyer
+				</div>
+			</div>
+			<div class="no_importa">
+				NO IMPORTA
+			</div>
+		</div>
+	</body>
+</html>

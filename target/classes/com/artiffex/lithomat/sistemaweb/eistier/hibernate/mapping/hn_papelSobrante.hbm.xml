@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.PapelSobrante" table="papel_sobrante" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idPapelSobrante">
+			<column name="id_papel_sobrante"/>
+			<type name="integer"/>
+			<generator class="increment"/>
+		</id>
+		<property name="inicioTabulador">
+			<column name="inicio_tabulador"/>
+			<type name="integer"/>
+		</property>
+		<property name="finTabulador">
+			<column name="fin_tabulador"/>
+			<type name="integer"/>
+		</property>
+		<property name="frenteNumTinta">
+			<column name="frente_num_tinta"/>
+			<type name="integer"/>
+		</property>
+		<property name="vueltaNumTinta">
+			<column name="vuelta_num_tinta"/>
+			<type name="integer"/>
+		</property>
+		<property name="tintaEspecial">
+			<column name="tinta_especial"/>
+			<type name="boolean"/>
+		</property>
+		<property name="hojasSobrante">
+			<column name="hojas_sobrante"/>
+			<type name="integer"/>
+		</property>
+		<property name="activo">
+			<column name="activo"/>
+			<type name="boolean"/>
+		</property>
+	</class>
+</hibernate-mapping>

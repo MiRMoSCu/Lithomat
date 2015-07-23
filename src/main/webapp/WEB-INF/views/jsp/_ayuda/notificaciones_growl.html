@@ -1,0 +1,86 @@
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>notificaciones_growl</title>
+		<script type="text/javascript" src="../../js/jquery-1_9_1.js"></script>
+		
+		<style type="text/css" media="screen">
+			#contenido {
+				width: 800px;
+				height: 1900px;
+				background: yellow;
+				margin-right: auto;
+				margin-left: auto;
+			}
+			
+			#notificacion_tipo_growl {
+				top: 50px;
+				right: 80px;
+				width: 300px;
+				height: 75px;
+				position: fixed;
+				background: red;
+				overflow: scroll;
+				display: none;
+			}
+
+		</style>
+		
+		<script type="text/javascript" charset="utf-8">
+			$(document).ready(function(){
+				
+				//listeners
+				
+				$("input[name=ancho]").focus( function(){
+					$("#notificacion_tipo_growl").append("<b>Se recomienda que el ancho sea menor que el alto jajajajajaja aj aj aj ajajajaja aj aja ja sdjdsadkljasd sadlkjadlk dlkasdj aslkd aslkdjasldkjasdlkjasdlkasdjlkasdj alksdj aslkdj sdlk</b>")
+					
+					$("#notificacion_tipo_growl").fadeIn(1500);
+					//$("#notificacion_tipo_growl").fadeIn(1000).delay(5000).fadeOut(1000);
+					//$("contenido").delay(10000);
+					//$("#notificacion_tipo_growl").fadeOut(1000);
+				} );
+				
+				$("input[name=ancho]").focusout( function(){
+					$("#notificacion_tipo_growl").fadeOut(1500);
+					//$("#notificacion_tipo_growl").fadeIn(1000).delay(5000).fadeOut(1000);
+					//$("contenido").delay(10000);
+					//$("#notificacion_tipo_growl").fadeOut(1000);
+				} );
+				
+				$("#cerrar_notificacion_growl").click( function(){
+					$("#notificacion_tipo_growl").fadeOut(1500);
+					//alert("hola");
+				} );
+				
+			});
+			
+			
+		</script>
+		
+	</head>
+	<body id="notificaciones_growl" onload="">
+		<div id="contenido">
+			<br><br><br><br><br><br><br>
+			<br><br><br><br><br><br><br>
+			<br><br><br><br><br><br><br>
+			<br><br><br><br><br><br><br>
+			<br><br><br><br><br><br><br>
+			<br><br><br><br><br><br><br>
+			<br><br><br><br><br><br><br>
+			<br><br><br><br><br><br><br>
+			<br><br><br><br><br><br><br>
+			<br><br><br><br><br><br><br>
+			<table border="1">
+				<tr>
+					<td>Data</td>
+					<td>
+						<input type="text" name="ancho" value="">
+					</td>
+				</tr>
+			</table>
+			<div id="notificacion_tipo_growl">
+				<span id="cerrar_notificacion_growl" style="cursor:pointer;">CLOSE</span>
+			</div>
+		</div>
+	</body>
+</html>

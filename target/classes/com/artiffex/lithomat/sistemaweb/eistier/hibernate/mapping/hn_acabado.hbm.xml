@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.Acabado" table="acabado" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idAcabado">
+			<column name="id_acabado"/>
+			<type name="integer"/>
+			<generator class="increment"/>
+		</id>
+		<many-to-one name="partida" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Partida" fetch="select">
+			<column name="id_partida"/>
+		</many-to-one>
+		<property name="indicacionTareaRealizar">
+			<column name="indicacion_tarea_realizar" length="250"/>
+			<type name="string"/>
+		</property>
+		<property name="resumenEntendidoRealizar">
+			<column name="resumen_entendido_realizar" length="250"/>
+			<type name="string"/>
+		</property>
+		<property name="materialesRecibe">
+			<column name="materiales_recibe" length="250"/>
+			<type name="string"/>
+		</property>
+		<property name="observaciones">
+			<column name="observaciones" length="250"/>
+			<type name="string"/>
+		</property>
+		<property name="fechaInicio">
+			<column name="fecha_inicio"/>
+			<type name="timestamp"/>
+		</property>
+		<property name="fechaFin">
+			<column name="fecha_fin"/>
+			<type name="timestamp"/>
+		</property>
+		<property name="fechaGeneracion">
+			<column name="fecha_generacion"/>
+			<type name="timestamp"/>
+		</property>
+		<property name="activo">
+			<column name="activo"/>
+			<type name="boolean"/>
+		</property>
+		<!-- relaciones de identidad uno a muchos que esta clase mantiene con otras clases -->
+		<set name="acabadoDetalle" table="acabado_detalle" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_acabado" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.AcabadoDetalle"/>
+		</set>
+	</class>
+</hibernate-mapping>

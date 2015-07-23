@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.FechaPrensistaMaquina" table="fecha_prensista_maquina" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idFechaPrensistaMaquina">
+			<column name="id_fecha_prensista_maquina"/>
+			<type name="integer"/>
+			<generator class="increment"/>
+		</id>
+		<many-to-one name="prensista" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Prensista" fetch="select">
+			<column name="id_prensista"/>
+		</many-to-one>
+		<many-to-one name="turnoLaboral" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TurnoLaboral" fetch="select">
+			<column name="id_turno_laboral"/>
+		</many-to-one>
+		<many-to-one name="maquina" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Maquina" fetch="select">
+			<column name="id_maquina"/>
+		</many-to-one>
+		<many-to-one name="pliego" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Pliego" fetch="select">
+			<column name="id_pliego"/>
+		</many-to-one>
+		<property name="fecha">
+			<column name="fecha"/>
+			<type name="date"/>
+		</property>
+		<property name="idPrensistaAyudante">
+			<column name="id_prensista_ayudante"/>
+			<type name="integer"/>
+		</property>
+		<property name="numeroMillarImpreso">
+			<column name="numero_millar_impreso"/>
+			<type name="integer"/>
+		</property>
+		<property name="numeroCambioPlacas">
+			<column name="numero_cambio_placas"/>
+			<type name="integer"/>
+		</property>
+		<property name="activo">
+			<column name="activo"/>
+			<type name="boolean"/>
+		</property>
+	</class>
+</hibernate-mapping>

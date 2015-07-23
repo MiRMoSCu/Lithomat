@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.Pliego" table="pliego" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idPliego">
+			<column name="id_pliego"/>
+			<type name="integer"/>
+			<generator class="increment"/>
+		</id>
+		<many-to-one name="tipoTrabajoDetalle" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajoDetalle" fetch="select">
+			<column name="id_tipo_trabajo_detalle"/>
+		</many-to-one>
+		
+		<property name="rebaseEnMilimetros">
+			<column name="rebase_en_milimetros"/>
+			<type name="integer"/>
+		</property>
+		<property name="medianilesEnMilimetros">
+			<column name="medianiles_en_milimetros"/>
+			<type name="integer"/>
+		</property>
+		<property name="pinzasEnCentimetros">
+			<column name="pinzas_en_centimetros"/>
+			<type name="integer"/>
+		</property>
+		<property name="observaciones">
+			<column name="observaciones"/>
+			<type name="string"/>
+		</property>
+		<property name="numeroDecimal">
+			<column name="numero_decimal"/>
+			<type name="float"/>
+		</property>
+		<property name="hojasRequeridas">
+			<column name="hojas_requeridas"/>
+			<type name="integer"/>
+		</property>
+		<property name="hojasSobrantes">
+			<column name="hojas_sobrantes"/>
+			<type name="integer"/>
+		</property>
+		<property name="hojasTotales">
+			<column name="hojas_totales"/>
+			<type name="integer"/>
+		</property>
+		<property name="frenteNumEntradasMaquinaTinta">
+			<column name="frente_num_entradas_maquina_tinta"/>
+			<type name="integer"/>
+		</property>
+		<property name="frenteNumEntradasMaquinaTintaEspecial">
+			<column name="frente_num_entradas_maquina_tinta_especial"/>
+			<type name="integer"/>
+		</property>
+		<property name="frenteNumEntradasMaquinaBarniz">
+			<column name="frente_num_entradas_maquina_barniz"/>
+			<type name="integer"/>
+		</property>
+		<property name="frenteNumTotalPlacas">
+			<column name="frente_num_total_placas"/>
+			<type name="integer"/>
+		</property>
+		<property name="vueltaNumEntradasMaquinaTinta">
+			<column name="vuelta_num_entradas_maquina_tinta"/>
+			<type name="integer"/>
+		</property>
+		<property name="vueltaNumEntradasMaquinaTintaEspecial">
+			<column name="vuelta_num_entradas_maquina_tinta_especial"/>
+			<type name="integer"/>
+		</property>
+		<property name="vueltaNumEntradasMaquinaBarniz">
+			<column name="vuelta_num_entradas_maquina_barniz"/>
+			<type name="integer"/>
+		</property>
+		<property name="vueltaMismasPlacas">
+			<column name="vuelta_mismas_placas"/>
+			<type name="boolean"/>
+		</property>
+		<property name="vueltaNumTotalPlacas">
+			<column name="vuelta_num_total_placas"/>
+			<type name="integer"/>
+		</property>
+		<many-to-one name="tipoVuelta" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoVuelta" fetch="select">
+			<column name="id_tipo_vuelta"/>
+		</many-to-one>
+		<property name="activo">
+			<column name="activo"/>
+			<type name="boolean"/>
+		</property>
+		<!-- relaciones de identidad uno a muchos que esta clase mantiene con otras clases -->
+		<set name="fechaPrensistaMaquina" table="fecha_prensista_maquina" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_pliego" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.FechaPrensistaMaquina"/>
+		</set>
+		<set name="calendarioOrdenProduccion" table="calendario_orden_produccion" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_pliego" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.CalendarioOrdenProduccion"/>
+		</set>
+		<set name="offsetDetalle" table="offset_detalle" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_pliego" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.OffsetDetalle"/>
+		</set>
+	</class>
+</hibernate-mapping>

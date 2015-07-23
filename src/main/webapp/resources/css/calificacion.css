@@ -1,0 +1,189 @@
+
+/* configuracion visual de una hoja */
+
+#div_area {
+    width: 1307px;
+    height: 1600px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* tama�o total */
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 77px;
+    background: transparent;
+}
+
+#div_ancho {
+    width: 1307px;
+    height: 1571px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_area - 29 (div_abajo3d) */
+}
+
+#div_hoja {
+    width: 1278px;
+    height: 1571px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* igual div_ancho */
+    background: #FFF;
+    float: left;
+}
+
+#div_cabecera {
+    width: 1278px;
+    height: 300px;
+    background: transparent; /*purple*/
+}
+
+#div_cuerpo {
+    width: 1278px;
+    height: 1221px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_hoja - 300 - 50 (div_cabecera, div_pie) */
+    background: transparent; /*orange*/
+}
+
+#div_menu {
+    width: 304px;
+    height: 402px;
+    background: transparent; /*yellow*/
+    float: left;
+/*	position:fixed;*/
+    top: 377px; /*377 original*/
+}
+
+#div_contenido {
+    width: 961px;
+    height: 1221px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* igual div_cuerpo */
+    float: right;
+    position: relative;
+    right: 13px;
+    background: transparent; /*orange*/
+}
+
+#div_pie {
+    width: 1278px;
+    height: 50px;
+    background: transparent; /*green*/
+}
+
+#div_derecha3d {
+    width: 29px;
+    height: 1571px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* igual div_ancho */
+    float: left;
+    /*background: purple;*/
+}
+
+#div_fondo_esq_sup {
+    width: 29px;
+    height: 31px;
+    background-image: url('../image/s_esq_sup.png');
+    background-repeat: no-repeat;
+}
+
+#div_fondo_der {
+    width: 29px;
+    height: 1540px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_hoja - 31 (div_fondo_esq_sup) */
+    background-image: url('../image/s_der.png');
+    background-repeat: repeat-y;
+}
+
+#div_abajo3d {
+    width: 1307px;
+    height: 29px;
+    float: left;
+}
+
+#div_fondo_esq_izq {
+    width: 32px;
+    height: 29px;
+    background-image: url('../image/s_esq_izq.png');
+    float: left;
+}
+
+#div_fondo_abajo {
+    width: 1246px;
+    height: 29px;
+    background-image: url('../image/s_inf.png');
+    float: left;
+}
+
+#div_fondo_esq_der {
+    width: 29px;
+    height: 29px;
+    float: left;
+    background-image: url('../image/s_esq_der.png');
+}
+
+#div_espacio_inf {
+    width: 1307px;
+    height: 77px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 77px;
+}
+
+/*****/
+
+#div_logo, #div_encabezado {
+    position: relative;
+    top: 25px;
+    left: 10px;
+    float: left;
+}
+
+/*****/
+
+#div_cliente, 
+#div_orden_produccion, 
+#div_partida,
+#div_tipo_trabajo_detalle,
+#div_paginador,
+#div_calificacion_orden_produccion,
+#div_resumen_partida,
+#div_visualizador_resumen {
+    width: 865px;
+    margin-left: auto;
+    margin-right: auto;
+    background: transparent;
+    display: block;
+}
+
+/*****/
+
+#div_tabla_resumen_calificacion {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    background: transparent;
+}
+
+table#tabla_cotizacion {
+    width: 100%;
+    height: 100%;
+    border-collapse: separate;
+    border-style: hidden;
+    color: #898989;
+}
+
+table#tabla_cotizacion th {
+    background: #7faadc;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+table#tabla_cotizacion td {
+    border: transparent;
+}
+
+table#tabla_cotizacion tr.l1 {
+    background: #fff;
+}
+
+table#tabla_cotizacion tr.l2 {
+    background: #d8e7ff;
+}
+
+table#tabla_cotizacion tr.l3 {
+    background: #b0c4de;
+    color: #696969;
+}
+
+table#tabla_cotizacion tr.italic {
+    font-style: italic;
+}
+
+

@@ -1,0 +1,483 @@
+
+/** CSS PARTICULARES A LA PAGINA **/
+
+#div_area {
+    width: 1307px;
+    height: 3781px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* tamanio total */
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 77px;
+    background: transparent;
+}
+
+#div_ancho {
+    width: 1307px;
+    height: 3752px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_area - 29 (div_abajo3d) */
+}
+
+#div_hoja {
+    width: 1278px;
+    height: 3752px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* igual a div_ancho */
+    background: #FFF;
+    float: left;
+}
+
+#div_cabecera {
+    width: 1278px;
+    height: 300px;
+    background: transparent;
+}
+
+#div_logo, #div_encabezado {
+    position: relative;
+    top: 25px;
+    left: 10px;
+    float: left;
+}
+
+#div_cuerpo {
+    width: 1278px;
+    height: 3402px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_hojas - 300 - 50 (div_cabecera, div_pie) */
+    background: transparent; /*orange*/
+}
+
+#div_menu {
+    width: 304px;
+    height: 402px;
+    background: transparent; /*yellow*/
+    float: left;
+/*	position:fixed;*/
+    top: 377px; /*377 original*/
+}
+
+#div_contenido {
+    width: 961px;
+    height: 3402px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* igual a div_cuerpo */
+    float: right;
+    position: relative;
+    right: 13px;
+    background: transparent; /*orange*/
+}
+
+#div_pie {
+    width: 1278px;
+    height: 50px;
+    background: transparent; /*green*/
+}
+
+#div_derecha3d {
+    width: 29px;
+    height: 3752px;  /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* igual div_ancho */
+    float: left;
+    /*background: purple;*/
+}
+
+#div_fondo_esq_sup {
+    width: 29px;
+    height: 31px;
+    background-image: url('../image/s_esq_sup.png');
+    background-repeat: no-repeat;
+}
+
+#div_fondo_der {
+    width: 29px;
+    height: 3721px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_hoja - 31 (div_fondo_esq_sup) */
+    background-image: url('../image/s_der.png');
+    background-repeat: repeat-y;
+}
+
+#div_abajo3d {
+    width: 1307px;
+    height: 29px;
+    float: left;
+    /*background: green;*/
+}
+
+#div_fondo_esq_izq {
+    width: 32px;
+    height: 29px;
+    background-image: url('../image/s_esq_izq.png');
+    float: left;
+}
+
+#div_fondo_abajo {
+    width: 1246px;
+    height: 29px;
+    background-image: url('../image/s_inf.png');
+    float: left;
+}
+
+#div_fondo_esq_der {
+    width: 29px;
+    height: 29px;
+    float: left;
+    background-image: url('../image/s_esq_der.png');
+}
+
+#div_espacio_inf {
+    width: 1307px;
+    height: 77px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 77px;
+}
+
+
+/**********/
+
+#div_cliente {
+    width: 865px;
+    margin-left: auto;
+    margin-right: auto;
+    background: transparent; /*green*/
+    display: block;
+}
+
+.div_cliente_nombre {
+    width: 571px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/**********/
+
+#div_orden_produccion {
+    width: 865px;
+    margin-left: auto;
+    margin-right: auto;
+    background: transparent;
+    display: block;
+}
+
+/**********/
+
+#div_visualizador_partidas {
+    width: 865px;
+    margin-left: auto;
+    margin-right: auto;
+    background: transparent;
+}
+
+#div_tabla_lista_partidas {
+    width: 800px;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    background: transparent;
+}
+
+/**********/
+
+#div_visualizador_tipo_trabajo_detalle {
+    width: 865px;
+    margin-left: auto;
+    margin-right: auto;
+    background: transparent;
+}
+
+#div_tabla_lista_tipo_trabajo_detalle {
+    width: 800px;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    background: transparent;
+}
+
+/**********/
+
+#div_partida {
+    width: 865px;
+    margin-left: auto;
+    margin-right: auto;
+    background: transparent;
+    display: block;
+}
+
+/**********/
+
+#div_tipo_trabajo_detalle {
+    width: 865px;
+    margin-left: auto;
+    margin-right: auto;
+    background: transparent; /*red*/
+    display: block;
+}
+
+#div_especificaciones_papel {
+    overflow: auto;
+}
+
+#div_especificaciones_papel_tipo_flyer {
+    width: 100%;
+    height: 0px; /*200px*/
+    background: transparent; /*yellow*/
+    overflow: hidden;
+}
+
+#div_especificaciones_papel_tipo_revista {
+    width: 100%;
+    height: 0px; /*200px*/
+    background: transparent; /*green*/
+    overflow: hidden;
+}
+
+#div_especificaciones_papel_tipo_otro {
+    width: 100%;
+    height: 0px; /*200px*/
+    background: transparent; /*red*/
+    overflow: hidden;
+}
+
+select[name="select_tipo_papel"] {
+    /*background: yellow;*/
+}
+
+/**********/
+
+#div_visualizador_pliegos {
+    width: 865px;
+    margin-left: auto;
+    margin-right: auto;
+    background: transparent; /*red*/
+    display: block;
+}
+
+
+
+
+#div_tabla_lista_pliegos {
+    width: 800px;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    background: transparent; /*cyan*/
+    
+}
+
+table#tabla_lista_pliegos {
+    overflow-y: scroll;
+}
+
+#div_tabla_lista_partidas {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    background: transparent; /*cyan*/
+}
+
+table#tabla_lista_pliegos {
+    overflow-y: scroll;
+}
+
+/**********/
+
+#div_pestania {
+    width:865px;
+    margin-left: auto;
+    margin-right: auto;
+    background: transparent; /*yellow*/
+}
+
+#div_pestania_menu {
+    width: 100%;
+    height: 40px;
+    background: transparent; /*red*/
+}
+
+#div_pestania_menu_disenio,
+#div_pestania_menu_preprensa,
+#div_pestania_menu_transporte,
+#div_pestania_menu_acabado,
+#div_pestania_menu_offset {
+    width: 173px;
+    height: 100%;
+    background: #E2E2E2;
+    float: left;
+}
+
+#div_pestania_contenido {
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background: #7FAADC; /*#7FAADC*/
+}
+
+#div_pestania_contenido_disenio,
+#div_pestania_contenido_preprensa,
+#div_pestania_contenido_transporte,
+#div_pestania_contenido_acabado,
+#div_pestania_contenido_offset {
+    width: 845px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    background: #FFF;
+}
+
+/**********/
+
+#div_disenio, 
+#div_preprensa, 
+#div_transporte, 
+#div_acabado, 
+#div_offset {
+    width: 800px;
+    height: 340px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+#div_disenio_general, 
+#div_preprensa_general,
+#div_transporte_general, 
+#div_acabado_general {
+    width: 100%;
+    background: transparent;
+}
+
+#div_disenio_particular, 
+#div_preprensa_particular,
+#div_transporte_particular, 
+#div_acabado_particular {
+    width: 100%;
+    height: 200px;
+    background: transparent;
+}
+
+#div_disenio_panel_izquierdo, 
+#div_preprensa_panel_izquierdo,
+#div_transporte_panel_izquierdo, 
+#div_acabado_panel_izquierdo {
+    width: 388px;
+    height: 100%;
+    float: left;
+}
+
+#div_disenio_panel_derecho, 
+#div_preprensa_panel_derecho, 
+#div_transporte_panel_derecho,
+#div_acabado_panel_derecho {
+    width: 388px;
+    height: 100%;
+    float: right;
+}
+
+#div_select_proceso_disenio, 
+#div_select_proceso_preprensa, 
+#div_select_proceso_transporte,
+#div_select_proceso_externo {
+    width: 130px;
+    height: 100%;
+    float: left;
+}
+
+#div_form_disenio_detalle, 
+#div_form_preprensa_detalle, 
+#div_form_transporte_detalle, 
+#div_form_acabado_detalle {
+    width: 250px;
+    height: 100%;
+    float: right;
+    background: transparent;
+}
+
+select[name="select_proceso_disenio"], 
+select[name="select_proceso_preprensa"], 
+select[name="select_proceso_transporte"], 
+select[name="select_proceso_externo"] {
+    width: 100%;
+    height: 200px;
+    color: gray;
+    background: #E2E2E2;
+    border: hidden;
+}
+
+/* EJEMPLO: no borrar
+select[name="select_proceso_disenio"]:hover {
+    color: gray;
+    background: pink;
+}
+*/
+
+#div_contenedor_tabla_disenio_detalle,
+#div_contenedor_tabla_preprensa_detalle, 
+#div_contenedor_tabla_transporte_detalle, 
+#div_contenedor_tabla_acabado_detalle {
+    width: 100%;
+    height: 135px;
+}
+
+#div_tabla_disenio_detalle, 
+#div_tabla_preprensa_detalle, 
+#div_tabla_transporte_detalle, 
+#div_tabla_acabado_detalle {
+    width: 100%;
+    height: 100%;
+    overflow-x: scroll;
+}
+
+
+/***/
+
+#div_material_ayuda {
+    width: 865px;
+    margin-left: auto;
+    margin-right: auto;
+    background: transparent;
+    display: block;
+}
+
+#div_tabla_material_ayuda {
+    width: 100%;
+    height: 97px;
+    margin-left: auto;
+    margin-right: auto;
+    background: #e2e2e2;
+    display:block;
+    overflow-x: scroll;
+}
+
+#div_contenido_material_ayuda {
+    width: 100%;
+    height: 105px;
+    background: transparent;
+}
+
+/***/
+
+#div_nuevo_tipo_trabajo_detalle {
+    width: 865px;
+    margin-left: auto;
+    margin-right: auto;
+    background: transparent;
+}
+
+/***/
+
+#div_nueva_partida {
+    width: 865px;
+    margin-left: auto;
+    margin-right: auto;
+    background: transparent;
+}
+
+/***/
+
+#div_cotizar {
+    width: 865px;
+    margin-left: auto;
+    margin-right: auto;
+    background: transparent; /*gray*/
+}
+
+#div_area_boton_enviar {
+    width: 115px;
+    height: 36px;
+    background: blue; /*gray*/
+    float: right;
+}

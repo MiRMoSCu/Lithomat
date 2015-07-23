@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.Usuario" table="usuario" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idUsuario">
+			<column name="id_usuario"/>
+			<type name="integer"/>
+			<generator class="increment"/>
+		</id>
+		<property name="nombre">
+			<column name="nombre" length="45"/>
+			<type name="string"/>
+		</property>
+		<property name="apPaterno">
+			<column name="ap_paterno" length="45"/>
+			<type name="string"/>
+		</property>
+		<property name="apMaterno">
+			<column name="ap_materno" length="45"/>
+			<type name="string"/>
+		</property>
+		<property name="usuario">
+			<column name="usuario" length="45"/>
+			<type name="string"/>
+		</property>
+		<property name="contrasenia">
+			<column name="contrasenia" length="45"/>
+			<type name="string"/>
+		</property>
+		<property name="activo">
+			<column name="activo"/>
+			<type name="boolean"/>
+		</property>
+		<!-- relaciones de identidad uno a muchos que esta clase mantiene con otras clases -->
+		<set name="ordenProduccion" table="orden_produccion" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_usuario" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.OrdenProduccion"/>
+		</set>
+	</class>
+</hibernate-mapping>

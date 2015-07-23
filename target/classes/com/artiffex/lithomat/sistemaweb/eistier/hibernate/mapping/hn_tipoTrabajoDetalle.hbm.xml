@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajoDetalle" table="tipo_trabajo_detalle" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idTipoTrabajoDetalle">
+			<column name="id_tipo_trabajo_detalle"/>
+			<type name="integer"/>
+			<generator class="increment"/>
+		</id>
+		<many-to-one name="partida" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Partida" fetch="select">
+			<column name="id_partida"/>
+		</many-to-one>
+		<property name="descripcion">
+			<column name="descripcion" length="350"/>
+			<type name="string"/>
+		</property>
+		<property name="ancho">
+			<column name="ancho"/>
+			<type name="float"/>
+		</property>
+		<property name="alto">
+			<column name="alto"/>
+			<type name="float"/>
+		</property>
+		<property name="anchoExtendido">
+			<column name="ancho_extendido"/>
+			<type name="float"/>
+		</property>
+		<property name="altoExtendido">
+			<column name="alto_extendido"/>
+			<type name="float"/>
+		</property>
+		<property name="clienteProporcionaPapel">
+			<column name="cliente_proporciona_papel"/>
+			<type name="boolean"/>
+		</property>
+		<property name="clienteProporcionaTinta">
+			<column name="cliente_proporciona_tinta"/>
+			<type name="boolean"/>
+		</property>
+		<property name="clienteProporcionaTintaEspecial">
+			<column name="cliente_proporciona_tinta_especial"/>
+			<type name="boolean"/>
+		</property>
+		<property name="clienteProporcionaBarniz">
+			<column name="cliente_proporciona_barniz"/>
+			<type name="boolean"/>
+		</property>
+		<property name="clienteProporcionaPlacas">
+			<column name="cliente_proporciona_placas"/>
+			<type name="boolean"/>
+		</property>
+		<many-to-one name="tipoPapelExtendido" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPapelExtendido" fetch="select">
+			<column name="id_tipo_papel_extendido"/>
+		</many-to-one>
+		<property name="repeticionesXPliego">
+			<column name="repeticiones_x_pliego"/>
+			<type name="integer"/>
+		</property>
+		<property name="numeroPaginasPublicacion">
+			<column name="numero_paginas_publicacion"/>
+			<type name="integer"/>
+		</property>
+		<many-to-one name="tamanioPublicacion" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TamanioPublicacion" fetch="select">
+			<column name="id_tamanio_publicacion"/>
+		</many-to-one>
+		<many-to-one name="frenteCombinacionTintas" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.CombinacionTintas" fetch="select">
+			<column name="frente_id_combinacion_tintas"/>
+		</many-to-one>
+		<property name="frenteNumTintaEspecial">
+			<column name="frente_num_tinta_especial"/>
+			<type name="integer"/>
+		</property>
+		<property name="frenteDescripcionTintaEspecial">
+			<column name="frente_descripcion_tinta_especial" length="250"/>
+			<type name="string"/>
+		</property>
+		<many-to-one name="frenteTipoBarniz" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoBarniz" fetch="select">
+			<column name="frente_id_tipo_barniz"/>
+		</many-to-one>
+		<many-to-one name="vueltaCombinacionTintas" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.CombinacionTintas" fetch="select">
+			<column name="vuelta_id_combinacion_tintas"/>
+		</many-to-one>
+		<property name="vueltaNumTintaEspecial">
+			<column name="vuelta_num_tinta_especial"/>
+			<type name="integer"/>
+		</property>
+		<property name="vueltaDescripcionTintaEspecial">
+			<column name="vuelta_descripcion_tinta_especial" length="250"/>
+			<type name="string"/>
+		</property>
+		<many-to-one name="vueltaTipoBarniz" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoBarniz" fetch="select">
+			<column name="vuelta_id_tipo_barniz"/>
+		</many-to-one>
+		<many-to-one name="maquina" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Maquina" fetch="select">
+			<column name="id_maquina"/>
+		</many-to-one>
+		<many-to-one name="tipoPlaca" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPlaca" fetch="select">
+			<column name="id_tipo_placa"/>
+		</many-to-one>
+		<property name="observaciones">
+			<column name="observaciones" length="250"/>
+			<type name="string"/>
+		</property>
+		<property name="fechaGeneracion">
+			<column name="fecha_generacion"/>
+			<type name="timestamp"/>
+		</property>
+		<property name="activo">
+			<column name="activo"/>
+			<type name="boolean"/>
+		</property>
+		<!-- relaciones de identidad uno a muchos que esta clase mantiene con otras clases -->
+		<set name="pliego" table="pliego" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_tipo_trabajo_detalle" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Pliego"/>
+		</set>
+		
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionProcesosPartida" table="calificacion_procesos_partida" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idCalificacionProcesosPartida">
+			<column name="id_calificacion_procesos_partida"/>
+			<type name="integer"/>
+			<generator class="increment"/>
+		</id>
+		<many-to-one name="partida" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Partida" fetch="select">
+			<column name="id_partida"/>
+		</many-to-one>
+		<property name="costeTotalProcesosPartida">
+			<column name="coste_total_procesos_partida"/>
+			<type name="double"/>
+		</property>
+		<property name="subpartidasCosteTotal">
+			<column name="subpartidas_coste_total"/>
+			<type name="double"/>
+		</property>
+		<property name="disenioCosteTotal">
+			<column name="disenio_coste_total"/>
+			<type name="double"/>
+		</property>
+		<property name="preprensaCosteTotal">
+			<column name="preprensa_coste_total"/>
+			<type name="double"/>
+		</property>
+		<property name="transporteCosteTotal">
+			<column name="transporte_coste_total"/>
+			<type name="double"/>
+		</property>
+		<property name="acabadoCosteTotal">
+			<column name="acabado_coste_total"/>
+			<type name="double"/>
+		</property>
+		<property name="offsetCosteTotal">
+			<column name="offset_coste_total"/>
+			<type name="double"/>
+		</property>
+		<property name="costoExtraTotal">
+			<column name="costo_extra_total"/>
+			<type name="double"/>
+		</property>
+		<property name="activo">
+			<column name="activo"/>
+			<type name="boolean"/>
+		</property>
+	</class>
+</hibernate-mapping>

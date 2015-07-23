@@ -1,0 +1,167 @@
+/** CSS GENERALES A Los CATALOGOS **/
+
+#div_area {
+	width: 1307px;
+	height: 929px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /*1881*/
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	top: 77px;
+	background: transparent;
+}
+
+#div_ancho {
+	width: 1307px;
+	height: 900px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /*1852*/
+}
+
+#div_hoja {
+	width: 1278px;
+	height: 900px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /*952*/
+	background: #fff;
+	float: left;
+}
+
+#div_cabecera {
+	width: 1278px;
+	height: 300px;
+	background: transparent; /*purple*/
+}
+
+#div_logo, #div_encabezado {
+	position: relative;
+	top: 25px;
+	left: 10px;
+	float: left;
+}
+
+#div_cuerpo {
+	width: 1278px;
+	height: 602px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /*1552*/
+	background: transparent; /*orange*/
+}
+
+#div_menu {
+	width: 304px;
+	height: 402px;
+	background: transparent; /*yellow*/
+	float: left;
+/*	position:fixed;*/
+	top: 377px; /*377 original*/
+}
+
+#div_contenido {
+	width: 961px;
+	height: 602px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /**/
+	float: right;
+	position: relative;
+	right: 13px;
+	background: transparent; /*orange*/
+}
+
+#div_pie {
+	width: 1278px;
+	height: 50px;
+	background: transparent; /*green*/
+}
+
+#div_derecha3d {
+	width: 29px;
+	height: 900px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/
+	float: left;
+	/*background: purple;*/
+}
+
+#div_fondo_esq_sup {
+	width: 29px;
+	height: 31px;
+	background-image: url('../image/s_esq_sup.png');
+	background-repeat: no-repeat;
+}
+
+#div_fondo_der {
+	/*mide 50*/
+	width: 29px;
+	height: 871px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /*1821*/
+	background-image: url('../image/s_der.png');
+	background-repeat: repeat-y;
+}
+
+#div_abajo3d {
+	width: 1307px;
+	height: 29px;
+	float: left;
+	/*background: green;*/
+}
+
+#div_fondo_esq_izq {
+	width: 32px;
+	height: 29px;
+	background-image: url('../image/s_esq_izq.png');
+	float: left;
+}
+
+#div_fondo_abajo {
+	width: 1246px;
+	height: 29px;
+	background-image: url('../image/s_inf.png');
+	float: left;
+}
+
+#div_fondo_esq_der {
+	width: 29px;
+	height: 29px;
+	float: left;
+	background-image: url('../image/s_esq_der.png');
+}
+
+#div_espacio_inf {
+	width: 1307px;
+	height: 77px;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	top: 77px;
+}
+
+/**/
+/**/
+/**/
+
+.columna_izquierda {
+	width: 421px;
+	height: 100%;
+	background: transparent;
+	float: left;
+}
+
+.columna_derecha {
+	width: 421px;
+	height: 100%;
+	background: transparent;
+	float: right;
+}
+
+.mitad_columna_izquierda {
+	width:205px;
+	height:100%;
+	background: #e2e2e2;
+	color: #898989;
+	float: left;
+}
+
+.mitad_columna_derecha {
+	width:205px;
+	height:100%;
+	background: #e2e2e2;
+	color: #898989;
+	float: right;
+}
+
+.columna_izquierda_tres_cuartos {
+	width: 649px;
+	height: 100%;
+	background: #e2e2e2;
+	color: #898989;
+	float: left;
+}

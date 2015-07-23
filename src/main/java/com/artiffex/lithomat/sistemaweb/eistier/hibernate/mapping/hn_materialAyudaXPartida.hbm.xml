@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.MaterialAyudaXPartida" table="material_ayuda_x_partida" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idMaterialAyudaXPartida">
+			<column name="id_material_ayuda_x_partida"/>
+			<type name="integer"/>
+			<generator class="increment"/>
+		</id>
+		<many-to-one name="partida" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Partida" fetch="select">
+			<column name="id_partida"/>
+		</many-to-one>
+		<many-to-one name="materialAyuda" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.MaterialAyuda" fetch="select">
+			<column name="id_material_ayuda"/>
+		</many-to-one>
+		<many-to-one name="responsableInsumo" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.ResponsableInsumo" fetch="select">
+			<column name="id_responsable_insumo"/>
+		</many-to-one>
+		<property name="observaciones">
+			<column name="observaciones"/>
+			<type name="string"/>
+		</property>
+		<property name="activo">
+			<column name="activo"/>
+			<type name="boolean"/>
+		</property>
+	</class>
+</hibernate-mapping>

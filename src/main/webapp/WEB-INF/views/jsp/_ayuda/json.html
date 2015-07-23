@@ -1,0 +1,674 @@
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>json</title>
+		<style type="text/css" media="screen">
+		/*
+			body {
+				font-family: "arial";
+				font-size: 14px;
+			}
+			
+			#contenedor {
+				width:800px;
+				margin-right:auto;
+				margin-left:auto;
+				background: transparent;
+			}
+			
+			.columna_completa {
+				height: 100%;
+				background: #e2e2e2;
+				color: #898989;
+			}
+			
+			table {
+				width:100%;
+				height:100%;
+				border-collapse: collapse;
+				border-color: gray;
+				background:transparent;
+			}
+			
+			tr.titulo_tabla{
+				background: #7faadc;
+				color: #fff;
+				font-weight: normal;
+				border-collapse: separate;
+				border: 1px solid #fff;
+			}
+		*/
+		</style>
+		
+		<script type="text/javascript">
+
+			var objeto = {"empleados":[{nombre:1},{nombre:2},{nombre:3}]};
+			console.log( objeto );
+			
+			var texto = '{"empleados":[{"nombre":1.99},{"nombre":2},{"nombre":3}]}';
+			console.log( texto );
+			
+			var json = JSON.parse( texto );
+			console.log( json );
+			
+			console.log( json.empleados[0].nombre );
+			
+			console.clear();
+
+			var calificacion =  	'{"id_orden_produccion":1, "nombre":"orden produccion", "descripcion":"xxxxxxx", "precio_bruto":999999.99, "precio_cliente":999999.99, "precio_neto":999999.99, "partidas":[' +
+										'{"id_partida":999, "nombre_partida":"partida 1", "disenio_coste_total":999999.99, "preprensa_coste_total":999999.99, "subpartidas":[' +
+											'{"id_tipo_trabajo_detalle":999, "descripcion":"tipo trabajo detalle 1", "papel_coste_total":999999.99, "placas_coste_total":999999.99},' +
+											'{"id_tipo_trabajo_detalle":999, "descripcion":"tipo trabajo detalle 2", "papel_coste_total":999999.99, "placas_coste_total":999999.99},' +
+											'{"id_tipo_trabajo_detalle":999, "descripcion":"tipo trabajo detalle 3", "papel_coste_total":999999.99, "placas_coste_total":999999.99}' +
+										'] },' +
+										'{"id_partida":999, "nombre_partida":"partida 2", "disenio_coste_total":999999.99, "preprensa_coste_total":999999.99, "subpartidas":[' +
+											'{"id_tipo_trabajo_detalle":999, "descripcion":"tipo trabajo detalle 4", "papel_coste_total":999999.99, "placas_coste_total":999999.99},' +
+											'{"id_tipo_trabajo_detalle":999, "descripcion":"tipo trabajo detalle 5", "papel_coste_total":999999.99, "placas_coste_total":999999.99}' +
+										'] }' +
+									'],' +
+									'"cliente":[{"nombre":"cliente abc", "tipo_cliente":"maquila"}]' +
+								 	'}';
+								
+								
+			//console.log( calificacion );
+			
+			var jsonCalificacion = JSON.parse( calificacion );
+			//console.log( jsonCalificacion );
+			
+			//console.log( jsonCalificacion.partidas.length );
+			//console.log( jsonCalificacion.partidas[0].subpartidas.length );
+			//console.log("\n");
+			//console.log( jsonCalificacion.length );
+			
+			//console.log( jsonCalificacion.id_orden_produccion );
+			//console.log( jsonCalificacion.nombre );
+			//console.log( jsonCalificacion.descripcion );
+			
+			//console.log( jsonCalificacion.cliente[0].nombre );
+			
+			//for( i=0; i<jsonCalificacion.partidas.length; i++ ) {
+				//console.log( "---" );
+				//console.log( "   " + jsonCalificacion.partidas[i].id_partida );
+				//console.log( "   " + jsonCalificacion.partidas[i].nombre_partida );
+				//console.log( "   " + jsonCalificacion.partidas[i].disenio_coste_total );
+				//console.log( "   " + jsonCalificacion.partidas[i].preprensa_coste_total );
+				
+				//for( j=0; j<jsonCalificacion.partidas[i].subpartidas.length; j++ ) {
+					//console.log( "--- ---" );
+					//console.log( "       " + jsonCalificacion.partidas[i].subpartidas[j].descripcion );
+					//console.log( "       " + jsonCalificacion.partidas[i].subpartidas[j].papel_coste_total );
+				//}	
+			//}
+			
+			function colocaValores() {
+				// inicializacion de variables
+				//-- numero de partidas:
+				var num_partidas = jsonCalificacion.partidas.length;
+				
+				
+			}
+			
+			
+			function genera_tabla() {
+				
+				var table;
+				var tr;
+				var td;
+				
+				table = document.createElement("table");
+				table.setAttribute("id","tabla_cotizacion");
+				table.setAttribute("border","1");
+				// tr titulo orden produccion
+				tr = document.createElement("tr");
+				tr.setAttribute("class","titulo_tabla");
+				td = document.createElement("td");
+				td.colSpan = "7";
+				td.innerHTML = "Orden de produccion";
+				tr.appendChild( td );
+				td = document.createElement("td");
+				td.innerHTML = "Precio";
+				tr.appendChild( td );
+				table.appendChild( tr );
+				// tr cliente
+				tr = document.createElement("tr");
+				td = document.createElement("td");
+				td.innerHTML = "Cliente";
+				tr.appendChild( td );
+				td = document.createElement("td");
+				td.colSpan = "7";
+				td.innerHTML = jsonCalificacion.nombre;
+				tr.appendChild( td );
+				table.appendChild( tr );
+				// tr descripcion
+				tr = document.createElement("tr");
+				td = document.createElement("td");
+				td.innerHTML = "Descripcion";
+				tr.appendChild( td );
+				td = document.createElement("td");
+				td.colSpan = "7";
+				td.innerHTML = jsonCalificacion.descripcion;
+				tr.appendChild( td );
+				table.appendChild( tr );
+				
+				var total_partida = 0;
+				for( i=0; i<jsonCalificacion.partidas.length; i++ ) {
+					// tr titulo
+					tr = document.createElement("tr");
+					td = document.createElement("td");
+					td.innerHTML = "&nbsp;";
+					tr.appendChild( td );
+					td = document.createElement("td");
+					td.colSpan = "7";
+					td.innerHTML = jsonCalificacion.partidas[i].nombre_partida;
+					tr.appendChild( td );
+					table.appendChild( tr );
+					// tr encabezado
+					tr = document.createElement("tr");
+					td = document.createElement("td");
+					td.innerHTML = "&nbsp;"
+					tr.appendChild( td );
+					td = document.createElement("td");
+					td.innerHTML = "Descripcion";
+					tr.appendChild( td );
+					td = document.createElement("td");
+					td.colSpan = "4";
+					td.innerHTML = "&nbsp;";
+					tr.appendChild( td );
+					td = document.createElement("td");
+					td.innerHTML = "Precio";
+					tr.appendChild( td );
+					td = document.createElement("td");
+					td.innerHTML = "&nbsp;";
+					tr.appendChild( td );
+					table.appendChild( tr );
+					// tr disenio
+					tr = document.createElement("tr");
+					td = document.createElement("td");
+					td.innerHTML = "&nbsp;"
+					tr.appendChild( td );
+					td = document.createElement("td");
+					td.innerHTML = "Disenio";
+					tr.appendChild( td );
+					td = document.createElement("td");
+					td.colSpan = "4";
+					td.innerHTML = "&nbsp;";
+					tr.appendChild( td );
+					td = document.createElement("td");
+					td.setAttribute("align","right");
+					td.innerHTML = jsonCalificacion.partidas[i].disenio_coste_total;
+					tr.appendChild( td );
+					td = document.createElement("td");
+					td.innerHTML = "&nbsp;";
+					tr.appendChild( td );
+					table.appendChild( tr );
+					// tr preprensa
+					tr = document.createElement("tr");
+					td = document.createElement("td");
+					td.innerHTML = "&nbsp;"
+					tr.appendChild( td );
+					td = document.createElement("td");
+					td.innerHTML = "Preprensa";
+					tr.appendChild( td );
+					td = document.createElement("td");
+					td.colSpan = "4";
+					td.innerHTML = "&nbsp;";
+					tr.appendChild( td );
+					td = document.createElement("td");
+					td.setAttribute("align","right");
+					td.innerHTML = jsonCalificacion.partidas[i].preprensa_coste_total;
+					tr.appendChild( td );
+					td = document.createElement("td");
+					td.innerHTML = "&nbsp;";
+					tr.appendChild( td );
+					table.appendChild( tr );
+					
+					for( j=0; j<jsonCalificacion.partidas[i].subpartidas.length; j++ ) {
+						tr = document.createElement("tr");
+						td = document.createElement("td");
+						td.colSpan = "2";
+						tr.appendChild( td );
+						td = document.createElement("td");
+						td.colSpan = "6";
+						td.innerHTML = "Detalle de partida " + (j + 1);
+						tr.appendChild( td );
+						table.appendChild( tr );
+						// tr encabezado
+						tr = document.createElement("tr");
+						
+						td = document.createElement("td");
+						td.colSpan = "2";
+						td.innerHTML = "&nbsp;";
+						tr.appendChild( td );
+						
+						td = document.createElement("td");
+						td.innerHTML = "Descripcion";
+						tr.appendChild( td );
+						
+						td = document.createElement("td");
+						td.innerHTML = "Cantidad";
+						tr.appendChild( td );
+
+						td = document.createElement("td");
+						td.innerHTML = "Costo unitario";
+						tr.appendChild( td );
+						
+						td = document.createElement("td");
+						td.innerHTML = "Precio";
+						tr.appendChild( td );
+						
+						td = document.createElement("td");
+						td.colSpan = "2";
+						td.innerHTML = "&nbsp;";
+						tr.appendChild( td );
+						
+						table.appendChild( tr );
+						
+						// tr papel_coste_papel
+						tr = document.createElement("tr");
+						
+						td = document.createElement("td");
+						td.colSpan = "2";
+						td.innerHTML = "&nbsp;";
+						tr.appendChild( td );
+						
+						td = document.createElement("td");
+						td.innerHTML = "Papel";
+						tr.appendChild( td );
+						
+						td = document.createElement("td");
+						td.setAttribute("align","right");
+						td.innerHTML = "100";
+						tr.appendChild( td );
+
+						td = document.createElement("td");
+						td.setAttribute("align","right");
+						td.innerHTML = "1.10";
+						tr.appendChild( td );
+						
+						td = document.createElement("td")
+						td.setAttribute("align","right");;
+						td.innerHTML = jsonCalificacion.partidas[i].subpartidas[j].papel_coste_total;
+						tr.appendChild( td );
+						
+						td = document.createElement("td");
+						td.colSpan = "2";
+						td.innerHTML = "&nbsp;";
+						tr.appendChild( td );
+						
+						table.appendChild( tr );
+						
+						// tr tinta
+						tr = document.createElement("tr");
+						
+						td = document.createElement("td");
+						td.colSpan = "2";
+						td.innerHTML = "&nbsp;";
+						tr.appendChild( td );
+						
+						td = document.createElement("td");
+						td.innerHTML = "Tinta";
+						tr.appendChild( td );
+						
+						td = document.createElement("td");
+						td.setAttribute("align","right");
+						td.innerHTML = "100";
+						tr.appendChild( td );
+
+						td = document.createElement("td");
+						td.setAttribute("align","right");
+						td.innerHTML = "1.10";
+						tr.appendChild( td );
+						
+						td = document.createElement("td")
+						td.setAttribute("align","right");;
+						td.innerHTML = jsonCalificacion.partidas[i].subpartidas[j].tinta_coste_total;
+						tr.appendChild( td );
+						
+						td = document.createElement("td");
+						td.colSpan = "2";
+						td.innerHTML = "&nbsp;";
+						tr.appendChild( td );
+						
+						table.appendChild( tr );
+						
+					}
+				}
+				
+				
+				
+				
+				
+				
+				
+				
+				document.getElementById("abc").appendChild( table );
+				
+			}
+						
+		</script>
+		
+	</head>
+	<body id="json" onload="genera_tabla();">
+		
+		<br>
+		<br>
+		<br>
+		<div id="contenedor">
+			<div class="columna_completa">
+				<table id="tabla_cotizacion" border="1">
+					<tr class="titulo_tabla">
+						<td colspan="7">Orden de producción</td>
+						<td>Precio</td>
+					</tr>
+					<tr>
+						<td>Cliente</td>
+						<td colspan="7">Fulanito y perenganito</td>
+					</tr>
+					<tr>
+						<td>Descripcion</td>
+						<td colspan="7">abcdefghijklmnopqrstuvwxyz</td>
+					</tr>
+					<tr class="titulo_tabla">
+						<td>&nbsp;</td>
+						<td colspan="7">Partida 1</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>Descripcion</td>
+						<td colspan="4">&nbsp;</td>
+						<td>Precio</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>Disenio</td>
+						<td colspan="4">&nbsp;</td>
+						<td align="right">1500</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>Preprensa</td>
+						<td colspan="4">&nbsp;</td>
+						<td align="right">1000</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>Transporte</td>
+						<td colspan="4">&nbsp;</td>
+						<td align="right">1000</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>Acabado</td>
+						<td colspan="4">&nbsp;</td>
+						<td align="right">1000</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>Offset</td>
+						<td colspan="4">&nbsp;</td>
+						<td align="right">1000</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>Costo extra</td>
+						<td colspan="4">&nbsp;</td>
+						<td align="right">1000</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>Total</td>
+						<td colspan="4">&nbsp;</td>
+						<td align="right">1000</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr class="titulo_tabla">
+						<td colspan="2">&nbsp;</td>
+						<td colspan="6">Detalle partida 1</td>
+					</tr>
+					
+					
+					
+					
+					<tr>
+						<td colspan="2">&nbsp;</td>
+						<td>Descripcion</td>
+						<td>Cantidad</td>
+						<td>Costo unitario</td>
+						<td>Precio</td>
+						<td colspan="2">&nbsp;</td>
+					</tr>
+					
+					
+					
+					<tr>
+						<td colspan="2">&nbsp;</td>
+						<td>Papel</td>
+						<td align="right">100</td>
+						<td align="right">1.599</td>
+						<td align="right">15.99</td>
+						<td colspan="2">&nbsp;</td>
+					</tr>
+					<tr>
+						<td colspan="2">&nbsp;</td>
+						<td>Tinta</td>
+						<td align="right">100</td>
+						<td align="right">1.599</td>
+						<td align="right">15.99</td>
+						<td colspan="2">&nbsp;</td>
+					</tr>
+					<tr>
+						<td colspan="2">&nbsp;</td>
+						<td>Tinta especial</td>
+						<td align="right">100</td>
+						<td align="right">1.599</td>
+						<td align="right">15.99</td>
+						<td colspan="2">&nbsp;</td>
+					</tr>
+					<tr>
+						<td colspan="2">&nbsp;</td>
+						<td>Barniz frente</td>
+						<td align="right">100</td>
+						<td align="right">1.599</td>
+						<td align="right">15.99</td>
+						<td colspan="2">&nbsp;</td>
+					</tr>
+					<tr>
+						<td colspan="2">&nbsp;</td>
+						<td>Barniz vuelta</td>
+						<td align="right">100</td>
+						<td align="right">1.599</td>
+						<td align="right">15.99</td>
+						<td colspan="2">&nbsp;</td>
+					</tr>
+					<tr>
+						<td colspan="2">&nbsp;</td>
+						<td>Subtotal</td>
+						<td colspan="2">&nbsp;</td>
+						<td align="right">15.99</td>
+						<td colspan="2">&nbsp;</td>
+					</tr>
+					<tr class="titulo_tabla">
+						<td colspan="2">&nbsp;</td>
+						<td colspan="6">Detalle partida 2</td>
+					</tr>
+					<tr>
+						<td colspan="2">&nbsp;</td>
+						<td>Descripcion</td>
+						<td>Cantidad</td>
+						<td>Costo unitario</td>
+						<td>Precio</td>
+						<td colspan="2">&nbsp;</td>
+					</tr>
+					<tr>
+						<td colspan="2">&nbsp;</td>
+						<td>Papel</td>
+						<td align="right">100</td>
+						<td align="right">1.599</td>
+						<td align="right">15.99</td>
+						<td colspan="2">&nbsp;</td>
+					</tr>
+					<tr>
+						<td colspan="2">&nbsp;</td>
+						<td>Tinta</td>
+						<td align="right">100</td>
+						<td align="right">1.599</td>
+						<td align="right">15.99</td>
+						<td colspan="2">&nbsp;</td>
+					</tr>
+					<tr>
+						<td colspan="2">&nbsp;</td>
+						<td>Tinta especial</td>
+						<td align="right">100</td>
+						<td align="right">1.599</td>
+						<td align="right">15.99</td>
+						<td colspan="2">&nbsp;</td>
+					</tr>
+					<tr>
+						<td colspan="2">&nbsp;</td>
+						<td>Barniz frente</td>
+						<td align="right">100</td>
+						<td align="right">1.599</td>
+						<td align="right">15.99</td>
+						<td colspan="2">&nbsp;</td>
+					</tr>
+					<tr>
+						<td colspan="2">&nbsp;</td>
+						<td>Barniz vuelta</td>
+						<td align="right">100</td>
+						<td align="right">1.599</td>
+						<td align="right">15.99</td>
+						<td colspan="2">&nbsp;</td>
+					</tr>
+					<tr>
+						<td colspan="2">&nbsp;</td>
+						<td>Subtotal</td>
+						<td colspan="2">&nbsp;</td>
+						<td align="right">15.99</td>
+						<td colspan="2">&nbsp;</td>
+					</tr>
+					<tr>
+						<td colspan="2">&nbsp;</td>
+						<td>Total</td>
+						<td colspan="3">&nbsp;</td>
+						<td align="right">1879.45</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>Precio bruto</td>
+						<td colspan="6">&nbsp;</td>
+						<td align="right">15,899.45</td>
+					</tr>
+					<tr>
+						<td>Precio cliente</td>
+						<td colspan="6">&nbsp;</td>
+						<td align="right">15,899.45</td>
+					</tr>
+					<tr>
+						<td>Precio neto</td>
+						<td colspan="6">&nbsp;</td>
+						<td align="right">15,899.45</td>
+					</tr>
+				</table>
+			</div>
+			
+			<br>
+			
+			
+			<br>
+			<br>
+			<br>
+			
+			<div id="abc">
+			
+			
+			</div>
+		</div>
+		<br>
+			
+<!--
+		i will follow him - little peggy march
+		dust in the wind - kansas
+		goodbye my lover - james blunt
+		si no la tengo - diablos locos
+			
+		infidencia
+		
+-->
+		
+		
+		
+		
+		<!--
+		CORRECTO
+
+			{
+				"id_orden_produccion":1,
+				"nombre":"orden produccion", 
+				"descripcion":"xxxxxxx", 
+				"precio_bruto":999999.99, 
+				"precio_cliente":999999.99, 
+				"precio_neto":999999.99, 
+				"partidas":[
+					{
+						"id_partida":999, 
+						"nombre_partida":"partida 1", 
+						"disenio_coste_total":999999.99, 
+						"preprensa_coste_total":999999.99, 
+						"subpartidas":[
+							{
+								"id_tipo_trabajo_detalle":999, 
+								"descripcion":"tipo trabajo detalle 1", 
+								"papel_coste_total":999999.99, 
+								"placas_coste_total":999999.99
+							},{
+								"id_tipo_trabajo_detalle":999, 
+								"descripcion":"tipo trabajo detalle 2", 
+								"papel_coste_total":999999.99, 
+								"placas_coste_total":999999.99
+							}
+						] 
+					}, {
+						"id_partida":999, 
+						"nombre_partida":"xxxxxxx", 
+						"disenio_coste_total":999999.99, 
+						"preprensa_coste_total":999999.99, 
+						"subpartidas":[
+							{
+								"id_tipo_trabajo_detalle":999, 
+								"descripcion":"xxxxxxx", 
+								"papel_coste_total":999999.99, 
+								"placas_coste_total":999999.99
+							},{
+								"id_tipo_trabajo_detalle":999, 
+								"descripcion":"xxxxxxx", 
+								"papel_coste_total":999999.99, 
+								"placas_coste_total":999999.99
+							}
+						] 
+					}
+				],
+				"cliente":[
+					{
+						"nombre":"cliente abc",
+						"tipo_cliente":"m"
+					}
+				]
+			}
+			
+			-->
+			
+	
+	</body>
+</html>
+
+
+
+
+	

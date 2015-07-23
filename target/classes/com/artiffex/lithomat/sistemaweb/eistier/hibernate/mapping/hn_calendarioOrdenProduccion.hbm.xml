@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.CalendarioOrdenProduccion" table="calendario_orden_produccion" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idCalendarioOrdenProduccion">
+			<column name="id_calendario_orden_produccion"/>
+			<type name="integer"/>
+			<generator class="increment"/>
+		</id>
+		<many-to-one name="pliego" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Pliego" fetch="select">
+			<column name="id_pliego"/>
+		</many-to-one>
+		<many-to-one name="maquina" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Maquina" fetch="select">
+			<column name="id_maquina"/>
+		</many-to-one>
+		<property name="apuntadorPliegoProduccion">
+			<column name="apuntador_pliego_produccion"/>
+			<type name="integer"/>
+		</property>
+		<property name="siguientePliegoRealizar">
+			<column name="siguiente_pliego_realizar"/>
+			<type name="integer"/>
+		</property>
+		<property name="estaEliminado">
+			<column name="esta_eliminado"/>
+			<type name="boolean"/>
+		</property>
+		<property name="activo">
+			<column name="activo"/>
+			<type name="boolean"/>
+		</property>
+	</class>
+</hibernate-mapping>

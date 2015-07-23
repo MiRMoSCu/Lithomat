@@ -1,0 +1,30 @@
+
+
+
+{	"seguridad":"false",
+	"catalogo":"true",
+	"produccion":"false",
+	"reportes":"true",
+	"cotizador":{ 	"alta":"true",
+				"baja":"false",
+				"cambio":"true",
+				"consulta":"true"	}
+}
+
+
+<html>
+	<script>
+	
+		var a = json;
+		if( a.seguridad = false )
+			muestra imagen a
+		else 
+			muestra imagen b
+	
+	</script>
+
+	<body>
+		<img name="a">
+		<img name="b"
+	</body>
+</html>

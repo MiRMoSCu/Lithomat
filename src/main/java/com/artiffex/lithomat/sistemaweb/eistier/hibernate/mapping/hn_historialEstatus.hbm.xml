@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.HistorialEstatus" table="historial_estatus" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idHistorialEstatus">
+			<column name="id_historial_estatus"/>
+			<type name="integer"/>
+			<generator class="increment"/>
+		</id>
+		<many-to-one name="ordenProduccion" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.OrdenProduccion" fetch="select">
+			<column name="id_orden_produccion" not-null="true"/>
+		</many-to-one>
+		<many-to-one name="estatusOrden" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.EstatusOrden" fetch="select">
+			<column name="id_estatus_orden" not-null="true"/>
+		</many-to-one>
+		<!-- relaciones otras tablas -->
+		<property name="fecha">
+			<column name="fecha"/>
+			<type name="timestamp"/>
+		</property>
+		<property name="observaciones">
+			<column name="observaciones" length="250"/>
+			<type name="string"/>
+		</property>
+		<property name="activo">
+			<column name="activo"/>
+			<type name="boolean"/>
+		</property>
+	</class>
+</hibernate-mapping>

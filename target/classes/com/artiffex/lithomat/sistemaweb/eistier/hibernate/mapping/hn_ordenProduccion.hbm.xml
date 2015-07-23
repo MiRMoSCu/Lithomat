@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.OrdenProduccion" table="orden_produccion" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idOrdenProduccion">
+			<column name="id_orden_produccion"/>
+			<type name="integer"/>
+			<generator class="increment"/>
+		</id>
+		<many-to-one name="usuario" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Usuario" fetch="select">
+			<column name="id_usuario" not-null="true"/>
+		</many-to-one>
+		<many-to-one name="cliente" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Cliente" fetch="select">
+			<column name="id_cliente" not-null="true"/>
+		</many-to-one>
+		<many-to-one name="tipoComprobanteFiscal" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoComprobanteFiscal" fetch="select">
+			<column name="id_tipo_comprobante_fiscal" not-null="true"/>
+		</many-to-one>
+		<property name="nut">
+			<column name="nut" length="12"/>
+			<type name="string"/>
+		</property>
+		<property name="nombre">
+			<column name="nombre" length="120"/>
+			<type name="string"/>
+		</property>
+		<property name="descripcion">
+			<column name="descripcion" length="500"/>
+			<type name="string"/>
+		</property>
+		<property name="fechaCotizacion">
+			<column name="fecha_cotizacion"/>
+			<type name="timestamp"/>
+		</property>
+		<property name="fechaPrometidaEntrega">
+			<column name="fecha_prometida_entrega"/>
+			<type name="timestamp"/>
+		</property>
+		<property name="fechaInicio">
+			<column name="fecha_inicio"/>
+			<type name="timestamp"/>
+		</property>
+		<property name="fechaFin">
+			<column name="fecha_fin"/>
+			<type name="timestamp"/>
+		</property>
+		<property name="fechaEntrega">
+			<column name="fecha_entrega"/>
+			<type name="timestamp"/>
+		</property>
+		<property name="fechaGeneracion">
+			<column name="fecha_generacion"/>
+			<type name="timestamp"/>
+		</property>
+		<property name="activo">
+			<column name="activo"/>
+			<type name="boolean"/>
+		</property>
+		<!-- relaciones de identidad uno a muchos que esta clase mantiene con otras clases -->
+		<set name="historialEstatus" table="historial_estatus" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_orden_produccion" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.HistorialEstatus"/>
+		</set>
+		<set name="cobranza" table="cobranza" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_orden_produccion" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Cobranza"/>
+		</set>
+		<set name="calificacionOrdenProduccion" table="calificacion_orden_produccion" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_orden_produccion" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionOrdenProduccion"/>
+		</set>
+		<set name="partida" table="partida" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_orden_produccion" not-null="true"/>
+			</key>	
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Partida"/>
+		</set>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,284 @@
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>tabla_con_estilo</title>
+		<style type="text/css" media="screen">
+			body {
+				background: blue;
+			}
+		
+			#contenedor {
+				width: 1000px;
+				background: white;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			
+			.columna_completa {
+				width: 800px;
+				margin-left: auto;
+				margin-right: auto;
+				background: #e2e2e2;
+			}
+			
+			table#tabla_cotizacion {
+				width: 100%;
+				height: 100%;
+				border-collapse: separate;
+				border-style: hidden;
+				color: #898989;
+			}
+			
+			table#tabla_cotizacion th {
+				background: #7faadc;
+				color: #fff;
+				border: 1px solid #fff;
+			}
+			
+			table#tabla_cotizacion td {
+				border: transparent;
+			}
+			
+			table#tabla_cotizacion tr.l1 {
+				background: #fff;
+			}
+			
+			table#tabla_cotizacion tr.l2 {
+				background: #d8e7ff;
+			}
+			
+			table#tabla_cotizacion tr.l3 {
+				background: #b0c4de;
+			}
+			
+			table#tabla_cotizacion tr.italic {
+				font-style: italic;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<br>
+		<br>
+		<div id="contenedor">
+			<br>
+			<div class="columna_completa">
+				<table id="tabla_cotizacion">
+                    <tr class="titulo_tabla">
+                                <th colspan="7">Orden de producción</td>
+                            <th>Precio</td>
+                    </tr>
+                    <tr class="l2">
+                            <td>Cliente</td>
+                            <td colspan="7">Fulanito y perenganito</td>
+                    </tr>
+                    <tr class="l1">
+                            <td>Descripcion</td>
+                            <td colspan="7">abcdefghijklmnopqrstuvwxyz</td>
+                    </tr>
+                    <tr>
+                            <th>&nbsp;</th>
+                            <th colspan="7">Partida 1</th>
+                    </tr>
+                    <tr class="l3">
+                            <td>&nbsp;</td>
+                            <td>Descripcion</td>
+                            <td colspan="4">&nbsp;</td>
+                            <td>Precio</td>
+                            <td>&nbsp;</td>
+                    </tr>
+                    <tr class="l2">
+                            <td>&nbsp;</td>
+                            <td style="text-align:left;">Disenio</td>
+                            <td colspan="4">&nbsp;</td>
+                            <td style="text-align:right;">1500</td>
+                            <td>&nbsp;</td>
+                    </tr>
+                    <tr class="l1">
+                            <td>&nbsp;</td>
+                            <td style="text-align:left;">Preprensa</td>
+                            <td colspan="4">&nbsp;</td>
+                            <td style="text-align:right;">1000</td>
+                            <td>&nbsp;</td>
+                    </tr>
+                    <tr class="l2">
+                            <td>&nbsp;</td>
+                            <td style="text-align:left;">Transporte</td>
+                            <td colspan="4">&nbsp;</td>
+                            <td style="text-align:right;">1000</td>
+                            <td>&nbsp;</td>
+                    </tr>
+                    <tr class="l1">
+                            <td>&nbsp;</td>
+                            <td style="text-align:left;">Acabado</td>
+                            <td colspan="4">&nbsp;</td>
+                            <td style="text-align:right;">1000</td>
+                            <td>&nbsp;</td>
+                    </tr>
+                    <tr class="l2">
+                            <td>&nbsp;</td>
+                            <td style="text-align:left;">Offset</td>
+                            <td colspan="4">&nbsp;</td>
+                            <td style="text-align:right;">1000</td>
+                            <td>&nbsp;</td>
+                    </tr>
+                    <tr class="l1">
+                            <td>&nbsp;</td>
+                            <td style="text-align:left;">Costo extra</td>
+                            <td colspan="4">&nbsp;</td>
+                            <td style="text-align:right;">1000</td>
+                            <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                            <td>&nbsp;</td>
+                            <td style="text-align:left;">Total</td>
+                            <td colspan="4">&nbsp;</td>
+                            <td style="text-align:right;">1000</td>
+                            <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                            <th colspan="2">&nbsp;</th>
+                            <th colspan="6">Detalle partida 1</th>
+                    </tr>
+                    <tr class="l3">
+                            <td colspan="2">&nbsp;</td>
+                            <td>Descripcion</td>
+                            <td>Cantidad</td>
+                            <td>Costo unitario</td>
+                            <td>Precio</td>
+                            <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr class="l2">
+                            <td colspan="2">&nbsp;</td>
+                            <td style="text-align:left;">Papel</td>
+                            <td>100</td>
+                            <td>1.599</td>
+                            <td style="text-align:right;">15.99</td>
+                            <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr class="l1">
+                            <td colspan="2">&nbsp;</td>
+                            <td style="text-align:left;">Tinta</td>
+                            <td>100</td>
+                            <td>1.599</td>
+                            <td style="text-align:right;">15.99</td>
+                            <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr class="l2">
+                            <td colspan="2">&nbsp;</td>
+                            <td style="text-align:left;">Tinta especial</td>
+                            <td>100</td>
+                            <td>1.599</td>
+                            <td style="text-align:right;">15.99</td>
+                            <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr class="l1">
+                            <td colspan="2">&nbsp;</td>
+                            <td style="text-align:left;">Barniz frente</td>
+                            <td>100</td>
+                            <td>1.599</td>
+                            <td style="text-align:right;">15.99</td>
+                            <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr class="l2 italic">
+                            <td colspan="2">&nbsp;</td>
+                            <td style="text-align:left;">Barniz vuelta</td>
+                            <td>100</td>
+                            <td>1.599</td>
+                            <td style="text-align:right;">15.99</td>
+                            <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                            <td colspan="2">&nbsp;</td>
+                            <td style="text-align:left;">Subtotal</td>
+                            <td colspan="2">&nbsp;</td>
+                            <td style="text-align:right;">15.99</td>
+                            <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                            <th colspan="2">&nbsp;</th>
+                            <th colspan="6">Detalle partida 2</th>
+                    </tr>
+                    <tr class="l3">
+                            <td colspan="2">&nbsp;</td>
+                            <td>Descripcion</td>
+                            <td>Cantidad</td>
+                            <td>Costo unitario</td>
+                            <td>Precio</td>
+                            <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr class="l2">
+                            <td colspan="2">&nbsp;</td>
+                            <td style="text-align:left;">Papel</td>
+                            <td>100</td>
+                            <td>1.599</td>
+                            <td style="text-align:right;">15.99</td>
+                            <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr class="l1">
+                            <td colspan="2">&nbsp;</td>
+                            <td style="text-align:left;">Tinta</td>
+                            <td>100</td>
+                            <td>1.599</td>
+                            <td style="text-align:right;">15.99</td>
+                            <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr class="l2">
+                            <td colspan="2">&nbsp;</td>
+                            <td style="text-align:left;">Tinta especial</td>
+                            <td>100</td>
+                            <td>1.599</td>
+                            <td style="text-align:right;">15.99</td>
+                            <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr class="l1">
+                            <td colspan="2">&nbsp;</td>
+                            <td style="text-align:left;">Barniz frente</td>
+                            <td>100</td>
+                            <td>1.599</td>
+                            <td style="text-align:right;">15.99</td>
+                            <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr class="l2">
+                            <td colspan="2">&nbsp;</td>
+                            <td style="text-align:left;">Barniz vuelta</td>
+                            <td>100</td>
+                            <td>1.599</td>
+                            <td style="text-align:right;">15.99</td>
+                            <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr class="l1">
+                            <td colspan="2">&nbsp;</td>
+                            <td style="text-align:left;">Subtotal</td>
+                            <td colspan="2">&nbsp;</td>
+                            <td style="text-align:right;">15.99</td>
+                            <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                            <td colspan="2">&nbsp;</td>
+                            <td style="text-align:left;">Total</td>
+                            <td colspan="3">&nbsp;</td>
+                            <td style="text-align:right;">1879.45</td>
+                            <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                            <td style="text-align:left;">Precio bruto</td>
+                            <td colspan="6">&nbsp;</td>
+                            <td style="text-align:right;">15,899.45</td>
+                    </tr>
+                    <tr>
+                            <td style="text-align:left;">Precio cliente</td>
+                            <td colspan="6">&nbsp;</td>
+                            <td style="text-align:right;">15,899.45</td>
+                    </tr>
+                    <tr>
+                            <td style="text-align:left;">Precio neto</td>
+                            <td colspan="6">&nbsp;</td>
+                            <td style="text-align:right;">15,899.45</td>
+                    </tr>
+                </table>
+			</div>
+		</div>
+		
+	</body>
+</html>

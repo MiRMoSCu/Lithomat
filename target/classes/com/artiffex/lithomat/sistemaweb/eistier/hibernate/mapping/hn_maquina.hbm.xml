@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.Maquina" table="maquina" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idMaquina">
+			<column name="id_maquina"/>
+			<type name="integer"/>
+			<generator class="increment"/>
+		</id>
+		<property name="nombre">
+			<column name="nombre"/>
+			<type name="string"/>
+		</property>
+		<property name="descripcion">
+			<column name="descripcion"/>
+			<type name="string"/>
+		</property>
+		<property name="numColores">
+			<column name="num_colores"/>
+			<type name="integer"/>
+		</property>
+		<property name="anchoPlaca">
+			<column name="ancho_placa"/>
+			<type name="integer"/>
+		</property>
+		<property name="altoPlaca">
+			<column name="alto_placa"/>
+			<type name="integer"/>
+		</property>
+		<property name="anchoMaxPapel">
+			<column name="ancho_max_papel"/>
+			<type name="integer"/>
+		</property>
+		<property name="altoMaxPapel">
+			<column name="alto_max_papel"/>
+			<type name="integer"/>
+		</property>
+		<property name="anchoMinPapel">
+			<column name="ancho_min_papel"/>
+			<type name="integer"/>
+		</property>
+		<property name="altoMinPapel">
+			<column name="alto_min_papel"/>
+			<type name="integer"/>
+		</property>
+		<property name="activo">
+			<column name="activo"/>
+			<type name="boolean"/>
+		</property>
+		<!-- relaciones de identidad uno a muchos que esta clase mantiene con otras clases -->
+		<set name="tipoTrabajoDetalle" table="tipo_trabajo_detalle" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_maquina" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajoDetalle"/>
+		</set>
+		<set name="tipoPlaca" table="tipo_placa" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_maquina" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPlaca"/>
+		</set>
+		<set name="tabuladorPrecios" table="tabulador_precios" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_maquina" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TabuladorPrecios"/>
+		</set>
+		<set name="calendarioOrdenProduccion" table="calendario_orden_produccion" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_maquina" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.CalendarioOrdenProduccion"/>
+		</set>
+		<set name="fechaPrensistaMaquina" table="fecha_prensista_maquina" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_maquina" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.FechaPrensistaMaquina"/>
+		</set>
+	</class>
+</hibernate-mapping>
