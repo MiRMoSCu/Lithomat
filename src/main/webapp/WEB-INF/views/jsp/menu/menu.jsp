@@ -31,6 +31,7 @@
 <c:url value="/tipo_trabajo/catalogo/lista" 			var="urlTipoTrabajo" />
 <c:url value="/turno_laboral/catalogo/lista" 			var="urlTurnoLaboral" />
 <c:url value="/tipo_vuelta/catalogo/lista" 				var="urlTipoVuelta" />
+<c:url value="/j_spring_security_logout" 				var="urlSalir" />
 
 <html>
     <head>
@@ -66,6 +67,7 @@
             var urlTipoTrabajo				= '${urlTipoTrabajo}';
             var urlTurnoLaboral				= '${urlTurnoLaboral}';
             var urlTipoVuelta				= '${urlTipoVuelta}';
+            var urlSalir					= '${urlSalir}';
             
             function menu( opcion ) {
                 switch( opcion ) {
@@ -158,6 +160,9 @@
                     	break;
                     case 'tipo_vuelta':
                     	document.forms["opcion_menu"].action = urlTipoVuelta;
+                    	break;
+                    case 'salir':
+                    	document.forms["opcion_menu"].action = urlSalir;
                     	break;
                     default:
                     	alert("error en url");
@@ -301,6 +306,13 @@
         	<tr>
         		<td>&nbsp;</td>
         		<td><b style="cursor:pointer;" onclick="menu('turno_laboral');">Turno laboral</b></td>
+        	</tr>
+        	<tr>
+        		<td colspan="2">&nbsp;</td>
+        	</tr>
+        	<tr>
+        		<td><b style="cursor:pointer;" onclick="menu('salir');">Cerrar sesion</b></td>
+        		<td>&nbsp;</td>
         	</tr>
         </table>
     </body>

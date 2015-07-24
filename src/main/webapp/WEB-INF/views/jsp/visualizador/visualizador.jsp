@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:url value="/menu"               						var="urlMenu"/>
+<c:url value="/"	               						var="urlMenu"/>
 <c:url value="/visualizador/busca_ordenes_produccion"   var="urlBuscaOrdenesProduccion"/>
 <c:url value="/visualizador/obtiene_detalle_nut"        var="urlObtieneDetalleNut"/>
 <fmt:setLocale value="en_US" scope="session" />

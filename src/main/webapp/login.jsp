@@ -3,7 +3,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:url value="/login" var="url" />
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -14,7 +13,7 @@
 		<script type="text/javascript" src="<c:url value="/resources/js/login.js"/>"></script>
 	</head>
 	<body>
-		<form name="login" action="${url}" method="post">
+		<form name="login" action="<c:url value="/j_spring_security_check"/>" method="post">
 			<div id="div_login">
 				<div id="div_cuadro_formulario">
 					<div id="div_espacio"></div>
@@ -50,7 +49,7 @@
 					<div id="div_enviar">
 						<div id="div_mensajes">
 							<div id="mensaje_contraseña_incorrecta" style="display: block;">
-								<p>${error}</p>
+								<p><%if(request.getParameter("error") != null){out.println("No fue posible Autenticarse.<br/>Intente nuevamente.");}%></p>
 							</div>
 						</div>
 						<div id="div_boton_enviar">

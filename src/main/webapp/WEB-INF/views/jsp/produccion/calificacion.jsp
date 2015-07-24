@@ -3,7 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<c:url value="/menu"									var="urlMenu"/>
+<c:url value="/"										var="urlMenu"/>
 <c:url value="/calificacion/resumen_partida"			var="urlResumenCalificacionPartida"/>
 <c:url value="/calificacion/resumen_trabajo_detalle"	var="urlResumenCalificacionTrabajoDetalle"/>
 <c:url value="/calificacion/resumen_procesos"			var="urlResumenCalificacionProcesos"/>

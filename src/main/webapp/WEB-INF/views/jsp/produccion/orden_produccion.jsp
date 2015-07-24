@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:url value="/menu"               				var="urlMenu"/>
+<c:url value="/"	               				var="urlMenu"/>
 <c:url value="/cliente/busca_nombre"        	var="urlBuscaNombreCliente"/>
 <c:url value="/cliente/busca"               	var="urlBuscaCliente"/>
 <c:url value="/orden_produccion/agrega"     	var="urlAgregaOrdenProduccion"/>

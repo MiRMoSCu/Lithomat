@@ -24,13 +24,15 @@
 	</annotation-driven>
 		 -->
 	
-	<annotation-driven/> 
+	<resources mapping="resources/**" location="/resources/**, classpath:resources"  />
+	<resources mapping="pages/**" location="/WEB-INF/pages/" />
+	
 	<context:component-scan base-package="com.artiffex.lithomat.sistemaweb.webtier.controller" />
 	<context:component-scan base-package="com.artiffex.lithomat.sistemaweb.businesstier.service.implementacion" />
 	<context:component-scan base-package="com.artiffex.lithomat.sistemaweb.eistier.dao" />
 	
-	<resources mapping="resources/**" location="/resources/**, classpath:resources"  />
-
+	<annotation-driven/>
+	
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/jsp/" />
 		<beans:property name="suffix" value=".jsp" />
