@@ -13,9 +13,9 @@ public class Perfil implements Serializable {
 	private String descripcion;
 	private boolean activo;
 	// esta clase esta relacionada [uno a muchos] con las tablas:
-	private Set<ModuloXPerfilXUsuario> moduloXPerfilXUsuario = new HashSet<ModuloXPerfilXUsuario>();
+	private Set<PerfilXUsuario> perfilXUsuario = new HashSet<PerfilXUsuario>();
 	
-
+	
 	public int getIdPerfil() {
 		return idPerfil;
 	}
@@ -40,12 +40,11 @@ public class Perfil implements Serializable {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	public Set<ModuloXPerfilXUsuario> getModuloXPerfilXUsuario() {
-		return moduloXPerfilXUsuario;
+	public Set<PerfilXUsuario> getPerfilXUsuario() {
+		return perfilXUsuario;
 	}
-	public void setModuloXPerfilXUsuario(
-			Set<ModuloXPerfilXUsuario> moduloXPerfilXUsuario) {
-		this.moduloXPerfilXUsuario = moduloXPerfilXUsuario;
+	public void setPerfilXUsuario(Set<PerfilXUsuario> perfilXUsuario) {
+		this.perfilXUsuario = perfilXUsuario;
 	}
-	
+		
 }

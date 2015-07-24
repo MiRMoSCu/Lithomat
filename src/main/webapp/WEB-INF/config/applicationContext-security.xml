@@ -2,14 +2,17 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:security="http://www.springframework.org/schema/security"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
                http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
                http://www.springframework.org/schema/security
-               http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+               http://www.springframework.org/schema/security/spring-security-3.1.xsd
+               http://www.springframework.org/schema/jdbc
+    		   http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd">
 	<security:http auto-config="true">
-		<security:intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/login.jsp*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<security:intercept-url pattern="/**" access="ROLE_USER" />
+		<security:intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/**" access="ROLE_ROOT" />
 		<security:form-login 
 			login-page="/login.jsp"
 			username-parameter="usuario" 
@@ -19,9 +22,32 @@
 	</security:http>
 	<security:authentication-manager>
 		<security:authentication-provider>
-			<security:user-service>
-				<security:user authorities="ROLE_USER" name="user" password="user" />
-			</security:user-service>
+			<security:jdbc-user-service 
+				data-source-ref="dataSource"
+				authorities-by-username-query=
+					"SELECT 
+					    u.usuario username, p.nombre authority
+					FROM
+					    perfil_x_usuario pfu,
+					    usuario u,
+					    perfil p
+					WHERE
+					    pfu.id_usuario = u.id_usuario
+					        AND pfu.id_perfil = p.id_perfil
+					        AND pfu.activo = TRUE
+					        and u.usuario = ?" 
+				users-by-username-query=
+					"SELECT 
+					    u.usuario username, u.contrasenia password, u.activo enabled
+					FROM
+					    perfil_x_usuario pfu,
+					    usuario u,
+					    perfil p
+					WHERE
+					    pfu.id_usuario = u.id_usuario
+					        AND pfu.id_perfil = p.id_perfil
+					        AND pfu.activo = TRUE
+					        AND u.usuario = ?" />
 		</security:authentication-provider>
 	</security:authentication-manager>
 	<!-- <bean id="serverErrorHandler" class="com.artiffex.lithomat.sistemaweb.security.ServerErrorFailureHandler" />-->

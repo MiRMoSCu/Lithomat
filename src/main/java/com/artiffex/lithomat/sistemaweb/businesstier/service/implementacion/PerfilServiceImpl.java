@@ -20,12 +20,12 @@ public class PerfilServiceImpl implements PerfilService {
 		return perfilDAO.crea(perfil);
 	}
 
-	public int modificaPerfil(Perfil perfil) {
-		return perfilDAO.modifica(perfil);
+	public void modificaPerfil(Perfil perfil) {
+		perfilDAO.modifica(perfil);
 	}
 
-	public int eliminaPerfil(int idPerfil) {
-		return perfilDAO.elimina(idPerfil);
+	public void eliminaPerfil(int idPerfil) {
+		perfilDAO.elimina(idPerfil);
 	}
 
 	public List<Perfil> listaPerfil() {

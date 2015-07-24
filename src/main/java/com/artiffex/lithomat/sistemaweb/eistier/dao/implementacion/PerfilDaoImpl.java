@@ -21,21 +21,17 @@ public class PerfilDaoImpl implements PerfilDAO {
 		return 0;
 	}
 
-	public int modifica(Perfil perfil) {
+	public void modifica(Perfil perfil) {
 		// TODO Auto-generated method stub
-		return 0;
 	}
 
-	public int elimina(int idPerfil) {
+	public void elimina(int idPerfil) {
 		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	public List<Perfil> lista() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
 	
 }

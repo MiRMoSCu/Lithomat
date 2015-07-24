@@ -34,6 +34,12 @@
 			<type name="boolean"/>
 		</property>
 		<!-- relaciones de identidad uno a muchos que esta clase mantiene con otras clases -->
+		<set name="perfilXUsuario" table="perfil_x_usuario" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_usuario" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.PerfilXUsuario"/>
+		</set>
 		<set name="ordenProduccion" table="orden_produccion" inverse="true" lazy="true" fetch="select">
 			<key>
 				<column name="id_usuario" not-null="true"/>

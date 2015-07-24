@@ -6,9 +6,6 @@ import java.util.Set;
 
 public class Usuario implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4694380466211635839L;
 	
 	private int idUsuario;
@@ -19,7 +16,7 @@ public class Usuario implements Serializable {
 	private String contrasenia;
 	private boolean activo;
 	// esta clase esta relacionada [uno <usuario> a muchos <ordenProduccion>] con las tablas:
-	private Set<ModuloXPerfilXUsuario> moduloXPerfilXUsuario = new HashSet<ModuloXPerfilXUsuario>();
+	private Set<PerfilXUsuario> perfilXUsuario = new HashSet<PerfilXUsuario>();
 	private Set<OrdenProduccion> ordenProduccion = new HashSet<OrdenProduccion>();
 	
 	
@@ -65,12 +62,11 @@ public class Usuario implements Serializable {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	public Set<ModuloXPerfilXUsuario> getModuloXPerfilXUsuario() {
-		return moduloXPerfilXUsuario;
+	public Set<PerfilXUsuario> getPerfilXUsuario() {
+		return perfilXUsuario;
 	}
-	public void setModuloXPerfilXUsuario(
-			Set<ModuloXPerfilXUsuario> moduloXPerfilXUsuario) {
-		this.moduloXPerfilXUsuario = moduloXPerfilXUsuario;
+	public void setPerfilXUsuario(Set<PerfilXUsuario> perfilXUsuario) {
+		this.perfilXUsuario = perfilXUsuario;
 	}
 	public Set<OrdenProduccion> getOrdenProduccion() {
 		return ordenProduccion;
@@ -78,5 +74,5 @@ public class Usuario implements Serializable {
 	public void setOrdenProduccion(Set<OrdenProduccion> ordenProduccion) {
 		this.ordenProduccion = ordenProduccion;
 	}
-
+	
 }

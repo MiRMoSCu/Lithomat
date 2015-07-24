@@ -16,14 +16,6 @@ public class LoginController {
 		return "menu/menu";
 	}
 	
-	/*
-	@RequestMapping("/login")
-	public String login() {
-		log.info("/");
-		return "menu/menu";
-	}
-	*/
-	
 	@RequestMapping("/pagina_estatica")
 	public String paginaEstatica() {
 		log.info("/pagina_estatica");

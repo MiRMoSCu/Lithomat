@@ -8,9 +8,9 @@ public interface PerfilService {
 	
 	public int creaPerfil(Perfil perfil);
 	
-	public int modificaPerfil(Perfil perfil);
+	public void modificaPerfil(Perfil perfil);
 	
-	public int eliminaPerfil(int idPerfil);
+	public void eliminaPerfil(int idPerfil);
 	
 	public List<Perfil> listaPerfil();
 	

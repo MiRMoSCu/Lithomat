@@ -8,9 +8,9 @@ public interface PerfilDAO {
 	
 	public int crea(Perfil perfil);
 	
-	public int modifica(Perfil perfil);
+	public void modifica(Perfil perfil);
 	
-	public int elimina(int idPerfil);
+	public void elimina(int idPerfil);
 	
 	public List<Perfil> lista();
 	

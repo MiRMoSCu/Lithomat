@@ -55,8 +55,7 @@
 		<mapping resource="hn_maquina.hbm.xml"/>
 		<mapping resource="hn_materialAyuda.hbm.xml"/>
 		<mapping resource="hn_materialAyudaXPartida.hbm.xml"/>
-		<mapping resource="hn_modulo.hbm.xml"/>
-		<mapping resource="hn_moduloXPerfilXUsuario.hbm.xml"/>
+		<mapping resource="hn_perfilXUsuario.hbm.xml"/>
 		<mapping resource="hn_offset.hbm.xml"/>
 		<mapping resource="hn_offsetDetalle.hbm.xml"/>
 		<mapping resource="hn_ordenProduccion.hbm.xml"/>
@@ -75,7 +74,6 @@
 		<mapping resource="hn_proveedorExterno.hbm.xml"/>
 		<mapping resource="hn_proveedorPapel.hbm.xml"/>
 		<mapping resource="hn_responsableInsumo.hbm.xml"/>
-		<mapping resource="hn_subModulo.hbm.xml"/>
 		<mapping resource="hn_tabuladorPrecios.hbm.xml"/>
 		<mapping resource="hn_tamanioPublicacion.hbm.xml"/>
 		<mapping resource="hn_tintaEspecial.hbm.xml"/>

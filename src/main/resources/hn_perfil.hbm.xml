@@ -22,11 +22,11 @@
 			<type name="boolean"/>
 		</property>
 		<!-- relaciones de identidad uno a muchos que esta clase mantiene con otras clases -->
-		<set name="moduloXPerfilXUsuario" table="modulo_x_perfil_x_usuario" inverse="true" lazy="true" fetch="select">
+		<set name="perfilXUsuario" table="perfil_x_usuario" inverse="true" lazy="true" fetch="select">
 			<key>
 				<column name="id_perfil" not-null="true"/>
 			</key>
-			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.ModuloXPerfilXUsuario"/>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.PerfilXUsuario"/>
 		</set>
 	</class>
 </hibernate-mapping>
