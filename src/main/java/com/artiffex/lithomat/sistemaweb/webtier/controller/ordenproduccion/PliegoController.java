@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,7 @@ public class PliegoController {
 	private TipoVueltaService tipoVueltaService;
 	
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/calcula", method = RequestMethod.GET)
 	public String calculaPliego(
 			@RequestParam(value = "id_tipo_trabajo_detalle", required = false) Integer idTipoTrabajoDetalle,
@@ -55,6 +57,7 @@ public class PliegoController {
 		return "produccion/pliego";
 	} // calculaPliego
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/agrega", method = RequestMethod.POST)
 	@ResponseBody
 	public String agregaPliego(
@@ -83,6 +86,7 @@ public class PliegoController {
 		return pliegoService.buscaHTML(idTipoTrabajoDetalle);
 	} // agregaPliego
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value="/activa_lista", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResponse activaListaPliegos(

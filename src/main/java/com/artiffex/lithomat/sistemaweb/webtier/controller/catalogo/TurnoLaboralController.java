@@ -9,6 +9,7 @@ import java.util.Locale;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,8 @@ public class TurnoLaboralController {
 	@Resource
 	private TurnoLaboralService turnoLaboralService;
 
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/lista", method = RequestMethod.POST)
 	public String listaTurnoLaboral( Locale locale, Model model ) throws IOException {
 		log.info("/lista_turno_laboral");
@@ -39,6 +42,7 @@ public class TurnoLaboralController {
 		return "catalogo/turno_laboral";
 	}// lista_turno_laboral
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
 	public String altaTurnoLaboral(
 			@RequestParam(value = "descripcion", 	required = false) String descripcion,
@@ -68,6 +72,7 @@ public class TurnoLaboralController {
 		return "catalogo/turno_laboral";
 	}// alta_turno_laboral
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
 	public String modificaTurnoLaboral(
 			@RequestParam(value = "id_turno_laboral", 	required = false) Integer idTurnoLaboral,
@@ -97,6 +102,7 @@ public class TurnoLaboralController {
 		return "catalogo/turno_laboral";
 	}// modifica_turno_laboral
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/elimina", method = RequestMethod.POST)
 	public String eliminaTurnoLaboral(
 			@RequestParam(value = "id_turno_laboral", required = false) Integer idTurnoLaboral,

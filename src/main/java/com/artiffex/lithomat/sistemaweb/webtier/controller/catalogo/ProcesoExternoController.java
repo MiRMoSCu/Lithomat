@@ -7,6 +7,7 @@ import java.util.Locale;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,8 @@ public class ProcesoExternoController {
 	@Resource
 	private TipoPrecioService tipoPrecioService;
 
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/lista", method = RequestMethod.POST)
 	public String listaProcesoExterno( Locale locale, Model model ) throws IOException {
 		log.info("/lista_proceso_externo");
@@ -52,6 +55,7 @@ public class ProcesoExternoController {
 		return "catalogo/proceso_externo";
 	}// lista_proceso_externo
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
 	public String altaProcesoExterno(
 			@RequestParam(value = "id_proveedor_externo", 	required = false) Integer idProveedorExterno,
@@ -94,6 +98,7 @@ public class ProcesoExternoController {
 		return "catalogo/proceso_externo";
 	}// alta_proceso_externo
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
 	public String modificaProcesoExterno(
 			@RequestParam(value = "id_proceso_externo", 	required = false) Integer idProcesoExterno,
@@ -132,6 +137,7 @@ public class ProcesoExternoController {
 		return "catalogo/proceso_externo";
 	}// modifica_proceso_externo
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/elimina", method = RequestMethod.POST)
 	public String eliminaProcesoExterno(
 			@RequestParam(value = "id_proceso_externo", required = false) Integer idProcesoExterno,

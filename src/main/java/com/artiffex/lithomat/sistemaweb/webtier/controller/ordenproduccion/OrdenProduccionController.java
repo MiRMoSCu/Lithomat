@@ -8,6 +8,7 @@ import java.util.Locale;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -85,6 +86,7 @@ public class OrdenProduccionController {
 	private HistorialEstatusService historialEstatusService;
 	
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String ordenProduccion(Locale locale, Model model) {
 		log.info("/orden_produccion");
@@ -158,6 +160,7 @@ public class OrdenProduccionController {
 		return "produccion/orden_produccion";
 	} // ordenProduccion
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/agrega", method = RequestMethod.POST, headers = "Accept=application/json")
 	@ResponseBody
 	public JsonResponse agregaOrdenProduccion(
@@ -204,6 +207,7 @@ public class OrdenProduccionController {
 		return jsonResponse;
 	} // agregaOrdenProduccion()
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/actualiza", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResponse actualizaOrdenProduccion(
@@ -234,6 +238,7 @@ public class OrdenProduccionController {
 		return jsonResponse;
 	} // actualizaOrdenProduccion
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/cambia_estatus", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResponse cambiaEstatusOrdenProduccion(

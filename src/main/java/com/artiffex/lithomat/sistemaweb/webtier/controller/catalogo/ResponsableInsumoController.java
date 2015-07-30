@@ -7,6 +7,7 @@ import java.util.Locale;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,8 @@ public class ResponsableInsumoController {
 	@Resource
 	private ResponsableInsumoService responsableInsumoService;
 
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/lista", method = RequestMethod.POST)
 	public String listaResponsableInsumo( Locale locale, Model model ) throws IOException {
 		log.info("/lista_responsable_insumo");
@@ -37,6 +40,7 @@ public class ResponsableInsumoController {
 		return "catalogo/responsable_insumo";
 	}// lista_reponsable_insumo
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
 	public String altaResponsableInsumo(
 			@RequestParam(value = "nombre", required = false) String nombre,
@@ -61,6 +65,7 @@ public class ResponsableInsumoController {
 		return "catalogo/responsable_insumo";
 	}// alta_reponsable_insumo
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
 	public String modificaResponsableInsumo(
 			@RequestParam(value = "id_responsable_insumo", 	required = false) Integer idResponsableInsumo,
@@ -85,6 +90,7 @@ public class ResponsableInsumoController {
 		return "catalogo/responsable_insumo";
 	}// modifica
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/elimina", method = RequestMethod.POST)
 	public String eliminaResponsableInsumo(
 			@RequestParam(value = "id_responsable_insumo", required = false) Integer idResponsableInsumo,

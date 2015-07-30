@@ -9,17 +9,24 @@
                http://www.springframework.org/schema/security/spring-security-3.1.xsd
                http://www.springframework.org/schema/jdbc
     		   http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd">
-	<security:http auto-config="true">
-		<security:intercept-url pattern="/login.jsp*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<security:intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<security:intercept-url pattern="/**" access="ROLE_ROOT" />
+    		   
+	<!-- <bean id="serverErrorHandler" class="com.artiffex.lithomat.sistemaweb.security.ServerErrorFailureHandler" />-->
+	
+	<security:http auto-config="true" use-expressions="true">
+		<security:intercept-url pattern="/login.jsp*" access="permitAll" />
+		<security:intercept-url pattern="/resources/**" access="permitAll" />
+		<security:intercept-url pattern="/**" access="isAuthenticated()" />
 		<security:form-login 
 			login-page="/login.jsp"
 			username-parameter="usuario" 
 			password-parameter="contrasenia"
 			authentication-failure-url="/login.jsp?error" />
 			<!--  authentication-failure-handler-ref="serverErrorHandler" /> -->
+			<security:session-management>
+				<security:concurrency-control max-sessions="1"/>
+			</security:session-management>
 	</security:http>
+	
 	<security:authentication-manager>
 		<security:authentication-provider>
 			<security:jdbc-user-service 
@@ -50,5 +57,7 @@
 					        AND u.usuario = ?" />
 		</security:authentication-provider>
 	</security:authentication-manager>
-	<!-- <bean id="serverErrorHandler" class="com.artiffex.lithomat.sistemaweb.security.ServerErrorFailureHandler" />-->
+	
+	<security:global-method-security secured-annotations="enabled" />
+	
 </beans>

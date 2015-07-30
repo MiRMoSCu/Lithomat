@@ -7,6 +7,7 @@ import java.util.Locale;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,8 @@ public class TipoComprobanteFiscalController {
 	@Resource
 	private TipoPrecioService tipoPrecioService;
 
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/lista", method = RequestMethod.POST)
 	public String listaTipoComprobanteFiscal( Locale locale, Model model ) throws IOException {
 		log.info("/lista_tipo_comprobante_fiscal");
@@ -45,6 +48,7 @@ public class TipoComprobanteFiscalController {
 		return "catalogo/tipo_comprobante_fiscal";
 	}// lista_tipo_comprobante_fiscal
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
 	public String altaTipoComprobanteFiscal(
 			@RequestParam(value = "nombre", 		required = false) String nombre,
@@ -79,6 +83,7 @@ public class TipoComprobanteFiscalController {
 		return "catalogo/tipo_comprobante_fiscal";
 	}// alta_tipo_comprobante_fiscal
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
 	public String modificaTipoComprobanteFiscal(
 			@RequestParam(value = "id_tipo_comprobante_fiscal", required = false) Integer idTipoComprobanteFiscal,
@@ -110,6 +115,7 @@ public class TipoComprobanteFiscalController {
 		return "catalogo/tipo_comprobante_fiscal";
 	}// modifica_tipo_comprobante_fiscal
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/elimina", method = RequestMethod.POST)
 	public String eliminaTipoComprobanteFiscal(
 			@RequestParam(value = "id_tipo_comprobante_fiscal", required = false) Integer idTipoComprobanteFiscal,

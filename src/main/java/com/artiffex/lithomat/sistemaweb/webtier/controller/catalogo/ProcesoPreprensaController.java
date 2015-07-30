@@ -7,6 +7,7 @@ import java.util.Locale;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,8 @@ public class ProcesoPreprensaController {
 	@Resource
 	private TipoPrecioService tipoPrecioService;
 
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/lista", method = RequestMethod.POST)
 	public String listaProcesoPreprensa( Locale locale, Model model ) throws IOException {
 		log.info("/lista_proceso_preprensa");
@@ -45,6 +48,7 @@ public class ProcesoPreprensaController {
 		return "catalogo/proceso_preprensa";
 	} // lista_proceso_preprensa
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
 	public String altaProcesoPreprensa(
 			@RequestParam(value = "nombre_proceso", required = false) String nombreProceso,
@@ -79,6 +83,7 @@ public class ProcesoPreprensaController {
 		return "catalogo/proceso_preprensa";
 	} // alta_proceso_preprensa
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
 	public String modificaProcesoPreprensa(
 			@RequestParam(value = "id_proceso_preprensa", 	required = false) Integer idProcesoPreprensa,
@@ -110,6 +115,7 @@ public class ProcesoPreprensaController {
 		return "catalogo/proceso_preprensa";
 	} // modifica_proceso_preprensa
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/elimina", method = RequestMethod.POST)
 	public String eliminaProcesoPreprensa(
 			@RequestParam(value = "id_proceso_preprensa", required = false) Integer idProcesoPreprensa,

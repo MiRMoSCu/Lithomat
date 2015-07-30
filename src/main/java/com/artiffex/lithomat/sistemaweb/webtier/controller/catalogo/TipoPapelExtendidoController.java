@@ -19,6 +19,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,6 +47,7 @@ public class TipoPapelExtendidoController {
 	@Resource
 	private TipoPrecioService tipoPrecioService;
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/catalogo/lista", method = RequestMethod.POST)
 	public String listaTipoPapelExtendido( Locale locale, Model model ) throws IOException {
 		log.info("/lista_tipo_papel_extendido");
@@ -66,6 +68,7 @@ public class TipoPapelExtendidoController {
 		return "catalogo/tipo_papel_extendido";
 	}// lista_tipo_papel_extendido
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
 	public String altaTipoPapelExtendido(
 			@RequestParam(value = "id_proveedor_papel", required = false) Integer idProveedorPapel,
@@ -116,6 +119,7 @@ public class TipoPapelExtendidoController {
 		return "catalogo/tipo_papel_extendido";
 	}// alta_tipo_papel_extendido
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
 	public String modificaTipoPapelExtendido(
 			@RequestParam(value = "id_tipo_papel_extendido", 	required = false) Integer idTipoPapelExtendido,
@@ -160,6 +164,7 @@ public class TipoPapelExtendidoController {
 		return "catalogo/tipo_papel_extendido";
 	}// modifica_tipo_papel_extendido
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/catalogo/elimina", method = RequestMethod.POST)
 	public String eliminaTipoPapelExtendido(
 			@RequestParam(value = "id_tipo_papel_extendido", required = false) Integer idTipoPapelExtendido,
@@ -187,6 +192,7 @@ public class TipoPapelExtendidoController {
 		return "catalogo/tipo_papel_extendido";
 	}// elimina_tipo_papel_extendido
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/catalogo/exporta", method = RequestMethod.GET)
 	public void exportaTipoPapelExtendido( HttpServletResponse response ) {
 		log.info("/exporta_tipo_papel_extendido");
@@ -206,6 +212,7 @@ public class TipoPapelExtendidoController {
 		}
 	} // exporta_tipo_papel_extendido
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/catalogo/ventana", method = RequestMethod.GET )
 	public String ventanaModalSubirArchivoPapel() {
 		log.info("/ventana_modal_subir_archivo_papel");
@@ -213,6 +220,7 @@ public class TipoPapelExtendidoController {
 		return "catalogo/tipo_papel_extendido_sube_archivo";
 	} // ventanaModalSubirArchivoPapel
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/catalogo/importa", method = RequestMethod.POST)
 	public String importaTipoPapelExtendido( HttpServletRequest request, Model model ) {
 		log.info("/importa_tipo_papel_extendido");

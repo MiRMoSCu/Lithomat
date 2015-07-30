@@ -1,7 +1,10 @@
 package com.artiffex.lithomat.sistemaweb.webtier.controller;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -11,8 +14,12 @@ public class LoginController {
 
 	
 	@RequestMapping("/")
-	public String welcomeFile() {
+	public String welcomeFile(
+			Model model
+		) {
 		log.info("/");
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("user",user.getUsername());
 		return "menu/menu";
 	}
 	

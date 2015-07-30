@@ -7,6 +7,7 @@ import java.util.Locale;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,8 @@ public class ProveedorPapelController {
 	@Resource
 	private ProveedorPapelService proveedorPapelService;
 
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/lista", method = RequestMethod.POST)
 	public String listaProveedorPapel( Locale locale, Model model ) throws IOException {
 		log.info("/lista_proveedor_papel");
@@ -37,6 +40,7 @@ public class ProveedorPapelController {
 		return "catalogo/proveedor_papel";
 	}// lista_proveedor_papel
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
 	public String altaProveedorPapel(
 			@RequestParam(value = "razon_social", 	required = false) String razonSocial,
@@ -77,6 +81,7 @@ public class ProveedorPapelController {
 		return "catalogo/proveedor_papel";
 	}// alta_proveedor_papel
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
 	public String modificaPProveedorPapel(
 			@RequestParam(value = "id_proveedor_papel", required = false) Integer idProveedorPapel,
@@ -117,6 +122,7 @@ public class ProveedorPapelController {
 		return "catalogo/proveedor_papel";
 	}// modifica_proveedor_papel
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/elimina", method = RequestMethod.POST)
 	public String eliminaProveedorPapel(
 			@RequestParam(value = "id_proveedor_papel", required = false) Integer idProveedorPapel,

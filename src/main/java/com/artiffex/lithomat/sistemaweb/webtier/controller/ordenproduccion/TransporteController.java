@@ -3,6 +3,7 @@ package com.artiffex.lithomat.sistemaweb.webtier.controller.ordenproduccion;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +24,7 @@ public class TransporteController {
 	private TransporteService transporteService;
 	
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/modifica", method = RequestMethod.POST, headers = "Accept=application/json")
 	@ResponseBody
 	public JsonResponse modificaTransporte(

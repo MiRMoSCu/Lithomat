@@ -7,6 +7,7 @@ import java.util.Locale;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,8 @@ public class TabuladorPreciosController {
 	@Resource
 	private TipoPrecioService tipoPrecioService;
 
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/lista", method = RequestMethod.POST)
 	public String listaTabuladorPrecios( Locale locale, Model model ) throws IOException {
 		log.info("/lista_tabulador_precios");
@@ -52,6 +55,7 @@ public class TabuladorPreciosController {
 		return "catalogo/tabulador_precios";
 	}// lista_tabulador_precios
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
 	public String altaTabuladorPrecios(
 			@RequestParam(value = "id_maquina", 		required = false) Integer idMaquina,
@@ -98,6 +102,7 @@ public class TabuladorPreciosController {
 		return "catalogo/tabulador_precios";
 	}// alta_tabulador_precios
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
 	public String modificaTabuladorPrecios(
 			@RequestParam(value = "id_tabulador_precios", 	required = false) Integer idTabuladorPrecios,
@@ -138,6 +143,7 @@ public class TabuladorPreciosController {
 		return "catalogo/tabulador_precios";
 	}// modifica_tabulador_precios
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/elimina", method = RequestMethod.POST)
 	public String eliminaTabuladorPrecios(
 			@RequestParam(value = "id_tabulador_precios", required = false) Integer idTabuladorPrecios,

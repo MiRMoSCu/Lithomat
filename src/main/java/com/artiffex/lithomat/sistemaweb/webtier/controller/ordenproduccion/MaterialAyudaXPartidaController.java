@@ -3,6 +3,7 @@ package com.artiffex.lithomat.sistemaweb.webtier.controller.ordenproduccion;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +27,7 @@ public class MaterialAyudaXPartidaController {
 	private MaterialAyudaXPartidaService materialAyudaXPartidaService;
 	
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/agrega", method = RequestMethod.POST, headers = "Accept=application/json")
 	@ResponseBody
 	public JsonResponse agregaMaterialAyuda(
@@ -60,6 +62,7 @@ public class MaterialAyudaXPartidaController {
 		return jsonResponse;
 	} // agregaMaterialAyuda
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/agrega_olvidado", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResponse agregaMaterialAyudaXPartidaOlvidado(
@@ -103,6 +106,7 @@ public class MaterialAyudaXPartidaController {
 		return jsonResponse;
 	} // agregaMaterialAyudaXPartidaOlvidado
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/actualiza", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResponse actualizaMaterialAyudaXPartida(
@@ -130,6 +134,7 @@ public class MaterialAyudaXPartidaController {
 		return jsonResponse;
 	} // actualizaMaterialAyudaXPartida
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/elimina", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResponse eliminaMaterialAyudaXPartida(

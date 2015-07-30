@@ -7,6 +7,7 @@ import java.util.Locale;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,8 @@ public class TamanioPublicacionController {
 	@Resource
 	private TamanioPublicacionService tamanioPublicacionService;
 
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/lista", method = RequestMethod.POST)
 	public String listaTamanioPublicacion( Locale locale, Model model ) throws IOException {
 		log.info("/lista_tamanio_publicacion");
@@ -37,6 +40,7 @@ public class TamanioPublicacionController {
 		return "catalogo/tamanio_publicacion";
 	}// lista_tamanio_publicacion
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
 	public String altaTamanioPublicacion(
 			@RequestParam(value = "nombre", 			required = false) String nombre,
@@ -67,6 +71,7 @@ public class TamanioPublicacionController {
 		return "catalogo/tamanio_publicacion";
 	}// alta_tamanio_publicacion
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
 	public String modificaTamanioPublicacion(
 			@RequestParam(value = "id_tamanio_publicacion", required = false) Integer idTamanioPublicacion,
@@ -97,6 +102,7 @@ public class TamanioPublicacionController {
 		return "catalogo/tamanio_publicacion";
 	}// modifica_tamanio_publicacion
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/elimina", method = RequestMethod.POST)
 	public String eliminaTamanioPublicacion(
 			@RequestParam(value = "id_tamanio_publicacion", required = false) Integer idTamanioPublicacion,

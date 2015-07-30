@@ -7,6 +7,7 @@ import java.util.Locale;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,8 @@ public class CostosExtrasController {
 	@Resource
 	private TipoPrecioService tipoPrecioService;
 
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/lista", method = RequestMethod.POST)
 	public String listaCostosExtras( Locale locale, Model model ) {
 		log.info("/lista_costos_extras");
@@ -45,6 +48,7 @@ public class CostosExtrasController {
 		return "catalogo/costos_extras";
 	} // lista_costos_extras
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
 	public String altaCostosExtras(
 			@RequestParam(value = "nombre", 		required = false) String nombre,
@@ -79,6 +83,7 @@ public class CostosExtrasController {
 		return "catalogo/costos_extras";
 	}// alta_costos_extras
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
 	public String modificaCostosExtras(
 			@RequestParam(value = "id_costos_extras", 	required = false) Integer idCostosExtras,
@@ -110,6 +115,7 @@ public class CostosExtrasController {
 		return "catalogo/costos_extras";
 	}// modifica_costos_extras
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/elimina", method = RequestMethod.POST)
 	public String eliminaCostosExtras(
 			@RequestParam(value = "id_costos_extras", required = false) Integer idCostosExtras,

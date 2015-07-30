@@ -3,6 +3,7 @@ package com.artiffex.lithomat.sistemaweb.webtier.controller.ordenproduccion;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,6 +56,7 @@ public class CalificacionController {
 	private AcabadoDetalleService acabadoDetalleService;
 	
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/produccion", method = RequestMethod.POST)
 	public String calificacionOrdenProduccion(
 			@RequestParam(value = "id_orden_produccion", required = false) Integer idOrdenProduccion,
@@ -101,6 +103,7 @@ public class CalificacionController {
 		return "produccion/calificacion";
 	} // calificacionOrdenProduccion
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/resumen_partida", method = RequestMethod.POST)
 	@ResponseBody
 	public _CalificacionPartida resumenCalificacionPartida(
@@ -110,6 +113,7 @@ public class CalificacionController {
 		return calificacionService.buscaCalificacionPartida(idPartida);
 	} // resumenCalificacionPartida
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/resumen_trabajo_detalle", method = RequestMethod.POST)
 	@ResponseBody
 	public _CalificacionTrabajoDetalle resumenCalificacionTrabajoDetalle(
@@ -196,6 +200,7 @@ public class CalificacionController {
 		return ctd;
 	} // buscaCalificacionTrabajoDetalle
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/resumen_procesos", method = RequestMethod.POST)
 	@ResponseBody
 	public _CalificacionProcesosPartida resumenCalificacionProcesosPartida(

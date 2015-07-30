@@ -7,6 +7,7 @@ import java.util.Locale;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,8 @@ public class MaquinaController {
 	@Resource
 	private MaquinaService maquinaService;
 
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/lista", method = RequestMethod.POST)
 	public String listaMaquina( Locale locale, Model model ) throws IOException {
 		log.info("/lista_maquina");
@@ -37,6 +40,7 @@ public class MaquinaController {
 		return "catalogo/maquina";
 	}// lista_maquina
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
 	public String altaMaquina(
 			@RequestParam(value = "nombre", 			required = false) String nombre,
@@ -75,6 +79,7 @@ public class MaquinaController {
 		return "catalogo/maquina";
 	}// alta_maquina
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
 	public String modificaMaquina(
 			@RequestParam(value = "id_maquina", 		required = false) Integer idMaquina,
@@ -113,6 +118,7 @@ public class MaquinaController {
 		return "catalogo/maquina";
 	}// modifica_maquina
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/elimina", method = RequestMethod.POST)
 	public String eliminaMaquina(
 			@RequestParam(value = "id_maquina", required = false) Integer idMaquina,

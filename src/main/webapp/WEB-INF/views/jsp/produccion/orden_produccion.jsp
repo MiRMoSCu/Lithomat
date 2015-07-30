@@ -22,7 +22,7 @@
 <c:url value="/acabado/modifica"            	var="urlModificaAcabado"/>
 <c:url value="/acabado_detalle/agrega"      	var="urlAgregaAcabadoDetalle"/>
 <c:url value="/offset/modifica"             	var="urlModificaOffset"/>
-<c:url value="/material_ayuda/agrega"       	var="urlAgregaMaterialAyuda"/>
+<c:url value="/material_ayuda_x_partida/agrega"	var="urlAgregaMaterialAyuda"/>
 <c:url value="/calificacion/produccion"			var="urlCalificacionOrdenProduccion"/>
 <html>
     <head>

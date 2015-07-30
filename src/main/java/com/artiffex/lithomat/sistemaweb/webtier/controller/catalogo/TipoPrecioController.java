@@ -7,6 +7,7 @@ import java.util.Locale;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,8 @@ public class TipoPrecioController {
 	@Resource
 	private TipoPrecioService tipoPrecioService;
 
+	
+	@Secured("ROLE_ROOT")
 	@RequestMapping(value = "/catalogo/lista", method = RequestMethod.POST)
 	public String listaTipoPrecio(Locale locale, Model model) throws IOException {
 		log.info("/lista_tipo_precio");
@@ -37,6 +40,7 @@ public class TipoPrecioController {
 		return "catalogo/tipo_precio";
 	}// lista_tipo_precio
 
+	@Secured("ROLE_ROOT")
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
 	public String altaTipoPrecio(
 			@RequestParam(value = "nombre", 		required = false) String nombre,
@@ -63,6 +67,7 @@ public class TipoPrecioController {
 		return "catalogo/tipo_precio";
 	}// alta_tipo_precio
 
+	@Secured("ROLE_ROOT")
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
 	public String modificaTipoPrecio(
 			@RequestParam(value = "id_tipo_precio", required = false) Integer idTipoPrecio,
@@ -89,6 +94,7 @@ public class TipoPrecioController {
 		return "catalogo/tipo_precio";
 	}// modifica_tipo_precio
 
+	@Secured("ROLE_ROOT")
 	@RequestMapping(value = "/catalogo/elimina", method = RequestMethod.POST)
 	public String eliminaTipoPrecio(
 			@RequestParam(value = "id_tipo_precio", required = false) Integer idTipoPrecio,

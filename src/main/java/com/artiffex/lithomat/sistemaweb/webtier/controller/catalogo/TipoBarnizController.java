@@ -7,6 +7,7 @@ import java.util.Locale;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,8 @@ public class TipoBarnizController {
 	@Resource
 	private TipoPrecioService tipoPrecioService;
 
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/lista", method = RequestMethod.POST)
 	public String listaTipoBarniz( Locale locale, Model model ) throws IOException {
 		log.info("/lista_tipo_barniz");
@@ -45,6 +48,7 @@ public class TipoBarnizController {
 		return "catalogo/tipo_barniz";
 	}// lista_tipo_barniz
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
 	public String altaTipoBarniz(
 			@RequestParam(value = "descripcion", 			required = false) String descripcion,
@@ -81,6 +85,7 @@ public class TipoBarnizController {
 		return "catalogo/tipo_barniz";
 	}// alta_tipo_barniz
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
 	public String modificaTipoBarniz(
 			@RequestParam(value = "id_tipo_barniz", 		required = false) Integer idTipoBarniz,
@@ -114,6 +119,7 @@ public class TipoBarnizController {
 		return "catalogo/tipo_barniz";
 	}// modifica_tipo_barniz
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/elimina", method = RequestMethod.POST)
 	public String eliminaTipoBarniz(
 			@RequestParam(value = "id_tipo_barniz", required = false) Integer idTipoBarniz,

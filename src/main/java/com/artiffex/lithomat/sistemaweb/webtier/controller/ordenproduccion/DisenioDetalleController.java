@@ -3,6 +3,7 @@ package com.artiffex.lithomat.sistemaweb.webtier.controller.ordenproduccion;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,7 +30,8 @@ public class DisenioDetalleController {
 	private CalificacionService calificacionService;
 	
 	
-	@RequestMapping(value = "/agrega_disenio_detalle", method = RequestMethod.POST, headers = "Accept=application/json")
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
+	@RequestMapping(value = "/agrega", method = RequestMethod.POST, headers = "Accept=application/json")
 	@ResponseBody
 	public JsonResponse agregaDisenioDetalle(
 			@RequestParam(value = "id_disenio", 		required = false) Integer idDisenio,
@@ -65,6 +67,7 @@ public class DisenioDetalleController {
 		return jsonResponse;
 	} // agregaDisenioDetalle
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/agrega_olvidado", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResponse agregaDisenioDetalleOlvidado(
@@ -115,6 +118,7 @@ public class DisenioDetalleController {
 		return jsonResponse;
 	} // agregaDisenioDetalleOlvidado
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/actualiza", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResponse actualizaDisenioDetalle(
@@ -149,6 +153,7 @@ public class DisenioDetalleController {
 		return jsonResponse;
 	} // actualizaDisenioDetalle
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/elimina", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResponse eliminaDisenioDetalle(

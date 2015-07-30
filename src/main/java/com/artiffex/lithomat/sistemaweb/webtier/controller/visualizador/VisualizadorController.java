@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -138,6 +139,7 @@ public class VisualizadorController {
 	/*
 	 * inicializa la pantalla del visualizador con los registos base
 	 */
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String visualizador(Model model) {
 		log.info("/visualizador");
@@ -196,6 +198,7 @@ public class VisualizadorController {
 	/*
 	 * busca orden de produccion con los parametros especificados
 	 */
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/busca_ordenes_produccion", method = RequestMethod.POST, headers = "Accept=application/json")
 	@ResponseBody
 	public String buscaOrdenesProduccion(
@@ -246,6 +249,7 @@ public class VisualizadorController {
 	/*
 	 * obtiene jsp con resumen del nut solicitado
 	 */
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/obtiene_detalle_nut", method = RequestMethod.GET)
 	public String obtieneDetalleNut(
 			@RequestParam(value = "nut", required = false) String nut,
@@ -351,6 +355,7 @@ public class VisualizadorController {
 	/*
 	 * genera html de la lista de procesos de partida
 	 */
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/obtiene_partida", method = RequestMethod.POST, headers = "Accept=application/json")
 	@ResponseBody
 	public JsonResponse obtienePartida(
@@ -426,6 +431,7 @@ public class VisualizadorController {
 	/*
 	 * obtiene lista de subpartida
 	 */
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/obtiene_tipo_trabajo_detalle", method = RequestMethod.POST, headers = "Accept=application/json")
 	@ResponseBody
 	public JsonResponse obtieneTipoTrabajoDetalle(
@@ -462,6 +468,7 @@ public class VisualizadorController {
 	/*
 	 * obtiene jsp que muestra el detalle de los precios
 	 */
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/obtiene_precio_detalle", method = RequestMethod.GET)
 	public String obtienePrecioDetalle(
 			@RequestParam(value = "nut", required = false) String nut,
@@ -489,6 +496,7 @@ public class VisualizadorController {
 		return "visualizador/detalle_precio";
 	} // obtienePrecioDetalle
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/obtiene_precio_neto", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResponse obtienePrecioNeto(

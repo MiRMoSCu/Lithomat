@@ -7,6 +7,7 @@ import java.util.Locale;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,8 @@ public class EstatusOrdenController {
 	@Resource
 	private EstatusOrdenService estatusOrdenService;
 
+	
+	@Secured("ROLE_ROOT")
 	@RequestMapping(value = "/catalogo/lista", method = RequestMethod.POST)
 	public String listaEstatusOrden( Locale locale, Model model ) throws IOException {
 		log.info("/lista_estatus_orden");
@@ -36,6 +39,7 @@ public class EstatusOrdenController {
 		return "catalogo/estatus_orden";
 	}// lista_estatus_orden
 
+	@Secured("ROLE_ROOT")
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
 	public String altaEstatusOrden(
 			@RequestParam(value = "nombre", required = false) String nombre,
@@ -60,6 +64,7 @@ public class EstatusOrdenController {
 		return "catalogo/estatus_orden";
 	}// alta_estatus_orden
 
+	@Secured("ROLE_ROOT")
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
 	public String modificaEstatusOrden(
 			@RequestParam(value = "id_estatus_orden", 	required = false) Integer idEstatusOrden,
@@ -84,6 +89,7 @@ public class EstatusOrdenController {
 		return "catalogo/estatus_orden";
 	}// modifica_estatus_orden
 
+	@Secured("ROLE_ROOT")
 	@RequestMapping(value = "/catalogo/elimina", method = RequestMethod.POST)
 	public String eliminaEstatusOren(
 			@RequestParam(value = "id_estatus_orden", required = false) Integer idEstatusOrden,

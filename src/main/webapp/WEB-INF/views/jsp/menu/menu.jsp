@@ -1,6 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page contentType="text/html;charset=ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 <c:url value="/orden_produccion/" 						var="urlOrdenProduccion" />
 <c:url value="/visualizador/" 							var="urlVisualizador" />
 <c:url value="/cliente/catalogo/lista" 					var="urlCliente" />
@@ -36,6 +37,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+        <style type="text/css">
+        	th, td {
+        		padding: 0px 7px 0px 7px;
+        	}
+        	
+        </style>
         <script type="text/javascript">
         	var urlOrdenProduccion 			= '${urlOrdenProduccion}';	
         	var urlVisualizador				= '${urlVisualizador}';
@@ -174,146 +181,1017 @@
     </head>
     <body>
         <form name="opcion_menu" action="" method="POST" accept-charset="ISO-8859-1"></form>
-    
-        Menu.
-        <br/>
+        Bienvenido ${user}.<br/>
+        <b style="cursor:pointer;" onclick="menu('salir');">Cerrar sesion</b>
         <br/>
         <br/>
         <table border="1">
         	<tr>
-        		<td><b style="cursor:pointer;" onclick="menu('orden_produccion');">Orden Producci&oacute;n</b></td>
-        		<td>&nbsp;</td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th>ROOT</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th>ADMIN</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>COTIZADOR</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>PRODUCCION</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>DISEÑO</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>PREPRENSA</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>TRANSPORTE</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>PROCESO EXTERNO</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>ACABADO</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>CLIENTE</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td><b style="cursor:pointer;" onclick="menu('visualizador');">Visualizador</b></td>
-        		<td>&nbsp;</td>
+        		<th>&nbsp;</th>
         	</tr>
         	<tr>
-        		<td colspan="2">&nbsp;</td>
+        		<td>PRODUCCION</td>
         	</tr>
         	<tr>
-        		<td><b>Cat&aacute;logos</b></td>
-        		<td>&nbsp;</td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('orden_produccion');">Orden Producci&oacute;n</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('orden_produccion');">Orden Producci&oacute;n</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th><b style="cursor:pointer;" onclick="menu('orden_produccion');">Orden Producci&oacute;n</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>PRODUCCION</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>DISEÑO</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>PREPRENSA</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>TRANSPORTE</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>PROCESO EXTERNO</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>ACABADO</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>CLIENTE</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('cliente');">Cliente</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('visualizador');">Visualizador</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('visualizador');">Visualizador</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th><b style="cursor:pointer;" onclick="menu('visualizador');">Visualizador</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>PRODUCCION</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>DISEÑO</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>PREPRENSA</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>TRANSPORTE</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>PROCESO EXTERNO</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>ACABADO</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>CLIENTE</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('combinacion_tintas');">Combinacion de tintas</b></td>
+        		<th>&nbsp;</th>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('costos_extras');">Costos extras</b></td>
+        		<td>CATALOGOS</td>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('estatus_orden');">Estatus orden</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('cliente');">Cliente</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('cliente');">Cliente</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th><b style="cursor:pointer;" onclick="menu('cliente');">Cliente</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('maquina');">Maquina</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('tipo_papel_extendido');">Tipo papel extendido</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('tipo_papel_extendido');">Tipo papel extendido</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th><b style="cursor:pointer;" onclick="menu('tipo_papel_extendido');">Tipo papel extendido</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('material_ayuda');">Material Ayuda</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('combinacion_tintas');">Combinacion de tintas</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('combinacion_tintas');">Combinacion de tintas</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('papel_sobrante');">Papel sobrante</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('costos_extras');">Costos extras</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('costos_extras');">Costos extras</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('prensista');">Prensista</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('maquina');">Maquina</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('maquina');">Maquina</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('proceso_disenio');">Proceso disenio</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('material_ayuda');">Material Ayuda</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('material_ayuda');">Material Ayuda</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('proceso_preprensa');">Proceso preprensa</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('papel_sobrante');">Papel sobrante</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('papel_sobrante');">Papel sobrante</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('proceso_transporte');">Proceso transporte</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('prensista');">Prensista</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('prensista');">Prensista</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('proceso_externo');">Proceso externo</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('proceso_disenio');">Proceso disenio</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('proceso_disenio');">Proceso disenio</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('proveedor_externo');">Proveedor externo</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('proceso_preprensa');">Proceso preprensa</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('proceso_preprensa');">Proceso preprensa</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('proveedor_papel');">Proveedor papel</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('proceso_transporte');">Proceso transporte</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('proceso_transporte');">Proceso transporte</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('responsable_insumo');">Responsable insumo</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('proceso_externo');">Proceso externo</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('proceso_externo');">Proceso externo</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('tabulador_precios');">Tabulador precios</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('proveedor_externo');">Proveedor externo</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('proveedor_externo');">Proveedor externo</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('tamanio_publicacion');">Tamanio publicacion</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('proveedor_papel');">Proveedor papel</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('proveedor_papel');">Proveedor papel</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('tinta_especial');">Tinta especial</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('responsable_insumo');">Responsable insumo</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('responsable_insumo');">Responsable insumo</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('tipo_barniz');">Tipo barniz</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('tabulador_precios');">Tabulador precios</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('tabulador_precios');">Tabulador precios</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('tipo_cliente');">Tipo cliente</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('tamanio_publicacion');">Tamanio publicacion</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('tamanio_publicacion');">Tamanio publicacion</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('tipo_comprobante_fiscal');">Tipo comprobante fiscal</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('tinta_especial');">Tinta especial</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('tinta_especial');">Tinta especial</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('tipo_forma_trabajo');">Tipo forma trabajo</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('tipo_barniz');">Tipo barniz</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('tipo_barniz');">Tipo barniz</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('tipo_papel_extendido');">Tipo papel extendido</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('tipo_cliente');">Tipo cliente</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('tipo_cliente');">Tipo cliente</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('tipo_placa');">Tipo placa</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('tipo_comprobante_fiscal');">Tipo comprobante fiscal</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('tipo_comprobante_fiscal');">Tipo comprobante fiscal</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('tipo_precio');">Tipo precio</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('tipo_forma_trabajo');">Tipo forma trabajo</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('tipo_forma_trabajo');">Tipo forma trabajo</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('tipo_trabajo');">Tipo trabajo</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('tipo_placa');">Tipo placa</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('tipo_placa');">Tipo placa</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('tipo_vuelta');">Tipo vuelta</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('tipo_vuelta');">Tipo vuelta</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('tipo_vuelta');">Tipo vuelta</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td>&nbsp;</td>
-        		<td><b style="cursor:pointer;" onclick="menu('turno_laboral');">Turno laboral</b></td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('turno_laboral');">Turno laboral</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th><b style="cursor:pointer;" onclick="menu('turno_laboral');">Turno laboral</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td colspan="2">&nbsp;</td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('estatus_orden');">Estatus orden</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         	<tr>
-        		<td><b style="cursor:pointer;" onclick="menu('salir');">Cerrar sesion</b></td>
-        		<td>&nbsp;</td>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('tipo_precio');">Tipo precio</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        	</tr>
+        	<tr>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('tipo_trabajo');">Tipo trabajo</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
         	</tr>
         </table>
+        <br/>
+        
     </body>
 </html>

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,6 +39,7 @@ public class TipoTrabajoDetalleController {
 	private PliegoService pliegoService;
 	
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/agrega", method = RequestMethod.POST, headers = "Accept=application/json")
 	@ResponseBody
 	public JsonResponse agregaTipoTrabajoDetalle(
@@ -138,6 +140,7 @@ public class TipoTrabajoDetalleController {
 		return jsonResponse;
 	} // agregaDetallePartida
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/elimina", method = RequestMethod.POST)
 	@ResponseBody
 	public String eliminaTipoTrabajoDetalle(
@@ -155,6 +158,7 @@ public class TipoTrabajoDetalleController {
 		return "1";
 	} // eliminaDetallePartida
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/busca", method = RequestMethod.POST, headers = "Accept=application/json")
 	@ResponseBody
 	public JsonResponse buscaTipoTrabajoDetalle(
@@ -169,6 +173,7 @@ public class TipoTrabajoDetalleController {
 		return jsonResponse;
 	} // buscaTipoTrabajoDetalle
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/actualiza", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResponse actualizaTipoTrabajoDetalle(

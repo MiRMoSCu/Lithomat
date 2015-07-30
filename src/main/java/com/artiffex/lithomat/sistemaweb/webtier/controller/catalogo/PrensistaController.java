@@ -7,6 +7,7 @@ import java.util.Locale;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,8 @@ public class PrensistaController {
 	@Resource
 	private PrensistaService prensistaService;
 
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/lista", method = RequestMethod.POST)
 	public String listaPrensista( Locale locale, Model model ) throws IOException {
 		log.info("/lista_prensista");
@@ -37,6 +40,7 @@ public class PrensistaController {
 		return "catalogo/prensista";
 	}// lista_prensista
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
 	public String altaPrensista(
 			@RequestParam(value = "nombre", 	required = false) String nombre,
@@ -63,6 +67,7 @@ public class PrensistaController {
 		return "catalogo/prensista";
 	}// alta_prensista
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
 	public String modificaPrensista(
 			@RequestParam(value = "id_prensista", 	required = false) Integer idPrensista,
@@ -89,6 +94,7 @@ public class PrensistaController {
 		return "catalogo/prensista";
 	}// modifica_prensista
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/elimina", method = RequestMethod.POST)
 	public String eliminaPrensista(
 			@RequestParam(value = "id_prensista", required = false) Integer idPrensista,

@@ -7,6 +7,7 @@ import java.util.Locale;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,8 @@ public class MaterialAyudaController {
 	@Resource
 	private MaterialAyudaService materialAyudaService;
 
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/lista", method = RequestMethod.POST)
 	public String listaMaterialAyuda( Locale locale, Model model ) throws IOException {
 		log.info("/lista_material_ayuda");
@@ -37,6 +40,7 @@ public class MaterialAyudaController {
 		return "catalogo/material_ayuda";
 	}// lista_material_ayuda
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
 	public String altaMaterialAyuda(
 			@RequestParam(value = "nombre", 		required = false) String nombre,
@@ -61,6 +65,7 @@ public class MaterialAyudaController {
 		return "catalogo/material_ayuda";
 	}// alta_material_ayuda
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
 	public String modificaMaterialAyuda(
 			@RequestParam(value = "id_material_ayuda", 	required = false) Integer idMaterialAyuda,
@@ -85,6 +90,7 @@ public class MaterialAyudaController {
 		return "catalogo/material_ayuda";
 	}// modifica_material_ayuda
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/elimina", method = RequestMethod.POST)
 	public String eliminaMaterialAyuda(
 			@RequestParam(value = "id_material_ayuda", required = false) Integer idMaterialAyuda,

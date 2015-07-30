@@ -7,6 +7,7 @@ import java.util.Locale;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,8 @@ public class TipoVueltaController {
 	@Resource
 	private TipoVueltaService tipoVueltaService;
 
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/lista", method = RequestMethod.POST)
 	public String listaTipoVuelta( Locale locale, Model model ) throws IOException {
 		log.info("/lista_tipo_vuelta");
@@ -37,6 +40,7 @@ public class TipoVueltaController {
 		return "catalogo/tipo_vuelta";
 	}// lista_tipo_vuelta
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
 	public String altaTipoVuelta(
 			@RequestParam(value = "nombre", 		required = false) String nombre,
@@ -61,6 +65,7 @@ public class TipoVueltaController {
 		return "catalogo/tipo_vuelta";
 	}// alta_tipo_vuelta
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
 	public String modificaTipoVuelta(
 			@RequestParam(value = "id_tipo_vuelta", required = false) Integer idTipoVuelta,
@@ -85,6 +90,7 @@ public class TipoVueltaController {
 		return "catalogo/tipo_vuelta";
 	}// modifica_tipo_vuelta
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/elimina", method = RequestMethod.POST)
 	public String eliminaTipoVuelta(
 			@RequestParam(value = "id_tipo_vuelta", required = false) Integer idTipoVuelta,

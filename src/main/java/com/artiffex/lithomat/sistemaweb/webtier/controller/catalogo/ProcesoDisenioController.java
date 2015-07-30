@@ -7,6 +7,7 @@ import java.util.Locale;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,8 @@ public class ProcesoDisenioController {
 	@Resource
 	private TipoPrecioService tipoPrecioService;
 
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/lista", method = RequestMethod.POST)
 	public String listaProcesoDisenio( Locale locale, Model model ) throws IOException {
 		log.info("/lista_proceso_disenio");
@@ -45,6 +48,7 @@ public class ProcesoDisenioController {
 		return "catalogo/proceso_disenio";
 	}// lista_proceso_disenio
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
 	public String altaProcesoDisenio(
 			@RequestParam(value = "nombre_proceso", required = false) String nombreProceso,
@@ -79,6 +83,7 @@ public class ProcesoDisenioController {
 		return "catalogo/proceso_disenio";
 	}// alta_proceso_disenio
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
 	public String modificaProcesoDisenio(
 			@RequestParam(value = "id_proceso_disenio", required = false) Integer idProcesoDisenio,
@@ -110,6 +115,7 @@ public class ProcesoDisenioController {
 		return "catalogo/proceso_disenio";
 	}// modifica_proceso_disenio
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/elimina", method = RequestMethod.POST)
 	public String eliminaProcesoDisenio(
 			@RequestParam(value = "id_proceso_disenio", required = false) Integer idProcesoDisenio,

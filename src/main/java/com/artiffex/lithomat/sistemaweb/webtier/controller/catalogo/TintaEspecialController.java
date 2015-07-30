@@ -7,6 +7,7 @@ import java.util.Locale;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,8 @@ public class TintaEspecialController {
 	@Resource
 	private TipoPrecioService tipoPrecioService;
 
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/lista", method = RequestMethod.POST)
 	public String listaTintaEspecial( Locale locale, Model model ) throws IOException {
 		log.info("/lista_tinta_especial");
@@ -45,6 +48,7 @@ public class TintaEspecialController {
 		return "catalogo/tinta_especial";
 	}// lista_tinta_especial
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
 	public String modificaTintaEspecial(
 			@RequestParam(value = "id_tinta_especial", 	required = false) Integer idTintaEspecial,

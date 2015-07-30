@@ -29,6 +29,7 @@ import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,23 +47,25 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.OrdenProdu
 @RequestMapping("/cotizacion")
 public class CotizacionController {
 	
-		private static final Logger log = Logger.getLogger(CotizacionController.class);
-	
-		// cuando se corre en una aplicacion java
-		//public static final String DIRECTORIO_ORIGEN = "WebContent/resources/jasper/"; 
-		
-		// cuando se corre en una aplicacion dentro de un servidor
-		public static final String DIRECTORIO_ORIGEN = "/resources/jasper/";
-		
-		@Autowired
-		ServletContext context; // sirve para obtener el getContextPath()
-		@Resource
-		private CalificacionService calificacionService;
-		@Resource
-		private ClienteService clienteService;
-		@Resource
-		private OrdenProduccionService ordenProduccionService;
+	private static final Logger log = Logger.getLogger(CotizacionController.class);
 
+	// cuando se corre en una aplicacion java
+	//public static final String DIRECTORIO_ORIGEN = "WebContent/resources/jasper/"; 
+	
+	// cuando se corre en una aplicacion dentro de un servidor
+	public static final String DIRECTORIO_ORIGEN = "/resources/jasper/";
+	
+	@Autowired
+	ServletContext context; // sirve para obtener el getContextPath()
+	@Resource
+	private CalificacionService calificacionService;
+	@Resource
+	private ClienteService clienteService;
+	@Resource
+	private OrdenProduccionService ordenProduccionService;
+
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/condiciones_produccion", method = RequestMethod.GET)
 	public String condicionesProduccion(
 			@RequestParam(value = "nut", required = false) String nut,

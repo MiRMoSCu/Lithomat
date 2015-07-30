@@ -7,6 +7,7 @@ import java.util.Locale;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +37,8 @@ public class TipoPlacaController {
 	@Resource
 	private MaquinaService maquinaService;
 
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/lista", method = RequestMethod.POST)
 	public String listaTipoPlaca( Locale locale, Model model ) throws IOException {
 		log.info("/lista_tipo_placa");
@@ -54,6 +57,7 @@ public class TipoPlacaController {
 		return "catalogo/tipo_placa";
 	}// lista_tipo_placa
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
 	public String altaTipoPlaca(
 			@RequestParam(value = "id_maquina", 	required = false) Integer idMaquina,
@@ -94,6 +98,7 @@ public class TipoPlacaController {
 		return "catalogo/tipo_placa";
 	}// alta_tipo_placa
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
 	public String modificaTipoPlaca(
 			@RequestParam(value = "id_tipo_placa", 	required = false) Integer idTipoPlaca,
@@ -128,6 +133,7 @@ public class TipoPlacaController {
 		return "catalogo/tipo_placa";
 	}// modifica_tipo_placa
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/elimina", method = RequestMethod.POST)
 	public String eliminaTipoPlaca(
 			@RequestParam(value = "id_tipo_placa", required = false) Integer idTipoPlaca,
@@ -155,6 +161,7 @@ public class TipoPlacaController {
 		return "catalogo/tipo_placa";
 	}// elimina_tipo_placa
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/busca", method = RequestMethod.POST, headers = "Accept=application/json")
 	@ResponseBody
 	public JsonResponse buscaTipoPlaca(
