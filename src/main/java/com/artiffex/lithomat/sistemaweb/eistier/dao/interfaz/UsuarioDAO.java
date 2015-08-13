@@ -1,21 +1,17 @@
 package com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz;
 
+import java.util.List;
+
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Usuario;
 
 public interface UsuarioDAO {
 	
-	public boolean creaUsuario(Usuario u);
+	public int crea(Usuario usuario);
 	
-	public boolean existeUsuario(Usuario u);
+	public Usuario busca(int idUsuario);
 	
-	public boolean modificaUsuario(Usuario u);
+	public void modifica(Usuario usuario);
 	
-	public String getRol(Usuario u);
-	
-	public int getLastUser();
-	
-	public boolean validaUsuario(Usuario u);
-	
-	public Error bajaUsuario(int id);
+	public List<Usuario> lista();
 	
 }

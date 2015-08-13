@@ -2,27 +2,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:url value="/"	               				var="urlMenu"/>
-<c:url value="/turno_laboral/catalogo/alta" 	var="urlAlta"/>
-<c:url value="/turno_laboral/catalogo/modifica" var="urlModifica"/>
-<c:url value="/turno_laboral/catalogo/elimina" 	var="urlElimina"/>
+<c:url value="/"	var="urlMenu"/>
 <html>
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1"></meta>
-        <title>Turno Laboral</title>
+        <title>Perfil</title>
         <style type="text/css" media="screen">
         
-            table#tabla_turno_laboral {
+            table#tabla_perfil {
                 overflow-y:scroll;
             }
         
-            table#tabla_turno_laboral tr:hover td  {
+            table#tabla_perfil tr:hover td  {
                 cursor: pointer;
                 color:#000;
                 background-color: #99CCFF;
             }
             
-            #div_turno_laboral {
+            #div_perfil {
                 width: 865px;
                 margin-left: auto;
                 margin-right: auto;
@@ -32,10 +29,10 @@
             
             #div_contenedor_tabla {
                 width: 100%;
-                height: 250px;
+                height: 220px;
             }
             
-            #div_tabla_turno_laboral {
+            #div_tabla_perfil {
                 width: 100%;
                 height: 100%;
                 overflow-x: scroll;
@@ -47,13 +44,9 @@
         <link rel="stylesheet" href="<c:url value="/resources/css/menu.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/catalogo.css"/>" type="text/css"></link>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/turno_laboral.js"/>"></script>
-        <script type="text/javascript" src=""></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/perfil.js"/>"></script>
         <script type="text/javascript">
         	var urlMenu		= "${urlMenu}";
-            var urlAlta     = '${urlAlta}';
-            var urlModifica = '${urlModifica}';
-            var urlElimina  = '${urlElimina}';
         </script>
         <script type="text/javascript">
 	        function regresa_menu() {
@@ -84,33 +77,28 @@
                             </div>
                         </div>
                         <div id="div_contenido">
-                            <form action="turno_laboral" method="post" accept-charset="ISO-8859-1">
-                                <div id="div_turno_laboral">
+                            <form action="perfil" method="post" accept-charset="ISO-8859-1">
+                                <div id="div_perfil">
                                     <div class="titulo">
-                                        <img alt="" src="<c:url value="/resources/image/titulo_turno_laboral.png"/>"></img>
+                                        <img alt="" src="<c:url value="/resources/image/titulo_perfil.png"/>"></img>PERFIL
                                     </div>
                                     <div id="div_contenedor_tabla">
                                         <div class="columna_completa">
-                                            <div id="div_tabla_turno_laboral">
-                                                <table id="tabla_turno_laboral">
+                                            <div id="div_tabla_perfil">
+                                                <table id="tabla_perfil">
                                                     <tr>
                                                         <th>Identificador</th>
+                                                        <th>Nombre</th>
                                                         <th>Descripci&oacute;n</th>
-                                                        <th>Hora inicio</th>
-                                                        <th>Hora fin</th>
                                                     </tr>
-                                                    
-                                                <c:forEach var="turnoLaboral" items="${listaTurnoLaboral}"
-                                                           varStatus="i">
+                                                <c:forEach var="perfil" items="${listaPerfil}" varStatus="i">
                                                     <tr class='${i.count%2==0?"l2":"l1"}'
-                                                        onclick="setCampos( '${turnoLaboral.idTurnoLaboral}', '${turnoLaboral.descripcion}', '${turnoLaboral.horaInicio}', '${turnoLaboral.horaFin}' );">
-                                                        <td>${turnoLaboral.idTurnoLaboral}</td>
-                                                        <td>${turnoLaboral.descripcion}</td>
-                                                        <td>${turnoLaboral.horaInicio}</td>
-                                                        <td>${turnoLaboral.horaFin}</td>
+                                                        onclick="setCampos( '${perfil.idPerfil}', '${perfil.nombre}', '${perfil.descripcion}');">
+                                                        <td>${perfil.idPerfil}</td>
+                                                        <td>${perfil.nombre}</td>
+                                                        <td>${perfil.descripcion}</td>
                                                     </tr>
                                                 </c:forEach>
-                                                
                                                 </table>
                                             </div>
                                         </div>
@@ -126,43 +114,38 @@
                                                         <tr>
                                                             <td width="40%">Identificador:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="id_turno_laboral"
+                                                                <input type="text" class="input" name="id_perfil"
                                                                        value="" tabindex="1" readonly="readonly"></input>
                                                             </td>
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <div class="mitad_columna_derecha">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="linea">
+                                        <div class="casilla">
+                                            <div class="columna_izquierda">
+                                                <div class="columna_completa">
                                                     <table>
                                                         <tr>
-                                                            <td width="1%">Descripci&oacute;n:</td>
+                                                            <td width="1%">Nombre:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="descripcion"
-                                                                       value="" tabindex="2"></input>
+                                                                <input type="text" class="input" name="nombre" value=""
+                                                                       tabindex="2"></input>
                                                             </td>
                                                         </tr>
                                                     </table>
                                                 </div>
                                             </div>
                                             <div class="columna_derecha">
-                                                <div class="mitad_columna_izquierda">
+                                                <div class="columna_completa">
                                                     <table>
                                                         <tr>
-                                                            <td width="37%">Hora inicio:</td>
+                                                            <td width="1%">Descripci&oacute;n:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="hora_inicio"
+                                                                <input type="text" class="input" name="descripcion"
                                                                        value="" tabindex="3"></input>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                <div class="mitad_columna_derecha">
-                                                    <table>
-                                                        <tr>
-                                                            <td width="29%">Hora fin:</td>
-                                                            <td>
-                                                                <input type="text" class="input" name="hora_fin"
-                                                                       value="" tabindex="4"></input>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -171,20 +154,28 @@
                                         </div>
                                     </div>
                                     <div class="linea"></div>
+                                    
                                     <div class="linea">
+                                        <!-- 
+                                            Los estados de la aplicacion no pueden modificarse porque
+                                            la aplicacion depende de ellos en el código.
+                                            CalificacionServiceImpl
+                                        -->
+                                        <!-- 
                                         <div class="casilla" style="text-align:right;">
                                             <img alt="" style="cursor:pointer;" onclick="limpia();"
-                                            	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"></img>
+                                                 src="resources/image/boton_limpiar.jpg"></img>
                                              
                                             <img alt="" style="cursor:pointer;" onclick="elimina();"
-                                            	 src="<c:url value="/resources/image/boton_eliminar.jpg"/>"></img>
+                                                 src="resources/image/boton_eliminar.jpg"></img>
                                              
                                             <img alt="" style="cursor:pointer;" onclick="modifica();"
-                                            	 src="<c:url value="/resources/image/boton_modificar.jpg"/>"></img>
+                                                 src="resources/image/boton_modificar.jpg"></img>
                                              
                                             <img alt="" style="cursor:pointer;" onclick="crear();"
-                                            	 src="<c:url value="/resources/image/boton_agregar.jpg"/>"></img>
+                                                 src="resources/image/boton_agregar.jpg"></img>
                                         </div>
+                                        -->
                                     </div>
                                 </div>
                             </form>

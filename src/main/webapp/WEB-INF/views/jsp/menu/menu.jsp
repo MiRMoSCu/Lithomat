@@ -11,6 +11,8 @@
 <c:url value="/maquina/catalogo/lista" 					var="urlMaquina" />
 <c:url value="/material_ayuda/catalogo/lista" 			var="urlMaterialAyuda" />
 <c:url value="/papel_sobrante/catalogo/lista" 			var="urlPapelSobrante" />
+<c:url value="/perfil/catalogo/lista" 					var="urlPerfil" />
+<c:url value="/perfil_x_usuario/catalogo/lista" 		var="urlPerfilXUsuario" />
 <c:url value="/prensista/catalogo/lista" 				var="urlPrensista" />
 <c:url value="/proceso_disenio/catalogo/lista" 			var="urlProcesoDisenio" />
 <c:url value="/proceso_externo/catalogo/lista" 			var="urlProcesoExterno" />
@@ -32,6 +34,7 @@
 <c:url value="/tipo_trabajo/catalogo/lista" 			var="urlTipoTrabajo" />
 <c:url value="/turno_laboral/catalogo/lista" 			var="urlTurnoLaboral" />
 <c:url value="/tipo_vuelta/catalogo/lista" 				var="urlTipoVuelta" />
+<c:url value="/usuario/catalogo/lista" 					var="urlUsuario" />
 <c:url value="/j_spring_security_logout" 				var="urlSalir" />
 
 <html>
@@ -54,6 +57,8 @@
             var urlMaterialAyuda			= '${urlMaterialAyuda}';
             var urlPapelSobrante			= '${urlPapelSobrante}';
             var urlPrensista				= '${urlPrensista}';
+            var urlPerfil					= '${urlPerfil}';
+            var urlPerfilXUsuario			= '${urlPerfilXUsuario}';
             var urlProcesoDisenio			= '${urlProcesoDisenio}';
             var urlProcesoExterno			= '${urlProcesoExterno}';
             var urlProcesoPreprensa			= '${urlProcesoPreprensa}';
@@ -74,6 +79,7 @@
             var urlTipoTrabajo				= '${urlTipoTrabajo}';
             var urlTurnoLaboral				= '${urlTurnoLaboral}';
             var urlTipoVuelta				= '${urlTipoVuelta}';
+            var urlUsuario					= '${urlUsuario}';
             var urlSalir					= '${urlSalir}';
             
             function menu( opcion ) {
@@ -104,6 +110,12 @@
                     	break;
                     case 'papel_sobrante':
                     	document.forms["opcion_menu"].action = urlPapelSobrante;
+                    	break;
+                    case 'perfil':
+                    	document.forms["opcion_menu"].action = urlPerfil;
+                    	break;
+                    case 'perfil_x_usuario':
+                    	document.forms["opcion_menu"].action = urlPerfilXUsuario;
                     	break;
                     case 'prensista':
                     	document.forms["opcion_menu"].action = urlPrensista;
@@ -167,6 +179,9 @@
                     	break;
                     case 'tipo_vuelta':
                     	document.forms["opcion_menu"].action = urlTipoVuelta;
+                    	break;
+                    case 'usuario':
+                    	document.forms["opcion_menu"].action = urlUsuario;
                     	break;
                     case 'salir':
                     	document.forms["opcion_menu"].action = urlSalir;
@@ -1128,6 +1143,70 @@
         	</tr>
         	<tr>
         		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('perfil');">Perfil</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        	</tr>
+        	<tr>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('perfil_x_usuario');">Perfil por Usuario</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        	</tr>
+        	<tr>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
         			<th><b style="cursor:pointer;" onclick="menu('tipo_precio');">Tipo precio</b></th>
         		</security:authorize>
         		<security:authorize access="hasRole('ROLE_ADMIN')">
@@ -1161,6 +1240,38 @@
         	<tr>
         		<security:authorize access="hasRole('ROLE_ROOT')">
         			<th><b style="cursor:pointer;" onclick="menu('tipo_trabajo');">Tipo trabajo</b></th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ADMIN')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	        		<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_DISEÑO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_ACABADO')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        		<security:authorize access="hasRole('ROLE_CLIENTE')">
+        			<th>&nbsp;</th>
+        		</security:authorize>
+        	</tr>
+        	<tr>
+        		<security:authorize access="hasRole('ROLE_ROOT')">
+        			<th><b style="cursor:pointer;" onclick="menu('usuario');">Usuario</b></th>
         		</security:authorize>
         		<security:authorize access="hasRole('ROLE_ADMIN')">
 	        		<th>&nbsp;</th>

@@ -2,40 +2,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:url value="/"	               				var="urlMenu"/>
-<c:url value="/turno_laboral/catalogo/alta" 	var="urlAlta"/>
-<c:url value="/turno_laboral/catalogo/modifica" var="urlModifica"/>
-<c:url value="/turno_laboral/catalogo/elimina" 	var="urlElimina"/>
+<c:url value="/"	               			var="urlMenu"/>
+<c:url value="/usuario/catalogo/alta" 		var="urlAlta"/>
+<c:url value="/usuario/catalogo/modifica" 	var="urlModifica"/>
+<c:url value="/usuario/catalogo/elimina" 	var="urlElimina"/>
 <html>
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1"></meta>
-        <title>Turno Laboral</title>
+        <title>Usuario</title>
         <style type="text/css" media="screen">
         
-            table#tabla_turno_laboral {
+            table#tabla_usuario {
                 overflow-y:scroll;
             }
         
-            table#tabla_turno_laboral tr:hover td  {
+            table#tabla_usuario tr:hover td  {
                 cursor: pointer;
                 color:#000;
                 background-color: #99CCFF;
             }
             
-            #div_turno_laboral {
+            #div_usuario {
                 width: 865px;
                 margin-left: auto;
                 margin-right: auto;
                 background: transparent; /*green*/
-                display: block;                    
+                display: block;                
             }
             
             #div_contenedor_tabla {
                 width: 100%;
-                height: 250px;
+                height: 220px;
             }
             
-            #div_tabla_turno_laboral {
+            #div_tabla_usuario {
                 width: 100%;
                 height: 100%;
                 overflow-x: scroll;
@@ -47,8 +47,7 @@
         <link rel="stylesheet" href="<c:url value="/resources/css/menu.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/catalogo.css"/>" type="text/css"></link>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/turno_laboral.js"/>"></script>
-        <script type="text/javascript" src=""></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/usuario.js"/>"></script>
         <script type="text/javascript">
         	var urlMenu		= "${urlMenu}";
             var urlAlta     = '${urlAlta}';
@@ -84,33 +83,34 @@
                             </div>
                         </div>
                         <div id="div_contenido">
-                            <form action="turno_laboral" method="post" accept-charset="ISO-8859-1">
-                                <div id="div_turno_laboral">
+                            <form action="usuario" method="post" accept-charset="ISO-8859-1">
+                                <div id="div_usuario">
                                     <div class="titulo">
-                                        <img alt="" src="<c:url value="/resources/image/titulo_turno_laboral.png"/>"></img>
+                                        <img alt="" src="<c:url value="/resources/image/titulo_usuario.png"/>"></img>Usuario
                                     </div>
                                     <div id="div_contenedor_tabla">
                                         <div class="columna_completa">
-                                            <div id="div_tabla_turno_laboral">
-                                                <table id="tabla_turno_laboral">
+                                            <div id="div_tabla_usuario">
+                                                <table id="tabla_usuario">
                                                     <tr>
                                                         <th>Identificador</th>
-                                                        <th>Descripci&oacute;n</th>
-                                                        <th>Hora inicio</th>
-                                                        <th>Hora fin</th>
+                                                        <th>Nombre</th>
+                                                        <th>Ap. Paterno</th>
+                                                        <th>Ap. Materno</th>
+                                                        <th>Usuario</th>
+                                                        <th>Contrasenia</th>
                                                     </tr>
-                                                    
-                                                <c:forEach var="turnoLaboral" items="${listaTurnoLaboral}"
-                                                           varStatus="i">
+                                                <c:forEach var="usuario" items="${listaUsuario}" varStatus="i">
                                                     <tr class='${i.count%2==0?"l2":"l1"}'
-                                                        onclick="setCampos( '${turnoLaboral.idTurnoLaboral}', '${turnoLaboral.descripcion}', '${turnoLaboral.horaInicio}', '${turnoLaboral.horaFin}' );">
-                                                        <td>${turnoLaboral.idTurnoLaboral}</td>
-                                                        <td>${turnoLaboral.descripcion}</td>
-                                                        <td>${turnoLaboral.horaInicio}</td>
-                                                        <td>${turnoLaboral.horaFin}</td>
+                                                        onclick="setCampos('${usuario.idUsuario}','${usuario.nombre}', '${usuario.apPaterno}', '${usuario.apMaterno}','${usuario.usuario}', '${usuario.contrasenia}' );">
+                                                        <td>${usuario.idUsuario}</td>
+                                                        <td>${usuario.nombre}</td>
+                                                        <td>${usuario.apPaterno}</td>
+                                                        <td>${usuario.apMaterno}</td>
+                                                        <td>${usuario.usuario}</td>
+                                                        <td>${usuario.contrasenia}</td>
                                                     </tr>
                                                 </c:forEach>
-                                                
                                                 </table>
                                             </div>
                                         </div>
@@ -126,18 +126,24 @@
                                                         <tr>
                                                             <td width="40%">Identificador:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="id_turno_laboral"
+                                                                <input type="text" class="input" name="id_usuario"
                                                                        value="" tabindex="1" readonly="readonly"></input>
                                                             </td>
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <div class="mitad_columna_derecha">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="linea">
+                                        <div class="casilla">
+                                            <div class="columna_izquierda">
+                                                <div class="columna_completa">
                                                     <table>
                                                         <tr>
-                                                            <td width="1%">Descripci&oacute;n:</td>
+                                                            <td width="1%">Nombre:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="descripcion"
+                                                                <input type="text" class="input" name="nombre"
                                                                        value="" tabindex="2"></input>
                                                             </td>
                                                         </tr>
@@ -145,13 +151,13 @@
                                                 </div>
                                             </div>
                                             <div class="columna_derecha">
-                                                <div class="mitad_columna_izquierda">
+                                            	<div class="mitad_columna_izquierda">
                                                     <table>
                                                         <tr>
-                                                            <td width="37%">Hora inicio:</td>
+                                                            <td width="42%">Ap. Paterno:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="hora_inicio"
-                                                                       value="" tabindex="3"></input>
+                                                                <input  type="text" class="input" name="ap_paterno" 
+                                                                        value="" tabindex="3"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -159,10 +165,38 @@
                                                 <div class="mitad_columna_derecha">
                                                     <table>
                                                         <tr>
-                                                            <td width="29%">Hora fin:</td>
+                                                            <td width="42%">Ap. Materno:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="hora_fin"
+                                                                <input type="text" class="input" name="ap_materno"
                                                                        value="" tabindex="4"></input>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="linea">
+                                        <div class="casilla">
+                                            <div class="columna_izquierda">
+                                                <div class="mitad_columna_izquierda">
+                                                    <table>
+                                                        <tr>
+                                                            <td width="1%">Usuario:</td>
+                                                            <td>
+                                                                <input type="text" class="input" name="usuario" value=""
+                                                                       tabindex="5"></input>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="mitad_columna_derecha">
+                                                    <table>
+                                                        <tr>
+                                                            <td width="1%">Contraseña:</td>
+                                                            <td>
+                                                            	<input type="text" class="input" name="contrasenia"
+                                                                       value="" tabindex="6"></input>
                                                             </td>
                                                         </tr>
                                                     </table>
