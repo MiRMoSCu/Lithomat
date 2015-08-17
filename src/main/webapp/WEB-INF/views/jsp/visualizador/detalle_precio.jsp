@@ -298,7 +298,7 @@
 	                                    </div>
 	                                    <div class="columna_derecha_tres_cuartos" style="background:#fff;">
 	<!-- div_orden_produccion_detalle -->
-	                                    	<div id="div_orden_produccion_detalle" style="width:100px; height:100px; background:green; float:left; display:none;">
+	                                    	<div id="div_orden_produccion_detalle" style="width:100px; height:100px; background:#fff; float:left; display:none;">
 	                                    	</div>
 	<!-- div_partida_detalle -->                           	
 	                                    	<div id="div_partida_detalle" style="width:100%; height:100%; background:#fff; float:left; display:none;">

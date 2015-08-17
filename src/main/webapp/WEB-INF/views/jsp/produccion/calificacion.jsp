@@ -49,7 +49,7 @@
                             <img alt="" src="<c:url value="/resources/image/logo.png"/>"/>
                         </div>
                         <div id="div_encabezado">
-                            <img alt="" src="<c:url value="/resources/image/encabezado_cotizador.png"/>"/>
+                            <img alt="" src="<c:url value="/resources/image/encabezado_orden_produccion.png"/>"/>
                         </div>
                     </div>
                     <div id="div_cuerpo">

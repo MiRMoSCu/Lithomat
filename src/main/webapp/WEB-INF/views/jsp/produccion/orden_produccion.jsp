@@ -104,7 +104,7 @@
                             <img alt="" src="<c:url value="/resources/image/logo.png"/>"></img>
                         </div>
                         <div id="div_encabezado">
-                            <img alt="" src="<c:url value="/resources/image/encabezado_cotizador.png"/>"></img>
+                            <img alt="" src="<c:url value="/resources/image/encabezado_orden_produccion.png"/>"></img>
                         </div>
                     </div>
                     <div id="div_cuerpo">
