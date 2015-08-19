@@ -29,6 +29,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TintaEspec
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoTrabajoDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.Precio;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades._CalificacionPartida;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades._CalificacionTrabajoDetalle;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CalificacionOrdenProduccionDAO;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CalificacionPartidaDAO;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CalificacionProcesosPartidaDAO;
@@ -867,7 +868,93 @@ public class CalificacionServiceImpl implements CalificacionService {
 		
 		return listaPartidaReporte;
 	}
-
+	
+	public List<_CalificacionTrabajoDetalle> obtieneListaCalificacionTrabajoDetallePorNut(String nut) {
+		List<_CalificacionTrabajoDetalle> listaCalificacionTrabajoDetalle = new ArrayList<_CalificacionTrabajoDetalle>();
+		OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
+		List<Partida> listaPartida = partidaService.listaPartidaPorOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
+		for (Partida partida : listaPartida) {
+			List<TipoTrabajoDetalle> listaTipoTrabajoDetalle = tipoTrabajoDetalleService.listaTipoTrabajoDetallePorPartida(partida.getIdPartida());
+			for (TipoTrabajoDetalle tipoTrabajoDetalle : listaTipoTrabajoDetalle) {
+				CalificacionTrabajoDetalle ctd = calificacionTrabajoDetalleDAO.buscaPorTipoTrabajoDetalle(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());
+				
+				_CalificacionTrabajoDetalle calificacionTrabajoDetalle = new _CalificacionTrabajoDetalle();
+				calificacionTrabajoDetalle.setNombreCliente(ordenProduccion.getCliente().getNombreMoral());
+				calificacionTrabajoDetalle.setNut(nut);
+				calificacionTrabajoDetalle.setDescripcion(tipoTrabajoDetalle.getDescripcion());
+				calificacionTrabajoDetalle.setCantidadOriginal(partida.getCantidad());
+				calificacionTrabajoDetalle.setClienteProporcionaPapel(tipoTrabajoDetalle.isClienteProporcionaPapel());
+				calificacionTrabajoDetalle.setClienteProporcionaTinta(tipoTrabajoDetalle.isClienteProporcionaTinta());
+				calificacionTrabajoDetalle.setClienteProporcionaTintaEspecial(tipoTrabajoDetalle.isClienteProporcionaTintaEspecial());
+				calificacionTrabajoDetalle.setClienteProporcionaBarniz(tipoTrabajoDetalle.isClienteProporcionaBarniz());
+				calificacionTrabajoDetalle.setClienteProporcionaPlacas(tipoTrabajoDetalle.isClienteProporcionaPlacas());
+					StringBuffer sb = new StringBuffer();
+					sb.append(tipoTrabajoDetalle.getTipoPapelExtendido().getNombre());
+					sb.append(" ");
+					sb.append(tipoTrabajoDetalle.getTipoPapelExtendido().getGramaje());
+					sb.append(" gr. ");
+					sb.append(tipoTrabajoDetalle.getTipoPapelExtendido().getAlto());
+					sb.append(" x ");
+					sb.append(tipoTrabajoDetalle.getTipoPapelExtendido().getAncho());
+					sb.append("  cm. (");
+					sb.append(tipoTrabajoDetalle.getTipoPapelExtendido().getKilogramos());
+					sb.append(" kg.)");
+				calificacionTrabajoDetalle.setPapelDescripcion(sb.toString());
+					sb.delete(0, sb.length());
+				calificacionTrabajoDetalle.setPapelCantidadTotal(ctd.getPapelCantidadTotal());
+				calificacionTrabajoDetalle.setPapelPrecioUnitario(ctd.getPapelPrecioUnitario());
+				calificacionTrabajoDetalle.setPapelCosteTotal(ctd.getPapelCosteTotal());
+					sb.append("Tinta fte: ");
+					sb.append(tipoTrabajoDetalle.getFrenteCombinacionTintas().getDescripcion());
+					sb.append("; vta: ");
+					sb.append(tipoTrabajoDetalle.getVueltaCombinacionTintas().getDescripcion());
+				calificacionTrabajoDetalle.setTintaDescripcion(sb.toString());
+					sb.delete(0, sb.length());
+				calificacionTrabajoDetalle.setTintaNumEntMaq(ctd.getTintaNumEntMaq());
+				calificacionTrabajoDetalle.setTintaPrecioUnitario(ctd.getTintaPrecioUnitario());
+				calificacionTrabajoDetalle.setTintaCosteTotal(ctd.getTintaCosteTotal());
+					sb.append("Tinta especial fte: ");
+					sb.append(tipoTrabajoDetalle.getFrenteDescripcionTintaEspecial());
+					sb.append("; vta; ");
+					sb.append(tipoTrabajoDetalle.getVueltaDescripcionTintaEspecial());
+				calificacionTrabajoDetalle.setTintaEspecialDescripcion(sb.toString());
+					sb.delete(0, sb.length());
+				calificacionTrabajoDetalle.setTintaEspecialNumEntMaq(ctd.getTintaEspecialNumEntMaq());
+				calificacionTrabajoDetalle.setTintaEspecialPrecioUnitario(ctd.getTintaEspecialPrecioUnitario());
+				calificacionTrabajoDetalle.setTintaEspecialCosteTotal(ctd.getTintaEspecialCosteTotal());
+					sb.append("Barniz fte: ");
+					sb.append(tipoTrabajoDetalle.getFrenteTipoBarniz().getDescripcion());
+					sb.append("; vta: ");
+					sb.append(tipoTrabajoDetalle.getVueltaTipoBarniz().getDescripcion());
+				calificacionTrabajoDetalle.setBarnizDescripcion(sb.toString());
+					sb.delete(0, sb.length());
+				calificacionTrabajoDetalle.setFrenteBarnizNumEntMaq(ctd.getFrenteBarnizNumEntMaq());
+				calificacionTrabajoDetalle.setFrenteBarnizPrecioUnitario(ctd.getFrenteBarnizPrecioUnitario());
+				calificacionTrabajoDetalle.setFrenteBarnizCosteTotal(ctd.getFrenteBarnizCosteTotal());
+				calificacionTrabajoDetalle.setVueltaBarnizNumEntMaq(ctd.getVueltaBarnizNumEntMaq());
+				calificacionTrabajoDetalle.setVueltaBarnizPrecioUnitario(ctd.getVueltaBarnizPrecioUnitario());
+				calificacionTrabajoDetalle.setVueltaBarnizCosteTotal(ctd.getVueltaBarnizCosteTotal());
+				calificacionTrabajoDetalle.setPlacasDescripcion(tipoTrabajoDetalle.getTipoPlaca().getDescripcion());
+				calificacionTrabajoDetalle.setPlacasNumPlacas(ctd.getPlacasNumPlacas());
+				calificacionTrabajoDetalle.setPlacasPrecioUnitario(ctd.getPlacasPrecioUnitario());
+				calificacionTrabajoDetalle.setPlacasCosteTotal(ctd.getPlacasCosteTotal());
+				
+				listaCalificacionTrabajoDetalle.add(calificacionTrabajoDetalle);
+				
+				sb							= null;
+				ctd							= null;
+				calificacionTrabajoDetalle 	= null;
+				tipoTrabajoDetalle 			= null;
+			}
+			listaTipoTrabajoDetalle = null;
+			partida 				= null;
+		}
+		listaPartida	= null;
+		ordenProduccion = null;
+		
+		return listaCalificacionTrabajoDetalle;
+	}
+	
 	public List<OrdenProduccionDTOAyuda> obtieneVOPruebaJasper(int idOrdenProduccion) {
 		return calificacionOrdenProduccionDAO.obtieneVOPruebaJasper(idOrdenProduccion);
 	}
@@ -875,6 +962,8 @@ public class CalificacionServiceImpl implements CalificacionService {
 	public List<CalificacionTrabajoDetalleDTOAyuda> obtieneEjemploVOPapel() {
 		return calificacionOrdenProduccionDAO.ejemploListaPapel();
 	}
+
+	
 	
 }
 

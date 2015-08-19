@@ -58,10 +58,10 @@
         <script type="text/javascript" src="<c:url value="/resources/js/modificacion_preprensa_detalle.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/modificacion_transporte.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/agrega_transporte_detalle.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/modifica_transporte_detalle.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/modificacion_transporte_detalle.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/modificacion_acabado.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/agrega_acabado_detalle.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/modifica_acabado_detalle.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/modificacion_acabado_detalle.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/modificacion_offset.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/agrega_material_ayuda.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/modificacion_material_ayuda.js"/>"></script>

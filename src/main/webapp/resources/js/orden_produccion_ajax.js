@@ -455,7 +455,7 @@ function ajaxAgregaTipoTrabajoDetalle() {
                             //content: "<form method='post' action='" + urlCalculaPliego + "' target='hidden_iframe'><input type='hidden' name='id_tipo_trabajo_detalle' value='" + response.id_tipo_trabajo_detalle + "'></input</form><iframe name='hidden_iframe'></iframe>",
                             player:"iframe",
                             width:630,
-                            height:734,
+                            height:769,
                             options:{ 
                             	modal: true,
                                 overlayOpacity: 0.75,

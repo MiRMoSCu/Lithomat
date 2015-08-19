@@ -56,9 +56,9 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 			sb.append(" ");
 			sb.append(tipoPapelExtendido.getGramaje());
 			sb.append(" gr. ");
-			sb.append(tipoPapelExtendido.getAncho());
-			sb.append("x");
 			sb.append(tipoPapelExtendido.getAlto());
+			sb.append(" x ");
+			sb.append(tipoPapelExtendido.getAncho());
 			sb.append("  cm. (");
 			sb.append(tipoPapelExtendido.getKilogramos());
 			sb.append(" kg.) ($");
@@ -90,39 +90,39 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 			// creacion de fila 1
 			HSSFRow row = sheet.createRow(0);
 			// creacion de celdas fila 1
-				// celda A
+				// celda A (0)
 			HSSFCell cell_id = row.createCell(0);
 			cell_id.setCellValue("ID");
 	        cell_id.setCellStyle(cellStyle_centro);
-	        	// celda B
+	        	// celda B (1)
 	        HSSFCell cell_proveedor = row.createCell(1);
 	        cell_proveedor.setCellValue("PROVEEDOR");
 	        cell_proveedor.setCellStyle(cellStyle_centro);
-	        	// celda C
+	        	// celda C (2)
 	        HSSFCell cell_nombre = row.createCell(2);
 	        cell_nombre.setCellValue("NOMBRE");
 	        cell_nombre.setCellStyle(cellStyle_centro);
-	        	// celda D
+	        	// celda D (3)
 	        HSSFCell cell_gramaje = row.createCell(3);
 	        cell_gramaje.setCellValue("GRAMAJE");
 	        cell_gramaje.setCellStyle(cellStyle_centro);
-	        	// celda E
+	        	// celda E (4)
 	        HSSFCell cell_kilogramos = row.createCell(4);
 	        cell_kilogramos.setCellValue("KILOGRAMOS");
 	        cell_kilogramos.setCellStyle(cellStyle_centro);
-	        	// celda F
-	        HSSFCell cell_ancho = row.createCell(5);
-	        cell_ancho.setCellValue("ANCHO");
-	        cell_ancho.setCellStyle(cellStyle_centro);
-	        	// celda G
-	        HSSFCell cell_alto = row.createCell(6);
+	        	// celda F (5)
+	        HSSFCell cell_alto = row.createCell(5);
 	        cell_alto.setCellValue("ALTO");
 	        cell_alto.setCellStyle(cellStyle_centro);
-	        	// celda H
+	        	// celda G (6)
+	        HSSFCell cell_ancho = row.createCell(6);
+	        cell_ancho.setCellValue("ANCHO");
+	        cell_ancho.setCellStyle(cellStyle_centro);
+	        	// celda H (7)
 	        HSSFCell cell_precio = row.createCell(7);
 	        cell_precio.setCellValue("PRECIO");
 	        cell_precio.setCellStyle(cellStyle_centro);
-	        	// celda I
+	        	// celda I (8)
 	        HSSFCell cell_unidad = row.createCell(8);
 	        cell_unidad.setCellValue("UNIDAD");
 	        cell_unidad.setCellStyle(cellStyle_centro);
@@ -138,8 +138,8 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 				row.createCell(2).setCellValue( tipoPapelExtendido.getNombre() );
 				row.createCell(3).setCellValue( tipoPapelExtendido.getGramaje() );
 				row.createCell(4).setCellValue( tipoPapelExtendido.getKilogramos() );
-				row.createCell(5).setCellValue( tipoPapelExtendido.getAncho() );
-				row.createCell(6).setCellValue( tipoPapelExtendido.getAlto() );
+				row.createCell(5).setCellValue( tipoPapelExtendido.getAlto() );
+				row.createCell(6).setCellValue( tipoPapelExtendido.getAncho() );
 				row.createCell(7).setCellValue( tipoPapelExtendido.getPrecio() );
 				row.createCell(8).setCellValue( tipoPapelExtendido.getTipoPrecio().getNombre() );
 				cont++;

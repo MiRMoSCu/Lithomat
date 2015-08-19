@@ -27,8 +27,8 @@ public class CompiladorJasper {
             String path_base = path.substring( 0, path.indexOf("archivo.txt") );
             System.out.println( "path_base: " + path_base );
             
-            String directorio_origen 	= path_base + "WebContent/resources/jrxml/";
-            String directorio_destino 	= path_base + "WebContent/resources/jasper/";
+            String directorio_origen 	= path_base + "src/main/webapp/resources/jrxml/";
+            String directorio_destino 	= path_base + "src/main/webapp/resources/jasper/";
             
             /*
             String[] folder = path_corto.split("/");
@@ -48,7 +48,7 @@ public class CompiladorJasper {
             // ---------
             
             System.out.println("Compiling report...");
-            JasperCompileManager.compileReportToFile( directorio_origen + "ReporteCotizacion.jrxml", directorio_destino + "ReporteCotizacion.jasper");
+            JasperCompileManager.compileReportToFile( directorio_origen + "Remision.jrxml", directorio_destino + "Remision.jasper");
             System.out.println("Done!");
             
             

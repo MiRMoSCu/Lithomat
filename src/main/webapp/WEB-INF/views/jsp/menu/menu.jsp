@@ -86,7 +86,6 @@
             var urlSalir					= '${urlSalir}';
             
             function menu_principal( opcion_principal ) {
-            	
             	switch( opcion_principal ) {
             		case 'produccion':
             			document.getElementById("div_pestania_reportes").style.display 		= "none";
@@ -113,7 +112,7 @@
             			document.getElementById("div_pestania_seguridad").style.display 	= "block";
             			break;
             		default:
-            			//alert(opcion_principal);
+            			//alert("error");
             			break;
             	}
             	
@@ -229,9 +228,15 @@
                 }
                 document.forms[0].submit();
             }
+            
+            function revisaParametroMenu() {
+            	var opcion = location.search.split("opc=")[1] ? location.search.split("opc=")[1] : "produccion";
+            	menu_principal(opcion);
+            }
+            
         </script>
     </head>
-    <body>
+    <body onload="revisaParametroMenu()">
     	<div id="div_area">
             <div id="div_ancho">
                 <div id="div_hoja">
@@ -363,9 +368,6 @@
                                 				<div id="div_opcion_cliente" class="boton_dinamico" onclick="menu('cliente');">
 	                                				<span class="texto_boton">Cliente</span>
 	                                			</div>
-	                                			<div id="div_opcion_tipo_papel_extendido" class="boton_dinamico" onclick="menu('tipo_papel_extendido');">
-	                                				<span class="texto_boton">Tipo papel extendido</span>
-	                                			</div>
 	                                			<div id="div_opcion_combinacion_de_tintas" class="boton_dinamico" onclick="menu('combinacion_tintas');">
 	                                				<span class="texto_boton">Combinaci&oacute;n de tintas</span>
 	                                			</div>
@@ -428,6 +430,9 @@
 	                                			</div>
 	                                			<div id="div_opcion_tipo_forma_trabajo" class="boton_dinamico" onclick="menu('tipo_forma_trabajo');">
 	                                				<span class="texto_boton">Tipo forma trabajo</span>
+	                                			</div>
+	                                			<div id="div_opcion_tipo_papel_extendido" class="boton_dinamico" onclick="menu('tipo_papel_extendido');">
+	                                				<span class="texto_boton">Tipo papel extendido</span>
 	                                			</div>
 	                                			<div id="div_opcion_tipo_placa" class="boton_dinamico" onclick="menu('tipo_placa');">
 	                                				<span class="texto_boton">Tipo placa</span>

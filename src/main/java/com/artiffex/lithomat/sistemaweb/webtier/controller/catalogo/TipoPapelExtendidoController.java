@@ -75,8 +75,8 @@ public class TipoPapelExtendidoController {
 			@RequestParam(value = "nombre", 			required = false) String nombre,
 			@RequestParam(value = "gramaje", 			required = false) Integer gramaje,
 			@RequestParam(value = "kilogramos", 		required = false) float kilogramos,
-			@RequestParam(value = "ancho", 				required = false) float ancho,
 			@RequestParam(value = "alto", 				required = false) float alto,
+			@RequestParam(value = "ancho", 				required = false) float ancho,
 			@RequestParam(value = "descripcion", 		required = false) String descripcion,
 			@RequestParam(value = "precio", 			required = false) float precio,
 			@RequestParam(value = "id_tipo_precio", 	required = false) Integer idTipoPrecio,
@@ -91,8 +91,8 @@ public class TipoPapelExtendidoController {
 		tipoPapelExtendido.setNombre(nombre);
 		tipoPapelExtendido.setGramaje(gramaje);
 		tipoPapelExtendido.setKilogramos(kilogramos);
-		tipoPapelExtendido.setAncho(ancho);
 		tipoPapelExtendido.setAlto(alto);
+		tipoPapelExtendido.setAncho(ancho);
 		tipoPapelExtendido.setDescripcion(descripcion);
 		tipoPapelExtendido.setPrecio(precio);
 			TipoPrecio tipoPrecio = new TipoPrecio();
@@ -127,8 +127,8 @@ public class TipoPapelExtendidoController {
 			@RequestParam(value = "nombre", 					required = false) String nombre,
 			@RequestParam(value = "gramaje", 					required = false) Integer gramaje,
 			@RequestParam(value = "kilogramos", 				required = false) float kilogramos,
-			@RequestParam(value = "ancho", 						required = false) float ancho,
 			@RequestParam(value = "alto", 						required = false) float alto,
+			@RequestParam(value = "ancho", 						required = false) float ancho,
 			@RequestParam(value = "descripcion", 				required = false) String descripcion,
 			@RequestParam(value = "precio", 					required = false) float precio,
 			@RequestParam(value = "id_tipo_precio", 			required = false) Integer idTipoPrecio,
@@ -141,8 +141,8 @@ public class TipoPapelExtendidoController {
 		tipoPapelExtendido.setNombre(nombre);
 		tipoPapelExtendido.setGramaje(gramaje);
 		tipoPapelExtendido.setKilogramos(kilogramos);
-		tipoPapelExtendido.setAncho(ancho);
 		tipoPapelExtendido.setAlto(alto);
+		tipoPapelExtendido.setAncho(ancho);
 		tipoPapelExtendido.setDescripcion(descripcion);
 		tipoPapelExtendido.setPrecio(precio);
 		tipoPapelExtendido.getTipoPrecio().setIdTipoPrecio(idTipoPrecio);

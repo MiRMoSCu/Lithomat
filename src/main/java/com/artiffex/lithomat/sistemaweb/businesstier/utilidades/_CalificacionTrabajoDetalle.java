@@ -31,6 +31,8 @@ public class _CalificacionTrabajoDetalle implements Serializable {
 	private double vueltaBarnizCosteTotal;
 	private boolean activo;
 	// campos para enviarse en ajax
+	private String nombreCliente;
+	private String nut;
 	private String descripcion;
 	private String maquinaDescripcion;
 	private int repeticionesXPliego;
@@ -192,6 +194,18 @@ public class _CalificacionTrabajoDetalle implements Serializable {
 	}
 	public void setActivo(boolean activo) {
 		this.activo = activo;
+	}
+	public String getNombreCliente() {
+		return nombreCliente;
+	}
+	public void setNombreCliente(String nombreCliente) {
+		this.nombreCliente = nombreCliente;
+	}
+	public String getNut() {
+		return nut;
+	}
+	public void setNut(String nut) {
+		this.nut = nut;
 	}
 	public String getDescripcion() {
 		return descripcion;

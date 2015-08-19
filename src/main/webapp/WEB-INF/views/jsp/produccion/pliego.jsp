@@ -205,6 +205,23 @@
                                     </div>
                                 </div>
                                 <div class="linea">
+                                	<div class="casilla">
+                                		<div class="" style="color: #898989;">
+                                			<table>
+                                				<tr>
+                                					<td width="61%">¿Modificar todos los sobrantes similares?:</td>
+                                					<td>
+                                						<input 	type="checkbox"
+                                								class="input"
+                                								name="mismos_sobrantes"
+                                								tabindex="5" />
+                                					</td>
+                                				</tr>
+                                			</table>
+                                		</div>
+                                	</div>
+                                </div>
+                                <div class="linea">
                                     <div class="casilla">                            
                                         <div class="columna_completa">
                                             <table>
@@ -215,7 +232,7 @@
                                                                 class="input"
                                                                 name="observaciones"
                                                                 value=""
-                                                                tabindex="5">
+                                                                tabindex="6">
                                                     </td>
                                                 </tr>
                                             </table>
@@ -232,7 +249,7 @@
                                                         <input  type="checkbox" 
                                                                 class="input"
                                                                 name="mismas_placas"
-                                                                tabindex="6">
+                                                                tabindex="7">
                                                     </td>
                                                 </tr>
                                             </table>
@@ -247,7 +264,7 @@
                                                     <td width="18%">Tipo vuelta:</td>
                                                     <td>
                                                         <select name="tipo_vuelta" 
-                                                                tabindex="7" 
+                                                                tabindex="8" 
                                                                 onchange="">
                                                             <c:forEach var="v" items="${listaTipoVuelta}">
                                                                 <option value="${v.value}">${v.text}</option>

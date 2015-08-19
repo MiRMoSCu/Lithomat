@@ -1,7 +1,7 @@
 
 #div_area {
     width:528px;
-    height: 594px;
+    height: 629px; /*524*/
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -10,12 +10,12 @@
 
 #div_ancho {
     width: 528px;
-    height: 565px;
+    height: 595px;
 }
 
 #div_hoja {
     width: 499px;
-    height: 565px;
+    height: 600px;
     float: left;
     background-color: #fff;
 }
@@ -35,7 +35,7 @@
 
 #div_fondo_der{
     width: 29px;
-    height: 534px;
+    height: 569px;
     background-image: url('../image/s_der.png');
     background-repeat: repeat-y;
 }
@@ -71,7 +71,7 @@
 
 #div_contenido {
     width: 455px;
-    height: 550px;
+    height: 585px;
     position: relative;
     top: 15px;
     background-color: transparent;

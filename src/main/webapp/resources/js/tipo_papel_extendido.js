@@ -10,7 +10,7 @@ $(document).ready(function () {
 /*************************************************************/
 
 /* funciones */
-function setCampos( id_tipo_papel_extendido, razon_social, nombre, gramaje, kilogramos, ancho, alto, descripcion, precio, nombre_precio ) {
+function setCampos( id_tipo_papel_extendido, razon_social, nombre, gramaje, kilogramos, alto, ancho, descripcion, precio, nombre_precio ) {
 
     //Busqueda de proveedor_papel
     var select_proveedor = document.forms[0].id_proveedor_papel;
@@ -38,8 +38,8 @@ function setCampos( id_tipo_papel_extendido, razon_social, nombre, gramaje, kilo
     document.forms[0].nombre.value                      = nombre;
     document.forms[0].gramaje.value                     = gramaje;
     document.forms[0].kilogramos.value                  = kilogramos;
-    document.forms[0].ancho.value                       = ancho;
     document.forms[0].alto.value                        = alto;
+    document.forms[0].ancho.value                       = ancho;
     document.forms[0].descripcion.value                 = descripcion;
     document.forms[0].precio.value                      = precio;
     document.forms[0].id_tipo_precio.selectedIndex      = index_precio;
@@ -49,8 +49,8 @@ function crear() {
     if (document.forms[0].nombre.value == "" 
      || document.forms[0].gramaje.value == ""
      || document.forms[0].kilogramos.value == ""
-     || document.forms[0].ancho.value == ""
      || document.forms[0].alto.value == ""
+     || document.forms[0].ancho.value == ""
      || document.forms[0].precio.value == "" )
         alert("Todos los campos son obligatorios, favor de informarlos.");
     else {
@@ -63,8 +63,8 @@ function modifica() {
     if (document.forms[0].nombre.value == "" 
      || document.forms[0].gramaje.value == ""
      || document.forms[0].kilogramos.value == ""
-     || document.forms[0].ancho.value == ""
      || document.forms[0].alto.value == ""
+     || document.forms[0].ancho.value == ""
      || document.forms[0].precio.value == "")
         alert("Todos los campos son obligatorios, favor de informarlos.");
     else {
@@ -86,8 +86,8 @@ function limpia() {
     document.forms[0].nombre.value                      = "";
     document.forms[0].gramaje.value                     = "";
     document.forms[0].kilogramos.value                  = "";
-    document.forms[0].ancho.value                       = "";
     document.forms[0].alto.value                        = "";
+    document.forms[0].ancho.value                       = "";
     document.forms[0].descripcion.value                 = "";
     document.forms[0].precio.value                      = "";
     document.forms[0].id_tipo_precio.selectedIndex      = 0;

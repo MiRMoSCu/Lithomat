@@ -53,7 +53,7 @@ public class CotizacionController {
 	//public static final String DIRECTORIO_ORIGEN = "WebContent/resources/jasper/"; 
 	
 	// cuando se corre en una aplicacion dentro de un servidor
-	public static final String DIRECTORIO_ORIGEN = "/resources/jasper/";
+	private static final String DIRECTORIO_ORIGEN = "/resources/jasper/";
 	
 	@Autowired
 	ServletContext context; // sirve para obtener el getContextPath()
@@ -71,12 +71,12 @@ public class CotizacionController {
 			@RequestParam(value = "nut", required = false) String nut,
 			Model model
 		) {
-		log.trace("/condiciones_produccion");
-		
+		log.info("/condiciones_produccion");
 		model.addAttribute("condiciones_produccion", calificacionService.obtieneCondicionesProduccion(nut));
 		return "visualizador/condiciones_produccion";
 	} // condicionesProduccion
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/exporta_reporte", method = RequestMethod.POST)
 	public void exportaReportePDF(
 			@RequestParam(value = "nut", 					required = false) String nut,
@@ -84,7 +84,7 @@ public class CotizacionController {
 			@RequestParam(value = "tipo_formato",			required = false) int tipoFormato,
 			HttpServletResponse response
 		) throws IOException {
-		log.trace("/exporta_reporte");
+		log.info("/exporta_reporte");
 		
 		//System.out.println("nut:" + nut);
 		//System.out.println("condiciones_produccion:" + condiciones_produccion);

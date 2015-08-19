@@ -103,6 +103,7 @@ public class CalificacionController {
 		return "produccion/calificacion";
 	} // calificacionOrdenProduccion
 	
+	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/resumen_partida", method = RequestMethod.POST)
 	@ResponseBody
@@ -112,6 +113,7 @@ public class CalificacionController {
 		log.info("/resumen_calificacion_partida");
 		return calificacionService.buscaCalificacionPartida(idPartida);
 	} // resumenCalificacionPartida
+	
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/resumen_trabajo_detalle", method = RequestMethod.POST)
@@ -199,6 +201,7 @@ public class CalificacionController {
 		
 		return ctd;
 	} // buscaCalificacionTrabajoDetalle
+	
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/resumen_procesos", method = RequestMethod.POST)

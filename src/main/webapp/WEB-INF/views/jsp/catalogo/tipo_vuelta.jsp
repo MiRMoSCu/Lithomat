@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:url value="/"	               				var="urlMenu"/>
+<c:url value="/?opc=catalogos"	               	var="urlMenu"/>
 <c:url value="/tipo_vuelta/catalogo/alta" 		var="urlAlta"/>
 <c:url value="/tipo_vuelta/catalogo/modifica" 	var="urlModifica"/>
 <c:url value="/tipo_vuelta/catalogo/elimina" 	var="urlElimina"/>
@@ -87,7 +87,7 @@
                                 <div id="div_tipo_vuelta">
                                     <div class="titulo">
                                         <img alt="" src="<c:url value="/resources/image/titulo_tipo_vuelta.png"/>"></img>
-                                        <font size="8">VUELTA</font>
+                                        <font size="8">TIPO VUELTA</font>
                                     </div>
                                     <div id="div_contenedor_tabla">
                                         <div class="columna_completa">

@@ -10,6 +10,7 @@ function limpiaPliego() {
     document.forms[0].hojas_requeridas.value    = "";
     document.forms[0].hojas_sobrantes.value     = "";
     document.forms[0].hojas_totales.value       = "";
+    document.forms[0].mismos_sobrantes.checked  = false;
     document.forms[0].observaciones.value       = "";
     document.forms[0].mismas_placas.checked     = false;
     document.forms[0].tipo_vuelta.selectedIndex = 0;
@@ -61,29 +62,45 @@ function modificaRegistro() {
         var hojas_requeridas        = document.forms[0].elements["hojas_requeridas"].value;
         var hojas_sobrantes         = document.forms[0].elements["hojas_sobrantes"].value;
         var hojas_totales           = document.forms[0].elements["hojas_totales"].value;
+        var mismos_sobrantes		= document.forms[0].elements["mismos_sobrantes"].checked == true ? true : false;
         var observaciones           = document.forms[0].elements["observaciones"].value;
         var vuelta_mismas_placas    = document.forms[0].elements["mismas_placas"].checked == true ? true : false;
         var tipo_vuelta             = document.forms[0].elements["tipo_vuelta"].options[ document.forms[0].elements["tipo_vuelta"].selectedIndex ].innerText;
-        
+
         var tableDOM = document.getElementById("tabla_hojas_pliego");
+        var hojas_sobrantes_original;
         // busca en tabla el registro que corresponde a la modificacion
         for( var i = 0; i < tableDOM.rows.length; i++ ) {
             if( tableDOM.rows[i].cells[0].innerHTML == numero_pliego ) {
-                
+            	hojas_sobrantes_original = tableDOM.rows[i].cells[2].innerHTML
                 tableDOM.rows[i].removeAttribute("onclick");
-                
                 tableDOM.rows[i].cells[2].innerHTML = hojas_sobrantes;
                 tableDOM.rows[i].cells[3].innerHTML = hojas_totales;
                 tableDOM.rows[i].cells[4].innerHTML = observaciones;
-                tableDOM.rows[i].cells[5].innerHTML = vuelta_mismas_placas == true ? "S&iacute;" : "No";
+                tableDOM.rows[i].cells[5].innerHTML = vuelta_mismas_placas == true ? "Si" : "No";
                 tableDOM.rows[i].cells[6].innerHTML = tipo_vuelta;
-                
                 var stringFuncion = "setCampos(\'" + i + "\', \'" + hojas_requeridas + "\', \'" + hojas_sobrantes + "\', \'" + hojas_totales + "\', \'" + observaciones + "\', \'" + vuelta_mismas_placas + "\', \'" + tipo_vuelta + "\');";
                 tableDOM.rows[i].setAttribute("onclick",stringFuncion);
-                
                 delete stringFuncion;
             }
         }
+        // si mismos_sobrantes == true 
+        // entonces modifica entre todos los pliegos los sobrantes que son identicos al primer registro modificado 
+        if( mismos_sobrantes ) {
+        	for( var i = 0; i < tableDOM.rows.length; i++ ) {
+        		if( tableDOM.rows[i].cells[2].innerHTML == hojas_sobrantes_original ) {
+        			tableDOM.rows[i].removeAttribute("onclick");
+        			hojas_totales = parseInt(tableDOM.rows[i].cells[1].innerHTML) + parseInt(hojas_sobrantes);
+        			tableDOM.rows[i].cells[2].innerHTML = hojas_sobrantes;
+        			tableDOM.rows[i].cells[3].innerHTML = hojas_totales;
+        			vuelta_mismas_placas = tableDOM.rows[i].cells[5].innerHTML.trim() == "Si" ? true : false;
+        			//setCampos( pgo, h_req, h_sob, h_tot, obs, ¿mismas_placas?, tipo_vuelta )
+        			var stringFuncion = "setCampos(\'" + i + "\', \'" + tableDOM.rows[i].cells[1].innerHTML + "\', \'" + tableDOM.rows[i].cells[2].innerHTML + "\', \'" + tableDOM.rows[i].cells[3].innerHTML + "\', \'" + tableDOM.rows[i].cells[4].innerHTML + "\', \'" + vuelta_mismas_placas + "\', \'" + tableDOM.rows[i].cells[6].innerHTML + "\');";
+        			tableDOM.rows[i].setAttribute("onclick",stringFuncion);
+        			delete stringFuncion;
+        		}
+        	}
+    	}
         
         limpiaPliego();
         
