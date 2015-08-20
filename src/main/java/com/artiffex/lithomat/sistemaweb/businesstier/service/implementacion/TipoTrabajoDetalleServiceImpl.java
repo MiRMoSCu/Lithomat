@@ -79,6 +79,8 @@ public class TipoTrabajoDetalleServiceImpl implements TipoTrabajoDetalleService 
 		tipoTrabajoDetalleDTO.setVueltaDescripcionTipoBarniz(tipoTrabajoDetalle.getVueltaTipoBarniz().getDescripcion());
 		tipoTrabajoDetalleDTO.setNombreMaquina(tipoTrabajoDetalle.getMaquina().getNombre());
 		tipoTrabajoDetalleDTO.setDescripcionPlaca(tipoTrabajoDetalle.getTipoPlaca().getDescripcion());
+		tipoTrabajoDetalleDTO.setDescripcionComplejidad(tipoTrabajoDetalle.getTipoComplejidad().getNombre());
+		
 		tipoTrabajoDetalle = null;
 		return tipoTrabajoDetalleDTO;
 	}

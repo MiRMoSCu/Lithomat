@@ -184,11 +184,11 @@
                                             la aplicacion depende de ellos en el código.
                                             CalificacionServiceImpl
                                         -->
-                                        <!-- 
+                                        
                                         <div class="casilla" style="text-align:right;">
                                             <img alt="" style="cursor:pointer;" onclick="limpia();"
-                                                 src="resources/image/boton_limpiar.jpg"></img>
-                                             
+                                                 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"></img>
+                                        	<!--      
                                             <img alt="" style="cursor:pointer;" onclick="elimina();"
                                                  src="resources/image/boton_eliminar.jpg"></img>
                                              
@@ -197,8 +197,9 @@
                                              
                                             <img alt="" style="cursor:pointer;" onclick="crear();"
                                                  src="resources/image/boton_agregar.jpg"></img>
+                                            -->
                                         </div>
-                                        -->
+                                        
                                     </div>
                                 </div>
                             </form>

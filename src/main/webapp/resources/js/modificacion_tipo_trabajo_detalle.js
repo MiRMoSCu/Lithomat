@@ -25,6 +25,7 @@ var obj_ttd = {
 	vuelta_tipo_barniz 					: "",
 	maquina 							: "",
 	tipo_placa 							: "",
+	tipo_complejidad					: "",
 	listaIdPliegoEliminado				: "",
 	htmlListaPliegos					: "",
 		
@@ -51,6 +52,7 @@ var obj_ttd = {
 		this.vuelta_tipo_barniz 				= document.tipo_trabajo_detalle.vuelta_tipo_barniz.value;
 		this.maquina 							= document.tipo_trabajo_detalle.maquina.value;
 		this.tipo_placa 						= document.tipo_trabajo_detalle.tipo_placa.value;
+		this.tipo_complejidad 					= document.tipo_trabajo_detalle.tipo_complejidad.value;
 	}, // setObjTTD
 	
 	setFormTTD : function() {
@@ -76,6 +78,7 @@ var obj_ttd = {
 		document.tipo_trabajo_detalle.vuelta_tipo_barniz.value 					= this.vuelta_tipo_barniz;
 		document.tipo_trabajo_detalle.maquina.value 							= this.maquina;
 		document.tipo_trabajo_detalle.tipo_placa.value 							= this.tipo_placa;
+		document.tipo_trabajo_detalle.tipo_complejidad.value 					= this.tipo_complejidad;
 	} //setFormTTD
 } // obj_ttd_encabezado
 	
@@ -205,6 +208,17 @@ function activaCamposFormTipoTrabajoDetalle() {
 	}
 	delete encontroOpcion;
 	
+	// select tipo_complejidad
+	clave 	= document.tipo_trabajo_detalle.tipo_complejidad.value;
+	select 	= document.tipo_trabajo_detalle.select_tipo_complejidad;
+	for( var i=0; i<select.length; i++ ) {
+		if( select.options[i].innerText == clave ) {
+			select.selectedIndex	= i;
+			break;
+		}
+	}
+	
+	// -------
 	delete clave;
 	delete select;
 	
@@ -234,6 +248,8 @@ function activaCamposFormTipoTrabajoDetalle() {
 	document.tipo_trabajo_detalle.select_maquina.style.display 						= "inline";
 	document.tipo_trabajo_detalle.tipo_placa.style.display 							= "none";
 	document.tipo_trabajo_detalle.select_tipo_placa.style.display 					= "inline";
+	document.tipo_trabajo_detalle.tipo_complejidad.style.display 					= "none";
+	document.tipo_trabajo_detalle.select_tipo_complejidad.style.display 			= "inline";
 	
 	// desactiva readOnly
 	document.tipo_trabajo_detalle.ancho.readOnly 								= false;
@@ -288,6 +304,8 @@ function desactivaCamposFormTipoTrabajoDetalle() {
 	document.tipo_trabajo_detalle.maquina.style.display 							= "inline";
 	document.tipo_trabajo_detalle.select_tipo_placa.style.display 					= "none";
 	document.tipo_trabajo_detalle.tipo_placa.style.display 							= "inline";
+	document.tipo_trabajo_detalle.select_tipo_complejidad.style.display 			= "none";
+	document.tipo_trabajo_detalle.tipo_complejidad.style.display 					= "inline";
 	
 	// activa readOnly
 	document.tipo_trabajo_detalle.ancho.readOnly 								= true;
@@ -337,6 +355,7 @@ function aceptaModificarTTD() {
 	document.tipo_trabajo_detalle.vuelta_id_tipo_barniz.value				= document.tipo_trabajo_detalle.select_vuelta_tipo_barniz.value;
 	document.tipo_trabajo_detalle.id_maquina.value							= document.tipo_trabajo_detalle.select_maquina.value;
 	document.tipo_trabajo_detalle.id_tipo_placa.value						= document.tipo_trabajo_detalle.select_tipo_placa.value;
+	document.tipo_trabajo_detalle.id_tipo_complejidad.value					= document.tipo_trabajo_detalle.select_tipo_complejidad.value;
 	
 	// genera la informacion de los input checkbox
 	if( document.tipo_trabajo_detalle.checkbox_proporciona_papel.checked )
@@ -368,6 +387,7 @@ function aceptaModificarTTD() {
 	document.tipo_trabajo_detalle.vuelta_tipo_barniz.value 			= document.tipo_trabajo_detalle.select_vuelta_tipo_barniz.options[document.tipo_trabajo_detalle.select_vuelta_tipo_barniz.selectedIndex].text;
 	document.tipo_trabajo_detalle.maquina.value 					= document.tipo_trabajo_detalle.select_maquina.options[document.tipo_trabajo_detalle.select_maquina.selectedIndex].text;
 	document.tipo_trabajo_detalle.tipo_placa.value 					= document.tipo_trabajo_detalle.select_tipo_placa.options[document.tipo_trabajo_detalle.select_tipo_placa.selectedIndex].text;
+	document.tipo_trabajo_detalle.tipo_complejidad.value 			= document.tipo_trabajo_detalle.select_tipo_complejidad.options[document.tipo_trabajo_detalle.select_tipo_complejidad.selectedIndex].text;
 	
 	var correcto = true;
 	

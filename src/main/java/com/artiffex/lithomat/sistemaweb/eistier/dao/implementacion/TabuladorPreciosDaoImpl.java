@@ -54,25 +54,12 @@ public class TabuladorPreciosDaoImpl implements TabuladorPreciosDAO {
 		return tabuladorPrecios;
 	}
 	
-	public float buscaPrecioTabulador(int idMaquina, int cantidad) {
+	public float buscaPrecioTabulador(String sqlQuery, int idMaquina, int cantidad) {
 		float precioTabulador = 0f;
 		try {
 			sesion = HibernateUtil.getInstance().getCurrentSession();
 			sesion.beginTransaction();
-			SQLQuery query = sesion.createSQLQuery(
-					"SELECT \r\n" + 
-					"    CAST((tp.precio / tipo_precio.factor_divisor) AS DECIMAL (6,3)) precio_unitario\r\n" + 
-					"FROM\r\n" + 
-					"    maquina m,\r\n" + 
-					"    tabulador_precios tp,\r\n" + 
-					"    tipo_precio tipo_precio\r\n" + 
-					"WHERE\r\n" + 
-					"    m.id_maquina = tp.id_maquina\r\n" + 
-					"        AND tp.id_tipo_precio = tipo_precio.id_tipo_precio\r\n" + 
-					"        AND tp.id_maquina = :idMaquina\r\n" + 
-					"        AND :cantidadMasUno > tp.inicio_tabulador\r\n" + 
-					"        AND :cantidadMenosUno < tp.fin_tabulador\r\n" + 
-					"        AND tp.activo = TRUE;");
+			SQLQuery query = sesion.createSQLQuery(sqlQuery);
 			query.setParameter("idMaquina", idMaquina);
 			query.setParameter("cantidadMasUno", cantidad+1);
 			query.setParameter("cantidadMenosUno", cantidad-1);

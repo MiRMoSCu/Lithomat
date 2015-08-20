@@ -20,6 +20,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.entity.Maquina;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Partida;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TamanioPublicacion;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoBarniz;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoComplejidad;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPapelExtendido;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPlaca;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajoDetalle;
@@ -66,7 +67,8 @@ public class TipoTrabajoDetalleController {
 			@RequestParam(value = "vuelta_descripcion_tinta_especial", 	required = false) String vueltaDescripcionTintaEspecial,
 			@RequestParam(value = "vuelta_id_tipo_barniz", 				required = false) Integer vueltaIdTipoBarniz,
 			@RequestParam(value = "id_maquina", 						required = false) Integer idMaquina,
-			@RequestParam(value = "id_tipo_placa", 						required = false) Integer idTipoPlaca
+			@RequestParam(value = "id_tipo_placa", 						required = false) Integer idTipoPlaca,
+			@RequestParam(value = "id_tipo_complejidad", 				required = false) Integer idTipoComplejidad
 		) {
 		log.info("/agrega_tipo_trabajo_detalle");
 
@@ -116,6 +118,9 @@ public class TipoTrabajoDetalleController {
 			TipoPlaca tipoPlaca = new TipoPlaca();
 			tipoPlaca.setIdTipoPlaca(idTipoPlaca);
 		tipoTrabajoDetalle.setTipoPlaca(tipoPlaca);
+			TipoComplejidad tipoComplejidad = new TipoComplejidad();
+			tipoComplejidad.setIdTipoComplejidad(idTipoComplejidad);
+		tipoTrabajoDetalle.setTipoComplejidad(tipoComplejidad);
 		tipoTrabajoDetalle.setFechaGeneracion(fechaGeneracion);
 		tipoTrabajoDetalle.setActivo(true);
 
@@ -135,6 +140,7 @@ public class TipoTrabajoDetalleController {
 		vueltaTipoBarniz 		= null;
 		maquina 				= null;
 		tipoPlaca 				= null;
+		tipoComplejidad			= null;
 		tipoTrabajoDetalle 		= null;
 		
 		return jsonResponse;
@@ -202,7 +208,8 @@ public class TipoTrabajoDetalleController {
 			@RequestParam(value = "vuelta_descripcion_tinta_especial", 	required = false) String vueltaDescripcionTintaEspecial,
 			@RequestParam(value = "vuelta_id_tipo_barniz", 				required = false) Integer vueltaIdTipoBarniz,
 			@RequestParam(value = "id_maquina", 						required = false) Integer idMaquina,
-			@RequestParam(value = "id_tipo_placa", 						required = false) Integer idTipoPlaca
+			@RequestParam(value = "id_tipo_placa", 						required = false) Integer idTipoPlaca,
+			@RequestParam(value = "id_tipo_complejidad", 				required = false) Integer idTipoComplejidad
 		) {
 		log.info("/actualiza_tipo_trabajo_detalle");
 		
@@ -229,6 +236,7 @@ public class TipoTrabajoDetalleController {
 		tipoTrabajoDetalle.getVueltaTipoBarniz().setIdTipoBarniz(vueltaIdTipoBarniz);
 		tipoTrabajoDetalle.getMaquina().setIdMaquina(idMaquina);
 		tipoTrabajoDetalle.getTipoPlaca().setIdTipoPlaca(idTipoPlaca);
+		tipoTrabajoDetalle.getTipoComplejidad().setIdTipoComplejidad(idTipoComplejidad);
 		
 		tipoTrabajoDetalleService.modificaTipoTrabajoDetalle(tipoTrabajoDetalle);
 		

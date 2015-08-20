@@ -100,6 +100,9 @@
 		<many-to-one name="tipoPlaca" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPlaca" fetch="select">
 			<column name="id_tipo_placa"/>
 		</many-to-one>
+		<many-to-one name="tipoComplejidad" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoComplejidad" fetch="select">
+			<column name="id_tipo_complejidad"/>
+		</many-to-one>
 		<property name="observaciones">
 			<column name="observaciones" length="250"/>
 			<type name="string"/>

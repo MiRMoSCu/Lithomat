@@ -31,6 +31,7 @@ public class TipoTrabajoDetalleDTO implements Serializable {
 	private String vueltaDescripcionTipoBarniz;
 	private String nombreMaquina;
 	private String descripcionPlaca;
+	private String descripcionComplejidad;
 	
 	
 	public int getIdTipoTrabajoDetalle() {
@@ -188,5 +189,11 @@ public class TipoTrabajoDetalleDTO implements Serializable {
 	public void setDescripcionPlaca(String descripcionPlaca) {
 		this.descripcionPlaca = descripcionPlaca;
 	}
-	
+	public String getDescripcionComplejidad() {
+		return descripcionComplejidad;
+	}
+	public void setDescripcionComplejidad(String descripcionComplejidad) {
+		this.descripcionComplejidad = descripcionComplejidad;
+	}
+		
 }

@@ -10,7 +10,7 @@ public class HibernateUtil {
 	
 	private static final Logger log = Logger.getLogger(HibernateUtil.class);
 	private static SessionFactory sessionFactory;
-	private static String SERVER_CONFIG_FILE_LOCATION 	= "hibernate.cfg.xml";
+	private static String SERVER_CONFIG_FILE_LOCATION 	= "hibernate/hibernate.cfg.xml";
 
 	// constructor
 	private HibernateUtil() { }	

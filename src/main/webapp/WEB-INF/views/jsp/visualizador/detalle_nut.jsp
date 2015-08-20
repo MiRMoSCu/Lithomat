@@ -913,6 +913,8 @@
                                     	<input type="hidden" name="vuelta_id_tipo_barniz" 				value="">
                                     	<input type="hidden" name="id_maquina" 							value="">
                                     	<input type="hidden" name="id_tipo_placa" 						value="">
+                                    	<input type="hidden" name="id_tipo_complejidad" 				value="">
+                                    	
                                         <div class="div_separador_mediano">
                                             <img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
                                         </div>
@@ -1445,6 +1447,33 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="linea">
+                                        	<div class="casilla">
+                                        		<div class="columna_izquierda">
+                                        			<div class="columna_completa">
+                                        				<table>
+                                        					<tr>
+                                        						<td width="32%">Tipo de Complejidad</td>
+	                                    						<td>
+	                                    							<input	type="text"
+	                                    									class="input"
+	                                    									name="tipo_complejidad"
+	                                    									style="display:inline;"
+	                                    									value=""
+	                                    									readonly/>
+	                                    							<select name="select_tipo_complejidad"
+	                                    									style="display:none;">
+	                                    								<c:forEach var="x" items="${listaTipoComplejidad}">
+	                                    									<option value="${x.value}">${x.text}</option>
+	                                    								</c:forEach>
+	                                    							</select>
+                                    							</td>
+                                        					</tr>
+                                        				</table>
+                                        			</div>
+                                        		</div>
+                                        	</div>
                                         </div>
                                         <div class="div_separador_chico">
                                         	<img alt="" src="<c:url value="/resources/image/separador_chico.jpg"/>"/>

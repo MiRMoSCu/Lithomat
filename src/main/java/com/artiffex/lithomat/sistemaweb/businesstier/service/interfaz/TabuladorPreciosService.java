@@ -14,6 +14,6 @@ public interface TabuladorPreciosService {
 	
 	public List<TabuladorPrecios> listaTabuladorPrecios();
 	
-	public float obtienePrecioUnitarioTabulador(int idMaquina, int cantidad);
+	public float obtienePrecioUnitarioTabulador(int idTipoComplejidad, int idMaquina, int cantidad);
 	
 }

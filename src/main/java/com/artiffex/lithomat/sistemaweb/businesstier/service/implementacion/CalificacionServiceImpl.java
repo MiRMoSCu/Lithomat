@@ -99,11 +99,14 @@ public class CalificacionServiceImpl implements CalificacionService {
 				else
 					cantidadRedondeada = (cantidadOriginal / 1000) * 1000;
 				
+				// * tipo complejidad
+				int idTipoComplejidad = tipoTrabajoDetalle.getTipoComplejidad().getIdTipoComplejidad();
+				
 				// * maquina
 				int idMaquina = tipoTrabajoDetalle.getMaquina().getIdMaquina();
 				
 				// * precio tabulador
-				float precioUnitarioTabulador = tabuladorPreciosService.obtienePrecioUnitarioTabulador(idMaquina, cantidadRedondeada);
+				float precioUnitarioTabulador = tabuladorPreciosService.obtienePrecioUnitarioTabulador(idTipoComplejidad, idMaquina, cantidadRedondeada);
 				
 				// *** COMPONENTES IMPRESION ***
 				HashMap<String, Object> sumatorias = tipoTrabajoDetalleService.obtieneSumatorias(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());
@@ -368,13 +371,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 		return calificacionProcesosPartidaDAO.buscaPorPartida(idPartida);
 	} // buscaCalificacionProcesos
 	
-	/*
-	@Override
-	public float obtienePrecioNetoPorNut(String nut) {
-		return calificacionOrdenProduccionDAO.obtienePrecioNetoPorNut(nut);
-	} // obtienePrecioNetoPorNut
-	*/
-	
 	public void actualizaOrdenProduccion(int idOrdenProduccion) {
 		System.out.println("CalificacionService.actualizaOrdenProduccion");
 		
@@ -460,11 +456,14 @@ public class CalificacionServiceImpl implements CalificacionService {
 				else
 					cantidadRedondeada = (cantidadOriginal / 1000) * 1000;
 				
+				// * tipo complejidad
+				int idTipoComplejidad = tipoTrabajoDetalle.getTipoComplejidad().getIdTipoComplejidad();
+				
 				// * maquina
 				int idMaquina = tipoTrabajoDetalle.getMaquina().getIdMaquina();
 				
 				// * precio tabulador
-				float precioUnitarioTabulador = tabuladorPreciosService.obtienePrecioUnitarioTabulador(idMaquina, cantidadRedondeada);
+				float precioUnitarioTabulador = tabuladorPreciosService.obtienePrecioUnitarioTabulador(idTipoComplejidad, idMaquina, cantidadRedondeada);
 				
 				// *** COMPONENTES IMPRESION ***
 				HashMap<String, Object> sumatorias = tipoTrabajoDetalleService.obtieneSumatorias(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());
@@ -962,8 +961,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 	public List<CalificacionTrabajoDetalleDTOAyuda> obtieneEjemploVOPapel() {
 		return calificacionOrdenProduccionDAO.ejemploListaPapel();
 	}
-
-	
 	
 }
 

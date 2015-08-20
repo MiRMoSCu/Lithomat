@@ -308,6 +308,7 @@ function buscaTrabajoDetalle( id_tipo_trabajo_detalle ) {
             document.forms["tipo_trabajo_detalle"].elements["vuelta_tipo_barniz"].value                 = detallePartidaJson.tipo_trabajo_detalle.vueltaDescripcionTipoBarniz;
             document.forms["tipo_trabajo_detalle"].elements["maquina"].value                            = detallePartidaJson.tipo_trabajo_detalle.nombreMaquina;
             document.forms["tipo_trabajo_detalle"].elements["tipo_placa"].value                         = detallePartidaJson.tipo_trabajo_detalle.descripcionPlaca;
+            document.forms["tipo_trabajo_detalle"].elements["tipo_complejidad"].value                   = detallePartidaJson.tipo_trabajo_detalle.descripcionComplejidad;
             
             document.getElementById("div_tabla_lista_pliegos").innerHTML                                = detallePartidaJson.lista_pliegos;
             

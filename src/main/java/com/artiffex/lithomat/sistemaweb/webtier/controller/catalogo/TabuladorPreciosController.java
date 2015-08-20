@@ -58,13 +58,15 @@ public class TabuladorPreciosController {
 	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
 	public String altaTabuladorPrecios(
-			@RequestParam(value = "id_maquina", 		required = false) Integer idMaquina,
-			@RequestParam(value = "nombre_insumo", 		required = false) String nombreInsumo,
-			@RequestParam(value = "descripcion", 		required = false) String descripcion,
-			@RequestParam(value = "inicio_tabulador", 	required = false) Integer inicioTabulador,
-			@RequestParam(value = "fin_tabulador", 		required = false) Integer finTabulador,
-			@RequestParam(value = "precio", 			required = false) float precio,
-			@RequestParam(value = "id_tipo_precio", 	required = false) Integer idTipoPrecio,
+			@RequestParam(value = "id_maquina", 					required = false) Integer idMaquina,
+			@RequestParam(value = "nombre_insumo", 					required = false) String nombreInsumo,
+			@RequestParam(value = "descripcion", 					required = false) String descripcion,
+			@RequestParam(value = "inicio_tabulador", 				required = false) Integer inicioTabulador,
+			@RequestParam(value = "fin_tabulador", 					required = false) Integer finTabulador,
+			@RequestParam(value = "precio_complejidad_sencilla",	required = false) float precioComplejidadSencilla,
+			@RequestParam(value = "precio_complejidad_regular",		required = false) float precioComplejidadRegular,
+			@RequestParam(value = "precio_complejidad_dificil",		required = false) float precioComplejidadDificil,
+			@RequestParam(value = "id_tipo_precio", 				required = false) Integer idTipoPrecio,
 			Model model
 		) throws IOException {
 		log.info("/alta_tabulador_precios");
@@ -77,7 +79,9 @@ public class TabuladorPreciosController {
 		tabuladorPrecios.setDescripcion(descripcion);
 		tabuladorPrecios.setInicioTabulador(inicioTabulador);
 		tabuladorPrecios.setFinTabulador(finTabulador);
-		tabuladorPrecios.setPrecio(precio);
+		tabuladorPrecios.setPrecioComplejidadSencilla(precioComplejidadSencilla);
+		tabuladorPrecios.setPrecioComplejidadRegular(precioComplejidadRegular);
+		tabuladorPrecios.setPrecioComplejidadDificil(precioComplejidadDificil);
 			TipoPrecio tipoPrecio = new TipoPrecio();
 			tipoPrecio.setIdTipoPrecio(idTipoPrecio);
 		tabuladorPrecios.setTipoPrecio(tipoPrecio);
@@ -105,14 +109,16 @@ public class TabuladorPreciosController {
 	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
 	public String modificaTabuladorPrecios(
-			@RequestParam(value = "id_tabulador_precios", 	required = false) Integer idTabuladorPrecios,
-			@RequestParam(value = "id_maquina", 			required = false) Integer idMaquina,
-			@RequestParam(value = "nombre_insumo", 			required = false) String nombreInsumo,
-			@RequestParam(value = "descripcion", 			required = false) String descripcion,
-			@RequestParam(value = "inicio_tabulador", 		required = false) Integer inicioTabulador,
-			@RequestParam(value = "fin_tabulador", 			required = false) Integer finTabulador,
-			@RequestParam(value = "precio", 				required = false) float precio,
-			@RequestParam(value = "id_tipo_precio", 		required = false) Integer idTipoPrecio,
+			@RequestParam(value = "id_tabulador_precios", 			required = false) Integer idTabuladorPrecios,
+			@RequestParam(value = "id_maquina", 					required = false) Integer idMaquina,
+			@RequestParam(value = "nombre_insumo", 					required = false) String nombreInsumo,
+			@RequestParam(value = "descripcion", 					required = false) String descripcion,
+			@RequestParam(value = "inicio_tabulador", 				required = false) Integer inicioTabulador,
+			@RequestParam(value = "fin_tabulador", 					required = false) Integer finTabulador,
+			@RequestParam(value = "precio_complejidad_sencilla",	required = false) float precioComplejidadSencilla,
+			@RequestParam(value = "precio_complejidad_regular",		required = false) float precioComplejidadRegular,
+			@RequestParam(value = "precio_complejidad_dificil",		required = false) float precioComplejidadDificil,
+			@RequestParam(value = "id_tipo_precio", 				required = false) Integer idTipoPrecio,
 			Model model
 		) throws IOException {
 		log.info("/modifica_tabulador_precios");
@@ -123,7 +129,9 @@ public class TabuladorPreciosController {
 		tabuladorPrecios.setDescripcion(descripcion);
 		tabuladorPrecios.setInicioTabulador(inicioTabulador);
 		tabuladorPrecios.setFinTabulador(finTabulador);
-		tabuladorPrecios.setPrecio(precio);
+		tabuladorPrecios.setPrecioComplejidadSencilla(precioComplejidadSencilla);
+		tabuladorPrecios.setPrecioComplejidadRegular(precioComplejidadRegular);
+		tabuladorPrecios.setPrecioComplejidadDificil(precioComplejidadDificil);
 		tabuladorPrecios.getTipoPrecio().setIdTipoPrecio(idTipoPrecio);
 		
 		tabuladorPreciosService.modificaTabuladorPrecios(tabuladorPrecios);

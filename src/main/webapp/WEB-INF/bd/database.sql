@@ -385,8 +385,8 @@ CREATE TABLE IF NOT EXISTS `artiffex_lithomat`.`tipo_papel_extendido` (
   `nombre` VARCHAR(45) NULL,
   `gramaje` INT NULL,
   `kilogramos` FLOAT NULL,
-  `ancho` DECIMAL(5,2) NULL,
   `alto` DECIMAL(5,2) NULL,
+  `ancho` DECIMAL(5,2) NULL,
   `descripcion` VARCHAR(80) NULL,
   `precio` FLOAT NULL,
   `id_tipo_precio` INT UNSIGNED NOT NULL,
@@ -482,6 +482,18 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `artiffex_lithomat`.`tipo_complejidad`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `artiffex_lithomat`.`tipo_complejidad` (
+  `id_tipo_complejidad` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NULL,
+  `descripcion` VARCHAR(80) NULL,
+  `activo` TINYINT(1) NULL,
+  PRIMARY KEY (`id_tipo_complejidad`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `artiffex_lithomat`.`tipo_trabajo_detalle`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `artiffex_lithomat`.`tipo_trabajo_detalle` (
@@ -511,6 +523,7 @@ CREATE TABLE IF NOT EXISTS `artiffex_lithomat`.`tipo_trabajo_detalle` (
   `vuelta_id_tipo_barniz` INT NULL,
   `id_maquina` INT UNSIGNED NOT NULL,
   `id_tipo_placa` INT UNSIGNED NOT NULL,
+  `id_tipo_complejidad` INT UNSIGNED NOT NULL,
   `observaciones` VARCHAR(250) NULL,
   `fecha_generacion` TIMESTAMP NULL,
   `activo` TINYINT(1) NULL,
@@ -522,6 +535,7 @@ CREATE TABLE IF NOT EXISTS `artiffex_lithomat`.`tipo_trabajo_detalle` (
   INDEX `fk_tipo_trabajo_detalle_tipo_barniz1_idx` (`frente_id_tipo_barniz` ASC),
   INDEX `fk_tipo_trabajo_detalle_tipo_placa1_idx` (`id_tipo_placa` ASC),
   INDEX `fk_tipo_trabajo_detalle_maquina1_idx` (`id_maquina` ASC),
+  INDEX `fk_tipo_trabajo_detalle_tipo_complejidad1_idx` (`id_tipo_complejidad` ASC),
   CONSTRAINT `fk_tipo_trabajo_detalle_partida1`
     FOREIGN KEY (`id_partida`)
     REFERENCES `artiffex_lithomat`.`partida` (`id_partida`)
@@ -555,6 +569,11 @@ CREATE TABLE IF NOT EXISTS `artiffex_lithomat`.`tipo_trabajo_detalle` (
   CONSTRAINT `fk_tipo_trabajo_detalle_maquina1`
     FOREIGN KEY (`id_maquina`)
     REFERENCES `artiffex_lithomat`.`maquina` (`id_maquina`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tipo_trabajo_detalle_tipo_complejidad1`
+    FOREIGN KEY (`id_tipo_complejidad`)
+    REFERENCES `artiffex_lithomat`.`tipo_complejidad` (`id_tipo_complejidad`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -600,7 +619,9 @@ CREATE TABLE IF NOT EXISTS `artiffex_lithomat`.`tabulador_precios` (
   `descripcion` VARCHAR(250) NULL,
   `inicio_tabulador` INT NULL,
   `fin_tabulador` INT NULL,
-  `precio` FLOAT NULL,
+  `precio_complejidad_sencilla` FLOAT NULL,
+  `precio_complejidad_regular` FLOAT NULL,
+  `precio_complejidad_dificil` FLOAT NULL,
   `id_tipo_precio` INT UNSIGNED NOT NULL,
   `activo` TINYINT(1) NULL,
   `filler_varchar_1` VARCHAR(250) NULL,
@@ -1437,16 +1458,16 @@ CREATE TABLE IF NOT EXISTS `artiffex_lithomat`.`perfil_x_usuario` (
   `id_perfil` INT UNSIGNED NOT NULL,
   `activo` TINYINT(1) NULL,
   PRIMARY KEY (`id_perfil_x_usuario`),
-  INDEX `fk_perfil_x_usuario_usuario1_idx` (`id_usuario` ASC),
   INDEX `fk_perfil_x_usuario_perfil1_idx` (`id_perfil` ASC),
-  CONSTRAINT `fk_perfil_x_usuario_usuario1`
-    FOREIGN KEY (`id_usuario`)
-    REFERENCES `artiffex_lithomat`.`usuario` (`id_usuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  INDEX `fk_perfil_x_usuario_usuario1_idx` (`id_usuario` ASC),
   CONSTRAINT `fk_perfil_x_usuario_perfil1`
     FOREIGN KEY (`id_perfil`)
     REFERENCES `artiffex_lithomat`.`perfil` (`id_perfil`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_perfil_x_usuario_usuario1`
+    FOREIGN KEY (`id_usuario`)
+    REFERENCES `artiffex_lithomat`.`usuario` (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

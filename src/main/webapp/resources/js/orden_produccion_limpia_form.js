@@ -186,6 +186,7 @@ function limpiaCamposFormTipoTrabajoDetalle() {
     document.forms["tipo_trabajo_detalle"].elements["vuelta_descripcion_tinta_especial"].value          = "";
     document.forms["tipo_trabajo_detalle"].elements["select_maquina"].selectedIndex                     = 0;
     document.forms["tipo_trabajo_detalle"].elements["select_tipo_placa"].selectedIndex                  = 0;
+    document.forms["tipo_trabajo_detalle"].elements["select_tipo_complejidad"].selectedIndex            = 0;
     document.forms["tipo_trabajo_detalle"].elements["descripcion_partida_detalle"].focus();
 } // limpiaCamposFormTipoTrabajoDetalle()
 
@@ -206,6 +207,7 @@ function limpiaFormTipoTrabajoDetalle() {
     document.forms["tipo_trabajo_detalle"].elements["vuelta_id_tipo_barniz"].value              = "";
     document.forms["tipo_trabajo_detalle"].elements["id_maquina"].value                         = "";
     document.forms["tipo_trabajo_detalle"].elements["id_tipo_placa"].value                      = "";
+    document.forms["tipo_trabajo_detalle"].elements["id_tipo_complejidad"].value                = "";
     limpiaCamposFormTipoTrabajoDetalle();
     activaCamposTipoTrabajoDetalle();
     activaBtnTipoTrabajoDetalle();
@@ -236,6 +238,7 @@ function activaCamposTipoTrabajoDetalle() {
     document.forms["tipo_trabajo_detalle"].elements["vuelta_descripcion_tinta_especial"].readOnly   = false;
     document.forms["tipo_trabajo_detalle"].elements["select_maquina"].disabled                      = false;
     document.forms["tipo_trabajo_detalle"].elements["select_tipo_placa"].disabled                   = false;
+    document.forms["tipo_trabajo_detalle"].elements["select_tipo_complejidad"].disabled             = false;
 } // activaCamposTipoTrabajoDetalle()
 
 
@@ -263,6 +266,7 @@ function desactivaCamposTipoTrabajoDetalle() {
     document.forms["tipo_trabajo_detalle"].elements["vuelta_descripcion_tinta_especial"].readOnly   = true;
     document.forms["tipo_trabajo_detalle"].elements["select_maquina"].disabled                      = true;
     document.forms["tipo_trabajo_detalle"].elements["select_tipo_placa"].disabled                   = true;
+    document.forms["tipo_trabajo_detalle"].elements["select_tipo_complejidad"].disabled             = true;
 } // desactivaCamposTipoTrabajoDetalle()
 
 

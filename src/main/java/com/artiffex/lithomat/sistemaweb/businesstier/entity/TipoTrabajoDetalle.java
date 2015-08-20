@@ -35,11 +35,13 @@ public class TipoTrabajoDetalle implements Serializable {
 	private TipoBarniz vueltaTipoBarniz;
 	private Maquina maquina;
 	private TipoPlaca tipoPlaca;
+	private TipoComplejidad tipoComplejidad;
 	private String observaciones;
 	private Timestamp fechaGeneracion;
 	private boolean activo;
 	// esta clase esta relacionada [uno a muchos] con las tablas:
 	private Set<Pliego> pliego = new HashSet<Pliego>();
+	
 	
 	public int getIdTipoTrabajoDetalle() {
 		return idTipoTrabajoDetalle;
@@ -199,6 +201,12 @@ public class TipoTrabajoDetalle implements Serializable {
 	}
 	public void setTipoPlaca(TipoPlaca tipoPlaca) {
 		this.tipoPlaca = tipoPlaca;
+	}
+	public TipoComplejidad getTipoComplejidad() {
+		return tipoComplejidad;
+	}
+	public void setTipoComplejidad(TipoComplejidad tipoComplejidad) {
+		this.tipoComplejidad = tipoComplejidad;
 	}
 	public String getObservaciones() {
 		return observaciones;

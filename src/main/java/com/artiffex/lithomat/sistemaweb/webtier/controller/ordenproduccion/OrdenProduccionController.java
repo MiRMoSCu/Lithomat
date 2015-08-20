@@ -38,6 +38,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.ProcesoTra
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.ResponsableInsumoService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TamanioPublicacionService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoBarnizService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoComplejidadService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoComprobanteFiscalService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoFormaTrabajoService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoPapelExtendidoService;
@@ -66,6 +67,8 @@ public class OrdenProduccionController {
 	private TipoBarnizService tipoBarnizService;
 	@Resource
 	private MaquinaService maquinaService;
+	@Resource
+	private TipoComplejidadService tipoComplejidadService;
 	@Resource
 	private ProcesoDisenioService procesoDisenioService;
 	@Resource
@@ -118,6 +121,10 @@ public class OrdenProduccionController {
 		List<ComboSelect> listaMaquina = maquinaService.listaComboSelect();
 		model.addAttribute("listaMaquina", listaMaquina);
 		listaMaquina = null;
+		
+		List<ComboSelect> listaTipoComplejidad = tipoComplejidadService.listaComboSelect();
+		model.addAttribute("listaTipoComplejidad", listaTipoComplejidad);
+		listaTipoComplejidad = null;
 		
 		Gson gson = new Gson();
 

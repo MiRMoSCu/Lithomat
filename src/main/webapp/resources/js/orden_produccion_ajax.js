@@ -331,6 +331,7 @@ function ajaxAgregaTipoTrabajoDetalle() {
     document.forms["tipo_trabajo_detalle"].elements["vuelta_id_tipo_barniz"].value              = document.forms["tipo_trabajo_detalle"].elements["select_vuelta_tipo_barniz"].value;
     document.forms["tipo_trabajo_detalle"].elements["id_maquina"].value                         = document.forms["tipo_trabajo_detalle"].elements["select_maquina"].value;
     document.forms["tipo_trabajo_detalle"].elements["id_tipo_placa"].value                      = document.forms["tipo_trabajo_detalle"].elements["select_tipo_placa"].value;
+    document.forms["tipo_trabajo_detalle"].elements["id_tipo_complejidad"].value                = document.forms["tipo_trabajo_detalle"].elements["select_tipo_complejidad"].value;
     
     var id_tipo_trabajo                     = document.forms["partida"].elements["id_tipo_trabajo"].value;
     var descripcion_partida_detalle         = document.forms["tipo_trabajo_detalle"].elements["descripcion_partida_detalle"].value;

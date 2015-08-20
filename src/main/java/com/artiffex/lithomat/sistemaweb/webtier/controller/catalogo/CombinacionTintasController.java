@@ -75,7 +75,6 @@ public class CombinacionTintasController {
 		log.info("/modifica_combinacion_tintas");
 
 		CombinacionTintas ct = combinacionTintasService.buscaCombinacionTintas(idCombinacionTintas);
-		ct.setIdCombinacionTintas(idCombinacionTintas);
 		ct.setNumTintas(numTintas);
 		ct.setDescripcion(descripcion);
 

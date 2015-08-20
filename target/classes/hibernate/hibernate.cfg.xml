@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC 
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+	
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.max_allowed_packet">50M</property>
+<!-- LOCAL DATABASE -->
+		<property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/artiffex_lithomat</property>
+		<property name="hibernate.connection.username">root</property>
+<!-- PRODUCTION DATABASE  -->
+<!-- 
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/interjet_promociones</property>
+		<property name="hibernate.connection.username">interjet_userdb</property>
+		<property name="hibernate.connection.password">1tj-us3r</property>
+ -->
+		<property name="hibernate.autoReconnect">true</property>
+		<property name="hibernate.autoReconnectForPools">true</property>
+		<property name="hibernate.transaction.auto_close_session">true</property>
+		<property name="use_outer_join">true</property>
+		<property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+		<property name="hibernate.show_sql">false</property>
+		<property name="current_session_context_class">thread</property>
+		<property name="hibernate.enable_lazy_load_no_trans">true</property>
+		<property name="hibernate.query.factory_class">org.hibernate.hql.internal.classic.ClassicQueryTranslatorFactory</property>
+		<property name="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+<!--************** JDBC connection pool C3PO *****************-->
+		<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+		<property name="hibernate.c3p0.min_size">10</property>
+		<property name="hibernate.c3p0.max_size">50</property>
+		<property name="hibernate.c3p0.initialPoolSize">5</property>
+		<property name="hibernate.c3p0.acquire_increment">1</property>
+		<property name="hibernate.c3p0.timeout">600</property>
+		<property name="hibernate.c3p0.idle_test_period">180</property>
+<!-- ************ END JDBC connection pool C3PO ****************-->
+<!-- La ruta es absoluta -->
+		<mapping resource="hibernate/hn_acabado.hbm.xml"/>
+		<mapping resource="hibernate/hn_acabadoDetalle.hbm.xml"/>
+		<mapping resource="hibernate/hn_calendarioOrdenProduccion.hbm.xml"/>
+		<mapping resource="hibernate/hn_calificacionOrdenProduccion.hbm.xml"/>
+		<mapping resource="hibernate/hn_calificacionProcesosPartida.hbm.xml"/>
+		<mapping resource="hibernate/hn_calificacionTrabajoDetalle.hbm.xml"/>
+		<mapping resource="hibernate/hn_cliente.hbm.xml"/>
+		<mapping resource="hibernate/hn_cobranza.hbm.xml"/>
+		<mapping resource="hibernate/hn_combinacionTintas.hbm.xml"/>
+		<mapping resource="hibernate/hn_costosExtras.hbm.xml"/>
+		<mapping resource="hibernate/hn_costosExtrasDetalle.hbm.xml"/>
+		<mapping resource="hibernate/hn_disenio.hbm.xml"/>
+		<mapping resource="hibernate/hn_disenioDetalle.hbm.xml"/>
+		<mapping resource="hibernate/hn_estatusOrden.hbm.xml"/>
+		<mapping resource="hibernate/hn_fechaPrensistaMaquina.hbm.xml"/>
+		<mapping resource="hibernate/hn_historialEstatus.hbm.xml"/>
+		<mapping resource="hibernate/hn_maquina.hbm.xml"/>
+		<mapping resource="hibernate/hn_materialAyuda.hbm.xml"/>
+		<mapping resource="hibernate/hn_materialAyudaXPartida.hbm.xml"/>
+		<mapping resource="hibernate/hn_offset.hbm.xml"/>
+		<mapping resource="hibernate/hn_offsetDetalle.hbm.xml"/>
+		<mapping resource="hibernate/hn_ordenProduccion.hbm.xml"/>
+		<mapping resource="hibernate/hn_papelSobrante.hbm.xml"/>
+		<mapping resource="hibernate/hn_parametrosConfig.hbm.xml"/>
+		<mapping resource="hibernate/hn_partida.hbm.xml"/>
+		<mapping resource="hibernate/hn_perfil.hbm.xml"/>
+		<mapping resource="hibernate/hn_perfilXUsuario.hbm.xml"/>
+		<mapping resource="hibernate/hn_pliego.hbm.xml"/>
+		<mapping resource="hibernate/hn_prensista.hbm.xml"/>
+		<mapping resource="hibernate/hn_preprensa.hbm.xml"/>
+		<mapping resource="hibernate/hn_preprensaDetalle.hbm.xml"/>
+		<mapping resource="hibernate/hn_procesoDisenio.hbm.xml"/>
+		<mapping resource="hibernate/hn_procesoExterno.hbm.xml"/>
+		<mapping resource="hibernate/hn_procesoPreprensa.hbm.xml"/>
+		<mapping resource="hibernate/hn_procesoTransporte.hbm.xml"/>
+		<mapping resource="hibernate/hn_proveedorExterno.hbm.xml"/>
+		<mapping resource="hibernate/hn_proveedorPapel.hbm.xml"/>
+		<mapping resource="hibernate/hn_responsableInsumo.hbm.xml"/>
+		<mapping resource="hibernate/hn_tabuladorPrecios.hbm.xml"/>
+		<mapping resource="hibernate/hn_tamanioPublicacion.hbm.xml"/>
+		<mapping resource="hibernate/hn_tintaEspecial.hbm.xml"/>
+		<mapping resource="hibernate/hn_tipoBarniz.hbm.xml"/>
+		<mapping resource="hibernate/hn_tipoCliente.hbm.xml"/>
+		<mapping resource="hibernate/hn_tipoComplejidad.hbm.xml"/>
+		<mapping resource="hibernate/hn_tipoComprobanteFiscal.hbm.xml"/>
+		<mapping resource="hibernate/hn_tipoFormaTrabajo.hbm.xml"/>
+		<mapping resource="hibernate/hn_tipoPapelExtendido.hbm.xml"/>
+		<mapping resource="hibernate/hn_tipoPlaca.hbm.xml"/>
+		<mapping resource="hibernate/hn_tipoPrecio.hbm.xml"/>
+		<mapping resource="hibernate/hn_tipoTrabajo.hbm.xml"/>
+		<mapping resource="hibernate/hn_tipoTrabajoDetalle.hbm.xml"/>
+		<mapping resource="hibernate/hn_tipoVuelta.hbm.xml"/>
+		<mapping resource="hibernate/hn_transporte.hbm.xml"/>
+		<mapping resource="hibernate/hn_transporteDetalle.hbm.xml"/>
+		<mapping resource="hibernate/hn_turnoLaboral.hbm.xml"/>
+		<mapping resource="hibernate/hn_usuario.hbm.xml"/>
+	</session-factory>
+</hibernate-configuration>
