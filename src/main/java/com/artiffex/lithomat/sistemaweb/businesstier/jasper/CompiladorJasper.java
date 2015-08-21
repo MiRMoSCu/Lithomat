@@ -48,7 +48,7 @@ public class CompiladorJasper {
             // ---------
             
             System.out.println("Compiling report...");
-            JasperCompileManager.compileReportToFile( directorio_origen + "Remision.jrxml", directorio_destino + "Remision.jasper");
+            JasperCompileManager.compileReportToFile( directorio_origen + "Remision_OK.jrxml", directorio_destino + "Remision_OK.jasper");
             System.out.println("Done!");
             
             

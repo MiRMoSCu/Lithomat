@@ -205,31 +205,42 @@ function ajaxSubPartida( id_tipo_trabajo_detalle ) {
         	// papel
         	if( response.clienteProporcionaPapel )
         		document.resumen_tipo_trabajo_detalle.papel_coste_total.style.textDecoration = "line-through";
-        	else 
+        	else {
+        		document.resumen_tipo_trabajo_detalle.papel_coste_total.style.textDecoration = "none";
         		sumatoria += response.papelCosteTotal;
+        	}
         	// tinta
         	if( response.clienteProporcionaTinta )
         		document.resumen_tipo_trabajo_detalle.tinta_coste_total.style.textDecoration = "line-through";
-        	else
+        	else {
+        		document.resumen_tipo_trabajo_detalle.tinta_coste_total.style.textDecoration = "none";
         		sumatoria += response.tintaCosteTotal;
+        	}
         	// tinta especial
         	if( response.clienteProporcionaTintaEspecial )
         		document.resumen_tipo_trabajo_detalle.tinta_especial_coste_total.style.textDecoration = "line-through";
-        	else
+        	else {
+        		document.resumen_tipo_trabajo_detalle.tinta_especial_coste_total.style.textDecoration = "none";
         		sumatoria += response.tintaEspecialCosteTotal;
+        	}
         	// barniz
         	if( response.clienteProporcionaBarniz ) {
         		document.resumen_tipo_trabajo_detalle.frente_barniz_coste_total.style.textDecoration = "line-through";
         		document.resumen_tipo_trabajo_detalle.vuelta_barniz_coste_total.style.textDecoration = "line-through";
         	} else {
+        		document.resumen_tipo_trabajo_detalle.frente_barniz_coste_total.style.textDecoration = "none";
+        		document.resumen_tipo_trabajo_detalle.vuelta_barniz_coste_total.style.textDecoration = "none";
         		sumatoria += response.frenteBarnizCosteTotal;
         		sumatoria += response.vueltaBarnizCosteTotal;
         	}
         	// placas
         	if( response.clienteProporcionaPlacas )
         		document.resumen_tipo_trabajo_detalle.placas_coste_total.style.textDecoration = "line-through";
-        	else
+        	else {
+        		document.resumen_tipo_trabajo_detalle.placas_coste_total.style.textDecoration = "none";
         		sumatoria += response.placasCosteTotal;
+        	}
+        		
         		
         	document.resumen_tipo_trabajo_detalle.tipo_trabajo_detalle_coste_total.value 		= "$ " + (sumatoria).formatMoney(2);
         	delete sumatoria;

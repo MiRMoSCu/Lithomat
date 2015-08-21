@@ -59,7 +59,7 @@ public class RemisionController {
 		try {
 			OutputStream outputStream 				= response.getOutputStream();
 			
-			InputStream reportStream 				= context.getResourceAsStream(DIRECTORIO_ORIGEN + "Remision.jasper");			
+			InputStream reportStream 				= context.getResourceAsStream(DIRECTORIO_ORIGEN + "Remision_OK.jasper");			
 			JRBeanCollectionDataSource dataSource 	= new JRBeanCollectionDataSource(listaCalificacionTrabajoDetalle);
 			JasperPrint jasperPrint 				= JasperFillManager.fillReport( reportStream, null, dataSource );
 			
