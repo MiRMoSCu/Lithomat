@@ -26,6 +26,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PliegoServ
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PreprensaDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoTrabajoDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TransporteDetalleService;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.Precio;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades._CalificacionPartida;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades._CalificacionProcesosPartida;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades._CalificacionTrabajoDetalle;
@@ -64,41 +65,34 @@ public class CalificacionController {
 		) {
 		log.info("/calificacion_produccion");
 		
-		
-		
-		
-		
 		// I M P O R T A N T E
 		// VERIFICAR QUE NO ES UN REFRESH DE LA PAGINA y POR TANTO AGREGARIA OTRO REGISTRO A BD Y ROMPERIA INTEGRIDAD
-		
-		
-		
-		
-		
 		// activa estatus orden de produccion para que sea visible en el visualizador y se puedan realizar los calculos de calificacion
 		// estatus activo tabla orden produccion != estatus tabla historial_estatus de la orden de produccion
 		OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccion(idOrdenProduccion);
-		ordenProduccion.setActivo(true);
-		ordenProduccionService.modificaOrdenProduccion(ordenProduccion);
-		model.addAttribute("ordenProduccion", ordenProduccion);
-		
-		// realiza calculo de calificacion
-		calificacionService.creaCalificacion(idOrdenProduccion);
-		
-		// obtiene informacion para enviarla en el jsp
-		Cliente cliente = clienteService.buscaCliente(ordenProduccion.getCliente().getIdCliente());
-		model.addAttribute("cliente",cliente);
-		
-		CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionService.buscaCalificacionOrdenProduccion(idOrdenProduccion);
-		model.addAttribute("calificacionOrdenProduccion",calificacionOrdenProduccion);
-		
-		String jsonArbol = ordenProduccionService.generaJsonArbolOrdenProduccion(idOrdenProduccion);
-		model.addAttribute("jsonArbol", jsonArbol);
-		
-		ordenProduccion 			= null;
-		cliente						= null;
-		calificacionOrdenProduccion	= null;
-		jsonArbol					= null;
+		if( !ordenProduccion.isActivo() ) {
+			ordenProduccion.setActivo(true);
+			ordenProduccionService.modificaOrdenProduccion(ordenProduccion);
+			model.addAttribute("ordenProduccion", ordenProduccion);
+			
+			// realiza calculo de calificacion
+			calificacionService.creaCalificacion(idOrdenProduccion);
+			
+			// obtiene informacion para enviarla en el jsp
+			Cliente cliente = clienteService.buscaCliente(ordenProduccion.getCliente().getIdCliente());
+			model.addAttribute("cliente",cliente);
+			
+			CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionService.buscaCalificacionOrdenProduccion(idOrdenProduccion);
+			model.addAttribute("calificacionOrdenProduccion",calificacionOrdenProduccion);
+			
+			String jsonArbol = ordenProduccionService.generaJsonArbolOrdenProduccion(idOrdenProduccion);
+			model.addAttribute("jsonArbol", jsonArbol);
+			
+			ordenProduccion 			= null;
+			cliente						= null;
+			calificacionOrdenProduccion	= null;
+			jsonArbol					= null;
+		}
 		
 		return "produccion/calificacion";
 	} // calificacionOrdenProduccion
@@ -108,10 +102,25 @@ public class CalificacionController {
 	@RequestMapping(value = "/resumen_partida", method = RequestMethod.POST)
 	@ResponseBody
 	public _CalificacionPartida resumenCalificacionPartida(
+			@RequestParam(value = "nut", required = false) String nut,
 			@RequestParam(value = "id_partida", required = false) Integer idPartida
 		) {
 		log.info("/resumen_calificacion_partida");
-		return calificacionService.buscaCalificacionPartida(idPartida);
+		
+		OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
+		CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionService.buscaCalificacionOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
+		float porcentajeCliente = Precio.conversionRespectoTipoPrecio(
+				calificacionOrdenProduccion.getTipoClientePrecio(),
+				calificacionOrdenProduccion.getTipoClienteIdTipoPrecio()
+			);
+		calificacionOrdenProduccion	= null;
+		ordenProduccion 			= null;
+		
+		_CalificacionPartida calificacionPartida = calificacionService.buscaCalificacionPartida(idPartida);
+		float costeTotal = calificacionPartida.getCosteTotal();
+		calificacionPartida.setCosteTotal( costeTotal * (1 + porcentajeCliente) );
+		
+		return calificacionPartida;
 	} // resumenCalificacionPartida
 	
 	
@@ -119,36 +128,43 @@ public class CalificacionController {
 	@RequestMapping(value = "/resumen_trabajo_detalle", method = RequestMethod.POST)
 	@ResponseBody
 	public _CalificacionTrabajoDetalle resumenCalificacionTrabajoDetalle(
+			@RequestParam(value = "nut", required = false) String nut,
 			@RequestParam(value = "id_tipo_trabajo_detalle", required = false) Integer idTipoTrabajoDetalle
 		) {
 		log.info("/resumen_calificacion_trabajo_detalle");
 		
+		OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
+		CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionService.buscaCalificacionOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
+		float porcentajeCliente = Precio.conversionRespectoTipoPrecio(
+				calificacionOrdenProduccion.getTipoClientePrecio(),
+				calificacionOrdenProduccion.getTipoClienteIdTipoPrecio()
+			);
+		calificacionOrdenProduccion	= null;
+		ordenProduccion 			= null;
+		
 		_CalificacionTrabajoDetalle ctd = new _CalificacionTrabajoDetalle();
 		
 		CalificacionTrabajoDetalle calificacionTrabajoDetalle = calificacionService.buscaCalificacionTrabajoDetalle(idTipoTrabajoDetalle);
-		ctd.setIdCalificacionTrabajoDetalle(calificacionTrabajoDetalle.getIdCalificacionTrabajoDetalle());
-		ctd.setCosteTotalTipoTrabajoDetalle(calificacionTrabajoDetalle.getCosteTotalTipoTrabajoDetalle());
-		ctd.setCantidadOriginal(calificacionTrabajoDetalle.getCantidadOriginal());
 		ctd.setCantidadRedondeada(calificacionTrabajoDetalle.getCantidadRedondeada());
-		ctd.setPrecioUnitarioTabulador(calificacionTrabajoDetalle.getPrecioUnitarioTabulador());
 		ctd.setPapelCantidadTotal(calificacionTrabajoDetalle.getPapelCantidadTotal());
-		ctd.setPapelPrecioUnitario(calificacionTrabajoDetalle.getPapelPrecioUnitario());
-		ctd.setPapelCosteTotal(calificacionTrabajoDetalle.getPapelCosteTotal());
+		ctd.setPapelPrecioUnitario(calificacionTrabajoDetalle.getPapelPrecioUnitario() * (1 + porcentajeCliente));
+		ctd.setPapelCosteTotal(calificacionTrabajoDetalle.getPapelCosteTotal() * (1 + porcentajeCliente));
 		ctd.setPlacasNumPlacas(calificacionTrabajoDetalle.getPlacasNumPlacas());
-		ctd.setPlacasPrecioUnitario(calificacionTrabajoDetalle.getPlacasPrecioUnitario());
-		ctd.setPlacasCosteTotal(calificacionTrabajoDetalle.getPlacasCosteTotal());
+		ctd.setPlacasPrecioUnitario(calificacionTrabajoDetalle.getPlacasPrecioUnitario() * (1 + porcentajeCliente));
+		ctd.setPlacasCosteTotal(calificacionTrabajoDetalle.getPlacasCosteTotal() * (1 + porcentajeCliente));
 		ctd.setTintaNumEntMaq(calificacionTrabajoDetalle.getTintaNumEntMaq());
-		ctd.setTintaPrecioUnitario(calificacionTrabajoDetalle.getTintaPrecioUnitario());
-		ctd.setTintaCosteTotal(calificacionTrabajoDetalle.getTintaCosteTotal());
+		ctd.setTintaPrecioUnitario(calificacionTrabajoDetalle.getTintaPrecioUnitario() * (1 + porcentajeCliente));
+		ctd.setTintaCosteTotal(calificacionTrabajoDetalle.getTintaCosteTotal() * (1 + porcentajeCliente));
 		ctd.setTintaEspecialNumEntMaq(calificacionTrabajoDetalle.getTintaEspecialNumEntMaq());
-		ctd.setTintaEspecialPrecioUnitario(calificacionTrabajoDetalle.getTintaEspecialPrecioUnitario());
-		ctd.setTintaEspecialCosteTotal(calificacionTrabajoDetalle.getTintaEspecialCosteTotal());
+		ctd.setTintaEspecialPrecioUnitario(calificacionTrabajoDetalle.getTintaEspecialPrecioUnitario() * (1 + porcentajeCliente));
+		ctd.setTintaEspecialCosteTotal(calificacionTrabajoDetalle.getTintaEspecialCosteTotal() * (1 + porcentajeCliente));
 		ctd.setFrenteBarnizNumEntMaq(calificacionTrabajoDetalle.getFrenteBarnizNumEntMaq());
-		ctd.setFrenteBarnizPrecioUnitario(calificacionTrabajoDetalle.getFrenteBarnizPrecioUnitario());
-		ctd.setFrenteBarnizCosteTotal(calificacionTrabajoDetalle.getFrenteBarnizCosteTotal());
+		ctd.setFrenteBarnizPrecioUnitario(calificacionTrabajoDetalle.getFrenteBarnizPrecioUnitario() * (1 + porcentajeCliente));
+		ctd.setFrenteBarnizCosteTotal(calificacionTrabajoDetalle.getFrenteBarnizCosteTotal() * (1 + porcentajeCliente));
 		ctd.setVueltaBarnizNumEntMaq(calificacionTrabajoDetalle.getVueltaBarnizNumEntMaq());
-		ctd.setVueltaBarnizPrecioUnitario(calificacionTrabajoDetalle.getVueltaBarnizPrecioUnitario());
-		ctd.setVueltaBarnizCosteTotal(calificacionTrabajoDetalle.getVueltaBarnizCosteTotal());
+		ctd.setVueltaBarnizPrecioUnitario(calificacionTrabajoDetalle.getVueltaBarnizPrecioUnitario() * (1 + porcentajeCliente));
+		ctd.setVueltaBarnizCosteTotal(calificacionTrabajoDetalle.getVueltaBarnizCosteTotal() * (1 + porcentajeCliente));
+		
 		calificacionTrabajoDetalle = null;
 		
 		TipoTrabajoDetalle tipoTrabajoDetalle = tipoTrabajoDetalleService.buscaTipoTrabajoDetalle(idTipoTrabajoDetalle);
@@ -197,7 +213,8 @@ public class CalificacionController {
 		ctd.setClienteProporcionaTintaEspecial(tipoTrabajoDetalle.isClienteProporcionaTintaEspecial());
 		ctd.setClienteProporcionaBarniz(tipoTrabajoDetalle.isClienteProporcionaBarniz());
 		ctd.setClienteProporcionaPlacas(tipoTrabajoDetalle.isClienteProporcionaPlacas());
-		tipoTrabajoDetalle = null;
+		
+		tipoTrabajoDetalle 			= null;
 		
 		return ctd;
 	} // buscaCalificacionTrabajoDetalle
@@ -207,29 +224,39 @@ public class CalificacionController {
 	@RequestMapping(value = "/resumen_procesos", method = RequestMethod.POST)
 	@ResponseBody
 	public _CalificacionProcesosPartida resumenCalificacionProcesosPartida(
+			@RequestParam(value = "nut", required = false) String nut,
 			@RequestParam(value = "id_partida", required = false) Integer idPartida
 		) {
 		log.info("/resumen_calificacion_procesos");
+		
+		OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
+		CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionService.buscaCalificacionOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
+		float porcentajeCliente = Precio.conversionRespectoTipoPrecio(
+				calificacionOrdenProduccion.getTipoClientePrecio(),
+				calificacionOrdenProduccion.getTipoClienteIdTipoPrecio()
+			);
+		calificacionOrdenProduccion	= null;
+		ordenProduccion 			= null;
 		
 		CalificacionProcesosPartida calificacionProcesosPartida = calificacionService.buscaCalificacionProcesos(idPartida);
 		
 		_CalificacionProcesosPartida cpp = new _CalificacionProcesosPartida();
 		cpp.setIdCalificacionProcesosPartida(calificacionProcesosPartida.getIdCalificacionProcesosPartida());
-		cpp.setCosteTotalProcesosPartida(calificacionProcesosPartida.getCosteTotalProcesosPartida());
-		cpp.setSubpartidasCosteTotal(calificacionProcesosPartida.getSubpartidasCosteTotal());
-		cpp.setDisenioCosteTotal(calificacionProcesosPartida.getDisenioCosteTotal());
-		cpp.setPreprensaCosteTotal(calificacionProcesosPartida.getPreprensaCosteTotal());
-		cpp.setTransporteCosteTotal(calificacionProcesosPartida.getTransporteCosteTotal());
-		cpp.setAcabadoCosteTotal(calificacionProcesosPartida.getAcabadoCosteTotal());
-		cpp.setOffsetCosteTotal(calificacionProcesosPartida.getOffsetCosteTotal());
-		cpp.setCostoExtraTotal(calificacionProcesosPartida.getCostoExtraTotal());
+		cpp.setCosteTotalProcesosPartida(calificacionProcesosPartida.getCosteTotalProcesosPartida() * (1 + porcentajeCliente));
+		cpp.setSubpartidasCosteTotal(calificacionProcesosPartida.getSubpartidasCosteTotal() * (1 + porcentajeCliente));
+		cpp.setDisenioCosteTotal(calificacionProcesosPartida.getDisenioCosteTotal() * (1 + porcentajeCliente));
+		cpp.setPreprensaCosteTotal(calificacionProcesosPartida.getPreprensaCosteTotal() * (1 + porcentajeCliente));
+		cpp.setTransporteCosteTotal(calificacionProcesosPartida.getTransporteCosteTotal() * (1 + porcentajeCliente));
+		cpp.setAcabadoCosteTotal(calificacionProcesosPartida.getAcabadoCosteTotal() * (1 + porcentajeCliente));
+		cpp.setOffsetCosteTotal(calificacionProcesosPartida.getOffsetCosteTotal() * (1 + porcentajeCliente));
+		cpp.setCostoExtraTotal(calificacionProcesosPartida.getCostoExtraTotal() * (1 + porcentajeCliente));
 		
 		calificacionProcesosPartida = null;
 		
-		cpp.setHtmlTablaProcesosDisenio( disenioDetalleService.listaHTMLProcesosYPrecio(idPartida) );
-		cpp.setHtmlTablaProcesosPreprensa( preprensaDetalleService.listaHTMLProcesosYPrecio(idPartida) );
-		cpp.setHtmlTablaProcesosTransporte( transporteDetalleService.listaHTMLProcesosYPrecio(idPartida) );
-		cpp.setHtmlTablaProcesosAcabado( acabadoDetalleService.listaHTMLProcesosYPrecio(idPartida) );
+		cpp.setHtmlTablaProcesosDisenio( disenioDetalleService.listaHTMLProcesosYPrecioConPorcentajeCliente(idPartida, porcentajeCliente) );
+		cpp.setHtmlTablaProcesosPreprensa( preprensaDetalleService.listaHTMLProcesosYPrecioConPorcentajeCliente(idPartida, porcentajeCliente) );
+		cpp.setHtmlTablaProcesosTransporte( transporteDetalleService.listaHTMLProcesosYPrecioConPorcentajeCliente(idPartida, porcentajeCliente) );
+		cpp.setHtmlTablaProcesosAcabado( acabadoDetalleService.listaHTMLProcesosYPrecioConPorcentajeCliente(idPartida, porcentajeCliente) );
 		
 		return cpp;
 	} // resumenCalificacionProcesosPartida

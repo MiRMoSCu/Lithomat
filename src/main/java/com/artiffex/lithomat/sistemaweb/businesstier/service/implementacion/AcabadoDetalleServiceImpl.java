@@ -276,4 +276,80 @@ public class AcabadoDetalleServiceImpl implements AcabadoDetalleService {
 		return html.toString();
 	}
 
+	public String listaHTMLProcesosYPrecioConPorcentajeCliente(int idPartida, float porcentajeCliente) {
+		Acabado acabado = acabadoService.buscaAcabadoPorPartida(idPartida);
+		List<AcabadoDetalle> listaAcabadoDetalle = acabadoDetalleDAO.listaPorAcabado(acabado.getIdAcabado());
+		acabado = null;
+		
+		DecimalFormat numFormat = new DecimalFormat("'$ '#,##0.00");
+
+		StringBuilder html = new StringBuilder();
+		html.append("<table>");
+		html.append("<tr>");
+		html.append("<th>No.</th>");
+		html.append("<th>Descripci&oacute;n</th>");
+		html.append("<th>Precio</th>");
+		html.append("<th>Especificaci&oacute;n</th>");
+		html.append("</tr>");
+
+		int cont = 0;
+		if (listaAcabadoDetalle.size() > 0) {
+			for (AcabadoDetalle acabadoDetalle : listaAcabadoDetalle) {
+
+				html.append("<tr class=\'");
+				if (cont % 2 == 0) {
+					html.append("l1");
+				} else {
+					html.append("l2");
+				}
+				html.append("\'>");
+
+				html.append("<td>");
+				html.append(cont + 1);
+				html.append("</td>");
+
+				html.append("<td>");
+				html.append(acabadoDetalle.getProcesoExterno().getNombreProceso());
+				html.append("</td>");
+
+				html.append("<td>");
+				html.append( numFormat.format(acabadoDetalle.getPrecioTotalPesos() * (1 + porcentajeCliente)) );
+				html.append("</td>");
+
+				html.append("<td>");
+				html.append(acabadoDetalle.getEspecificaciones());
+				html.append("</td>");
+
+				cont++;
+				
+				acabadoDetalle = null;
+			}
+		} else {
+			html.append("<tr class=\'");
+			html.append("l1");
+			html.append("\'>");
+
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+		}
+
+		html.append("</table>");
+
+		listaAcabadoDetalle = null;
+		return html.toString();
+	}
+
 }

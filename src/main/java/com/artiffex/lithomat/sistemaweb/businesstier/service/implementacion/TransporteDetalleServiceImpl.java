@@ -275,4 +275,80 @@ public class TransporteDetalleServiceImpl implements TransporteDetalleService {
 		return html.toString();
 	}
 
+	public String listaHTMLProcesosYPrecioConPorcentajeCliente(int idPartida, float porcentajeCliente) {
+		Transporte transporte = transporteService.buscaTransportePorPartida(idPartida);
+		List<TransporteDetalle> listaTransporteDetalle = transporteDetalleDAO.listaPorTransporte(transporte.getIdTransporte());
+		transporte = null;
+		
+		DecimalFormat numFormat = new DecimalFormat("'$ '#,##0.00");
+		
+		StringBuilder html = new StringBuilder();
+		html.append("<table>");
+		html.append("<tr>");
+		html.append("<th>No.</th>");
+		html.append("<th>Descripci&oacute;n</th>");
+		html.append("<th>Precio</th>");
+		html.append("<th>Especificaci&oacute;n</th>");
+		html.append("</tr>");
+
+		int cont = 0;
+		if (listaTransporteDetalle.size() > 0) {
+			for (TransporteDetalle transporteDetalle : listaTransporteDetalle) {
+
+				html.append("<tr class=\'");
+				if (cont % 2 == 0) {
+					html.append("l1");
+				} else {
+					html.append("l2");
+				}
+				html.append("\'>");
+
+				html.append("<td>");
+				html.append(cont + 1);
+				html.append("</td>");
+
+				html.append("<td>");
+				html.append(transporteDetalle.getProcesoTransporte().getNombreProceso());
+				html.append("</td>");
+
+				html.append("<td>");
+				html.append( numFormat.format(transporteDetalle.getPrecioTotalPesos() * (1 + porcentajeCliente)) );
+				html.append("</td>");
+
+				html.append("<td>");
+				html.append(transporteDetalle.getEspecificaciones());
+				html.append("</td>");
+
+				cont++;
+				
+				transporteDetalle = null;
+			}
+		} else {
+			html.append("<tr class=\'");
+			html.append("l1");
+			html.append("\'>");
+
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+		}
+
+		html.append("</table>");
+
+		listaTransporteDetalle = null;
+		return html.toString();
+	}
+
 }

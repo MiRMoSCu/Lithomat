@@ -144,10 +144,11 @@ function limpiaCampos(){
 
 function ajaxPartida( id_partida ) {
 	limpiaFormPartida();
+	var nut = document.orden_produccion.nut.value;
 	$.ajax({
 		type:'POST',
 		url:urlResumenCalificacionPartida,
-		data:{id_partida:id_partida},
+		data:{nut:nut, id_partida:id_partida},
 		success:function(response){
 			//console.log(response);
 			document.resumen_partida.nombre_tipo_trabajo.value	= response.nombreTipoTrabajo;
@@ -164,10 +165,11 @@ function ajaxPartida( id_partida ) {
 
 function ajaxSubPartida( id_tipo_trabajo_detalle ) {
 	limpiaFormSubPartida();
+	var nut = document.orden_produccion.nut.value;
 	$.ajax({
 		type:'POST',
 		url:urlResumenCalificacionTrabajoDetalle,
-		data:{id_tipo_trabajo_detalle:id_tipo_trabajo_detalle},
+		data:{nut:nut, id_tipo_trabajo_detalle:id_tipo_trabajo_detalle},
 		success:function(response) {
 			//console.log(response);
 			document.resumen_tipo_trabajo_detalle.descripcion.value 						= response.descripcion;
@@ -254,10 +256,11 @@ function ajaxSubPartida( id_tipo_trabajo_detalle ) {
 
 function ajaxProcesos( id_partida ) {
 	limpiaFormProcesos();
+	var nut = document.orden_produccion.nut.value;
 	$.ajax({
 		type:'POST',
 		url:urlResumenCalificacionProcesos,
-		data:{id_partida:id_partida},
+		data:{nut:nut, id_partida:id_partida},
 		success:function(response){
 			//console.log(response);
 			document.getElementById("div_tabla_lista_procesos_disenio").innerHTML 		= response.htmlTablaProcesosDisenio;

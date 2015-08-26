@@ -5,10 +5,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.jasperreports.engine.JRException;
@@ -30,8 +32,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionOrdenProduccion;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.OrdenProduccion;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CalificacionService;
-import com.artiffex.lithomat.sistemaweb.businesstier.utilidades._CalificacionTrabajoDetalle;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.OrdenProduccionService;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.Remision;
 
 @Controller
 @RequestMapping("/remision")
@@ -44,24 +49,46 @@ public class RemisionController {
 	@Autowired
 	ServletContext context; // sirve para obtener el getContextPath()
 	@Resource
+	private OrdenProduccionService ordenProduccionService;
+	@Resource
 	private CalificacionService calificacionService;
 
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/exporta_reporte", method = RequestMethod.GET)
 	public void exportaReporteRemision(
 			@RequestParam(value = "nut", required = false) String nut,
+			HttpServletRequest request,
 			HttpServletResponse response
 		) throws IOException {
 		log.info("/exporta_reporte_remision");
 		
-		List<_CalificacionTrabajoDetalle> listaCalificacionTrabajoDetalle = calificacionService.obtieneListaCalificacionTrabajoDetallePorNut(nut);
+		OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
+		CalificacionOrdenProduccion cop = calificacionService.buscaCalificacionOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
+		String path = request.getSession().getServletContext().getRealPath("/");
+		// PARAMETROS
+		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
+		
+		parameterMap.put("SUBREPORT_DIR",path + DIRECTORIO_ORIGEN + "RemisionChild.jasper");
+		parameterMap.put("nut",nut);
+		parameterMap.put("nombreCliente", ordenProduccion.getCliente().getNombreMoral());
+		parameterMap.put("nombreOrdenProduccion", ordenProduccion.getNombre());
+		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
+		System.out.println( cop.getPrecioCliente() );
+		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
+		parameterMap.put("precioCliente", "1000");
+		
+		cop				= null;
+		ordenProduccion = null;
+
+		// INFORMACION DEL DATA SOURCE
+		List<Remision> listaRemision = calificacionService.obtieneRemisionPorNut(nut);
 		
 		try {
 			OutputStream outputStream 				= response.getOutputStream();
 			
-			InputStream reportStream 				= context.getResourceAsStream(DIRECTORIO_ORIGEN + "Remision_OK.jasper");			
-			JRBeanCollectionDataSource dataSource 	= new JRBeanCollectionDataSource(listaCalificacionTrabajoDetalle);
-			JasperPrint jasperPrint 				= JasperFillManager.fillReport( reportStream, null, dataSource );
+			InputStream reportStream 				= context.getResourceAsStream(DIRECTORIO_ORIGEN + "RemisionMaster.jasper");			
+			JRBeanCollectionDataSource dataSource 	= new JRBeanCollectionDataSource(listaRemision);
+			JasperPrint jasperPrint 				= JasperFillManager.fillReport( reportStream, parameterMap, dataSource );
 			
 			int tipoFormato = 0;
 			//System.out.println("tipo_formato:" + tipo_formato);
@@ -109,7 +136,7 @@ public class RemisionController {
 			outputStream.flush();
 			outputStream.close();
 			
-			listaCalificacionTrabajoDetalle = null;
+			
 
 			
 		} catch (JRException e) {
@@ -121,7 +148,7 @@ public class RemisionController {
 			response.getOutputStream().print(stringWriter.toString());
 		}
 		
-		
+		listaRemision = null;
 	}
 
 }

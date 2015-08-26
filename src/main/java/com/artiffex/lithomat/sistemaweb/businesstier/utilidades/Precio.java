@@ -1,5 +1,6 @@
 package com.artiffex.lithomat.sistemaweb.businesstier.utilidades;
 
+
 public class Precio {
 	
 	private static final int TIPO_PRECIO_NO_APLICA 				= 1;
@@ -10,45 +11,35 @@ public class Precio {
 	private static final int TIPO_PRECIO_PORCENTAJE 			= 6;
 	private static final int TIPO_PRECIO_CENTIMETRO_CUADRADO 	= 7;
 	
-	public static float calculaPrecioRespectoTipoPrecio(float precioBase, int idTipoPrecio, float cantidadTipoPrecio ) {
-		
-		float precioFinal = 0f;
-		
-		switch (idTipoPrecio) {
+	
+	public static float conversionRespectoTipoPrecio( float cantidadTipoPrecio, int idTipoPrecio ) {
+		float precioFinal = 0;
+		switch( idTipoPrecio ) {
 			case TIPO_PRECIO_NO_APLICA:
-				precioFinal = precioBase * 0;
+				precioFinal = cantidadTipoPrecio * 0;
 				break;
-				
 			case TIPO_PRECIO_UNIDAD:
-				precioFinal = cantidadTipoPrecio;
+				precioFinal = cantidadTipoPrecio / 1;
 				break;
-				
 			case TIPO_PRECIO_CIENTO:
 				precioFinal = cantidadTipoPrecio / 100;
 				break;
-				
 			case TIPO_PRECIO_MILLAR:
 				precioFinal = cantidadTipoPrecio / 1000;
 				break;
-				
 			case TIPO_PRECIO_HORA:
 				precioFinal = cantidadTipoPrecio / 60;
 				break;
-				
 			case TIPO_PRECIO_PORCENTAJE:
-				precioFinal = precioBase + (precioBase * (cantidadTipoPrecio / 100));
+				precioFinal = cantidadTipoPrecio / 100;
 				break;
-				
 			case TIPO_PRECIO_CENTIMETRO_CUADRADO:
+				precioFinal = cantidadTipoPrecio / 1;
 				break;
-				
 			default:
 				break;
 		}
 		return precioFinal;
 	}
 	
-	public static long cortaADosDecimales( double d ) {
-		return (long) ((long) (d * 1e2) / 1e2);
-	}
 }

@@ -2801,7 +2801,7 @@
 		                                    <div class="linea">
 	                                    		<div class="casilla" style="text-align:right;">
 	                                    			<span style="cursor:pointer;" onclick="ajaxCambiaEstatus();">
-	                                    				ACEPTAR
+	                                    				MODIFICAR
 	                                    			</span>
 		                                    	</div>
 		                                    </div>

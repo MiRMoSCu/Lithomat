@@ -17,6 +17,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.jasperreports.engine.JREmptyDataSource;
@@ -37,6 +38,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.artiffex.lithomat.sistemaweb.ayuda.CalificacionTrabajoDetalleDTOAyuda;
 import com.artiffex.lithomat.sistemaweb.ayuda.OrdenProduccionDTOAyuda;
+import com.artiffex.lithomat.sistemaweb.ayuda.Persona;
+import com.artiffex.lithomat.sistemaweb.ayuda.Telefono;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CalificacionService;
 
 @Controller
@@ -308,4 +311,81 @@ public class PruebasJasperController {
 		}
 	} // reporteFrio
 	
+	
+	@RequestMapping(value = "/subreporte", method = RequestMethod.GET)
+	public void subreporte(
+			HttpServletRequest request,
+			HttpServletResponse response
+		) throws IOException {
+		
+		ArrayList<Persona> listaPersona = new ArrayList<Persona>();
+	
+		List<Telefono> listaTelefono1 = new ArrayList<Telefono>();
+		
+		Telefono telefono1 = new Telefono();
+		telefono1.setTelefono("57704580");
+		listaTelefono1.add(telefono1);
+		
+		Telefono telefono2 = new Telefono();
+		telefono2.setTelefono("0445537274635");
+		listaTelefono1.add(telefono2);
+		
+		Persona persona1 = new Persona();
+		persona1.setNombrePersona("Gerardo Nieto López");
+		persona1.setListaTelefono(listaTelefono1);
+		
+		listaPersona.add(persona1);
+		
+		//*****/
+		List<Telefono> listaTelefono2 = new ArrayList<Telefono>();
+		
+		Telefono telefono3 = new Telefono();
+		telefono3.setTelefono("99990909");
+		listaTelefono2.add(telefono3);
+		
+		Telefono telefono4 = new Telefono();
+		telefono4.setTelefono("45454888454");
+		listaTelefono2.add(telefono4);
+		
+		Persona persona2 = new Persona();
+		persona2.setNombrePersona("Eduardo Nieto López");
+		persona2.setListaTelefono(listaTelefono2);
+		
+		listaPersona.add(persona2);
+		
+		for (Persona persona : listaPersona) {
+			System.out.println( persona.getNombrePersona() );
+			for (Telefono telefono : persona.getListaTelefono()) {
+				System.out.println( telefono.getTelefono() );
+			}
+			
+		}
+		
+		String path = request.getSession().getServletContext().getRealPath("/");
+		
+		try {
+			
+			InputStream reportStream 	= context.getResourceAsStream( DIRECTORIO_ORIGEN + "ejemploReportePadre.jasper");
+			OutputStream outputStream 	= response.getOutputStream();
+			
+			HashMap<String, Object> parameterMap = new HashMap<String, Object>();
+			parameterMap.put("SUBREPORT_DIR", path + DIRECTORIO_ORIGEN + "ejemploReporteHijo.jasper" );
+
+			// JREmptyDataSource dataSource = new JREmptyDataSource();
+			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(listaPersona);
+			JasperRunManager.runReportToPdfStream( reportStream, outputStream, parameterMap, dataSource );
+
+			response.setContentType("application/pdf");
+			outputStream.flush();
+			outputStream.close();
+			
+		} catch (JRException e) {
+			// display stack trace in the browser
+			StringWriter stringWriter 	= new StringWriter();
+			PrintWriter printWriter 	= new PrintWriter(stringWriter);
+			e.printStackTrace(printWriter);
+			response.setContentType("text/plain");
+			response.getOutputStream().print(stringWriter.toString());
+		}
+	}
 }

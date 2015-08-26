@@ -22,5 +22,6 @@ public interface DisenioDetalleService {
 	
 	public String listaHTMLProcesosYPrecio(int idPartida);
 	
+	public String listaHTMLProcesosYPrecioConPorcentajeCliente(int idPartida, float porcentajeCliente);
 	
 }

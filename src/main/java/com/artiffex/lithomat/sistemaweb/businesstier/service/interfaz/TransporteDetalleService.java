@@ -22,4 +22,6 @@ public interface TransporteDetalleService {
 	
 	public String listaHTMLProcesosYPrecio(int idPartida);
 	
+	public String listaHTMLProcesosYPrecioConPorcentajeCliente(int idPartida, float porcentajeCliente);
+	
 }

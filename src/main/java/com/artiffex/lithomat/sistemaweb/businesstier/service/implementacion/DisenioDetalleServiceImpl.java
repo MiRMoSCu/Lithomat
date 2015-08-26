@@ -274,4 +274,81 @@ public class DisenioDetalleServiceImpl implements DisenioDetalleService {
 		return html.toString();
 	}
 
+	public String listaHTMLProcesosYPrecioConPorcentajeCliente(int idPartida, float porcentajeCliente) {
+		
+		Disenio disenio = disenioService.buscaDisenioPorPartida(idPartida);
+		List<DisenioDetalle> listaDisenioDetalle = disenioDetalleDAO.listaPorDisenio(disenio.getIdDisenio());
+		disenio = null;
+		
+		DecimalFormat numFormat = new DecimalFormat("'$ '#,##0.00");
+		
+		StringBuilder html = new StringBuilder();
+		html.append("<table>");
+		html.append("<tr>");
+		html.append("<th>No.</th>");
+		html.append("<th>Descripci&oacute;n</th>");
+		html.append("<th>Precio</th>");
+		html.append("<th>Especificaci&oacute;n</th>");
+		html.append("</tr>");
+
+		int cont = 0;
+		if (listaDisenioDetalle.size() > 0) {
+			for (DisenioDetalle disenioDetalle : listaDisenioDetalle) {
+
+				html.append("<tr class=\'");
+				if (cont % 2 == 0) {
+					html.append("l1");
+				} else {
+					html.append("l2");
+				}
+				html.append("\'>");
+
+				html.append("<td>");
+				html.append(cont + 1);
+				html.append("</td>");
+
+				html.append("<td>");
+				html.append(disenioDetalle.getProcesoDisenio().getNombreProceso());
+				html.append("</td>");
+
+				html.append("<td>");
+				html.append( numFormat.format(disenioDetalle.getPrecioTotalPesos() * (1 + porcentajeCliente)) );
+				html.append("</td>");
+
+				html.append("<td>");
+				html.append(disenioDetalle.getEspecificaciones());
+				html.append("</td>");
+
+				cont++;
+				
+				disenioDetalle = null;
+			}
+		} else {
+			html.append("<tr class=\'");
+			html.append("l1");
+			html.append("\'>");
+
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+		}
+		html.append("</table>");
+
+		listaDisenioDetalle = null;
+
+		return html.toString();
+	}
+
 }

@@ -20,6 +20,8 @@ public interface PreprensaDetalleService {
 	
 	public String listaHTMLModificacionPorPreprensa(int idPreprensa);
 	
-	public String listaHTMLProcesosYPrecio(int idPreprensa);
+	public String listaHTMLProcesosYPrecio(int idPartida);
+	
+	public String listaHTMLProcesosYPrecioConPorcentajeCliente(int idPartida, float porcentajeCliente);
 	
 }

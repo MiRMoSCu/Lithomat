@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2015-08-21T05:32:19 -->
+<!-- 2015-08-24T04:15:35 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Remision" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cb491f62-60e3-42cd-9145-b95c9f1e1ace">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="precio_cliente" class="java.lang.Float"/>
 	<field name="nombreCliente" class="java.lang.String"/>
 	<field name="nut" class="java.lang.String"/>
 	<field name="descripcion" class="java.lang.String"/>
@@ -42,6 +43,9 @@ new Double( $F{clienteProporcionaTintaEspecial} == true ? 0 : $F{tintaEspecialCo
 new Double( $F{clienteProporcionaBarniz} == true ? 0 : $F{frenteBarnizCosteTotal} ) + 
 new Double( $F{clienteProporcionaBarniz} == true ? 0 : $F{vueltaBarnizCosteTotal} ) + 
 new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} ) )]]></variableExpression>
+	</variable>
+	<variable name="GANANCIA" class="java.lang.Double">
+		<variableExpression><![CDATA[(1+($P{precio_cliente}/100))]]></variableExpression>
 	</variable>
 	<title>
 		<band height="114" splitType="Stretch">
@@ -95,14 +99,14 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} ) )]
 				<text><![CDATA[Concepto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="323" y="58" width="70" height="21" uuid="960df493-9f71-4efc-8c80-8f1b50b9df1a"/>
+				<reportElement x="323" y="58" width="70" height="20" uuid="960df493-9f71-4efc-8c80-8f1b50b9df1a"/>
 				<textElement textAlignment="Center">
 					<font size="11" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[P. Unitario]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="401" y="59" width="70" height="21" uuid="0dade202-1e49-4cf5-951c-b1c206ac4ebd"/>
+				<reportElement x="401" y="59" width="70" height="19" uuid="0dade202-1e49-4cf5-951c-b1c206ac4ebd"/>
 				<textElement textAlignment="Center">
 					<font size="11" isBold="true" isUnderline="true"/>
 				</textElement>
@@ -136,14 +140,14 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} ) )]
 				<textFieldExpression><![CDATA[$F{papelDescripcion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="323" y="79" width="70" height="14" uuid="9c05785e-c935-4903-981f-9466e90e99df"/>
+				<reportElement x="323" y="80" width="70" height="15" uuid="9c05785e-c935-4903-981f-9466e90e99df"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00####").format(Double.valueOf(
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00#####").format(Double.valueOf(
 	$F{clienteProporcionaPapel}==true?0:$F{papelPrecioUnitario}
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="401" y="80" width="70" height="14" uuid="9cb03169-c092-431d-a127-336188f95c06"/>
+				<reportElement x="401" y="80" width="70" height="15" uuid="9cb03169-c092-431d-a127-336188f95c06"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00##").format(Double.valueOf(
 	$F{clienteProporcionaPapel}==true?0:$F{papelCosteTotal}
@@ -159,14 +163,14 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} ) )]
 				<textFieldExpression><![CDATA[$F{tintaDescripcion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="323" y="99" width="70" height="14" uuid="6cb009be-73da-444b-b6be-f1f965fc643f"/>
+				<reportElement x="323" y="100" width="70" height="15" uuid="6cb009be-73da-444b-b6be-f1f965fc643f"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00####").format(Double.valueOf(
 	$F{clienteProporcionaTinta}==true?0:$F{tintaPrecioUnitario}
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="401" y="100" width="70" height="14" uuid="1a296a73-57c2-4b16-974e-6a345bddb3c6"/>
+				<reportElement x="401" y="100" width="70" height="15" uuid="1a296a73-57c2-4b16-974e-6a345bddb3c6"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00##").format(Double.valueOf(
 	$F{clienteProporcionaTinta}==true?0:$F{tintaCosteTotal}
@@ -182,7 +186,7 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} ) )]
 				<textFieldExpression><![CDATA[$F{tintaEspecialDescripcion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="323" y="119" width="70" height="14" uuid="c27e875a-3cec-432a-b495-8c8059067b8e"/>
+				<reportElement x="323" y="120" width="70" height="14" uuid="c27e875a-3cec-432a-b495-8c8059067b8e"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00####").format(Double.valueOf(
 	$F{clienteProporcionaTintaEspecial}==true?0:$F{tintaEspecialPrecioUnitario}
@@ -205,7 +209,7 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} ) )]
 				<textFieldExpression><![CDATA[$F{barnizDescripcion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="323" y="139" width="70" height="14" uuid="47d9d25a-5cc8-481e-a960-a1a133c527c8"/>
+				<reportElement x="323" y="140" width="70" height="14" uuid="47d9d25a-5cc8-481e-a960-a1a133c527c8"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00####").format(Double.valueOf(
 	$F{clienteProporcionaBarniz}==true?0:$F{frenteBarnizPrecioUnitario}
@@ -224,7 +228,7 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} ) )]
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{vueltaBarnizNumEntMaq})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="323" y="159" width="70" height="14" uuid="b370e753-0eff-40d3-892d-98d55bcc02f8"/>
+				<reportElement x="323" y="160" width="70" height="14" uuid="b370e753-0eff-40d3-892d-98d55bcc02f8"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00####").format(Double.valueOf(
 	$F{clienteProporcionaBarniz}==true?0:$F{vueltaBarnizPrecioUnitario}
@@ -247,7 +251,7 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} ) )]
 				<textFieldExpression><![CDATA[$F{placasDescripcion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="323" y="179" width="70" height="14" uuid="7bbb5d48-17f1-48d6-bb11-6ad4993b8483"/>
+				<reportElement x="323" y="180" width="70" height="14" uuid="7bbb5d48-17f1-48d6-bb11-6ad4993b8483"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00####").format(Double.valueOf(
 	$F{clienteProporcionaPlacas}==true?0:$F{placasPrecioUnitario}
@@ -265,13 +269,13 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} ) )]
 				<textElement textAlignment="Right">
 					<font size="11" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00##").format(Double.valueOf(
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(Double.valueOf(
 new Double( $F{clienteProporcionaPapel} == true ? 0 : $F{papelCosteTotal} ) + 
 new Double( $F{clienteProporcionaTinta} == true ? 0 : $F{tintaCosteTotal} ) + 
 new Double( $F{clienteProporcionaTintaEspecial} == true ? 0 : $F{tintaEspecialCosteTotal} ) + 
 new Double( $F{clienteProporcionaBarniz} == true ? 0 : $F{frenteBarnizCosteTotal} ) + 
 new Double( $F{clienteProporcionaBarniz} == true ? 0 : $F{vueltaBarnizCosteTotal} ) + 
-new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} ) 
+new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} )
 ))]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -289,7 +293,7 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} )
 				<text><![CDATA[(concepto barniz vuelta)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="475" y="59" width="77" height="19" uuid="fca99ede-5f71-4b51-abf6-2b5a2419e8e3"/>
+				<reportElement x="475" y="58" width="77" height="20" uuid="fca99ede-5f71-4b51-abf6-2b5a2419e8e3"/>
 				<textElement textAlignment="Center">
 					<font size="11" isBold="true" isUnderline="true"/>
 				</textElement>

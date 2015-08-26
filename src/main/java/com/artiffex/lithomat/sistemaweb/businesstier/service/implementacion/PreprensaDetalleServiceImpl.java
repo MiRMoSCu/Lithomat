@@ -271,6 +271,82 @@ public class PreprensaDetalleServiceImpl implements PreprensaDetalleService {
 		listaPreprensaDetalle = null;
 		
 		return html.toString();
-	}	
+	}
+
+	public String listaHTMLProcesosYPrecioConPorcentajeCliente(int idPartida, float porcentajeCliente) {
+		Preprensa preprensa = preprensaService.buscaPreprensaPorPartida(idPartida);
+		List<PreprensaDetalle> listaPreprensaDetalle = preprensaDetalleDAO.listaPorPreprensa(preprensa.getIdPreprensa());
+		preprensa = null;
+
+		DecimalFormat numFormat = new DecimalFormat("'$ '#,##0.00");
+		
+		StringBuilder html = new StringBuilder();
+		html.append("<table>");
+		html.append("<tr>");
+		html.append("<th>No.</th>");
+		html.append("<th>Descripci&oacute;n</th>");
+		html.append("<th>Precio</th>");
+		html.append("<th>Especificaci&oacute;n</th>");
+		html.append("</tr>");
+
+		int cont = 0;
+		if (listaPreprensaDetalle.size() > 0) {
+			for (PreprensaDetalle preprensaDetalle : listaPreprensaDetalle) {
+				html.append("<tr class=\'");
+				if (cont % 2 == 0) {
+					html.append("l1");
+				} else {
+					html.append("l2");
+				}
+				html.append("\'>");
+
+				html.append("<td>");
+				html.append(cont + 1);
+				html.append("</td>");
+
+				html.append("<td>");
+				html.append(preprensaDetalle.getProcesoPreprensa().getNombreProceso());
+				html.append("</td>");
+
+				html.append("<td>");
+				html.append( numFormat.format(preprensaDetalle.getPrecioTotalPesos() * (1 + porcentajeCliente) ) );
+				html.append("</td>");
+
+				html.append("<td>");
+				html.append(preprensaDetalle.getEspecificaciones());
+				html.append("</td>");
+
+				cont++;
+				
+				preprensaDetalle = null;
+			}
+		} else {
+			html.append("<tr class=\'");
+			html.append("l1");
+			html.append("\'>");
+
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+		}
+
+		html.append("</table>");
+
+		listaPreprensaDetalle = null;
+		
+		return html.toString();
+	}
 
 }
