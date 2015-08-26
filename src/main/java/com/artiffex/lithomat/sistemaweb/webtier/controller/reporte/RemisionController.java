@@ -70,12 +70,9 @@ public class RemisionController {
 		
 		parameterMap.put("SUBREPORT_DIR",path + DIRECTORIO_ORIGEN + "RemisionChild.jasper");
 		parameterMap.put("nut",nut);
-		parameterMap.put("nombreCliente", ordenProduccion.getCliente().getNombreMoral());
-		parameterMap.put("nombreOrdenProduccion", ordenProduccion.getNombre());
-		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
-		System.out.println( cop.getPrecioCliente() );
-		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
-		parameterMap.put("precioCliente", "1000");
+		parameterMap.put("nombreCliente",ordenProduccion.getCliente().getNombreMoral());
+		parameterMap.put("nombreOrdenProduccion",ordenProduccion.getNombre());
+		parameterMap.put("precioCliente",cop.getPrecioCliente());
 		
 		cop				= null;
 		ordenProduccion = null;

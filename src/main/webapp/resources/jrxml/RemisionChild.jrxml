@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2015-08-25T21:03:15 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RemisionChild" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="75315364-8f17-454b-bd3d-bfc8fc859dfe">
+<!-- 2015-08-26T02:49:08 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RemisionChild" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="75315364-8f17-454b-bd3d-bfc8fc859dfe">
+	<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<field name="descripcion" class="java.lang.String"/>
 	<field name="cantidadOriginal" class="java.lang.Integer"/>
 	<field name="clienteProporcionaPapel" class="java.lang.Boolean"/>
@@ -40,63 +50,71 @@ new Double( $F{clienteProporcionaBarniz} == true ? 0 : $F{frenteBarnizCosteTotal
 new Double( $F{clienteProporcionaBarniz} == true ? 0 : $F{vueltaBarnizCosteTotal} ) + 
 new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} ) )]]></variableExpression>
 	</variable>
+	<columnHeader>
+		<band height="17">
+			<line>
+				<reportElement x="184" y="10" width="230" height="1" uuid="4aeb111a-1b85-4120-916e-dfbf1092b096"/>
+			</line>
+		</band>
+	</columnHeader>
 	<detail>
-		<band height="237" splitType="Stretch">
+		<band height="201">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
 			<textField>
-				<reportElement x="478" y="180" width="70" height="14" uuid="3c7ed9c1-eb64-45ce-94ee-59fa6d9a87ef"/>
+				<reportElement x="495" y="152" width="70" height="14" uuid="3c7ed9c1-eb64-45ce-94ee-59fa6d9a87ef"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[new String( $F{clienteProporcionaPlacas} == true ? "Cliente" : "Lithomat" )]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="70" y="162" width="236" height="10" uuid="83b39e57-59ca-4bb3-99ee-7ec77f100615"/>
+				<reportElement x="97" y="137" width="236" height="10" uuid="83b39e57-59ca-4bb3-99ee-7ec77f100615"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[(concepto barniz vuelta)]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="401" y="180" width="70" height="14" uuid="2ca32472-3219-4408-940e-226fe891abf9"/>
+				<reportElement x="418" y="152" width="70" height="14" uuid="2ca32472-3219-4408-940e-226fe891abf9"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00##").format(Double.valueOf(
 	$F{clienteProporcionaPlacas}==true?0:$F{placasCosteTotal}
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="180" width="50" height="14" uuid="988dcf8a-5d99-4ef1-a4df-90487922a0c8"/>
+				<reportElement x="27" y="152" width="50" height="14" uuid="988dcf8a-5d99-4ef1-a4df-90487922a0c8"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{placasNumPlacas})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="401" y="160" width="70" height="14" uuid="9c1d05cf-c68c-45a0-afca-4b70e2bef06f"/>
+				<reportElement x="418" y="135" width="70" height="14" uuid="9c1d05cf-c68c-45a0-afca-4b70e2bef06f"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00##").format(Double.valueOf(
 	$F{clienteProporcionaBarniz}==true?0:$F{vueltaBarnizCosteTotal}
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="70" y="100" width="236" height="14" uuid="66e05f91-a6aa-459b-8a5b-da5a979a67b0"/>
+				<reportElement x="97" y="87" width="236" height="14" uuid="66e05f91-a6aa-459b-8a5b-da5a979a67b0"/>
 				<textFieldExpression><![CDATA[$F{tintaDescripcion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="401" y="100" width="70" height="15" uuid="c8830724-1b9c-48f0-a145-7aed7f9625bf"/>
+				<reportElement x="418" y="87" width="70" height="15" uuid="c8830724-1b9c-48f0-a145-7aed7f9625bf"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00##").format(Double.valueOf(
 	$F{clienteProporcionaTinta}==true?0:$F{tintaCosteTotal}
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="70" y="80" width="236" height="14" uuid="b9815604-24b5-4497-8413-159d919f29b5"/>
+				<reportElement x="97" y="71" width="236" height="14" uuid="b9815604-24b5-4497-8413-159d919f29b5"/>
 				<textFieldExpression><![CDATA[$F{papelDescripcion}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="115" y="40" width="50" height="14" uuid="62bf3feb-7c70-4776-82ee-50845ee90d48"/>
+				<reportElement x="142" y="31" width="50" height="14" uuid="62bf3feb-7c70-4776-82ee-50845ee90d48"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[unidades.]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="380" y="211" width="91" height="14" uuid="ff9fbcba-34b4-4701-96f2-41d38c264e6c"/>
+				<reportElement x="397" y="185" width="91" height="14" uuid="ff9fbcba-34b4-4701-96f2-41d38c264e6c"/>
 				<textElement textAlignment="Right">
 					<font size="11" isBold="true"/>
 				</textElement>
@@ -110,197 +128,201 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} )
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="323" y="120" width="70" height="14" uuid="6c2e1ea0-0a09-480f-841f-5a5f7a845462"/>
+				<reportElement x="340" y="103" width="70" height="14" uuid="6c2e1ea0-0a09-480f-841f-5a5f7a845462"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00####").format(Double.valueOf(
 	$F{clienteProporcionaTintaEspecial}==true?0:$F{tintaEspecialPrecioUnitario}
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="100" width="50" height="14" uuid="ec907cd4-8ee8-4f23-b657-2917249bf6f6"/>
+				<reportElement x="27" y="87" width="50" height="14" uuid="ec907cd4-8ee8-4f23-b657-2917249bf6f6"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{tintaNumEntMaq})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="70" y="180" width="236" height="14" uuid="84612075-9a5c-4f55-94ba-f07fe6b86bc0"/>
+				<reportElement x="97" y="152" width="236" height="14" uuid="84612075-9a5c-4f55-94ba-f07fe6b86bc0"/>
 				<textFieldExpression><![CDATA[$F{placasDescripcion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="120" width="50" height="14" uuid="7f06df70-3597-4b36-9e85-b581852fd854"/>
+				<reportElement x="27" y="103" width="50" height="14" uuid="7f06df70-3597-4b36-9e85-b581852fd854"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{tintaEspecialNumEntMaq})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="160" width="50" height="14" uuid="4e9c2318-b6cb-4a65-add4-21b672b47f8e"/>
+				<reportElement x="27" y="135" width="50" height="14" uuid="4e9c2318-b6cb-4a65-add4-21b672b47f8e"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{vueltaBarnizNumEntMaq})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="401" y="80" width="70" height="15" uuid="4ecc2c34-ed23-4dd7-adf8-e279df5ec0e4"/>
+				<reportElement x="418" y="71" width="70" height="15" uuid="4ecc2c34-ed23-4dd7-adf8-e279df5ec0e4"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00##").format(Double.valueOf(
 	$F{clienteProporcionaPapel}==true?0:$F{papelCosteTotal}
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="323" y="180" width="70" height="14" uuid="f4f241cd-6e8b-4eb3-929f-75c072b1cf7e"/>
+				<reportElement x="340" y="152" width="70" height="14" uuid="f4f241cd-6e8b-4eb3-929f-75c072b1cf7e"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00####").format(Double.valueOf(
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(Double.valueOf(
 	$F{clienteProporcionaPlacas}==true?0:$F{placasPrecioUnitario}
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="401" y="140" width="70" height="14" uuid="eb9000f9-8983-4e17-b57f-dce00c258299"/>
+				<reportElement x="418" y="119" width="70" height="14" uuid="eb9000f9-8983-4e17-b57f-dce00c258299"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00##").format(Double.valueOf(
 	$F{clienteProporcionaBarniz}==true?0:$F{frenteBarnizCosteTotal}
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="478" y="80" width="70" height="14" uuid="17e274ac-980d-4df7-bcce-14a0995653dd"/>
+				<reportElement x="495" y="71" width="70" height="14" uuid="17e274ac-980d-4df7-bcce-14a0995653dd"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[new String( $F{clienteProporcionaPapel} == true ? "Cliente" : "Lithomat" )]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="60" y="40" width="50" height="14" uuid="534f36d3-80cc-4238-8d4f-36eb9cacf204"/>
+				<reportElement x="87" y="31" width="50" height="14" uuid="534f36d3-80cc-4238-8d4f-36eb9cacf204"/>
 				<textElement textAlignment="Right">
 					<font isBold="true" isItalic="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{cantidadOriginal})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="323" y="160" width="70" height="14" uuid="e6d2d798-01c3-46da-b140-e64a2ca9a595"/>
+				<reportElement x="340" y="135" width="70" height="14" uuid="e6d2d798-01c3-46da-b140-e64a2ca9a595"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00####").format(Double.valueOf(
 	$F{clienteProporcionaBarniz}==true?0:$F{vueltaBarnizPrecioUnitario}
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="323" y="80" width="70" height="15" uuid="f0f3bdaf-38f4-4dc8-81c1-3f1346610dfc"/>
+				<reportElement x="340" y="71" width="70" height="15" uuid="f0f3bdaf-38f4-4dc8-81c1-3f1346610dfc"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00#####").format(Double.valueOf(
 	$F{clienteProporcionaPapel}==true?0:$F{papelPrecioUnitario}
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="140" width="50" height="14" uuid="4b5997ba-6e1a-4ab5-a34b-bd05c3946cb6"/>
+				<reportElement x="27" y="119" width="50" height="14" uuid="4b5997ba-6e1a-4ab5-a34b-bd05c3946cb6"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{frenteBarnizNumEntMaq})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="323" y="58" width="70" height="20" uuid="bdb2d9e5-732c-4aa2-a2e4-1af2a266bba4"/>
+				<reportElement x="340" y="49" width="70" height="20" uuid="bdb2d9e5-732c-4aa2-a2e4-1af2a266bba4"/>
 				<textElement textAlignment="Center">
 					<font size="11" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[P. Unitario]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1" y="59" width="60" height="19" uuid="c6d2bafa-3b50-4321-b0fd-5329cb1839c6"/>
+				<reportElement x="28" y="50" width="60" height="19" uuid="c6d2bafa-3b50-4321-b0fd-5329cb1839c6"/>
 				<textElement textAlignment="Center">
 					<font size="11" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Cantidad]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="40" width="50" height="14" uuid="354799a8-b1ac-40ca-9299-e07887eb5918"/>
+				<reportElement x="27" y="31" width="50" height="14" uuid="354799a8-b1ac-40ca-9299-e07887eb5918"/>
 				<text><![CDATA[Producto:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="326" y="211" width="53" height="13" uuid="3a1a1bd9-e131-45f3-8326-0eccd7ebdd61"/>
+				<reportElement x="343" y="185" width="53" height="13" uuid="3a1a1bd9-e131-45f3-8326-0eccd7ebdd61"/>
 				<textElement textAlignment="Right">
 					<font size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[SubTotal:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="323" y="100" width="70" height="15" uuid="08da84ec-7c8b-497b-90e1-2d82e3c3e9db"/>
+				<reportElement x="340" y="87" width="70" height="15" uuid="08da84ec-7c8b-497b-90e1-2d82e3c3e9db"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00####").format(Double.valueOf(
 	$F{clienteProporcionaTinta}==true?0:$F{tintaPrecioUnitario}
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="323" y="140" width="70" height="14" uuid="bc5db635-ca07-46b4-aaa8-4ad445e3f660"/>
+				<reportElement x="340" y="119" width="70" height="14" uuid="bc5db635-ca07-46b4-aaa8-4ad445e3f660"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00####").format(Double.valueOf(
 	$F{clienteProporcionaBarniz}==true?0:$F{frenteBarnizPrecioUnitario}
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="60" y="20" width="492" height="14" uuid="1615ef9c-a08a-44dd-a363-6f6c6110f028"/>
+				<reportElement x="82" y="11" width="492" height="14" uuid="1615ef9c-a08a-44dd-a363-6f6c6110f028"/>
 				<textElement>
 					<font size="11" isBold="true" isItalic="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement x="162" y="10" width="230" height="1" uuid="4aeb111a-1b85-4120-916e-dfbf1092b096"/>
-			</line>
 			<staticText>
-				<reportElement x="401" y="59" width="70" height="19" uuid="5974f42b-9b7e-44f2-847c-46d209f3ec0e"/>
+				<reportElement x="418" y="50" width="70" height="19" uuid="5974f42b-9b7e-44f2-847c-46d209f3ec0e"/>
 				<textElement textAlignment="Center">
 					<font size="11" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[P. Total]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="478" y="100" width="70" height="14" uuid="ad18b4ce-4fe0-40ef-a70a-f2f52b989922"/>
+				<reportElement x="495" y="87" width="70" height="14" uuid="ad18b4ce-4fe0-40ef-a70a-f2f52b989922"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[new String( $F{clienteProporcionaTinta} == true ? "Cliente" : "Lithomat" )]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="70" y="120" width="236" height="14" uuid="4a329e22-54d0-4033-bae7-e5eaf57f49d3"/>
+				<reportElement x="97" y="103" width="236" height="14" uuid="4a329e22-54d0-4033-bae7-e5eaf57f49d3"/>
 				<textFieldExpression><![CDATA[$F{tintaEspecialDescripcion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="70" y="140" width="236" height="14" uuid="e0f4c250-aefa-47d9-9bfb-95711a25fb58"/>
+				<reportElement x="97" y="119" width="236" height="14" uuid="e0f4c250-aefa-47d9-9bfb-95711a25fb58"/>
 				<textFieldExpression><![CDATA[$F{barnizDescripcion}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="20" width="50" height="14" uuid="a1565661-7970-49d0-85cc-b383c8dcf3f3"/>
+				<reportElement x="27" y="11" width="50" height="14" uuid="a1565661-7970-49d0-85cc-b383c8dcf3f3"/>
 				<text><![CDATA[Trabajo:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="401" y="120" width="70" height="14" uuid="a61d58b9-0e67-4363-93c3-dcf7f31fffc9"/>
+				<reportElement x="418" y="103" width="70" height="14" uuid="a61d58b9-0e67-4363-93c3-dcf7f31fffc9"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00##").format(Double.valueOf(
 	$F{clienteProporcionaTintaEspecial}==true?0:$F{tintaEspecialCosteTotal}
 ))]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="370" y="194" width="140" height="16" uuid="be280e1e-7d44-4e42-aa89-d661e40c7bea"/>
+				<reportElement x="387" y="168" width="140" height="16" uuid="be280e1e-7d44-4e42-aa89-d661e40c7bea"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[---------------------]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="70" y="59" width="236" height="19" uuid="ae9081fd-2ca3-4238-9910-ffe5149af179"/>
+				<reportElement x="97" y="50" width="236" height="19" uuid="ae9081fd-2ca3-4238-9910-ffe5149af179"/>
 				<textElement textAlignment="Center">
 					<font size="11" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Concepto]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="478" y="140" width="70" height="14" uuid="c1c7b557-2233-4f2e-afb6-1d3e500b66d9"/>
+				<reportElement x="495" y="119" width="70" height="14" uuid="c1c7b557-2233-4f2e-afb6-1d3e500b66d9"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[new String( $F{clienteProporcionaBarniz} == true ? "Cliente" : "Lithomat" )]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="475" y="58" width="77" height="20" uuid="ff8bda88-feb1-4e2d-b4d7-95f599f6e572"/>
+				<reportElement x="492" y="49" width="77" height="20" uuid="ff8bda88-feb1-4e2d-b4d7-95f599f6e572"/>
 				<textElement textAlignment="Center">
 					<font size="11" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Responsable]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="478" y="120" width="70" height="14" uuid="18cae96c-4e1b-4cdd-a782-bafd49c17aa5"/>
+				<reportElement x="495" y="103" width="70" height="14" uuid="18cae96c-4e1b-4cdd-a782-bafd49c17aa5"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[new String( $F{clienteProporcionaTintaEspecial} == true ? "Cliente" : "Lithomat" )]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="80" width="50" height="14" uuid="b619b192-3306-4e9b-9546-359e955a84f5"/>
+				<reportElement x="27" y="71" width="50" height="14" uuid="b619b192-3306-4e9b-9546-359e955a84f5"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{papelCantidadTotal})]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
+	<columnFooter>
+		<band height="17">
+			<line>
+				<reportElement x="184" y="11" width="230" height="1" uuid="6571673c-6ec7-4286-b22e-dc6169695644"/>
+			</line>
+		</band>
+	</columnFooter>
 </jasperReport>
