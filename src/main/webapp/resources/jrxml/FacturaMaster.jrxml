@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
+<!-- 2015-08-27T18:40:43 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RemisionMaster" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ea907b63-9974-4aec-a146-9c41310c93d3">
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<parameter name="nut" class="java.lang.String"/>
+	<parameter name="nombreCliente" class="java.lang.String"/>
+	<parameter name="nombreOrdenProduccion" class="java.lang.String"/>
+	<parameter name="precioCliente" class="java.lang.Double"/>
+	<parameter name="precioNeto" class="java.lang.Double"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="gananciaClientePorcentaje" class="java.lang.Double"/>
+	<field name="costeTotalProcesosPartida" class="java.lang.Double"/>
+	<field name="subpartidasCosteTotal" class="java.lang.Double"/>
+	<field name="disenioCosteTotal" class="java.lang.Double"/>
+	<field name="preprensaCosteTotal" class="java.lang.Double"/>
+	<field name="transporteCosteTotal" class="java.lang.Double"/>
+	<field name="acabadoCosteTotal" class="java.lang.Double"/>
+	<field name="offsetCosteTotal" class="java.lang.Double"/>
+	<field name="costoExtraTotal" class="java.lang.Double"/>
+	<field name="listaCalificacionTrabajoDetalle" class="java.util.List"/>
+	<title>
+		<band height="114" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="200" height="20" uuid="6a350f8f-596f-43d6-b801-dbae966261c1"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nota de Factura Lithomat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="50" height="20" uuid="569a1378-d657-418a-a6ed-6261d4776fae"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[NUT:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="52" y="30" width="100" height="20" uuid="b94fda88-926f-4c69-a337-be091b76418d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{nut}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="50" width="50" height="20" uuid="f7a1f90d-186d-47e0-b309-ab8af8080236"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="52" y="50" width="458" height="20" uuid="cf3a5c84-8497-447e-bc75-980ad9df2fc2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{nombreCliente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="70" width="50" height="20" uuid="a8e12ff4-563c-4003-a6c8-5d223a9e7552"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Trabajo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="52" y="70" width="440" height="20" uuid="e063c201-7a2d-4efe-aef3-4c904eb2478a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{nombreOrdenProduccion}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="47" y="104" width="460" height="1" uuid="eb420ab5-143b-4b26-a786-7a7486aa7569"/>
+			</line>
+		</band>
+	</title>
+	<detail>
+		<band height="254" splitType="Stretch">
+			<subreport>
+				<reportElement x="-20" y="8" width="595" height="235" uuid="45ec71cc-a2c3-451f-b474-440e11cdca7d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<subreportParameter name="subpartidasCosteTotal">
+					<subreportParameterExpression><![CDATA[$F{subpartidasCosteTotal}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="disenioCosteTotal">
+					<subreportParameterExpression><![CDATA[$F{disenioCosteTotal}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="preprensaCosteTotal">
+					<subreportParameterExpression><![CDATA[$F{preprensaCosteTotal}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="transporteCosteTotal">
+					<subreportParameterExpression><![CDATA[$F{transporteCosteTotal}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="acabadoCosteTotal">
+					<subreportParameterExpression><![CDATA[$F{acabadoCosteTotal}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="offsetCosteTotal">
+					<subreportParameterExpression><![CDATA[$F{offsetCosteTotal}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="costoExtraTotal">
+					<subreportParameterExpression><![CDATA[$F{costoExtraTotal}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="costeTotalProcesosPartida">
+					<subreportParameterExpression><![CDATA[$F{costeTotalProcesosPartida}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombre">
+					<subreportParameterExpression><![CDATA[$F{nombre}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaCalificacionTrabajoDetalle})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="103">
+			<staticText>
+				<reportElement x="255" y="77" width="115" height="22" uuid="66ab6385-36c3-4aa3-9696-ae9ebba0d705">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gran Total:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="377" y="77" width="90" height="22" uuid="d86f5def-a54b-444a-be2c-6b3a016530f8">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(new Double($P{precioNeto}))]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="255" y="10" width="115" height="22" uuid="83a79de3-2967-4502-b7f8-c786942d66d6">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio sin IVA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="377" y="10" width="90" height="22" uuid="d6a2836d-9107-4132-8547-d16f17f21363">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(new Double($P{precioCliente}))]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="255" y="35" width="115" height="22" uuid="1028523b-6462-40b4-b9cf-5ede9197eb79">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IVA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="377" y="35" width="90" height="22" uuid="7edc5746-7af5-46e1-b4df-0b4131c5edcf">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(new Double($P{precioNeto} - $P{precioCliente}))]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>

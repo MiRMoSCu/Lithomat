@@ -3,9 +3,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:url value="/?opc=catalogos"	               	var="urlMenu"/>
-<c:url value="/tipo_trabajo/catalogo/alta" 		var="urlAlta"/>
-<c:url value="/tipo_trabajo/catalogo/modifica" 	var="urlModifica"/>
-<c:url value="/tipo_trabajo/catalogo/elimina" 	var="urlElimina"/>
 <html>
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1"></meta>
@@ -146,11 +143,11 @@
                                         <!--
                                             No debe ser posible cambiar estos tres tipos de trabajo
                                         -->
-                                        <!--
+                                        
                                         <div class="casilla" style="text-align:right;">
                                             <img alt="" style="cursor:pointer;" onclick="limpia();"
-                                                 src="resources/image/boton_limpiar.jpg"></img>
-                                             
+                                            	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"></img>
+                                             <!--
                                             <img alt="" style="cursor:pointer;" onclick="elimina();"
                                                  src="resources/image/boton_eliminar.jpg"></img>
                                              
@@ -159,8 +156,9 @@
                                              
                                             <img alt="" style="cursor:pointer;" onclick="crear();"
                                                  src="resources/image/boton_agregar.jpg"></img>
+                                            -->
                                         </div>
-                                        -->
+                                        
                                     </div>
                                 </div>
                             </form>

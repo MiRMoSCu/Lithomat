@@ -1,4 +1,4 @@
-USE artiffex_lithomat;
+USE lithomat_artiffex;
 
 INSERT INTO usuario (id_usuario, nombre, ap_paterno, ap_materno, usuario, contrasenia, activo) VALUES (1,'Gerardo','Nieto','López','gnieto','gnieto',true);
 INSERT INTO usuario (id_usuario, nombre, ap_paterno, ap_materno, usuario, contrasenia, activo) VALUES (2,'José','Tovar','Ortega','jtovar','jtovar',true);

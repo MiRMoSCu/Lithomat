@@ -9,14 +9,16 @@
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.max_allowed_packet">50M</property>
 <!-- LOCAL DATABASE -->
-		<property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/artiffex_lithomat</property>
+  
+		<property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/lithomat_artiffex</property>
 		<property name="hibernate.connection.username">root</property>
+
 <!-- PRODUCTION DATABASE  -->
 <!-- 
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/interjet_promociones</property>
-		<property name="hibernate.connection.username">interjet_userdb</property>
-		<property name="hibernate.connection.password">1tj-us3r</property>
- -->
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/lithomat_artiffex</property>
+		<property name="hibernate.connection.username">lithomat_root</property>
+		<property name="hibernate.connection.password">Q1werty23</property>
+-->
 		<property name="hibernate.autoReconnect">true</property>
 		<property name="hibernate.autoReconnectForPools">true</property>
 		<property name="hibernate.transaction.auto_close_session">true</property>

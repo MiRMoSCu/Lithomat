@@ -7,7 +7,7 @@
 <c:url value="/calificacion/resumen_partida"			var="urlResumenCalificacionPartida"/>
 <c:url value="/calificacion/resumen_trabajo_detalle"	var="urlResumenCalificacionTrabajoDetalle"/>
 <c:url value="/calificacion/resumen_procesos"			var="urlResumenCalificacionProcesos"/>
-<c:url value="/cotizacion/condiciones_produccion"		var="urlCondicionesProduccion"/>
+<c:url value="/nota/condiciones_produccion"		var="urlCondicionesProduccion"/>
 <fmt:setLocale value="en_US" scope="session" />
 <html>
     <head>

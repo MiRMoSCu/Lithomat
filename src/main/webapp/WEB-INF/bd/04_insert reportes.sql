@@ -1,4 +1,4 @@
-USE artiffex_lithomat;
+USE lithomat_artiffex;
 
 INSERT INTO fecha_prensista_maquina (id_fecha_prensista_maquina, id_prensista, id_turno_laboral, id_maquina, id_pliego, fecha, id_prensista_ayudante, numero_millar_impreso, numero_cambio_placas, activo) VALUES (1,1,1,1,1,'2013-09-22',1,834,8,true);
 INSERT INTO fecha_prensista_maquina (id_fecha_prensista_maquina, id_prensista, id_turno_laboral, id_maquina, id_pliego, fecha, id_prensista_ayudante, numero_millar_impreso, numero_cambio_placas, activo) VALUES (2,1,1,1,2,'2013-09-27',1,5000,10,true);

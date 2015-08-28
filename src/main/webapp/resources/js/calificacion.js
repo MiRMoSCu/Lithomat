@@ -181,7 +181,7 @@ function ajaxSubPartida( id_tipo_trabajo_detalle ) {
         	document.resumen_tipo_trabajo_detalle.numero_pliegos.value 						= response.numeroPliegos;
         	document.resumen_tipo_trabajo_detalle.papel_descripcion.value 					= response.papelDescripcion;
         	document.resumen_tipo_trabajo_detalle.papel_cantidad_total.value 				= response.papelCantidadTotal;
-        	document.resumen_tipo_trabajo_detalle.papel_precio_unitario.value 				= "$ " + (response.papelPrecioUnitario).formatMoney(3);
+        	document.resumen_tipo_trabajo_detalle.papel_precio_unitario.value 				= "$ " + (response.papelPrecioUnitario).formatMoney(4);
         	document.resumen_tipo_trabajo_detalle.papel_coste_total.value 					= "$ " + (response.papelCosteTotal).formatMoney(2);
         	document.resumen_tipo_trabajo_detalle.tinta_descripcion.value 					= response.tintaDescripcion;
         	document.resumen_tipo_trabajo_detalle.tinta_num_ent_maq.value 					= response.tintaNumEntMaq;
@@ -335,7 +335,7 @@ function condicionesProduccion() {
         content:urlCondicionesProduccion + "?nut=" + document.orden_produccion.nut.value,
         player:"iframe",
         width:730,
-        height:430,
+        height:510,
         options:{ 
         	modal: false,
         	overlayOpacity: 0.75 

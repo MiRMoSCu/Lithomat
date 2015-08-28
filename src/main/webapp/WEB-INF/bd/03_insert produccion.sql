@@ -1,4 +1,4 @@
-USE artiffex_lithomat;
+USE lithomat_artiffex;
 
 INSERT INTO cliente (id_cliente, id_tipo_cliente, nombre_moral, nombre_representante, puesto, calle, num_exterior, num_interior, colonia, delegacion_municipio, estado, codigo_postal, pais, rfc, telefono_particular, telefono_movil, email, observaciones, activo) VALUES (1,1,'Maquila',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',NULL,true);
 INSERT INTO cliente (id_cliente, id_tipo_cliente, nombre_moral, nombre_representante, puesto, calle, num_exterior, num_interior, colonia, delegacion_municipio, estado, codigo_postal, pais, rfc, telefono_particular, telefono_movil, email, observaciones, activo) VALUES (2,2,'Editores Buena Onda S.A. De C.V.','Eduardo Ruíz Noriega','Director','Suiza',14,NULL,'Portales Oriente','Benito Juárez','Distrito Federal','03570','México','EBO981030HL7','55320880','0445555087783','aaa@aaa.com',NULL,true);

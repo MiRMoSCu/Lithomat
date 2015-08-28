@@ -94,13 +94,20 @@ public class TipoComprobanteFiscalController {
 			Model model
 		) throws IOException {
 		log.info("/modifica_tipo_comprobante_fiscal");
-
-		TipoComprobanteFiscal tipoComprobanteFiscal = tipoComprobanteFiscalService.buscaTipoComprobanteFiscal(idTipoComprobanteFiscal);
-		tipoComprobanteFiscal.setNombre(nombre);
-		tipoComprobanteFiscal.setDescripcion(descripcion);
-		tipoComprobanteFiscal.setPrecio(precio);
-		tipoComprobanteFiscal.getTipoPrecio().setIdTipoPrecio(idTipoPrecio);
 		
+		// NO SE PUEDE MODIFICAR EL NOMBRE NI PORCENTAJE DE LOS COMPROBANTES BASE:
+		// 1) NOTA DE REMISION
+		// 2) FACTURA
+		TipoComprobanteFiscal tipoComprobanteFiscal = tipoComprobanteFiscalService.buscaTipoComprobanteFiscal(idTipoComprobanteFiscal);
+		if( idTipoComprobanteFiscal == 1 || idTipoComprobanteFiscal == 2) {
+			tipoComprobanteFiscal.setDescripcion(descripcion);
+			tipoComprobanteFiscal.setPrecio(precio);
+		} else {
+			tipoComprobanteFiscal.setNombre(nombre);
+			tipoComprobanteFiscal.setDescripcion(descripcion);
+			tipoComprobanteFiscal.setPrecio(precio);
+			tipoComprobanteFiscal.getTipoPrecio().setIdTipoPrecio(idTipoPrecio);
+		}
 		tipoComprobanteFiscalService.modificaTipoComprobanteFiscal(tipoComprobanteFiscal);
 
 		List<TipoComprobanteFiscal> listaTipoComprobanteFiscal = tipoComprobanteFiscalService.listaTipoComprobanteFiscal();
@@ -123,10 +130,14 @@ public class TipoComprobanteFiscalController {
 		) throws IOException {
 		log.info("/elimina_tipo_comprobante_fiscal");
 
+		// NO SE PUEDE ELIMINAR LOS COMPROBANTES BASE:
+		// 1) NOTA DE REMISION
+		// 2) FACTURA
 		TipoComprobanteFiscal tipoComprobanteFiscal = tipoComprobanteFiscalService.buscaTipoComprobanteFiscal(idTipoComprobanteFiscal);
-		tipoComprobanteFiscal.setActivo(false);
-		
-		tipoComprobanteFiscalService.modificaTipoComprobanteFiscal(tipoComprobanteFiscal);
+		if( idTipoComprobanteFiscal != 1 && idTipoComprobanteFiscal != 2 ) {
+			tipoComprobanteFiscal.setActivo(false);
+			tipoComprobanteFiscalService.modificaTipoComprobanteFiscal(tipoComprobanteFiscal);
+		}
 
 		List<TipoComprobanteFiscal> listaTipoComprobanteFiscal = tipoComprobanteFiscalService.listaTipoComprobanteFiscal();
 		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();

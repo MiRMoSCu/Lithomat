@@ -195,10 +195,10 @@
                                         <div class="casilla" style="text-align:right;">
                                             <img alt="" style="cursor:pointer;" onclick="limpia();"
                                             	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"></img>
-                                             
+                                            
                                             <img alt="" style="cursor:pointer;" onclick="elimina();"
                                             	 src="<c:url value="/resources/image/boton_eliminar.jpg"/>"></img>
-                                             
+                                            
                                             <img alt="" style="cursor:pointer;" onclick="modifica();"
                                             	 src="<c:url value="/resources/image/boton_modificar.jpg"/>"></img>
                                              

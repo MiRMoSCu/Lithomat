@@ -3,9 +3,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:url value="/?opc=catalogos"					var="urlMenu"/>
-<c:url value="/estatus_orden/catalogo/alta" 	var="urlAlta"/>
-<c:url value="/estatus_orden/catalogo/modifica" var="urlModifica"/>
-<c:url value="/estatus_orden/catalogo/elimina" 	var="urlElimina"/>
 <html>
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1"></meta>

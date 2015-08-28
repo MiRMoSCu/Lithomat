@@ -1,4 +1,4 @@
-USE artiffex_lithomat;
+USE lithomat_artiffex;
 
 INSERT INTO combinacion_tintas (id_combinacion_tintas, num_tintas, descripcion, activo) VALUES (1,4,'CMYK',true);
 INSERT INTO combinacion_tintas (id_combinacion_tintas, num_tintas, descripcion, activo) VALUES (2,3,'CMY',true);
