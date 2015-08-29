@@ -28,5 +28,11 @@
 			</key>
 			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.MaterialAyudaXPartida"/>
 		</set>
+		<set name="costosExtrasDetalle" table="costos_extras_detalle" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_responsable_insumo" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.CostosExtrasDetalle"/>
+		</set>
 	</class>
 </hibernate-mapping>

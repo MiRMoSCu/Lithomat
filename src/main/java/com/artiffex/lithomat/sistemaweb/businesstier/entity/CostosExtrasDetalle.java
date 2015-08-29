@@ -8,6 +8,7 @@ public class CostosExtrasDetalle implements Serializable {
 
 	private int idCostosExtrasDetalle;
 	private Partida partida;
+	private ResponsableInsumo responsableInsumo;
 	private CostosExtras costosExtras;
 	private int cantidad;
 	private String especificaciones;
@@ -26,6 +27,12 @@ public class CostosExtrasDetalle implements Serializable {
 	}
 	public void setPartida(Partida partida) {
 		this.partida = partida;
+	}
+	public ResponsableInsumo getResponsableInsumo() {
+		return responsableInsumo;
+	}
+	public void setResponsableInsumo(ResponsableInsumo responsableInsumo) {
+		this.responsableInsumo = responsableInsumo;
 	}
 	public CostosExtras getCostosExtras() {
 		return costosExtras;
@@ -57,6 +64,5 @@ public class CostosExtrasDetalle implements Serializable {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-
-	
+		
 }

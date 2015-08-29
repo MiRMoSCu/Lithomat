@@ -74,11 +74,19 @@ public class ResponsableInsumoController {
 			Model model
 		) throws IOException {
 		log.info("/modifica_responsable_insumo");
+		
+		// NO SE PUEDE MODIFICAR EL NOMBRE DE LOS RESPONSABLES DEL INSUMO
+		// 1) CLIENTE
+		// 2) LITHOMAT
+		// 3) OTRO
 
 		ResponsableInsumo responsableInsumo = responsableInsumoService.buscaResponsableInsumo(idResponsableInsumo);
-		responsableInsumo.setNombre(nombre);
-		responsableInsumo.setDescripcion(descripcion);
-
+		if( idResponsableInsumo == 1 || idResponsableInsumo == 2 || idResponsableInsumo == 3 ) {
+			responsableInsumo.setDescripcion(descripcion);
+		} else {
+			responsableInsumo.setNombre(nombre);
+			responsableInsumo.setDescripcion(descripcion);
+		}
 		responsableInsumoService.modificaResponsableInsumo(responsableInsumo);
 
 		List<ResponsableInsumo> listaResponsableInsumo = responsableInsumoService.listaResponsableInsumo();
@@ -98,10 +106,16 @@ public class ResponsableInsumoController {
 		) throws IOException {
 		log.info("/elimina_responsable_insumo");
 		
+		// NO SE PUEDE ELIMINAR LOS RESPONSABLES DE INSUMO BASE
+		// 1) CLIENTE
+		// 2) LITHOMAT
+		// 3) OTRO
+		
 		ResponsableInsumo responsableInsumo = responsableInsumoService.buscaResponsableInsumo(idResponsableInsumo);
-		responsableInsumo.setActivo(false);
-
-		responsableInsumoService.modificaResponsableInsumo(responsableInsumo);
+		if( idResponsableInsumo != 1 && idResponsableInsumo != 2 && idResponsableInsumo != 3 ) {
+			responsableInsumo.setActivo(false);
+			responsableInsumoService.modificaResponsableInsumo(responsableInsumo);
+		}
 
 		List<ResponsableInsumo> listaResponsableInsumo = responsableInsumoService.listaResponsableInsumo();
 		model.addAttribute("listaResponsableInsumo", listaResponsableInsumo);

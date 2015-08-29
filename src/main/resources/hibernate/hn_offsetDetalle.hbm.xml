@@ -32,6 +32,14 @@
 			<column name="laminas_extras"/>
 			<type name="integer"/>
 		</property>
+		<property name="kilosTintaFrente">
+			<column name="kilos_tinta_frente"/>
+			<type name="integer"/>
+		</property>
+		<property name="kilosTintaVuelta">
+			<column name="kilos_tinta_vuelta"/>
+			<type name="integer"/>
+		</property>
 		<property name="activo">
 			<column name="activo"/>
 			<type name="integer"/>

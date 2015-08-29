@@ -12,6 +12,9 @@
 		<many-to-one name="partida" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Partida" fetch="select">
 			<column name="id_partida"/>
 		</many-to-one>
+		<many-to-one name="responsableInsumo" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.ResponsableInsumo" fetch="select">
+			<column name="id_responsable_insumo"/>
+		</many-to-one>
 		<many-to-one name="costosExtras" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.CostosExtras" fetch="select">
 			<column name="id_costos_extras"/>
 		</many-to-one>
