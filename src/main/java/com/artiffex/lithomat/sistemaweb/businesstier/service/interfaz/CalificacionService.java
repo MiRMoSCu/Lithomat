@@ -8,6 +8,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.dto.ReporteCotizacionDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionOrdenProduccion;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionProcesosPartida;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionTrabajoDetalle;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.OrdenTrabajo;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.Remision;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades._CalificacionPartida;
 
@@ -44,6 +45,8 @@ public interface CalificacionService {
 	public List<ReporteCotizacionDTO> obtieneListaPrecioCotizacionPartida(String nut);
 	
 	public List<Remision> obtieneRemisionPorNut(String nut);
+	
+	public List<OrdenTrabajo> obtieneOrdenTrabajo(String nut);
 	
 	// Ejemplos JasperReports
 	

@@ -2,6 +2,7 @@ package com.artiffex.lithomat.sistemaweb.businesstier.service.implementacion;
 
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -19,6 +20,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionProcesos
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionTrabajoDetalle;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.OrdenProduccion;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Partida;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.Pliego;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajoDetalle;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CalificacionService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.DisenioService;
@@ -28,6 +30,10 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PliegoServ
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TabuladorPreciosService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TintaEspecialService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoTrabajoDetalleService;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.OrdenTrabajo;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.OrdenTrabajoPartida;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.OrdenTrabajoPliego;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.OrdenTrabajoTipoTrabajoDetalle;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.Precio;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.Remision;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades._CalificacionPartida;
@@ -1011,6 +1017,123 @@ public class CalificacionServiceImpl implements CalificacionService {
 	}
 	
 	
+	public List<OrdenTrabajo> obtieneOrdenTrabajo(String nut) {
+		List<OrdenTrabajo> listaOrdenTrabajo = new ArrayList<OrdenTrabajo>();
+		
+		OrdenTrabajo ot = new OrdenTrabajo();
+		List<OrdenTrabajoPartida> listaOrdenTrabajoPartida = new ArrayList<OrdenTrabajoPartida>();
+		OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
+		List<Partida> listaPartida = partidaService.listaPartidaPorOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
+		for (Partida partida : listaPartida) {
+			OrdenTrabajoPartida otp = new OrdenTrabajoPartida();
+			List<OrdenTrabajoTipoTrabajoDetalle> listaOrdenTrabajoTipoTrabajoDetalle = new ArrayList<OrdenTrabajoTipoTrabajoDetalle>();
+			List<TipoTrabajoDetalle> listaTipoTrabajoDetalle = tipoTrabajoDetalleService.listaTipoTrabajoDetallePorPartida(partida.getIdPartida());
+			for (TipoTrabajoDetalle tipoTrabajoDetalle : listaTipoTrabajoDetalle) {
+				OrdenTrabajoTipoTrabajoDetalle otttd = new OrdenTrabajoTipoTrabajoDetalle();
+				List<OrdenTrabajoPliego> listaOrdenTrabajoPliego = new ArrayList<OrdenTrabajoPliego>();
+				List<Pliego> listaPliegos = pliegoService.listaPliegoPorTipoTrabajoDetalle(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());
+				int cont = 1;
+				for (Pliego pliego : listaPliegos) {
+					OrdenTrabajoPliego otpl = new OrdenTrabajoPliego();
+					otpl.setId(cont++);
+					otpl.setPapel(tipoTrabajoDetalleService.obtienePapelDescripcionBasica(tipoTrabajoDetalle.getIdTipoTrabajoDetalle()));
+					otpl.setHojasRequeridas(pliego.getHojasRequeridas());
+					otpl.setHojasSobrantes(pliego.getHojasSobrantes());
+					otpl.setHojasTotales(pliego.getHojasTotales());
+						StringBuilder descripcionEntMaq = new StringBuilder();
+						descripcionEntMaq.append(tipoTrabajoDetalle.getFrenteCombinacionTintas().getNumTintas());
+						descripcionEntMaq.append(": ");
+						descripcionEntMaq.append(tipoTrabajoDetalle.getFrenteCombinacionTintas().getDescripcion());
+						if( tipoTrabajoDetalle.getFrenteNumTintaEspecial() > 0 ) {
+							descripcionEntMaq.append(" + ");
+							descripcionEntMaq.append(tipoTrabajoDetalle.getFrenteNumTintaEspecial() + tipoTrabajoDetalle.getVueltaNumTintaEspecial());
+							descripcionEntMaq.append(" esp");
+						}
+						if( tipoTrabajoDetalle.getFrenteTipoBarniz().getNumEntradasMaquina() > 0 )
+							descripcionEntMaq.append(" + B");
+					otpl.setFrenteEntMaq(descripcionEntMaq.toString());
+						descripcionEntMaq.delete(0, descripcionEntMaq.length());
+						descripcionEntMaq.append(tipoTrabajoDetalle.getVueltaCombinacionTintas().getNumTintas());
+						descripcionEntMaq.append(": ");
+						descripcionEntMaq.append(tipoTrabajoDetalle.getVueltaCombinacionTintas().getDescripcion());
+						if( tipoTrabajoDetalle.getVueltaNumTintaEspecial() > 0 ) {
+							descripcionEntMaq.append(" + ");
+							descripcionEntMaq.append(tipoTrabajoDetalle.getVueltaNumTintaEspecial());
+							descripcionEntMaq.append(" esp");
+						}
+						if( tipoTrabajoDetalle.getVueltaTipoBarniz().getNumEntradasMaquina() > 0 )
+							descripcionEntMaq.append(" + B");
+					otpl.setVueltaEntMaq(descripcionEntMaq.toString());
+						descripcionEntMaq = null;
+					otpl.setRebases(pliego.getRebaseEnMilimetros());
+					otpl.setMedianiles(pliego.getMedianilesEnMilimetros());
+					otpl.setPinzas(pliego.getPinzasEnCentimetros());
+					listaOrdenTrabajoPliego.add(otpl);
+					otpl	 = null;
+					pliego	 = null;
+				}
+				otttd.setMaquina(tipoTrabajoDetalle.getMaquina().getNombre());
+				otttd.setTipoPlaca(tipoTrabajoDetalle.getTipoPlaca().getDescripcion());
+				otttd.setDescripcion(tipoTrabajoDetalle.getDescripcion());
+				otttd.setAncho((int)tipoTrabajoDetalle.getAncho());
+				otttd.setAlto((int)tipoTrabajoDetalle.getAlto());
+				otttd.setAnchoExtendido((int)tipoTrabajoDetalle.getAnchoExtendido());
+				otttd.setAltoExtendido((int)tipoTrabajoDetalle.getAltoExtendido());
+				otttd.setTipoPapel(tipoTrabajoDetalleService.obtienePapelDescripcionBasica(tipoTrabajoDetalle.getIdTipoTrabajoDetalle()));
+				otttd.setNumeroPaginas(tipoTrabajoDetalle.getNumeroPaginasPublicacion());
+				otttd.setTamanioPublicacion(tipoTrabajoDetalle.getTamanioPublicacion().getNombre());
+				otttd.setRepeticionesPorPliego(tipoTrabajoDetalle.getRepeticionesXPliego());
+				otttd.setFrenteCombinacionTintas(tipoTrabajoDetalle.getFrenteCombinacionTintas().getDescripcion());
+				if( tipoTrabajoDetalle.getFrenteNumTintaEspecial() > 0 ) 
+					otttd.setFrenteTintaEspecial(tipoTrabajoDetalle.getFrenteNumTintaEspecial() + " : " + tipoTrabajoDetalle.getFrenteDescripcionTintaEspecial());
+				else
+					otttd.setFrenteTintaEspecial("0");
+				otttd.setFrenteTipoBarniz(tipoTrabajoDetalle.getFrenteTipoBarniz().getDescripcion());
+				otttd.setVueltaCombinacionTintas(tipoTrabajoDetalle.getVueltaCombinacionTintas().getDescripcion());
+				if( tipoTrabajoDetalle.getVueltaNumTintaEspecial() > 0 )
+					otttd.setVueltaTintaEspecial(tipoTrabajoDetalle.getVueltaNumTintaEspecial() + " : " + tipoTrabajoDetalle.getVueltaDescripcionTintaEspecial());
+				else
+					otttd.setVueltaTintaEspecial("0");
+				otttd.setVueltaTipoBarniz(tipoTrabajoDetalle.getVueltaTipoBarniz().getDescripcion());
+				otttd.setListaOrdenTrabajoPliego(listaOrdenTrabajoPliego); 
+				listaOrdenTrabajoPliego = null;
+				listaOrdenTrabajoTipoTrabajoDetalle.add(otttd);
+				otttd 				= null;
+				listaPliegos 		= null;
+				tipoTrabajoDetalle	= null;
+			}
+			otp.setTipoTrabajo(partida.getTipoTrabajo().getNombre());
+			otp.setCantidad(partida.getCantidad());
+			otp.setNombrePartida(partida.getNombrePartida());
+			otp.setDescripcionPartida(partida.getDescripcionPartida());
+			otp.setObservacionesGenerales(partida.getObservacionesGenerales());
+			otp.setObservacionesAprobacion(partida.getObservacionesAprobacion());
+			otp.setListaOrdenTrabajoTipoTrabajoDetalle(listaOrdenTrabajoTipoTrabajoDetalle);
+			listaOrdenTrabajoTipoTrabajoDetalle = null;
+			listaOrdenTrabajoPartida.add(otp);
+			otp 					= null;
+			listaTipoTrabajoDetalle = null;
+			partida 				= null;
+		}
+		ot.setNombreCliente(ordenProduccion.getCliente().getNombreMoral());
+		ot.setNombreRepresentante(ordenProduccion.getCliente().getNombreRepresentante());
+		ot.setTelefonoParticular(ordenProduccion.getCliente().getTelefonoParticular());
+		ot.setTelefonoMovil(ordenProduccion.getCliente().getTelefonoMovil());
+		ot.setNut(ordenProduccion.getNut());
+		ot.setNombreTrabajo(ordenProduccion.getNombre());
+		ot.setDescripcion(ordenProduccion.getDescripcion());
+		ot.setFechaEntrega(new SimpleDateFormat("dd MMM yyyy").format(ordenProduccion.getFechaEntrega()));
+		ot.setListaOrdenTrabajoPartida(listaOrdenTrabajoPartida);
+		listaOrdenTrabajoPartida = null;
+		listaOrdenTrabajo.add(ot);
+		ot 				= null;
+		listaPartida 	= null;
+		ordenProduccion = null;
+		
+		return listaOrdenTrabajo;
+	}
+	
+	
 	public List<OrdenProduccionDTOAyuda> obtieneVOPruebaJasper(int idOrdenProduccion) {
 		return calificacionOrdenProduccionDAO.obtieneVOPruebaJasper(idOrdenProduccion);
 	}
@@ -1019,6 +1142,8 @@ public class CalificacionServiceImpl implements CalificacionService {
 	public List<CalificacionTrabajoDetalleDTOAyuda> obtieneEjemploVOPapel() {
 		return calificacionOrdenProduccionDAO.ejemploListaPapel();
 	}
+
+	
 	
 }
 

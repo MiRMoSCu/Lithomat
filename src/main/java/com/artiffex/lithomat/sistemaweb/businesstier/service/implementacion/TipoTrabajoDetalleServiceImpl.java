@@ -225,5 +225,20 @@ public class TipoTrabajoDetalleServiceImpl implements TipoTrabajoDetalleService 
 
 		return html.toString();
 	}
+
+	public String obtienePapelDescripcionBasica(int idTipoTrabajoDetalle) {
+		StringBuffer papelDescripcion = new StringBuffer();
+		TipoTrabajoDetalle ttd = tipoTrabajoDetalleDAO.busca(idTipoTrabajoDetalle);
+		papelDescripcion.append(ttd.getTipoPapelExtendido().getNombre());
+		papelDescripcion.append(" ");
+		papelDescripcion.append((int)ttd.getTipoPapelExtendido().getAncho());
+		papelDescripcion.append("x");
+		papelDescripcion.append((int)ttd.getTipoPapelExtendido().getAlto());
+		papelDescripcion.append(" ");
+		papelDescripcion.append(ttd.getTipoPapelExtendido().getGramaje());
+		papelDescripcion.append("g.");
+		ttd = null;
+		return papelDescripcion.toString();
+	}
 	
 }

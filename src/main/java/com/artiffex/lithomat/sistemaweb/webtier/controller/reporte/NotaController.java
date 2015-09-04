@@ -45,6 +45,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.Calificaci
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.ClienteService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.OrdenProduccionService;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.OrdenTrabajo;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.Remision;
 
 @Controller
@@ -329,7 +330,6 @@ public class NotaController {
 		String path = request.getSession().getServletContext().getRealPath("/");
 		// PARAMETROS
 		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
-		
 		parameterMap.put("SUBREPORT_DIR",path + DIRECTORIO_ORIGEN + "RemisionChild.jasper");
 		parameterMap.put("nut",nut);
 		parameterMap.put("nombreCliente",ordenProduccion.getCliente().getNombreMoral());
@@ -403,6 +403,91 @@ public class NotaController {
 			response.getOutputStream().print(stringWriter.toString());
 		}
 		listaRemision = null;
+	}
+	
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
+	@RequestMapping(value = "/exporta_orden_trabajo", method = RequestMethod.GET)
+	public void exportaOrdenTrabajo(
+				@RequestParam(value = "nut", required = false) String nut,
+				HttpServletRequest request,
+				HttpServletResponse response
+			) throws IOException {
+		log.info("/exporta_orden_trabajo");
+		
+		// INFORMACION DEL DATASOURCE
+		List<OrdenTrabajo> listaOrdenTrabajo = calificacionService.obtieneOrdenTrabajo(nut);
+		
+		// PARAMETROS
+		String path = request.getSession().getServletContext().getRealPath("/");
+		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("SUBREPORT_PARTIDA",path + DIRECTORIO_ORIGEN + "OrdenTrabajoPartida.jasper");
+		parameterMap.put("SUBREPORT_TIPO_TRABAJO_DETALLE",path + DIRECTORIO_ORIGEN + "OrdenTrabajoTipoTrabajoDetalle.jasper");
+		parameterMap.put("SUBREPORT_PLIEGO",path + DIRECTORIO_ORIGEN + "OrdenTrabajoPliego.jasper");
+		
+		try {
+			OutputStream outputStream 				= response.getOutputStream();
+			
+			InputStream reportStream 				= context.getResourceAsStream(DIRECTORIO_ORIGEN + "OrdenTrabajoMaster.jasper");			
+			JRBeanCollectionDataSource dataSource 	= new JRBeanCollectionDataSource(listaOrdenTrabajo);
+			JasperPrint jasperPrint 				= JasperFillManager.fillReport( reportStream, parameterMap, dataSource );
+			
+			//System.out.println("tipo_formato:" + tipo_formato);
+			int idTipoFormato = 12;
+			switch( idTipoFormato ) {
+				case 1:	// PDF
+					response.setHeader("Content-Disposition", "attachment; filename=OT" + nut + ".pdf");
+					response.setContentType("application/pdf");
+					//JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream); // funciona
+					JRPdfExporter pdfExporter = new JRPdfExporter();
+					pdfExporter.setExporterInput( new SimpleExporterInput(jasperPrint) );
+					pdfExporter.setExporterOutput( new SimpleOutputStreamExporterOutput(outputStream) );
+					pdfExporter.exportReport();
+					break;
+				case 2: // RTF
+					response.setHeader("Content-Disposition", "attachment; filename=OT" + nut + ".doc");
+					response.setContentType("application/rtf");
+					JRRtfExporter rtfExporter = new JRRtfExporter();
+					rtfExporter.setExporterInput( new SimpleExporterInput(jasperPrint) );
+					rtfExporter.setExporterOutput( new SimpleHtmlExporterOutput(outputStream) );
+					rtfExporter.exportReport();
+					break;
+				case 3: // EXCEL // NO ESTA CONFIGURADO, QUIZA NO FUNCIONE
+					response.setHeader("Content-Disposition", "attachment; filename=OT" + nut + ".xls");
+					response.setContentType("application/vnd.ms-excel");
+					//JRXlsExporter xlsExporter = new JRXlsExporter();
+					//xlsExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+					//xlsExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(outputStream));
+					//SimpleXlsReportConfiguration configuration = new SimpleXlsReportConfiguration();
+					//configuration.setOnePagePerSheet(true);
+					//configuration.setDetectCellType(true);
+					//configuration.setCollapseRowSpan(false);
+					//xlsExporter.setConfiguration(configuration);
+					break;
+				default: // en pantalla
+					response.setContentType("application/pdf");
+					try {
+						JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
+					}catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+					break;
+			}
+			outputStream.flush();
+			outputStream.close();
+			
+		} catch (JRException e) {
+			// display stack trace in the browser
+			StringWriter stringWriter = new StringWriter();
+			PrintWriter printWriter = new PrintWriter(stringWriter);
+			e.printStackTrace(printWriter);
+			response.setContentType("text/plain");
+			response.getOutputStream().print(stringWriter.toString());
+		}
+		
+		listaOrdenTrabajo = null;
+		
 	}
 
 }

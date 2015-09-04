@@ -23,5 +23,7 @@ public interface TipoTrabajoDetalleService {
 	public HashMap<String, Object> obtieneSumatorias(int idTipoTrabajoDetalle);
 	
 	public String buscaHTML(int idPartida);
+	
+	public String obtienePapelDescripcionBasica(int idTipoTrabajoDetalle);
 
 }

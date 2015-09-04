@@ -388,4 +388,36 @@ public class PruebasJasperController {
 			response.getOutputStream().print(stringWriter.toString());
 		}
 	}
+	
+	
+	@RequestMapping(value = "/reporte_ot_frio", method = RequestMethod.GET)
+	public void reporteOrdenTrabajoFrio(
+			HttpServletRequest request,
+			HttpServletResponse response
+		) throws IOException {
+		
+		try {
+			InputStream reportStream 	= context.getResourceAsStream( DIRECTORIO_ORIGEN + "OrdenTrabajoFrio.jasper");
+			OutputStream outputStream 	= response.getOutputStream();
+
+			JREmptyDataSource dataSource = new JREmptyDataSource();
+			//JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(listaPersona);
+			JasperRunManager.runReportToPdfStream( reportStream, outputStream, null, dataSource );
+
+			response.setContentType("application/pdf");
+			outputStream.flush();
+			outputStream.close();
+			
+		} catch (JRException e) {
+			// display stack trace in the browser
+			StringWriter stringWriter 	= new StringWriter();
+			PrintWriter printWriter 	= new PrintWriter(stringWriter);
+			e.printStackTrace(printWriter);
+			response.setContentType("text/plain");
+			response.getOutputStream().print(stringWriter.toString());
+		}
+	}
+	
+	
+	
 }

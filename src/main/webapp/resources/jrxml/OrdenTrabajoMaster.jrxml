@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
+<!-- 2015-09-03T17:54:42 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdenProduccion" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f0b5206b-deb3-40ee-a30a-3afb64785693">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="SUBREPORT_PARTIDA" class="java.lang.String"/>
+	<parameter name="SUBREPORT_TIPO_TRABAJO_DETALLE" class="java.lang.String"/>
+	<parameter name="SUBREPORT_PLIEGO" class="java.lang.String"/>
+	<field name="nombreCliente" class="java.lang.String"/>
+	<field name="nombreRepresentante" class="java.lang.String"/>
+	<field name="telefonoParticular" class="java.lang.String"/>
+	<field name="telefonoMovil" class="java.lang.String"/>
+	<field name="nut" class="java.lang.String"/>
+	<field name="nombreTrabajo" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="fechaEntrega" class="java.lang.String"/>
+	<field name="listaOrdenTrabajoPartida" class="java.util.List"/>
+	<title>
+		<band height="176" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="130" width="100" height="15" uuid="6213e30b-8530-4e95-8078-997db92f08b7">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="51" width="100" height="15" uuid="8b5410d5-4d3a-46c2-9027-60629e56b970">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tel. móvil:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="52" y="74" width="450" height="1" uuid="d553520b-3f56-44e8-97cb-51c91d1c2425">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="36" width="100" height="15" uuid="dc10b364-12fa-43c2-8cbc-bf1d75955823">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Representante:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="20" uuid="c507bd97-7403-4b74-b66b-a5c8c31e3574">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true" isItalic="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="51" width="100" height="15" uuid="e0125d30-b94d-4cba-95c4-b60fdac5cd73">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tel. particular:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="157" width="100" height="15" uuid="1089bd34-c63e-4eff-a3c9-4d5dd8fc5c8d">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha entrega:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="21" width="100" height="15" uuid="581e7e5b-b3cd-44a6-abed-3ce13ca04990">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="103" width="100" height="15" uuid="fd9fa843-b239-450b-884a-ecd8d5c25354">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre Trabajo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="82" width="160" height="20" uuid="82b05390-bdaf-4e96-886b-e57a5c7a3e52">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[- Orden de Trabajo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="404" y="82" width="39" height="20" uuid="e1b3fef3-6355-4054-88cc-14b920e1e863">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NUT:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="21" width="428" height="15" uuid="77fbca8b-4027-4e06-be55-c0951d5f7885">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombreCliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="36" width="428" height="15" uuid="a745c901-84f8-4dd6-88d3-80a239dda7b6">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombreRepresentante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="51" width="145" height="15" uuid="c2da4682-5815-41c8-b4a6-5dc2cf1ea21f">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{telefonoParticular}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="51" width="145" height="15" uuid="31aee427-610a-4103-9349-ef4ad827534e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{telefonoMovil}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="443" y="82" width="111" height="20" uuid="01e75c9f-3215-49df-8662-af3c77f5f64e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nut}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="103" width="428" height="27" uuid="7e560514-54ad-4ee7-8998-cf4611625f10">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreTrabajo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="130" width="428" height="27" uuid="0a763a2c-1542-46db-9a7c-d2c1f77d9579">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="157" width="100" height="15" uuid="6e4a5361-1167-4d5e-9c5d-f85ece827c79">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaEntrega}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="575" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<subreport>
+				<reportElement x="0" y="2" width="554" height="570" uuid="73563f31-da0c-4ac4-b8ec-7aa054302847">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<subreportParameter name="SUBREPORT_TIPO_TRABAJO_DETALLE">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_TIPO_TRABAJO_DETALLE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_PLIEGO">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_PLIEGO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaOrdenTrabajoPartida})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_PARTIDA}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>
