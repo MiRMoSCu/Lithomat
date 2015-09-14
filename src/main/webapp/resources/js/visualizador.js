@@ -26,7 +26,7 @@ function muestra_detalle_nut( nut ) {
         player: "iframe",
         width: 1278,
         height: 804,
-        options: { modal: true,
+        options: { modal: true, // IMPERATIVO CERRAR MANUALMENTE
                    overlayOpacity: 0.75 }
     });
 } // muestra_detalle_nut

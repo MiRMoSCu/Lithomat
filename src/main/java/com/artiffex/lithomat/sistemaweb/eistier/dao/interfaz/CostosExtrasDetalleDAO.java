@@ -14,11 +14,6 @@ public interface CostosExtrasDetalleDAO {
 	
 	public List<CostosExtrasDetalle> lista();
 	
-	public List<CostosExtrasDetalle> listaPorPartida(int idPartida);
+	public List<CostosExtrasDetalle> listaPorTipoTrabajoDetalle(int idTipoTrabajoDetalle);
 	
-
-	
-	
-	//public float getSumatoriaPrecioTotalPesos(int idPartida); // FALTA CORREGIR
-
 }

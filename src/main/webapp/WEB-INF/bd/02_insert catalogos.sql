@@ -36,7 +36,7 @@ INSERT INTO tipo_precio (id_tipo_precio, nombre, descripcion, factor_divisor, ac
 INSERT INTO tipo_precio (id_tipo_precio, nombre, descripcion, factor_divisor, activo) VALUES (3,'Ciento','Precio por ciento',100,true);
 INSERT INTO tipo_precio (id_tipo_precio, nombre, descripcion, factor_divisor, activo) VALUES (4,'Millar','Precio por millares',1000,true);
 INSERT INTO tipo_precio (id_tipo_precio, nombre, descripcion, factor_divisor, activo) VALUES (5,'Hora','Precio por hora',60,true);
-INSERT INTO tipo_precio (id_tipo_precio, nombre, descripcion, factor_divisor, activo) VALUES (6,'Porcentaje','Precio por porcentaje',1,true);
+INSERT INTO tipo_precio (id_tipo_precio, nombre, descripcion, factor_divisor, activo) VALUES (6,'Porcentaje','Precio por porcentaje',100,true);
 INSERT INTO tipo_precio (id_tipo_precio, nombre, descripcion, factor_divisor, activo) VALUES (7,'Centímetro cuadrado','Precio por centímetro cuadrado',1,true);
 
 
@@ -208,8 +208,8 @@ INSERT INTO tipo_complejidad (id_tipo_complejidad, nombre, descripcion, activo) 
 
 
 
-INSERT INTO tipo_comprobante_fiscal (id_tipo_comprobante_fiscal, nombre, descripcion, precio, id_tipo_precio, activo) VALUES (1,'Nota de remisión',NULL,0,1,true);
-INSERT INTO tipo_comprobante_fiscal (id_tipo_comprobante_fiscal, nombre, descripcion, precio, id_tipo_precio, activo) VALUES (2,'Factura',NULL,16,6,true);
+INSERT INTO tipo_comprobante_fiscal (id_tipo_comprobante_fiscal, nombre, descripcion, precio, id_tipo_precio, activo) VALUES (1,'Nota de Remisión',NULL,0,1,true);
+INSERT INTO tipo_comprobante_fiscal (id_tipo_comprobante_fiscal, nombre, descripcion, precio, id_tipo_precio, activo) VALUES (2,'Nota de Factura',NULL,16,6,true);
 
 
 

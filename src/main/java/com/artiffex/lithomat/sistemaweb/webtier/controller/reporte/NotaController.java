@@ -407,9 +407,10 @@ public class NotaController {
 	
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
-	@RequestMapping(value = "/exporta_orden_trabajo", method = RequestMethod.GET)
+	@RequestMapping(value = "/orden_trabajo", method = RequestMethod.POST)
 	public void exportaOrdenTrabajo(
-				@RequestParam(value = "nut", required = false) String nut,
+				@RequestParam(value = "nut", 				required = false) String nut,
+				@RequestParam(value = "id_tipo_formato",	required = false) Integer idTipoFormato,
 				HttpServletRequest request,
 				HttpServletResponse response
 			) throws IOException {
@@ -433,7 +434,6 @@ public class NotaController {
 			JasperPrint jasperPrint 				= JasperFillManager.fillReport( reportStream, parameterMap, dataSource );
 			
 			//System.out.println("tipo_formato:" + tipo_formato);
-			int idTipoFormato = 12;
 			switch( idTipoFormato ) {
 				case 1:	// PDF
 					response.setHeader("Content-Disposition", "attachment; filename=OT" + nut + ".pdf");

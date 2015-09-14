@@ -7,11 +7,11 @@ public class CostosExtrasDetalle implements Serializable {
 	private static final long serialVersionUID = -2491101489030489130L;
 
 	private int idCostosExtrasDetalle;
-	private Partida partida;
+	private TipoTrabajoDetalle tipoTrabajoDetalle;
 	private ResponsableInsumo responsableInsumo;
 	private CostosExtras costosExtras;
 	private int cantidad;
-	private String especificaciones;
+	private String especificacion;
 	private float precioTotalPesos;
 	private boolean activo;
 	
@@ -22,11 +22,11 @@ public class CostosExtrasDetalle implements Serializable {
 	public void setIdCostosExtrasDetalle(int idCostosExtrasDetalle) {
 		this.idCostosExtrasDetalle = idCostosExtrasDetalle;
 	}
-	public Partida getPartida() {
-		return partida;
+	public TipoTrabajoDetalle getTipoTrabajoDetalle() {
+		return tipoTrabajoDetalle;
 	}
-	public void setPartida(Partida partida) {
-		this.partida = partida;
+	public void setTipoTrabajoDetalle(TipoTrabajoDetalle tipoTrabajoDetalle) {
+		this.tipoTrabajoDetalle = tipoTrabajoDetalle;
 	}
 	public ResponsableInsumo getResponsableInsumo() {
 		return responsableInsumo;
@@ -46,11 +46,11 @@ public class CostosExtrasDetalle implements Serializable {
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
-	public String getEspecificaciones() {
-		return especificaciones;
+	public String getEspecificacion() {
+		return especificacion;
 	}
-	public void setEspecificaciones(String especificaciones) {
-		this.especificaciones = especificaciones;
+	public void setEspecificacion(String especificacion) {
+		this.especificacion = especificacion;
 	}
 	public float getPrecioTotalPesos() {
 		return precioTotalPesos;
@@ -64,5 +64,4 @@ public class CostosExtrasDetalle implements Serializable {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-		
 }

@@ -57,12 +57,6 @@
 			</key>
 			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajoDetalle"/>
 		</set>
-		<set name="costosExtrasDetalle" table="costos_extra_detalle" inverse="true" lazy="true" fetch="select">
-			<key>
-				<column name="id_partida" not-null="true"/>
-			</key>
-			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.CostosExtrasDetalle"/>
-		</set>
 		<set name="materialAyudaXPartida" table="material_ayuda_x_partida" inverse="true" lazy="true" fetch="select">
 			<key>
 				<column name="id_partida" not-null="true"/>

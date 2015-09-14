@@ -20,8 +20,8 @@
 			<column name="tipo_cliente_precio"/>
 			<type name="float"/>
 		</property>
-		<property name="tipoClienteIdTipoPrecio">
-			<column name="tipo_cliente_id_tipo_precio"/>
+		<property name="tipoClienteFactorDivisor">
+			<column name="tipo_cliente_factor_divisor"/>
 			<type name="integer"/>
 		</property>
 		<property name="precioCliente">

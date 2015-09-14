@@ -243,7 +243,6 @@ function ajaxSubPartida( id_tipo_trabajo_detalle ) {
         		sumatoria += response.placasCosteTotal;
         	}
         		
-        		
         	document.resumen_tipo_trabajo_detalle.tipo_trabajo_detalle_coste_total.value 		= "$ " + (sumatoria).formatMoney(2);
         	delete sumatoria;
         	delete response;

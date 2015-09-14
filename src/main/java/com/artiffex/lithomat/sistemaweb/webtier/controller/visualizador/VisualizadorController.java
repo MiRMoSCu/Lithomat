@@ -496,9 +496,10 @@ public class VisualizadorController {
 		String jsonArbol = ordenProduccionService.generaJsonArbolOrdenProduccion(op.getIdOrdenProduccion());
 		model.addAttribute("jsonArbol", jsonArbol);
 		
-		op 	= null;
-		c 	= null;
-		cop	= null;
+		op 			= null;
+		c 			= null;
+		cop			= null;
+		jsonArbol	= null;
 		
 		return "visualizador/detalle_precio";
 	} // obtienePrecioDetalle

@@ -46,9 +46,8 @@ INSERT INTO material_ayuda_x_partida (id_material_ayuda_x_partida, id_partida, i
 
 
 
-INSERT INTO costos_extras_detalle (id_costos_extras_detalle, id_partida, id_costos_extras, especificaciones, precio_total_pesos, cantidad, activo) VALUES (1,1,1,' Porque cliente equivoco prueba de color',100.1,1,true);
-INSERT INTO costos_extras_detalle (id_costos_extras_detalle, id_partida, id_costos_extras, especificaciones, precio_total_pesos, cantidad, activo) VALUES (2,1,5,' Porque cliente equivoco prueba de color',215.25,1,true);
-INSERT INTO costos_extras_detalle (id_costos_extras_detalle, id_partida, id_costos_extras, especificaciones, precio_total_pesos, cantidad, activo) VALUES (3,2,6,NULL,300.13,2,true);
+INSERT INTO costos_extras_detalle (id_costos_extras_detalle, id_tipo_trabajo_detalle, id_responsable_insumo, id_costos_extras, especificacion, precio_total_pesos, cantidad, activo) VALUES (1,1,1,1,' Porque cliente equivoco prueba de color',100.1,1,true);
+INSERT INTO costos_extras_detalle (id_costos_extras_detalle, id_tipo_trabajo_detalle, id_responsable_insumo, id_costos_extras, especificacion, precio_total_pesos, cantidad, activo) VALUES (2,1,1,5,' Porque cliente equivoco prueba de color',215.25,1,true);
 
 
 
@@ -133,4 +132,4 @@ INSERT INTO calificacion_procesos_partida (id_calificacion_procesos_partida, id_
 
 
 
-INSERT INTO calificacion_orden_produccion (id_calificacion_orden_produccion, id_orden_produccion, precio_bruto, tipo_cliente_precio, tipo_cliente_id_tipo_precio, precio_cliente, porcentaje_descuento, precio_bruto_con_descuento, precio_neto, observaciones, condiciones_produccion, fecha_generacion, activo) VALUES (1,1,1,1,1,1,1,1,1,1,'Ninguna','2013-09-19 03:14:07',true);
+INSERT INTO calificacion_orden_produccion (id_calificacion_orden_produccion, id_orden_produccion, precio_bruto, tipo_cliente_precio, tipo_cliente_factor_divisor, precio_cliente, porcentaje_descuento, precio_bruto_con_descuento, precio_neto, observaciones, condiciones_produccion, fecha_generacion, activo) VALUES (1,1,1,1,1,1,1,1,1,1,'Ninguna','2013-09-19 03:14:07',true);

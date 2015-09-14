@@ -33,6 +33,7 @@
 <c:url value="/material_ayuda_x_partida/agrega_olvidado"	var="urlAgregaMaterialAyudaXPartidaOlvidado"/>
 <c:url value="/material_ayuda_x_partida/actualiza"       	var="urlActualizaMaterialAyudaXPartida"/>
 <c:url value="/material_ayuda_x_partida/elimina"       		var="urlEliminaMaterialAyudaXPartida"/>
+<c:url value="/costos_extras_detalle"       				var="urlCostosExtrasDetalle"/>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
@@ -106,6 +107,7 @@
             var urlAgregaMaterialAyudaXPartidaOlvidado	= "${urlAgregaMaterialAyudaXPartidaOlvidado}";
             var urlActualizaMaterialAyudaXPartida		= "${urlActualizaMaterialAyudaXPartida}";
             var urlEliminaMaterialAyudaXPartida			= "${urlEliminaMaterialAyudaXPartida}";
+            var urlCostosExtrasDetalle					= "${urlCostosExtrasDetalle}";
         </script>
         <script type="text/javascript">
             var strJsonListaProcesoDisenio      = '${jsonListaProcesoDisenio}';

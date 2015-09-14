@@ -5,16 +5,13 @@ import java.sql.Timestamp;
 
 public class CalificacionOrdenProduccion implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4913956952064195216L;
 	
 	private int idCalificacionOrdenProduccion;
 	private OrdenProduccion ordenProduccion;
 	private double precioBruto;
 	private float tipoClientePrecio;
-	private int tipoClienteIdTipoPrecio;
+	private int tipoClienteFactorDivisor;
 	private double precioCliente;
 	private int porcentajeDescuento;
 	private double precioBrutoConDescuento;
@@ -23,6 +20,7 @@ public class CalificacionOrdenProduccion implements Serializable {
 	private String condicionesProduccion;
 	private Timestamp fechaGeneracion;
 	private boolean activo;
+	
 	
 	public int getIdCalificacionOrdenProduccion() {
 		return idCalificacionOrdenProduccion;
@@ -48,11 +46,11 @@ public class CalificacionOrdenProduccion implements Serializable {
 	public void setTipoClientePrecio(float tipoClientePrecio) {
 		this.tipoClientePrecio = tipoClientePrecio;
 	}
-	public int getTipoClienteIdTipoPrecio() {
-		return tipoClienteIdTipoPrecio;
+	public int getTipoClienteFactorDivisor() {
+		return tipoClienteFactorDivisor;
 	}
-	public void setTipoClienteIdTipoPrecio(int tipoClienteIdTipoPrecio) {
-		this.tipoClienteIdTipoPrecio = tipoClienteIdTipoPrecio;
+	public void setTipoClienteFactorDivisor(int tipoClienteFactorDivisor) {
+		this.tipoClienteFactorDivisor = tipoClienteFactorDivisor;
 	}
 	public double getPrecioCliente() {
 		return precioCliente;
@@ -102,5 +100,4 @@ public class CalificacionOrdenProduccion implements Serializable {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	
 }

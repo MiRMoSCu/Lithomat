@@ -328,29 +328,14 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `lithomat_artiffex`.`costos_extras_detalle`
+-- Table `lithomat_artiffex`.`responsable_insumo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`costos_extras_detalle` (
-  `id_costos_extras_detalle` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_partida` INT UNSIGNED NOT NULL,
-  `id_costos_extras` INT UNSIGNED NOT NULL,
-  `cantidad` INT NULL,
-  `especificaciones` VARCHAR(200) NULL,
-  `precio_total_pesos` FLOAT NULL,
+CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`responsable_insumo` (
+  `id_responsable_insumo` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NULL,
+  `descripcion` VARCHAR(80) NULL,
   `activo` TINYINT(1) NULL,
-  PRIMARY KEY (`id_costos_extras_detalle`),
-  INDEX `fk_costos_extras_detalle_partida1_idx` (`id_partida` ASC),
-  INDEX `fk_costos_extras_detalle_costos_extras1_idx` (`id_costos_extras` ASC),
-  CONSTRAINT `fk_costos_extras_detalle_partida1`
-    FOREIGN KEY (`id_partida`)
-    REFERENCES `lithomat_artiffex`.`partida` (`id_partida`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_costos_extras_detalle_costos_extras1`
-    FOREIGN KEY (`id_costos_extras`)
-    REFERENCES `lithomat_artiffex`.`costos_extras` (`id_costos_extras`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`id_responsable_insumo`))
 ENGINE = InnoDB;
 
 
@@ -574,6 +559,40 @@ CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`tipo_trabajo_detalle` (
   CONSTRAINT `fk_tipo_trabajo_detalle_tipo_complejidad1`
     FOREIGN KEY (`id_tipo_complejidad`)
     REFERENCES `lithomat_artiffex`.`tipo_complejidad` (`id_tipo_complejidad`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `lithomat_artiffex`.`costos_extras_detalle`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`costos_extras_detalle` (
+  `id_costos_extras_detalle` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_tipo_trabajo_detalle` INT UNSIGNED NOT NULL,
+  `id_responsable_insumo` INT UNSIGNED NOT NULL,
+  `id_costos_extras` INT UNSIGNED NOT NULL,
+  `cantidad` INT NULL,
+  `especificacion` VARCHAR(200) NULL,
+  `precio_total_pesos` FLOAT NULL,
+  `activo` TINYINT(1) NULL,
+  PRIMARY KEY (`id_costos_extras_detalle`),
+  INDEX `fk_costos_extras_detalle_costos_extras1_idx` (`id_costos_extras` ASC),
+  INDEX `fk_costos_extras_detalle_responsable_insumo1_idx` (`id_responsable_insumo` ASC),
+  INDEX `fk_costos_extras_detalle_tipo_trabajo_detalle1_idx` (`id_tipo_trabajo_detalle` ASC),
+  CONSTRAINT `fk_costos_extras_detalle_costos_extras1`
+    FOREIGN KEY (`id_costos_extras`)
+    REFERENCES `lithomat_artiffex`.`costos_extras` (`id_costos_extras`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_costos_extras_detalle_responsable_insumo1`
+    FOREIGN KEY (`id_responsable_insumo`)
+    REFERENCES `lithomat_artiffex`.`responsable_insumo` (`id_responsable_insumo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_costos_extras_detalle_tipo_trabajo_detalle1`
+    FOREIGN KEY (`id_tipo_trabajo_detalle`)
+    REFERENCES `lithomat_artiffex`.`tipo_trabajo_detalle` (`id_tipo_trabajo_detalle`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -817,6 +836,8 @@ CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`offset_detalle` (
   `hojas_limpias` INT NULL,
   `hojas_adicionales` INT NULL,
   `laminas_extras` INT NULL,
+  `kilos_tinta_frente` INT NULL,
+  `kilos_tinta_vuelta` INT NULL,
   `activo` TINYINT(1) NULL,
   PRIMARY KEY (`id_offset_detalle`),
   INDEX `fk_offset_detalle_pliego1_idx` (`id_pliego` ASC),
@@ -837,18 +858,6 @@ CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`material_ayuda` (
   `descripcion` VARCHAR(80) NULL,
   `activo` TINYINT(1) NULL,
   PRIMARY KEY (`id_material_ayuda`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `lithomat_artiffex`.`responsable_insumo`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`responsable_insumo` (
-  `id_responsable_insumo` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NULL,
-  `descripcion` VARCHAR(80) NULL,
-  `activo` TINYINT(1) NULL,
-  PRIMARY KEY (`id_responsable_insumo`))
 ENGINE = InnoDB;
 
 
@@ -1421,7 +1430,7 @@ CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`calificacion_orden_produccion` (
   `id_orden_produccion` INT UNSIGNED NOT NULL,
   `precio_bruto` DECIMAL(12,2) NULL,
   `tipo_cliente_precio` FLOAT NULL,
-  `tipo_cliente_id_tipo_precio` INT NULL,
+  `tipo_cliente_factor_divisor` INT NULL,
   `precio_cliente` DECIMAL(12,2) NULL,
   `porcentaje_descuento` INT NULL,
   `precio_bruto_con_descuento` DECIMAL(12,2) NULL,

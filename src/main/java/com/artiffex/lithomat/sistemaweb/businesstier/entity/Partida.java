@@ -7,9 +7,6 @@ import java.util.Set;
 
 public class Partida implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4151926580853583278L;
 	
 	private int idPartida;
@@ -26,7 +23,6 @@ public class Partida implements Serializable {
 	private boolean activo;
 	// esta clase esta relacionada [uno a muchos] con las tablas: 
 	private Set<TipoTrabajoDetalle> tipoTrabajoDetalle = new HashSet<TipoTrabajoDetalle>();
-	private Set<CostosExtrasDetalle> costosExtrasDetalle = new HashSet<CostosExtrasDetalle>();
 	private Set<MaterialAyudaXPartida> materialAyudaXPartida = new HashSet<MaterialAyudaXPartida>();
 	private Set<CalificacionProcesosPartida> calificacionProcesosPartida = new HashSet<CalificacionProcesosPartida>();
 	private Set<Disenio> disenio = new HashSet<Disenio>();
@@ -113,12 +109,6 @@ public class Partida implements Serializable {
 	}
 	public void setTipoTrabajoDetalle(Set<TipoTrabajoDetalle> tipoTrabajoDetalle) {
 		this.tipoTrabajoDetalle = tipoTrabajoDetalle;
-	}
-	public Set<CostosExtrasDetalle> getCostosExtrasDetalle() {
-		return costosExtrasDetalle;
-	}
-	public void setCostosExtrasDetalle(Set<CostosExtrasDetalle> costosExtrasDetalle) {
-		this.costosExtrasDetalle = costosExtrasDetalle;
 	}
 	public Set<MaterialAyudaXPartida> getMaterialAyudaXPartida() {
 		return materialAyudaXPartida;

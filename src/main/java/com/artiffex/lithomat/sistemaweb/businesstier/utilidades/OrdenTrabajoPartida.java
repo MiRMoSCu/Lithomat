@@ -13,6 +13,11 @@ public class OrdenTrabajoPartida implements Serializable {
 	private String descripcionPartida;
 	private String observacionesGenerales;
 	private String observacionesAprobacion;
+	private String indicacionesDisenio;
+	private String indicacionesPreprensa;
+	private String indicacionesTransporte;
+	private String indicacionesAcabado;
+	private String indicacionesOffset;
 	private List<OrdenTrabajoTipoTrabajoDetalle> listaOrdenTrabajoTipoTrabajoDetalle;
 	
 	
@@ -51,6 +56,36 @@ public class OrdenTrabajoPartida implements Serializable {
 	}
 	public void setObservacionesAprobacion(String observacionesAprobacion) {
 		this.observacionesAprobacion = observacionesAprobacion;
+	}
+	public String getIndicacionesDisenio() {
+		return indicacionesDisenio;
+	}
+	public void setIndicacionesDisenio(String indicacionesDisenio) {
+		this.indicacionesDisenio = indicacionesDisenio;
+	}
+	public String getIndicacionesPreprensa() {
+		return indicacionesPreprensa;
+	}
+	public void setIndicacionesPreprensa(String indicacionesPreprensa) {
+		this.indicacionesPreprensa = indicacionesPreprensa;
+	}
+	public String getIndicacionesTransporte() {
+		return indicacionesTransporte;
+	}
+	public void setIndicacionesTransporte(String indicacionesTransporte) {
+		this.indicacionesTransporte = indicacionesTransporte;
+	}
+	public String getIndicacionesAcabado() {
+		return indicacionesAcabado;
+	}
+	public void setIndicacionesAcabado(String indicacionesAcabado) {
+		this.indicacionesAcabado = indicacionesAcabado;
+	}
+	public String getIndicacionesOffset() {
+		return indicacionesOffset;
+	}
+	public void setIndicacionesOffset(String indicacionesOffset) {
+		this.indicacionesOffset = indicacionesOffset;
 	}
 	public List<OrdenTrabajoTipoTrabajoDetalle> getListaOrdenTrabajoTipoTrabajoDetalle() {
 		return listaOrdenTrabajoTipoTrabajoDetalle;

@@ -26,7 +26,6 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PliegoServ
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PreprensaDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoTrabajoDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TransporteDetalleService;
-import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.Precio;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades._CalificacionPartida;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades._CalificacionProcesosPartida;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades._CalificacionTrabajoDetalle;
@@ -109,10 +108,7 @@ public class CalificacionController {
 		
 		OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
 		CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionService.buscaCalificacionOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
-		float porcentajeCliente = Precio.conversionRespectoTipoPrecio(
-				calificacionOrdenProduccion.getTipoClientePrecio(),
-				calificacionOrdenProduccion.getTipoClienteIdTipoPrecio()
-			);
+		float porcentajeCliente = calificacionOrdenProduccion.getTipoClientePrecio() / calificacionOrdenProduccion.getTipoClienteFactorDivisor();
 		calificacionOrdenProduccion	= null;
 		ordenProduccion 			= null;
 		
@@ -135,10 +131,7 @@ public class CalificacionController {
 		
 		OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
 		CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionService.buscaCalificacionOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
-		float porcentajeCliente = Precio.conversionRespectoTipoPrecio(
-				calificacionOrdenProduccion.getTipoClientePrecio(),
-				calificacionOrdenProduccion.getTipoClienteIdTipoPrecio()
-			);
+		float porcentajeCliente = calificacionOrdenProduccion.getTipoClientePrecio() / calificacionOrdenProduccion.getTipoClienteFactorDivisor();
 		calificacionOrdenProduccion	= null;
 		ordenProduccion 			= null;
 		
@@ -231,10 +224,7 @@ public class CalificacionController {
 		
 		OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
 		CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionService.buscaCalificacionOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
-		float porcentajeCliente = Precio.conversionRespectoTipoPrecio(
-				calificacionOrdenProduccion.getTipoClientePrecio(),
-				calificacionOrdenProduccion.getTipoClienteIdTipoPrecio()
-			);
+		float porcentajeCliente = calificacionOrdenProduccion.getTipoClientePrecio() / calificacionOrdenProduccion.getTipoClienteFactorDivisor();
 		calificacionOrdenProduccion	= null;
 		ordenProduccion 			= null;
 		

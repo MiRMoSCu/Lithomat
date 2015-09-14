@@ -1,0 +1,139 @@
+#div_area {
+    width: 700px;
+    height: 420px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* tamaño total */
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 77px;
+    background: transparent;
+}
+
+#div_ancho {
+    width: 700px;
+    height: 391px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_area - 29 (div_abajo3d) */
+}
+
+#div_hoja {
+    width: 671px; 
+    height: 391px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* igual div_ancho */
+    background: #FFF;
+    float: left;
+}
+
+#div_cuerpo {
+    width: 671px;
+    height: 391px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* igual div_ancho */
+    background: transparent; /*orange*/
+}
+
+#div_contenido {
+    width: 627px;
+    height: 391px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* igual div_ancho */
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    background: transparent; /*orange*/
+}
+
+#div_derecha3d {
+    width: 29px;
+    height: 391px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* igual div_ancho */
+    float: left;
+    /*background: purple;*/
+}
+
+#div_fondo_esq_sup {
+    width: 29px;
+    height: 31px;
+    background-image: url('../image/s_esq_sup.png');
+    background-repeat: no-repeat;
+}
+
+#div_fondo_der {
+    width: 29px;
+    height: 360px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_hoja - 31 (div_fondo_esq_sup) */
+    background-image: url('../image/s_der.png');
+    background-repeat: repeat-y;
+}
+
+#div_abajo3d {
+    width: 700px;
+    height: 29px;
+    float: left;
+}
+
+#div_fondo_esq_izq {
+    width: 32px;
+    height: 29px;
+    background-image: url('../image/s_esq_izq.png');
+    float: left;
+}
+
+#div_fondo_abajo {
+    width: 639px;
+    height: 29px;
+    background-image: url('../image/s_inf.png');
+    float: left;
+}
+
+#div_fondo_esq_der {
+    width: 29px;
+    height: 29px;
+    float: left;
+    background-image: url('../image/s_esq_der.png');
+}
+
+#div_espacio_inf {
+    height: 77px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 77px;
+}
+
+/*****/
+
+#div_formulario {
+    /*width:865px;*/
+    margin-left:auto;
+    margin-right:auto;
+    background:transparent;
+    display:block;
+}
+
+/*****/
+
+#div_costos_extras_detalle {
+	width:100%;
+	height:285px;
+	background-color:transparent;
+}
+
+#div_arbol_tipo_trabajo {
+	width:205px;
+	height:326px;
+	float:left;
+	background:transparent;
+}
+
+#div_costos_extras_tipo_trabajo {
+	width:422px;
+	height:100%;
+	float:left;
+	background:transparent;
+}
+
+#div_tabla_costos_extras_tipo_trabajo {
+	width:100%;
+	height:100px;
+	margin-left:auto; 
+	margin-right:auto;
+	overflow-x:scroll;
+}
+
+table#tabla_lista_costos_extras_tipo_trabajo tr:hover td {
+	cursor: pointer;
+    color: #000;
+    background-color: #99CCFF;
+}
+		

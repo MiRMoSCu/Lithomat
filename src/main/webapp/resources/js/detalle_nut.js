@@ -327,66 +327,84 @@ function buscaTrabajoDetalle( id_tipo_trabajo_detalle ) {
 } // buscaTrabajoDetalle
 
 function ajaxCambiaEstatus() {
-	
 	document.forms["cambio_estatus"].elements["id_orden_produccion"].value 	= document.forms["orden_produccion"].elements["id_orden_produccion"].value;
-	document.forms["cambio_estatus"].elements["id_estatus_orden"].value 	= document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].value; 
+	document.forms["cambio_estatus"].elements["id_estatus_orden"].value 	= document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].value;
 	
-	$.ajax({
-		type:"POST",
-		url:urlCambiaEstatusPartida,
-		data:$("[name='cambio_estatus']").serialize(),
-		success:function(response){
-			//console.log(response);
-			if(response.estatusOperacion != 0) {
-				var index = document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].selectedIndex;
-				document.forms["orden_produccion"].elements["estatus"].value = document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].options[index].text;
-				// modifica texto
-				var id_td = "td_" + document.forms["orden_produccion"].elements["nut"].value;
-				window.parent.document.getElementById(id_td).innerHTML = document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].options[index].text;
-				// modifica color
-				window.parent.document.getElementById(id_td).removeAttribute("class");
-				window.parent.document.getElementById(id_td).setAttribute("class","estatus_" + document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].value);
-				// elimina la opcion de modificar la informacion.
-				document.getElementById("div_btn_actualizar_orden_produccion").style.display 	= "none";
-				document.getElementById("div_btn_actualizar_partida").style.display 			= "none";
-				document.getElementById("div_btn_actualizar_ttd_encabezado").style.display 		= "none";
-				document.getElementById("div_btn_modificar_disenio").style.display 				= "none";
-				document.getElementById("div_btn_agregar_disenio_detalle").style.display 		= "none";
-				document.getElementById("div_btn_actualizar_disenio_detalle").style.display 	= "none";
-				document.getElementById("div_btn_modificar_preprensa").style.display 			= "none";
-				document.getElementById("div_btn_agregar_preprensa_detalle").style.display 		= "none";
-				document.getElementById("div_btn_actualizar_preprensa_detalle").style.display 	= "none";
-				document.getElementById("div_btn_modificar_transporte").style.display 			= "none";
-				document.getElementById("div_btn_agregar_transporte_detalle").style.display 	= "none";
-				document.getElementById("div_btn_actualizar_transporte_detalle").style.display 	= "none";
-				document.getElementById("div_btn_modificar_acabado").style.display 				= "none";
-				document.getElementById("div_btn_agregar_acabado_detalle").style.display 		= "none";
-				document.getElementById("div_btn_actualizar_acabado_detalle").style.display 	= "none";
-				document.getElementById("div_btn_modificar_offset").style.display 				= "none";
-				document.getElementById("div_btn_agregar_material_ayuda").style.display 		= "none";
-				document.getElementById("div_btn_actualizar_material_ayuda").style.display 		= "none";
-				// modifica select
-				$("[name='select_estatus_orden_produccion']").empty();
-				var jsonObject = JSON.parse(response.textoJson);
-				$.each( jsonObject, function(i, item) {
-	                //alert( item.id_tipo_placa + ' ' + item.descripcion );
-	                var option = document.createElement("option");
-	                option.text     = item.text;
-	                option.value    = item.value;
-	                document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].add( option );
-	                delete option;
-	            } );
-	            delete jsonObject;
-				// elimina variables
-				delete index;
-				delete id_td;
+	// evitar el doble ingreso de registros en finalizado
+	if( document.orden_produccion.estatus.value.toUpperCase() != "FINALIZADO" ) {
+		$.ajax({
+			type:"POST",
+			url:urlCambiaEstatusPartida,
+			data:$("[name='cambio_estatus']").serialize(),
+			success:function(response){
+				//console.log(response);
+				if(response.estatusOperacion != 0) {
+					var index = document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].selectedIndex;
+					document.forms["orden_produccion"].elements["estatus"].value = document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].options[index].text;
+					// modifica texto
+					var id_td = "td_" + document.forms["orden_produccion"].elements["nut"].value;
+					window.parent.document.getElementById(id_td).innerHTML = document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].options[index].text;
+					// modifica color
+					window.parent.document.getElementById(id_td).removeAttribute("class");
+					window.parent.document.getElementById(id_td).setAttribute("class","estatus_" + document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].value);
+					// elimina la opcion de modificar la informacion.
+					document.getElementById("div_btn_actualizar_orden_produccion").style.display 	= "none";
+					document.getElementById("div_btn_actualizar_partida").style.display 			= "none";
+					document.getElementById("div_btn_actualizar_ttd_encabezado").style.display 		= "none";
+					document.getElementById("div_btn_modificar_disenio").style.display 				= "none";
+					document.getElementById("div_btn_agregar_disenio_detalle").style.display 		= "none";
+					document.getElementById("div_btn_actualizar_disenio_detalle").style.display 	= "none";
+					document.getElementById("div_btn_modificar_preprensa").style.display 			= "none";
+					document.getElementById("div_btn_agregar_preprensa_detalle").style.display 		= "none";
+					document.getElementById("div_btn_actualizar_preprensa_detalle").style.display 	= "none";
+					document.getElementById("div_btn_modificar_transporte").style.display 			= "none";
+					document.getElementById("div_btn_agregar_transporte_detalle").style.display 	= "none";
+					document.getElementById("div_btn_actualizar_transporte_detalle").style.display 	= "none";
+					document.getElementById("div_btn_modificar_acabado").style.display 				= "none";
+					document.getElementById("div_btn_agregar_acabado_detalle").style.display 		= "none";
+					document.getElementById("div_btn_actualizar_acabado_detalle").style.display 	= "none";
+					document.getElementById("div_btn_modificar_offset").style.display 				= "none";
+					document.getElementById("div_btn_agregar_material_ayuda").style.display 		= "none";
+					document.getElementById("div_btn_actualizar_material_ayuda").style.display 		= "none";
+					// modifica select
+					$("[name='select_estatus_orden_produccion']").empty();
+					var jsonObject = JSON.parse(response.textoJson);
+					$.each( jsonObject, function(i, item) {
+		                //alert( item.id_tipo_placa + ' ' + item.descripcion );
+		                var option = document.createElement("option");
+		                option.text     = item.text;
+		                option.value    = item.value;
+		                document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].add( option );
+		                delete option;
+		            } );
+		            delete jsonObject;
+					// elimina variables
+					delete index;
+					delete id_td;
+					
+					// SI CAMBIO ESTATUS == FINALIZADO ENTONCES ABRE VENTANA DE COSTOS EXTRAS
+					if( document.cambio_estatus.id_estatus_orden.value == 10 ) {
+						//abre ventana modal para guardar costos extras
+						Shadowbox.open({
+							content:urlCostosExtrasDetalle + "/?nut=" + document.orden_produccion.nut.value,
+							player:"iframe",
+							width:830,
+							height:580,
+							options:{
+								modal:true, // IMPERATIVO CERRAR MANUALMENTE
+								overlayOpacity:0.75
+							}
+							
+						});
+					}
+				}
+			},
+			error:function(e){
+				alert("NO fue posible actualizar el estado de la Orden de Produccion");
+				console.log(e);
 			}
-		},
-		error:function(e){
-			alert("NO fue posible actualizar el estado de la Orden de Produccion");
-			console.log(e);
-		}
-	});
+		});
+	}
 } // ajaxCambiaEstatus
 
 function muestraDetallePrecio() {
@@ -395,11 +413,9 @@ function muestraDetallePrecio() {
 } // muestraDetallePrecio
 
 function inicializa() {
-
 	var select = document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"];
 	for(var i=0; i<select.length; i++) {
 		if( select.options[i].innerText == document.forms["orden_produccion"].elements["estatus"].value )
 			document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].selectedIndex = i;
 	}
-	
 }

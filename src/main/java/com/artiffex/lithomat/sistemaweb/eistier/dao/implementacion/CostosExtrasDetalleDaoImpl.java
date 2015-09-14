@@ -80,13 +80,13 @@ public class CostosExtrasDetalleDaoImpl implements CostosExtrasDetalleDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<CostosExtrasDetalle> listaPorPartida(int idPartida) {
+	public List<CostosExtrasDetalle> listaPorTipoTrabajoDetalle(int idTipoTrabajoDetalle) {
 		List<CostosExtrasDetalle> lista = new ArrayList<CostosExtrasDetalle>();
 		try {
 			sesion = HibernateUtil.getInstance().getCurrentSession();
 			sesion.beginTransaction();
-			Query query = sesion.createQuery("from CostosExtrasDetalle ced where ced.activo = true and ced.partida.idPartida = :idPartida order by ced.idCostosExtrasDetalle asc");
-			query.setParameter("idPartida", idPartida); 
+			Query query = sesion.createQuery("from CostosExtrasDetalle ced where ced.activo = true and ced.tipoTrabajoDetalle.idTipoTrabajoDetalle = :idTipoTrabajoDetalle order by ced.idCostosExtrasDetalle asc");
+			query.setParameter("idTipoTrabajoDetalle", idTipoTrabajoDetalle); 
 			lista = query.list();
 			sesion.getTransaction().commit();
 		} catch(Exception e) {

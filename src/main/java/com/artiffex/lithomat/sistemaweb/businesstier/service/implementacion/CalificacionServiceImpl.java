@@ -14,27 +14,35 @@ import org.springframework.stereotype.Service;
 
 import com.artiffex.lithomat.sistemaweb.ayuda.CalificacionTrabajoDetalleDTOAyuda;
 import com.artiffex.lithomat.sistemaweb.ayuda.OrdenProduccionDTOAyuda;
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.OffsetDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.ReporteCotizacionDTO;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.Acabado;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionOrdenProduccion;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionProcesosPartida;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionTrabajoDetalle;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.Disenio;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.OrdenProduccion;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Partida;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Pliego;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.Preprensa;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajoDetalle;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.Transporte;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.AcabadoService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CalificacionService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.DisenioService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.OffsetService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.OrdenProduccionService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PartidaService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PliegoService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PreprensaService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TabuladorPreciosService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TintaEspecialService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoTrabajoDetalleService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TransporteService;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.OrdenTrabajo;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.OrdenTrabajoPartida;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.OrdenTrabajoPliego;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.OrdenTrabajoTipoTrabajoDetalle;
-import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.Precio;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.Remision;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades._CalificacionPartida;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades._CalificacionTrabajoDetalle;
@@ -68,6 +76,14 @@ public class CalificacionServiceImpl implements CalificacionService {
 	private TabuladorPreciosService tabuladorPreciosService;
 	@Resource
 	private DisenioService disenioService;
+	@Resource
+	private PreprensaService preprensaService;
+	@Resource
+	private TransporteService transporteService;
+	@Resource
+	private AcabadoService acabadoService;
+	@Resource
+	private OffsetService offsetService;
 	@Resource
 	private TintaEspecialService tintaEspecialService;
 	
@@ -123,19 +139,13 @@ public class CalificacionServiceImpl implements CalificacionService {
 				// *** ***** ***
 				// PAPEL
 				int papelCantidadTotal = (Integer)sumatorias.get("papelCantidadTotal");
-				float papelPrecioUnitario = Precio.conversionRespectoTipoPrecio(
-													tipoTrabajoDetalle.getTipoPapelExtendido().getPrecio(),
-													tipoTrabajoDetalle.getTipoPapelExtendido().getTipoPrecio().getIdTipoPrecio() 
-												);
+				float papelPrecioUnitario = tipoTrabajoDetalle.getTipoPapelExtendido().getPrecio() / tipoTrabajoDetalle.getTipoPapelExtendido().getTipoPrecio().getFactorDivisor(); 
 				float papelCosteTotal = papelCantidadTotal * papelPrecioUnitario;
 				
 				// *** ***** ***
 				// PLACAS
 				int placasNumPlacas = (Integer)sumatorias.get("placasNumPlacas");
-				float placasPrecioUnitario = Precio.conversionRespectoTipoPrecio(
-													tipoTrabajoDetalle.getTipoPlaca().getPrecio(),
-													tipoTrabajoDetalle.getTipoPlaca().getTipoPrecio().getIdTipoPrecio() 
-												);
+				float placasPrecioUnitario = tipoTrabajoDetalle.getTipoPlaca().getPrecio() / tipoTrabajoDetalle.getTipoPlaca().getTipoPrecio().getFactorDivisor();
 				float placasCosteTotal = placasNumPlacas * placasPrecioUnitario;
 				
 				// *** ***** ***
@@ -147,28 +157,19 @@ public class CalificacionServiceImpl implements CalificacionService {
 				// TIRO (TINTA ESPECIAL)
 				int tintaEspecialNumEntMaq = (Integer)sumatorias.get("tintaEspecialNumEntMaq");
 				HashMap<String, Object> hashTintaEspecialPrecio = tintaEspecialService.getHashPrecioYTipoPrecio();
-				float tintaEspecialPrecioUnitario = Precio.conversionRespectoTipoPrecio(
-														(Float)hashTintaEspecialPrecio.get("precio"), 
-														Integer.parseInt(hashTintaEspecialPrecio.get("idTipoPrecio").toString())
-													);
+				float tintaEspecialPrecioUnitario = precioUnitarioTabulador * (1 + ((Float)hashTintaEspecialPrecio.get("precio") / Integer.parseInt(hashTintaEspecialPrecio.get("factorDivisor").toString())));  
 				float tintaEspecialCosteTotal = cantidadRedondeada * tintaEspecialNumEntMaq * tintaEspecialPrecioUnitario;
 				
 				// *** ***** ***
 				// TIRO (BARNIZ FRENTE)
 				int frenteBarnizNumEntMaq = (Integer)sumatorias.get("frenteBarnizNumEntMaq");
-				float frenteBarnizPrecioUnitario = Precio.conversionRespectoTipoPrecio(
-														tipoTrabajoDetalle.getFrenteTipoBarniz().getPrecio(), 
-														tipoTrabajoDetalle.getFrenteTipoBarniz().getTipoPrecio().getIdTipoPrecio()
-													);
+				float frenteBarnizPrecioUnitario = precioUnitarioTabulador * (1 + (tipoTrabajoDetalle.getFrenteTipoBarniz().getPrecio() / tipoTrabajoDetalle.getFrenteTipoBarniz().getTipoPrecio().getFactorDivisor()));
 				float frenteBarnizCosteTotal = cantidadRedondeada * frenteBarnizNumEntMaq * frenteBarnizPrecioUnitario;
 				
 				// *** ***** ***
 				// TIRO (BARNIZ VUELTA)
 				int vueltaBarnizNumEntMaq = (Integer)sumatorias.get("vueltaBarnizNumEntMaq");
-				float vueltaBarnizPrecioUnitario = Precio.conversionRespectoTipoPrecio(
-														tipoTrabajoDetalle.getVueltaTipoBarniz().getPrecio(), 
-														tipoTrabajoDetalle.getVueltaTipoBarniz().getTipoPrecio().getIdTipoPrecio()
-													);
+				float vueltaBarnizPrecioUnitario = precioUnitarioTabulador * (1 + (tipoTrabajoDetalle.getVueltaTipoBarniz().getPrecio() / tipoTrabajoDetalle.getVueltaTipoBarniz().getTipoPrecio().getFactorDivisor()));
 				float vueltaBarnizCosteTotal = cantidadRedondeada * vueltaBarnizNumEntMaq * vueltaBarnizPrecioUnitario;
 				
 				
@@ -319,19 +320,13 @@ public class CalificacionServiceImpl implements CalificacionService {
 		
 		// *** ***** ***
 		// PRECIO CLIENTE
-		float porcentajeTipoCliente = Precio.conversionRespectoTipoPrecio(
-											ordenProduccion.getCliente().getTipoCliente().getPrecio(), 
-											ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getIdTipoPrecio()
-										);
+		float porcentajeTipoCliente = ordenProduccion.getCliente().getTipoCliente().getPrecio() / ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getFactorDivisor();
 		float precioCliente = (float)precioBruto * (1 + porcentajeTipoCliente);
 		
 			
 		// *** ***** ***
 		// PRECIO TIPO COMPROBANTE
-		float porcentajeTipoComprobante = Precio.conversionRespectoTipoPrecio(
-												ordenProduccion.getTipoComprobanteFiscal().getPrecio(), 
-												ordenProduccion.getTipoComprobanteFiscal().getTipoPrecio().getIdTipoPrecio()
-											);
+		float porcentajeTipoComprobante = ordenProduccion.getTipoComprobanteFiscal().getPrecio() / ordenProduccion.getTipoComprobanteFiscal().getTipoPrecio().getFactorDivisor();
 		float porcentajeComprobante = precioCliente * (1 + porcentajeTipoComprobante);
 		float precioNeto = porcentajeTipoComprobante == 0 ? precioCliente : porcentajeComprobante;
 
@@ -343,7 +338,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 		calificacionOrdenProduccion.setOrdenProduccion(ordenProduccion);
 		calificacionOrdenProduccion.setPrecioBruto(precioBruto);
 		calificacionOrdenProduccion.setTipoClientePrecio(ordenProduccion.getCliente().getTipoCliente().getPrecio());
-		calificacionOrdenProduccion.setTipoClienteIdTipoPrecio(ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getIdTipoPrecio());
+		calificacionOrdenProduccion.setTipoClienteFactorDivisor(ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getFactorDivisor());
 		calificacionOrdenProduccion.setPrecioCliente(precioCliente);
 		calificacionOrdenProduccion.setPrecioNeto(precioNeto);
 		calificacionOrdenProduccion.setFechaGeneracion(new Timestamp(Calendar.getInstance().getTimeInMillis()));
@@ -352,9 +347,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 		calificacionOrdenProduccionDAO.crea(calificacionOrdenProduccion);
 
 		precioBruto					= 0;
-		porcentajeTipoCliente 		= 0;
 		precioCliente 				= 0;
-		porcentajeTipoComprobante 	= 0;
 		porcentajeComprobante 		= 0;
 		precioNeto 					= 0;
 		calificacionOrdenProduccion	= null;
@@ -369,14 +362,14 @@ public class CalificacionServiceImpl implements CalificacionService {
 	} // buscaCalificacionOrdenProduccion
 	
 	
-	public CalificacionTrabajoDetalle buscaCalificacionTrabajoDetalle(int idTipoTrabajoDetalle) {
-		return calificacionTrabajoDetalleDAO.buscaPorTipoTrabajoDetalle(idTipoTrabajoDetalle);
-	} // buscaCalificacionTrabajoDetalle
-	
-	
 	public _CalificacionPartida buscaCalificacionPartida(int idPartida) {
 		return calificacionPartidaDAO.busca(idPartida);
 	} // buscaCalificacionPartida
+	
+	
+	public CalificacionTrabajoDetalle buscaCalificacionTrabajoDetalle(int idTipoTrabajoDetalle) {
+		return calificacionTrabajoDetalleDAO.buscaPorTipoTrabajoDetalle(idTipoTrabajoDetalle);
+	} // buscaCalificacionTrabajoDetalle
 	
 	
 	public CalificacionProcesosPartida buscaCalificacionProcesos(int idPartida) {
@@ -399,18 +392,12 @@ public class CalificacionServiceImpl implements CalificacionService {
 		
 		// *** ***** ***
 		// PRECIO CLIENTE
-		float porcentajeTipoCliente = Precio.conversionRespectoTipoPrecio(
-						ordenProduccion.getCliente().getTipoCliente().getPrecio(), 
-						ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getIdTipoPrecio()
-					);
+		float porcentajeTipoCliente = ordenProduccion.getCliente().getTipoCliente().getPrecio() / ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getFactorDivisor();
 		float precioCliente = (float)precioBruto * (1 + porcentajeTipoCliente);
 		
 		// *** ***** ***
 		// PRECIO TIPO COMPROBANTE
-		float porcentajeTipoComprobante = Precio.conversionRespectoTipoPrecio(
-						ordenProduccion.getTipoComprobanteFiscal().getPrecio(), 
-						ordenProduccion.getTipoComprobanteFiscal().getTipoPrecio().getIdTipoPrecio()
-					);
+		float porcentajeTipoComprobante = ordenProduccion.getTipoComprobanteFiscal().getPrecio() / ordenProduccion.getTipoComprobanteFiscal().getTipoPrecio().getFactorDivisor();
 		float porcentajeComprobante = precioCliente * (1 + porcentajeTipoComprobante);
 		float precioNeto = porcentajeTipoComprobante == 0 ? precioCliente : porcentajeComprobante;
 		
@@ -420,7 +407,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 
 		calificacionOrdenProduccion.setPrecioBruto(precioBruto);
 		calificacionOrdenProduccion.setTipoClientePrecio(ordenProduccion.getCliente().getTipoCliente().getPrecio());
-		calificacionOrdenProduccion.setTipoClienteIdTipoPrecio(ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getIdTipoPrecio());
+		calificacionOrdenProduccion.setTipoClienteFactorDivisor(ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getFactorDivisor());
 		calificacionOrdenProduccion.setPrecioCliente(precioCliente);
 		calificacionOrdenProduccion.setPrecioNeto(precioNeto);
 		calificacionOrdenProduccion.setFechaGeneracion(new Timestamp(Calendar.getInstance().getTimeInMillis()));
@@ -488,19 +475,13 @@ public class CalificacionServiceImpl implements CalificacionService {
 				// *** ***** ***
 				// PAPEL
 				int papelCantidadTotal = (Integer)sumatorias.get("papelCantidadTotal");
-				float papelPrecioUnitario = Precio.conversionRespectoTipoPrecio(
-													tipoTrabajoDetalle.getTipoPapelExtendido().getPrecio(),
-													tipoTrabajoDetalle.getTipoPapelExtendido().getTipoPrecio().getIdTipoPrecio() 
-												);
+				float papelPrecioUnitario = tipoTrabajoDetalle.getTipoPapelExtendido().getPrecio() / tipoTrabajoDetalle.getTipoPapelExtendido().getTipoPrecio().getFactorDivisor();
 				float papelCosteTotal = papelCantidadTotal * papelPrecioUnitario;
 
 				// *** ***** ***
 				// PLACAS
 				int placasNumPlacas = (Integer)sumatorias.get("placasNumPlacas");
-				float placasPrecioUnitario = Precio.conversionRespectoTipoPrecio(
-													tipoTrabajoDetalle.getTipoPlaca().getPrecio(),
-													tipoTrabajoDetalle.getTipoPlaca().getTipoPrecio().getIdTipoPrecio() 
-												);
+				float placasPrecioUnitario = tipoTrabajoDetalle.getTipoPlaca().getPrecio() / tipoTrabajoDetalle.getTipoPlaca().getTipoPrecio().getFactorDivisor();
 				float placasCosteTotal = placasNumPlacas * placasPrecioUnitario;
 				
 				// *** ***** ***
@@ -512,28 +493,19 @@ public class CalificacionServiceImpl implements CalificacionService {
 				// TIRO (TINTA ESPECIAL)
 				int tintaEspecialNumEntMaq = (Integer)sumatorias.get("tintaEspecialNumEntMaq");
 				HashMap<String, Object> hashTintaEspecialPrecio = tintaEspecialService.getHashPrecioYTipoPrecio();
-				float tintaEspecialPrecioUnitario = Precio.conversionRespectoTipoPrecio(
-														(Float)hashTintaEspecialPrecio.get("precio"), 
-														Integer.parseInt(hashTintaEspecialPrecio.get("idTipoPrecio").toString())
-													);
+				float tintaEspecialPrecioUnitario = precioUnitarioTabulador * (1 + ((Float)hashTintaEspecialPrecio.get("precio") / Integer.parseInt(hashTintaEspecialPrecio.get("factorDivisor").toString())));
 				float tintaEspecialCosteTotal = cantidadRedondeada * tintaEspecialNumEntMaq * tintaEspecialPrecioUnitario;
 				
 				// *** ***** ***
 				// TIRO (BARNIZ FRENTE)
 				int frenteBarnizNumEntMaq = (Integer)sumatorias.get("frenteBarnizNumEntMaq");
-				float frenteBarnizPrecioUnitario = Precio.conversionRespectoTipoPrecio(
-														tipoTrabajoDetalle.getFrenteTipoBarniz().getPrecio(), 
-														tipoTrabajoDetalle.getFrenteTipoBarniz().getTipoPrecio().getIdTipoPrecio()
-													);
+				float frenteBarnizPrecioUnitario = precioUnitarioTabulador * (1 + (tipoTrabajoDetalle.getFrenteTipoBarniz().getPrecio() /  tipoTrabajoDetalle.getFrenteTipoBarniz().getTipoPrecio().getFactorDivisor()));
 				float frenteBarnizCosteTotal = cantidadRedondeada * frenteBarnizNumEntMaq * frenteBarnizPrecioUnitario;
 				
 				// *** ***** ***
 				// TIRO (BARNIZ VUELTA)
 				int vueltaBarnizNumEntMaq = (Integer)sumatorias.get("vueltaBarnizNumEntMaq");
-				float vueltaBarnizPrecioUnitario = Precio.conversionRespectoTipoPrecio(
-														tipoTrabajoDetalle.getVueltaTipoBarniz().getPrecio(), 
-														tipoTrabajoDetalle.getVueltaTipoBarniz().getTipoPrecio().getIdTipoPrecio()
-													);
+				float vueltaBarnizPrecioUnitario = precioUnitarioTabulador * (1 + (tipoTrabajoDetalle.getVueltaTipoBarniz().getPrecio() / tipoTrabajoDetalle.getVueltaTipoBarniz().getTipoPrecio().getFactorDivisor()));
 				float vueltaBarnizCosteTotal = cantidadRedondeada * vueltaBarnizNumEntMaq * vueltaBarnizPrecioUnitario;
 
 				
@@ -679,18 +651,12 @@ public class CalificacionServiceImpl implements CalificacionService {
 		
 		// *** ***** ***
 		// PRECIO CLIENTE
-		float porcentajeTipoCliente = Precio.conversionRespectoTipoPrecio(
-						ordenProduccion.getCliente().getTipoCliente().getPrecio(), 
-						ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getIdTipoPrecio()
-					);
+		float porcentajeTipoCliente = ordenProduccion.getCliente().getTipoCliente().getPrecio() / ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getFactorDivisor();
 		float precioCliente = (float)precioBruto * (1 + porcentajeTipoCliente);
 
 		// *** ***** ***
 		// PRECIO TIPO COMPROBANTE
-		float porcentajeTipoComprobante = Precio.conversionRespectoTipoPrecio(
-						ordenProduccion.getTipoComprobanteFiscal().getPrecio(), 
-						ordenProduccion.getTipoComprobanteFiscal().getTipoPrecio().getIdTipoPrecio()
-					);
+		float porcentajeTipoComprobante = ordenProduccion.getTipoComprobanteFiscal().getPrecio() / ordenProduccion.getTipoComprobanteFiscal().getTipoPrecio().getFactorDivisor();
 		float porcentajeComprobante = precioCliente * (1 + porcentajeTipoComprobante);
 		float precioNeto = porcentajeTipoComprobante == 0 ? precioCliente : porcentajeComprobante;
 		
@@ -701,7 +667,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 		calificacionOrdenProduccion.setOrdenProduccion(ordenProduccion);
 		calificacionOrdenProduccion.setPrecioBruto(precioBruto);
 		calificacionOrdenProduccion.setTipoClientePrecio(ordenProduccion.getCliente().getTipoCliente().getPrecio());
-		calificacionOrdenProduccion.setTipoClienteIdTipoPrecio(ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getIdTipoPrecio());
+		calificacionOrdenProduccion.setTipoClienteFactorDivisor(ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getFactorDivisor());
 		calificacionOrdenProduccion.setPrecioCliente(precioCliente);
 		calificacionOrdenProduccion.setPrecioNeto(precioNeto);
 		calificacionOrdenProduccion.setFechaGeneracion(new Timestamp(Calendar.getInstance().getTimeInMillis()));
@@ -791,19 +757,13 @@ public class CalificacionServiceImpl implements CalificacionService {
 		
 		// *** ***** ***
 		// PRECIO CLIENTE
-		float porcentajeTipoCliente = Precio.conversionRespectoTipoPrecio(
-						ordenProduccion.getCliente().getTipoCliente().getPrecio(), 
-						ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getIdTipoPrecio()
-					);
+		float porcentajeTipoCliente = ordenProduccion.getCliente().getTipoCliente().getPrecio() / ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getFactorDivisor();
 		float precioCliente = (float)precioBruto * (1 + porcentajeTipoCliente);
 		
 			
 		// *** ***** ***
 		// PRECIO TIPO COMPROBANTE
-		float porcentajeTipoComprobante = Precio.conversionRespectoTipoPrecio(
-						ordenProduccion.getTipoComprobanteFiscal().getPrecio(), 
-						ordenProduccion.getTipoComprobanteFiscal().getTipoPrecio().getIdTipoPrecio()
-					);
+		float porcentajeTipoComprobante = ordenProduccion.getTipoComprobanteFiscal().getPrecio() / ordenProduccion.getTipoComprobanteFiscal().getTipoPrecio().getFactorDivisor();
 		float porcentajeComprobante = precioCliente * (1 + porcentajeTipoComprobante);
 		float precioNeto = porcentajeTipoComprobante == 0 ? precioCliente : porcentajeComprobante;
 
@@ -815,7 +775,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 		calificacionOrdenProduccion.setOrdenProduccion(ordenProduccion);
 		calificacionOrdenProduccion.setPrecioBruto(precioBruto);
 		calificacionOrdenProduccion.setTipoClientePrecio(ordenProduccion.getCliente().getTipoCliente().getPrecio());
-		calificacionOrdenProduccion.setTipoClienteIdTipoPrecio(ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getIdTipoPrecio());
+		calificacionOrdenProduccion.setTipoClienteFactorDivisor(ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getFactorDivisor());
 		calificacionOrdenProduccion.setPrecioCliente(precioCliente);
 		calificacionOrdenProduccion.setPrecioNeto(precioNeto);
 		calificacionOrdenProduccion.setFechaGeneracion(new Timestamp(Calendar.getInstance().getTimeInMillis()));
@@ -867,10 +827,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 			partidaReporte.setDescripcion(partida.getDescripcionPartida());
 				
 				CalificacionProcesosPartida cpp 		= calificacionProcesosPartidaDAO.buscaPorPartida(partida.getIdPartida());
-				float porcentajeTipoCliente = Precio.conversionRespectoTipoPrecio(
-						partida.getOrdenProduccion().getCliente().getTipoCliente().getPrecio(), 
-						partida.getOrdenProduccion().getCliente().getTipoCliente().getTipoPrecio().getIdTipoPrecio()
-					);
+				float porcentajeTipoCliente = partida.getOrdenProduccion().getCliente().getTipoCliente().getPrecio() / partida.getOrdenProduccion().getCliente().getTipoCliente().getTipoPrecio().getFactorDivisor();
 				double costeTotalProcesosPartida 		= cpp.getCosteTotalProcesosPartida();
 				double costeGananciaRespectoTipoCliente = (double)(costeTotalProcesosPartida * (1 + porcentajeTipoCliente));
 			
@@ -903,10 +860,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 		OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
 			
 		CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionOrdenProduccionDAO.buscaPorOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
-		float gananciaCliente = Precio.conversionRespectoTipoPrecio(
-				calificacionOrdenProduccion.getTipoClientePrecio(), 
-				calificacionOrdenProduccion.getTipoClienteIdTipoPrecio()
-			);
+		float gananciaCliente = calificacionOrdenProduccion.getTipoClientePrecio() / calificacionOrdenProduccion.getTipoClienteFactorDivisor();
 			
 		List<Partida> listaPartida = partidaService.listaPartidaPorOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
 		for (Partida partida : listaPartida) {
@@ -1108,6 +1062,25 @@ public class CalificacionServiceImpl implements CalificacionService {
 			otp.setDescripcionPartida(partida.getDescripcionPartida());
 			otp.setObservacionesGenerales(partida.getObservacionesGenerales());
 			otp.setObservacionesAprobacion(partida.getObservacionesAprobacion());
+			
+			Disenio disenio = disenioService.buscaDisenioPorPartida(partida.getIdPartida());
+			Preprensa preprensa = preprensaService.buscaPreprensaPorPartida(partida.getIdPartida());
+			Transporte transporte = transporteService.buscaTransportePorPartida(partida.getIdPartida());
+			Acabado acabado = acabadoService.buscaAcabadoPorPartida(partida.getIdPartida());
+			OffsetDTO offset = offsetService.buscaOffsetPorPartidaEnDTO(partida.getIdPartida());
+			
+			otp.setIndicacionesDisenio(disenio.getIndicacionTareaRealizar()==null?"":disenio.getIndicacionTareaRealizar());
+			otp.setIndicacionesPreprensa(preprensa.getIndicacionTareaRealizar()==null?"":preprensa.getIndicacionTareaRealizar());
+			otp.setIndicacionesTransporte(transporte.getIndicacionTareaRealizar()==null?"":transporte.getIndicacionTareaRealizar());
+			otp.setIndicacionesAcabado(acabado.getIndicacionTareaRealizar()==null?"":acabado.getIndicacionTareaRealizar());
+			otp.setIndicacionesOffset(offset.getIndicacionTareaRealizar()==null?"":offset.getIndicacionTareaRealizar());
+			
+			disenio 	= null;
+			preprensa 	= null;
+			transporte 	= null;
+			acabado 	= null;
+			offset 		= null;
+			
 			otp.setListaOrdenTrabajoTipoTrabajoDetalle(listaOrdenTrabajoTipoTrabajoDetalle);
 			listaOrdenTrabajoTipoTrabajoDetalle = null;
 			listaOrdenTrabajoPartida.add(otp);
@@ -1122,7 +1095,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 		ot.setNut(ordenProduccion.getNut());
 		ot.setNombreTrabajo(ordenProduccion.getNombre());
 		ot.setDescripcion(ordenProduccion.getDescripcion());
-		ot.setFechaEntrega(new SimpleDateFormat("dd MMM yyyy").format(ordenProduccion.getFechaEntrega()));
+		ot.setFechaEntrega(new SimpleDateFormat("dd MMM yyyy").format(ordenProduccion.getFechaPrometidaEntrega()));
 		ot.setListaOrdenTrabajoPartida(listaOrdenTrabajoPartida);
 		listaOrdenTrabajoPartida = null;
 		listaOrdenTrabajo.add(ot);
@@ -1142,8 +1115,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 	public List<CalificacionTrabajoDetalleDTOAyuda> obtieneEjemploVOPapel() {
 		return calificacionOrdenProduccionDAO.ejemploListaPapel();
 	}
-
-	
 	
 }
 

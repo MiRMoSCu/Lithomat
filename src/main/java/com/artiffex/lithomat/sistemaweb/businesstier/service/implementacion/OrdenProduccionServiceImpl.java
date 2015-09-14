@@ -215,6 +215,12 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
 		OrdenProduccion ordenProduccion = ordenProduccionDAO.buscaPorNut(nut);
 		ComboSelect comboSelect = new ComboSelect();
 		
+		// POR DEFAULT: Orden de Trabajo
+		comboSelect = new ComboSelect();
+		comboSelect.setValue(-1);
+		comboSelect.setText("Orden Trabajo");
+		listaReporte.add(comboSelect);
+		comboSelect		= null;
 		// POR DEFAULT: Cotizacion
 		comboSelect = new ComboSelect();
 		comboSelect.setValue(0);

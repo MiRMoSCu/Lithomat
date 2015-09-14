@@ -79,9 +79,8 @@ public class ResponsableInsumoController {
 		// 1) CLIENTE
 		// 2) LITHOMAT
 		// 3) OTRO
-
 		ResponsableInsumo responsableInsumo = responsableInsumoService.buscaResponsableInsumo(idResponsableInsumo);
-		if( idResponsableInsumo == 1 || idResponsableInsumo == 2 || idResponsableInsumo == 3 ) {
+		if( idResponsableInsumo > 0 && idResponsableInsumo < 4 ) { // rango VERDADERO incluyente del 1 al 4
 			responsableInsumo.setDescripcion(descripcion);
 		} else {
 			responsableInsumo.setNombre(nombre);
@@ -110,9 +109,8 @@ public class ResponsableInsumoController {
 		// 1) CLIENTE
 		// 2) LITHOMAT
 		// 3) OTRO
-		
 		ResponsableInsumo responsableInsumo = responsableInsumoService.buscaResponsableInsumo(idResponsableInsumo);
-		if( idResponsableInsumo != 1 && idResponsableInsumo != 2 && idResponsableInsumo != 3 ) {
+		if( idResponsableInsumo < 1 || idResponsableInsumo > 3 ) { // rango VERDADERO excluyente del 1 al 3
 			responsableInsumo.setActivo(false);
 			responsableInsumoService.modificaResponsableInsumo(responsableInsumo);
 		}

@@ -29,8 +29,8 @@ public class TintaEspecialServiceImpl implements TintaEspecialService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		List<TintaEspecial> listaTintaEspecial = tintaEspecialDAO.lista();
 		for (TintaEspecial tintaEspecial : listaTintaEspecial) {
-			map.put("idTipoPrecio", tintaEspecial.getTipoPrecio().getIdTipoPrecio());
 			map.put("precio", tintaEspecial.getPrecio());
+			map.put("factorDivisor", tintaEspecial.getTipoPrecio().getFactorDivisor());
 			tintaEspecial = null;
 		}
 		listaTintaEspecial = null;

@@ -97,9 +97,9 @@ public class TipoComprobanteFiscalController {
 		
 		// NO SE PUEDE MODIFICAR EL NOMBRE NI PORCENTAJE DE LOS COMPROBANTES BASE:
 		// 1) NOTA DE REMISION
-		// 2) FACTURA
+		// 2) NOTA DE FACTURA
 		TipoComprobanteFiscal tipoComprobanteFiscal = tipoComprobanteFiscalService.buscaTipoComprobanteFiscal(idTipoComprobanteFiscal);
-		if( idTipoComprobanteFiscal == 1 || idTipoComprobanteFiscal == 2) {
+		if( idTipoComprobanteFiscal > 0 && idTipoComprobanteFiscal < 3) { // rango VERDADERO incluyente del 1 al 2
 			tipoComprobanteFiscal.setDescripcion(descripcion);
 			tipoComprobanteFiscal.setPrecio(precio);
 		} else {
@@ -132,9 +132,9 @@ public class TipoComprobanteFiscalController {
 
 		// NO SE PUEDE ELIMINAR LOS COMPROBANTES BASE:
 		// 1) NOTA DE REMISION
-		// 2) FACTURA
+		// 2) NOTA DE FACTURA
 		TipoComprobanteFiscal tipoComprobanteFiscal = tipoComprobanteFiscalService.buscaTipoComprobanteFiscal(idTipoComprobanteFiscal);
-		if( idTipoComprobanteFiscal != 1 && idTipoComprobanteFiscal != 2 ) {
+		if( idTipoComprobanteFiscal < 1 || idTipoComprobanteFiscal > 2 ) { // rango VERDADERO excluyente del 1 al 2
 			tipoComprobanteFiscal.setActivo(false);
 			tipoComprobanteFiscalService.modificaTipoComprobanteFiscal(tipoComprobanteFiscal);
 		}

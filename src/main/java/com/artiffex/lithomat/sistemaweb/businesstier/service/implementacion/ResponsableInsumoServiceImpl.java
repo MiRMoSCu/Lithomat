@@ -45,6 +45,7 @@ public class ResponsableInsumoServiceImpl implements ResponsableInsumoService {
 			comboSelect = null;
 			responsableInsumo = null;
 		}
+		listaResponsableInsumo = null;
 		return listaComboSelect;
 	}
 

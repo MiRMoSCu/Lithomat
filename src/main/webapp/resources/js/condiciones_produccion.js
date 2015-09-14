@@ -20,6 +20,10 @@ function exportaReporte(id_tipo_formato) {
 	document.tipo_reporte.id_tipo_formato.value = id_tipo_formato;
 	// genera action
 	switch( parseInt(document.tipo_reporte.select_tipo_reporte.value) ) {
+	case -1: // orden de trabajo
+		document.tipo_reporte.condiciones_produccion.value = document.condiciones_produccion.condiciones_produccion.value;
+		document.tipo_reporte.action = urlExportaReporteOrdenTrabajo;
+		break;
 	case 0: // cotizacion
 		document.tipo_reporte.condiciones_produccion.value = document.condiciones_produccion.condiciones_produccion.value;
 		document.tipo_reporte.action = urlExportaReporteCotizacion;
