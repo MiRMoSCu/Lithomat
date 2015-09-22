@@ -13,7 +13,7 @@ public class ResponsableInsumo implements Serializable {
 	private String descripcion;
 	private boolean activo;
 	// esta clase esta relacionada [uno a muchos] con las tablas:
-	private Set<CostosExtrasDetalle> costosExtrasDetalle = new HashSet<CostosExtrasDetalle>();
+	private Set<CostoExtraDetalle> costoExtraDetalle = new HashSet<CostoExtraDetalle>();
 	private Set<MaterialAyudaXPartida> materialAyudaXPartida = new HashSet<MaterialAyudaXPartida>();
 	
 	
@@ -41,11 +41,11 @@ public class ResponsableInsumo implements Serializable {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	public Set<CostosExtrasDetalle> getCostosExtrasDetalle() {
-		return costosExtrasDetalle;
+	public Set<CostoExtraDetalle> getCostoExtraDetalle() {
+		return costoExtraDetalle;
 	}
-	public void setCostosExtrasDetalle(Set<CostosExtrasDetalle> costosExtrasDetalle) {
-		this.costosExtrasDetalle = costosExtrasDetalle;
+	public void setCostoExtraDetalle(Set<CostoExtraDetalle> costoExtraDetalle) {
+		this.costoExtraDetalle = costoExtraDetalle;
 	}
 	public Set<MaterialAyudaXPartida> getMaterialAyudaXPartida() {
 		return materialAyudaXPartida;

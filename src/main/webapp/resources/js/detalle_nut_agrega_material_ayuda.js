@@ -21,8 +21,6 @@ function desactivaCamposFormMaterialAyuda() {
 	// desactiva select
 	document.material_ayuda.select_material_ayuda.disabled 		= true;
 	document.material_ayuda.select_responsable_insumo.disabled 	= true;
-	// inicializa select
-	document.material_ayuda.select_responsable_insumo.selectedIndex = 0;
 	// activa opcion readOnly
 	document.material_ayuda.observaciones.readOnly = true;
 	// cambia el color
@@ -31,13 +29,11 @@ function desactivaCamposFormMaterialAyuda() {
 
 function activaBotonesAgregarFormMaterialAyuda() {
 	document.getElementById("imgBtnAgregarMaterialAyuda").style.display 		= "none";
-	document.getElementById("imgBtnAgregarMaterialAyuda").style.display 		= "none";
 	document.getElementById("imgBtnAceptaAgregarMaterialAyuda").style.display 	= "inline";
 	document.getElementById("imgBtnCancelaAgregarMaterialAyuda").style.display	= "inline";
 } // activaBotonesAgregarFormMaterialAyuda
 
 function desactivaBotonesAgregarFormMaterialAyuda() {
-	document.getElementById("imgBtnAgregarMaterialAyuda").style.display 		= "inline";
 	document.getElementById("imgBtnAgregarMaterialAyuda").style.display 		= "inline";
 	document.getElementById("imgBtnAceptaAgregarMaterialAyuda").style.display 	= "none";
 	document.getElementById("imgBtnCancelaAgregarMaterialAyuda").style.display 	= "none";

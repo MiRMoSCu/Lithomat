@@ -56,17 +56,20 @@ function searchLikeGoogle(str){
 	}
 }
 
+
 function closeSearchLikeGoogle(){
 	$("#div_search_like_google").slideUp(function(){
 		document.cliente.select_search.options[0].selected = true;
 	});
 }
 
+
 function preparaAjaxBuscaCliente() {
 	//console.log("esta en: preparaAjaxBuscaCliente");
 	document.cliente.id_cliente.value = document.cliente.select_search.value;
 	ajaxBuscaCliente()
 }
+
 
 function enterSearchLikeGoogle() {
 	//console.log("entro a enterSearchLikeGoogle");
@@ -75,6 +78,7 @@ function enterSearchLikeGoogle() {
 		preparaAjaxBuscaCliente();
 	}
 }
+
 
 function ajaxBuscaCliente() {
     //alert( $('#form_cliente').serialize() );
@@ -447,6 +451,7 @@ function ajaxAgregaTipoTrabajoDetalle() {
                         
                     default:
                         document.forms["visualizador_pliegos"].elements["id_tipo_trabajo_detalle"].value = response.idTipoTrabajoDetalle;
+                    	document.forms["costo_extra_detalle"].elements["id_tipo_trabajo_detalle"].value = response.idTipoTrabajoDetalle;
                         // cambia cursor
                         document.body.style.cursor = "default";
                         
@@ -495,8 +500,10 @@ function ajaxAgregaTipoTrabajoDetalle() {
 function revisaCierreVentanaModal() { 
 // esta funciona se manda llamar en la funcion response ok de la funcion ajax de ajaxAgregaDetallePartida()
     if( cerradoOKVentanaListaPliegos ) {
-        document.getElementById("div_visualizador_pliegos").style.display       = "block";
-        document.getElementById("div_nuevo_tipo_trabajo_detalle").style.display = "block";
+        document.getElementById("div_visualizador_pliegos").style.display       		= "block";
+        document.getElementById("div_costo_extra_detalle").style.display 				= "block";
+        document.getElementById("div_visualizador_costo_extra_detalle").style.display 	= "block";
+        document.getElementById("div_nuevo_tipo_trabajo_detalle").style.display 		= "block";
     } else {
         // la ventana no se cerro con el boton agregar
         // 1) se debe eliminar el registro de tipo_trabajo_detalle, porque fue insertado, pero no es correcto
@@ -526,16 +533,93 @@ function revisaCierreVentanaModal() {
 } // revisaVentanaModal()
 
 
+function ajaxUnidadCostoExtra() {
+	$.ajax({
+		type:"POST",
+		url:urlBuscaUnidadMedidaCostoExtra,
+		data:{id_costo_extra:$("[name=select_costo_extra]").val()},
+		success:function(response) {
+			//alert(response);
+			document.forms["costo_extra_detalle"].elements["nombre_unidad_medida"].value = response;
+		},
+		error:function(e) {
+			console.log(e);
+			document.costo_extra_detalle.nombre_unidad_medida.value = "-";
+		}
+	});
+} // ajaxUnidadCostoExtra
+
+
+function ajaxAgregaCostoExtraDetalle() {
+	
+	// VALIDACIONES
+	var correcto = true;
+	
+	if( document.forms["costo_extra_detalle"].elements["cantidad"].value == "" ) {
+		correcto = false;
+		alert("Es necesario especificar la cantidad de costo extra");
+		document.forms["costo_extra_detalle"].elements["cantidad"].focus();
+	}
+	
+	if( correcto && document.forms["costo_extra_detalle"].elements["select_costo_extra"].selectedIndex == "-1" ) {
+		correcto = false;
+		alert("Es necesario especificar el costo extra");
+		document.forms["costo_extra_detalle"].elements["select_costo_extra"].focus();
+	}
+	
+	if( correcto && document.forms["costo_extra_detalle"].elements["select_responsable_insumo"].selectedIndex == "-1" ) {
+		correcto = false;
+		alert("Es necesario especificar el responsable del insumo");
+		document.forms["costo_extra_detalle"].elements["select_costo_extra"].focus();
+	}
+	
+	if( correcto ) {
+		document.body.style.cursor = "wait";
+		// desactiva campos y botones
+		desactivaBtnCostoExtraDetalle();
+		// copia valores a input hidden
+		document.forms["costo_extra_detalle"].elements["id_costo_extra"].value 		= $("[name=select_costo_extra]").val();
+		document.forms["costo_extra_detalle"].elements["id_responsable_insumo"].value = $("[name=select_responsable_insumo]").val();
+		
+		$.ajax({
+			type:"POST",
+			url:urlAgregaCostoExtra,
+			data:$("[name='costo_extra_detalle']").serialize(),
+			success:function(response) {
+				// actualiza tabla html
+				document.getElementById("div_tabla_costo_extra_tipo_trabajo").innerHTML = response.textoHTML;
+				// elimina la opcion del select
+				document.forms["costo_extra_detalle"].elements["select_costo_extra"].remove( document.forms["costo_extra_detalle"].elements["select_costo_extra"].selectedIndex );
+				// limpia los campos
+				limpiaCamposCostoExtraDetalle();
+				activaBtnCostoExtraDetalle();
+				// cambia cursor
+                document.body.style.cursor = "default";
+			},
+			error:function(e) {
+				console.log(e);
+                document.body.style.cursor = "default";
+                alert("No fue posible insertar costo extra");
+			}
+		});
+	}
+	
+} // ajaxAgregaCostoExtraDetalle
+
+
 function preparaNuevoTipoTrabajoDetalle() {
     // busca la informacion del div div_visualizador_tipo_trabajo_detalle 
     ajaxBuscaTipoTrabajoDetalle();
     // se guarda la informacion id_partida antes de limpiar todo
     var id_partida = document.forms["tipo_trabajo_detalle"].elements["id_partida"].value;
-    // limpia form div_tipo_trabajo_detalle
+    // limpia form div_tipo_trabajo_detalle y div_costo_extra_detalle
     limpiaFormTipoTrabajoDetalle();
+    limpiaFormCostoExtraDetalle();
     // oculta divs no necesarios
-    document.getElementById("div_visualizador_pliegos").style.display       = "none";
-    document.getElementById("div_nuevo_tipo_trabajo_detalle").style.display = "none";
+    document.getElementById("div_visualizador_pliegos").style.display       		= "none";
+    document.getElementById("div_visualizador_costo_extra_detalle").style.display 	= "none";
+    document.getElementById("div_costo_extra_detalle").style.display       		= "none";
+    document.getElementById("div_nuevo_tipo_trabajo_detalle").style.display 		= "none";
     // inicializa el form tipo_trabajo_detalle
     document.forms["tipo_trabajo_detalle"].elements["id_partida"].value = id_partida;
     document.forms["tipo_trabajo_detalle"].elements["descripcion_partida_detalle"].focus();
@@ -543,7 +627,13 @@ function preparaNuevoTipoTrabajoDetalle() {
     delete id_partida;
 } // preparaNuevoTipoTrabajoDetalle()
 
+
 function muestraDetalleArea() {
+	// desactiva campos del formulario costo extra detalle y desactiva boton agregar costo extra detalle
+	desactivaCamposCostoExtraDetalle();
+	desactivaBtnCostoExtraDetalle();
+	
+	// desactiva boton agregar tipo trabajo detalle
     document.getElementById("imgBtnAgregarTipoTrabajoDetalleActivo").style.display     = "none";
     document.getElementById("imgBtnAgregarTipoTrabajoDetalleInactivo").style.display   = "inline";
 
@@ -553,6 +643,7 @@ function muestraDetalleArea() {
     document.getElementById("div_nueva_partida").style.display              = "block";
     document.getElementById("div_cotizar").style.display                    = "block";
 } // muestra_detalle_area()
+
 
 function ajaxAgregaDisenio() {
 	// EL REGISTRO EN BASE DE DATOS YA SE INGRESO, SOLO ES NECESARIO MODIFICAR SU CONTENIDO
@@ -1216,13 +1307,15 @@ function ajaxAgregaMaterialAyuda() {
         document.forms["material_ayuda"].elements["select_material_ayuda"].focus();
     }
     
-    if( document.forms["material_ayuda"].elements["select_responsable_insumo"].selectedIndex == "-1" ) {
+    if( correcto 
+    		&& document.forms["material_ayuda"].elements["select_responsable_insumo"].selectedIndex == "-1" ) {
         correcto = false;
         alert("Es necesario especificar el responsable del material de ayuda");
         document.forms["material_ayuda"].elements["select_responsable_insumo"].focus();
     }
     
-    if( observaciones == "" ) {
+    if( correcto 
+    		&& observaciones == "" ) {
         correcto = false;
         alert("Es necesario especificar las observaciones del material de ayuda");
         document.forms["material_ayuda"].elements["observaciones"].focus();
@@ -1342,6 +1435,8 @@ function preparaNuevaPartida() {
     document.getElementById("div_visualizador_tipo_trabajo_detalle").style.display  = "none";
     document.getElementById("div_tipo_trabajo_detalle").style.display               = "none";
     document.getElementById("div_visualizador_pliegos").style.display               = "none";
+    document.getElementById("div_visualizador_costo_extra_detalle").style.display  	= "none";
+    document.getElementById("div_costo_extra_detalle").style.display              	= "none";
     document.getElementById("div_pestania").style.display                           = "none";
     document.getElementById("div_material_ayuda").style.display                     = "none";
     document.getElementById("div_nuevo_tipo_trabajo_detalle").style.display         = "none";
@@ -1350,6 +1445,7 @@ function preparaNuevaPartida() {
     
     // limpia los campos de los forms ocultos
     limpiaFormTipoTrabajoDetalle();
+    limpiaFormCostoExtraDetalle();
     limpiaFormDisenio();
     limpiaFormDisenioDetalle();
     limpiaFormPreprensa();
@@ -1369,7 +1465,7 @@ function preparaNuevaPartida() {
     // elimina variable de inicializacion
     delete id_orden_produccion;
 
-    // inicializa pesta�as area detalle
+    // inicializa pestanias area detalle
     var obj = { id:"div_pestania_menu_disenio" };
     menu( obj );
     

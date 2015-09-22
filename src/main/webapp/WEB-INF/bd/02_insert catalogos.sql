@@ -47,12 +47,12 @@ INSERT INTO tinta_especial (id_tinta_especial, precio, id_tipo_precio, activo) V
 
 
 
-INSERT INTO costos_extras (id_costos_extras, nombre, descripcion, precio, id_tipo_precio, activo) VALUES (1,'Tiempo extra máquina',NULL,30,5,true);
-INSERT INTO costos_extras (id_costos_extras, nombre, descripcion, precio, id_tipo_precio, activo) VALUES (2,'Cartulina sulfatada',NULL,15,6,true);
-INSERT INTO costos_extras (id_costos_extras, nombre, descripcion, precio, id_tipo_precio, activo) VALUES (3,'Sustratos especiales',NULL,100,6,true);
-INSERT INTO costos_extras (id_costos_extras, nombre, descripcion, precio, id_tipo_precio, activo) VALUES (4,'Suspensión de trabajos',NULL,1000,5,true);
-INSERT INTO costos_extras (id_costos_extras, nombre, descripcion, precio, id_tipo_precio, activo) VALUES (5,'Tiempo muerto',NULL,700,5,true);
-INSERT INTO costos_extras (id_costos_extras, nombre, descripcion, precio, id_tipo_precio, activo) VALUES (6,'Bajada de corte',NULL,3,3,true);
+INSERT INTO costo_extra (id_costo_extra, nombre, descripcion, precio, id_tipo_precio, activo) VALUES (1,'Tiempo extra máquina',NULL,30,5,true);
+INSERT INTO costo_extra (id_costo_extra, nombre, descripcion, precio, id_tipo_precio, activo) VALUES (2,'Cartulina sulfatada',NULL,15,6,true);
+INSERT INTO costo_extra (id_costo_extra, nombre, descripcion, precio, id_tipo_precio, activo) VALUES (3,'Sustratos especiales',NULL,100,6,true);
+INSERT INTO costo_extra (id_costo_extra, nombre, descripcion, precio, id_tipo_precio, activo) VALUES (4,'Suspensión de trabajos',NULL,1000,5,true);
+INSERT INTO costo_extra (id_costo_extra, nombre, descripcion, precio, id_tipo_precio, activo) VALUES (5,'Tiempo muerto',NULL,700,5,true);
+INSERT INTO costo_extra (id_costo_extra, nombre, descripcion, precio, id_tipo_precio, activo) VALUES (6,'Bajada de corte',NULL,3,3,true);
 
 
 

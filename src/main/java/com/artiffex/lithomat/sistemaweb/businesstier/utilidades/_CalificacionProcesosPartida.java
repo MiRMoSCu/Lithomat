@@ -20,10 +20,12 @@ public class _CalificacionProcesosPartida implements Serializable {
 	private double costoExtraTotal;
 	private boolean activo;
 	// campos para transferir informacion
+	private String htmlTablaCostosExtras;
 	private String htmlTablaProcesosDisenio;
 	private String htmlTablaProcesosPreprensa;
 	private String htmlTablaProcesosTransporte;
 	private String htmlTablaProcesosAcabado;
+	
 	
 	public int getIdCalificacionProcesosPartida() {
 		return idCalificacionProcesosPartida;
@@ -91,6 +93,12 @@ public class _CalificacionProcesosPartida implements Serializable {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
+	public String getHtmlTablaCostosExtras() {
+		return htmlTablaCostosExtras;
+	}
+	public void setHtmlTablaCostosExtras(String htmlTablaCostosExtras) {
+		this.htmlTablaCostosExtras = htmlTablaCostosExtras;
+	}
 	public String getHtmlTablaProcesosDisenio() {
 		return htmlTablaProcesosDisenio;
 	}
@@ -115,5 +123,4 @@ public class _CalificacionProcesosPartida implements Serializable {
 	public void setHtmlTablaProcesosAcabado(String htmlTablaProcesosAcabado) {
 		this.htmlTablaProcesosAcabado = htmlTablaProcesosAcabado;
 	}
-	
 }

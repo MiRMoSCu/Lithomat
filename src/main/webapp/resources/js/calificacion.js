@@ -63,6 +63,24 @@ function limpiaFormProcesos(){
 	
 	document.resumen_procesos.procesos_coste_total.value = "";
 	
+	document.getElementById("div_tabla_lista_costos_extras_detalle").innerHTML = 
+		"<table>" + 
+			"<tr>" +
+				"<th>No.</th>" +
+				"<th>Costo Extra</th>" +
+				"<th>Responsable</th>" +
+				"<th>Precio</th>" +
+				"<th>Especificaci&oacute;n</th>" +
+			"</tr>" +
+			"<tr class=\"l1\">" +
+				"<td>&nbsp;</td>" +
+				"<td>&nbsp;</td>" +
+				"<td>&nbsp;</td>" +
+				"<td>&nbsp;</td>" +
+				"<td>&nbsp;</td>" +
+			"</tr>" +
+		"</table>";
+	
 	document.getElementById("div_tabla_lista_procesos_disenio").innerHTML = 
 		"<table>" + 
 			"<tr>" +
@@ -262,6 +280,7 @@ function ajaxProcesos( id_partida ) {
 		data:{nut:nut, id_partida:id_partida},
 		success:function(response){
 			//console.log(response);
+			document.getElementById("div_tabla_lista_costos_extras_detalle").innerHTML 	= response.htmlTablaCostosExtras;
 			document.getElementById("div_tabla_lista_procesos_disenio").innerHTML 		= response.htmlTablaProcesosDisenio;
 			document.getElementById("div_tabla_lista_procesos_preprensa").innerHTML 	= response.htmlTablaProcesosPreprensa;
 			document.getElementById("div_tabla_lista_procesos_transporte").innerHTML 	= response.htmlTablaProcesosTransporte;

@@ -3,26 +3,26 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:url value="/?opc=catalogos"					var="urlMenu"/>
-<c:url value="/costos_extras/catalogo/alta" 	var="urlAlta"/>
-<c:url value="/costos_extras/catalogo/modifica" var="urlModifica"/>
-<c:url value="/costos_extras/catalogo/elimina" 	var="urlElimina"/>
+<c:url value="/costo_extra/catalogo/alta" 		var="urlAlta"/>
+<c:url value="/costo_extra/catalogo/modifica" 	var="urlModifica"/>
+<c:url value="/costo_extra/catalogo/elimina" 	var="urlElimina"/>
 <html>
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1"></meta>
-        <title>Costos extras</title>
+        <title>Costo extra</title>
         <style type="text/css" media="screen">
             
-            table#tabla_costos_extras {
+            table#tabla_costo_extra {
                 overflow-y:scroll;
             }
             
-            table#tabla_costos_extras tr:hover td  {
+            table#tabla_costo_extra tr:hover td  {
                 cursor: pointer;
                 color:#000;
                 background-color: #99CCFF;
             }
             
-            #div_costos_extras {
+            #div_costo_extra {
                 width: 865px;
                 margin-left: auto;
                 margin-right: auto;
@@ -35,7 +35,7 @@
                 height: 290px;
             }
             
-            #div_tabla_costos_extras {
+            #div_tabla_costo_extra {
                 width: 100%;
                 height: 100%;
                 overflow-x: scroll;
@@ -47,7 +47,7 @@
         <link rel="stylesheet" href="<c:url value="/resources/css/menu.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/catalogo.css"/>" type="text/css"></link>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/costos_extras.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/costo_extra.js"/>"></script>
         <script type="text/javascript">
         	var urlMenu		= "${urlMenu}";
             var urlAlta 	= '${urlAlta}';
@@ -83,15 +83,15 @@
                             </div>
                         </div>
                         <div id="div_contenido">
-                            <form:form action="${urlAlta}" method="post" modelAttribute="costosExtras" acceptCharset="ISO-8859-1">
-                                <div id="div_costos_extras">
+                            <form:form action="" method="post" acceptCharset="ISO-8859-1">
+                                <div id="div_costo_extra">
                                     <div class="titulo">
-                                        <img alt="" src="<c:url value="/resources/image/titulo_costos_extras.png"/>"></img>
+                                        <img alt="" src="<c:url value="/resources/image/titulo_costo_extra.png"/>"></img>
                                     </div>
                                     <div id="div_contenedor_tabla">
                                         <div class="columna_completa">
-                                            <div id="div_tabla_costos_extras">
-                                                <table id="tabla_costos_extras">
+                                            <div id="div_tabla_costo_extra">
+                                                <table id="tabla_costo_extra">
                                                     <tr>
                                                         <th>Identificador</th>
                                                         <th>Nombre</th>
@@ -99,14 +99,14 @@
                                                         <th>Precio</th>
                                                         <th>Unidad</th>
                                                     </tr>
-                                                <c:forEach var="costosExtras" items="${listaCostosExtras}" varStatus="i">
+                                                <c:forEach var="costoExtra" items="${listaCostoExtra}" varStatus="i">
                                                     <tr class='${i.count%2==0?"l2":"l1"}'
-                                                        onclick="setCampos('${costosExtras.idCostosExtras}','${costosExtras.nombre}', '${costosExtras.descripcion}','${costosExtras.precio}', '${costosExtras.tipoPrecio.nombre}' );">
-                                                        <td>${costosExtras.idCostosExtras}</td>
-                                                        <td>${costosExtras.nombre}</td>
-                                                        <td>${costosExtras.descripcion}</td>
-                                                        <td>${costosExtras.precio}</td>
-                                                        <td>${costosExtras.tipoPrecio.nombre}</td>
+                                                        onclick="setCampos('${costoExtra.idCostoExtra}','${costoExtra.nombre}', '${costoExtra.descripcion}','${costoExtra.precio}', '${costoExtra.tipoPrecio.nombre}' );">
+                                                        <td>${costoExtra.idCostoExtra}</td>
+                                                        <td>${costoExtra.nombre}</td>
+                                                        <td>${costoExtra.descripcion}</td>
+                                                        <td>${costoExtra.precio}</td>
+                                                        <td>${costoExtra.tipoPrecio.nombre}</td>
                                                     </tr>
                                                 </c:forEach>
                                                 </table>
@@ -124,7 +124,7 @@
                                                         <tr>
                                                             <td width="40%">Identificador:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="id_costos_extras"
+                                                                <input type="text" class="input" name="id_costo_extra"
                                                                        value="" tabindex="1" readonly="readonly"></input>
                                                             </td>
                                                         </tr>

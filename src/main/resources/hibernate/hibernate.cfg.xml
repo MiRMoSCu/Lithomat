@@ -48,8 +48,8 @@
 		<mapping resource="hibernate/hn_cliente.hbm.xml"/>
 		<mapping resource="hibernate/hn_cobranza.hbm.xml"/>
 		<mapping resource="hibernate/hn_combinacionTintas.hbm.xml"/>
-		<mapping resource="hibernate/hn_costosExtras.hbm.xml"/>
-		<mapping resource="hibernate/hn_costosExtrasDetalle.hbm.xml"/>
+		<mapping resource="hibernate/hn_costoExtra.hbm.xml"/>
+		<mapping resource="hibernate/hn_costoExtraDetalle.hbm.xml"/>
 		<mapping resource="hibernate/hn_disenio.hbm.xml"/>
 		<mapping resource="hibernate/hn_disenioDetalle.hbm.xml"/>
 		<mapping resource="hibernate/hn_estatusOrden.hbm.xml"/>

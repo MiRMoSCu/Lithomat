@@ -1098,6 +1098,34 @@
 	<!-- div_procesos_acabado_detalle -->
 	                                    	<div id="div_procesos_acabado_detalle" style="width:100%; height:100%; background:#fff; float:left; display:none;">
 	                                    		<form name="resumen_procesos" action="" accept-charset="utf-8">
+	                                    		
+	                                    			<div class="titulo">
+	                                    				<font size="4">COSTOS EXTRAS</font>
+	                                    			</div>
+	                                    			<div style="width:80%; height:100px; margin-left:auto; margin-right:auto;">
+	                                    				<div class="columna_completa">
+	                                    					<div id="div_tabla_lista_costos_extras_detalle" style="width:100%; height:100%; overflow-x:scroll;">
+	                                    						<table>
+	                                    							<tr>
+	                                    								<th>No.</th>
+	                                    								<th>Costo Extra</th>
+	                                    								<th>Responsable</th>
+	                                    								<th>Precio</th>
+	                                    								<th>Especificaci&oacute;n</th>
+	                                    							</tr>
+	                                    							<tr class="l1">
+	                                    								<td>&nbsp;</td>
+	                                    								<td>&nbsp;</td>
+	                                    								<td>&nbsp;</td>
+	                                    								<td>&nbsp;</td>
+	                                    								<td>&nbsp;</td>
+	                                    							</tr>
+	                                    						</table>
+	                                    					</div>
+	                                    				</div>
+	                                    			</div>
+	                                    			<br/>
+	                                    		
 	                                    		<!-- DISENIO -->
 		                                    		<div class="titulo">
 		                                    			<font size="4">DISE&Ntilde;O</font>
@@ -1118,17 +1146,11 @@
 		                                    							<td>&nbsp;</td>
 		                                    							<td>&nbsp;</td>
 		                                    						</tr>
-		                                    						<tr>
-		                                    							<td>&nbsp;</td>
-		                                    							<td>&nbsp;</td>
-		                                    							<td>&nbsp;</td>
-		                                    							<td>&nbsp;</td>
-		                                    						</tr>
 		                                    					</table>
 		                                    				</div>
 		                                    			</div>
 		                                    		</div>
-		                                    		<div class="linea"></div>
+		                                    		<br/>
 		                                    	<!-- PREPRENSA -->
 		                                    		<div class="titulo">
 		                                    			<font size="4">PREPRENSA</font>
@@ -1149,17 +1171,11 @@
 		                                    							<td>&nbsp;</td>
 		                                    							<td>&nbsp;</td>
 		                                    						</tr>
-		                                    						<tr>
-		                                    							<td>&nbsp;</td>
-		                                    							<td>&nbsp;</td>
-		                                    							<td>&nbsp;</td>
-		                                    							<td>&nbsp;</td>
-		                                    						</tr>
 		                                    					</table>
 		                                    				</div>
 		                                    			</div>
 		                                    		</div>
-		                                    		<div class="linea"></div>
+		                                    		<br/>
 		                                    	<!-- TRANSPORTE -->
 		                                    		<div class="titulo">
 		                                    			<font size="4">TRANSPORTE</font>
@@ -1180,17 +1196,11 @@
 		                                    							<td>&nbsp;</td>
 		                                    							<td>&nbsp;</td>
 		                                    						</tr>
-		                                    						<tr>
-		                                    							<td>&nbsp;</td>
-		                                    							<td>&nbsp;</td>
-		                                    							<td>&nbsp;</td>
-		                                    							<td>&nbsp;</td>
-		                                    						</tr>
 		                                    					</table>
 		                                    				</div>
 		                                    			</div>
 		                                    		</div>
-		                                    		<div class="linea"></div>
+		                                    		<br/>
 		                                    	<!-- ACABADO -->
 		                                    		<div class="titulo">
 		                                    			<font size="4">ACABADO</font>
@@ -1211,17 +1221,11 @@
 		                                    							<td>&nbsp;</td>
 		                                    							<td>&nbsp;</td>
 		                                    						</tr>
-		                                    						<tr>
-		                                    							<td>&nbsp;</td>
-		                                    							<td>&nbsp;</td>
-		                                    							<td>&nbsp;</td>
-		                                    							<td>&nbsp;</td>
-		                                    						</tr>
 		                                    					</table>
 		                                    				</div>
 		                                    			</div>
 		                                    		</div>
-		                                    		<div class="linea"></div>
+		                                    		<br/>
 		                                    	<!-- SEPARADOR -->
 		                                    		<div class="div_separador_chico">
 		                                            	<img alt="" src="<c:url value="/resources/image/separador_chico.jpg"/>"/>

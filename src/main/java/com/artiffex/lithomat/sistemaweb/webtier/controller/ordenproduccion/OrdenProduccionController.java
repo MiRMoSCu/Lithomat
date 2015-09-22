@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionOrdenProduccion;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Cliente;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.CostoExtra;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.EstatusOrden;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.HistorialEstatus;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.JsonResponse;
@@ -26,6 +27,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoComprobanteFisca
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Usuario;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CalificacionService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CombinacionTintasService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CostoExtraService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.EstatusOrdenService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.HistorialEstatusService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.MaquinaService;
@@ -69,6 +71,8 @@ public class OrdenProduccionController {
 	private MaquinaService maquinaService;
 	@Resource
 	private TipoComplejidadService tipoComplejidadService;
+	@Resource
+	private CostoExtraService costoExtraService;
 	@Resource
 	private ProcesoDisenioService procesoDisenioService;
 	@Resource
@@ -125,6 +129,17 @@ public class OrdenProduccionController {
 		List<ComboSelect> listaTipoComplejidad = tipoComplejidadService.listaComboSelect();
 		model.addAttribute("listaTipoComplejidad", listaTipoComplejidad);
 		listaTipoComplejidad = null;
+		
+		List<ComboSelect> listaCostoExtra = costoExtraService.listaComboSelect();
+		model.addAttribute("listaCostoExtra",listaCostoExtra);
+		if( listaCostoExtra.size() > 0 ) {
+			ComboSelect cs = listaCostoExtra.get(0);
+			CostoExtra costoExtra = costoExtraService.buscaCostoExtra(cs.getValue());
+			model.addAttribute("nombre_unidad_medida",costoExtra.getTipoPrecio().getNombre());
+			costoExtra 	= null;
+			cs 				= null;
+		}
+		listaCostoExtra = null;
 		
 		Gson gson = new Gson();
 

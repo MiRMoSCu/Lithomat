@@ -8,25 +8,25 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
-import com.artiffex.lithomat.sistemaweb.businesstier.entity.CostosExtrasDetalle;
-import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CostosExtrasDetalleDAO;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.CostoExtraDetalle;
+import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CostoExtraDetalleDAO;
 import com.artiffex.lithomat.sistemaweb.eistier.hibernate.HibernateUtil;
 
-@Repository("costosExtrasDetalleDAO")
-public class CostosExtrasDetalleDaoImpl implements CostosExtrasDetalleDAO {
+@Repository("costoExtraDetalleDAO")
+public class CostoExtraDetalleDaoImpl implements CostoExtraDetalleDAO {
 	
-	private static final Logger log = Logger.getLogger(CostosExtrasDetalleDaoImpl.class);
+	private static final Logger log = Logger.getLogger(CostoExtraDetalleDaoImpl.class);
 	private Session sesion;
 	
 	// constructor
-	public CostosExtrasDetalleDaoImpl() { }
+	public CostoExtraDetalleDaoImpl() { }
 
-	public int crea(CostosExtrasDetalle costosExtrasDetalle) {
+	public int crea(CostoExtraDetalle costoExtraDetalle) {
 		int id = 0;
 		try {
 			sesion = HibernateUtil.getInstance().getCurrentSession();
 			sesion.beginTransaction();
-			id = (Integer)sesion.save(costosExtrasDetalle);
+			id = (Integer)sesion.save(costoExtraDetalle);
 			sesion.getTransaction().commit();
 		} catch(Exception e) {
 			log.error(e.getMessage());
@@ -35,28 +35,28 @@ public class CostosExtrasDetalleDaoImpl implements CostosExtrasDetalleDAO {
 		return id;
 	}
 	
-	public CostosExtrasDetalle busca(int idCostosExtrasDetalle) {
-		CostosExtrasDetalle costosExtrasDetalle = null;
+	public CostoExtraDetalle busca(int idCostoExtraDetalle) {
+		CostoExtraDetalle costoExtraDetalle = null;
 		try {
 			sesion = HibernateUtil.getInstance().getCurrentSession();
 			sesion.beginTransaction();
-			Query query = sesion.createQuery("from CostosExtrasDetalle ced where ced.idCostosExtrasDetalle = :idCostosExtrasDetalle");
-			query.setParameter("idCostosExtrasDetalle", idCostosExtrasDetalle);
-			costosExtrasDetalle = (CostosExtrasDetalle)query.uniqueResult();
+			Query query = sesion.createQuery("from CostoExtraDetalle ced where ced.idCostoExtraDetalle = :idCostoExtraDetalle");
+			query.setParameter("idCostoExtraDetalle", idCostoExtraDetalle);
+			costoExtraDetalle = (CostoExtraDetalle)query.uniqueResult();
 			sesion.getTransaction().commit();
 			query = null;
 		} catch(Exception e) {
 			log.error(e.getMessage());
 			sesion.getTransaction().rollback();
 		}
-		return costosExtrasDetalle;
+		return costoExtraDetalle;
 	}
 
-	public void modifica(CostosExtrasDetalle costosExtrasDetalle) {
+	public void modifica(CostoExtraDetalle costoExtraDetalle) {
 		try {
 			sesion = HibernateUtil.getInstance().getCurrentSession();
 			sesion.beginTransaction();
-			sesion.update(costosExtrasDetalle);
+			sesion.update(costoExtraDetalle);
 			sesion.getTransaction().commit();
 		} catch(Exception e) {
 			log.error(e.getMessage());
@@ -65,12 +65,12 @@ public class CostosExtrasDetalleDaoImpl implements CostosExtrasDetalleDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<CostosExtrasDetalle> lista() {
-		List<CostosExtrasDetalle> lista = new ArrayList<CostosExtrasDetalle>();
+	public List<CostoExtraDetalle> lista() {
+		List<CostoExtraDetalle> lista = new ArrayList<CostoExtraDetalle>();
 		try {
 			sesion = HibernateUtil.getInstance().getCurrentSession();
 			sesion.beginTransaction();
-			lista = sesion.createQuery("from CostosExtrasDetalle ced where ced.activo = true order by ced.idCostosExtrasDetalle asc").list();
+			lista = sesion.createQuery("from CostoExtraDetalle ced where ced.activo = true order by ced.idCostoExtraDetalle asc").list();
 			sesion.getTransaction().commit();
 		} catch(Exception e) {
 			log.error(e.getMessage());
@@ -80,12 +80,12 @@ public class CostosExtrasDetalleDaoImpl implements CostosExtrasDetalleDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<CostosExtrasDetalle> listaPorTipoTrabajoDetalle(int idTipoTrabajoDetalle) {
-		List<CostosExtrasDetalle> lista = new ArrayList<CostosExtrasDetalle>();
+	public List<CostoExtraDetalle> listaPorTipoTrabajoDetalle(int idTipoTrabajoDetalle) {
+		List<CostoExtraDetalle> lista = new ArrayList<CostoExtraDetalle>();
 		try {
 			sesion = HibernateUtil.getInstance().getCurrentSession();
 			sesion.beginTransaction();
-			Query query = sesion.createQuery("from CostosExtrasDetalle ced where ced.activo = true and ced.tipoTrabajoDetalle.idTipoTrabajoDetalle = :idTipoTrabajoDetalle order by ced.idCostosExtrasDetalle asc");
+			Query query = sesion.createQuery("from CostoExtraDetalle ced where ced.activo = true and ced.tipoTrabajoDetalle.idTipoTrabajoDetalle = :idTipoTrabajoDetalle order by ced.idCostoExtraDetalle asc");
 			query.setParameter("idTipoTrabajoDetalle", idTipoTrabajoDetalle); 
 			lista = query.list();
 			sesion.getTransaction().commit();

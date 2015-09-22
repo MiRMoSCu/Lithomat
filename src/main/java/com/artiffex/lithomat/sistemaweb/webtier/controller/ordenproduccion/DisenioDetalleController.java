@@ -103,9 +103,9 @@ public class DisenioDetalleController {
 			jsonResponse.setTextoHTML(disenioDetalleService.listaHTMLModificacionPorDisenio(idDisenio));
 			// actualiza precio
 			calificacionService.actualizaProcesosPartida(idOrdenProduccion);
-			
+			// busca precio
 			CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionService.buscaCalificacionOrdenProduccion(idOrdenProduccion);
-			
+			// guarda en response
 			jsonResponse.setPrecioNeto( calificacionOrdenProduccion.getPrecioNeto() );
 			
 			calificacionOrdenProduccion = null;
@@ -158,7 +158,6 @@ public class DisenioDetalleController {
 	@ResponseBody
 	public JsonResponse eliminaDisenioDetalle(
 			@RequestParam(value = "id_orden_produccion", 	required = false) Integer idOrdenProduccion,
-			@RequestParam(value = "nut", 					required = false) String nut,
 			@RequestParam(value = "id_disenio_detalle", 	required = false) Integer idDisenioDetalle,
 			@RequestParam(value = "id_disenio",				required = false) Integer idDisenio
 		) {

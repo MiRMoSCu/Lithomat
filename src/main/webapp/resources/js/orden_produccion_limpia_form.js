@@ -290,6 +290,62 @@ function desactivaBtnTipoTrabajoDetalle() {
 
 
 //************************/
+//costo_extra_detalle
+
+function limpiaCamposCostoExtraDetalle() {
+	document.forms["costo_extra_detalle"].elements["select_costo_extra"].selectedIndex 		= 0;
+	document.forms["costo_extra_detalle"].elements["select_responsable_insumo"].selectedIndex = 0;
+	document.forms["costo_extra_detalle"].elements["cantidad"].value 							= "";
+	document.forms["costo_extra_detalle"].elements["nombre_unidad_medida"].value 				= "";
+	document.forms["costo_extra_detalle"].elements["especificacion"].value 					= "";
+	ajaxUnidadCostoExtra();
+} // limpiaCamposCostoExtraDetalle
+
+function limpiaFormCostoExtraDetalle() {
+	document.forms["costo_extra_detalle"].elements["id_tipo_trabajo_detalle"].value = "";
+	document.forms["costo_extra_detalle"].elements["id_costo_extra"].value 			= "";
+	document.forms["costo_extra_detalle"].elements["id_responsable_insumo"].value 	= "";
+	limpiaCamposCostoExtraDetalle();
+	activaCamposCostoExtraDetalle();
+	activaBtnCostoExtraDetalle();
+	// limpia tabla de costo extra detalle
+	document.getElementById("div_tabla_costo_extra_tipo_trabajo").innerHTML = "<table><tr><th>Id.<\/th><th>Costo Extra<\/th><th>Responsable<\/th><th>Cantidad<\/th><th>Especificaci&oacute;n<\/th></tr><tr class=\"l1\"><td><\/td><td><\/td><td><\/td><td><\/td><td><\/td><\/tr><\/table>";
+} // limpiaFormCostoExtraDetalle
+
+
+function activaCamposCostoExtraDetalle() {
+	document.forms["costo_extra_detalle"].elements["select_costo_extra"].disabled 		= false;
+	document.forms["costo_extra_detalle"].elements["select_responsable_insumo"].disabled 	= false;
+	document.forms["costo_extra_detalle"].elements["cantidad"].readOnly 					= false;
+	document.forms["costo_extra_detalle"].elements["especificacion"].readOnly 			= false;
+} // activaCamposCostoExtraDetalle
+
+function desactivaCamposCostoExtraDetalle() {
+	document.forms["costo_extra_detalle"].elements["select_costo_extra"].disabled 		= true;
+	document.forms["costo_extra_detalle"].elements["select_responsable_insumo"].disabled 	= true;
+	document.forms["costo_extra_detalle"].elements["cantidad"].readOnly 					= true;
+	document.forms["costo_extra_detalle"].elements["especificacion"].readOnly 			= true;
+} // desactivaCamposCostoExtraDetalle
+
+function activaBtnCostoExtraDetalle() {
+	document.getElementById("imgBtnLimpiarCostoExtraDetalleInactivo").style.display = "none";
+	document.getElementById("imgBtnAgregarCostoExtraDetalleInactivo").style.display = "none";
+	document.getElementById("imgBtnLimpiarCostoExtraDetalleActivo").style.display   = "inline";
+	document.getElementById("imgBtnAgregarCostoExtraDetalleActivo").style.display   = "inline";
+} // activaBtnCostoExtraDetalle
+
+function desactivaBtnCostoExtraDetalle() {
+	document.getElementById("imgBtnLimpiarCostoExtraDetalleActivo").style.display   = "none";
+	document.getElementById("imgBtnAgregarCostoExtraDetalleActivo").style.display   = "none";
+	document.getElementById("imgBtnLimpiarCostoExtraDetalleInactivo").style.display = "inline";
+	document.getElementById("imgBtnAgregarCostoExtraDetalleInactivo").style.display = "inline";
+} // desactivaBtnCostoExtraDetalle
+
+
+
+
+
+//************************/
 // disenio
 
 function activaCamposDisenio() {
@@ -403,7 +459,7 @@ function limpiaFormDisenioDetalle() {
     });
     jsonObject = null;
     // limpia tabla
-    document.getElementById("div_tabla_disenio_detalle").innerHTML = "<table><tbody><tr><th>No.<\/th><th>Descripci&oacute;n<\/th><th>Cantidad<\/th><th>Especificaci&oacute;n<\/th><\/tr><tr class=\"l1\"><td><\/td><td><\/td><td><\/td><td><\/td><\/tr><\/tbody><\/table>";
+    document.getElementById("div_tabla_disenio_detalle").innerHTML = "<table><tr><th>No.<\/th><th>Descripci&oacute;n<\/th><th>Cantidad<\/th><th>Especificaci&oacute;n<\/th><\/tr><tr class=\"l1\"><td><\/td><td><\/td><td><\/td><td><\/td><\/tr><\/table>";
     
     limpiaCamposFormDisenioDetalle();
     desactivaCamposDisenioDetalle();

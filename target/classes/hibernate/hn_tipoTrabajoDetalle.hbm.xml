@@ -122,11 +122,11 @@
 			</key>
 			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Pliego"/>
 		</set>
-		<set name="costosExtrasDetalle" table="costos_extra_detalle" inverse="true" lazy="true" fetch="select">
+		<set name="costoExtraDetalle" table="costo_extra_detalle" inverse="true" lazy="true" fetch="select">
 			<key>
 				<column name="id_tipo_trabajo_detalle" not-null="true"/>
 			</key>
-			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.CostosExtrasDetalle"/>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.CostoExtraDetalle"/>
 		</set>
 	</class>
 </hibernate-mapping>

@@ -20,6 +20,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajoDetalle;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.AcabadoDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CalificacionService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.ClienteService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CostoExtraDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.DisenioDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.OrdenProduccionService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PliegoService;
@@ -54,6 +55,8 @@ public class CalificacionController {
 	private TransporteDetalleService transporteDetalleService;
 	@Resource
 	private AcabadoDetalleService acabadoDetalleService;
+	@Resource
+	private CostoExtraDetalleService costosExtrasDetalleService;
 	
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
@@ -243,6 +246,7 @@ public class CalificacionController {
 		
 		calificacionProcesosPartida = null;
 		
+		cpp.setHtmlTablaCostosExtras( costosExtrasDetalleService.listaHTMLProcesosYPrecioConPorcentajeCliente(idPartida, porcentajeCliente) );
 		cpp.setHtmlTablaProcesosDisenio( disenioDetalleService.listaHTMLProcesosYPrecioConPorcentajeCliente(idPartida, porcentajeCliente) );
 		cpp.setHtmlTablaProcesosPreprensa( preprensaDetalleService.listaHTMLProcesosYPrecioConPorcentajeCliente(idPartida, porcentajeCliente) );
 		cpp.setHtmlTablaProcesosTransporte( transporteDetalleService.listaHTMLProcesosYPrecioConPorcentajeCliente(idPartida, porcentajeCliente) );

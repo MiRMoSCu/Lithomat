@@ -47,44 +47,48 @@ function buscaTipoPlaca( obj ) {
 } // buscaTipoPlaca
 
 function ocultaBotonesModificarPorSeccion() {
-	document.getElementById("div_btn_actualizar_orden_produccion").style.display 	= "none";
-	document.getElementById("div_btn_actualizar_partida").style.display 			= "none";
-	document.getElementById("div_btn_actualizar_ttd_encabezado").style.display 		= "none";
-	document.getElementById("div_btn_modificar_disenio").style.display 				= "none";
-	document.getElementById("div_btn_agregar_disenio_detalle").style.display 		= "none";
-	document.getElementById("div_btn_actualizar_disenio_detalle").style.display 	= "none";
-	document.getElementById("div_btn_modificar_preprensa").style.display 			= "none";
-	document.getElementById("div_btn_agregar_preprensa_detalle").style.display 		= "none";
-	document.getElementById("div_btn_actualizar_preprensa_detalle").style.display 	= "none";
-	document.getElementById("div_btn_modificar_transporte").style.display 			= "none";
-	document.getElementById("div_btn_agregar_transporte_detalle").style.display 	= "none";
-	document.getElementById("div_btn_actualizar_transporte_detalle").style.display 	= "none";
-	document.getElementById("div_btn_modificar_acabado").style.display 				= "none";
-	document.getElementById("div_btn_agregar_acabado_detalle").style.display 		= "none";
-	document.getElementById("div_btn_actualizar_acabado_detalle").style.display 	= "none";
-	document.getElementById("div_btn_modificar_offset").style.display 				= "none";
-	document.getElementById("div_btn_agregar_material_ayuda").style.display 		= "none";
-	document.getElementById("div_btn_actualizar_material_ayuda").style.display 		= "none";
+	document.getElementById("div_btn_actualizar_orden_produccion").style.display 		= "none";
+	document.getElementById("div_btn_actualizar_partida").style.display 				= "none";
+	document.getElementById("div_btn_actualizar_ttd_encabezado").style.display 			= "none";
+	document.getElementById("div_btn_actualizar_costo_extra_detalle").style.display 	= "none";
+	document.getElementById("div_btn_agregar_costo_extra_detalle").style.display 		= "none";
+	document.getElementById("div_btn_modificar_disenio").style.display 					= "none";
+	document.getElementById("div_btn_agregar_disenio_detalle").style.display 			= "none";
+	document.getElementById("div_btn_actualizar_disenio_detalle").style.display 		= "none";
+	document.getElementById("div_btn_modificar_preprensa").style.display 				= "none";
+	document.getElementById("div_btn_agregar_preprensa_detalle").style.display 			= "none";
+	document.getElementById("div_btn_actualizar_preprensa_detalle").style.display 		= "none";
+	document.getElementById("div_btn_modificar_transporte").style.display 				= "none";
+	document.getElementById("div_btn_agregar_transporte_detalle").style.display 		= "none";
+	document.getElementById("div_btn_actualizar_transporte_detalle").style.display 		= "none";
+	document.getElementById("div_btn_modificar_acabado").style.display 					= "none";
+	document.getElementById("div_btn_agregar_acabado_detalle").style.display 			= "none";
+	document.getElementById("div_btn_actualizar_acabado_detalle").style.display 		= "none";
+	document.getElementById("div_btn_modificar_offset").style.display 					= "none";
+	document.getElementById("div_btn_agregar_material_ayuda").style.display 			= "none";
+	document.getElementById("div_btn_actualizar_material_ayuda").style.display 			= "none";
 } // ocultaBotonesModificarPorSeccion
 
 function muestraBotonesModificarPorSeccion() {
-	document.getElementById("div_btn_actualizar_orden_produccion").style.display 	= "inline";
-	document.getElementById("div_btn_actualizar_partida").style.display 			= "inline";
-	document.getElementById("div_btn_actualizar_ttd_encabezado").style.display 		= "inline";
-	document.getElementById("div_btn_modificar_disenio").style.display 				= "inline";
-	document.getElementById("div_btn_agregar_disenio_detalle").style.display 		= "inline";
-	document.getElementById("div_btn_actualizar_disenio_detalle").style.display 	= "inline";
-	document.getElementById("div_btn_modificar_preprensa").style.display 			= "inline";
-	document.getElementById("div_btn_agregar_preprensa_detalle").style.display 		= "inline";
-	document.getElementById("div_btn_actualizar_preprensa_detalle").style.display 	= "inline";
-	document.getElementById("div_btn_modificar_transporte").style.display 			= "inline";
-	document.getElementById("div_btn_agregar_transporte_detalle").style.display 	= "inline";
-	document.getElementById("div_btn_actualizar_transporte_detalle").style.display 	= "inline";
-	document.getElementById("div_btn_modificar_acabado").style.display 				= "inline";
-	document.getElementById("div_btn_agregar_acabado_detalle").style.display 		= "inline";
-	document.getElementById("div_btn_actualizar_acabado_detalle").style.display 	= "inline";
-	document.getElementById("div_btn_modificar_offset").style.display 				= "inline";
-	document.getElementById("div_btn_agregar_material_ayuda").style.display 		= "inline";
-	document.getElementById("div_btn_actualizar_material_ayuda").style.display 		= "inline";
+	document.getElementById("div_btn_actualizar_orden_produccion").style.display 		= "inline";
+	document.getElementById("div_btn_actualizar_partida").style.display 				= "inline";
+	document.getElementById("div_btn_actualizar_ttd_encabezado").style.display 			= "inline";
+	document.getElementById("div_btn_actualizar_costo_extra_detalle").style.display 	= "inline";
+	document.getElementById("div_btn_agregar_costo_extra_detalle").style.display 		= "inline";
+	document.getElementById("div_btn_modificar_disenio").style.display 					= "inline";
+	document.getElementById("div_btn_agregar_disenio_detalle").style.display 			= "inline";
+	document.getElementById("div_btn_actualizar_disenio_detalle").style.display 		= "inline";
+	document.getElementById("div_btn_modificar_preprensa").style.display 				= "inline";
+	document.getElementById("div_btn_agregar_preprensa_detalle").style.display 			= "inline";
+	document.getElementById("div_btn_actualizar_preprensa_detalle").style.display 		= "inline";
+	document.getElementById("div_btn_modificar_transporte").style.display 				= "inline";
+	document.getElementById("div_btn_agregar_transporte_detalle").style.display 		= "inline";
+	document.getElementById("div_btn_actualizar_transporte_detalle").style.display 		= "inline";
+	document.getElementById("div_btn_modificar_acabado").style.display 					= "inline";
+	document.getElementById("div_btn_agregar_acabado_detalle").style.display 			= "inline";
+	document.getElementById("div_btn_actualizar_acabado_detalle").style.display 		= "inline";
+	document.getElementById("div_btn_modificar_offset").style.display 					= "inline";
+	document.getElementById("div_btn_agregar_material_ayuda").style.display 			= "inline";
+	document.getElementById("div_btn_actualizar_material_ayuda").style.display 			= "inline";
 } // muestraBotonesModificarPorSeccion
 

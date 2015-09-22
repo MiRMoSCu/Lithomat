@@ -41,7 +41,7 @@ public class TipoTrabajoDetalle implements Serializable {
 	private boolean activo;
 	// esta clase esta relacionada [uno a muchos] con las tablas:
 	private Set<Pliego> pliego = new HashSet<Pliego>();
-	private Set<CostosExtrasDetalle> costosExtrasDetalle = new HashSet<CostosExtrasDetalle>();
+	private Set<CostoExtraDetalle> costoExtraDetalle = new HashSet<CostoExtraDetalle>();
 	
 	
 	public int getIdTipoTrabajoDetalle() {
@@ -233,10 +233,10 @@ public class TipoTrabajoDetalle implements Serializable {
 	public void setPliego(Set<Pliego> pliego) {
 		this.pliego = pliego;
 	}
-	public Set<CostosExtrasDetalle> getCostosExtrasDetalle() {
-		return costosExtrasDetalle;
+	public Set<CostoExtraDetalle> getCostoExtraDetalle() {
+		return costoExtraDetalle;
 	}
-	public void setCostosExtrasDetalle(Set<CostosExtrasDetalle> costosExtrasDetalle) {
-		this.costosExtrasDetalle = costosExtrasDetalle;
+	public void setCostoExtraDetalle(Set<CostoExtraDetalle> costoExtraDetalle) {
+		this.costoExtraDetalle = costoExtraDetalle;
 	}
 }

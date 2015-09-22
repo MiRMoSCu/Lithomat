@@ -90,7 +90,6 @@ function aceptaModificarDisenioDetalle() {
 				document.precio.precio_neto.value = "$ " + (response.precioNeto).formatMoney(2);
 				// desactiva todo
 				cancelaModificarDisenioDetalle();
-				muestraBotonesModificarPorSeccion();
 			},
 			error:function(e){
 				document.body.style.cursor = "default";

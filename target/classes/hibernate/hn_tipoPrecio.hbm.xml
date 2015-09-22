@@ -32,11 +32,11 @@
 			</key>
 			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoCliente"/>
 		</set>
-		<set name="costosExtras" table="costos_extras" inverse="true" lazy="true" fetch="select">
+		<set name="costoExtra" table="costo_extra" inverse="true" lazy="true" fetch="select">
 			<key>
 				<column name="id_tipo_precio" not-null="true"/>
 			</key>
-			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.CostosExtras"/>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.CostoExtra"/>
 		</set>
 		<set name="tipoComprobanteFiscal" table="tipo_comprobante_fiscal" inverse="true" lazy="true" fetch="select">
 			<key>

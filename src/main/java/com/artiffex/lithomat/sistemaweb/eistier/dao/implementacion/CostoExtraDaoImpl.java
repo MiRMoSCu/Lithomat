@@ -10,26 +10,26 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
-import com.artiffex.lithomat.sistemaweb.businesstier.entity.CostosExtras;
-import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CostosExtrasDAO;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.CostoExtra;
+import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CostoExtraDAO;
 import com.artiffex.lithomat.sistemaweb.eistier.hibernate.HibernateUtil;
 
-@Repository("costosExtrasDAO")
+@Repository("costoExtraDAO")
 @Transactional
-public class CostosExtrasDaoImpl implements CostosExtrasDAO {
+public class CostoExtraDaoImpl implements CostoExtraDAO {
 	
-	private static final Logger log = Logger.getLogger(CostosExtrasDaoImpl.class);
+	private static final Logger log = Logger.getLogger(CostoExtraDaoImpl.class);
 	private Session sesion;
 	
 	// constructor
-	public CostosExtrasDaoImpl() { }
+	public CostoExtraDaoImpl() { }
 	
-	public int crea(CostosExtras costosExtras) {
+	public int crea(CostoExtra costoExtra) {
 		int id = 0;
 		try {
 			sesion = HibernateUtil.getInstance().getCurrentSession();
 			sesion.beginTransaction();
-			id = (Integer)sesion.save(costosExtras);
+			id = (Integer)sesion.save(costoExtra);
 			sesion.getTransaction().commit();
 		} catch(Exception e) {
 			log.error(e.getMessage());
@@ -38,14 +38,14 @@ public class CostosExtrasDaoImpl implements CostosExtrasDAO {
 		return id;
 	}
 	
-	public CostosExtras busca(int idCostosExtras) {
-		CostosExtras costosExtras = null;
+	public CostoExtra busca(int idCostoExtra) {
+		CostoExtra costosExtras = null;
 		try {
 			sesion = HibernateUtil.getInstance().getCurrentSession();
 			sesion.beginTransaction();
-			Query query = sesion.createQuery("from CostosExtras ce where ce.idCostosExtras = :idCostosExtras");
-			query.setParameter("idCostosExtras", idCostosExtras);
-			costosExtras = (CostosExtras)query.uniqueResult();
+			Query query = sesion.createQuery("from CostoExtra ce where ce.idCostoExtra = :idCostoExtra");
+			query.setParameter("idCostoExtra", idCostoExtra);
+			costosExtras = (CostoExtra)query.uniqueResult();
 			sesion.getTransaction().commit();
 			query = null;
 		} catch(Exception e) {
@@ -55,11 +55,11 @@ public class CostosExtrasDaoImpl implements CostosExtrasDAO {
 		return costosExtras;
 	}
 	
-	public void modifica(CostosExtras costosExtras) {
+	public void modifica(CostoExtra costoExtra) {
 		try {
 			sesion = HibernateUtil.getInstance().getCurrentSession();
 			sesion.beginTransaction();
-			sesion.update(costosExtras);
+			sesion.update(costoExtra);
 			sesion.getTransaction().commit();
 		} catch(Exception e) {
 			log.error(e.getMessage());
@@ -68,12 +68,12 @@ public class CostosExtrasDaoImpl implements CostosExtrasDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<CostosExtras> lista() {
-		List<CostosExtras> lista = new ArrayList<CostosExtras>();
+	public List<CostoExtra> lista() {
+		List<CostoExtra> lista = new ArrayList<CostoExtra>();
 		try {
 			sesion = HibernateUtil.getInstance().getCurrentSession();
 			sesion.beginTransaction();
-			lista = sesion.createQuery("from CostosExtras ce where ce.activo = true order by ce.idCostosExtras asc").list();
+			lista = sesion.createQuery("from CostoExtra ce where ce.activo = true order by ce.idCostoExtra asc").list();
 			sesion.getTransaction().commit();
 		} catch(Exception e) {
 			log.error(e.getMessage());

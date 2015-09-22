@@ -14,130 +14,130 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.artiffex.lithomat.sistemaweb.businesstier.entity.CostosExtras;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.CostoExtra;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPrecio;
-import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CostosExtrasService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CostoExtraService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoPrecioService;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
 
 @Controller
-@RequestMapping("/costos_extras")
-public class CostosExtrasController {
+@RequestMapping("/costo_extra")
+public class CostoExtraController {
 	
-	private static final Logger log = Logger.getLogger(CostosExtrasController.class);
+	private static final Logger log = Logger.getLogger(CostoExtraController.class);
 	
 	@Resource
-	private CostosExtrasService costosExtrasService;
+	private CostoExtraService costoExtraService;
 	@Resource
 	private TipoPrecioService tipoPrecioService;
 
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/lista", method = RequestMethod.POST)
-	public String listaCostosExtras( Locale locale, Model model ) {
-		log.info("/lista_costos_extras");
+	public String listaCostoExtra( Locale locale, Model model ) {
+		log.info("/lista_costo_extra");
 		
-		List<CostosExtras> listaCostosExtras = costosExtrasService.listaCostosExtras();
+		List<CostoExtra> listaCostoExtra = costoExtraService.listaCostoExtra();
 		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();
-		model.addAttribute("listaCostosExtras", listaCostosExtras);
+		model.addAttribute("listaCostoExtra", listaCostoExtra);
 		model.addAttribute("listaTipoPrecio", listaTipoPrecio);
 
 		listaTipoPrecio = null;
-		listaCostosExtras = null;
+		listaCostoExtra = null;
 		
-		return "catalogo/costos_extras";
-	} // lista_costos_extras
+		return "catalogo/costo_extra";
+	} // lista_costo_extra
 
 	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
-	public String altaCostosExtras(
+	public String altaCostoExtra(
 			@RequestParam(value = "nombre", 		required = false) String nombre,
 			@RequestParam(value = "descripcion", 	required = false) String descripcion,
 			@RequestParam(value = "precio", 		required = false) float precio,
 			@RequestParam(value = "id_tipo_precio", required = false) int idTipoPrecio,
 			Model model
 		) throws IOException {
-		log.info("/alta_costos_extras");
+		log.info("/alta_costo_extra");
 
-		CostosExtras costosExtras = new CostosExtras();
-		costosExtras.setNombre(nombre);
-		costosExtras.setDescripcion(descripcion);
-		costosExtras.setPrecio(precio);
+		CostoExtra costoExtra = new CostoExtra();
+		costoExtra.setNombre(nombre);
+		costoExtra.setDescripcion(descripcion);
+		costoExtra.setPrecio(precio);
 			TipoPrecio tipoPrecio = new TipoPrecio();
 			tipoPrecio.setIdTipoPrecio(idTipoPrecio);
-		costosExtras.setTipoPrecio(tipoPrecio);
-		costosExtras.setActivo(true);
+		costoExtra.setTipoPrecio(tipoPrecio);
+		costoExtra.setActivo(true);
 
-		costosExtrasService.creaCostosExtras(costosExtras);
+		costoExtraService.creaCostoExtra(costoExtra);
 
-		List<CostosExtras> listaCostosExtras = costosExtrasService.listaCostosExtras();
+		List<CostoExtra> listaCostoExtra = costoExtraService.listaCostoExtra();
 		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();
 		model.addAttribute("listaTipoPrecio", listaTipoPrecio);
-		model.addAttribute("listaCostosExtras", listaCostosExtras);
+		model.addAttribute("listaCostoExtra", listaCostoExtra);
 
-		costosExtras = null;
+		costoExtra = null;
 		tipoPrecio = null;
 		listaTipoPrecio = null;
-		listaCostosExtras = null;
+		listaCostoExtra = null;
 		
-		return "catalogo/costos_extras";
-	}// alta_costos_extras
+		return "catalogo/costo_extra";
+	}// alta_costo_extra
 
 	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
-	public String modificaCostosExtras(
-			@RequestParam(value = "id_costos_extras", 	required = false) Integer idCostosExtras,
+	public String modificaCostoExtra(
+			@RequestParam(value = "id_costo_extra", 	required = false) Integer idCostoExtra,
 			@RequestParam(value = "nombre", 			required = false) String nombre,
 			@RequestParam(value = "descripcion", 		required = false) String descripcion,
 			@RequestParam(value = "precio", 			required = false) float precio,
 			@RequestParam(value = "id_tipo_precio", 	required = false) int idTipoPrecio,
 			Model model
 		) throws IOException {
-		log.info("/modifica_costos_extras");
+		log.info("/modifica_costo_extra");
 
-		CostosExtras costosExtras = costosExtrasService.buscaCostosExtras(idCostosExtras);
-		costosExtras.setNombre(nombre);
-		costosExtras.setDescripcion(descripcion);
-		costosExtras.setPrecio(precio);
-		costosExtras.getTipoPrecio().setIdTipoPrecio(idTipoPrecio);
+		CostoExtra costoExtra = costoExtraService.buscaCostoExtra(idCostoExtra);
+		costoExtra.setNombre(nombre);
+		costoExtra.setDescripcion(descripcion);
+		costoExtra.setPrecio(precio);
+		costoExtra.getTipoPrecio().setIdTipoPrecio(idTipoPrecio);
 
-		costosExtrasService.modificaCostosExtras(costosExtras);
+		costoExtraService.modificaCostoExtra(costoExtra);
 
-		List<CostosExtras> listaCostosExtras = costosExtrasService.listaCostosExtras();
+		List<CostoExtra> listaCostoExtra = costoExtraService.listaCostoExtra();
 		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();
-		model.addAttribute("listaCostosExtras", listaCostosExtras);
+		model.addAttribute("listaCostoExtra", listaCostoExtra);
 		model.addAttribute("listaTipoPrecio", listaTipoPrecio);
 
-		costosExtras = null;
+		costoExtra = null;
 		listaTipoPrecio = null;
-		listaCostosExtras = null;
+		listaCostoExtra = null;
 		
-		return "catalogo/costos_extras";
-	}// modifica_costos_extras
+		return "catalogo/costo_extra";
+	}// modifica_costo_extra
 
 	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/elimina", method = RequestMethod.POST)
-	public String eliminaCostosExtras(
-			@RequestParam(value = "id_costos_extras", required = false) Integer idCostosExtras,
+	public String eliminaCostoExtra(
+			@RequestParam(value = "id_costo_extra", required = false) Integer idCostoExtra,
 			Model model
 		) throws IOException {
-		log.info("/elimina_costos_extras");
+		log.info("/elimina_costo_extra");
 
-		CostosExtras costosExtras = costosExtrasService.buscaCostosExtras(idCostosExtras);
-		costosExtras.setActivo(false);
+		CostoExtra costoExtra = costoExtraService.buscaCostoExtra(idCostoExtra);
+		costoExtra.setActivo(false);
 		
-		costosExtrasService.modificaCostosExtras(costosExtras);
+		costoExtraService.modificaCostoExtra(costoExtra);
 
-		List<CostosExtras> listaCostosExtras = costosExtrasService.listaCostosExtras();
+		List<CostoExtra> listaCostoExtra = costoExtraService.listaCostoExtra();
 		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();
-		model.addAttribute("listaCostosExtras", listaCostosExtras);
+		model.addAttribute("listaCostoExtra", listaCostoExtra);
 		model.addAttribute("listaTipoPrecio", listaTipoPrecio);
 
-		costosExtras = null;
+		costoExtra = null;
 		listaTipoPrecio = null;
-		listaCostosExtras = null;
+		listaCostoExtra = null;
 		
-		return "catalogo/costos_extras";
-	}// elimina_costos_extras
+		return "catalogo/costo_extra";
+	}// elimina_costo_extra
 	
 }

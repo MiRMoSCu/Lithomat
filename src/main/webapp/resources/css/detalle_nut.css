@@ -2,7 +2,7 @@
 
 #div_area {
     width: 1010px;
-    height: 3365px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* tamaño total */
+    height: 3774px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* tamaño total */ /*3365*/
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -12,25 +12,25 @@
 
 #div_ancho {
     width: 1010px;
-    height: 3336px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_area - 29 (div_abajo3d) */
+    height: 3745px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_area - 29 (div_abajo3d) */
 }
 
 #div_hoja {
     width: 981px;
-    height: 3336px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* igual div_ancho */
+    height: 3745px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* igual div_ancho */
     background: #FFF;
     float: left;
 }
 
 #div_cuerpo {
     width: 981px;
-    height: 3336px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* igual div_ancho */
+    height: 3745px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* igual div_ancho */
     background: transparent; /*orange*/
 }
 
 #div_contenido {
     width: 961px;
-    height: 3336px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* igual div_ancho */
+    height: 3745px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* igual div_ancho */
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -45,7 +45,7 @@
 
 #div_derecha3d {
     width: 29px;
-    height: 3336px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* igual div_ancho */
+    height: 3745px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* igual div_ancho */
     float: left;
     /*background: purple;*/
 }
@@ -59,7 +59,7 @@
 
 #div_fondo_der {
     width: 29px;
-    height: 3305px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_hoja - 31 (div_fondo_esq_sup) */
+    height: 3714px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_hoja - 31 (div_fondo_esq_sup) */
     background-image: url('../image/s_der.png');
     background-repeat: repeat-y;
 }
@@ -108,6 +108,32 @@
     margin-right:auto;
     background:transparent;
     display:block;
+}
+
+/*****/
+
+#div_visualizador_costo_extra_detalle {
+	width:865px;
+    margin-left:auto;
+    margin-right:auto;
+    background:transparent; /*red*/
+    display:block;
+}
+
+#div_costo_extra_detalle {
+	width:865px;
+    margin-left:auto;
+    margin-right:auto;
+    background:transparent; /*red*/
+    display:block;
+}
+
+#div_tabla_costo_extra_tipo_trabajo {
+	width:100%;
+	height:100%;
+	margin-left:auto; 
+	margin-right:auto;
+	overflow-x:scroll;
 }
 
 /*****/

@@ -18,7 +18,7 @@ public class TipoPrecio implements Serializable {
 	private boolean activo;
 	// esta clase esta relacionada [uno a muchos] con las tablas:
 	private Set<TipoCliente> tipoCliente = new HashSet<TipoCliente>();
-	private Set<CostosExtras> costosExtras = new HashSet<CostosExtras>();
+	private Set<CostoExtra> costoExtra = new HashSet<CostoExtra>();
 	private Set<TipoComprobanteFiscal> tipoComprobanteFiscal = new HashSet<TipoComprobanteFiscal>();
 	private Set<TipoPapelExtendido> tipoPapelExtendido = new HashSet<TipoPapelExtendido>();
 	private Set<TintaEspecial> tintaEspecial = new HashSet<TintaEspecial>();
@@ -68,11 +68,11 @@ public class TipoPrecio implements Serializable {
 	public void setTipoCliente(Set<TipoCliente> tipoCliente) {
 		this.tipoCliente = tipoCliente;
 	}
-	public Set<CostosExtras> getCostosExtras() {
-		return costosExtras;
+	public Set<CostoExtra> getCostoExtra() {
+		return costoExtra;
 	}
-	public void setCostosExtras(Set<CostosExtras> costosExtras) {
-		this.costosExtras = costosExtras;
+	public void setCostoExtra(Set<CostoExtra> costoExtra) {
+		this.costoExtra = costoExtra;
 	}
 	public Set<TipoComprobanteFiscal> getTipoComprobanteFiscal() {
 		return tipoComprobanteFiscal;
@@ -141,5 +141,4 @@ public class TipoPrecio implements Serializable {
 	public void setParametrosConfig(Set<ParametrosConfig> parametrosConfig) {
 		this.parametrosConfig = parametrosConfig;
 	}
-
 }

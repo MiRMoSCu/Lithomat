@@ -1,7 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:url value="/tipo_placa/busca"            				var="urlBuscaTipoPlaca"/>
 <c:url value="/orden_produccion/cambia_estatus"				var="urlCambiaEstatusPartida"/>
 <c:url value="/visualizador/obtiene_partida"         		var="urlObtienePartida"/>
@@ -13,6 +14,11 @@
 <c:url value="/tipo_trabajo_detalle/actualiza"  			var="urlActualizaTipoTrabajoDetalle"/>
 <c:url value="/pliego/calcula"              				var="urlCalculaPliego"/>
 <c:url value="/pliego/activa_lista"            				var="urlActivaListaPliegos"/>
+<c:url value="/costo_extra_detalle/" 						var="urlCostoExtraDetalle"/>
+<c:url value="/costo_extra_detalle/busca_unidad_medida" 	var="urlBuscaUnidadMedidaCostoExtra"/>
+<c:url value="/costo_extra_detalle/agrega_olvidado" 		var="urlAgregaCostoExtraDetalleOlvidado"/>
+<c:url value="/costo_extra_detalle/actualiza_en_op" 		var="urlActualizaCostoExtraDetalle"/>
+<c:url value="/costo_extra_detalle/elimina_en_op" 			var="urlEliminaCostoExtraDetalle"/>
 <c:url value="/disenio/modifica"       						var="urlModificaDisenio"/>
 <c:url value="/disenio_detalle/agrega_olvidado"				var="urlAgregaDisenioDetalleOlvidado"/>
 <c:url value="/disenio_detalle/actualiza"       			var="urlActualizaDisenioDetalle"/>
@@ -33,7 +39,7 @@
 <c:url value="/material_ayuda_x_partida/agrega_olvidado"	var="urlAgregaMaterialAyudaXPartidaOlvidado"/>
 <c:url value="/material_ayuda_x_partida/actualiza"       	var="urlActualizaMaterialAyudaXPartida"/>
 <c:url value="/material_ayuda_x_partida/elimina"       		var="urlEliminaMaterialAyudaXPartida"/>
-<c:url value="/costos_extras_detalle"       				var="urlCostosExtrasDetalle"/>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
@@ -48,24 +54,26 @@
         <script type="text/javascript" src="<c:url value="/resources/js/master.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/modificacion_orden_produccion.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/modificacion_partida.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/modificacion_tipo_trabajo_detalle.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/modificacion_disenio.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/agrega_disenio_detalle.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/modificacion_disenio_detalle.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/modificacion_preprensa.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/agrega_preprensa_detalle.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/modificacion_preprensa_detalle.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/modificacion_transporte.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/agrega_transporte_detalle.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/modificacion_transporte_detalle.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/modificacion_acabado.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/agrega_acabado_detalle.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/modificacion_acabado_detalle.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/modificacion_offset.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/agrega_material_ayuda.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/modificacion_material_ayuda.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_orden_produccion.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_partida.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_tipo_trabajo_detalle.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_agrega_costo_extra_detalle.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_costo_extra_detalle.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_disenio.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_agrega_disenio_detalle.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_disenio_detalle.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_preprensa.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_agrega_preprensa_detalle.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_preprensa_detalle.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_transporte.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_agrega_transporte_detalle.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_transporte_detalle.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_acabado.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_agrega_acabado_detalle.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_acabado_detalle.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_offset.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_agrega_material_ayuda.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_material_ayuda.js"/>"></script>
         <script type="text/javascript">
             //inicializacion jquery
             $(document).ready(function (){});
@@ -87,6 +95,11 @@
             var urlActualizaTipoTrabajoDetalle			= "${urlActualizaTipoTrabajoDetalle}";
             var urlCalculaPliego            			= "${urlCalculaPliego}";
             var urlActivaListaPliegos					= "${urlActivaListaPliegos}";
+            var urlCostoExtraDetalle					= "${urlCostoExtraDetalle}";
+            var urlBuscaUnidadMedidaCostoExtra			= "${urlBuscaUnidadMedidaCostoExtra}";
+            var urlAgregaCostoExtraDetalleOlvidado		= "${urlAgregaCostoExtraDetalleOlvidado}";
+            var urlActualizaCostoExtraDetalle			= "${urlActualizaCostoExtraDetalle}";
+            var urlEliminaCostoExtraDetalle				= "${urlEliminaCostoExtraDetalle}";
             var urlModificaDisenio						= "${urlModificaDisenio}";
             var urlAgregaDisenioDetalleOlvidado			= "${urlAgregaDisenioDetalleOlvidado}";
             var urlActualizaDisenioDetalle				= "${urlActualizaDisenioDetalle}";
@@ -107,9 +120,9 @@
             var urlAgregaMaterialAyudaXPartidaOlvidado	= "${urlAgregaMaterialAyudaXPartidaOlvidado}";
             var urlActualizaMaterialAyudaXPartida		= "${urlActualizaMaterialAyudaXPartida}";
             var urlEliminaMaterialAyudaXPartida			= "${urlEliminaMaterialAyudaXPartida}";
-            var urlCostosExtrasDetalle					= "${urlCostosExtrasDetalle}";
         </script>
         <script type="text/javascript">
+        	var strJsonListaCostoExtra			= '${jsonListaCostoExtra}';
             var strJsonListaProcesoDisenio      = '${jsonListaProcesoDisenio}';
             var strJsonListaProcesoPreprensa    = '${jsonListaProcesoPreprensa}';
             var strJsonListaProcesoTransporte   = '${jsonListaProcesoTransporte}';
@@ -629,7 +642,7 @@
                                                         <th>Descripci&oacute;n</th>
                                                     </tr>
 												<c:forEach var="partida" items="${listaPartida}" varStatus="i">
-                                                    <tr class='${i.count%2==0?"l2":"l1"}' onclick="buscaPartida(${partida.idPartida});">
+                                                 	<tr class='${i.count%2==0?"l2":"l1"}' onclick="buscaPartida(${partida.idPartida});">
                                                         <td>${i.count}</td>
                                                         <td>${partida.tipoTrabajo.nombre}</td>
                                                         <td id="td_${partida.idPartida}_nombre_partida">${partida.nombrePartida}</td>
@@ -1572,6 +1585,226 @@
                                         </div>
                                     </form>
                                 </div>
+                                
+                                
+                                
+                                
+<!-- div_visualizador_costo_extra_detalle, display:none; -->
+								<div id="div_visualizador_costo_extra_detalle" style="display:none;">
+	                            	<div class="div_separador_mediano">
+	                                    <img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
+	                                </div>
+	                                <div class="titulo">
+	                                    <font size="5">LISTA COSTO EXTRA POR DETALLE PARTIDA</font>
+	                                </div>
+	                                <div style="width:800px; height:100px; margin-left:auto; margin-right:auto; overflow-x:scroll;">
+	                                	<div class="columna_completa">
+	                                		<div id="div_tabla_costo_extra_tipo_trabajo">
+												<table id="tabla_lista_costo_extra_tipo_trabajo">
+													<tr>
+														<th>No.</th>
+														<th>Costo Extra</th>
+														<th>Responsable</th>
+														<th>Cantidad</th>
+														<th>Especificaci&oacute;n</th>
+													</tr>
+												<c:choose>
+													<c:when test="${fn:length(listaCostoExtraDetalle) gt 0}">
+														<c:forEach var="costoExtraDetalle" items="${listaCostoExtraDetalle}" varStatus="i">
+															<tr class='${i.count%2==0?"l2":"l1"}'  
+																onclick="setCampos('${i.count}','${costoExtraDetalle.idCostoExtraDetalle}','${costoExtraDetalle.responsableInsumo.nombre}','${costoExtraDetalle.costoExtra.nombre}','${costoExtraDetalle.cantidad}','${costoExtraDetalle.especificacion}')">
+																<td>${i.count}</td>
+																<td>${costoExtraDetalle.responsableInsumo.nombre}</td>
+																<td>${costoExtraDetalle.costoExtra.nombre}</td>
+																<td>${costoExtraDetalle.cantidad}</td>
+																<td>${costoExtraDetalle.especificacion}</td>
+															</tr>
+														</c:forEach>
+													</c:when>
+													<c:otherwise>
+														<tr class="l1">
+															<td>&nbsp;</td>
+															<td>&nbsp;</td>
+															<td>&nbsp;</td>
+															<td>&nbsp;</td>
+															<td>&nbsp;</td>
+														</tr>														
+													</c:otherwise>
+												</c:choose>
+												</table>
+											</div>
+	                                	</div>
+	                                </div>
+	                                <c:if test="${historialEstatus.estatusOrden.idEstatusOrden == estatus_cotizacion}">
+	                                	<div style="width:800px; margin-left:auto; margin-right:auto; overflow-x:scroll;">
+		                                	<div class="linea" style="padding-top:5px;">
+			                                	<div class="casilla" style="text-align:right;">
+			                                		<div id="div_btn_actualizar_costo_extra_detalle">
+			                                			<img id="imgBtnModificarCostoExtraDetalle" alt="" style="cursor:pointer;" onclick="modificaTablaCostoExtraDetalle();" src="<c:url value="/resources/image/boton_modificar.jpg"/>">
+			                                                        			
+		                                    			<span id="imgBtnCancelaModificarCostoExtraDetalle" style="cursor:pointer; display:none;" onclick="cancelaModificarCostoExtraDetalle();">
+		                                    				<font color="gray">CANCELAR</font>
+		                                    			</span>
+		                                    			<span id="imgBtnAceptaEliminarCostoExtraDetalle" style="cursor:pointer; display:none;" onclick="aceptaEliminarCostoExtraDetalle();">
+		                                               		<font color="#FFCC00">ELIMINAR</font>
+		                                               	</span>
+		                                    			<span id="imgBtnAceptaModificarCostoExtraDetalle" style="cursor:pointer; display:none;" onclick="aceptaModificarCostoExtraDetalle();">
+		                                    				<font color="blue">ACEPTAR</font>
+		                                    			</span>
+		                                			</div>
+		                                		</div>
+		                                	</div>
+		                                </div>
+	                                </c:if>
+	                            </div>
+	                            
+	                            
+	   							
+	                            
+	                                                        
+	<!-- div_costo_extra_detalle, display:none; -->
+								<div id="div_costo_extra_detalle" style="display:none;">
+									<form name="costo_extra_detalle" action="" accept-charset="ISO-8859-1">
+										<input type="hidden" name="id_orden_produccion"		value="${ordenProduccion.idOrdenProduccion}"/>
+										<input type="hidden" name="nut" 					value="${ordenProduccion.nut}"/>
+										<input type="hidden" name="id_costo_extra_detalle"	value=""/>
+										<input type="hidden" name="id_tipo_trabajo_detalle" value=""/>
+										<input type="hidden" name="id_responsable_insumo" 	value=""/>
+										<input type="hidden" name="id_costo_extra" 			value=""/>
+										<div class="div_separador_chico">
+											<img alt="" src="<c:url value="/resources/image/separador_chico.jpg"/>"/>
+										</div>
+		                                <div class="titulo">
+		                                    <font size="5">COSTO EXTRA</font>
+		                                </div>
+		                                <div class="linea">
+		                                	<div class="casilla">
+		                                		<div class="columna_izquierda">
+		                                			<div class="mitad_columna_izquierda">
+		                                				<div class="columna_completa">
+			                                				<table>
+			                                					<tr>
+			                                						<td width="41%">Costo Extra:</td>
+			                                						<td>
+			                                							<input	type="text"
+			                                									class="input"
+			                                									name="costo_extra"
+			                                									style="display:inline;"
+			                                									value=""
+			                                									readonly/>
+			                                							<select name="select_costo_extra" id="select_costo_extra" style="display:none;" onchange="ajaxUnidadCostoExtra()" disabled>
+
+			                                							</select>
+			                                						</td>
+			                                					</tr>
+			                                				</table>
+			                                			</div>
+		                                			</div>
+		                                			<div class="mitad_columna_derecha">
+		                                				<div class="columna_completa">
+			                                				<table>
+			                                					<tr>
+			                                						<td width="1%">Responsable:</td>
+			                                						<td>
+			                                							<input	type="text"
+			                                									class="input"
+			                                									name="responsable_insumo_costo_extra"
+			                                									style="display:inline;"
+			                                									value=""
+			                                									readonly/>
+			                                							<select name="select_responsable_insumo" style="display:none;" disabled>
+																			<c:forEach var="ri" items="${listaResponsableInsumo}">
+																				<option value="${ri.value}">${ri.text}</option>
+																			</c:forEach>
+			                                							</select>
+			                                						</td>
+			                                					</tr>
+			                                				</table>
+			                                			</div>
+		                                			</div>
+		                                		</div>
+		                                		<div class="columna_derecha">
+		                                			<div class="mitad_columna_izquierda">
+		                                				<div class="columna_completa">
+		                                					<table>
+			                                					<tr>
+			                                						<td width="1%">Cantidad:</td>
+			                                						<td>
+			                                							<input	type="text"
+			                                									class="input"
+			                                									name="cantidad"
+			                                									value=""
+			                                									tabindex="39"
+			                                									onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
+			                                									readonly/>
+			                                						</td>
+			                                					</tr>
+			                                				</table>
+		                                				</div>
+		                                			</div>
+		                                			<div class="mitad_columna_derecha">
+		                                				<div class="columna_completa">
+		                                					<table>
+			                                					<tr>
+			                                						<td width="38%">Medido en:</td>
+			                                						<td>
+			                                							<input	type="text"
+			                                									class="input"
+			                                									name="nombre_unidad_medida"
+			                                									value=""
+			                                									tabindex=""
+			                                									readonly/>
+			                                						</td>
+			                                					</tr>
+			                                				</table>
+		                                				</div>
+		                                			</div>
+		                                		</div>
+		                                	</div>
+		                                </div>
+		                                <div class="linea">
+		                                	<div class="casilla">
+		                                		<div class="columna_izquierda">
+		                                			<div class="columna_completa">
+		                                				<table>
+			                                				<tr>
+			                                					<td width="1%">Especificaci&oacute;n:</td>
+			                                					<td>
+			                                						<input	type="text"
+			                                								class="input"
+			                                								name="especificacion"
+			                                								value=""
+			                                								readonly/>
+			                                					</td>
+			                                				</tr>
+			                                			</table>
+		                                			</div>
+		                                		</div>
+		                                	</div>
+		                                </div>
+		                                <c:if test="${historialEstatus.estatusOrden.idEstatusOrden == estatus_cotizacion}">
+		                                	<div class="linea">
+			                                	<div class="casilla" style="text-align:right;">
+			                                		<div id="div_btn_agregar_costo_extra_detalle">
+			                                			<img id="imgBtnAgregarCostoExtraDetalle" alt="" style="cursor:pointer;" onclick="agregaCostoExtraDetalle();" src="<c:url value="/resources/image/boton_agregar.jpg"/>"/>
+			                                            <span id="imgBtnCancelaAgregarCostoExtraDetalle" style="cursor:pointer; display:none" onclick="cancelaAgregarCostoExtraDetalle();">
+			                                            	<font color="gray">CANCELAR</font>
+			                                            </span>     
+			                                            <span id="imgBtnAceptaAgregarCostoExtraDetalle" style="cursor:pointer; display:none;" onclick="aceptaAgregarCostoExtraDetalle();">
+			                                            	<font color="blue">ACEPTAR</font>
+			                                            </span>
+			                                		</div>
+			                                	</div>
+			                                </div>
+		                                </c:if>
+		                                
+	                                </form>
+								</div>  
+                                
+                                
+                                
+                                
+                                
 							<!-- div_pestania -->
                                 <div id="div_pestania" style="display:none;">
                                     <div class="div_separador_grande">

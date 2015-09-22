@@ -2,28 +2,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:url value="/?opc=produccion"	            var="urlMenu"/>
-<c:url value="/cliente/busca_nombre"        	var="urlBuscaNombreCliente"/>
-<c:url value="/cliente/busca"               	var="urlBuscaCliente"/>
-<c:url value="/orden_produccion/agrega"     	var="urlAgregaOrdenProduccion"/>
-<c:url value="/partida/agrega"              	var="urlAgregaPartida"/>
-<c:url value="/partida/busca"               	var="urlBuscaPartida"/>
-<c:url value="/tipo_placa/busca"            	var="urlBuscaTipoPlaca"/>
-<c:url value="/tipo_trabajo_detalle/agrega" 	var="urlAgregaTipoTrabajoDetalle"/>
-<c:url value="/tipo_trabajo_detalle/elimina"    var="urlEliminaDetallePartida"/>
-<c:url value="/tipo_trabajo_detalle/busca"  	var="urlBuscaTipoTrabajoDetalle"/>
-<c:url value="/pliego/calcula"              	var="urlCalculaPliego"/>
-<c:url value="/disenio/modifica"            	var="urlModificaDisenio"/>
-<c:url value="/disenio_detalle/agrega"      	var="urlAgregaDisenioDetalle"/>
-<c:url value="/preprensa/modifica"          	var="urlModificaPreprensa"/>
-<c:url value="/preprensa_detalle/agrega"    	var="urlAgregaPreprensaDetalle"/>
-<c:url value="/transporte/modifica"         	var="urlModificaTransporte"/>
-<c:url value="/transporte_detalle/agrega"   	var="urlAgregaTransporteDetalle"/>
-<c:url value="/acabado/modifica"            	var="urlModificaAcabado"/>
-<c:url value="/acabado_detalle/agrega"      	var="urlAgregaAcabadoDetalle"/>
-<c:url value="/offset/modifica"             	var="urlModificaOffset"/>
-<c:url value="/material_ayuda_x_partida/agrega"	var="urlAgregaMaterialAyuda"/>
-<c:url value="/calificacion/produccion"			var="urlCalificacionOrdenProduccion"/>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<c:url value="/?opc=produccion"	            				var="urlMenu"/>
+<c:url value="/cliente/busca_nombre"        				var="urlBuscaNombreCliente"/>
+<c:url value="/cliente/busca"               				var="urlBuscaCliente"/>
+<c:url value="/orden_produccion/agrega"     				var="urlAgregaOrdenProduccion"/>
+<c:url value="/partida/agrega"              				var="urlAgregaPartida"/>
+<c:url value="/partida/busca"               				var="urlBuscaPartida"/>
+<c:url value="/tipo_placa/busca"            				var="urlBuscaTipoPlaca"/>
+<c:url value="/tipo_trabajo_detalle/agrega" 				var="urlAgregaTipoTrabajoDetalle"/>
+<c:url value="/tipo_trabajo_detalle/elimina"    			var="urlEliminaDetallePartida"/>
+<c:url value="/tipo_trabajo_detalle/busca"  				var="urlBuscaTipoTrabajoDetalle"/>
+<c:url value="/pliego/calcula"              				var="urlCalculaPliego"/>
+<c:url value="/costo_extra_detalle/busca_unidad_medida" 	var="urlBuscaUnidadMedidaCostoExtra"/>
+<c:url value="/costo_extra_detalle/agrega_en_op" 			var="urlAgregaCostoExtra"/>
+<c:url value="/disenio/modifica"            				var="urlModificaDisenio"/>
+<c:url value="/disenio_detalle/agrega"      				var="urlAgregaDisenioDetalle"/>
+<c:url value="/preprensa/modifica"          				var="urlModificaPreprensa"/>
+<c:url value="/preprensa_detalle/agrega"    				var="urlAgregaPreprensaDetalle"/>
+<c:url value="/transporte/modifica"         				var="urlModificaTransporte"/>
+<c:url value="/transporte_detalle/agrega"   				var="urlAgregaTransporteDetalle"/>
+<c:url value="/acabado/modifica"            				var="urlModificaAcabado"/>
+<c:url value="/acabado_detalle/agrega"      				var="urlAgregaAcabadoDetalle"/>
+<c:url value="/offset/modifica"             				var="urlModificaOffset"/>
+<c:url value="/material_ayuda_x_partida/agrega"				var="urlAgregaMaterialAyuda"/>
+<c:url value="/calificacion/produccion"						var="urlCalificacionOrdenProduccion"/>
 <html>
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1"></meta>
@@ -61,6 +64,8 @@
             var urlEliminaDetallePartida    	= "${urlEliminaDetallePartida}";
             var urlBuscaTipoTrabajoDetalle  	= "${urlBuscaTipoTrabajoDetalle}";
             var urlCalculaPliego            	= "${urlCalculaPliego}";
+            var urlBuscaUnidadMedidaCostoExtra	= "${urlBuscaUnidadMedidaCostoExtra}";
+            var urlAgregaCostoExtra				= "${urlAgregaCostoExtra}";
             var urlModificaDisenio            	= "${urlModificaDisenio}";
             var urlAgregaDisenioDetalle     	= "${urlAgregaDisenioDetalle}";
             var urlModificaPreprensa          	= "${urlModificaPreprensa}";
@@ -1578,6 +1583,190 @@
                             
                             
                             
+                            
+<!-- div_visualizador_costo_extra_detalle, display:none; -->
+                            <div id="div_visualizador_costo_extra_detalle" style="display:none;">
+                            	<div class="div_separador_mediano">
+                                    <img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
+                                </div>
+                                <div class="titulo">
+                                    <font size="5">LISTA COSTO EXTRA POR DETALLE PARTIDA</font>
+                                </div>
+                                <div style="width:800px; height:100px; margin-left:auto; margin-right:auto; overflow-x:scroll;">
+                                	<div class="columna_completa">
+                                		<div id="div_tabla_costo_extra_tipo_trabajo">
+											<table id="tabla_lista_costo_extra_tipo_trabajo">
+												<tr>
+													<th>No.</th>
+													<th>Costo Extra</th>
+													<th>Responsable</th>
+													<th>Cantidad</th>
+													<th>Especificaci&oacute;n</th>
+												</tr>
+											<c:choose>
+												<c:when test="${fn:length(listaCostoExtraDetalle) gt 0}">
+													<c:forEach var="costoExtraDetalle" items="${listaCostoExtraDetalle}" varStatus="i">
+														<tr class='${i.count%2==0?"l2":"l1"}'  
+															onclick="setCampos('${i.count}','${costoExtraDetalle.idCostoExtraDetalle}','${costoExtraDetalle.responsableInsumo.nombre}','${costoExtraDetalle.costoExtra.nombre}','${costoExtraDetalle.cantidad}','${costoExtraDetalle.especificacion}')">
+															<td>${i.count}</td>
+															<td>${costoExtraDetalle.responsableInsumo.nombre}</td>
+															<td>${costoExtraDetalle.costoExtra.nombre}</td>
+															<td>${costoExtraDetalle.cantidad}</td>
+															<td>${costoExtraDetalle.especificacion}</td>
+														</tr>
+													</c:forEach>
+												</c:when>
+												<c:otherwise>
+													<tr class="l1">
+														<td>&nbsp;</td>
+														<td>&nbsp;</td>
+														<td>&nbsp;</td>
+														<td>&nbsp;</td>
+														<td>&nbsp;</td>
+													</tr>														
+												</c:otherwise>
+											</c:choose>
+											</table>
+										</div>
+                                	</div>
+                                </div>
+                            </div>
+                            
+                            
+   							
+                            
+                                                        
+<!-- div_costo_extra_detalle, display:none; -->
+							<div id="div_costo_extra_detalle" style="display:none;">
+								<form name="costo_extra_detalle" action="" accept-charset="ISO-8859-1">
+									<input type="hidden" name="id_tipo_trabajo_detalle" value=""/>
+									<input type="hidden" name="id_costo_extra" 			value=""/>
+									<input type="hidden" name="id_responsable_insumo" 	value=""/>
+									<div class="div_separador_chico">
+										<img alt="" src="<c:url value="/resources/image/separador_chico.jpg"/>"/>
+									</div>
+									
+									
+	                                <div class="titulo">
+	                                    <font size="5">COSTO EXTRA</font>
+	                                </div>
+	                                <div class="linea">
+	                                	<div class="casilla">
+	                                		<div class="columna_izquierda">
+	                                			<div class="mitad_columna_izquierda">
+	                                				<div class="columna_completa">
+		                                				<table>
+		                                					<tr>
+		                                						<td width="41%">Costo Extra:</td>
+		                                						<td>
+		                                							<select name="select_costo_extra" tabindex="37" onchange="ajaxUnidadCostoExtra()">
+		                                								<c:forEach var="costoExtra" items="${listaCostoExtra}">
+	                                                                        <option value="${costoExtra.value}">${costoExtra.text}</option>
+	                                                                    </c:forEach>
+		                                							</select>
+		                                						</td>
+		                                					</tr>
+		                                				</table>
+		                                			</div>
+	                                			</div>
+	                                			<div class="mitad_columna_derecha">
+	                                				<div class="columna_completa">
+		                                				<table>
+		                                					<tr>
+		                                						<td width="1%">Responsable:</td>
+		                                						<td>
+		                                							<select name="select_responsable_insumo" tabindex="38">
+																		<c:forEach var="ri" items="${listaResponsableInsumo}">
+																			<option value="${ri.value}">${ri.text}</option>
+																		</c:forEach>
+		                                							</select>
+		                                						</td>
+		                                					</tr>
+		                                				</table>
+		                                			</div>
+	                                			</div>
+	                                		</div>
+	                                		<div class="columna_derecha">
+	                                			<div class="mitad_columna_izquierda">
+	                                				<div class="columna_completa">
+	                                					<table>
+		                                					<tr>
+		                                						<td width="1%">Cantidad:</td>
+		                                						<td>
+		                                							<input	type="text"
+		                                									class="input"
+		                                									name="cantidad"
+		                                									value=""
+		                                									tabindex="39"
+		                                									onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
+		                                						</td>
+		                                					</tr>
+		                                				</table>
+	                                				</div>
+	                                			</div>
+	                                			<div class="mitad_columna_derecha">
+	                                				<div class="columna_completa">
+	                                					<table>
+		                                					<tr>
+		                                						<td width="38%">Medido en:</td>
+		                                						<td>
+		                                							<input	type="text"
+		                                									class="input"
+		                                									name="nombre_unidad_medida"
+		                                									value="${nombre_unidad_medida}"
+		                                									tabindex=""
+		                                									readonly/>
+		                                						</td>
+		                                					</tr>
+		                                				</table>
+	                                				</div>
+	                                			</div>
+	                                		</div>
+	                                	</div>
+	                                </div>
+	                                <div class="linea">
+	                                	<div class="casilla">
+	                                		<div class="columna_izquierda">
+	                                			<div class="columna_completa">
+	                                				<table>
+		                                				<tr>
+		                                					<td width="1%">Especificaci&oacute;n:</td>
+		                                					<td>
+		                                						<input	type="text"
+		                                								class="input"
+		                                								name="especificacion"
+		                                								value=""
+		                                								tabindex="40"/>
+		                                					</td>
+		                                				</tr>
+		                                			</table>
+	                                			</div>
+	                                		</div>
+	                                	</div>
+	                                </div>
+	                                <div class="linea">
+	                                	<div class="casilla" style="text-align:right;">
+	                                		<img id="imgBtnLimpiarCostoExtraDetalleActivo"
+                                                 alt="" style="cursor:pointer;" onclick="limpiaCamposCostoExtraDetalle();"
+                                                 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
+                                            <img id="imgBtnLimpiarCostoExtraDetalleInactivo"
+                                                 alt="" style="display:none;"
+                                                 src="<c:url value="/resources/image/boton_limpiar_des.jpg"/>"/>
+                                            <img id="imgBtnAgregarCostoExtraDetalleActivo"
+                                                 alt="" style="cursor:pointer;" onclick="ajaxAgregaCostoExtraDetalle();"
+                                                 src="<c:url value="/resources/image/boton_agregar.jpg"/>"/>
+                                            <img id="imgBtnAgregarCostoExtraDetalleInactivo"
+                                                 alt="" style="display:none;"
+                                                 src="<c:url value="/resources/image/boton_agregar_des.jpg"/>"/>
+	                                	</div>
+	                                </div>
+                                </form>
+							</div>                           
+                         
+
+                            
+
+                            
 <!-- div_nueva_partida, display:none;  -->
                             <div id="div_nuevo_tipo_trabajo_detalle" style="display:none;">
                                 <div class="div_separador_mediano">
@@ -2698,6 +2887,7 @@
                             </div>
                             
                             
+                            
 
 <!-- div_nueva_partida, display:none;  -->
                             <div id="div_nueva_partida" style="display:none;">
@@ -2713,6 +2903,8 @@
                                         src="<c:url value="/resources/image/boton_agregar.jpg"/>"/>
                                 </div>
                             </div>
+                            
+                            
                             
                             
 
@@ -2732,6 +2924,7 @@
                                     </div>
                                 </form>
                             </div>
+                            
                             
                             
                             

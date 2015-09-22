@@ -308,16 +308,16 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `lithomat_artiffex`.`costos_extras`
+-- Table `lithomat_artiffex`.`costo_extra`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`costos_extras` (
-  `id_costos_extras` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`costo_extra` (
+  `id_costo_extra` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(80) NULL,
   `descripcion` VARCHAR(250) NULL,
   `precio` FLOAT NULL,
   `id_tipo_precio` INT UNSIGNED NOT NULL,
   `activo` TINYINT(1) NULL,
-  PRIMARY KEY (`id_costos_extras`),
+  PRIMARY KEY (`id_costo_extra`),
   INDEX `fk_costos_extras_tipo_precio1_idx` (`id_tipo_precio` ASC),
   CONSTRAINT `fk_costos_extras_tipo_precio1`
     FOREIGN KEY (`id_tipo_precio`)
@@ -565,24 +565,24 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `lithomat_artiffex`.`costos_extras_detalle`
+-- Table `lithomat_artiffex`.`costo_extra_detalle`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`costos_extras_detalle` (
-  `id_costos_extras_detalle` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`costo_extra_detalle` (
+  `id_costo_extra_detalle` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_tipo_trabajo_detalle` INT UNSIGNED NOT NULL,
   `id_responsable_insumo` INT UNSIGNED NOT NULL,
-  `id_costos_extras` INT UNSIGNED NOT NULL,
+  `id_costo_extra` INT UNSIGNED NOT NULL,
   `cantidad` INT NULL,
   `especificacion` VARCHAR(200) NULL,
   `precio_total_pesos` FLOAT NULL,
   `activo` TINYINT(1) NULL,
-  PRIMARY KEY (`id_costos_extras_detalle`),
-  INDEX `fk_costos_extras_detalle_costos_extras1_idx` (`id_costos_extras` ASC),
+  PRIMARY KEY (`id_costo_extra_detalle`),
+  INDEX `fk_costos_extras_detalle_costos_extras1_idx` (`id_costo_extra` ASC),
   INDEX `fk_costos_extras_detalle_responsable_insumo1_idx` (`id_responsable_insumo` ASC),
   INDEX `fk_costos_extras_detalle_tipo_trabajo_detalle1_idx` (`id_tipo_trabajo_detalle` ASC),
   CONSTRAINT `fk_costos_extras_detalle_costos_extras1`
-    FOREIGN KEY (`id_costos_extras`)
-    REFERENCES `lithomat_artiffex`.`costos_extras` (`id_costos_extras`)
+    FOREIGN KEY (`id_costo_extra`)
+    REFERENCES `lithomat_artiffex`.`costo_extra` (`id_costo_extra`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_costos_extras_detalle_responsable_insumo1`

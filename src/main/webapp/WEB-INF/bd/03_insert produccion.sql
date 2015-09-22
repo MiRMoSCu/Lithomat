@@ -46,8 +46,8 @@ INSERT INTO material_ayuda_x_partida (id_material_ayuda_x_partida, id_partida, i
 
 
 
-INSERT INTO costos_extras_detalle (id_costos_extras_detalle, id_tipo_trabajo_detalle, id_responsable_insumo, id_costos_extras, especificacion, precio_total_pesos, cantidad, activo) VALUES (1,1,1,1,' Porque cliente equivoco prueba de color',100.1,1,true);
-INSERT INTO costos_extras_detalle (id_costos_extras_detalle, id_tipo_trabajo_detalle, id_responsable_insumo, id_costos_extras, especificacion, precio_total_pesos, cantidad, activo) VALUES (2,1,1,5,' Porque cliente equivoco prueba de color',215.25,1,true);
+INSERT INTO costo_extra_detalle (id_costo_extra_detalle, id_tipo_trabajo_detalle, id_responsable_insumo, id_costo_extra, especificacion, precio_total_pesos, cantidad, activo) VALUES (1,1,1,1,' Porque cliente equivoco prueba de color',100.1,1,true);
+INSERT INTO costo_extra_detalle (id_costo_extra_detalle, id_tipo_trabajo_detalle, id_responsable_insumo, id_costo_extra, especificacion, precio_total_pesos, cantidad, activo) VALUES (2,1,1,5,' Porque cliente equivoco prueba de color',215.25,1,true);
 
 
 

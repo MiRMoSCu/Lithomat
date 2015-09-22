@@ -98,10 +98,12 @@ function buscaPartida( id_partida ){
     //alert("busca_detalle_partida: " + id);
 	
 	// oculta divs
-	document.getElementById("div_tipo_trabajo_detalle").style.display 	= "none";
-	document.getElementById("div_visualizador_pliegos").style.display 	= "none";
-	document.getElementById("div_pestania").style.display 				= "none";
-	document.getElementById("div_material_ayuda").style.display 		= "none";
+	document.getElementById("div_tipo_trabajo_detalle").style.display 				= "none";
+	document.getElementById("div_visualizador_pliegos").style.display 				= "none";
+	document.getElementById("div_visualizador_costo_extra_detalle").style.display	= "none";
+    document.getElementById("div_costo_extra_detalle").style.display				= "none";
+	document.getElementById("div_pestania").style.display 							= "none";
+	document.getElementById("div_material_ayuda").style.display 					= "none";
 	
     $.ajax({
         type:"POST",
@@ -281,8 +283,10 @@ function buscaTrabajoDetalle( id_tipo_trabajo_detalle ) {
         url:urlObtieneTipoTrabajoDetalle,
         data:{id_tipo_trabajo_detalle:id_tipo_trabajo_detalle},
         success:function( response ) {
+        	//console.log(response);
         	// set id_tipo_trabajo_detalle
-        	document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value = id_tipo_trabajo_detalle;
+        	document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value 	= id_tipo_trabajo_detalle;
+        	document.costo_extra_detalle.id_tipo_trabajo_detalle.value 	= id_tipo_trabajo_detalle;
         	
             var detallePartidaJson = JSON.parse( response.textoJson );
             document.forms["tipo_trabajo_detalle"].elements["descripcion_partida_detalle"].value        = detallePartidaJson.tipo_trabajo_detalle.descripcion;
@@ -311,11 +315,14 @@ function buscaTrabajoDetalle( id_tipo_trabajo_detalle ) {
             document.forms["tipo_trabajo_detalle"].elements["tipo_complejidad"].value                   = detallePartidaJson.tipo_trabajo_detalle.descripcionComplejidad;
             
             document.getElementById("div_tabla_lista_pliegos").innerHTML                                = detallePartidaJson.lista_pliegos;
+            document.getElementById("div_tabla_costo_extra_tipo_trabajo").innerHTML                   	= detallePartidaJson.lista_costo_extra_detalle;
             
-            document.getElementById("div_tipo_trabajo_detalle").style.display 	= "block";
-            document.getElementById("div_visualizador_pliegos").style.display	= "block";
-            document.getElementById("div_pestania").style.display				= "block";
-            document.getElementById("div_material_ayuda").style.display			= "block";
+            document.getElementById("div_tipo_trabajo_detalle").style.display 				= "block";
+            document.getElementById("div_visualizador_pliegos").style.display				= "block";
+            document.getElementById("div_visualizador_costo_extra_detalle").style.display	= "block";
+            document.getElementById("div_costo_extra_detalle").style.display				= "block";
+            document.getElementById("div_pestania").style.display							= "block";
+            document.getElementById("div_material_ayuda").style.display						= "block";
             
             delete detallePartidaJson;
         },
@@ -348,24 +355,26 @@ function ajaxCambiaEstatus() {
 					window.parent.document.getElementById(id_td).removeAttribute("class");
 					window.parent.document.getElementById(id_td).setAttribute("class","estatus_" + document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].value);
 					// elimina la opcion de modificar la informacion.
-					document.getElementById("div_btn_actualizar_orden_produccion").style.display 	= "none";
-					document.getElementById("div_btn_actualizar_partida").style.display 			= "none";
-					document.getElementById("div_btn_actualizar_ttd_encabezado").style.display 		= "none";
-					document.getElementById("div_btn_modificar_disenio").style.display 				= "none";
-					document.getElementById("div_btn_agregar_disenio_detalle").style.display 		= "none";
-					document.getElementById("div_btn_actualizar_disenio_detalle").style.display 	= "none";
-					document.getElementById("div_btn_modificar_preprensa").style.display 			= "none";
-					document.getElementById("div_btn_agregar_preprensa_detalle").style.display 		= "none";
-					document.getElementById("div_btn_actualizar_preprensa_detalle").style.display 	= "none";
-					document.getElementById("div_btn_modificar_transporte").style.display 			= "none";
-					document.getElementById("div_btn_agregar_transporte_detalle").style.display 	= "none";
-					document.getElementById("div_btn_actualizar_transporte_detalle").style.display 	= "none";
-					document.getElementById("div_btn_modificar_acabado").style.display 				= "none";
-					document.getElementById("div_btn_agregar_acabado_detalle").style.display 		= "none";
-					document.getElementById("div_btn_actualizar_acabado_detalle").style.display 	= "none";
-					document.getElementById("div_btn_modificar_offset").style.display 				= "none";
-					document.getElementById("div_btn_agregar_material_ayuda").style.display 		= "none";
-					document.getElementById("div_btn_actualizar_material_ayuda").style.display 		= "none";
+					document.getElementById("div_btn_actualizar_orden_produccion").style.display 		= "none";
+					document.getElementById("div_btn_actualizar_partida").style.display 				= "none";
+					document.getElementById("div_btn_actualizar_ttd_encabezado").style.display 			= "none";
+					document.getElementById("div_btn_agregar_costo_extra_detalle").style.display 		= "none";
+					document.getElementById("div_btn_actualizar_costo_extra_detalle").style.display 	= "none";
+					document.getElementById("div_btn_modificar_disenio").style.display 					= "none";
+					document.getElementById("div_btn_agregar_disenio_detalle").style.display 			= "none";
+					document.getElementById("div_btn_actualizar_disenio_detalle").style.display 		= "none";
+					document.getElementById("div_btn_modificar_preprensa").style.display 				= "none";
+					document.getElementById("div_btn_agregar_preprensa_detalle").style.display 			= "none";
+					document.getElementById("div_btn_actualizar_preprensa_detalle").style.display 		= "none";
+					document.getElementById("div_btn_modificar_transporte").style.display 				= "none";
+					document.getElementById("div_btn_agregar_transporte_detalle").style.display 		= "none";
+					document.getElementById("div_btn_actualizar_transporte_detalle").style.display 		= "none";
+					document.getElementById("div_btn_modificar_acabado").style.display 					= "none";
+					document.getElementById("div_btn_agregar_acabado_detalle").style.display 			= "none";
+					document.getElementById("div_btn_actualizar_acabado_detalle").style.display 		= "none";
+					document.getElementById("div_btn_modificar_offset").style.display 					= "none";
+					document.getElementById("div_btn_agregar_material_ayuda").style.display 			= "none";
+					document.getElementById("div_btn_actualizar_material_ayuda").style.display 			= "none";
 					// modifica select
 					$("[name='select_estatus_orden_produccion']").empty();
 					var jsonObject = JSON.parse(response.textoJson);
@@ -382,11 +391,11 @@ function ajaxCambiaEstatus() {
 					delete index;
 					delete id_td;
 					
-					// SI CAMBIO ESTATUS == FINALIZADO ENTONCES ABRE VENTANA DE COSTOS EXTRAS
+					// SI CAMBIO ESTATUS == FINALIZADO ENTONCES ABRE VENTANA DE COSTO EXTRA
 					if( document.cambio_estatus.id_estatus_orden.value == 10 ) {
-						//abre ventana modal para guardar costos extras
+						//abre ventana modal para guardar costo extra
 						Shadowbox.open({
-							content:urlCostosExtrasDetalle + "/?nut=" + document.orden_produccion.nut.value,
+							content:urlCostoExtraDetalle + "?nut=" + document.orden_produccion.nut.value,
 							player:"iframe",
 							width:830,
 							height:580,

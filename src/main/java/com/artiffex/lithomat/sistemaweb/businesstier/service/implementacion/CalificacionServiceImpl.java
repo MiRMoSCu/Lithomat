@@ -270,7 +270,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 			float transporteCosteTotal 	= partidaService.obtieneTransporteCosteTotal(partida.getIdPartida());
 			float acabadoCosteTotal 	= partidaService.obtieneAcabadoCosteTotal(partida.getIdPartida());
 			float offsetCosteTotal 		= 0;
-			float costoExtraTotal 		= partidaService.obtieneCostosExtrasCosteTotal(partida.getIdPartida());
+			float costoExtraTotal 		= partidaService.obtieneCostoExtraCosteTotal(partida.getIdPartida());
 			
 			// SUMATORIA PARA CALCULO PRECIO BRUTO
 			// coste_total_procesos_partida = subpartidas_coste_total + sumatoria(disenio.coste_total + preprensa_coste_total + transporte_coste_total + acabado_coste_total + offset_coste_total + costo_extra)
@@ -603,7 +603,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 			float transporteCosteTotal 	= partidaService.obtieneTransporteCosteTotal(partida.getIdPartida());
 			float acabadoCosteTotal 	= partidaService.obtieneAcabadoCosteTotal(partida.getIdPartida());
 			float offsetCosteTotal 		= 0;
-			float costoExtraTotal 		= partidaService.obtieneCostosExtrasCosteTotal(partida.getIdPartida());
+			float costoExtraTotal 		= partidaService.obtieneCostoExtraCosteTotal(partida.getIdPartida());
 			
 			// SUMATORIA PARA CALCULO PRECIO BRUTO
 			// coste_total_procesos_partida = subpartidas_coste_total + sumatoria(disenio.coste_total + preprensa_coste_total + transporte_coste_total + acabado_coste_total + offset_coste_total + costo_extra)
@@ -718,7 +718,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 			float transporteCosteTotal 	= partidaService.obtieneTransporteCosteTotal(partida.getIdPartida());
 			float acabadoCosteTotal 	= partidaService.obtieneAcabadoCosteTotal(partida.getIdPartida());
 			float offsetCosteTotal 		= 0;
-			float costoExtraTotal 		= partidaService.obtieneCostosExtrasCosteTotal(partida.getIdPartida());
+			float costoExtraTotal 		= partidaService.obtieneCostoExtraCosteTotal(partida.getIdPartida());
 			
 			// SUMATORIA PARA CALCULO PRECIO BRUTO
 			double costeTotalProcesosPartida = 0;

@@ -2,25 +2,25 @@ package com.artiffex.lithomat.sistemaweb.businesstier.entity;
 
 import java.io.Serializable;
 
-public class CostosExtrasDetalle implements Serializable {
+public class CostoExtraDetalle implements Serializable {
 	
 	private static final long serialVersionUID = -2491101489030489130L;
 
-	private int idCostosExtrasDetalle;
+	private int idCostoExtraDetalle;
 	private TipoTrabajoDetalle tipoTrabajoDetalle;
 	private ResponsableInsumo responsableInsumo;
-	private CostosExtras costosExtras;
+	private CostoExtra costoExtra;
 	private int cantidad;
 	private String especificacion;
 	private float precioTotalPesos;
 	private boolean activo;
 	
 	
-	public int getIdCostosExtrasDetalle() {
-		return idCostosExtrasDetalle;
+	public int getIdCostoExtraDetalle() {
+		return idCostoExtraDetalle;
 	}
-	public void setIdCostosExtrasDetalle(int idCostosExtrasDetalle) {
-		this.idCostosExtrasDetalle = idCostosExtrasDetalle;
+	public void setIdCostoExtraDetalle(int idCostoExtraDetalle) {
+		this.idCostoExtraDetalle = idCostoExtraDetalle;
 	}
 	public TipoTrabajoDetalle getTipoTrabajoDetalle() {
 		return tipoTrabajoDetalle;
@@ -34,11 +34,11 @@ public class CostosExtrasDetalle implements Serializable {
 	public void setResponsableInsumo(ResponsableInsumo responsableInsumo) {
 		this.responsableInsumo = responsableInsumo;
 	}
-	public CostosExtras getCostosExtras() {
-		return costosExtras;
+	public CostoExtra getCostoExtra() {
+		return costoExtra;
 	}
-	public void setCostosExtras(CostosExtras costosExtras) {
-		this.costosExtras = costosExtras;
+	public void setCostoExtra(CostoExtra costoExtra) {
+		this.costoExtra = costoExtra;
 	}
 	public int getCantidad() {
 		return cantidad;

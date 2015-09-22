@@ -2,23 +2,23 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<c:url value="/costos_extras_detalle/busca_unidad_medida" 				var="urlBuscaUnidadMedida"/>
-<c:url value="/costos_extras_detalle/agrega_costos_extras_detalle" 		var="urlAlta"/>
-<c:url value="/costos_extras_detalle/modifica_costos_extras_detalle" 	var="urlModifica"/>
-<c:url value="/costos_extras_detalle/elimina_costos_extras_detalle" 	var="urlElimina"/>
+<c:url value="/costo_extra_detalle/busca_unidad_medida" 	var="urlBuscaUnidadMedida"/>
+<c:url value="/costo_extra_detalle/agrega" 					var="urlAlta"/>
+<c:url value="/costo_extra_detalle/modifica" 				var="urlModifica"/>
+<c:url value="/costo_extra_detalle/elimina" 				var="urlElimina"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Costos extras</title>
+		<title>Costo extra</title>
 		<link rel="stylesheet" href="<c:url value="/resources/css/master.css"/>" type="text/css"></link>
 		<link rel="stylesheet" href="<c:url value="/resources/css/font.css"/>" type="text/css"></link>
 		<link rel="stylesheet" href="<c:url value="/resources/css/menu.css"/>" type="text/css"></link>
 		<link rel="stylesheet" href="<c:url value="/resources/css/jstree.style.min.css"/>" type="text/css"></link>
-		<link rel="stylesheet" href="<c:url value="/resources/css/costos_extras_detalle.css"/>" type="text/css"></link>
+		<link rel="stylesheet" href="<c:url value="/resources/css/costo_extra_detalle.css"/>" type="text/css"></link>
 		<script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
 		<script type="text/javascript" src="<c:url value="/resources/js/jstree.min.js"/>"></script>
-		<script type="text/javascript" src="<c:url value="/resources/js/costos_extras_detalle.js"/>"></script>
+		<script type="text/javascript" src="<c:url value="/resources/js/costo_extra_detalle.js"/>"></script>
 		<script type="text/javascript">
             //inicializacion jquery
             $(document).ready(function (){});
@@ -39,53 +39,54 @@
 					<div id="div_cuerpo">
 						<div id="div_contenido">
 							<br/>
-							<div id="div_costos_extras_detalle">
-								<form name="costos_extras_detalle" action="" accept-charset="ISO-8859-1" method="post">
-									<input type="hidden" name="nut" 						value="${nut}"/>
-									<input type="hidden" name="id_costos_extras_detalle" 	value=""/>
-									<input type="hidden" name="id_tipo_trabajo_detalle" 	value=""/>
-									<input type="hidden" name="id_responsable_insumo" 		value=""/>
-									<input type="hidden" name="id_costos_extras" 			value=""/>
+							<div id="div_costo_extra_detalle">
+								<form name="costo_extra_detalle" action="" accept-charset="ISO-8859-1" method="post">
+									<input type="hidden" name="nut" 					value="${nut}"/>
+									<input type="hidden" name="id_costo_extra_detalle" 	value=""/>
+									<input type="hidden" name="id_tipo_trabajo_detalle" value=""/>
+									<input type="hidden" name="id_responsable_insumo" 	value=""/>
+									<input type="hidden" name="id_costo_extra" 			value=""/>
 									<div class="titulo">
-										<font size="5">COSTOS EXTRAS POR TIPO TRABAJO</font>
+										<img alt="" src="<c:url value="/resources/image/titulo_costo_extra.png"/>"/>
 									</div>
+	                                    
 									<div>
 										<div id="div_arbol_tipo_trabajo">
 											<div class="columna_completa">
 												<div id="arbol_tipo_trabajo" style="height:100%; overflow:auto;"></div>
 											</div>
 										</div>
-										<div id="div_costos_extras_tipo_trabajo">
+										<div id="div_costo_extra_tipo_trabajo">
 											<div class="linea">
 												<div class="casilla" style="text-align:right;">
-													<span id="" style="cursor:pointer; display:inline" onclick="finalizaCostosExtras()">
+													<span id="" style="cursor:pointer; display:inline" onclick="finalizaCostoExtra()">
 														<font color="blue">FINALIZAR</font>
 													</span>
 												</div>
 											</div>
 											<div style="width:400px; margin-left:auto;">
 												<div class="columna_completa">
-													<div id="div_tabla_costos_extras_tipo_trabajo">
-														<table id="tabla_lista_costos_extras_tipo_trabajo">
+													<div id="div_tabla_costo_extra_tipo_trabajo">
+														<table id="tabla_lista_costo_extra_tipo_trabajo">
 															<tr>
-																<th>Id.</th>
+																<th>No.</th>
 																<th>Subpartida</th>
-																<th>Resp.</th>
 																<th>Costo Extra</th>
+																<th>Resp.</th>
 																<th>Cant.</th>
 																<th>Especif.</th>
 															</tr>
 														<c:choose>
-															<c:when test="${fn:length(listaCostosExtrasDetalle) gt 0}">
-																<c:forEach var="costosExtrasDetalle" items="${listaCostosExtrasDetalle}" varStatus="i">
+															<c:when test="${fn:length(listaCostoExtraDetalle) gt 0}">
+																<c:forEach var="costoExtraDetalle" items="${listaCostoExtraDetalle}" varStatus="i">
 																	<tr class='${i.count%2==0?"l2":"l1"}'  
-																		onclick="setCampos('${i.count}','${costosExtrasDetalle.idCostosExtrasDetalle}','${costosExtrasDetalle.tipoTrabajoDetalle.descripcion}','${costosExtrasDetalle.responsableInsumo.nombre}','${costosExtrasDetalle.costosExtras.nombre}','${costosExtrasDetalle.cantidad}','${costosExtrasDetalle.especificacion}')">
+																		onclick="setCampos('${i.count}','${costoExtraDetalle.idCostoExtraDetalle}','${costoExtraDetalle.tipoTrabajoDetalle.descripcion}','${costoExtraDetalle.costoExtra.nombre}','${costoExtraDetalle.responsableInsumo.nombre}','${costoExtraDetalle.cantidad}','${costoExtraDetalle.especificacion}')">
 																		<td>${i.count}</td>
-																		<td>${costosExtrasDetalle.tipoTrabajoDetalle.descripcion}</td>
-																		<td>${costosExtrasDetalle.responsableInsumo.nombre}</td>
-																		<td>${costosExtrasDetalle.costosExtras.nombre}</td>
-																		<td>${costosExtrasDetalle.cantidad}</td>
-																		<td>${costosExtrasDetalle.especificacion}</td>
+																		<td>${costoExtraDetalle.tipoTrabajoDetalle.descripcion}</td>
+																		<td>${costoExtraDetalle.costoExtra.nombre}</td>
+																		<td>${costoExtraDetalle.responsableInsumo.nombre}</td>
+																		<td>${costoExtraDetalle.cantidad}</td>
+																		<td>${costoExtraDetalle.especificacion}</td>
 																	</tr>
 																</c:forEach>
 															</c:when>
@@ -149,9 +150,9 @@
 																	<tr>
 																		<td width="44%">Costo Extra:</td>
 																		<td>
-																			<select name="select_costos_extras" onchange="ajaxUnidadCostoExtra()">
-																				<c:forEach var="costosExtras" items="${listaCostosExtras}">
-			                                                                        <option value="${costosExtras.value}">${costosExtras.text}</option>
+																			<select name="select_costo_extra" onchange="ajaxUnidadCostoExtra()">
+																				<c:forEach var="costoExtra" items="${listaCostoExtra}">
+			                                                                        <option value="${costoExtra.value}">${costoExtra.text}</option>
 			                                                                    </c:forEach>
 																			</select>
 																		</td>
@@ -200,7 +201,7 @@
 															<div class="columna_completa">
 																<table>
 																	<tr>
-																		<td width="58%">Especificado en:</td>
+																		<td width="40%">Medido en:</td>
 																		<td>
 																			<input	type="text"
 																					class="input"
@@ -236,10 +237,10 @@
 											</div>
 											<div class="linea">
 												<div class="casilla" style="text-align:right;">
-													<img id="" alt="" style="cursor:pointer;" onclick="limpiaFormCostosExtras()" src="<c:url value="/resources/image/boton_limpiar.jpg"/>">
-													<img id="" alt="" style="cursor:pointer;" onclick="eliminaCostosExtras();" src="<c:url value="/resources/image/boton_eliminar.jpg"/>">
-													<img id="" alt="" style="cursor:pointer;" onclick="modificaCostosExtras();" src="<c:url value="/resources/image/boton_modificar.jpg"/>">
-													<img id="" alt="" style="cursor:pointer;" onclick="creaCostosExtras();" src="<c:url value="/resources/image/boton_agregar.jpg"/>">
+													<img id="" alt="" style="cursor:pointer;" onclick="limpiaFormCostoExtra()" src="<c:url value="/resources/image/boton_limpiar.jpg"/>">
+													<img id="" alt="" style="cursor:pointer;" onclick="eliminaCostoExtra();" src="<c:url value="/resources/image/boton_eliminar.jpg"/>">
+													<img id="" alt="" style="cursor:pointer;" onclick="modificaCostoExtra();" src="<c:url value="/resources/image/boton_modificar.jpg"/>">
+													<img id="" alt="" style="cursor:pointer;" onclick="creaCostoExtra();" src="<c:url value="/resources/image/boton_agregar.jpg"/>">
 												</div>
 											</div>
 										</div>

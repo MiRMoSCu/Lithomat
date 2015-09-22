@@ -6,7 +6,7 @@
 <c:url value="/visualizador/" 							var="urlVisualizador" />
 <c:url value="/cliente/catalogo/lista" 					var="urlCliente" />
 <c:url value="/combinacion_tintas/catalogo/lista" 		var="urlCombinacionTintas" />
-<c:url value="/costos_extras/catalogo/lista" 			var="urlCostosExtras" />
+<c:url value="/costo_extra/catalogo/lista" 				var="urlCostoExtra" />
 <c:url value="/estatus_orden/catalogo/lista" 			var="urlEstatusOrden" />
 <c:url value="/maquina/catalogo/lista" 					var="urlMaquina" />
 <c:url value="/material_ayuda/catalogo/lista" 			var="urlMaterialAyuda" />
@@ -55,7 +55,7 @@
         	var urlVisualizador				= '${urlVisualizador}';
             var urlCliente					= '${urlCliente}';
             var urlCombinacionTintas		= '${urlCombinacionTintas}';
-            var urlCostosExtras				= '${urlCostosExtras}';
+            var urlCostoExtra				= '${urlCostoExtra}';
             var urlEstatusOrden				= '${urlEstatusOrden}';
             var urlMaquina					= '${urlMaquina}';
             var urlMaterialAyuda			= '${urlMaterialAyuda}';
@@ -134,8 +134,8 @@
                     case 'combinacion_tintas':
                     	document.forms["opcion_menu"].action = urlCombinacionTintas;
                     	break;
-                    case 'costos_extras':
-                    	document.forms["opcion_menu"].action = urlCostosExtras;
+                    case 'costo_extra':
+                    	document.forms["opcion_menu"].action = urlCostoExtra;
                     	break;
                     case 'estatus_orden':
                     	document.forms["opcion_menu"].action = urlEstatusOrden;
@@ -376,8 +376,8 @@
 	                                			<div id="div_opcion_combinacion_de_tintas" class="boton_dinamico" onclick="menu('combinacion_tintas');">
 	                                				<span class="texto_boton">Combinaci&oacute;n de tintas</span>
 	                                			</div>
-	                                			<div id="div_opcion_costos_extras" class="boton_dinamico" onclick="menu('costos_extras');">
-	                                				<span class="texto_boton">Costos extras</span>
+	                                			<div id="div_opcion_costo_extra" class="boton_dinamico" onclick="menu('costo_extra');">
+	                                				<span class="texto_boton">Costo extra</span>
 	                                			</div>
 	                                			<div id="div_opcion_estatus_orden" class="boton_dinamico" onclick="menu('estatus_orden');">
 	                                				<span class="texto_boton">(+) Estatus orden</span>
@@ -468,8 +468,8 @@
 	                                			<div id="div_opcion_combinacion_de_tintas" class="boton_dinamico" onclick="menu('combinacion_tintas');">
 	                                				<span class="texto_boton">Combinaci&oacute;n de tintas</span>
 	                                			</div>
-	                                			<div id="div_opcion_costos_extras" class="boton_dinamico" onclick="menu('costos_extras');">
-	                                				<span class="texto_boton">Costos extras</span>
+	                                			<div id="div_opcion_costo_extra" class="boton_dinamico" onclick="menu('costo_extra');">
+	                                				<span class="texto_boton">Costo extra</span>
 	                                			</div>
 	                                			<div id="div_opcion_maquina" class="boton_dinamico" onclick="menu('maquina');">
 	                                				<span class="texto_boton">M&aacute;quina</span>

@@ -3,9 +3,9 @@
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.CostosExtrasDetalle" table="costos_extras_detalle" dynamic-update="true" optimistic-lock="dirty">
-		<id name="idCostosExtrasDetalle">
-			<column name="id_costos_extras_detalle"/>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.CostoExtraDetalle" table="costo_extra_detalle" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idCostoExtraDetalle">
+			<column name="id_costo_extra_detalle"/>
 			<type name="integer"/>
 			<generator class="increment"/>
 		</id>
@@ -15,8 +15,8 @@
 		<many-to-one name="responsableInsumo" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.ResponsableInsumo" fetch="select">
 			<column name="id_responsable_insumo"/>
 		</many-to-one>
-		<many-to-one name="costosExtras" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.CostosExtras" fetch="select">
-			<column name="id_costos_extras"/>
+		<many-to-one name="costoExtra" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.CostoExtra" fetch="select">
+			<column name="id_costo_extra"/>
 		</many-to-one>
 		<property name="cantidad">
 			<column name="cantidad"/>

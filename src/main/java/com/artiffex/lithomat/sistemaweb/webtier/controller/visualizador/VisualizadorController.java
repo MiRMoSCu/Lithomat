@@ -32,6 +32,8 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.AcabadoSer
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CalificacionService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.ClienteService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CombinacionTintasService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CostoExtraDetalleService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CostoExtraService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.DisenioDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.DisenioService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.EstatusOrdenService;
@@ -88,6 +90,8 @@ public class VisualizadorController {
 	@Resource
 	private HistorialEstatusService historialEstatusService;
 	@Resource
+	private CostoExtraService costoExtraService;
+	@Resource
 	private DisenioService disenioService;
 	@Resource
 	private PreprensaService preprensaService;
@@ -97,6 +101,8 @@ public class VisualizadorController {
 	private AcabadoService acabadoService;
 	@Resource
 	private OffsetService offsetService;
+	@Resource
+	private CostoExtraDetalleService costoExtraDetalleService;
 	@Resource
 	private DisenioDetalleService disenioDetalleService;
 	@Resource
@@ -294,6 +300,10 @@ public class VisualizadorController {
 		model.addAttribute("listaTipoComplejidad", listaTipoComplejidad);
 		listaTipoComplejidad = null;
 		
+		List<ComboSelect> listaResponsableInsumo = responsableInsumoService.listaComboSelect();
+		model.addAttribute("listaResponsableInsumo", listaResponsableInsumo);
+		listaResponsableInsumo = null;
+		
 		// lista procesos por seccion
 		
 		Gson gson = new Gson();
@@ -323,9 +333,10 @@ public class VisualizadorController {
 		model.addAttribute("jsonListaMaterialAyuda",jsonListaMaterialAyuda.toString());
 		listaMaterialAyuda = null;
 		
-		List<ComboSelect> listaResponsableInsumo = responsableInsumoService.listaComboSelect();
-		model.addAttribute("listaResponsableInsumo", listaResponsableInsumo);
-		listaResponsableInsumo = null;
+		List<ComboSelect> listaCostoExtra = costoExtraService.listaComboSelect();
+		String jsonListaCostoExtra = gson.toJson(listaCostoExtra);
+		model.addAttribute("jsonListaCostoExtra",jsonListaCostoExtra.toString());
+		listaCostoExtra = null;
 		
 		gson = null;
 		
@@ -459,11 +470,15 @@ public class VisualizadorController {
 		sb.append(gson.toJson(tipoTrabajoDetalle));
 		sb.append(",");
 		sb.append("\"lista_pliegos\":");
-		sb.append("\"" + pliegoService.buscaHTML(idTipoTrabajoDetalle)
-				+ "\"");
+		sb.append("\"" + pliegoService.buscaHTML(idTipoTrabajoDetalle) + "\"");
+		sb.append(",");
+		sb.append("\"lista_costo_extra_detalle\":");
+		sb.append("\"" + costoExtraDetalleService.listaHTMLModificacion(idTipoTrabajoDetalle) + "\"");
 		sb.append("}");
 
 		jsonResponse.setTextoJson(sb.toString());
+		
+		System.out.println(sb.toString());
 
 		tipoTrabajoDetalle = null;
 		gson = null;

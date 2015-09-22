@@ -4,25 +4,25 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CostosExtras implements Serializable {
+public class CostoExtra implements Serializable {
 
 	private static final long serialVersionUID = -2060284715195512325L;
 
-	private int idCostosExtras;
+	private int idCostoExtra;
 	private String nombre;
 	private String descripcion;
 	private float precio;
 	private TipoPrecio tipoPrecio;
 	private boolean activo;
 	// esta clase esta relacionada [uno a muchos] con las tablas:
-	private Set<CostosExtrasDetalle> costosExtrasDetalle = new HashSet<CostosExtrasDetalle>();
+	private Set<CostoExtraDetalle> costoExtraDetalle = new HashSet<CostoExtraDetalle>();
 	
 	
-	public int getIdCostosExtras() {
-		return idCostosExtras;
+	public int getIdCostoExtra() {
+		return idCostoExtra;
 	}
-	public void setIdCostosExtras(int idCostosExtras) {
-		this.idCostosExtras = idCostosExtras;
+	public void setIdCostoExtra(int idCostoExtra) {
+		this.idCostoExtra = idCostoExtra;
 	}
 	public String getNombre() {
 		return nombre;
@@ -54,11 +54,10 @@ public class CostosExtras implements Serializable {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	public Set<CostosExtrasDetalle> getCostosExtrasDetalle() {
-		return costosExtrasDetalle;
+	public Set<CostoExtraDetalle> getCostoExtraDetalle() {
+		return costoExtraDetalle;
 	}
-	public void setCostosExtrasDetalle(Set<CostosExtrasDetalle> costosExtrasDetalle) {
-		this.costosExtrasDetalle = costosExtrasDetalle;
+	public void setCostoExtraDetalle(Set<CostoExtraDetalle> costoExtraDetalle) {
+		this.costoExtraDetalle = costoExtraDetalle;
 	}
-	
 }

@@ -10,7 +10,7 @@ $(document).ready(function () {
 /*************************************************************/
 
 /* funciones */
-function setCampos(id_costos_extras, nombre, descripcion, precio, nombre_precio) {
+function setCampos(id_costo_extra, nombre, descripcion, precio, nombre_precio) {
 
     // busqueda de nombre_tipo_precio
     var select = document.forms[0].id_tipo_precio;
@@ -23,7 +23,7 @@ function setCampos(id_costos_extras, nombre, descripcion, precio, nombre_precio)
         }
     }
     
-    document.forms[0].id_costos_extras.value        = id_costos_extras;
+    document.forms[0].id_costo_extra.value        	= id_costo_extra;
     document.forms[0].nombre.value                  = nombre;
     document.forms[0].descripcion.value             = descripcion;
     document.forms[0].precio.value                  = precio;
@@ -56,7 +56,7 @@ function elimina() {
 }
 
 function limpia() {
-    document.forms[0].id_costos_extras.value        = "";
+    document.forms[0].id_costo_extra.value        	= "";
     document.forms[0].nombre.value                  = "";
     document.forms[0].descripcion.value             = "";
     document.forms[0].precio.value                  = "";

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.PartidaDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Acabado;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.AcabadoDetalle;
-import com.artiffex.lithomat.sistemaweb.businesstier.entity.CostosExtrasDetalle;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.CostoExtraDetalle;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Disenio;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.DisenioDetalle;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.PapelSobrante;
@@ -22,7 +22,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.entity.Transporte;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TransporteDetalle;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.AcabadoDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.AcabadoService;
-import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CostosExtrasDetalleService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CostoExtraDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.DisenioDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.DisenioService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PapelSobranteService;
@@ -68,7 +68,7 @@ public class PartidaServiceImpl implements PartidaService {
 	@Resource
 	private AcabadoDetalleService acabadoDetalleService;
 	@Resource
-	private CostosExtrasDetalleService costosExtrasDetalleService;
+	private CostoExtraDetalleService costoExtraDetalleService;
 	
 	
 	public int creaPartida(Partida partida) {
@@ -158,10 +158,10 @@ public class PartidaServiceImpl implements PartidaService {
 		return costeTotal;
 	}
 
-	public float obtieneCostosExtrasCosteTotal(int idPartida) {
+	public float obtieneCostoExtraCosteTotal(int idPartida) {
 		float costeTotal = 0f;
-		List<CostosExtrasDetalle> lista = costosExtrasDetalleService.listaCostosExtrasDetallePorPartida(idPartida);
-		for (CostosExtrasDetalle costosExtrasDetalle : lista) {
+		List<CostoExtraDetalle> lista = costoExtraDetalleService.listaCostoExtraDetallePorPartida(idPartida);
+		for (CostoExtraDetalle costosExtrasDetalle : lista) {
 			costeTotal += costosExtrasDetalle.getPrecioTotalPesos();
 			costosExtrasDetalle = null;
 		}
