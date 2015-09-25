@@ -13,8 +13,8 @@ public class TipoPapelExtendido implements Serializable {
 	private String nombre;
 	private int gramaje;
 	private float kilogramos;
-	private float alto;
-	private float ancho;
+	private float ancho; 	// es el lado mas grande
+	private float alto;		// es el lado mas pequenio
 	private String descripcion;
 	private float precio;
 	private TipoPrecio tipoPrecio;
@@ -53,17 +53,17 @@ public class TipoPapelExtendido implements Serializable {
 	public void setKilogramos(float kilogramos) {
 		this.kilogramos = kilogramos;
 	}
-	public float getAlto() {
-		return alto;
-	}
-	public void setAlto(float alto) {
-		this.alto = alto;
-	}
 	public float getAncho() {
 		return ancho;
 	}
 	public void setAncho(float ancho) {
 		this.ancho = ancho;
+	}
+	public float getAlto() {
+		return alto;
+	}
+	public void setAlto(float alto) {
+		this.alto = alto;
 	}
 	public String getDescripcion() {
 		return descripcion;

@@ -172,7 +172,6 @@ function limpiaCamposFormTipoTrabajoDetalle() {
     document.forms["tipo_trabajo_detalle"].elements["proporciona_tinta_especial"].checked               = false;
     document.forms["tipo_trabajo_detalle"].elements["proporciona_barniz"].checked                       = false;
     document.forms["tipo_trabajo_detalle"].elements["proporciona_placas"].checked                       = false;
-    document.forms["tipo_trabajo_detalle"].elements["select_tipo_papel_extendido"].selectedIndex        = 0;
     document.forms["tipo_trabajo_detalle"].elements["repeticiones_x_pliego"].value                      = "";
     document.forms["tipo_trabajo_detalle"].elements["numero_paginas_publicacion"].value                 = 0;
     document.forms["tipo_trabajo_detalle"].elements["select_tamanio_publicacion"].selectedIndex         = 0;
@@ -224,7 +223,6 @@ function activaCamposTipoTrabajoDetalle() {
     document.forms["tipo_trabajo_detalle"].elements["proporciona_tinta_especial"].disabled          = false;
     document.forms["tipo_trabajo_detalle"].elements["proporciona_barniz"].disabled                  = false;
     document.forms["tipo_trabajo_detalle"].elements["proporciona_placas"].disabled                  = false;
-    document.forms["tipo_trabajo_detalle"].elements["select_tipo_papel_extendido"].disabled         = false;
     document.forms["tipo_trabajo_detalle"].elements["repeticiones_x_pliego"].readOnly               = false;
     document.forms["tipo_trabajo_detalle"].elements["numero_paginas_publicacion"].readOnly          = false;
     document.forms["tipo_trabajo_detalle"].elements["select_tamanio_publicacion"].disabled          = false;
@@ -252,7 +250,6 @@ function desactivaCamposTipoTrabajoDetalle() {
     document.forms["tipo_trabajo_detalle"].elements["proporciona_tinta_especial"].disabled          = true;
     document.forms["tipo_trabajo_detalle"].elements["proporciona_barniz"].disabled                  = true;
     document.forms["tipo_trabajo_detalle"].elements["proporciona_placas"].disabled                  = true;
-    document.forms["tipo_trabajo_detalle"].elements["select_tipo_papel_extendido"].disabled         = true;
     document.forms["tipo_trabajo_detalle"].elements["repeticiones_x_pliego"].readOnly               = true;
     document.forms["tipo_trabajo_detalle"].elements["numero_paginas_publicacion"].readOnly          = true;
     document.forms["tipo_trabajo_detalle"].elements["select_tamanio_publicacion"].disabled          = true;

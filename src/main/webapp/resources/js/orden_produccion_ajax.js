@@ -309,6 +309,18 @@ function ajaxAgregaPartida() {
 } // ajaxAgregaPartida()
 
 
+function ajaxBuscaPapelExtendido() {
+	Shadowbox.open({
+        content: urlBuscaTipoPapel,
+        player: 'iframe',
+        width: 1024,     //966
+        height: 800,    //600
+        options: { modal:true,
+                   overlayOpacity: 0.75 }
+    });
+}
+
+
 function ajaxAgregaTipoTrabajoDetalle() {
 
     /*
@@ -327,7 +339,6 @@ function ajaxAgregaTipoTrabajoDetalle() {
     document.forms["tipo_trabajo_detalle"].elements["cliente_proporciona_tinta_especial"].value = document.forms["tipo_trabajo_detalle"].elements["proporciona_tinta_especial"].checked;
     document.forms["tipo_trabajo_detalle"].elements["cliente_proporciona_barniz"].value         = document.forms["tipo_trabajo_detalle"].elements["proporciona_barniz"].checked;
     document.forms["tipo_trabajo_detalle"].elements["cliente_proporciona_placas"].value         = document.forms["tipo_trabajo_detalle"].elements["proporciona_placas"].checked;
-    document.forms["tipo_trabajo_detalle"].elements["id_tipo_papel_extendido"].value            = document.forms["tipo_trabajo_detalle"].elements["select_tipo_papel_extendido"].value;
     document.forms["tipo_trabajo_detalle"].elements["id_tamanio_publicacion"].value             = document.forms["tipo_trabajo_detalle"].elements["select_tamanio_publicacion"].value;
     document.forms["tipo_trabajo_detalle"].elements["frente_id_combinacion_tintas"].value       = document.forms["tipo_trabajo_detalle"].elements["select_frente_combinacion_tintas"].value;
     document.forms["tipo_trabajo_detalle"].elements["frente_id_tipo_barniz"].value              = document.forms["tipo_trabajo_detalle"].elements["select_frente_tipo_barniz"].value;
@@ -343,6 +354,7 @@ function ajaxAgregaTipoTrabajoDetalle() {
     var alto                                = document.forms["tipo_trabajo_detalle"].elements["alto"].value;
     var repeticiones_x_pliego               = document.forms["tipo_trabajo_detalle"].elements["repeticiones_x_pliego"].value;
     var numero_paginas_publicacion          = document.forms["tipo_trabajo_detalle"].elements["numero_paginas_publicacion"].value;
+    var descripcion_tipo_papel_extendido	= document.forms["tipo_trabajo_detalle"].elements["tipo_papel_extendido"].value;
     var frente_id_combinacion_tintas        = document.forms["tipo_trabajo_detalle"].elements["select_frente_combinacion_tintas"].value;
     var frente_num_tinta_especial           = document.forms["tipo_trabajo_detalle"].elements["frente_num_tinta_especial"].value;
     var frente_descripcion_tinta_especial   = document.forms["tipo_trabajo_detalle"].elements["frente_descripcion_tinta_especial"].value;
@@ -389,6 +401,13 @@ function ajaxAgregaTipoTrabajoDetalle() {
         default:
             break;
     } // switch validacion tipo trabajo
+    
+    // valida que existe papel
+    if( descripcion_tipo_papel_extendido == "" ) {
+    	correcto = false;
+    	alert("Favor de especificar el tipo de papel");
+    	document.forms["tipo_trabajo_detalle"].elements["tipo_papel_extendido"].focus();
+    }
     
     // valida que si no hay tinta normal en frente, debe forzosamente haber tinta especial en frente
     if( frente_id_combinacion_tintas == "16" ) {

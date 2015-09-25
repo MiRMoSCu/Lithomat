@@ -142,7 +142,7 @@
                                                                             name="radio_tipo_busqueda"
                                                                             value="1"
                                                                             onclick=""/>
-                                                                    <label for="radio_nut">NUT:</label>
+                                                                    <label for="radio_nut" style="cursor:pointer;">NUT:</label>
                                                                 </td>
                                                                 <td>
                                                                     <input  type="text"
@@ -166,7 +166,7 @@
                                                                             type="radio"
                                                                             name="radio_tipo_busqueda"
                                                                             value="2"/>
-                                                                    <label for="radio_estatus">Estatus:</label>
+                                                                    <label for="radio_estatus" style="cursor:pointer;">Estatus:</label>
                                                                 </td>
                                                                 <td>
                                                                     <select name="id_estatus_orden" tabindex="" onchange="">
@@ -192,7 +192,7 @@
                                                                     type="radio"
                                                                     name="radio_tipo_busqueda"
                                                                     value="3"/>
-                                                            <label for="radio_nombre_op">Nombre OP:</label>
+                                                            <label for="radio_nombre_op" style="cursor:pointer;">Nombre OP:</label>
                                                         </td>
                                                         <td>
                                                             <input  type="text"
@@ -217,7 +217,7 @@
                                                                     type="radio"
                                                                     name="radio_tipo_busqueda"
                                                                     value="4"/>
-                                                            <label for="radio_descripcion_op">Descripci&oacute;n OP:</label>
+                                                            <label for="radio_descripcion_op" style="cursor:pointer;">Descripci&oacute;n OP:</label>
                                                         </td>
                                                         <td>
                                                             <input  type="text"
@@ -243,7 +243,7 @@
                                                                         type="radio"
                                                                         name="radio_tipo_busqueda"
                                                                         value="5"/>
-                                                                <label for="radio_fecha_cotizacion">Fecha:</label>
+                                                                <label for="radio_fecha_cotizacion" style="cursor:pointer;">Fecha:</label>
                                                             </td>
                                                             <td>
                                                                 <table>
@@ -281,7 +281,7 @@
                                                                         type="radio"
                                                                         name="radio_tipo_busqueda"
                                                                         value="6"/>
-                                                                <label for="radio_cliente">Cliente:</label>
+                                                                <label for="radio_cliente" style="cursor:pointer;">Cliente:</label>
                                                             </td>
                                                             <td>
                                                                 <input  type="text"

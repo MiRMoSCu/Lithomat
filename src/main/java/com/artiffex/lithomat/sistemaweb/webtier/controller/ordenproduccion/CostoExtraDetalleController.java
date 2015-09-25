@@ -214,7 +214,7 @@ public class CostoExtraDetalleController {
 	// Metodos para utilizar en CostoExtra al finalizar la orden de produccion
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/ventana", method = RequestMethod.GET)
 	public String costoExtraDetalle(
 			@RequestParam(value = "nut", required = false) String nut,
 			Model model

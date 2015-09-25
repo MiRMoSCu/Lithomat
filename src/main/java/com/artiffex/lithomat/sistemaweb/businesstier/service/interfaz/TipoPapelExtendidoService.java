@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPapelExtendido;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ParametrosBusquedaTipoPapelExtendido;
 
 public interface TipoPapelExtendidoService {
 
@@ -14,6 +15,8 @@ public interface TipoPapelExtendidoService {
 	public void modificaTipoPapelExtendido(TipoPapelExtendido tipoPapelExtendido);
 
 	public List<TipoPapelExtendido> listaTipoPapelExtendido();
+	
+	public String listaHTMLTipoPapelExtendidoPorConsulta(ParametrosBusquedaTipoPapelExtendido parametros);
 
 	public List<ComboSelect> listaComboSelect();
 	

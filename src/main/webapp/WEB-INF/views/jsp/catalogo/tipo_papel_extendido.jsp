@@ -1,7 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form"	uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c"		uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" 	uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:url value="/?opc=catalogos"	               			var="urlMenu"/>
 <c:url value="/tipo_papel_extendido/catalogo/alta" 		var="urlAlta"/>
 <c:url value="/tipo_papel_extendido/catalogo/modifica" 	var="urlModifica"/>
@@ -120,27 +121,29 @@
                                             <div id="div_tabla_tipo_papel_extendido">
                                                 <table id="tabla_tipo_papel_extendido">
                                                     <tr>
-                                                        <th>Identificador</th>
+                                                        <th>Id.</th>
                                                         <th>Proveedor</th>
                                                         <th>Nombre</th>
                                                         <th>Gramaje</th>
                                                         <th>Kilogramos</th>
-                                                        <th>Alto</th>
                                                         <th>Ancho</th>
+                                                        <th>Alto</th>
                                                         <th>Descripci&oacute;n</th>
                                                         <th>Precio</th>
                                                         <th>Unidad</th>
                                                     </tr>
                                                 <c:forEach var="tipoPapelExtendido" items="${listaTipoPapelExtendido}" varStatus="i">
-                                                    <tr class='${i.count%2==0?"l2":"l1"}'
-                                                        onclick="setCampos('${tipoPapelExtendido.idTipoPapelExtendido}', '${tipoPapelExtendido.proveedorPapel.razonSocial}', '${tipoPapelExtendido.nombre}', '${tipoPapelExtendido.gramaje}', '${tipoPapelExtendido.kilogramos}', '${tipoPapelExtendido.alto}', '${tipoPapelExtendido.ancho}', '${tipoPapelExtendido.descripcion}', '${tipoPapelExtendido.precio}', '${tipoPapelExtendido.tipoPrecio.nombre}');">
+													<fmt:formatNumber var="formatAncho" value="${tipoPapelExtendido.ancho}" maxFractionDigits="0" />
+													<fmt:formatNumber var="formatAlto" value="${tipoPapelExtendido.alto}" maxFractionDigits="0" />
+													<tr class='${i.count%2==0?"l2":"l1"}'
+                                                        onclick="setCampos('${tipoPapelExtendido.idTipoPapelExtendido}', '${tipoPapelExtendido.proveedorPapel.razonSocial}', '${tipoPapelExtendido.nombre}', '${tipoPapelExtendido.gramaje}', '${tipoPapelExtendido.kilogramos}', '${formatAncho}', '${formatAlto}', '${tipoPapelExtendido.descripcion}', '${tipoPapelExtendido.precio}', '${tipoPapelExtendido.tipoPrecio.nombre}');">
                                                         <td>${tipoPapelExtendido.idTipoPapelExtendido}</td>
                                                         <td>${tipoPapelExtendido.proveedorPapel.razonSocial}</td>
                                                         <td>${tipoPapelExtendido.nombre}</td>
                                                         <td>${tipoPapelExtendido.gramaje}</td>
                                                         <td>${tipoPapelExtendido.kilogramos}</td>
-                                                        <td>${tipoPapelExtendido.alto}</td>
-                                                        <td>${tipoPapelExtendido.ancho}</td>
+                                                        <td>${formatAncho}</td>
+                                                        <td>${formatAlto}</td>
                                                         <td>${tipoPapelExtendido.descripcion}</td>
                                                         <td>${tipoPapelExtendido.precio}</td>
                                                         <td>${tipoPapelExtendido.tipoPrecio.nombre}</td>
@@ -227,12 +230,12 @@
                                                     </table>
                                                 </div>
                                                 <div class="mitad_columna_derecha">
-                                                    <table>
-                                                    	<tr>
-                                                            <td width="1%">Alto:</td>
+                                                	<table>
+                                                        <tr>
+                                                            <td width="1%">Ancho:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="alto" value=""
-                                                                       tabindex="7"
+                                                                <input type="text" class="input" name="ancho" value=""
+                                                                       tabindex="6"
                                                                        onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"></input>
                                                             </td>
                                                         </tr>
@@ -242,11 +245,11 @@
                                             <div class="columna_derecha">
                                                 <div class="mitad_columna_izquierda">
                                                     <table>
-                                                        <tr>
-                                                            <td width="1%">Ancho:</td>
+                                                    	<tr>
+                                                            <td width="1%">Alto:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="ancho" value=""
-                                                                       tabindex="6"
+                                                                <input type="text" class="input" name="alto" value=""
+                                                                       tabindex="7"
                                                                        onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"></input>
                                                             </td>
                                                         </tr>

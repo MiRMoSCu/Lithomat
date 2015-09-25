@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPapelExtendido;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ParametrosBusquedaTipoPapelExtendido;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.TipoPapelExtendidoDAO;
 import com.artiffex.lithomat.sistemaweb.eistier.hibernate.HibernateUtil;
 
@@ -71,6 +72,21 @@ public class TipoPapelExtendidoDaoImpl implements TipoPapelExtendidoDAO {
 			sesion = HibernateUtil.getInstance().getCurrentSession();
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from TipoPapelExtendido tpe where tpe.activo = true order by tpe.proveedorPapel.idProveedorPapel asc, tpe.nombre asc, tpe.gramaje asc, tpe.kilogramos asc").list();
+			sesion.getTransaction().commit();
+		} catch(Exception e) {
+			log.error(e.getMessage());
+			sesion.getTransaction().rollback();
+		}
+		return lista;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<TipoPapelExtendido> listaPorQuery(String query, ParametrosBusquedaTipoPapelExtendido parametros) {
+		List<TipoPapelExtendido> lista = new ArrayList<TipoPapelExtendido>();
+		try {
+			sesion = HibernateUtil.getInstance().getCurrentSession();
+			sesion.beginTransaction();
+			lista = sesion.createQuery(query).setProperties(parametros).list();
 			sesion.getTransaction().commit();
 		} catch(Exception e) {
 			log.error(e.getMessage());

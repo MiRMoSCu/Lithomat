@@ -14,7 +14,7 @@
 <c:url value="/tipo_trabajo_detalle/actualiza"  			var="urlActualizaTipoTrabajoDetalle"/>
 <c:url value="/pliego/calcula"              				var="urlCalculaPliego"/>
 <c:url value="/pliego/activa_lista"            				var="urlActivaListaPliegos"/>
-<c:url value="/costo_extra_detalle/" 						var="urlCostoExtraDetalle"/>
+<c:url value="/costo_extra_detalle/ventana" 				var="urlCostoExtraDetalle"/>
 <c:url value="/costo_extra_detalle/busca_unidad_medida" 	var="urlBuscaUnidadMedidaCostoExtra"/>
 <c:url value="/costo_extra_detalle/agrega_olvidado" 		var="urlAgregaCostoExtraDetalleOlvidado"/>
 <c:url value="/costo_extra_detalle/actualiza_en_op" 		var="urlActualizaCostoExtraDetalle"/>

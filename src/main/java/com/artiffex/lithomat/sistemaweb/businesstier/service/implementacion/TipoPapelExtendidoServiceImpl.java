@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPapelExtendido;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoPapelExtendidoService;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ParametrosBusquedaTipoPapelExtendido;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.TipoPapelExtendidoDAO;
 
 @Service("tipoPapelExtendidoService")
@@ -44,6 +45,151 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 	public List<TipoPapelExtendido> listaTipoPapelExtendido() {
 		return tipoPapelExtendidoDAO.lista();
 	}
+	
+	public String listaHTMLTipoPapelExtendidoPorConsulta(ParametrosBusquedaTipoPapelExtendido parametros) {
+		
+		StringBuilder query = new StringBuilder();
+		query.append("from TipoPapelExtendido tpe ");
+		query.append("where tpe.activo = true ");
+		if( parametros.isBusquedaPorNombre() )
+			query.append("and tpe.nombre like concat('%', :nombrePapel ,'%') ");
+		if( parametros.isBusquedaPorAncho() )
+			query.append("and tpe.ancho = :ancho ");
+		if( parametros.isBusquedaPorAlto() )
+			query.append("and tpe.alto = :alto ");
+		if( parametros.isBusquedaPorGramaje() )
+			query.append("and tpe.gramaje = :gramaje ");
+		if( parametros.isBusquedaPorKilogramos() )
+			query.append("and tpe.kilogramos = :kilogramos ");
+		if( parametros.isBusquedaPorProveedor() )
+			query.append("and tpe.proveedorPapel.idProveedorPapel = :idProveedorPapel ");
+		query.append("order by tpe.proveedorPapel.idProveedorPapel asc, tpe.nombre asc, tpe.gramaje asc, tpe.kilogramos asc");
+		
+		List<TipoPapelExtendido> lista = tipoPapelExtendidoDAO.listaPorQuery(query.toString(), parametros);
+		
+		query = null;
+		StringBuilder html = new StringBuilder();
+		
+		html.append("<table id=\"tabla_tipo_papel_extendido\">");
+		html.append("<tr>");
+		html.append("<th>Id.</th>");
+		html.append("<th>Proveedor</th>");
+		html.append("<th>Nombre</th>");
+		html.append("<th>Gramaje</th>");
+		html.append("<th>Kilogramos</th>");
+		html.append("<th>Ancho</th>");
+		html.append("<th>Alto</th>");
+		html.append("<th>Precio</th>");
+		html.append("<th>Unidad</th>");
+		html.append("</tr>");
+		
+		
+		int cont = 0;
+		if( lista.size() > 0 ) {
+			for (TipoPapelExtendido tipoPapelExtendido : lista) {
+				html.append("<tr class=\'");
+				if (cont % 2 == 0) {
+					html.append("l1");
+				} else {
+					html.append("l2");
+				}
+				html.append("\' ");
+				html.append("onclick=\'setCamposTipoPapelExtendido("
+						+ "&#39;" + tipoPapelExtendido.getIdTipoPapelExtendido() + "&#39;,"
+						+ "&#39;" + tipoPapelExtendido.getProveedorPapel().getRazonSocial() + "&#39;,"
+						+ "&#39;" + tipoPapelExtendido.getNombre() + "&#39;,"
+						+ "&#39;" + tipoPapelExtendido.getGramaje() + "&#39;,"
+						+ "&#39;" + tipoPapelExtendido.getKilogramos() + "&#39;,"
+						+ "&#39;" + (int)tipoPapelExtendido.getAncho() + "&#39;,"
+						+ "&#39;" + (int)tipoPapelExtendido.getAlto() + "&#39;,"
+						+ "&#39;" + tipoPapelExtendido.getPrecio() + "&#39;"
+						+ ");\'");
+				html.append(">");
+				
+				html.append("<td>");
+				html.append(tipoPapelExtendido.getIdTipoPapelExtendido());
+				html.append("</td>");
+				
+				html.append("<td>");
+				html.append(tipoPapelExtendido.getProveedorPapel().getRazonSocial());
+				html.append("</td>");
+				
+				html.append("<td>");
+				html.append(tipoPapelExtendido.getNombre());
+				html.append("</td>");
+				
+				html.append("<td>");
+				html.append(tipoPapelExtendido.getGramaje());
+				html.append("</td>");
+				
+				html.append("<td>");
+				html.append(tipoPapelExtendido.getKilogramos());
+				html.append("</td>");
+				
+				html.append("<td>");
+				html.append((int)tipoPapelExtendido.getAncho());
+				html.append("</td>");
+				
+				html.append("<td>");
+				html.append((int)tipoPapelExtendido.getAlto());
+				html.append("</td>");
+				
+				html.append("<td>");
+				html.append(tipoPapelExtendido.getPrecio());
+				html.append("</td>");
+				
+				html.append("<td>");
+				html.append(tipoPapelExtendido.getTipoPrecio().getNombre());
+				html.append("</td>");
+				
+				cont++;
+				tipoPapelExtendido = null;
+			}
+		} else {
+			html.append("<tr class=\'");
+			html.append("l1");
+			html.append("\'>");
+			// id
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+			// proveedor
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+			// nombre
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+			// gramaje
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+			// kilogramos
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+			// ancho
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+			// alto
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+			// precio
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+			// unidad
+			html.append("<td>");
+			html.append("&nbsp;");
+			html.append("</td>");
+		}
+		html.append("</table");
+		
+		return html.toString();
+	}
 
 	public List<ComboSelect> listaComboSelect() {
 		List<ComboSelect> listaComboSelect = new ArrayList<ComboSelect>();
@@ -56,10 +202,10 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 			sb.append(" ");
 			sb.append(tipoPapelExtendido.getGramaje());
 			sb.append(" gr. ");
-			sb.append(tipoPapelExtendido.getAlto());
+			sb.append((int)tipoPapelExtendido.getAncho());
 			sb.append(" x ");
-			sb.append(tipoPapelExtendido.getAncho());
-			sb.append("  cm. (");
+			sb.append((int)tipoPapelExtendido.getAlto());
+			sb.append(" cm. (");
 			sb.append(tipoPapelExtendido.getKilogramos());
 			sb.append(" kg.) ($");
 			sb.append(tipoPapelExtendido.getPrecio());
@@ -111,13 +257,13 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 	        cell_kilogramos.setCellValue("KILOGRAMOS");
 	        cell_kilogramos.setCellStyle(cellStyle_centro);
 	        	// celda F (5)
-	        HSSFCell cell_alto = row.createCell(5);
-	        cell_alto.setCellValue("ALTO");
-	        cell_alto.setCellStyle(cellStyle_centro);
-	        	// celda G (6)
-	        HSSFCell cell_ancho = row.createCell(6);
+	        HSSFCell cell_ancho = row.createCell(5);
 	        cell_ancho.setCellValue("ANCHO");
 	        cell_ancho.setCellStyle(cellStyle_centro);
+	        	// celda G (6)
+	        HSSFCell cell_alto = row.createCell(6);
+	        cell_alto.setCellValue("ALTO");
+	        cell_alto.setCellStyle(cellStyle_centro);
 	        	// celda H (7)
 	        HSSFCell cell_precio = row.createCell(7);
 	        cell_precio.setCellValue("PRECIO");
@@ -138,8 +284,8 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 				row.createCell(2).setCellValue( tipoPapelExtendido.getNombre() );
 				row.createCell(3).setCellValue( tipoPapelExtendido.getGramaje() );
 				row.createCell(4).setCellValue( tipoPapelExtendido.getKilogramos() );
-				row.createCell(5).setCellValue( tipoPapelExtendido.getAlto() );
-				row.createCell(6).setCellValue( tipoPapelExtendido.getAncho() );
+				row.createCell(5).setCellValue( tipoPapelExtendido.getAncho() );
+				row.createCell(6).setCellValue( tipoPapelExtendido.getAlto() );
 				row.createCell(7).setCellValue( tipoPapelExtendido.getPrecio() );
 				row.createCell(8).setCellValue( tipoPapelExtendido.getTipoPrecio().getNombre() );
 				cont++;

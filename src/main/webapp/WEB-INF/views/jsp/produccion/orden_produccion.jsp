@@ -10,6 +10,7 @@
 <c:url value="/partida/agrega"              				var="urlAgregaPartida"/>
 <c:url value="/partida/busca"               				var="urlBuscaPartida"/>
 <c:url value="/tipo_placa/busca"            				var="urlBuscaTipoPlaca"/>
+<c:url value="/tipo_papel_extendido/ventana/lista"          var="urlBuscaTipoPapel"/>
 <c:url value="/tipo_trabajo_detalle/agrega" 				var="urlAgregaTipoTrabajoDetalle"/>
 <c:url value="/tipo_trabajo_detalle/elimina"    			var="urlEliminaDetallePartida"/>
 <c:url value="/tipo_trabajo_detalle/busca"  				var="urlBuscaTipoTrabajoDetalle"/>
@@ -60,6 +61,7 @@
             var urlAgregaPartida            	= "${urlAgregaPartida}";
             var urlBuscaPartida             	= "${urlBuscaPartida}";
             var urlBuscaTipoPlaca           	= "${urlBuscaTipoPlaca}";
+            var urlBuscaTipoPapel				= "${urlBuscaTipoPapel}";
             var urlAgregaTipoTrabajoDetalle 	= "${urlAgregaTipoTrabajoDetalle}";
             var urlEliminaDetallePartida    	= "${urlEliminaDetallePartida}";
             var urlBuscaTipoTrabajoDetalle  	= "${urlBuscaTipoTrabajoDetalle}";
@@ -1177,13 +1179,20 @@
                                                         <tr>
                                                             <td width="18%">Tipo Papel:</td>
                                                             <td>
+                                                            	<input  type="text"
+                                                            			class="input"
+                                                            			name="tipo_papel_extendido"
+                                                            			value=""
+                                                            			readonly/>
+                                                            	<!-- 
                                                                 <select name="select_tipo_papel_extendido" 
                                                                         tabindex="24"
                                                                         onchange="javascrip:obtieneDatosPapel(this.value)">
-                                                                    <c:forEach var="tpe" items="${listaTipoPapelExtendido}">
-                                                                        <option value="${tpe.value}">${tpe.text}</option>
-                                                                    </c:forEach>
                                                                 </select>
+                                                                -->
+                                                            </td>
+                                                            <td>
+                                                            	<img id="imgBtnBuscaPapelExtendido" alt="" style="cursor:pointer;" onclick="ajaxBuscaPapelExtendido()" src="<c:url value="/resources/image/lupa.png"/>"/>
                                                             </td>
                                                         </tr>
                                                     </table>

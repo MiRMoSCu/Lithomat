@@ -898,10 +898,10 @@ public class CalificacionServiceImpl implements CalificacionService {
 					sb.append(" ");
 					sb.append(tipoTrabajoDetalle.getTipoPapelExtendido().getGramaje());
 					sb.append(" gr. ");
-					sb.append(tipoTrabajoDetalle.getTipoPapelExtendido().getAlto());
+					sb.append((int)tipoTrabajoDetalle.getTipoPapelExtendido().getAncho());
 					sb.append(" x ");
-					sb.append(tipoTrabajoDetalle.getTipoPapelExtendido().getAncho());
-					sb.append("  cm. (");
+					sb.append((int)tipoTrabajoDetalle.getTipoPapelExtendido().getAlto());
+					sb.append(" cm. (");
 					sb.append(tipoTrabajoDetalle.getTipoPapelExtendido().getKilogramos());
 					sb.append(" kg.)");
 				calificacionTrabajoDetalle.setPapelDescripcion(sb.toString());

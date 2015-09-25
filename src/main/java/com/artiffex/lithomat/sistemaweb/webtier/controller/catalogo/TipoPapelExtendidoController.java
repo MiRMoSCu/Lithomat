@@ -25,7 +25,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.JsonResponse;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.ProveedorPapel;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPapelExtendido;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPrecio;
@@ -33,6 +35,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.ProveedorP
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoPapelExtendidoService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoPrecioService;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ParametrosBusquedaTipoPapelExtendido;
 
 @Controller
 @RequestMapping("/tipo_papel_extendido")
@@ -46,13 +49,74 @@ public class TipoPapelExtendidoController {
 	private ProveedorPapelService proveedorPapelService;
 	@Resource
 	private TipoPrecioService tipoPrecioService;
+	
 
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
+	@RequestMapping(value = "/ventana/lista", method = RequestMethod.GET)
+	public String ventanaBusquedaPapelExtendido(
+			Model model
+		)  throws IOException {
+		log.info("/ventana_busqueda_tipo_papel_extendido");
+		
+		List<ComboSelect> listaProveedorPapel = proveedorPapelService.listaComboSelect();
+		model.addAttribute("listaProveedorPapel", listaProveedorPapel);
+		listaProveedorPapel = null;
+		
+		return "catalogo/tipo_papel_extendido_busqueda";
+	}
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
+	@RequestMapping(value = "/ventana/busca", method = RequestMethod.POST)
+	@ResponseBody
+	public JsonResponse buscaTipoPapelExtendido(
+			@RequestParam(value = "busqueda_por_nombre",		required = false) boolean busquedaPorNombre,
+			@RequestParam(value = "busqueda_por_ancho",			required = false) boolean busquedaPorAncho,
+			@RequestParam(value = "busqueda_por_alto", 			required = false) boolean busquedaPorAlto,
+			@RequestParam(value = "busqueda_por_gramaje", 		required = false) boolean busquedaPorGramaje,
+			@RequestParam(value = "busqueda_por_kilogramos",	required = false) boolean busquedaPorKilogramos,
+			@RequestParam(value = "busqueda_por_proveedor", 	required = false) boolean busquedaPorProveedor,
+			@RequestParam(value = "nombre", 					required = false) String nombrePapel,
+			@RequestParam(value = "ancho", 						required = false) Float ancho,
+			@RequestParam(value = "alto", 						required = false) Float alto,
+			@RequestParam(value = "gramaje", 					required = false) Integer gramaje,
+			@RequestParam(value = "kilogramos", 				required = false) Float kilogramos,
+			@RequestParam(value = "id_proveedor_papel", 		required = false) Integer idProveedorPapel
+		) {
+		log.info("entraste a ventana/busca");
+		
+		ParametrosBusquedaTipoPapelExtendido parametros = new ParametrosBusquedaTipoPapelExtendido();
+		parametros.setBusquedaPorNombre(busquedaPorNombre);
+		parametros.setBusquedaPorAncho(busquedaPorAncho);
+		parametros.setBusquedaPorAlto(busquedaPorAlto);
+		parametros.setBusquedaPorGramaje(busquedaPorGramaje);
+		parametros.setBusquedaPorKilogramos(busquedaPorKilogramos);
+		parametros.setBusquedaPorProveedor(busquedaPorProveedor);
+		parametros.setNombrePapel(nombrePapel);
+		parametros.setAncho(ancho);
+		parametros.setAlto(alto);
+		parametros.setGramaje(gramaje);
+		parametros.setKilogramos(kilogramos);
+		parametros.setIdProveedorPapel(idProveedorPapel);
+		
+		String html = tipoPapelExtendidoService.listaHTMLTipoPapelExtendidoPorConsulta(parametros);
+		
+		JsonResponse jsonResponse = new JsonResponse();
+		jsonResponse.setEstatusOperacion(1);
+		jsonResponse.setTextoHTML(html);
+				
+		parametros 	= null;
+		html 		= null;
+		
+		return jsonResponse;
+	}
+	
+	
+	/* funciones utilizadas para el CATALOGO */
+	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/catalogo/lista", method = RequestMethod.POST)
 	public String listaTipoPapelExtendido( Locale locale, Model model ) throws IOException {
 		log.info("/lista_tipo_papel_extendido");
-
-		System.out.println("lista tipo papel extendido");
 
 		List<TipoPapelExtendido> listaTipoPapelExtendido = tipoPapelExtendidoService.listaTipoPapelExtendido();
 		List<ComboSelect> listaProveedorPapel = proveedorPapelService.listaComboSelect();
