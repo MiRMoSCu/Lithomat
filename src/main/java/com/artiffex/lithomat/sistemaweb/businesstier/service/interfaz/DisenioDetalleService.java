@@ -2,6 +2,7 @@ package com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz;
 
 import java.util.List;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.DisenioDetalleDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.DisenioDetalle;
 
 public interface DisenioDetalleService {
@@ -9,12 +10,14 @@ public interface DisenioDetalleService {
 	public int creaDisenioDetalle(DisenioDetalle disenioDetalle);
 	
 	public DisenioDetalle buscaDisenioDetalle(int idDisenioDetalle);
-
+	
 	public void modificaDisenioDetalle(DisenioDetalle disenioDetalle);
 	
 	public List<DisenioDetalle> listaDisenioDetalle();
 	
 	public List<DisenioDetalle> listaDisenioDetallePorDisenio(int idDisenio);
+	
+	public List<DisenioDetalleDTO> listaDisenioDetallePorDisenioEnDTO(int idDisenio);
 
 	public String listaHTML(int idDisenio);
 	

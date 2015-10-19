@@ -1,12 +1,14 @@
 package com.artiffex.lithomat.sistemaweb.businesstier.service.implementacion;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.PreprensaDetalleDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Preprensa;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.PreprensaDetalle;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PreprensaDetalleService;
@@ -40,6 +42,22 @@ public class PreprensaDetalleServiceImpl implements PreprensaDetalleService {
 	
 	public List<PreprensaDetalle> listaPreprensaDetallePorPreprensa(int idPreprensa) {
 		return preprensaDetalleDAO.listaPorPreprensa(idPreprensa);
+	}
+	
+	public List<PreprensaDetalleDTO> listaPreprensaDetallePorPreprensaEnDTO(int idPreprensa) {
+		List<PreprensaDetalleDTO> listaPreprensaDetalleDTO = new ArrayList<PreprensaDetalleDTO>();
+		List<PreprensaDetalle> listaPreprensaDetalle = preprensaDetalleDAO.listaPorPreprensa(idPreprensa);
+		for (PreprensaDetalle preprensaDetalle : listaPreprensaDetalle) {
+			PreprensaDetalleDTO preprensaDetalleDTO = new PreprensaDetalleDTO();
+			preprensaDetalleDTO.setNombreProcesoPreprensa(preprensaDetalle.getProcesoPreprensa().getNombreProceso());
+			preprensaDetalleDTO.setCantidad(preprensaDetalle.getCantidad());
+			preprensaDetalleDTO.setEspecificaciones(preprensaDetalle.getEspecificaciones());
+			listaPreprensaDetalleDTO.add(preprensaDetalleDTO);
+			preprensaDetalleDTO	= null;
+			preprensaDetalle 	= null;
+		}
+		listaPreprensaDetalle = null;
+		return listaPreprensaDetalleDTO;
 	}
 	
 	public String listaHTML(int idPreprensa) {
@@ -348,5 +366,7 @@ public class PreprensaDetalleServiceImpl implements PreprensaDetalleService {
 		
 		return html.toString();
 	}
+
+	
 
 }

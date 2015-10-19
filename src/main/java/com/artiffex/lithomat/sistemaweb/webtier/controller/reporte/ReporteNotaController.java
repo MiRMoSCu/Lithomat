@@ -49,10 +49,10 @@ import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.OrdenTrabajo;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.Remision;
 
 @Controller
-@RequestMapping("/nota")
-public class NotaController {
+@RequestMapping("/reporte")
+public class ReporteNotaController {
 	
-	private static final Logger log = Logger.getLogger(NotaController.class);
+	private static final Logger log = Logger.getLogger(ReporteNotaController.class);
 	
 	// cuando se corre en una aplicacion java
 	//public static final String DIRECTORIO_ORIGEN = "WebContent/resources/jasper/"; 
@@ -91,7 +91,7 @@ public class NotaController {
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/cotizacion", method = RequestMethod.POST)
-	public void exportaReportePDF(
+	public void reporteCotizacion(
 			@RequestParam(value = "nut", 					required = false) String nut,
 			@RequestParam(value = "condiciones_produccion", required = false) String condicionesProduccion,
 			@RequestParam(value = "id_tipo_formato",		required = false) Integer idTipoFormato,
@@ -225,8 +225,8 @@ public class NotaController {
 	
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
-	@RequestMapping(value = "/remision", method = RequestMethod.POST)
-	public void exportaReporteRemision(
+	@RequestMapping(value = "/nota_remision", method = RequestMethod.POST)
+	public void reporteNotaRemision(
 			@RequestParam(value = "nut", 				required = false) String nut,
 			@RequestParam(value = "id_tipo_formato",	required = false) Integer idTipoFormato,
 			HttpServletRequest request,
@@ -316,8 +316,8 @@ public class NotaController {
 
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
-	@RequestMapping(value = "/factura", method = RequestMethod.POST)
-	public void exportaReporteFactura(
+	@RequestMapping(value = "/nota_factura", method = RequestMethod.POST)
+	public void reporteNotaFactura(
 			@RequestParam(value = "nut", 				required = false) String nut,
 			@RequestParam(value = "id_tipo_formato",	required = false) Integer idTipoFormato,
 			HttpServletRequest request,
@@ -408,7 +408,7 @@ public class NotaController {
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/orden_trabajo", method = RequestMethod.POST)
-	public void exportaOrdenTrabajo(
+	public void reporteOrdenTrabajo(
 				@RequestParam(value = "nut", 				required = false) String nut,
 				@RequestParam(value = "id_tipo_formato",	required = false) Integer idTipoFormato,
 				HttpServletRequest request,
@@ -422,9 +422,18 @@ public class NotaController {
 		// PARAMETROS
 		String path = request.getSession().getServletContext().getRealPath("/");
 		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
-		parameterMap.put("SUBREPORT_PARTIDA",path + DIRECTORIO_ORIGEN + "OrdenTrabajoPartida.jasper");
-		parameterMap.put("SUBREPORT_TIPO_TRABAJO_DETALLE",path + DIRECTORIO_ORIGEN + "OrdenTrabajoTipoTrabajoDetalle.jasper");
-		parameterMap.put("SUBREPORT_PLIEGO",path + DIRECTORIO_ORIGEN + "OrdenTrabajoPliego.jasper");
+		parameterMap.put("SUBREPORT_PARTIDA",				path + DIRECTORIO_ORIGEN + "OrdenTrabajoPartida.jasper");
+		parameterMap.put("SUBREPORT_DISENIO",				path + DIRECTORIO_ORIGEN + "OrdenTrabajoDisenio.jasper");
+		parameterMap.put("SUBREPORT_DISENIO_DETALLE",		path + DIRECTORIO_ORIGEN + "OrdenTrabajoDisenioDetalle.jasper");
+		parameterMap.put("SUBREPORT_PREPRENSA",				path + DIRECTORIO_ORIGEN + "OrdenTrabajoPreprensa.jasper");
+		parameterMap.put("SUBREPORT_PREPRENSA_DETALLE",		path + DIRECTORIO_ORIGEN + "OrdenTrabajoPreprensaDetalle.jasper");
+		parameterMap.put("SUBREPORT_TRANSPORTE",			path + DIRECTORIO_ORIGEN + "OrdenTrabajoTransporte.jasper");
+		parameterMap.put("SUBREPORT_TRANSPORTE_DETALLE",	path + DIRECTORIO_ORIGEN + "OrdenTrabajoTransporteDetalle.jasper");
+		parameterMap.put("SUBREPORT_ACABADO",				path + DIRECTORIO_ORIGEN + "OrdenTrabajoAcabado.jasper");
+		parameterMap.put("SUBREPORT_ACABADO_DETALLE",		path + DIRECTORIO_ORIGEN + "OrdenTrabajoAcabadoDetalle.jasper");
+		parameterMap.put("SUBREPORT_OFFSET",				path + DIRECTORIO_ORIGEN + "OrdenTrabajoOffset.jasper");
+		parameterMap.put("SUBREPORT_TIPO_TRABAJO_DETALLE",	path + DIRECTORIO_ORIGEN + "OrdenTrabajoTipoTrabajoDetalle.jasper");
+		parameterMap.put("SUBREPORT_PLIEGO",				path + DIRECTORIO_ORIGEN + "OrdenTrabajoPliego.jasper");
 		
 		try {
 			OutputStream outputStream 				= response.getOutputStream();

@@ -2,6 +2,7 @@ package com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz;
 
 import java.util.List;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.AcabadoDetalleDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.AcabadoDetalle;
 
 public interface AcabadoDetalleService {
@@ -15,6 +16,8 @@ public interface AcabadoDetalleService {
 	public List<AcabadoDetalle> listaAcabadoDetalle();
 	
 	public List<AcabadoDetalle> listaAcabadoDetallePorAcabado(int idAcabado);
+	
+	public List<AcabadoDetalleDTO> listaAcabadoDetallePorAcabadoEnDTO(int idAcabado);
 	
 	public String listaHTML(int idAcabado);
 	

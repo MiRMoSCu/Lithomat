@@ -25,6 +25,10 @@ public class OffsetServiceImpl implements OffsetService {
 		return offsetDAO.busca(idOffset);
 	}
 	
+	public Offset buscaOffsetPorPartida(int idPartida) {
+		return offsetDAO.buscaPorPartida(idPartida);
+	}
+	
 	public OffsetDTO buscaOffsetPorPartidaEnDTO(int idPartida) {
 		Offset offset = offsetDAO.buscaPorPartida(idPartida);
 		OffsetDTO offsetDTO = new OffsetDTO();
@@ -43,5 +47,4 @@ public class OffsetServiceImpl implements OffsetService {
 	public List<Offset> listaOffset() {
 		return offsetDAO.lista();
 	}
-	
 }

@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:url value="/nota/orden_trabajo"	var="urlExportaReporteOrdenTrabajo"/>
-<c:url value="/nota/cotizacion"		var="urlExportaReporteCotizacion"/>
-<c:url value="/nota/remision"		var="urlExportaReporteRemision"/>
-<c:url value="/nota/factura"		var="urlExportaReporteFactura"/>
+<c:url value="/reporte/orden_trabajo"	var="urlExportaReporteOrdenTrabajo"/>
+<c:url value="/reporte/cotizacion"		var="urlExportaReporteCotizacion"/>
+<c:url value="/reporte/nota_remision"	var="urlExportaReporteRemision"/>
+<c:url value="/reporte/nota_factura"	var="urlExportaReporteFactura"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>

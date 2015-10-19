@@ -1,6 +1,7 @@
 package com.artiffex.lithomat.sistemaweb.businesstier.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class AcabadoDTO implements Serializable {
 
@@ -10,6 +11,7 @@ public class AcabadoDTO implements Serializable {
 	private String indicacionTareaRealizar;
 	private String materialesRecibe;
 	private String observaciones;
+	private List<AcabadoDetalleDTO> listaAcabadoDetalleDTO;
 	
 	
 	public int getIdAcabado() {
@@ -36,5 +38,11 @@ public class AcabadoDTO implements Serializable {
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
-	
+	public List<AcabadoDetalleDTO> getListaAcabadoDetalleDTO() {
+		return listaAcabadoDetalleDTO;
+	}
+	public void setListaAcabadoDetalleDTO(
+			List<AcabadoDetalleDTO> listaAcabadoDetalleDTO) {
+		this.listaAcabadoDetalleDTO = listaAcabadoDetalleDTO;
+	}
 }

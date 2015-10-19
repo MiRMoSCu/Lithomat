@@ -1,12 +1,14 @@
 package com.artiffex.lithomat.sistemaweb.businesstier.service.implementacion;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.AcabadoDetalleDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Acabado;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.AcabadoDetalle;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.AcabadoDetalleService;
@@ -40,6 +42,23 @@ public class AcabadoDetalleServiceImpl implements AcabadoDetalleService {
 	
 	public List<AcabadoDetalle> listaAcabadoDetallePorAcabado(int idAcabado) {
 		return acabadoDetalleDAO.listaPorAcabado(idAcabado);
+	}
+	
+	public List<AcabadoDetalleDTO> listaAcabadoDetallePorAcabadoEnDTO(int idAcabado) {
+		List<AcabadoDetalleDTO> listaAcabadoDetalleDTO = new ArrayList<AcabadoDetalleDTO>();
+		List<AcabadoDetalle> listaAcabadoDetalle = acabadoDetalleDAO.listaPorAcabado(idAcabado);
+		for (AcabadoDetalle acabadoDetalle : listaAcabadoDetalle) {
+			AcabadoDetalleDTO acabadoDetalleDTO = new AcabadoDetalleDTO();
+			acabadoDetalleDTO.setNombreProcesoAcabado(acabadoDetalle.getProcesoExterno().getNombreProceso());
+			acabadoDetalleDTO.setNombreProveedor(acabadoDetalle.getProcesoExterno().getProveedorExterno().getRazonSocial());
+			acabadoDetalleDTO.setCantidad(acabadoDetalle.getCantidadProcesoExterno());
+			acabadoDetalleDTO.setEspecificaciones(acabadoDetalle.getEspecificaciones());
+			listaAcabadoDetalleDTO.add(acabadoDetalleDTO);
+			acabadoDetalleDTO 	= null;
+			acabadoDetalle 		= null;
+		}
+		listaAcabadoDetalle = null;
+		return listaAcabadoDetalleDTO;
 	}
 
 	public String listaHTML(int idAcabado) {
@@ -351,5 +370,4 @@ public class AcabadoDetalleServiceImpl implements AcabadoDetalleService {
 		listaAcabadoDetalle = null;
 		return html.toString();
 	}
-
 }

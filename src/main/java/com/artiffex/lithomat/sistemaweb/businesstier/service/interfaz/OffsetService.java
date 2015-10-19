@@ -11,6 +11,8 @@ public interface OffsetService {
 	
 	public Offset buscaOffset(int idOffset);
 	
+	public Offset buscaOffsetPorPartida(int idPartida);
+	
 	public OffsetDTO buscaOffsetPorPartidaEnDTO(int idPartida);
 
 	public void modificaOffset(Offset offset);

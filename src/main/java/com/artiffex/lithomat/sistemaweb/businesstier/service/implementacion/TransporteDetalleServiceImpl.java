@@ -1,12 +1,14 @@
 package com.artiffex.lithomat.sistemaweb.businesstier.service.implementacion;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.TransporteDetalleDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Transporte;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TransporteDetalle;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TransporteDetalleService;
@@ -40,6 +42,22 @@ public class TransporteDetalleServiceImpl implements TransporteDetalleService {
 	
 	public List<TransporteDetalle> listaTransporteDetallePorTransporte(int idTransporte) {
 		return transporteDetalleDAO.listaPorTransporte(idTransporte);
+	}
+	
+	public List<TransporteDetalleDTO> listaTransporteDetallePorTransporteEnDTO(int idTransporte) {
+		List<TransporteDetalleDTO> listaTransporteDetalleDTO = new ArrayList<TransporteDetalleDTO>();
+		List<TransporteDetalle> listaTransporteDetalle = transporteDetalleDAO.listaPorTransporte(idTransporte);
+		for (TransporteDetalle transporteDetalle : listaTransporteDetalle) {
+			TransporteDetalleDTO transporteDetalleDTO = new TransporteDetalleDTO();
+			transporteDetalleDTO.setNombreProcesoTransporte(transporteDetalle.getProcesoTransporte().getNombreProceso());
+			transporteDetalleDTO.setCantidad(transporteDetalle.getCantidad());
+			transporteDetalleDTO.setEspecificaciones(transporteDetalle.getEspecificaciones());
+			listaTransporteDetalleDTO.add(transporteDetalleDTO);
+			transporteDetalleDTO 	= null;
+			transporteDetalle 		= null;
+		}
+		listaTransporteDetalle = null;
+		return listaTransporteDetalleDTO;
 	}
 
 	public String listaHTML(int idTransporte) {
@@ -350,5 +368,4 @@ public class TransporteDetalleServiceImpl implements TransporteDetalleService {
 		listaTransporteDetalle = null;
 		return html.toString();
 	}
-
 }

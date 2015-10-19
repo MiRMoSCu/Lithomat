@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
+<!-- 2015-10-19T14:01:07 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdenTrabajoDisenio" pageWidth="570" pageHeight="185" columnWidth="570" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e9a0b461-b3b4-4723-bb1a-3c6d12992121">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<parameter name="SUBREPORT_TRANSPORTE_DETALLE" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="indicacionTareaRealizar" class="java.lang.String"/>
+	<field name="materialesRecibe" class="java.lang.String"/>
+	<field name="observaciones" class="java.lang.String"/>
+	<field name="listaTransporteDetalleDTO" class="java.util.List"/>
+	<detail>
+		<band height="115" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<printWhenExpression><![CDATA[!$F{indicacionTareaRealizar}.equals("") 
+&& !$F{materialesRecibe}.equals("")
+&& !$F{observaciones}.equals("")]]></printWhenExpression>
+			<staticText>
+				<reportElement x="15" y="25" width="125" height="15" uuid="324ecad4-3130-4884-b10f-35be0480f038">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Indicación tarea realizar:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="145" y="25" width="414" height="30" uuid="b22ec0f5-a67a-4163-975e-7d2e2b98991f">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{indicacionTareaRealizar}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="55" width="125" height="15" uuid="ae6ef82f-74d6-47ff-a5f0-20390f208a5b">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Materiales que recibe:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="145" y="55" width="414" height="30" uuid="17aed8ff-2d47-4875-bb24-5443e2f593e4">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{materialesRecibe}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="85" width="125" height="15" uuid="9f79e5e1-233c-4e7e-a1dd-6699e596d9a6"/>
+				<text><![CDATA[Observaciones:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="145" y="85" width="414" height="30" uuid="aaabab84-3a60-4991-94f3-e9e7a8a7ea31">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{observaciones}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="3" width="85" height="20" uuid="d0b5fe1a-523a-4c97-8ec8-5522ba819f49">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Transporte]]></text>
+			</staticText>
+			<line>
+				<reportElement x="213" y="1" width="155" height="1" uuid="e2609896-8c00-442d-83be-92b71616d97c"/>
+			</line>
+		</band>
+		<band height="55">
+			<subreport>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="5" y="0" width="560" height="55" isRemoveLineWhenBlank="true" uuid="c5e8b38c-2f87-4f0b-b30e-90ecde6b1033">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaTransporteDetalleDTO})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_TRANSPORTE_DETALLE}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

@@ -2,6 +2,7 @@ package com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz;
 
 import java.util.List;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.TransporteDetalleDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TransporteDetalle;
 
 public interface TransporteDetalleService {
@@ -15,6 +16,8 @@ public interface TransporteDetalleService {
 	public List<TransporteDetalle> listaTransporteDetalle();
 	
 	public List<TransporteDetalle> listaTransporteDetallePorTransporte(int idTransporte);
+	
+	public List<TransporteDetalleDTO> listaTransporteDetallePorTransporteEnDTO(int idTransporte);
 	
 	public String listaHTML(int idTransporte);
 	

@@ -14,30 +14,38 @@ import org.springframework.stereotype.Service;
 
 import com.artiffex.lithomat.sistemaweb.ayuda.CalificacionTrabajoDetalleDTOAyuda;
 import com.artiffex.lithomat.sistemaweb.ayuda.OrdenProduccionDTOAyuda;
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.AcabadoDTO;
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.AcabadoDetalleDTO;
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.DisenioDTO;
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.DisenioDetalleDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.OffsetDTO;
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.PreprensaDTO;
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.PreprensaDetalleDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.ReporteCotizacionDTO;
-import com.artiffex.lithomat.sistemaweb.businesstier.entity.Acabado;
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.TransporteDTO;
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.TransporteDetalleDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionOrdenProduccion;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionProcesosPartida;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionTrabajoDetalle;
-import com.artiffex.lithomat.sistemaweb.businesstier.entity.Disenio;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.OrdenProduccion;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Partida;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Pliego;
-import com.artiffex.lithomat.sistemaweb.businesstier.entity.Preprensa;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajoDetalle;
-import com.artiffex.lithomat.sistemaweb.businesstier.entity.Transporte;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.AcabadoDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.AcabadoService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CalificacionService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.DisenioDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.DisenioService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.OffsetService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.OrdenProduccionService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PartidaService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PliegoService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PreprensaDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PreprensaService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TabuladorPreciosService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TintaEspecialService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoTrabajoDetalleService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TransporteDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TransporteService;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.OrdenTrabajo;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.OrdenTrabajoPartida;
@@ -77,11 +85,19 @@ public class CalificacionServiceImpl implements CalificacionService {
 	@Resource
 	private DisenioService disenioService;
 	@Resource
+	private DisenioDetalleService disenioDetalleService;
+	@Resource
 	private PreprensaService preprensaService;
+	@Resource
+	private PreprensaDetalleService preprensaDetalleService;
 	@Resource
 	private TransporteService transporteService;
 	@Resource
+	private TransporteDetalleService transporteDetalleService;
+	@Resource
 	private AcabadoService acabadoService;
+	@Resource
+	private AcabadoDetalleService acabadoDetalleService;
 	@Resource
 	private OffsetService offsetService;
 	@Resource
@@ -1063,24 +1079,59 @@ public class CalificacionServiceImpl implements CalificacionService {
 			otp.setObservacionesGenerales(partida.getObservacionesGenerales());
 			otp.setObservacionesAprobacion(partida.getObservacionesAprobacion());
 			
-			Disenio disenio = disenioService.buscaDisenioPorPartida(partida.getIdPartida());
-			Preprensa preprensa = preprensaService.buscaPreprensaPorPartida(partida.getIdPartida());
-			Transporte transporte = transporteService.buscaTransportePorPartida(partida.getIdPartida());
-			Acabado acabado = acabadoService.buscaAcabadoPorPartida(partida.getIdPartida());
-			OffsetDTO offset = offsetService.buscaOffsetPorPartidaEnDTO(partida.getIdPartida());
+			// informacion del area DISENIO
+			List<DisenioDTO> listaDisenioDTO = new ArrayList<DisenioDTO>();
+			DisenioDTO disenioDTO = disenioService.buscaDisenioPorPartidaEnDTO(partida.getIdPartida());
+			List<DisenioDetalleDTO> listaDisenioDetalleDTO = disenioDetalleService.listaDisenioDetallePorDisenioEnDTO(disenioDTO.getIdDisenio());
+			disenioDTO.setListaDisenioDetalleDTO(listaDisenioDetalleDTO);
+			listaDisenioDTO.add(disenioDTO);
+			otp.setListaDisenioDTO(listaDisenioDTO);
+			listaDisenioDetalleDTO 	= null;
+			disenioDTO 				= null;
+			listaDisenioDTO 		= null;
 			
-			otp.setIndicacionesDisenio(disenio.getIndicacionTareaRealizar()==null?"":disenio.getIndicacionTareaRealizar());
-			otp.setIndicacionesPreprensa(preprensa.getIndicacionTareaRealizar()==null?"":preprensa.getIndicacionTareaRealizar());
-			otp.setIndicacionesTransporte(transporte.getIndicacionTareaRealizar()==null?"":transporte.getIndicacionTareaRealizar());
-			otp.setIndicacionesAcabado(acabado.getIndicacionTareaRealizar()==null?"":acabado.getIndicacionTareaRealizar());
-			otp.setIndicacionesOffset(offset.getIndicacionTareaRealizar()==null?"":offset.getIndicacionTareaRealizar());
+			// informacion del area PREPRENSA
+			List<PreprensaDTO> listaPreprensaDTO = new ArrayList<PreprensaDTO>();
+			PreprensaDTO preprensaDTO = preprensaService.buscaPreprensaPorPartidaEnDTO(partida.getIdPartida());
+			List<PreprensaDetalleDTO> listaPreprensaDetalleDTO = preprensaDetalleService.listaPreprensaDetallePorPreprensaEnDTO(preprensaDTO.getIdPreprensa());
+			preprensaDTO.setListaPreprensaDetalleDTO(listaPreprensaDetalleDTO);
+			listaPreprensaDTO.add(preprensaDTO);
+			otp.setListaPreprensaDTO(listaPreprensaDTO);
+			listaPreprensaDetalleDTO 	= null;
+			preprensaDTO 				= null;
+			listaPreprensaDTO 			= null;
 			
-			disenio 	= null;
-			preprensa 	= null;
-			transporte 	= null;
-			acabado 	= null;
-			offset 		= null;
+			// informacion del area TRANSPORTE
+			List<TransporteDTO> listaTransporteDTO = new ArrayList<TransporteDTO>();
+			TransporteDTO transporteDTO = transporteService.buscaTransportePorPartidaEnDTO(partida.getIdPartida());
+			List<TransporteDetalleDTO> listaTransporteDetalleDTO = transporteDetalleService.listaTransporteDetallePorTransporteEnDTO(transporteDTO.getIdTransporte());
+			transporteDTO.setListaTransporteDetalleDTO(listaTransporteDetalleDTO);
+			listaTransporteDTO.add(transporteDTO);
+			otp.setListaTransporteDTO(listaTransporteDTO);
+			listaTransporteDetalleDTO 	= null;
+			transporteDTO 				= null;
+			listaTransporteDTO 			= null;
 			
+			// informacion del area ACABADO
+			List<AcabadoDTO> listaAcabadoDTO = new ArrayList<AcabadoDTO>();
+			AcabadoDTO acabadoDTO = acabadoService.buscaAcabadoPorPartidaEnDTO(partida.getIdPartida());
+			List<AcabadoDetalleDTO> listaAcabadoDetalleDTO = acabadoDetalleService.listaAcabadoDetallePorAcabadoEnDTO(acabadoDTO.getIdAcabado());
+			acabadoDTO.setListaAcabadoDetalleDTO(listaAcabadoDetalleDTO);
+			listaAcabadoDTO.add(acabadoDTO);
+			otp.setListaAcabadoDTO(listaAcabadoDTO);
+			listaAcabadoDetalleDTO  = null;
+			acabadoDTO				= null;
+			listaAcabadoDTO	 		= null;
+			
+			// informacion del area OFFSET
+			List<OffsetDTO> listaOffsetDTO = new ArrayList<OffsetDTO>();
+			OffsetDTO offsetDTO = offsetService.buscaOffsetPorPartidaEnDTO(partida.getIdPartida());
+			listaOffsetDTO.add(offsetDTO);
+			otp.setListaOffsetDTO(listaOffsetDTO);
+			offsetDTO 		= null;
+			listaOffsetDTO	= null;
+			
+			// lista de TipoTrabajoDetalle
 			otp.setListaOrdenTrabajoTipoTrabajoDetalle(listaOrdenTrabajoTipoTrabajoDetalle);
 			listaOrdenTrabajoTipoTrabajoDetalle = null;
 			listaOrdenTrabajoPartida.add(otp);

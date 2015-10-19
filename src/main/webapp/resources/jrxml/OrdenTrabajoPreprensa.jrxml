@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
+<!-- 2015-10-19T13:59:29 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdenTrabajoPreprensa" pageWidth="570" pageHeight="185" columnWidth="570" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e9a0b461-b3b4-4723-bb1a-3c6d12992121">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<parameter name="SUBREPORT_PREPRENSA_DETALLE" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="indicacionTareaRealizar" class="java.lang.String"/>
+	<field name="materialesRecibe" class="java.lang.String"/>
+	<field name="observaciones" class="java.lang.String"/>
+	<field name="listaPreprensaDetalleDTO" class="java.util.List"/>
+	<detail>
+		<band height="115" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<printWhenExpression><![CDATA[!$F{indicacionTareaRealizar}.equals("") 
+&& !$F{materialesRecibe}.equals("")
+&& !$F{observaciones}.equals("")]]></printWhenExpression>
+			<staticText>
+				<reportElement x="15" y="25" width="125" height="15" uuid="0efdaa67-bec9-424a-81dc-763ec6a25854">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Indicación tarea realizar:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="145" y="25" width="414" height="30" uuid="96c139c6-a774-4c0c-99dd-f10cd7b6f549">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{indicacionTareaRealizar}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="55" width="125" height="15" uuid="0516dd05-a1a7-4212-807f-576a4b894e0a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Materiales que recibe:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="145" y="55" width="414" height="30" uuid="bdb7dfbd-ba5c-4f10-9781-a08611905f97">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{materialesRecibe}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="85" width="125" height="15" uuid="beb5505c-5962-4ffd-8318-3abf2c423810"/>
+				<text><![CDATA[Observaciones:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="145" y="85" width="414" height="30" uuid="518525b2-e200-4894-9ac4-02d5870a19f9">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{observaciones}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="3" width="85" height="20" uuid="3721fc9b-19c4-4464-8c59-518290ae5fa9">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Preprensa]]></text>
+			</staticText>
+			<line>
+				<reportElement x="213" y="1" width="155" height="1" uuid="43b14772-480a-4045-b139-9cba14273fa8"/>
+			</line>
+		</band>
+		<band height="55">
+			<subreport runToBottom="true">
+				<reportElement key="" positionType="Float" x="5" y="0" width="560" height="55" isRemoveLineWhenBlank="true" uuid="94cf5aee-8157-4f57-b53e-32e0efbd6877">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaPreprensaDetalleDTO})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_PREPRENSA_DETALLE}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,6 +1,7 @@
 package com.artiffex.lithomat.sistemaweb.businesstier.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class PreprensaDTO implements Serializable {
 	
@@ -10,6 +11,7 @@ public class PreprensaDTO implements Serializable {
 	private String indicacionTareaRealizar;
 	private String materialesRecibe;
 	private String observaciones;
+	private List<PreprensaDetalleDTO> listaPreprensaDetalleDTO;
 	
 	
 	public int getIdPreprensa() {
@@ -36,5 +38,10 @@ public class PreprensaDTO implements Serializable {
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
-	
+	public List<PreprensaDetalleDTO> getListaPreprensaDetalleDTO() {
+		return listaPreprensaDetalleDTO;
+	}
+	public void setListaPreprensaDetalleDTO(List<PreprensaDetalleDTO> listaPreprensaDetalleDTO) {
+		this.listaPreprensaDetalleDTO = listaPreprensaDetalleDTO;
+	}
 }

@@ -2,6 +2,7 @@ package com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz;
 
 import java.util.List;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.PreprensaDetalleDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.PreprensaDetalle;
 
 public interface PreprensaDetalleService {
@@ -15,6 +16,8 @@ public interface PreprensaDetalleService {
 	public List<PreprensaDetalle> listaPreprensaDetalle();
 	
 	public List<PreprensaDetalle> listaPreprensaDetallePorPreprensa(int idPreprensa);
+	
+	public List<PreprensaDetalleDTO> listaPreprensaDetallePorPreprensaEnDTO(int idPreprensa);
 	
 	public String listaHTML(int idPreprensa);
 	

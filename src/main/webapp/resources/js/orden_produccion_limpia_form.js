@@ -172,6 +172,7 @@ function limpiaCamposFormTipoTrabajoDetalle() {
     document.forms["tipo_trabajo_detalle"].elements["proporciona_tinta_especial"].checked               = false;
     document.forms["tipo_trabajo_detalle"].elements["proporciona_barniz"].checked                       = false;
     document.forms["tipo_trabajo_detalle"].elements["proporciona_placas"].checked                       = false;
+    document.forms["tipo_trabajo_detalle"].elements["tipo_papel_extendido"].value                      	= "";
     document.forms["tipo_trabajo_detalle"].elements["repeticiones_x_pliego"].value                      = "";
     document.forms["tipo_trabajo_detalle"].elements["numero_paginas_publicacion"].value                 = 0;
     document.forms["tipo_trabajo_detalle"].elements["select_tamanio_publicacion"].selectedIndex         = 0;

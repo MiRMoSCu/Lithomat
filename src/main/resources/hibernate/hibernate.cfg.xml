@@ -9,7 +9,7 @@
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.max_allowed_packet">50M</property>
 <!-- LOCAL DATABASE -->
-  
+   
 		<property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/lithomat_artiffex</property>
 		<property name="hibernate.connection.username">root</property>
 

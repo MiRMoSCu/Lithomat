@@ -1,12 +1,14 @@
 package com.artiffex.lithomat.sistemaweb.businesstier.service.implementacion;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.DisenioDetalleDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Disenio;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.DisenioDetalle;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.DisenioDetalleService;
@@ -40,6 +42,22 @@ public class DisenioDetalleServiceImpl implements DisenioDetalleService {
 	
 	public List<DisenioDetalle> listaDisenioDetallePorDisenio(int idDisenio) {
 		return disenioDetalleDAO.listaPorDisenio(idDisenio);
+	}
+	
+	public List<DisenioDetalleDTO> listaDisenioDetallePorDisenioEnDTO(int idDisenio) {
+		List<DisenioDetalleDTO> listaDisenioDetalleDTO = new ArrayList<DisenioDetalleDTO>();
+		List<DisenioDetalle> listaTemporal = disenioDetalleDAO.listaPorDisenio(idDisenio);
+		for (DisenioDetalle disenioDetalle : listaTemporal) {
+			DisenioDetalleDTO disenioDetalleDTO = new DisenioDetalleDTO();
+			disenioDetalleDTO.setNombreProcesoDisenio(disenioDetalle.getProcesoDisenio().getNombreProceso());
+			disenioDetalleDTO.setCantidad(disenioDetalle.getCantidad());
+			disenioDetalleDTO.setEspecificaciones(disenioDetalle.getEspecificaciones());
+			listaDisenioDetalleDTO.add(disenioDetalleDTO);
+			disenioDetalleDTO 	= null;
+			disenioDetalle 		= null;
+		}
+		listaTemporal = null;
+		return listaDisenioDetalleDTO;
 	}
 	
 	public String listaHTML(int idDisenio) {

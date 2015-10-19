@@ -34,7 +34,7 @@ public class DisenioServiceImpl implements DisenioService {
 		DisenioDTO disenioDTO = new DisenioDTO();
 		disenioDTO.setIdDisenio(disenio.getIdDisenio());
 		disenioDTO.setIndicacionTareaRealizar(disenio.getIndicacionTareaRealizar()==null?"":disenio.getIndicacionTareaRealizar());
-		disenioDTO.setMaterialesRecibe(disenio.getIndicacionTareaRealizar()==null?"":disenio.getIndicacionTareaRealizar());
+		disenioDTO.setMaterialesRecibe(disenio.getMaterialesRecibe()==null?"":disenio.getMaterialesRecibe());
 		disenioDTO.setObservaciones(disenio.getObservaciones()==null?"":disenio.getObservaciones());
 		disenio = null;
 		return disenioDTO;
