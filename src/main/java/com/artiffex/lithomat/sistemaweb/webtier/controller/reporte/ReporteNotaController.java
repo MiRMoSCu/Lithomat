@@ -161,7 +161,7 @@ public class ReporteNotaController {
 
 		try {
 			OutputStream outputStream 				= response.getOutputStream();
-			InputStream reportStream 				= context.getResourceAsStream(DIRECTORIO_ORIGEN + "ReporteCotizacion.jasper");
+			InputStream reportStream 				= context.getResourceAsStream(DIRECTORIO_ORIGEN + "01_ReporteCotizacion.jasper");
 			JRBeanCollectionDataSource dataSource 	= new JRBeanCollectionDataSource(listaPartida);
 			JasperPrint jasperPrint 				= JasperFillManager.fillReport( reportStream, parameterMap, dataSource );
 			
@@ -240,7 +240,7 @@ public class ReporteNotaController {
 		// PARAMETROS
 		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
 		
-		parameterMap.put("SUBREPORT_DIR",path + DIRECTORIO_ORIGEN + "RemisionChild.jasper");
+		parameterMap.put("SUBREPORT_DIR",path + DIRECTORIO_ORIGEN + "02_RemisionChild.jasper");
 		parameterMap.put("nut",nut);
 		parameterMap.put("nombreCliente",ordenProduccion.getCliente().getNombreMoral());
 		parameterMap.put("nombreOrdenProduccion",ordenProduccion.getNombre());
@@ -255,7 +255,7 @@ public class ReporteNotaController {
 		try {
 			OutputStream outputStream 				= response.getOutputStream();
 			
-			InputStream reportStream 				= context.getResourceAsStream(DIRECTORIO_ORIGEN + "RemisionMaster.jasper");			
+			InputStream reportStream 				= context.getResourceAsStream(DIRECTORIO_ORIGEN + "02_RemisionMaster.jasper");			
 			JRBeanCollectionDataSource dataSource 	= new JRBeanCollectionDataSource(listaRemision);
 			JasperPrint jasperPrint 				= JasperFillManager.fillReport( reportStream, parameterMap, dataSource );
 			
@@ -330,7 +330,7 @@ public class ReporteNotaController {
 		String path = request.getSession().getServletContext().getRealPath("/");
 		// PARAMETROS
 		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
-		parameterMap.put("SUBREPORT_DIR",path + DIRECTORIO_ORIGEN + "RemisionChild.jasper");
+		parameterMap.put("SUBREPORT_DIR",path + DIRECTORIO_ORIGEN + "02_RemisionChild.jasper");
 		parameterMap.put("nut",nut);
 		parameterMap.put("nombreCliente",ordenProduccion.getCliente().getNombreMoral());
 		parameterMap.put("nombreOrdenProduccion",ordenProduccion.getNombre());
@@ -346,7 +346,7 @@ public class ReporteNotaController {
 		try {
 			OutputStream outputStream 				= response.getOutputStream();
 			
-			InputStream reportStream 				= context.getResourceAsStream(DIRECTORIO_ORIGEN + "FacturaMaster.jasper");			
+			InputStream reportStream 				= context.getResourceAsStream(DIRECTORIO_ORIGEN + "03_FacturaMaster.jasper");			
 			JRBeanCollectionDataSource dataSource 	= new JRBeanCollectionDataSource(listaRemision);
 			JasperPrint jasperPrint 				= JasperFillManager.fillReport( reportStream, parameterMap, dataSource );
 			
@@ -422,24 +422,24 @@ public class ReporteNotaController {
 		// PARAMETROS
 		String path = request.getSession().getServletContext().getRealPath("/");
 		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
-		parameterMap.put("SUBREPORT_PARTIDA",				path + DIRECTORIO_ORIGEN + "OrdenTrabajoPartida.jasper");
-		parameterMap.put("SUBREPORT_DISENIO",				path + DIRECTORIO_ORIGEN + "OrdenTrabajoDisenio.jasper");
-		parameterMap.put("SUBREPORT_DISENIO_DETALLE",		path + DIRECTORIO_ORIGEN + "OrdenTrabajoDisenioDetalle.jasper");
-		parameterMap.put("SUBREPORT_PREPRENSA",				path + DIRECTORIO_ORIGEN + "OrdenTrabajoPreprensa.jasper");
-		parameterMap.put("SUBREPORT_PREPRENSA_DETALLE",		path + DIRECTORIO_ORIGEN + "OrdenTrabajoPreprensaDetalle.jasper");
-		parameterMap.put("SUBREPORT_TRANSPORTE",			path + DIRECTORIO_ORIGEN + "OrdenTrabajoTransporte.jasper");
-		parameterMap.put("SUBREPORT_TRANSPORTE_DETALLE",	path + DIRECTORIO_ORIGEN + "OrdenTrabajoTransporteDetalle.jasper");
-		parameterMap.put("SUBREPORT_ACABADO",				path + DIRECTORIO_ORIGEN + "OrdenTrabajoAcabado.jasper");
-		parameterMap.put("SUBREPORT_ACABADO_DETALLE",		path + DIRECTORIO_ORIGEN + "OrdenTrabajoAcabadoDetalle.jasper");
-		parameterMap.put("SUBREPORT_OFFSET",				path + DIRECTORIO_ORIGEN + "OrdenTrabajoOffset.jasper");
-		parameterMap.put("SUBREPORT_MATERIAL_AYUDA",		path + DIRECTORIO_ORIGEN + "OrdenTrabajoMaterialAyuda.jasper");
-		parameterMap.put("SUBREPORT_TIPO_TRABAJO_DETALLE",	path + DIRECTORIO_ORIGEN + "OrdenTrabajoTipoTrabajoDetalle.jasper");
-		parameterMap.put("SUBREPORT_PLIEGO",				path + DIRECTORIO_ORIGEN + "OrdenTrabajoPliego.jasper");
+		parameterMap.put("SUBREPORT_PARTIDA",				path + DIRECTORIO_ORIGEN + "04_OrdenTrabajoPartida.jasper");
+		parameterMap.put("SUBREPORT_DISENIO",				path + DIRECTORIO_ORIGEN + "04_OrdenTrabajoDisenio.jasper");
+		parameterMap.put("SUBREPORT_DISENIO_DETALLE",		path + DIRECTORIO_ORIGEN + "04_OrdenTrabajoDisenioDetalle.jasper");
+		parameterMap.put("SUBREPORT_PREPRENSA",				path + DIRECTORIO_ORIGEN + "04_OrdenTrabajoPreprensa.jasper");
+		parameterMap.put("SUBREPORT_PREPRENSA_DETALLE",		path + DIRECTORIO_ORIGEN + "04_OrdenTrabajoPreprensaDetalle.jasper");
+		parameterMap.put("SUBREPORT_TRANSPORTE",			path + DIRECTORIO_ORIGEN + "04_OrdenTrabajoTransporte.jasper");
+		parameterMap.put("SUBREPORT_TRANSPORTE_DETALLE",	path + DIRECTORIO_ORIGEN + "04_OrdenTrabajoTransporteDetalle.jasper");
+		parameterMap.put("SUBREPORT_ACABADO",				path + DIRECTORIO_ORIGEN + "04_OrdenTrabajoAcabado.jasper");
+		parameterMap.put("SUBREPORT_ACABADO_DETALLE",		path + DIRECTORIO_ORIGEN + "04_OrdenTrabajoAcabadoDetalle.jasper");
+		parameterMap.put("SUBREPORT_OFFSET",				path + DIRECTORIO_ORIGEN + "04_OrdenTrabajoOffset.jasper");
+		parameterMap.put("SUBREPORT_MATERIAL_AYUDA",		path + DIRECTORIO_ORIGEN + "04_OrdenTrabajoMaterialAyuda.jasper");
+		parameterMap.put("SUBREPORT_TIPO_TRABAJO_DETALLE",	path + DIRECTORIO_ORIGEN + "04_OrdenTrabajoTipoTrabajoDetalle.jasper");
+		parameterMap.put("SUBREPORT_PLIEGO",				path + DIRECTORIO_ORIGEN + "04_OrdenTrabajoPliego.jasper");
 		
 		try {
 			OutputStream outputStream 				= response.getOutputStream();
 			
-			InputStream reportStream 				= context.getResourceAsStream(DIRECTORIO_ORIGEN + "OrdenTrabajoMaster.jasper");			
+			InputStream reportStream 				= context.getResourceAsStream(DIRECTORIO_ORIGEN + "04_OrdenTrabajoMaster.jasper");			
 			JRBeanCollectionDataSource dataSource 	= new JRBeanCollectionDataSource(listaOrdenTrabajo);
 			JasperPrint jasperPrint 				= JasperFillManager.fillReport( reportStream, parameterMap, dataSource );
 			
