@@ -18,6 +18,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.dto.AcabadoDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.AcabadoDetalleDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.DisenioDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.DisenioDetalleDTO;
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.MaterialAyudaDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.OffsetDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.PreprensaDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.PreprensaDetalleDTO;
@@ -36,6 +37,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.AcabadoSer
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CalificacionService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.DisenioDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.DisenioService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.MaterialAyudaXPartidaService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.OffsetService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.OrdenProduccionService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PartidaService;
@@ -100,6 +102,8 @@ public class CalificacionServiceImpl implements CalificacionService {
 	private AcabadoDetalleService acabadoDetalleService;
 	@Resource
 	private OffsetService offsetService;
+	@Resource
+	private MaterialAyudaXPartidaService materialAyudaXPartidaService;
 	@Resource
 	private TintaEspecialService tintaEspecialService;
 	
@@ -1130,6 +1134,11 @@ public class CalificacionServiceImpl implements CalificacionService {
 			otp.setListaOffsetDTO(listaOffsetDTO);
 			offsetDTO 		= null;
 			listaOffsetDTO	= null;
+			
+			// informacion de MATERIAL DE AYUDA
+			List<MaterialAyudaDTO> listaMaterialAyudaDTO = materialAyudaXPartidaService.buscaListaMaterialAyudaPorPartidaEnDTO(partida.getIdPartida());
+			otp.setListaMaterialAyudaDTO(listaMaterialAyudaDTO);
+			listaMaterialAyudaDTO	= null;
 			
 			// lista de TipoTrabajoDetalle
 			otp.setListaOrdenTrabajoTipoTrabajoDetalle(listaOrdenTrabajoTipoTrabajoDetalle);

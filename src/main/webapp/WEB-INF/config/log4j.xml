@@ -13,7 +13,7 @@
 	</appender>
 	<!-- ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF -->
 	<root>
-	    <priority value="debug" />        
+	    <priority value="info" />        
 	    <appender-ref ref="consola"/>
 	</root>
 	

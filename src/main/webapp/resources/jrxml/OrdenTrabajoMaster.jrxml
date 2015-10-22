@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2015-10-13T12:28:10 -->
+<!-- 2015-10-21T17:40:45 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdenProduccion" pageWidth="590" pageHeight="842" columnWidth="580" leftMargin="5" rightMargin="5" topMargin="5" bottomMargin="5" uuid="f0b5206b-deb3-40ee-a30a-3afb64785693">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<parameter name="SUBREPORT_PARTIDA" class="java.lang.String"/>
@@ -13,6 +13,7 @@
 	<parameter name="SUBREPORT_ACABADO" class="java.lang.String"/>
 	<parameter name="SUBREPORT_ACABADO_DETALLE" class="java.lang.String"/>
 	<parameter name="SUBREPORT_OFFSET" class="java.lang.String"/>
+	<parameter name="SUBREPORT_MATERIAL_AYUDA" class="java.lang.String"/>
 	<parameter name="SUBREPORT_TIPO_TRABAJO_DETALLE" class="java.lang.String"/>
 	<parameter name="SUBREPORT_PLIEGO" class="java.lang.String"/>
 	<field name="nombreCliente" class="java.lang.String"/>
@@ -242,6 +243,9 @@
 				</subreportParameter>
 				<subreportParameter name="SUBREPORT_OFFSET">
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_OFFSET}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_MATERIAL_AYUDA">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_MATERIAL_AYUDA}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="SUBREPORT_TIPO_TRABAJO_DETALLE">
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_TIPO_TRABAJO_DETALLE}]]></subreportParameterExpression>

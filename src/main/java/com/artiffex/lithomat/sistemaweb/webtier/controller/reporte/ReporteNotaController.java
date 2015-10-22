@@ -432,6 +432,7 @@ public class ReporteNotaController {
 		parameterMap.put("SUBREPORT_ACABADO",				path + DIRECTORIO_ORIGEN + "OrdenTrabajoAcabado.jasper");
 		parameterMap.put("SUBREPORT_ACABADO_DETALLE",		path + DIRECTORIO_ORIGEN + "OrdenTrabajoAcabadoDetalle.jasper");
 		parameterMap.put("SUBREPORT_OFFSET",				path + DIRECTORIO_ORIGEN + "OrdenTrabajoOffset.jasper");
+		parameterMap.put("SUBREPORT_MATERIAL_AYUDA",		path + DIRECTORIO_ORIGEN + "OrdenTrabajoMaterialAyuda.jasper");
 		parameterMap.put("SUBREPORT_TIPO_TRABAJO_DETALLE",	path + DIRECTORIO_ORIGEN + "OrdenTrabajoTipoTrabajoDetalle.jasper");
 		parameterMap.put("SUBREPORT_PLIEGO",				path + DIRECTORIO_ORIGEN + "OrdenTrabajoPliego.jasper");
 		

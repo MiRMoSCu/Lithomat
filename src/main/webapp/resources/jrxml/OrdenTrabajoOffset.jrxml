@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2015-10-19T14:13:36 -->
+<!-- 2015-10-21T18:51:21 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdenTrabajoDisenio" pageWidth="570" pageHeight="150" columnWidth="570" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e9a0b461-b3b4-4723-bb1a-3c6d12992121">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<queryString>
@@ -11,9 +11,7 @@
 	<field name="observaciones" class="java.lang.String"/>
 	<detail>
 		<band height="87" splitType="Stretch">
-			<printWhenExpression><![CDATA[!$F{indicacionTareaRealizar}.equals("") 
-&& !$F{materialesRecibe}.equals("")
-&& !$F{observaciones}.equals("")]]></printWhenExpression>
+			<printWhenExpression><![CDATA[new Boolean(!$F{indicacionTareaRealizar}.equals("") || !$F{materialesRecibe}.equals("") || !$F{observaciones}.equals(""))]]></printWhenExpression>
 			<staticText>
 				<reportElement x="15" y="3" width="65" height="20" uuid="ec19905f-a69b-4500-a014-8cb85bfe8798">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.AcabadoDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.DisenioDTO;
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.MaterialAyudaDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.OffsetDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.PreprensaDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.TransporteDTO;
@@ -25,6 +26,7 @@ public class OrdenTrabajoPartida implements Serializable {
 	private List<AcabadoDTO> listaAcabadoDTO;
 	private List<OffsetDTO> listaOffsetDTO;
 	private List<OrdenTrabajoTipoTrabajoDetalle> listaOrdenTrabajoTipoTrabajoDetalle;
+	private List<MaterialAyudaDTO> listaMaterialAyudaDTO;
 	
 	
 	public String getTipoTrabajo() {
@@ -99,5 +101,11 @@ public class OrdenTrabajoPartida implements Serializable {
 	public void setListaOrdenTrabajoTipoTrabajoDetalle(
 			List<OrdenTrabajoTipoTrabajoDetalle> listaOrdenTrabajoTipoTrabajoDetalle) {
 		this.listaOrdenTrabajoTipoTrabajoDetalle = listaOrdenTrabajoTipoTrabajoDetalle;
+	}
+	public List<MaterialAyudaDTO> getListaMaterialAyudaDTO() {
+		return listaMaterialAyudaDTO;
+	}
+	public void setListaMaterialAyudaDTO(List<MaterialAyudaDTO> listaMaterialAyudaDTO) {
+		this.listaMaterialAyudaDTO = listaMaterialAyudaDTO;
 	}
 }

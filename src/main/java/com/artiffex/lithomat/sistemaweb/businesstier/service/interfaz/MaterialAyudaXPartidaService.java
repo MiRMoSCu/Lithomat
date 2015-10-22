@@ -2,6 +2,7 @@ package com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz;
 
 import java.util.List;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.MaterialAyudaDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.MaterialAyudaXPartida;
 
 public interface MaterialAyudaXPartidaService {
@@ -17,5 +18,7 @@ public interface MaterialAyudaXPartidaService {
 	public String listaHTML(int idPartida);
 	
 	public String listaHTMLModificacion(int idPartida);
+	
+	public List<MaterialAyudaDTO> buscaListaMaterialAyudaPorPartidaEnDTO(int idPartida);
 	
 }

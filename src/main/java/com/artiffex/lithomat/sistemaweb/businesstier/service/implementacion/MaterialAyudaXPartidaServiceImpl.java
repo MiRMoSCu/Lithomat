@@ -1,11 +1,13 @@
 package com.artiffex.lithomat.sistemaweb.businesstier.service.implementacion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.MaterialAyudaDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.MaterialAyudaXPartida;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.MaterialAyudaXPartidaService;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.MaterialAyudaXPartidaDAO;
@@ -185,6 +187,23 @@ public class MaterialAyudaXPartidaServiceImpl implements MaterialAyudaXPartidaSe
 		listaMaterialAyudaXPartida = null;
 		
 		return html.toString();
+	}
+
+	public List<MaterialAyudaDTO> buscaListaMaterialAyudaPorPartidaEnDTO(int idPartida) {
+		List<MaterialAyudaDTO> listaMaterialAyudaXPartidaEnDTO = new ArrayList<MaterialAyudaDTO>();
+		List<MaterialAyudaXPartida> listaMaterialAyudaxPartida = materialAyudaXPartidaDAO.lista(idPartida);
+		for (MaterialAyudaXPartida materialAyudaXPartida : listaMaterialAyudaxPartida) {
+			MaterialAyudaDTO materialAyudaDTO = new MaterialAyudaDTO();
+			materialAyudaDTO.setIdMaterialAyudaXPartida(materialAyudaXPartida.getIdMaterialAyudaXPartida());
+			materialAyudaDTO.setNombreMaterialAyuda(materialAyudaXPartida.getMaterialAyuda().getNombre());
+			materialAyudaDTO.setNombreResponsableInsumo(materialAyudaXPartida.getResponsableInsumo().getNombre());
+			materialAyudaDTO.setObservaciones(materialAyudaXPartida.getObservaciones());
+			listaMaterialAyudaXPartidaEnDTO.add(materialAyudaDTO);
+			materialAyudaDTO 		= null;
+			materialAyudaXPartida 	= null;
+		}
+		listaMaterialAyudaxPartida = null;
+		return listaMaterialAyudaXPartidaEnDTO;
 	}
 
 }
