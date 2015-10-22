@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2015-10-21T18:05:12 -->
+<!-- 2015-10-22T12:18:51 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdenTrabajoPartida" pageWidth="580" pageHeight="1000" columnWidth="580" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a8665aab-f47b-49c1-9a8c-fc9185390bff">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -45,7 +45,7 @@
 			<band height="55">
 				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				<subreport>
-					<reportElement positionType="Float" x="5" y="0" width="570" height="50" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="589dd18e-682a-4e90-a86f-1f60ef8d04f7">
+					<reportElement x="5" y="0" width="570" height="50" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="589dd18e-682a-4e90-a86f-1f60ef8d04f7">
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -64,7 +64,7 @@
 			<band height="55">
 				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				<subreport>
-					<reportElement positionType="Float" x="5" y="0" width="570" height="50" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="35f82df5-7146-469d-971c-5a3d6920c36b">
+					<reportElement x="5" y="0" width="570" height="50" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="35f82df5-7146-469d-971c-5a3d6920c36b">
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -82,7 +82,7 @@
 		<groupHeader>
 			<band height="56">
 				<subreport>
-					<reportElement positionType="Float" x="5" y="0" width="570" height="50" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="09adc6bd-2871-4e14-bbe3-70fb553255f0">
+					<reportElement x="5" y="0" width="570" height="50" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="09adc6bd-2871-4e14-bbe3-70fb553255f0">
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -100,7 +100,7 @@
 		<groupHeader>
 			<band height="50">
 				<subreport>
-					<reportElement positionType="Float" x="5" y="0" width="570" height="50" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="2067721f-d648-410f-a8d1-2b3ec9edf04d">
+					<reportElement x="5" y="0" width="570" height="50" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="2067721f-d648-410f-a8d1-2b3ec9edf04d">
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -118,7 +118,7 @@
 		<groupHeader>
 			<band height="50">
 				<subreport>
-					<reportElement positionType="Float" x="5" y="0" width="570" height="50" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="d5f29ae9-13ca-4110-a0cf-b03162fb3fd8">
+					<reportElement x="5" y="0" width="570" height="50" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="d5f29ae9-13ca-4110-a0cf-b03162fb3fd8">
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -136,7 +136,7 @@
 		<groupHeader>
 			<band height="50">
 				<subreport>
-					<reportElement positionType="Float" x="5" y="0" width="570" height="50" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="72b52a76-1109-41c1-89ee-42a6abd99224">
+					<reportElement x="5" y="0" width="570" height="50" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="72b52a76-1109-41c1-89ee-42a6abd99224">
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -315,7 +315,7 @@
 		<band height="56" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<subreport>
-				<reportElement positionType="Float" x="5" y="0" width="570" height="50" uuid="364844dc-51d2-43f3-adda-c5410db9ca90">
+				<reportElement x="5" y="0" width="570" height="50" uuid="364844dc-51d2-43f3-adda-c5410db9ca90">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
