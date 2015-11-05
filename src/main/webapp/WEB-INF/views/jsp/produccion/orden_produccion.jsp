@@ -45,9 +45,9 @@
         <script type="text/javascript" src="<c:url value="/resources/js/orden_produccion.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/prueba.js"/>"></script>
         <script type="text/javascript">
-            //inicializacion jquery
+            // inicializacion jquery
             $(document).ready(function (){});
-            //inicializacion shadowbox
+            // inicializacion shadowbox
             Shadowbox.init({
                 //modal: true,
                 //overlayOpacity: 0.75

@@ -3,7 +3,6 @@ package com.artiffex.lithomat.sistemaweb.businesstier.service.implementacion;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -20,7 +19,6 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.HistorialE
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.OrdenProduccionService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PartidaService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoTrabajoDetalleService;
-import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.Util;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.OrdenProduccionDAO;
 
@@ -208,35 +206,12 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
 		return sb.toString();
 	}
 
-	public List<ComboSelect> listaReportePorNut(String nut) {
-
-		List<ComboSelect> listaReporte = new ArrayList<ComboSelect>();
-		
+	public boolean existeOrdenProduccionPorNut(String nut) {
+		boolean existeRegistro = false;
 		OrdenProduccion ordenProduccion = ordenProduccionDAO.buscaPorNut(nut);
-		ComboSelect comboSelect = new ComboSelect();
-		
-		// POR DEFAULT: Orden de Trabajo
-		comboSelect = new ComboSelect();
-		comboSelect.setValue(-1);
-		comboSelect.setText("Orden Trabajo");
-		listaReporte.add(comboSelect);
-		comboSelect		= null;
-		// POR DEFAULT: Cotizacion
-		comboSelect = new ComboSelect();
-		comboSelect.setValue(0);
-		comboSelect.setText("Cotización");
-		listaReporte.add(comboSelect);
-		comboSelect		= null;
-		// TIPO DE COMPROBANTE FISCAL
-		comboSelect = new ComboSelect();
-		comboSelect.setValue(ordenProduccion.getTipoComprobanteFiscal().getIdTipoComprobanteFiscal());
-		comboSelect.setText(ordenProduccion.getTipoComprobanteFiscal().getNombre());
-		listaReporte.add(comboSelect);
-		comboSelect = null;
-		
+		if( ordenProduccion != null )
+			existeRegistro = true;
 		ordenProduccion = null;
-		
-		return listaReporte;
-	}	
-
+		return existeRegistro;
+	}
 }

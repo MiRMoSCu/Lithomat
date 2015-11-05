@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.OrdenProduccion;
-import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
 
 public interface OrdenProduccionService {
 	
@@ -24,6 +23,6 @@ public interface OrdenProduccionService {
 
 	public String generaJsonArbolOrdenProduccion(int idOrdenProduccion);
 	
-	public List<ComboSelect> listaReportePorNut(String nut);
+	public boolean existeOrdenProduccionPorNut(String nut);
 	
 }

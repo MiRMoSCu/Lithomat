@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2015-08-27T18:49:40 -->
+<!-- 2015-10-27T17:46:02 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RemisionMaster" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ea907b63-9974-4aec-a146-9c41310c93d3">
 	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
 	<parameter name="nut" class="java.lang.String"/>
@@ -26,7 +26,7 @@
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Nota de Factura Lithomat]]></text>
+				<text><![CDATA[Nota de Remisiòn Lithomat]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="30" width="50" height="20" uuid="569a1378-d657-418a-a6ed-6261d4776fae"/>
@@ -112,9 +112,9 @@
 		</band>
 	</detail>
 	<lastPageFooter>
-		<band height="38">
+		<band height="30">
 			<staticText>
-				<reportElement x="255" y="8" width="115" height="22" uuid="66ab6385-36c3-4aa3-9696-ae9ebba0d705">
+				<reportElement x="262" y="8" width="115" height="22" uuid="66ab6385-36c3-4aa3-9696-ae9ebba0d705">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -125,7 +125,7 @@
 				<text><![CDATA[Gran Total:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="377" y="8" width="90" height="22" uuid="d86f5def-a54b-444a-be2c-6b3a016530f8">
+				<reportElement x="384" y="8" width="90" height="22" uuid="d86f5def-a54b-444a-be2c-6b3a016530f8">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>

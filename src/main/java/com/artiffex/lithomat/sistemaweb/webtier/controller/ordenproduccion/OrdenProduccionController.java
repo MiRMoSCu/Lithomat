@@ -194,9 +194,9 @@ public class OrdenProduccionController {
 			@RequestParam(value = "fecha_prometida_entrega", 	required = false) String fechaPrometidaEntrega
 		) {
 		log.info("/agrega_orden_produccion");
-
+		
 		Timestamp fechaGeneracion = new Timestamp(Calendar.getInstance().getTimeInMillis());
-
+		
 		OrdenProduccion ordenProduccion = new OrdenProduccion();
 			Usuario usuario = new Usuario();
 			usuario.setIdUsuario(idUsuario);

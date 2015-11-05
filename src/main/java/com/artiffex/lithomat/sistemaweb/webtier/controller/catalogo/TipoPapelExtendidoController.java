@@ -260,7 +260,6 @@ public class TipoPapelExtendidoController {
 	@RequestMapping(value = "/catalogo/exporta", method = RequestMethod.GET)
 	public void exportaTipoPapelExtendido( HttpServletResponse response ) {
 		log.info("/exporta_tipo_papel_extendido");
-		
 		// enviar un archivo al cliente
 		byte[] documento = tipoPapelExtendidoService.obtieneExcelListaTipoPapelExtendido();
 		try {
@@ -274,13 +273,13 @@ public class TipoPapelExtendidoController {
 			log.error("Error al enviar el archivo de excel");
 			e.printStackTrace();
 		}
+		documento = null;
 	} // exporta_tipo_papel_extendido
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/catalogo/ventana", method = RequestMethod.GET )
 	public String ventanaModalSubirArchivoPapel() {
 		log.info("/ventana_modal_subir_archivo_papel");
-		
 		return "catalogo/tipo_papel_extendido_sube_archivo";
 	} // ventanaModalSubirArchivoPapel
 	

@@ -14,9 +14,9 @@ public class ServerErrorFailureHandler implements AuthenticationFailureHandler {
 	public void onAuthenticationFailure(
 			HttpServletRequest request,
 			HttpServletResponse response, 
-			AuthenticationException exception ) throws IOException, ServletException {
+			AuthenticationException exception 
+		) throws IOException, ServletException {
 		response.sendError(500);
-		
 	}
 
 }

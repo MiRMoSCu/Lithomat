@@ -2,8 +2,15 @@
 <%@ page contentType="text/html;charset=ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
+<!-- PRODUCCION -->
 <c:url value="/orden_produccion/" 						var="urlOrdenProduccion" />
 <c:url value="/visualizador/" 							var="urlVisualizador" />
+<!-- REPORTES -->
+<c:url value="/reporte/ventana_orden_produccion" 		var="urlVentanaOrdenProduccion" />
+<c:url value="/reporte/ventana_cotizacion" 				var="urlVentanaCotizacion" />
+<c:url value="/reporte/ventana_nota_remision_factura" 	var="urlVentanaNotaRemisionFactura" />
+<c:url value="/reporte/ventana_cola_impresion" 			var="urlVentanaColaImpresion" />
+<!-- CATALOGOS -->
 <c:url value="/cliente/catalogo/lista" 					var="urlCliente" />
 <c:url value="/combinacion_tintas/catalogo/lista" 		var="urlCombinacionTintas" />
 <c:url value="/costo_extra/catalogo/lista" 				var="urlCostoExtra" />
@@ -11,8 +18,6 @@
 <c:url value="/maquina/catalogo/lista" 					var="urlMaquina" />
 <c:url value="/material_ayuda/catalogo/lista" 			var="urlMaterialAyuda" />
 <c:url value="/papel_sobrante/catalogo/lista" 			var="urlPapelSobrante" />
-<c:url value="/perfil/catalogo/lista" 					var="urlPerfil" />
-<c:url value="/perfil_x_usuario/catalogo/lista" 		var="urlPerfilXUsuario" />
 <c:url value="/prensista/catalogo/lista" 				var="urlPrensista" />
 <c:url value="/proceso_disenio/catalogo/lista" 			var="urlProcesoDisenio" />
 <c:url value="/proceso_externo/catalogo/lista" 			var="urlProcesoExterno" />
@@ -35,57 +40,69 @@
 <c:url value="/tipo_trabajo/catalogo/lista" 			var="urlTipoTrabajo" />
 <c:url value="/turno_laboral/catalogo/lista" 			var="urlTurnoLaboral" />
 <c:url value="/tipo_vuelta/catalogo/lista" 				var="urlTipoVuelta" />
+<!-- SEGURIDAD -->
+<c:url value="/perfil/catalogo/lista" 					var="urlPerfil" />
+<c:url value="/perfil_x_usuario/catalogo/lista" 		var="urlPerfilXUsuario" />
 <c:url value="/usuario/catalogo/lista" 					var="urlUsuario" />
+<!-- CERRAR SESION -->
 <c:url value="/j_spring_security_logout" 				var="urlSalir" />
 
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
-        <link rel="stylesheet" href="resources/css/master.css" 		type="text/css"/>
-        <link rel="stylesheet" href="resources/css/menu_inicio.css"        type="text/css"/>
-        <link rel="stylesheet" href="resources/css/pagina_menu.css" type="text/css"/>
-        <style type="text/css">
-        	th, td {
-        		padding: 0px 7px 0px 7px;
-        	}
-        	
-        </style>
+        <link rel="stylesheet" href="<c:url value="/resources/css/master.css"/>" 			type="text/css"/>
+        <link rel="stylesheet" href="<c:url value="/resources/css/menu_inicio.css"/>" 		type="text/css"/>
+        <link rel="stylesheet" href="<c:url value="/resources/css/pagina_menu.css"/>" 		type="text/css"/>
+        <link rel="stylesheet" href="<c:url value="/resources/shadowbox/shadowbox.css"/>" 	type="text/css"></link>
+        <script type="text/javascript" src="<c:url value="/resources/shadowbox/shadowbox.js"/>"></script>
         <script type="text/javascript">
-        	var urlOrdenProduccion 			= '${urlOrdenProduccion}';	
-        	var urlVisualizador				= '${urlVisualizador}';
-            var urlCliente					= '${urlCliente}';
-            var urlCombinacionTintas		= '${urlCombinacionTintas}';
-            var urlCostoExtra				= '${urlCostoExtra}';
-            var urlEstatusOrden				= '${urlEstatusOrden}';
-            var urlMaquina					= '${urlMaquina}';
-            var urlMaterialAyuda			= '${urlMaterialAyuda}';
-            var urlPapelSobrante			= '${urlPapelSobrante}';
-            var urlPrensista				= '${urlPrensista}';
-            var urlPerfil					= '${urlPerfil}';
-            var urlPerfilXUsuario			= '${urlPerfilXUsuario}';
-            var urlProcesoDisenio			= '${urlProcesoDisenio}';
-            var urlProcesoExterno			= '${urlProcesoExterno}';
-            var urlProcesoPreprensa			= '${urlProcesoPreprensa}';
-            var urlProcesoTransporte		= '${urlProcesoTransporte}';
-            var urlProveedorExterno			= '${urlProveedorExterno}';
-            var urlProveedorPapel			= '${urlProveedorPapel}';
-            var urlResponsableInsumo		= '${urlResponsableInsumo}';
-            var urlTabuladorPrecios			= '${urlTabuladorPrecios}';
-            var urlTamanioPublicacion		= '${urlTamanioPublicacion}';
-            var urlTintaEspecial			= '${urlTintaEspecial}';
-            var urlTipoBarniz				= '${urlTipoBarniz}';
-            var urlTipoCliente				= '${urlTipoCliente}';
-            var urlTipoComplejidad			= '${urlTipoComplejidad}';
-            var urlTipoComprobanteFiscal	= '${urlTipoComprobanteFiscal}';
-            var urlTipoFormaTrabajo			= '${urlTipoFormaTrabajo}';
-            var urlTipoPapelExtendido		= '${urlTipoPapelExtendido}';
-            var urlTipoPlaca				= '${urlTipoPlaca}';
-            var urlTipoPrecio				= '${urlTipoPrecio}';
-            var urlTipoTrabajo				= '${urlTipoTrabajo}';
-            var urlTurnoLaboral				= '${urlTurnoLaboral}';
-            var urlTipoVuelta				= '${urlTipoVuelta}';
-            var urlUsuario					= '${urlUsuario}';
-            var urlSalir					= '${urlSalir}';
+	     	// inicializacion shadowbox
+	        Shadowbox.init({});
+        </script>
+        <script type="text/javascript">
+        	var urlOrdenProduccion 				= '${urlOrdenProduccion}';	
+        	var urlVisualizador					= '${urlVisualizador}';
+        // ***
+        	var urlVentanaOrdenProduccion		= '${urlVentanaOrdenProduccion}';
+        	var urlVentanaCotizacion			= '${urlVentanaCotizacion}';
+        	var urlVentanaNotaRemisionFactura	= '${urlVentanaNotaRemisionFactura}';
+        	var urlVentanaColaImpresion			= '${urlVentanaColaImpresion}';
+        // ***
+            var urlCliente						= '${urlCliente}';
+            var urlCombinacionTintas			= '${urlCombinacionTintas}';
+            var urlCostoExtra					= '${urlCostoExtra}';
+            var urlEstatusOrden					= '${urlEstatusOrden}';
+            var urlMaquina						= '${urlMaquina}';
+            var urlMaterialAyuda				= '${urlMaterialAyuda}';
+            var urlPapelSobrante				= '${urlPapelSobrante}';
+            var urlPrensista					= '${urlPrensista}';
+            var urlProcesoDisenio				= '${urlProcesoDisenio}';
+            var urlProcesoExterno				= '${urlProcesoExterno}';
+            var urlProcesoPreprensa				= '${urlProcesoPreprensa}';
+            var urlProcesoTransporte			= '${urlProcesoTransporte}';
+            var urlProveedorExterno				= '${urlProveedorExterno}';
+            var urlProveedorPapel				= '${urlProveedorPapel}';
+            var urlResponsableInsumo			= '${urlResponsableInsumo}';
+            var urlTabuladorPrecios				= '${urlTabuladorPrecios}';
+            var urlTamanioPublicacion			= '${urlTamanioPublicacion}';
+            var urlTintaEspecial				= '${urlTintaEspecial}';
+            var urlTipoBarniz					= '${urlTipoBarniz}';
+            var urlTipoCliente					= '${urlTipoCliente}';
+            var urlTipoComplejidad				= '${urlTipoComplejidad}';
+            var urlTipoComprobanteFiscal		= '${urlTipoComprobanteFiscal}';
+            var urlTipoFormaTrabajo				= '${urlTipoFormaTrabajo}';
+            var urlTipoPapelExtendido			= '${urlTipoPapelExtendido}';
+            var urlTipoPlaca					= '${urlTipoPlaca}';
+            var urlTipoPrecio					= '${urlTipoPrecio}';
+            var urlTipoTrabajo					= '${urlTipoTrabajo}';
+            var urlTurnoLaboral					= '${urlTurnoLaboral}';
+            var urlTipoVuelta					= '${urlTipoVuelta}';
+         // ***
+            var urlPerfil						= '${urlPerfil}';
+            var urlPerfilXUsuario				= '${urlPerfilXUsuario}';
+            var urlUsuario						= '${urlUsuario}';
+         // ***
+            var urlSalir						= '${urlSalir}';
             
             function menu_principal( opcion_principal ) {
             	switch( opcion_principal ) {
@@ -117,121 +134,241 @@
             			//alert("error");
             			break;
             	}
-            	
             }
             
             function menu( opcion ) {
                 switch( opcion ) {
 	                case 'visualizador':
 	                	document.forms["opcion_menu"].action = urlVisualizador;
+	                	document.forms["opcion_menu"].method = "post";
+	                	document.forms[0].submit();
 	                	break;
                     case 'orden_produccion':
                         document.forms["opcion_menu"].action = urlOrdenProduccion;
+                        document.forms["opcion_menu"].method = "post";
+                        document.forms[0].submit();
                         break;
+                // *******************
+                    case 'ventana_reporte_orden_produccion':
+                    	Shadowbox.open({
+                    		content:urlVentanaOrdenProduccion,
+                    		player:'iframe',
+                    		width:600,
+                    		height:300,
+                    		options:{
+                    			modal:true,
+                    			overlayOpacity:0.75
+                    		}
+                    	});
+                    	break;
+                    case 'ventana_reporte_cotizacion':
+                    	Shadowbox.open({
+                    		content:urlVentanaCotizacion,
+                    		player:'iframe',
+                    		width:800,
+                    		height:550,
+                    		options:{
+                    			modal:true,
+                    			overlayOpacity:0.75
+                    		}
+                    	});
+                    	break;
+                    case 'ventana_reporte_nota_remision':
+                    	Shadowbox.open({
+                    		content:urlVentanaNotaRemisionFactura,
+                    		player:'iframe',
+                    		width:600,
+                    		height:300,
+                    		options:{
+                    			modal:true,
+                    			overlayOpacity:0.75
+                    		}
+                    	});
+                    	break;
+                    case 'ventana_reporte_cola_impresion':
+                    	Shadowbox.open({
+                    		content:urlVentanaColaImpresion,
+                    		player:'iframe',
+                    		width:600,
+                    		height:350,
+                    		options:{
+                    			modal:true,
+                    			overlayOpacity:0.75
+                    		}
+                    	});
+                    	break;
+                // *******************
                     case 'cliente':
                     	document.forms["opcion_menu"].action = urlCliente;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'combinacion_tintas':
                     	document.forms["opcion_menu"].action = urlCombinacionTintas;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'costo_extra':
                     	document.forms["opcion_menu"].action = urlCostoExtra;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'estatus_orden':
                     	document.forms["opcion_menu"].action = urlEstatusOrden;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'maquina':
                     	document.forms["opcion_menu"].action = urlMaquina;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'material_ayuda':
                     	document.forms["opcion_menu"].action = urlMaterialAyuda;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'papel_sobrante':
                     	document.forms["opcion_menu"].action = urlPapelSobrante;
-                    	break;
-                    case 'perfil':
-                    	document.forms["opcion_menu"].action = urlPerfil;
-                    	break;
-                    case 'perfil_x_usuario':
-                    	document.forms["opcion_menu"].action = urlPerfilXUsuario;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'prensista':
                     	document.forms["opcion_menu"].action = urlPrensista;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'proceso_disenio':
                     	document.forms["opcion_menu"].action = urlProcesoDisenio;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'proceso_externo':
                     	document.forms["opcion_menu"].action = urlProcesoExterno;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'proceso_preprensa':
                     	document.forms["opcion_menu"].action = urlProcesoPreprensa;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'proceso_transporte':
                     	document.forms["opcion_menu"].action = urlProcesoTransporte;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'proveedor_externo':
                     	document.forms["opcion_menu"].action = urlProveedorExterno;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'proveedor_papel':
                     	document.forms["opcion_menu"].action = urlProveedorPapel;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'responsable_insumo':
                     	document.forms["opcion_menu"].action = urlResponsableInsumo;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'tabulador_precios':
                     	document.forms["opcion_menu"].action = urlTabuladorPrecios;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'tamanio_publicacion':
                     	document.forms["opcion_menu"].action = urlTamanioPublicacion;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'tinta_especial':
                     	document.forms["opcion_menu"].action = urlTintaEspecial;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'tipo_barniz':
                     	document.forms["opcion_menu"].action = urlTipoBarniz;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'tipo_cliente':
                     	document.forms["opcion_menu"].action = urlTipoCliente;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'tipo_complejidad':
                     	document.forms["opcion_menu"].action = urlTipoComplejidad;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'tipo_comprobante_fiscal':
                     	document.forms["opcion_menu"].action = urlTipoComprobanteFiscal;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'tipo_forma_trabajo':
                     	document.forms["opcion_menu"].action = urlTipoFormaTrabajo;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'tipo_papel_extendido':
                     	document.forms["opcion_menu"].action = urlTipoPapelExtendido;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'tipo_placa':
                     	document.forms["opcion_menu"].action = urlTipoPlaca;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'tipo_precio':
                     	document.forms["opcion_menu"].action = urlTipoPrecio;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'tipo_trabajo':
                     	document.forms["opcion_menu"].action = urlTipoTrabajo;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'turno_laboral':
                     	document.forms["opcion_menu"].action = urlTurnoLaboral;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'tipo_vuelta':
                     	document.forms["opcion_menu"].action = urlTipoVuelta;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
+                    	break;
+                // *******************
+                    case 'perfil':
+                    	document.forms["opcion_menu"].action = urlPerfil;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
+                    	break;
+                    case 'perfil_x_usuario':
+                    	document.forms["opcion_menu"].action = urlPerfilXUsuario;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     case 'usuario':
                     	document.forms["opcion_menu"].action = urlUsuario;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
+                // *******************
                     case 'salir':
                     	document.forms["opcion_menu"].action = urlSalir;
+                    	document.forms["opcion_menu"].method = "post";
+                    	document.forms[0].submit();
                     	break;
                     default:
                     	alert("error en url");
                         break;
                 }
-                document.forms[0].submit();
             }
             
             function revisaParametroMenu() {
@@ -278,8 +415,9 @@
                         </div>
                         <div id="div_contenido">
                             <div id="div_formulario">
-                                <form name="opcion_menu" action="" method="POST" accept-charset="ISO-8859-1"></form>
+                                <form name="opcion_menu" action="" accept-charset="ISO-8859-1"></form>
                                 	<div id="div_pestania">
+						<!-- PESTAÑA PRODUCCION -->
                                 		<div id="div_pestania_produccion" style="display:block; background-color: transparent;">
                                 			<div class="titulo_menu">
                                 				PRODUCCI&Oacute;N
@@ -330,18 +468,49 @@
 							        		
 							        		</security:authorize>
 	                                	</div>
+						<!-- PESTAÑA REPORTES -->
 	                                	<div id="div_pestania_reportes" style="display:none; background-color: transparent;">
 	                                		<div class="titulo_menu">
                                 				REPORTES
                                 			</div>
 	                                		<security:authorize access="hasRole('ROLE_ROOT')">
-                                			
+                                				<div id="div_opcion_reporte_orden_produccion" class="boton_dinamico" onclick="menu('ventana_reporte_orden_produccion');">
+                                					<span class="texto_boton">Orden Producci&oacute;n</span>
+	                                			</div>
+	                                			<div id="div_opcion_reporte_cotizacion" class="boton_dinamico" onclick="menu('ventana_reporte_cotizacion');">
+                                					<span class="texto_boton">Cotizaci&oacute;n</span>
+	                                			</div>
+	                                			<div id="div_opcion_reporte_nota_remision" class="boton_dinamico" onclick="menu('ventana_reporte_nota_remision');">
+                                					<span class="texto_boton">Nota <br/> Remisi&oacute;n / Factura</span>
+	                                			</div>
+	                                			<div id="div_opcion_reporte_cola_impresion" class="boton_dinamico" onclick="menu('ventana_reporte_cola_impresion');">
+                                					<span class="texto_boton">Cola Impresi&oacute;n</span>
+	                                			</div>
 							        		</security:authorize>
 							        		<security:authorize access="hasRole('ROLE_ADMIN')">
-							        		
+							        			<div id="div_opcion_reporte_orden_produccion" class="boton_dinamico" onclick="menu('ventana_reporte_orden_produccion');">
+                                					<span class="texto_boton">Orden Producci&oacute;n</span>
+	                                			</div>
+	                                			<div id="div_opcion_reporte_cotizacion" class="boton_dinamico" onclick="menu('ventana_reporte_cotizacion');">
+                                					<span class="texto_boton">Cotizaci&oacute;n</span>
+	                                			</div>
+	                                			<div id="div_opcion_reporte_nota_remision" class="boton_dinamico" onclick="menu('ventana_reporte_nota_remision');">
+                                					<span class="texto_boton">Nota <br/> Remisi&oacute;n / Factura</span>
+	                                			</div>
+	                                			<div id="div_opcion_reporte_cola_impresion" class="boton_dinamico" onclick="menu('ventana_reporte_cola_impresion');">
+                                					<span class="texto_boton">Cola Impresi&oacute;n</span>
+	                                			</div>
 							        		</security:authorize>
 							        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
-							        		
+							        			<div id="div_opcion_reporte_orden_produccion" class="boton_dinamico" onclick="menu('ventana_reporte_orden_produccion');">
+                                					<span class="texto_boton">Orden Producci&oacute;n</span>
+	                                			</div>
+	                                			<div id="div_opcion_reporte_cotizacion" class="boton_dinamico" onclick="menu('ventana_reporte_cotizacion');">
+                                					<span class="texto_boton">Cotizaci&oacute;n</span>
+	                                			</div>
+	                                			<div id="div_opcion_reporte_nota_remision" class="boton_dinamico" onclick="menu('ventana_reporte_nota_remision');">
+                                					<span class="texto_boton">Nota <br/> Remisi&oacute;n / Factura</span>
+	                                			</div>
 							        		</security:authorize>
 							        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
 							        		
@@ -365,6 +534,7 @@
 							        		
 							        		</security:authorize>
 	                                	</div>
+						<!-- PESTAÑA CATALOGOS -->
 	                                	<div id="div_pestania_catalogos" style="display:none; background-color: transparent;">
 	                                		<div class="titulo_menu">
                                 				CAT&Aacute;LOGOS
@@ -565,6 +735,7 @@
 							        		
 							        		</security:authorize>
 	                                	</div>
+						<!-- PESTAÑA SEGURIDAD -->
 	                                	<div id="div_pestania_seguridad" style="display:none; background-color: transparent;">
 	                                		<div class="titulo_menu">
                                 				SEGURIDAD

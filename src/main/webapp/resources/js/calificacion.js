@@ -350,7 +350,7 @@ function carga_datos() {
 
 function condicionesProduccion() {
 	Shadowbox.open({
-        content:urlCondicionesProduccion + "?nut=" + document.orden_produccion.nut.value,
+        content:urlVentanaCondicionesProduccion + "?nut=" + document.orden_produccion.nut.value,
         player:"iframe",
         width:730,
         height:510,

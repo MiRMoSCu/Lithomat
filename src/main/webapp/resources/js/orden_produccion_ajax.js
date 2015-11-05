@@ -311,12 +311,13 @@ function ajaxAgregaPartida() {
 
 function ajaxBuscaPapelExtendido() {
 	Shadowbox.open({
-        content: urlBuscaTipoPapel,
-        player: 'iframe',
-        width: 1024,     //966
-        height: 800,    //600
-        options: { modal:true,
-                   overlayOpacity: 0.75 }
+        content:urlBuscaTipoPapel,
+        player:'iframe',
+        width:1024,     //966
+        height:800,    //600
+        options:{ 
+        	modal:true,
+        	overlayOpacity: 0.75 }
     });
 }
 
