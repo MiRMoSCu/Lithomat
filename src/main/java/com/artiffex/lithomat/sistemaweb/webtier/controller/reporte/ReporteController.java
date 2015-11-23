@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -56,9 +55,9 @@ import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.Remision;
 
 @Controller
 @RequestMapping("/reporte")
-public class ReporteNotaController {
+public class ReporteController {
 	
-	private static final Logger log = Logger.getLogger(ReporteNotaController.class);
+	private static final Logger log = Logger.getLogger(ReporteController.class);
 	
 	// cuando se corre en una aplicacion java
 	//public static final String DIRECTORIO_ORIGEN = "WebContent/resources/jasper/"; 
@@ -479,9 +478,9 @@ public class ReporteNotaController {
 	}
 	
 	
-	private void colaImpresion( Timestamp fechaImpresion, int idMaquina, int idEstatusOrden, HttpServletRequest request, HttpServletResponse response) {
+	private void colaImpresion( int idEstatusOrden, HttpServletRequest request, HttpServletResponse response ) {
 		// enviar un archivo al cliente
-		byte[] documento = reporteService.obtieneExcelListaColaImpresion(fechaImpresion, idMaquina, idEstatusOrden);
+		byte[] documento = reporteService.obtieneExcelListaColaImpresion( idEstatusOrden );
 		try {
 			OutputStream os = response.getOutputStream();
 			response.setHeader("Content-Disposition","attachment; filename=reporteColaImpresion.xls");
@@ -628,16 +627,12 @@ public class ReporteNotaController {
 	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/cola_impresion", method = RequestMethod.POST)
 	public void colaImpresionPorMaquinaEstatusOrden(
-			@RequestParam(value = "fecha_impresion", 	required = false) String fechaImpresion,
-			@RequestParam(value = "id_maquina", 		required = false) Integer idMaquina,
 			@RequestParam(value = "id_estatus_orden", 	required = false) Integer idEstatusOrden,
 			HttpServletRequest request,
 			HttpServletResponse response
 		) {
 		log.info("/cola_impresion");
-		String[] arrFechaImpresion = fechaImpresion.split("/");
-		colaImpresion(Timestamp.valueOf(arrFechaImpresion[2] + "-" + arrFechaImpresion[1] + "-" + arrFechaImpresion[0] + " 00:00:00"), idMaquina, idEstatusOrden, request, response);
-		arrFechaImpresion = null;
+		colaImpresion(idEstatusOrden, request, response);
 	}
 	
 	
@@ -705,10 +700,6 @@ public class ReporteNotaController {
 	@RequestMapping(value = "/ventana_cola_impresion", method = RequestMethod.GET)
 	public String ventanaColaImpresion( Model model ){
 		log.info("/ventana_cola_impresion");
-		
-		List<ComboSelect> listaMaquina = maquinaService.listaComboSelect();
-		model.addAttribute("listaMaquina", listaMaquina);
-		listaMaquina = null;
 		
 		List<ComboSelect> listaEstatusOrden = estatusOrdenService.listaComboSelect();
 		model.addAttribute("listaEstatusOrden",listaEstatusOrden);

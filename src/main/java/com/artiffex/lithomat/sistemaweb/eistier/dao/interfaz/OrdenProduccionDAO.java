@@ -20,24 +20,5 @@ public interface OrdenProduccionDAO {
 	public int contador(Timestamp fechaGeneracion);
 	
 	public int buscaIdEstatusOrden(String nut);
-	
-	
-	
-	
-	
-
-
-	
-
-	
-	
-	
-	//public int obtieneIdOrdenProduccion(String nut);
-	
-	//public int actualiza(OrdenProduccion ordenProduccion);
-	
-	//public int obtieneEstatus(String nut);
-	
-	//public HashMap<String, Object> getHashPrecioYTipoPrecio(int idOrdenProduccion);
-	
+			
 }

@@ -93,8 +93,8 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 				} else {
 					html.append("l2");
 				}
-				html.append("\' ");
-				html.append("onclick=\'setCamposTipoPapelExtendido("
+				html.append("' ");
+				html.append("onclick='setCamposTipoPapelExtendido("
 						+ "&#39;" + tipoPapelExtendido.getIdTipoPapelExtendido() + "&#39;,"
 						+ "&#39;" + tipoPapelExtendido.getProveedorPapel().getRazonSocial() + "&#39;,"
 						+ "&#39;" + tipoPapelExtendido.getNombre() + "&#39;,"
@@ -103,7 +103,8 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 						+ "&#39;" + (int)tipoPapelExtendido.getAncho() + "&#39;,"
 						+ "&#39;" + (int)tipoPapelExtendido.getAlto() + "&#39;,"
 						+ "&#39;" + tipoPapelExtendido.getPrecio() + "&#39;"
-						+ ");\'");
+						+ ");'");
+				html.append("ondblclick=\"this.click(); window.parent.Shadowbox.close();\"");
 				html.append(">");
 				
 				html.append("<td>");

@@ -6,7 +6,7 @@ function setCamposTipoPapelExtendido( id_tipo_papel_extendido, nombre_proveedor,
 	window.parent.document.tipo_trabajo_detalle.id_tipo_papel_extendido.value 	= id_tipo_papel_extendido;
 	window.parent.document.tipo_trabajo_detalle.tipo_papel_extendido.value 		= document.tipo_trabajo_detalle.descripcion_completa.value;
 }
-		
+
 function limpia() {
 	// limpia campos ocultos
 	document.tipo_trabajo_detalle.id_tipo_papel_extendido.value = "";

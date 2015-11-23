@@ -1,8 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" 	prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" 			prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" 	prefix="fn"%>
 <c:url value="/?opc=produccion"	            				var="urlMenu"/>
 <c:url value="/cliente/busca_nombre"        				var="urlBuscaNombreCliente"/>
 <c:url value="/cliente/busca"               				var="urlBuscaCliente"/>
@@ -32,14 +32,15 @@
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1"></meta>
         <title>Orden Producci&oacute;n</title>
-        
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="<c:url value="/resources/shadowbox/shadowbox.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/master.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/font.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/menu.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/orden_produccion.css"/>" type="text/css"></link>
+        <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script type="text/javascript" src="<c:url value="/resources/shadowbox/shadowbox.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/orden_produccion_limpia_form.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/orden_produccion_ajax.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/orden_produccion.js"/>"></script>
@@ -52,6 +53,12 @@
                 //modal: true,
                 //overlayOpacity: 0.75
             });
+            // iniciacion datepicker
+            $(function() {
+				$("#datepicker").datepicker({
+					dateFormat:'yy-mm-dd',
+				});
+			});
         </script>
         <script type="text/javascript">
         	var urlMenu							= "${urlMenu}";
@@ -272,18 +279,7 @@
                                         </div>
                                         <div id="div_search_like_google" style="background:red; width:438px; float:right; display:none;">
                                         	<select name="select_search" size="5" onclick="preparaAjaxBuscaCliente()" onkeyup="enterSearchLikeGoogle()" onblur="closeSearchLikeGoogle()">
-                                        		<option value="1">abc</option>
-                                        		<option value="2">def</option>
-                                        		<option value="3">ghi</option>
-                                        		<option value="4">jkl</option>
-                                        		<option value="5">mno</option>
-                                        		<option value="6">pqr</option>
-                                        		<option value="7">stu</option>
-                                        		<option value="8">vwx</option>
-                                        		<option value="9">yza</option>
-                                        		<option value="10">1abc</option>
-                                        		<option value="11">1def</option>
-                                        		<option value="12">1ghi</option>
+                                        		<option></option>
                                         	</select>
                                         </div>
                                         <img alt="" src="<c:url value="/resources/image/separador_nombre.png"/>"></img>
@@ -637,10 +633,17 @@
                                                         <tr>
                                                             <td width="43%">Fecha aproximada entrega:</td>
                                                             <td>
+                                                            	<input 	type="text"
+                                                            			class="input"
+                                                            			id="datepicker"
+                                                            			name="fecha_prometida_entrega"
+                                                            			tabindex="6"/>
+                                                            	<!-- 
                                                                 <input  type="date" 
                                                                         class="input" 
                                                                         name="fecha_prometida_entrega" 
                                                                         tabindex="6"/>
+                                                                -->
                                                             </td>
                                                         </tr>
                                                     </table>

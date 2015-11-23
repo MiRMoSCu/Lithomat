@@ -18,11 +18,10 @@ function limpiarFormulario() {
 
 function enviarFormulario() {
 	// copia informacion
-	document.reporte_cola_impresion.id_maquina.value = $("[name=select_maquina]").val();
 	document.reporte_cola_impresion.id_estatus_orden.value = $("[name=select_estatus_orden]").val();
 	// validacion
 	var correcto = true;
-	
+	/*
 	if( document.reporte_cola_impresion.fecha_impresion.value == "" ) {
 		correcto = false;
 		alert("Favor de especificar la fecha de impresion.");
@@ -36,6 +35,7 @@ function enviarFormulario() {
 		document.reporte_cola_impresion.fecha_impresion.focus();
 	}
 	
+	
 	var arr = document.reporte_cola_impresion.fecha_impresion.value.split("/");
 	console.log(arr);
 	if( correcto &$ ( arr[0] == "00" || arr[1] == "00" || arr[2] == "0000"  )  ) {
@@ -43,6 +43,7 @@ function enviarFormulario() {
 		alert("Fecha invalida, favor de especificar una fecha correcta");
 		document.reporte_cola_impresion.fecha_impresion.focus();
 	}
+	*/
 	
 	if( correcto ) {
 		document.reporte_cola_impresion.action = urlExportaReporteColaImpresion;

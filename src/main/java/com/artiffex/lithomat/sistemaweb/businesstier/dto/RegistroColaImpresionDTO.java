@@ -2,21 +2,22 @@ package com.artiffex.lithomat.sistemaweb.businesstier.dto;
 
 import java.io.Serializable;
 
-public class ReporteColaImpresionDTO implements Serializable {
+public class RegistroColaImpresionDTO implements Serializable {
 
 	private static final long serialVersionUID = -7976372927329947970L;
 	
-	private String nut;
-	private String nombreCliente;
-	private String decripcion;
-	private String papel;
-	private String medida;
-	private int tiro;
-	private String tintas;
-	private String coloresFrente;
-	private String coloresVuelta;
-	private String placas;
-	private String Observaciones;
+	private String nut;				// tabla: orden_produccion
+	private String nombreCliente;	// tabla: cliente
+	private String decripcion;		// tabla: partida
+	private String papel;			// tabla: tipo_papel_extendido
+	private String medida;			// tabla: tipo_papel_extendido
+	private int tiro;				// tabla: pliego (hojas_totales)
+	private String tintas;			// tabla: combinacion_tintas
+	private String coloresFrente;	// tabla: combinacion_tintas
+	private String coloresVuelta;	// tabla: combinacion_tintas
+	private String placas;			// tabla: frente_num_total_placas + vuelta_num_total_placas
+	private String maquina;			// tabla: maquina
+	private String observaciones;	//        vacio
 	
 	
 	public String getNut() {
@@ -79,10 +80,17 @@ public class ReporteColaImpresionDTO implements Serializable {
 	public void setPlacas(String placas) {
 		this.placas = placas;
 	}
+	public String getMaquina() {
+		return maquina;
+	}
+	public void setMaquina(String maquina) {
+		this.maquina = maquina;
+	}
 	public String getObservaciones() {
-		return Observaciones;
+		return observaciones;
 	}
 	public void setObservaciones(String observaciones) {
-		Observaciones = observaciones;
+		this.observaciones = observaciones;
 	}
+	
 }

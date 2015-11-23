@@ -24,5 +24,5 @@ public interface OrdenProduccionService {
 	public String generaJsonArbolOrdenProduccion(int idOrdenProduccion);
 	
 	public boolean existeOrdenProduccionPorNut(String nut);
-	
+		
 }

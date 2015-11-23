@@ -19,11 +19,13 @@ public interface TipoTrabajoDetalleService {
 	public List<TipoTrabajoDetalle> listaTipoTrabajoDetalle();
 	
 	public List<TipoTrabajoDetalle> listaTipoTrabajoDetallePorPartida(int idPartida);
-
+	
 	public HashMap<String, Object> obtieneSumatorias(int idTipoTrabajoDetalle);
 	
 	public String buscaHTML(int idPartida);
 	
 	public String obtienePapelDescripcionBasica(int idTipoTrabajoDetalle);
+	
+	public List<TipoTrabajoDetalle> listaTipoTrabajoDetallePorEstatusOrden(int idEstatusOrden);
 
 }

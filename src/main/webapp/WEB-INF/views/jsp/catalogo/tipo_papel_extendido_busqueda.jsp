@@ -50,7 +50,8 @@
 													<fmt:parseNumber var="formatAncho" type="number" integerOnly="true" value="${tipoPapelExtendido.ancho}" />
 													<fmt:parseNumber var="formatAlto" type="number" integerOnly="true" value="${tipoPapelExtendido.alto}" />
 													<tr class='${i.count%2==0?"l2":"l1"}'
-														onclick="setCampos('${tipoPapelExtendido.idTipoPapelExtendido}', '${tipoPapelExtendido.proveedorPapel.razonSocial}', '${tipoPapelExtendido.nombre}', '${tipoPapelExtendido.gramaje}', '${tipoPapelExtendido.kilogramos}', '${tipoPapelExtendido.ancho}', '${tipoPapelExtendido.alto}', '${tipoPapelExtendido.descripcion}', '${tipoPapelExtendido.precio}', '${tipoPapelExtendido.tipoPrecio.nombre}');">
+														onclick="setCampos('${tipoPapelExtendido.idTipoPapelExtendido}', '${tipoPapelExtendido.proveedorPapel.razonSocial}', '${tipoPapelExtendido.nombre}', '${tipoPapelExtendido.gramaje}', '${tipoPapelExtendido.kilogramos}', '${tipoPapelExtendido.ancho}', '${tipoPapelExtendido.alto}', '${tipoPapelExtendido.descripcion}', '${tipoPapelExtendido.precio}', '${tipoPapelExtendido.tipoPrecio.nombre}');"
+														ondblclick="this.click(); window.parent.Shadowbox.close();">
 														<td>${tipoPapelExtendido.idTipoPapelExtendido}</td>
 														<td>${tipoPapelExtendido.proveedorPapel.razonSocial}</td>
 														<td>${tipoPapelExtendido.nombre}</td>

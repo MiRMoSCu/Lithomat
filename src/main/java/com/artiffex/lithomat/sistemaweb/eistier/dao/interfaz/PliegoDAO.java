@@ -18,32 +18,4 @@ public interface PliegoDAO {
 	
 	public int numeroPliegosPorTipoTrabajoDetalle(int idTipoTrabajoDetalle);
 	
-
-	
-	
-	
-	
-	
-
-	// Metodos abajo son utilizados para ResumenCalificacionService
-
-
-	//public int getTotalPlacas(int idTipoTrabajoDetalle);
-
-	//public int getTotalEntradasMaquinaTinta(int idTipoTrabajoDetalle);
-
-	//public int getTotalEntradasMaquinaTintaEspecial(int idTipoTrabajoDetalle);
-
-	//public int getTotalEntradasMaquinaBarnizFrente(int idTipoTrabajoDetalle);
-
-	//public int getTotalEntradasMaquinaBarnizVuelta(int idTipoTrabajoDetalle);
-	
-	//public int actualiza(Pliego pliego);
-	
-	//public List<Integer> listaIdPliego(int idTipoTrabajoDetalle);
-	
-	//public float getNumeroDecimal(int idPliego);
-	
-	//public int activaPliego(int idPliego);
-
 }

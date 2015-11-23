@@ -37,46 +37,9 @@
                     <div id="div_contenido">
                     	<br/>
                     	<form name="reporte_cola_impresion" method="post">
-                    		<input type="hidden" name="id_maquina" 			value="" />
                     		<input type="hidden" name="id_estatus_orden" 	value="" />
 	                        <div class="titulo">
 	                        	<font size=5>REPORTE COLA IMPRESI&Oacute;N</font>
-	                        </div>
-	                        
-	                        <div class="linea">
-	                        	<div class="casilla">
-	                        		<div class="columna_completa">
-	                        			<table>
-	                        				<tr>
-	                        					<td width="1%">Fecha:</td>
-	                        					<td>
-	                        						<input 	type="text" 
-	                        								class="input"
-	                        								name="fecha_impresion"
-	                        								id="datepicker">
-	                        					</td>
-	                        				</tr>
-	                        			</table>
-	                        		</div>
-	                        	</div>
-	                        </div>
-	                        <div class="linea">
-	                        	<div class="casilla">
-	                        		<div class="columna_completa">
-	                        			<table>
-	                        				<tr>
-	                        					<td width="1%">M&aacute;quina:</td>
-	                        					<td>
-	                        						<select name="select_maquina">
-	                        							<c:forEach var="m" items="${listaMaquina}">
-	                        								<option value="${m.value}">${m.text}</option>
-	                        							</c:forEach>
-	                        						</select>
-	                        					</td>
-	                        				</tr>
-	                        			</table>
-	                        		</div>
-	                        	</div>
 	                        </div>
 	                        <div class="linea">
 	                        	<div class="casilla">
@@ -96,6 +59,25 @@
 	                        		</div>
 	                        	</div>
 	                        </div>
+	                        <!-- 
+	                        <div class="linea">
+	                        	<div class="casilla">
+	                        		<div class="columna_completa">
+	                        			<table>
+	                        				<tr>
+	                        					<td width="1%">Fecha:</td>
+	                        					<td>
+	                        						<input 	type="text" 
+	                        								class="input"
+	                        								name="fecha_impresion"
+	                        								id="datepicker">
+	                        					</td>
+	                        				</tr>
+	                        			</table>
+	                        		</div>
+	                        	</div>
+	                        </div>
+	                        -->
 	                        <div class="linea">
 	                        	<div class="casilla" style="text-align:right;">
 	                        		<span style="cursor:pointer;" onclick="cerrarVentana()">

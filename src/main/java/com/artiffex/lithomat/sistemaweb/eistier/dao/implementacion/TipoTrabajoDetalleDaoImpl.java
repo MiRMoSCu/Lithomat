@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
@@ -96,5 +97,52 @@ public class TipoTrabajoDetalleDaoImpl implements TipoTrabajoDetalleDAO {
 		}
 		return lista;
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	public List<TipoTrabajoDetalle> listaPorEstatusOrden(int idEstatusOrden) {
+		List<TipoTrabajoDetalle> lista = new ArrayList<TipoTrabajoDetalle>();
+		try {
+			sesion = HibernateUtil.getInstance().getCurrentSession();
+			sesion.beginTransaction();
+			SQLQuery query = sesion.createSQLQuery(
+					"SELECT \r\n" + 
+					"    ttd.* \r\n" + 
+					"FROM \r\n" + 
+					"    tipo_trabajo_detalle ttd \r\n" + 
+					"WHERE \r\n" + 
+					"    ttd.id_partida IN (SELECT \r\n" + 
+					"            p.id_partida \r\n" + 
+					"        FROM \r\n" + 
+					"            partida p \r\n" + 
+					"        WHERE \r\n" + 
+					"            p.id_orden_produccion IN (SELECT \r\n" + 
+					"                    op.id_orden_produccion \r\n" + 
+					"                FROM \r\n" + 
+					"                    orden_produccion op, \r\n" + 
+					"                    historial_estatus he \r\n" + 
+					"                WHERE \r\n" + 
+					"                    he.id_orden_produccion = op.id_orden_produccion \r\n" + 
+					"                        AND he.id_estatus_orden = :idEstatusOrden \r\n" + 
+					"                        AND he.fecha = (SELECT \r\n" + 
+					"                            MAX(he2.fecha) \r\n" + 
+					"                        FROM \r\n" + 
+					"                            historial_estatus he2 \r\n" + 
+					"                        WHERE \r\n" + 
+					"                            he2.id_orden_produccion = he.id_orden_produccion) \r\n" + 
+					"                        AND op.activo = TRUE) \r\n" + 
+					"                AND p.activo = TRUE) \r\n" + 
+					"        AND ttd.activo = TRUE \r\n" + 
+					"ORDER BY ttd.id_maquina ASC , ttd.id_partida ASC;");
+			query.setParameter("idEstatusOrden", idEstatusOrden);
+			query.addEntity( TipoTrabajoDetalle.class );
+			lista = query.list();
+			sesion.getTransaction().commit();
+			query = null;
+		} catch(Exception e) {
+			log.error(e.getMessage());
+			sesion.getTransaction().rollback();
+		}
+		return lista;
+	}
+
 }

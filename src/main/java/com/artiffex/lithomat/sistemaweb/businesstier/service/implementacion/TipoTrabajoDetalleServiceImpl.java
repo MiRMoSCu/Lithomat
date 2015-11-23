@@ -240,5 +240,9 @@ public class TipoTrabajoDetalleServiceImpl implements TipoTrabajoDetalleService 
 		ttd = null;
 		return papelDescripcion.toString();
 	}
-	
+
+	public List<TipoTrabajoDetalle> listaTipoTrabajoDetallePorEstatusOrden(int idEstatusOrden) {
+		return tipoTrabajoDetalleDAO.listaPorEstatusOrden(idEstatusOrden);
+	}
+
 }
