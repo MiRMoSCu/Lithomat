@@ -39,26 +39,32 @@ function genera_tabla_dom( jsonOrdenesProduccion ) {
     td.innerHTML = "NUT";
     td.setAttribute("width","15%");
     tr.appendChild( td );
-    var td = document.createElement("th");
+    
+    td = document.createElement("th");
     td.innerHTML = "Nombre";
     td.setAttribute("width","15%");
     tr.appendChild( td );
-    var td = document.createElement("th");
+    
+    td = document.createElement("th");
     td.innerHTML = "Descripci&oacute;n";
     td.setAttribute("width","30%");
     tr.appendChild( td );
-    var td = document.createElement("th");
+    
+    td = document.createElement("th");
     td.setAttribute("width","10%");
     td.innerHTML = "Fecha cotizaci&oacute;n";
     tr.appendChild( td );
-    var td = document.createElement("th");
+    
+    td = document.createElement("th");
     td.innerHTML = "Cliente";
     td.setAttribute("width","20%");
     tr.appendChild( td );
-    var td = document.createElement("th");
+    
+    td = document.createElement("th");
     td.innerHTML = "Estatus";
     td.setAttribute("width","10%");
     tr.appendChild( td );
+    
     table.appendChild( tr );
     $.each( jsonOrdenesProduccion, function(i, item){
         tr = document.createElement("tr");
@@ -78,15 +84,15 @@ function genera_tabla_dom( jsonOrdenesProduccion ) {
         td.innerHTML = item.descripcion;
         tr.appendChild( td );
         td = document.createElement("td");
-        td.innerHTML = item.fecha_cotizacion;
+        td.innerHTML = item.fechaCotizacion;
         tr.appendChild( td );
         td = document.createElement("td");
-        td.innerHTML = item.nombre_moral;
+        td.innerHTML = item.nombreMoral;
         tr.appendChild( td );
         td = document.createElement("td");
         td.setAttribute("id","td_" + item.nut);
-        td.setAttribute("class","estatus_" + item.id_estatus_orden);
-        td.innerHTML = item.nombre_estatus;
+        td.setAttribute("class","estatus_" + item.idEstatusOrden);
+        td.innerHTML = item.nombreEstatus;
         tr.appendChild( td );
         table.appendChild( tr );
     });
@@ -166,6 +172,27 @@ function nueva_busqueda() {
         });    
     }
 } // nueva_busqueda
+
+function realiza_consulta_paginador(){
+	// realiza ajax con el nuevo numero de pagina solicitada; el tipo de busqueda es el mismo
+    document.forms["visualizador"].elements["numero_pagina"].value                  = numero_pagina;
+    document.forms["visualizador"].elements["numero_registros_por_pagina"].value    = numero_registros_por_pagina;
+    $.ajax({
+        type:"POST",
+        url:urlBuscaOrdenesProduccion,
+        data:$("[name='visualizador']").serialize(),
+        success:function( response ) {
+        	//console.log(response);
+        	genera_tabla_dom( response.listaOrdenesProduccion );
+        	//jsonResponse = JSON.parse(response);
+            //genera_tabla_dom( jsonResponse.ordenesProduccion );
+            //jsonResponse = null;
+        },
+        error:function( e ) {
+            alert("\u00A1Algo sali\u00f3 mal! pero no pasa nada, todo tiene soluci\u00f3n.");
+        }
+    });
+} // realiza_consulta (del paginador)
 
 function carga_datos() {
     

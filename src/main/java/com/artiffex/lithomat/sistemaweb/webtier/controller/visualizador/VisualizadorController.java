@@ -153,6 +153,11 @@ public class VisualizadorController {
 	public String visualizador(Model model) {
 		log.info("/visualizador");
 		
+		// configuracion de controles de pantalla
+		List<ComboSelect> listaEstatusOrden = estatusOrdenService.listaComboSelect();
+		model.addAttribute("listaEstatusOrden", listaEstatusOrden);
+		listaEstatusOrden = null;
+		
 		// configuracion busqueda
 		int tipoBusqueda = BUSQUEDA_DEFAULT;
 
@@ -164,11 +169,6 @@ public class VisualizadorController {
 		model.addAttribute("numeroRegistrosPorPagina", numeroRegistrosPorPagina);
 		model.addAttribute("tamanioMaximoArreglo", tamanioMaximoArreglo);
 		model.addAttribute("numeroPagina", numeroPagina);
-
-		// configuracion de controles de pantalla
-		List<ComboSelect> listaEstatusOrden = estatusOrdenService.listaComboSelect();
-		model.addAttribute("listaEstatusOrden", listaEstatusOrden);
-		listaEstatusOrden = null;
 
 		// numero total de registros
 		int numeroTotalRegistros = 
@@ -224,6 +224,9 @@ public class VisualizadorController {
 		) {
 		log.info("/busca_ordenes_produccion");
 		
+		StringBuilder sb = new StringBuilder();
+		Gson gson = new Gson();
+		
 		tipoBusqueda = tipoBusqueda == null ? 0 : tipoBusqueda;
 		// *
 		// * {"numeroTotalRegistros":13, 
@@ -236,21 +239,18 @@ public class VisualizadorController {
 		// * 		"estatus":""}, {"...":"...", ...}, {"":""}. ] }
 		// *
 		int numeroTotalRegistros = visualizadorService.getNumeroOrdenesProduccion(tipoBusqueda, nut, nombre, descripcion, fechaCotizacionInicio, fechaCotizacionFin, cliente, idEstatusOrden);
-		
 		List<VisualizadorDTO> listaOrdenesProduccion = visualizadorService.getListaOrdenesProduccion(tipoBusqueda, numeroPagina, numeroRegistrosPorPagina, nut, nombre, descripcion, fechaCotizacionInicio, fechaCotizacionFin, cliente, idEstatusOrden );
-
-		Gson gson = new Gson();
-		StringBuilder sb = new StringBuilder();
 
 		sb.append("{");
 		sb.append("\"numeroTotalRegistros\":");
 		sb.append(numeroTotalRegistros);
 		sb.append(",");
-		sb.append("\"ordenesProduccion\":");
+		sb.append("\"listaOrdenesProduccion\":");
 		sb.append(gson.toJson(listaOrdenesProduccion));
 		sb.append("}");
 
-		gson = null;
+		listaOrdenesProduccion	= null;
+		gson 					= null;
 
 		return sb.toString();
 	} // buscaOrdenesProduccion

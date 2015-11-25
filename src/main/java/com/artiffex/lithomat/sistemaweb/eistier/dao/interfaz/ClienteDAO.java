@@ -13,7 +13,11 @@ public interface ClienteDAO {
 	public void modifica(Cliente cliente);
 	
 	public List<Cliente> lista();
+	
+	public List<Cliente> listaPorRango(int limiteInferior, int limiteSuperior);
 
 	public List<Cliente> buscaPorNombre(String nombreMoral);
+	
+	public int numeroClientes();
 		
 }

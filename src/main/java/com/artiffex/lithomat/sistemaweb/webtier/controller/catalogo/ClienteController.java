@@ -22,6 +22,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoCliente;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.ClienteService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoClienteService;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
+import com.google.gson.Gson;
 
 @Controller
 @RequestMapping("/cliente")
@@ -39,17 +40,60 @@ public class ClienteController {
 	@RequestMapping(value = "/catalogo/lista", method = RequestMethod.POST)
 	public String listaCliente( Locale locale, Model model ) throws IOException {
 		log.info("/lista_cliente");
-
-		List<Cliente> listaCliente = clienteService.listaCliente();
+		
+		// configuracion de controles de la pagina (select)
 		List<ComboSelect> listaComboSelect = tipoClienteService.listaComboSelect();
-		model.addAttribute("listaCliente", listaCliente);
 		model.addAttribute("listaTipoCliente", listaComboSelect);
-
-		listaCliente = null;
 		listaComboSelect = null;
 		
+		// variables de configuracion del paginador
+		int numeroRegistrosPorPagina 	= 10;
+		int tamanioMaximoArreglo 		= 7;
+		int numeroPagina 				= 1;
+
+		model.addAttribute("numeroRegistrosPorPagina", numeroRegistrosPorPagina);
+		model.addAttribute("tamanioMaximoArreglo", tamanioMaximoArreglo);
+		model.addAttribute("numeroPagina", numeroPagina);
+		
+		// numero total de registros
+		int numeroTotalRegistros	= clienteService.obtieneNumeroClientes();
+		model.addAttribute("numeroTotalRegistros", numeroTotalRegistros);
+
+		// lista de registros
+		List<Cliente> listaCliente = clienteService.listaClientePorNumeroPagina(numeroPagina, numeroRegistrosPorPagina);
+		model.addAttribute("listaCliente", listaCliente);
+		listaCliente = null;
 		return "catalogo/cliente";
 	}// lista_cliente
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
+	@RequestMapping(value = "/catalogo/lista_por_pagina", method = RequestMethod.POST)
+	@ResponseBody
+	public String listaClientesPorPagina(
+			@RequestParam(value = "numero_pagina", 					required = false) Integer numeroPagina,
+			@RequestParam(value = "numero_registros_por_pagina", 	required = false) Integer numeroRegistrosPorPagina
+		) {
+		log.info("/busca_lista_clientes");
+		
+		StringBuilder sb = new StringBuilder();
+		Gson gson = new Gson();
+		
+		int numeroTotalRegistros = clienteService.obtieneNumeroClientes();
+		List<ClienteDTO> listaClientes = clienteService.listaClientePorNUmeroPaginaEnDTO(numeroPagina, numeroRegistrosPorPagina);
+		
+		sb.append("{");
+		sb.append("\"numeroTotalRegistros\":");
+		sb.append(numeroTotalRegistros);
+		sb.append(",");
+		sb.append("\"listaClientes\":");
+		sb.append(gson.toJson(listaClientes));
+		sb.append("}");
+
+		listaClientes 	= null;
+		gson 			= null;
+		
+		return sb.toString();
+	}
 
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
 	public String altaCliente(

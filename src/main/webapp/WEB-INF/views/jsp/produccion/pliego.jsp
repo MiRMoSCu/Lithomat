@@ -276,7 +276,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="linea"></div>
+                                <!-- <div class="linea"></div> -->
+                                <br/>
                                 <div class="linea">
                                     <div class="casilla" style="text-align: right;">
                                         <img alt="" style="cursor:pointer;" onclick="limpiaPliego();" src="<c:url value="/resources/image/boton_limpiar.jpg"/>">

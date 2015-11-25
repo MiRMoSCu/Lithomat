@@ -2,10 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:url value="/?opc=catalogos"	            var="urlMenu"/>
-<c:url value="/cliente/catalogo/alta"       var="urlAlta"/>
-<c:url value="/cliente/catalogo/modifica"   var="urlModifica"/>
-<c:url value="/cliente/catalogo/elimina"    var="urlElimina"/>
+<c:url value="/?opc=catalogos"	            		var="urlMenu"/>
+<c:url value="/cliente/catalogo/lista_por_pagina" 	var="urlBuscaListaClientes"/>
+<c:url value="/cliente/catalogo/alta"       		var="urlAlta"/>
+<c:url value="/cliente/catalogo/modifica"   		var="urlModifica"/>
+<c:url value="/cliente/catalogo/elimina"    		var="urlElimina"/>
 <html>
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1"></meta>
@@ -32,7 +33,7 @@
             
             #div_contenedor_tabla {
                 width: 100%;
-                height: 210px;
+                height: 150px; /*210px*/
             }
             
             #div_tabla_cliente {
@@ -46,13 +47,26 @@
         <link rel="stylesheet" href="<c:url value="/resources/css/font.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/menu.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/catalogo.css"/>" type="text/css"></link>
+        <link rel="stylesheet" href="<c:url value="/resources/css/paginador.css"/>" type="text/css"></link>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/paginador.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/cliente.js"/>"></script>
         <script type="text/javascript">
-        	var urlMenu		= "${urlMenu}";
-            var urlAlta 	= '${urlAlta}';
-            var urlModifica = '${urlModifica}';
-            var urlElimina 	= '${urlElimina}';
+            var numero_total_registros	        = ${numeroTotalRegistros};
+            var numero_registros_por_pagina		= ${numeroRegistrosPorPagina};
+            var tamanio_maximo_arreglo	        = ${tamanioMaximoArreglo};	// DEBE SER MAYOR A 2
+            var numero_pagina		        	= 1;						// NO DEBE MODIFICARSE
+            
+            var tamanio_arreglo		        	= 0; 	// se inicializan en carga_datos()
+            var numero_pagina_total	        	= 0; 	// se inicializan en carga_datos()
+            var mitad_tamanio_arreglo	        = 0;	// se inicializan en carga_datos()
+        </script>
+        <script type="text/javascript">
+        	var urlMenu					= "${urlMenu}";
+        	var urlBuscaListaClientes	= '${urlBuscaListaClientes}';
+            var urlAlta 				= '${urlAlta}';
+            var urlModifica 			= '${urlModifica}';
+            var urlElimina 				= '${urlElimina}';
         </script>
         <script type="text/javascript">
 	        function regresa_menu() {
@@ -60,7 +74,7 @@
 	        }
         </script>
     </head>
-    <body>
+    <body onload="carga_datos()">
         <div id="div_area">
             <div id="div_ancho">
                 <div id="div_hoja">
@@ -83,24 +97,35 @@
                             </div>
                         </div>
                         <div id="div_contenido">
-                            <form action="cliente" method="post" accept-charset="ISO-8859-1">
+                        	<form name="busqueda_cliente" action="" method="post" accept-charset="ISO-8859-1">
+                        		<input type="hidden" name="numero_pagina"               value=""/>
+                                <input type="hidden" name="numero_registros_por_pagina" value=""/>
+                        	</form>
+                            <form name="cliente" action="" method="post" accept-charset="ISO-8859-1">
                                 <div id="div_cliente">
                                     <div class="titulo">
                                         <img alt="" src="<c:url value="/resources/image/titulo_cliente.png"/>"></img>
                                     </div>
+                                    
+                                   	<div class="linea">
+                                   		<div class="casilla">
+                                   			<div id="div_paginacion_resultados" style="float:right;"></div>
+                                   		</div>
+                                   	</div>
+                                    
                                     <div id="div_contenedor_tabla">
                                         <div class="columna_completa">
                                             <div id="div_tabla_cliente">
                                                 <table id="tabla_cliente">
                                                     <tr>
-                                                        <th>Identificador</th>
-                                                        <th>Clave</th>
-                                                        <th>Nombre</th>
+                                                        <th>Id.</th>
+                                                        <th>Cve</th>
+                                                        <th width="60%">Nombre</th>
                                                         <th>Representante</th>
                                                         <th>Puesto</th>
                                                         <th>Calle</th>
-                                                        <th>No. Ext</th>
-                                                        <th>No. Int</th>
+                                                        <th>No.Ext</th>
+                                                        <th>No.Int</th>
                                                         <th>Colonia</th>
                                                         <th>Delegaci&oacute;n</th>
                                                         <th>Estado</th>
@@ -139,6 +164,27 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <br/>
+                                    
+                                    
+                                    <div class="linea">
+                                    	<div class="casilla">
+                                    		<div id="div_paginador">
+                                    			<ul id="paginacion">
+                                    				<!--
+                                    				<li onclick="paginador(this);" class="activo bold">Primero</li>
+                                    				<li onclick="paginador(this);" class="activo bold">Anterior</li>
+                                    				<li onclick="paginador(this);" name="arreglo" class="seleccionado">1</li>
+                                    				<li onclick="paginador(this);" name="arreglo" class="activo">2</li>
+                                    				<li onclick="paginador(this);" class="activo bold">Siguiente</li>
+                                    				<li onclick="paginador(this);" class="activo bold">Ultimo</li>
+                                    				-->
+                                    			</ul>
+                                    		</div>
+                                    	</div>
+                                    </div>
+                                    
+                                    
                                     <div class="titulo">
                                         <img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"></img>
                                     </div>
@@ -443,7 +489,7 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="linea"></div>
+                                    <!--  <div class="linea"></div> -->
                                     <div class="linea">
                                         <div class="casilla" style="text-align:right;">
                                             <img alt="" style="cursor:pointer;" onclick="limpia();"

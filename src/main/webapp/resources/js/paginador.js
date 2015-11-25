@@ -101,24 +101,9 @@ function paginador( obj ) {
                 break;
         }	
     }
-    // realiza ajax con el nuevo numero de pagina solicitada; el tipo de busqueda es el mismo
-    document.forms["visualizador"].elements["numero_pagina"].value                  = numero_pagina;
-    document.forms["visualizador"].elements["numero_registros_por_pagina"].value    = numero_registros_por_pagina;
-    $.ajax({
-        type:"POST",
-        url:urlBuscaOrdenesProduccion,
-        data:$("[name='visualizador']").serialize(),
-        success:function( response ) {
-        	//console.log(response);
-        	genera_tabla_dom( response.ordenesProduccion );
-        	//jsonResponse = JSON.parse(response);
-            //genera_tabla_dom( jsonResponse.ordenesProduccion );
-            //jsonResponse = null;
-        },
-        error:function( e ) {
-            alert("\u00A1Algo sali\u00f3 mal! pero no pasa nada, todo tiene soluci\u00f3n.");
-        }
-    });
+    
+    realiza_consulta_paginador();
+    
 }
 
 

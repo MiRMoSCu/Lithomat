@@ -27,7 +27,7 @@
             var numero_total_registros	        = ${numeroTotalRegistros};
             var numero_registros_por_pagina		= ${numeroRegistrosPorPagina};
             var tamanio_maximo_arreglo	        = ${tamanioMaximoArreglo};	// DEBE SER MAYOR A 2
-            var numero_pagina		        	= 1;	// NO DEBE MODIFICARSE
+            var numero_pagina		        	= 1;						// NO DEBE MODIFICARSE
             
             var tamanio_arreglo		        	= 0; 	// se inicializan en carga_datos()
             var numero_pagina_total	        	= 0; 	// se inicializan en carga_datos()
@@ -103,9 +103,9 @@
                                                         <td>${registro.nut}</td>
                                                         <td>${registro.nombre}</td>
                                                         <td>${registro.descripcion}</td>
-                                                        <td><fmt:formatDate value="${registro.fecha_cotizacion}" type="both" pattern="MMM dd, yyyy"/></td>
-                                                        <td>${registro.nombre_moral}</td>
-                                                        <td id="td_${registro.nut}" class="estatus_${registro.id_estatus_orden}">${registro.nombre_estatus}</td>
+                                                        <td><fmt:formatDate value="${registro.fechaCotizacion}" type="both" pattern="MMM dd, yyyy"/></td>
+                                                        <td>${registro.nombreMoral}</td>
+                                                        <td id="td_${registro.nut}" class="estatus_${registro.idEstatusOrden}">${registro.nombreEstatus}</td>
                                                     </tr>
                                                 </c:forEach>
                                                 </table>

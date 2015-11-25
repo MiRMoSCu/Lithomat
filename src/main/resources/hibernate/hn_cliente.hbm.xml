@@ -25,7 +25,7 @@
 			<type name="string"/>
 		</property>
 		<property name="calle">
-			<column name="calle" length="45"/>
+			<column name="calle" length="60"/>
 			<type name="string"/>
 		</property>
 		<property name="numExterior">
@@ -37,7 +37,7 @@
 			<type name="string"/>
 		</property>
 		<property name="colonia">
-			<column name="colonia" length="45"/>
+			<column name="colonia" length="60"/>
 			<type name="string"/>
 		</property>
 		<property name="delegacionMunicipio">

@@ -17,7 +17,13 @@ public interface ClienteService {
 	public void modificaCliente(Cliente cliente);
 
 	public List<Cliente> listaCliente();
+	
+	public List<Cliente> listaClientePorNumeroPagina(int numeroPagina, int numeroRegistrosPorPagina);
+	
+	public List<ClienteDTO> listaClientePorNUmeroPaginaEnDTO(int numeroPagina, int numeroRegistrosPorPagina);
 
 	public List<ComboSelect> buscaClientePorNombre(String nombreMoral);
+	
+	public int obtieneNumeroClientes();
 		
 }

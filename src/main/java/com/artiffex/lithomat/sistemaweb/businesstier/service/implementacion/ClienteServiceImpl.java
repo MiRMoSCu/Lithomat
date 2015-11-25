@@ -58,6 +58,42 @@ public class ClienteServiceImpl implements ClienteService {
 	public List<Cliente> listaCliente() {
 		return clienteDAO.lista();
 	}
+	
+	public List<Cliente> listaClientePorNumeroPagina(int numeroPagina, int numeroRegistrosPorPagina) {
+		return clienteDAO.listaPorRango(numeroRegistrosPorPagina * (numeroPagina - 1), numeroRegistrosPorPagina);
+	}
+	
+	public List<ClienteDTO> listaClientePorNUmeroPaginaEnDTO(int numeroPagina, int numeroRegistrosPorPagina) {
+		List<ClienteDTO> listaClienteDTO = new ArrayList<ClienteDTO>();
+		List<Cliente> listaCliente = clienteDAO.listaPorRango(numeroRegistrosPorPagina * (numeroPagina - 1), numeroRegistrosPorPagina);
+		for (Cliente cliente : listaCliente) {
+			ClienteDTO clienteDTO = new ClienteDTO();
+			clienteDTO.setIdCliente(cliente.getIdCliente());
+			clienteDTO.setClave(cliente.getTipoCliente().getClave());
+			clienteDTO.setNombreMoral(cliente.getNombreMoral());
+			clienteDTO.setNombreRepresentante(cliente.getNombreRepresentante());
+			clienteDTO.setPuesto(cliente.getPuesto());
+			clienteDTO.setCalle(cliente.getCalle());
+			clienteDTO.setNumExterior(cliente.getNumExterior());
+			clienteDTO.setNumInterior(cliente.getNumInterior());
+			clienteDTO.setColonia(cliente.getColonia());
+			clienteDTO.setDelegacionMunicipio(cliente.getDelegacionMunicipio());
+			clienteDTO.setEstado(cliente.getEstado());
+			clienteDTO.setCodigoPostal(cliente.getCodigoPostal());
+			clienteDTO.setPais(cliente.getPais());
+			clienteDTO.setRfc(cliente.getRfc());
+			clienteDTO.setTelefonoParticular(cliente.getTelefonoParticular());
+			clienteDTO.setTelefonoMovil(cliente.getTelefonoMovil());
+			clienteDTO.setEmail(cliente.getEmail());
+			clienteDTO.setObservaciones(cliente.getObservaciones());
+			clienteDTO.setActivo(cliente.isActivo());
+			listaClienteDTO.add(clienteDTO);
+			clienteDTO 	= null;
+			cliente 	= null;
+		}
+		listaCliente = null;
+		return listaClienteDTO;
+	}
 
 	public List<ComboSelect> buscaClientePorNombre(String nombreMoral) {
 		List<ComboSelect> listaComboSelect = new ArrayList<ComboSelect>();
@@ -73,4 +109,9 @@ public class ClienteServiceImpl implements ClienteService {
 		listaCliente = null;
 		return listaComboSelect;
 	}
+
+	public int obtieneNumeroClientes() {
+		return clienteDAO.numeroClientes();
+	}
+	
 }

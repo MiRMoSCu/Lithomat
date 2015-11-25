@@ -10,6 +10,7 @@ public class ClienteDTO implements Serializable {
 	private String nombreMoral;
 	private String clave;
 	private String nombreRepresentante;
+	private String puesto;
 	private String calle;
 	private String numExterior;
 	private String numInterior;
@@ -24,6 +25,7 @@ public class ClienteDTO implements Serializable {
 	private String email;
 	private String observaciones;
 	private boolean activo;
+	
 	
 	public int getIdCliente() {
 		return idCliente;
@@ -48,6 +50,12 @@ public class ClienteDTO implements Serializable {
 	}
 	public void setNombreRepresentante(String nombreRepresentante) {
 		this.nombreRepresentante = nombreRepresentante;
+	}
+	public String getPuesto() {
+		return puesto;
+	}
+	public void setPuesto(String puesto) {
+		this.puesto = puesto;
 	}
 	public String getCalle() {
 		return calle;

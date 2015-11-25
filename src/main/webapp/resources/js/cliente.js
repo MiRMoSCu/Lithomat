@@ -13,7 +13,7 @@ $(document).ready(function () {
 function setCampos( id_cliente, clave, nombre_moral, nombre_representante, puesto, calle, num_exterior, num_interior, colonia, delegacion_municipio, estado, codigo_postal, pais, rfc, telefono_particular, telefono_movil, email, observaciones ) {
 
     // busqueda de nombre_tipo_precio
-    var select = document.forms[0].id_tipo_cliente;
+    var select = document.forms["cliente"].id_tipo_cliente;
     var index = 0;
     for (var i = 0;i < select.length;i++) {
         //alert( select.options[i].innerText + " " + nombre_tipo_precio );
@@ -23,68 +23,369 @@ function setCampos( id_cliente, clave, nombre_moral, nombre_representante, puest
         }
     }
     
-    document.forms[0].id_cliente.value              = id_cliente;
-    document.forms[0].id_tipo_cliente.selectedIndex = index;
-    document.forms[0].nombre_moral.value            = nombre_moral;
-    document.forms[0].nombre_representante.value    = nombre_representante;
-    document.forms[0].puesto.value                  = puesto;
-    document.forms[0].calle.value                   = calle;
-    document.forms[0].num_exterior.value            = num_exterior;
-    document.forms[0].num_interior.value            = num_interior;
-    document.forms[0].colonia.value                 = colonia;
-    document.forms[0].delegacion_municipio.value    = delegacion_municipio;
-    document.forms[0].estado.value                  = estado;
-    document.forms[0].codigo_postal.value           = codigo_postal;
-    document.forms[0].pais.value                    = pais;
-    document.forms[0].rfc.value                     = rfc;
-    document.forms[0].telefono_particular.value     = telefono_particular;
-    document.forms[0].telefono_movil.value          = telefono_movil;
-    document.forms[0].email.value                   = email;
-    document.forms[0].observaciones.value           = observaciones;
+    document.forms["cliente"].id_cliente.value              = id_cliente;
+    document.forms["cliente"].id_tipo_cliente.selectedIndex = index;
+    document.forms["cliente"].nombre_moral.value            = nombre_moral;
+    document.forms["cliente"].nombre_representante.value    = nombre_representante;
+    document.forms["cliente"].puesto.value                  = puesto;
+    document.forms["cliente"].calle.value                   = calle;
+    document.forms["cliente"].num_exterior.value            = num_exterior;
+    document.forms["cliente"].num_interior.value            = num_interior;
+    document.forms["cliente"].colonia.value                 = colonia;
+    document.forms["cliente"].delegacion_municipio.value    = delegacion_municipio;
+    document.forms["cliente"].estado.value                  = estado;
+    document.forms["cliente"].codigo_postal.value           = codigo_postal;
+    document.forms["cliente"].pais.value                    = pais;
+    document.forms["cliente"].rfc.value                     = rfc;
+    document.forms["cliente"].telefono_particular.value     = telefono_particular;
+    document.forms["cliente"].telefono_movil.value          = telefono_movil;
+    document.forms["cliente"].email.value                   = email;
+    document.forms["cliente"].observaciones.value           = observaciones;
 }
 
 function crear() {
-    if (document.forms[0].nombre_moral.value == "")
+    if (document.forms["cliente"].nombre_moral.value == "")
         alert("El campo nombre es obligatorio, favor de informarlo.");
     else {
-        document.forms[0].action = urlAlta;
-        document.forms[0].submit();
+        document.forms["cliente"].action = urlAlta;
+        document.forms["cliente"].submit();
     }
 }
 
 function modifica() {
-    if (document.forms[0].nombre_moral.value == "")
+    if (document.forms["cliente"].nombre_moral.value == "")
         alert("El campo nombre es obligatorio, favor de informarlo.");
     else {
-        document.forms[0].action = urlModifica;
-        document.forms[0].submit();
+        document.forms["cliente"].action = urlModifica;
+        document.forms["cliente"].submit();
     }
 }
 
 function elimina() {
     if (confirm(String.fromCharCode(191) + "Realmente desea eliminar este registro?")) {
-        document.forms[0].action = urlElimina;
-        document.forms[0].submit();
+        document.forms["cliente"].action = urlElimina;
+        document.forms["cliente"].submit();
     }
 }
 
 function limpia() {
-    document.forms[0].id_cliente.value              = "";
-    document.forms[0].id_tipo_cliente.selectedIndex = 0;
-    document.forms[0].nombre_moral.value            = "";
-    document.forms[0].nombre_representante.value    = "";
-    document.forms[0].puesto.value                  = "";
-    document.forms[0].calle.value                   = "";
-    document.forms[0].num_exterior.value            = "";
-    document.forms[0].num_interior.value            = "";
-    document.forms[0].colonia.value                 = "";
-    document.forms[0].delegacion_municipio.value    = "";
-    document.forms[0].estado.value                  = "";
-    document.forms[0].codigo_postal.value           = "";
-    document.forms[0].pais.value                    = "";
-    document.forms[0].rfc.value                     = "";
-    document.forms[0].telefono_particular.value     = "";
-    document.forms[0].telefono_movil.value          = "";
-    document.forms[0].email.value                   = "";
-    document.forms[0].observaciones.value           = "";
+    document.forms["cliente"].id_cliente.value              = "";
+    document.forms["cliente"].id_tipo_cliente.selectedIndex = 0;
+    document.forms["cliente"].nombre_moral.value            = "";
+    document.forms["cliente"].nombre_representante.value    = "";
+    document.forms["cliente"].puesto.value                  = "";
+    document.forms["cliente"].calle.value                   = "";
+    document.forms["cliente"].num_exterior.value            = "";
+    document.forms["cliente"].num_interior.value            = "";
+    document.forms["cliente"].colonia.value                 = "";
+    document.forms["cliente"].delegacion_municipio.value    = "";
+    document.forms["cliente"].estado.value                  = "";
+    document.forms["cliente"].codigo_postal.value           = "";
+    document.forms["cliente"].pais.value                    = "";
+    document.forms["cliente"].rfc.value                     = "";
+    document.forms["cliente"].telefono_particular.value     = "";
+    document.forms["cliente"].telefono_movil.value          = "";
+    document.forms["cliente"].email.value                   = "";
+    document.forms["cliente"].observaciones.value           = "";
 }
+
+/*****/
+
+function genera_tabla_dom( jsonListaClientes ) {
+	//console.log( jsonListaClientes );
+	
+    var table = document.createElement("table");
+    table.setAttribute("id","tabla_cliente");
+    var tr = document.createElement("tr");
+    var td = document.createElement("th");
+    td.innerHTML = "Id.";
+    //td.setAttribute("width","1%");
+    tr.appendChild( td );
+    
+    td = document.createElement("th");
+    td.innerHTML = "Cve";
+    //td.setAttribute("width","1%");
+    tr.appendChild( td );
+    
+    td = document.createElement("th");
+    td.innerHTML = "Nombre";
+    td.setAttribute("width","60%");
+    tr.appendChild( td );
+    
+    td = document.createElement("th");
+    td.innerHTML = "Representante";
+    //td.setAttribute("width","10%");
+    tr.appendChild( td );
+    
+    td = document.createElement("th");
+    td.innerHTML = "Puesto";
+    //td.setAttribute("width","20%");
+    tr.appendChild( td );
+    
+    td = document.createElement("th");
+    td.innerHTML = "Calle";
+    //td.setAttribute("width","10%");
+    tr.appendChild( td );
+    
+    td = document.createElement("th");
+    td.innerHTML = "No.Ext";
+    //td.setAttribute("width","15%");
+    tr.appendChild( td );
+    
+    td = document.createElement("th");
+    td.innerHTML = "No.Int";
+    //td.setAttribute("width","15%");
+    tr.appendChild( td );
+    
+    td = document.createElement("th");
+    td.innerHTML = "Colonia";
+    //td.setAttribute("width","10%");
+    tr.appendChild( td );
+    
+    td = document.createElement("th");
+    td.innerHTML = "Delegaci&oacute;n";
+    //td.setAttribute("width","10%");
+    tr.appendChild( td );
+    
+    td = document.createElement("th");
+    td.innerHTML = "Estado";
+    //td.setAttribute("width","10%");
+    tr.appendChild( td );
+    
+    td = document.createElement("th");
+    td.innerHTML = "C.P.";
+    //td.setAttribute("width","10%");
+    tr.appendChild( td );
+    
+    td = document.createElement("th");
+    td.innerHTML = "Pa&iacute;s";
+    //td.setAttribute("width","10%");
+    tr.appendChild( td );
+    
+    td = document.createElement("th");
+    td.innerHTML = "RFC";
+    //td.setAttribute("width","10%");
+    tr.appendChild( td );
+    
+    td = document.createElement("th");
+    td.innerHTML = "Tel&eacute;fono";
+    //td.setAttribute("width","10%");
+    tr.appendChild( td );
+    
+    td = document.createElement("th");
+    td.innerHTML = "M&oacute;vil";
+    //td.setAttribute("width","10%");
+    tr.appendChild( td );
+    
+    td = document.createElement("th");
+    td.innerHTML = "Email";
+    //td.setAttribute("width","10%");
+    tr.appendChild( td );
+    
+    td = document.createElement("th");
+    td.innerHTML = "Observaciones";
+    //td.setAttribute("width","10%");
+    tr.appendChild( td );
+    
+    table.appendChild( tr );
+    
+    $.each( jsonListaClientes, function(i, item){
+        tr = document.createElement("tr");
+        
+        tr.setAttribute("onclick","setCampos('" + item.idCliente + "','"  + item.clave + "','"  + item.nombreMoral + "','"  + item.nombreRepresentante + "','"  + item.puesto + "','"  + item.calle + "','"  + item.numExterior + "','"  + item.numInterior + "','"  + item.colonia + "','"  + item.delegacionMunicipio + "','"  + item.estado + "','"  + item.codigoPostal + "','"  + item.pais + "','"  + item.rfc + "','"  + item.telefonoParticular + "','"  + item.telefonoMovil + "','"  + item.email + "','" + item.observaciones + "');")
+        if( i%2 == 0 )
+            tr.setAttribute("class","l1");
+        else
+            tr.setAttribute("class","l2");
+        
+        td = document.createElement("td");
+        td.innerHTML = item.idCliente;
+        tr.appendChild( td );
+        
+        td = document.createElement("td");
+        td.innerHTML = item.clave;
+        tr.appendChild( td );
+        
+        td = document.createElement("td");
+        td.innerHTML = item.nombreMoral;
+        tr.appendChild( td );
+        
+        td = document.createElement("td");
+        td.innerHTML = item.nombreRepresentante;
+        tr.appendChild( td );
+        
+        td = document.createElement("td");
+        td.innerHTML = item.puesto;
+        tr.appendChild( td );
+        
+        td = document.createElement("td");
+        td.innerHTML = item.calle;
+        tr.appendChild( td );
+        
+        td = document.createElement("td");
+        td.innerHTML = item.numExterior;
+        tr.appendChild( td );
+        
+        td = document.createElement("td");
+        td.innerHTML = item.numInterior;
+        tr.appendChild( td );
+        
+        td = document.createElement("td");
+        td.innerHTML = item.colonia;
+        tr.appendChild( td );
+        
+        td = document.createElement("td");
+        td.innerHTML = item.delegacionMunicipio;
+        tr.appendChild( td );
+        
+        td = document.createElement("td");
+        td.innerHTML = item.estado;
+        tr.appendChild( td );
+        
+        td = document.createElement("td");
+        td.innerHTML = item.codigoPostal;
+        tr.appendChild( td );
+        
+        td = document.createElement("td");
+        td.innerHTML = item.pais;
+        tr.appendChild( td );
+        
+        td = document.createElement("td");
+        td.innerHTML = item.rfc;
+        tr.appendChild( td );
+        
+        td = document.createElement("td");
+        td.innerHTML = item.telefonoParticular;
+        tr.appendChild( td );
+        
+        td = document.createElement("td");
+        td.innerHTML = item.telefonoMovil;
+        tr.appendChild( td );
+        
+        td = document.createElement("td");
+        td.innerHTML = item.email;
+        tr.appendChild( td );
+        
+        td = document.createElement("td");
+        td.innerHTML = item.observaciones;
+        tr.appendChild( td );
+        
+        table.appendChild( tr );
+    });
+    //console.log( table );
+    //console.log( table.outerHTML );
+    //console.log( table.innerHTML );
+    //console.log( table.textContent );
+    //console.log( table.toString() );
+    //console.log( document.getElementById("div_tabla_registros") );
+    //console.log( document.getElementById("div_tabla_registros").innerHTML );
+    //document.getElementById("div_tabla_registros").appendChild( table ); // INCORRECTO
+    document.getElementById("div_tabla_cliente").innerHTML = table.outerHTML;
+    delete td;
+    delete tr;
+    delete table;
+} // genera_tabla_dom
+
+function realiza_consulta_paginador() {
+	// limpia campos
+	limpia();
+	// realiza ajax con el nuevo numero de pagina solicitada; el tipo de busqueda es el mismo
+    document.forms["busqueda_cliente"].elements["numero_pagina"].value                  = numero_pagina;
+    document.forms["busqueda_cliente"].elements["numero_registros_por_pagina"].value    = numero_registros_por_pagina;
+    $.ajax({
+        type:"POST",
+        url:urlBuscaListaClientes,
+        data:$("[name='busqueda_cliente']").serialize(),
+        success:function( response ) {
+        	//console.log(response);
+        	objJson = JSON.parse(response);
+        	//console.log(objJson);
+        	//console.log(response.clientes)
+        	genera_tabla_dom( objJson.listaClientes );
+        	//jsonResponse = JSON.parse(response);
+            //genera_tabla_dom( jsonResponse.ordenesProduccion );
+            //jsonResponse = null;
+        },
+        error:function( e ) {
+            alert("\u00A1Algo sali\u00f3 mal! pero no pasa nada, todo tiene soluci\u00f3n.");
+        }
+    });
+}
+
+function carga_datos() {
+	
+	// define el tamaño del arreglo que se muestra en el paginador
+    if( numero_total_registros < tamanio_maximo_arreglo * numero_registros_por_pagina ) {
+        tamanio_arreglo = Math.ceil( numero_total_registros / numero_registros_por_pagina );
+    } else {
+        tamanio_arreglo = tamanio_maximo_arreglo;
+    }
+    
+    // actualiza variables: define el numero de paginas que dependen del numero de registros encontrados
+    actualiza_variables();
+    
+    // limpia div
+    $("#div_paginador").empty();
+    
+    // Obtiene elemento div_paginador
+    var objDiv 	= document.getElementById("div_paginador");
+    
+    // crea objeto ul
+    var objUl 	= document.createElement("ul");
+    objUl.setAttribute("id","paginacion");
+    document.getElementById("div_paginacion_resultados").innerHTML = string_elementos_encontrados();
+    
+    // crea boton primero
+    var objLi = document.createElement("li");
+    objLi.setAttribute("onclick","paginador( this );");
+    objLi.setAttribute("class","activo bold");
+    objLi.innerHTML = "Primero";
+    objUl.appendChild( objLi );
+    delete objLi;
+    
+    // crea boton anterior
+    objLi = document.createElement("li");
+    objLi.setAttribute("onclick","paginador( this );");
+    objLi.setAttribute("class","activo bold");
+    objLi.innerHTML = "Anterior";
+    objUl.appendChild( objLi );
+    delete objLi;
+    
+    // crea botones
+    for( var i = 0; i < tamanio_arreglo; i++ ) {
+        objLi = document.createElement("li");
+        objLi.setAttribute("onclick","paginador( this );");
+        objLi.setAttribute("name","arreglo");
+        objLi.innerHTML = parseInt(i + 1);
+        if( i == 0 ) {
+            objLi.setAttribute("class","seleccionado");
+        } else {
+            objLi.setAttribute("class","activo");
+        }
+        objUl.appendChild( objLi );
+        delete objLi;
+    }
+    
+    // crea boton siguiente
+    objLi = document.createElement("li");
+    objLi.setAttribute("onclick","paginador( this );");
+    objLi.setAttribute("class","activo bold");
+    objLi.innerHTML = "Siguiente";
+    objUl.appendChild( objLi );
+    delete objLi;
+    
+    // crea boton ultimo
+    objLi = document.createElement("li");
+    objLi.setAttribute("onclick","paginador( this );");
+    objLi.setAttribute("class","activo bold");
+    objLi.innerHTML = "Ultimo";
+    objUl.appendChild( objLi );
+    delete objLi;
+    
+    // agrega ul a div
+    objDiv.appendChild( objUl );
+    
+    // elimina objetos
+    delete objUl;
+    delete objDiv;
+} // carga_datos

@@ -30,14 +30,14 @@ public class VisualizadorDaoImpl extends GenericJdbcDAO implements VisualizadorD
 							throws SQLException {
 						
 						VisualizadorDTO visualizador = new VisualizadorDTO();
-						visualizador.setId_orden_produccion(rs.getInt("id_orden_produccion"));
+						visualizador.setIdOrdenProduccion(rs.getInt("id_orden_produccion"));
 						visualizador.setNut(rs.getString("nut"));
 						visualizador.setNombre(rs.getString("nombre"));
 						visualizador.setDescripcion(rs.getString("descripcion"));
-						visualizador.setFecha_cotizacion(rs.getDate("fecha_cotizacion"));
-						visualizador.setNombre_moral(rs.getString("nombre_moral"));
-						visualizador.setId_estatus_orden(rs.getInt("id_estatus_orden"));
-						visualizador.setNombre_estatus(rs.getString("nombre_estatus"));
+						visualizador.setFechaCotizacion(rs.getDate("fecha_cotizacion"));
+						visualizador.setNombreMoral(rs.getString("nombre_moral"));
+						visualizador.setIdEstatusOrden(rs.getInt("id_estatus_orden"));
+						visualizador.setNombreEstatus(rs.getString("nombre_estatus"));
 						return visualizador;
 					}
 				});
