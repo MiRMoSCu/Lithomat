@@ -8,6 +8,7 @@ $(document).ready(function () {
 });
 
 /*************************************************************/
+// FUNCIONES PARA LA MODIFICACION DEL REGISTRO
 
 /* funciones */
 function setCampos( id_cliente, clave, nombre_moral, nombre_representante, puesto, calle, num_exterior, num_interior, colonia, delegacion_municipio, estado, codigo_postal, pais, rfc, telefono_particular, telefono_movil, email, observaciones ) {
@@ -68,7 +69,7 @@ function elimina() {
     }
 }
 
-function limpia() {
+function limpia_form_cliente() {
     document.forms["cliente"].id_cliente.value              = "";
     document.forms["cliente"].id_tipo_cliente.selectedIndex = 0;
     document.forms["cliente"].nombre_moral.value            = "";
@@ -89,7 +90,8 @@ function limpia() {
     document.forms["cliente"].observaciones.value           = "";
 }
 
-/*****/
+/*************************************************************/
+// FUNCIONES PARA EL PAGINADOR
 
 function genera_tabla_dom( jsonListaClientes ) {
 	//console.log( jsonListaClientes );
@@ -287,24 +289,20 @@ function genera_tabla_dom( jsonListaClientes ) {
 } // genera_tabla_dom
 
 function realiza_consulta_paginador() {
+	document.busqueda_cliente.numero_pagina.value 				= numero_pagina;
+	document.busqueda_cliente.numero_registros_por_pagina.value = numero_registros_por_pagina;
 	// limpia campos
-	limpia();
+	limpia_form_cliente();
 	// realiza ajax con el nuevo numero de pagina solicitada; el tipo de busqueda es el mismo
-    document.forms["busqueda_cliente"].elements["numero_pagina"].value                  = numero_pagina;
-    document.forms["busqueda_cliente"].elements["numero_registros_por_pagina"].value    = numero_registros_por_pagina;
     $.ajax({
         type:"POST",
-        url:urlBuscaListaClientes,
+        url:urlBuscaListaPorParametros,
         data:$("[name='busqueda_cliente']").serialize(),
         success:function( response ) {
         	//console.log(response);
         	objJson = JSON.parse(response);
-        	//console.log(objJson);
-        	//console.log(response.clientes)
         	genera_tabla_dom( objJson.listaClientes );
-        	//jsonResponse = JSON.parse(response);
-            //genera_tabla_dom( jsonResponse.ordenesProduccion );
-            //jsonResponse = null;
+        	objJson = null;
         },
         error:function( e ) {
             alert("\u00A1Algo sali\u00f3 mal! pero no pasa nada, todo tiene soluci\u00f3n.");
@@ -389,3 +387,90 @@ function carga_datos() {
     delete objUl;
     delete objDiv;
 } // carga_datos
+
+/*************************************************************/
+// FUNCIONES PARA LA BUSQUEDA ESPECIALIZADA
+
+function nueva_busqueda() {
+	
+	var correcto = true;
+	
+	if( correcto
+			&& document.busqueda_cliente.chkbx_busca_por_nombre_moral.checked
+			&& document.busqueda_cliente.nombre_moral.value == "" ) {
+		correcto = false;
+		alert("El campo de b\u00FAsqueda NOMBRE no puede estar vac\u00EDo. Favor de reportarlo.");
+	}
+	
+	if( correcto
+			&& document.busqueda_cliente.chkbx_busca_por_rfc.checked
+			&& document.busqueda_cliente.rfc.value == "" ) {
+		correcto = false;
+		alert("El campo de b\u00FAsqueda RFC no puede estar vac\u00EDo. Favor de reportarlo.");
+	}
+	
+	if( correcto
+			&& document.busqueda_cliente.chkbx_busca_por_nombre_representante.checked
+			&& document.busqueda_cliente.nombre_representante.value == "" ) {
+		correcto = false;
+		alert("El campo de b\u00FAsqueda REPRESENTANTE no puede estar vac\u00EDo. Favor de reportarlo.");
+	}
+	
+	if( correcto
+			&& document.busqueda_cliente.chkbx_busca_por_codigo_postal.checked
+			&& document.busqueda_cliente.codigo_postal.value == "" ) {
+		correcto = false;
+		alert("El campo de b\u00FAsqueda C.P. no puede estar vac\u00EDo. Favor de reportarlo.");
+	}
+	
+	if( correcto ) {
+		//alert("realiza la nueva busqueda");
+		numero_pagina = 1;
+		document.busqueda_cliente.numero_pagina.value 				= numero_pagina;
+		document.busqueda_cliente.numero_registros_por_pagina.value = numero_registros_por_pagina;
+		document.body.style.cursor = "wait";
+		$.ajax({
+			type:"POST",
+			url:urlBuscaListaPorParametros,
+			data:$("[name='busqueda_cliente']").serialize(),
+			success:function(response){
+				//console.log(response);
+				objJson = JSON.parse(response);
+	        	genera_tabla_dom( objJson.listaClientes );
+	        	numero_total_registros = objJson.numeroTotalRegistros;
+	        	carga_datos();
+	        	objJson = null;
+				document.body.style.cursor = "default";
+			},
+			error:function(e){
+				console.log(e);
+				alert("No fue posible realizar la consulta");
+				document.body.style.cursor = "default";
+			}
+		});
+	}
+	
+	delete correcto;
+}
+
+function limpia_form_busqueda_cliente() {
+	// limpia form modificar registro
+	limpia_form_cliente();
+	// limpia selects
+	document.busqueda_cliente.chkbx_busca_por_nombre_moral.checked 			= false;
+	document.busqueda_cliente.chkbx_busca_por_rfc.checked 					= false;
+	document.busqueda_cliente.chkbx_busca_por_clave.checked 				= false;
+	document.busqueda_cliente.chkbx_busca_por_nombre_representante.checked 	= false;
+	document.busqueda_cliente.chkbx_busca_por_codigo_postal.checked 		= false;
+	// limpia input text
+	document.busqueda_cliente.nombre_moral.value 			= "";
+	document.busqueda_cliente.rfc.value 					= "";
+	document.busqueda_cliente.nombre_representante.value 	= "";
+	document.busqueda_cliente.codigo_postal.value 			= "";
+	document.busqueda_cliente.id_tipo_cliente.selectedIndex = 0;
+	// realiza nueva busqueda
+	nueva_busqueda();
+}
+
+
+

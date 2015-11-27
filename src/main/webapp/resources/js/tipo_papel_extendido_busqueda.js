@@ -10,12 +10,6 @@ function setCamposTipoPapelExtendido( id_tipo_papel_extendido, nombre_proveedor,
 function limpia() {
 	// limpia campos ocultos
 	document.tipo_trabajo_detalle.id_tipo_papel_extendido.value = "";
-	document.tipo_trabajo_detalle.busqueda_por_nombre.value 	= true;
-	document.tipo_trabajo_detalle.busqueda_por_ancho.value 		= false;
-	document.tipo_trabajo_detalle.busqueda_por_alto.value 		= false;
-	document.tipo_trabajo_detalle.busqueda_por_gramaje.value 	= false;
-	document.tipo_trabajo_detalle.busqueda_por_kilogramos.value = false;
-	document.tipo_trabajo_detalle.busqueda_por_proveedor.value 	= false;
 	// limpia selects
 	document.tipo_trabajo_detalle.chkbx_busca_por_nombre.checked 		= true;
 	document.tipo_trabajo_detalle.chkbx_busca_por_ancho.checked			= false;
@@ -41,13 +35,6 @@ function limpia() {
 function busca() {
 	// limpia campo papel seleccionado
 	document.tipo_trabajo_detalle.descripcion_completa.value = "";
-	// campos hidden
-	document.tipo_trabajo_detalle.busqueda_por_nombre.value 	= document.tipo_trabajo_detalle.chkbx_busca_por_nombre.checked;
-	document.tipo_trabajo_detalle.busqueda_por_ancho.value		= document.tipo_trabajo_detalle.chkbx_busca_por_ancho.checked;
-	document.tipo_trabajo_detalle.busqueda_por_alto.value		= document.tipo_trabajo_detalle.chkbx_busca_por_alto.checked;
-	document.tipo_trabajo_detalle.busqueda_por_gramaje.value	= document.tipo_trabajo_detalle.chkbx_busca_por_gramaje.checked;
-	document.tipo_trabajo_detalle.busqueda_por_kilogramos.value	= document.tipo_trabajo_detalle.chkbx_busca_por_kilogramos.checked;
-	document.tipo_trabajo_detalle.busqueda_por_proveedor.value	= document.tipo_trabajo_detalle.chkbx_busca_por_proveedor.checked;
 	
 	// validacion
 	var correcto = true;
@@ -92,6 +79,7 @@ function busca() {
 	}
 	
 	if(correcto){
+		
 		document.body.style.cursor = "wait";
 		$.ajax({
 			type:"POST",

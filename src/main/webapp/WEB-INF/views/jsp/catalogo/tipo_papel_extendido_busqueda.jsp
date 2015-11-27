@@ -84,12 +84,6 @@
 							</div>
 							<form name="tipo_trabajo_detalle" action="" method="POST">
 								<input type="hidden" name="id_tipo_papel_extendido"	value="">
-								<input type="hidden" name="busqueda_por_nombre" 	value="true">
-								<input type="hidden" name="busqueda_por_ancho" 		value="false">
-								<input type="hidden" name="busqueda_por_alto" 		value="false">
-								<input type="hidden" name="busqueda_por_gramaje" 	value="false">
-								<input type="hidden" name="busqueda_por_kilogramos" value="false">
-								<input type="hidden" name="busqueda_por_proveedor" 	value="false">
 								<div class="div_separador_mediano">
 									<img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>">
 								</div>
@@ -217,11 +211,11 @@
 										</div>
 									</div>
 								</div>
-								<div class="linea"></div>
+								<br/>
+								<!-- <div class="linea"></div> -->
 								<div class="linea">
 									<div class="casilla" style="text-align: right;">
 										<img alt="" style="cursor: pointer;" onclick="limpia()" src="<c:url value="/resources/image/boton_limpiar.jpg"/>"></img>
-		
 										<span style="cursor:pointer;" onclick="busca()">
 											&nbsp;Buscar&nbsp;
 										</span>

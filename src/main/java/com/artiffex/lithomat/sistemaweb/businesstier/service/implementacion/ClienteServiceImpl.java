@@ -59,13 +59,325 @@ public class ClienteServiceImpl implements ClienteService {
 		return clienteDAO.lista();
 	}
 	
-	public List<Cliente> listaClientePorNumeroPagina(int numeroPagina, int numeroRegistrosPorPagina) {
-		return clienteDAO.listaPorRango(numeroRegistrosPorPagina * (numeroPagina - 1), numeroRegistrosPorPagina);
+	public List<ComboSelect> buscaClientePorNombre(String nombreMoral) {
+		List<ComboSelect> listaComboSelect = new ArrayList<ComboSelect>();
+		List<Cliente> listaCliente = clienteDAO.buscaPorNombre(nombreMoral);
+		for (Cliente cliente : listaCliente) {
+			ComboSelect comboSelect = new ComboSelect();
+			comboSelect.setValue(cliente.getIdCliente());
+			comboSelect.setText(cliente.getNombreMoral());
+			listaComboSelect.add(comboSelect);
+			comboSelect = null;
+			cliente = null;
+		}
+		listaCliente = null;
+		return listaComboSelect;
+	}
+
+	public int obtieneNumeroClientesPorParamatros(
+			boolean busquedaPorNombreMoral, 
+			boolean busquedaPorRFC,
+			boolean busquedaPorClave, 
+			boolean busquedaPorNombreRepresentante,
+			boolean busquedaPorCodigoPostal, 
+			String nombreMoral, 
+			String rfc,
+			Integer idTipoCliente, 
+			String nombreRepresentante,
+			String codigoPostal) {
+		
+		boolean existeParametro = false;
+		
+		StringBuilder query = new StringBuilder();
+		
+		query.append("SELECT COUNT(*)");
+		query.append(" ");
+		query.append("FROM cliente c");
+		query.append(" ");
+		query.append("WHERE");
+		query.append(" ");
+		
+		if( busquedaPorNombreMoral ) {
+			if( existeParametro ) {
+				query.append("AND");
+				query.append(" ");
+			}
+			query.append("c.nombre_moral LIKE '%");
+			query.append(nombreMoral);
+			query.append("%'");
+			query.append(" ");
+			existeParametro = true;
+		}
+		
+		if( busquedaPorRFC ) {
+			if( existeParametro ) {
+				query.append("AND");
+				query.append(" ");
+			}
+			query.append("c.rfc LIKE '%");
+			query.append(rfc);
+			query.append("%'");
+			query.append(" ");
+			existeParametro = true;
+		}
+		
+		if( busquedaPorClave ) {
+			if( existeParametro ) {
+				query.append("AND");
+				query.append(" ");
+			}
+			query.append("c.id_tipo_cliente = ");
+			query.append(idTipoCliente);
+			query.append(" ");
+			existeParametro = true;
+		}
+		
+		if( busquedaPorNombreRepresentante ) {
+			if( existeParametro ) {
+				query.append("AND");
+				query.append(" ");
+			}
+			query.append("c.nombre_representante LIKE '%");
+			query.append(nombreRepresentante);
+			query.append("%'");
+			query.append(" ");
+			existeParametro = true;
+		}
+		
+		if( busquedaPorCodigoPostal ) {
+			if( existeParametro ) {
+				query.append("AND");
+				query.append(" ");
+			}
+			query.append("c.codigo_postal LIKE '%");
+			query.append(codigoPostal);
+			query.append("%'");
+			query.append(" ");
+			existeParametro = true;
+		}
+	
+		if( existeParametro )
+			query.append("AND c.activo = TRUE; ");
+		else
+			query.append("c.activo = TRUE; ");
+		
+		int numRegistros = clienteDAO.numeroClientes( query.toString() );
+		
+		query = null;
+		
+		return numRegistros;
+	}
+
+	public List<Cliente> listaClientePorNumeroPagina(
+			boolean busquedaPorNombreMoral, 
+			boolean busquedaPorRFC,
+			boolean busquedaPorClave, 
+			boolean busquedaPorNombreRepresentante,
+			boolean busquedaPorCodigoPostal, 
+			String nombreMoral, 
+			String rfc,
+			Integer idTipoCliente, 
+			String nombreRepresentante,
+			String codigoPostal, 
+			int numeroPagina, 
+			int numeroRegistrosPorPagina ) {
+		
+		boolean existeParametro = false;
+		
+		StringBuilder query = new StringBuilder();
+		
+		query.append("SELECT *");
+		query.append(" ");
+		query.append("FROM cliente c");
+		query.append(" ");
+		query.append("WHERE");
+		query.append(" ");
+		
+		if( busquedaPorNombreMoral ) {
+			if( existeParametro ) {
+				query.append("AND");
+				query.append(" ");
+			}
+			query.append("c.nombre_moral LIKE '%");
+			query.append(nombreMoral);
+			query.append("%'");
+			query.append(" ");
+			existeParametro = true;
+		}
+		
+		if( busquedaPorRFC ) {
+			if( existeParametro ) {
+				query.append("AND");
+				query.append(" ");
+			}
+			query.append("c.rfc LIKE '%");
+			query.append(rfc);
+			query.append("%'");
+			query.append(" ");
+			existeParametro = true;
+		}
+		
+		if( busquedaPorClave ) {
+			if( existeParametro ) {
+				query.append("AND");
+				query.append(" ");
+			}
+			query.append("c.id_tipo_cliente = ");
+			query.append(idTipoCliente);
+			query.append(" ");
+			existeParametro = true;
+		}
+		
+		if( busquedaPorNombreRepresentante ) {
+			if( existeParametro ) {
+				query.append("AND");
+				query.append(" ");
+			}
+			query.append("c.nombre_representante LIKE '%");
+			query.append(nombreRepresentante);
+			query.append("%'");
+			query.append(" ");
+			existeParametro = true;
+		}
+		
+		if( busquedaPorCodigoPostal ) {
+			if( existeParametro ) {
+				query.append("AND");
+				query.append(" ");
+			}
+			query.append("c.codigo_postal LIKE '%");
+			query.append(codigoPostal);
+			query.append("%'");
+			query.append(" ");
+			existeParametro = true;
+		}
+	
+		if( existeParametro )
+			query.append("AND c.activo = TRUE");
+		else
+			query.append("c.activo = TRUE");
+		
+		query.append(" ");
+		query.append("ORDER BY c.id_cliente ASC");
+		query.append(" ");
+		query.append("LIMIT");
+		query.append(" ");
+		query.append(numeroRegistrosPorPagina * (numeroPagina - 1));
+		query.append(" , ");
+		query.append(numeroRegistrosPorPagina);
+		query.append(";");
+		
+		List<Cliente> lista = clienteDAO.listaPorRango( query.toString() );
+		
+		query = null;
+		
+		return lista;
 	}
 	
-	public List<ClienteDTO> listaClientePorNUmeroPaginaEnDTO(int numeroPagina, int numeroRegistrosPorPagina) {
+	public List<ClienteDTO> listaClientePorNUmeroPaginaEnDTO(
+			boolean busquedaPorNombreMoral, 
+			boolean busquedaPorRFC,
+			boolean busquedaPorClave, 
+			boolean busquedaPorNombreRepresentante,
+			boolean busquedaPorCodigoPostal, 
+			String nombreMoral, 
+			String rfc,
+			Integer idTipoCliente, 
+			String nombreRepresentante,
+			String codigoPostal, 
+			int numeroPagina, 
+			int numeroRegistrosPorPagina ) {
+		
+boolean existeParametro = false;
+		
+		StringBuilder query = new StringBuilder();
+		
+		query.append("SELECT *");
+		query.append(" ");
+		query.append("FROM cliente c");
+		query.append(" ");
+		query.append("WHERE");
+		query.append(" ");
+		
+		if( busquedaPorNombreMoral ) {
+			if( existeParametro ) {
+				query.append("AND");
+				query.append(" ");
+			}
+			query.append("c.nombre_moral LIKE '%");
+			query.append(nombreMoral);
+			query.append("%'");
+			query.append(" ");
+			existeParametro = true;
+		}
+		
+		if( busquedaPorRFC ) {
+			if( existeParametro ) {
+				query.append("AND");
+				query.append(" ");
+			}
+			query.append("c.rfc LIKE '%");
+			query.append(rfc);
+			query.append("%'");
+			query.append(" ");
+			existeParametro = true;
+		}
+		
+		if( busquedaPorClave ) {
+			if( existeParametro ) {
+				query.append("AND");
+				query.append(" ");
+			}
+			query.append("c.id_tipo_cliente = ");
+			query.append(idTipoCliente);
+			query.append(" ");
+			existeParametro = true;
+		}
+		
+		if( busquedaPorNombreRepresentante ) {
+			if( existeParametro ) {
+				query.append("AND");
+				query.append(" ");
+			}
+			query.append("c.nombre_representante LIKE '%");
+			query.append(nombreRepresentante);
+			query.append("%'");
+			query.append(" ");
+			existeParametro = true;
+		}
+		
+		if( busquedaPorCodigoPostal ) {
+			if( existeParametro ) {
+				query.append("AND");
+				query.append(" ");
+			}
+			query.append("c.codigo_postal LIKE '%");
+			query.append(codigoPostal);
+			query.append("%'");
+			query.append(" ");
+			existeParametro = true;
+		}
+	
+		if( existeParametro )
+			query.append("AND c.activo = TRUE");
+		else
+			query.append("c.activo = TRUE");
+		
+		query.append(" ");
+		query.append("ORDER BY c.id_cliente ASC");
+		query.append(" ");
+		query.append("LIMIT");
+		query.append(" ");
+		query.append(numeroRegistrosPorPagina * (numeroPagina - 1));
+		query.append(" , ");
+		query.append(numeroRegistrosPorPagina);
+		query.append(";");
+		
 		List<ClienteDTO> listaClienteDTO = new ArrayList<ClienteDTO>();
-		List<Cliente> listaCliente = clienteDAO.listaPorRango(numeroRegistrosPorPagina * (numeroPagina - 1), numeroRegistrosPorPagina);
+		List<Cliente> listaCliente = clienteDAO.listaPorRango( query.toString() );
+		
+		query = null;
+		
 		for (Cliente cliente : listaCliente) {
 			ClienteDTO clienteDTO = new ClienteDTO();
 			clienteDTO.setIdCliente(cliente.getIdCliente());
@@ -93,25 +405,6 @@ public class ClienteServiceImpl implements ClienteService {
 		}
 		listaCliente = null;
 		return listaClienteDTO;
-	}
-
-	public List<ComboSelect> buscaClientePorNombre(String nombreMoral) {
-		List<ComboSelect> listaComboSelect = new ArrayList<ComboSelect>();
-		List<Cliente> listaCliente = clienteDAO.buscaPorNombre(nombreMoral);
-		for (Cliente cliente : listaCliente) {
-			ComboSelect comboSelect = new ComboSelect();
-			comboSelect.setValue(cliente.getIdCliente());
-			comboSelect.setText(cliente.getNombreMoral());
-			listaComboSelect.add(comboSelect);
-			comboSelect = null;
-			cliente = null;
-		}
-		listaCliente = null;
-		return listaComboSelect;
-	}
-
-	public int obtieneNumeroClientes() {
-		return clienteDAO.numeroClientes();
 	}
 	
 }

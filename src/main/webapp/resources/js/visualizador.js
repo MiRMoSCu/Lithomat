@@ -2,8 +2,10 @@
 function limpia() {
     //console.log( document.forms["visualizador"].elements["radio_tipo_busqueda"] );
 
-    // limpia radio
+    // limpia campos ocultos
     document.forms["visualizador"].elements["radio_tipo_busqueda"].value        = "";
+    
+    // limpia radios del formulario
     for( var i=0; i<document.forms["visualizador"].elements["radio_tipo_busqueda"].length; i++)
         document.forms["visualizador"].elements["radio_tipo_busqueda"][i].checked = false;
     
@@ -159,7 +161,7 @@ function nueva_busqueda() {
             	//jsonResponse = JSON.parse(response);
                 // generacion de tabla con registros
                 //genera_tabla_dom( jsonResponse.ordenesProduccion );
-            	genera_tabla_dom( response.ordenesProduccion );
+            	genera_tabla_dom( response.listaOrdenesProduccion );
                 // inicializacion de variables
                 //numero_total_registros = jsonResponse.numeroTotalRegistros;
             	numero_total_registros = response.numeroTotalRegistros;

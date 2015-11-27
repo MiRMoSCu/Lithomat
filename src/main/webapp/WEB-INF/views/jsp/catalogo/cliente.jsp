@@ -2,11 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:url value="/?opc=catalogos"	            		var="urlMenu"/>
-<c:url value="/cliente/catalogo/lista_por_pagina" 	var="urlBuscaListaClientes"/>
-<c:url value="/cliente/catalogo/alta"       		var="urlAlta"/>
-<c:url value="/cliente/catalogo/modifica"   		var="urlModifica"/>
-<c:url value="/cliente/catalogo/elimina"    		var="urlElimina"/>
+<c:url value="/?opc=catalogos"	            						var="urlMenu"/>
+<c:url value="/cliente/catalogo/lista_por_pagina_por_parametros" 	var="urlBuscaListaPorParametros"/>
+<c:url value="/cliente/catalogo/alta"       						var="urlAlta"/>
+<c:url value="/cliente/catalogo/modifica"   						var="urlModifica"/>
+<c:url value="/cliente/catalogo/elimina"    						var="urlElimina"/>
 <html>
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1"></meta>
@@ -33,7 +33,7 @@
             
             #div_contenedor_tabla {
                 width: 100%;
-                height: 150px; /*210px*/
+                height: 210px; /*210px*/
             }
             
             #div_tabla_cliente {
@@ -46,7 +46,7 @@
         <link rel="stylesheet" href="<c:url value="/resources/css/master.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/font.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/menu.css"/>" type="text/css"></link>
-        <link rel="stylesheet" href="<c:url value="/resources/css/catalogo.css"/>" type="text/css"></link>
+        <link rel="stylesheet" href="<c:url value="/resources/css/catalogo_cliente.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/paginador.css"/>" type="text/css"></link>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/paginador.js"/>"></script>
@@ -62,11 +62,11 @@
             var mitad_tamanio_arreglo	        = 0;	// se inicializan en carga_datos()
         </script>
         <script type="text/javascript">
-        	var urlMenu					= "${urlMenu}";
-        	var urlBuscaListaClientes	= '${urlBuscaListaClientes}';
-            var urlAlta 				= '${urlAlta}';
-            var urlModifica 			= '${urlModifica}';
-            var urlElimina 				= '${urlElimina}';
+        	var urlMenu						= "${urlMenu}";
+        	var urlBuscaListaPorParametros	= '${urlBuscaListaPorParametros}';
+            var urlAlta 					= '${urlAlta}';
+            var urlModifica 				= '${urlModifica}';
+            var urlElimina 					= '${urlElimina}';
         </script>
         <script type="text/javascript">
 	        function regresa_menu() {
@@ -97,97 +97,206 @@
                             </div>
                         </div>
                         <div id="div_contenido">
-                        	<form name="busqueda_cliente" action="" method="post" accept-charset="ISO-8859-1">
-                        		<input type="hidden" name="numero_pagina"               value=""/>
-                                <input type="hidden" name="numero_registros_por_pagina" value=""/>
-                        	</form>
-                            <form name="cliente" action="" method="post" accept-charset="ISO-8859-1">
-                                <div id="div_cliente">
-                                    <div class="titulo">
-                                        <img alt="" src="<c:url value="/resources/image/titulo_cliente.png"/>"></img>
-                                    </div>
-                                    
-                                   	<div class="linea">
-                                   		<div class="casilla">
-                                   			<div id="div_paginacion_resultados" style="float:right;"></div>
-                                   		</div>
-                                   	</div>
-                                    
-                                    <div id="div_contenedor_tabla">
-                                        <div class="columna_completa">
-                                            <div id="div_tabla_cliente">
-                                                <table id="tabla_cliente">
-                                                    <tr>
-                                                        <th>Id.</th>
-                                                        <th>Cve</th>
-                                                        <th width="60%">Nombre</th>
-                                                        <th>Representante</th>
-                                                        <th>Puesto</th>
-                                                        <th>Calle</th>
-                                                        <th>No.Ext</th>
-                                                        <th>No.Int</th>
-                                                        <th>Colonia</th>
-                                                        <th>Delegaci&oacute;n</th>
-                                                        <th>Estado</th>
-                                                        <th>C.P.</th>
-                                                        <th>Pa&iacute;s</th>
-                                                        <th>RFC</th>
-                                                        <th>Tel&eacute;fono</th>
-                                                        <th>M&oacute;vil</th>
-                                                        <th>Email</th>
-                                                        <th>Observaciones</th>
-                                                    </tr>
-                                                <c:forEach var="cliente" items="${listaCliente}" varStatus="i">
-                                                    <tr class='${i.count%2==0?"l2":"l1"}' 
-                                                        onclick="setCampos('${cliente.idCliente}','${cliente.tipoCliente.clave}','${cliente.nombreMoral}','${cliente.nombreRepresentante}','${cliente.puesto}','${cliente.calle}','${cliente.numExterior}','${cliente.numInterior}','${cliente.colonia}','${cliente.delegacionMunicipio}','${cliente.estado}','${cliente.codigoPostal}','${cliente.pais}','${cliente.rfc}','${cliente.telefonoParticular}','${cliente.telefonoMovil}','${cliente.email}','${cliente.observaciones}');">
-                                                        <td>${cliente.idCliente}</td>
-                                                        <td>${cliente.tipoCliente.clave}</td>
-                                                        <td>${cliente.nombreMoral}</td>
-                                                        <td>${cliente.nombreRepresentante}</td>
-                                                        <td>${cliente.puesto}</td>
-                                                        <td>${cliente.calle}</td>
-                                                        <td>${cliente.numExterior}</td>
-                                                        <td>${cliente.numInterior}</td>
-                                                        <td>${cliente.colonia}</td>
-                                                        <td>${cliente.delegacionMunicipio}</td>
-                                                        <td>${cliente.estado}</td>
-                                                        <td>${cliente.codigoPostal}</td>
-                                                        <td>${cliente.pais}</td>
-                                                        <td>${cliente.rfc}</td>
-                                                        <td>${cliente.telefonoParticular}</td>
-                                                        <td>${cliente.telefonoMovil}</td>
-                                                        <td>${cliente.email}</td>
-                                                        <td>${cliente.observaciones}</td>
-                                                    </tr>
-                                                </c:forEach>
-                                                </table>
-                                            </div>
+                        	
+                            <div id="div_cliente">
+                                <div class="titulo">
+                                    <img alt="" src="<c:url value="/resources/image/titulo_cliente.png"/>"></img>
+                                </div>
+                               	<div class="linea">
+                               		<div class="casilla">
+                               			<div id="div_paginacion_resultados" style="float:right;"></div>
+                               		</div>
+                               	</div>
+                                <div id="div_contenedor_tabla">
+                                    <div class="columna_completa">
+                                        <div id="div_tabla_cliente">
+                                            <table id="tabla_cliente">
+                                                <tr>
+                                                    <th>Id.</th>
+                                                    <th>Cve</th>
+                                                    <th width="60%">Nombre</th>
+                                                    <th>Representante</th>
+                                                    <th>Puesto</th>
+                                                    <th>Calle</th>
+                                                    <th>No.Ext</th>
+                                                    <th>No.Int</th>
+                                                    <th>Colonia</th>
+                                                    <th>Delegaci&oacute;n</th>
+                                                    <th>Estado</th>
+                                                    <th>C.P.</th>
+                                                    <th>Pa&iacute;s</th>
+                                                    <th>RFC</th>
+                                                    <th>Tel&eacute;fono</th>
+                                                    <th>M&oacute;vil</th>
+                                                    <th>Email</th>
+                                                    <th>Observaciones</th>
+                                                </tr>
+                                            <c:forEach var="cliente" items="${listaCliente}" varStatus="i">
+                                                <tr class='${i.count%2==0?"l2":"l1"}' 
+                                                    onclick="setCampos('${cliente.idCliente}','${cliente.tipoCliente.clave}','${cliente.nombreMoral}','${cliente.nombreRepresentante}','${cliente.puesto}','${cliente.calle}','${cliente.numExterior}','${cliente.numInterior}','${cliente.colonia}','${cliente.delegacionMunicipio}','${cliente.estado}','${cliente.codigoPostal}','${cliente.pais}','${cliente.rfc}','${cliente.telefonoParticular}','${cliente.telefonoMovil}','${cliente.email}','${cliente.observaciones}');">
+                                                    <td>${cliente.idCliente}</td>
+                                                    <td>${cliente.tipoCliente.clave}</td>
+                                                    <td>${cliente.nombreMoral}</td>
+                                                    <td>${cliente.nombreRepresentante}</td>
+                                                    <td>${cliente.puesto}</td>
+                                                    <td>${cliente.calle}</td>
+                                                    <td>${cliente.numExterior}</td>
+                                                    <td>${cliente.numInterior}</td>
+                                                    <td>${cliente.colonia}</td>
+                                                    <td>${cliente.delegacionMunicipio}</td>
+                                                    <td>${cliente.estado}</td>
+                                                    <td>${cliente.codigoPostal}</td>
+                                                    <td>${cliente.pais}</td>
+                                                    <td>${cliente.rfc}</td>
+                                                    <td>${cliente.telefonoParticular}</td>
+                                                    <td>${cliente.telefonoMovil}</td>
+                                                    <td>${cliente.email}</td>
+                                                    <td>${cliente.observaciones}</td>
+                                                </tr>
+                                            </c:forEach>
+                                            </table>
                                         </div>
                                     </div>
-                                    <br/>
-                                    
-                                    
-                                    <div class="linea">
-                                    	<div class="casilla">
-                                    		<div id="div_paginador">
-                                    			<ul id="paginacion">
-                                    				<!--
-                                    				<li onclick="paginador(this);" class="activo bold">Primero</li>
-                                    				<li onclick="paginador(this);" class="activo bold">Anterior</li>
-                                    				<li onclick="paginador(this);" name="arreglo" class="seleccionado">1</li>
-                                    				<li onclick="paginador(this);" name="arreglo" class="activo">2</li>
-                                    				<li onclick="paginador(this);" class="activo bold">Siguiente</li>
-                                    				<li onclick="paginador(this);" class="activo bold">Ultimo</li>
-                                    				-->
-                                    			</ul>
-                                    		</div>
-                                    	</div>
-                                    </div>
-                                    
-                                    
-                                    <div class="titulo">
-                                        <img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"></img>
-                                    </div>
+                                </div>
+                                <br/>
+                               	<div class="linea">
+                                	<div class="casilla">
+                                		<div id="div_paginador">
+                                			<ul id="paginacion"></ul>
+                                		</div>
+                                	</div>
+                                </div>
+                                
+                                
+                                <div class="div_separador_mediano">
+                                	<img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
+                                </div>
+                                
+                                
+                                
+                                <div class="titulo">
+                                    <font size="5">CRITERIOS DE B&Uacute;SQUEDA</font>
+                                </div>
+                                <div id="div_formulario_busqueda_cliente">
+                                	<form name="busqueda_cliente" action="" method="post" accept-charset="ISO-8859-1">
+                                		<!-- campos para uso del paginador -->
+	                                	<input type="hidden" name="numero_pagina"               value=""/>
+	                                	<input type="hidden" name="numero_registros_por_pagina" value=""/>
+		                                <div class="linea">
+		                                	<div class="casilla">
+		                                		<div class="columna_izquierda">
+		                                			<div class="columna_completa">
+		                                				<table>
+		                                					<tr>
+		                                						<td width="19%">
+		                                							<input type="checkbox" name="chkbx_busca_por_nombre_moral">
+		                                							<span style="cursor:pointer;" onclick="document.busqueda_cliente.chkbx_busca_por_nombre_moral.click()">Nombre:</span>
+		                                						</td>
+		                                						<td>
+		                                							<input type="text" class="input" name="nombre_moral" value="" tabindex="1">
+		                                						</td>
+		                                					</tr>
+		                                				</table>
+		                                			</div>
+		                                		</div>
+		                                		<div class="columna_derecha">
+		                                			<div class="mitad_columna_izquierda">
+		                                				<table>
+		                                					<tr>
+		                                						<td width="30%">
+		                                							<input type="checkbox" name="chkbx_busca_por_rfc">
+		                                							<span style="cursor:pointer;" onclick="document.busqueda_cliente.chkbx_busca_por_rfc.click()">RFC:</span>
+		                                						</td>
+		                                						<td>
+		                                							<input type="text" class="input" name="rfc" value="" tabindex="2">
+		                                						</td>
+		                                					</tr>
+		                                				</table>
+		                                			</div>
+		                                			<div class="mitad_columna_derecha">
+		                                				<table>
+		                                					<tr>
+		                                						<td width="33%">
+		                                							<input type="checkbox" name="chkbx_busca_por_clave">
+		                                							<span style="cursor:pointer;" onclick="document.busqueda_cliente.chkbx_busca_por_clave.click()">Clave:</span>
+		                                						</td>
+		                                						<td>
+		                                							<select name="id_tipo_cliente" tabindex="3" onchange="">
+	                                                                    <c:forEach var="tipoCliente" items="${listaTipoCliente}">
+	                                                                        <option value="${tipoCliente.value}">${tipoCliente.text}</option>
+	                                                                    </c:forEach>
+	                                                                </select>
+		                                						</td>
+		                                					</tr>
+		                                				</table>
+		                                			</div>
+		                                		</div>
+		                                	</div>
+		                                </div>
+	                                	<div class="linea">
+	                                		<div class="casilla">
+	                                			<div class="columna_izquierda">
+	                                				<div class="columna_completa">
+	                                					<table>
+	                                						<tr>
+	                                							<td width="29%">
+	                                								<input type="checkbox" name="chkbx_busca_por_nombre_representante">
+		                                							<span style="cursor:pointer;" onclick="document.busqueda_cliente.chkbx_busca_por_nombre_representante.click()">Representante:</span>
+	                                							</td>
+	                                							<td>
+	                                								<input type="text" class="input" name="nombre_representante" value="" tabindex="4">
+	                                							</td>
+	                                						</tr>
+	                                					</table>
+	                                				</div>
+	                                			</div>
+	                                			<div class="columna_derecha">
+	                                				<div class="mitad_columna_izquierda">
+	                                					<table>
+	                                						<tr>
+	                                							<td width="29%">
+	                                								<input type="checkbox" name="chkbx_busca_por_codigo_postal">
+		                                							<span style="cursor:pointer;" onclick="document.busqueda_cliente.chkbx_busca_por_codigo_postal.click()">C.P.:</span>
+	                                							</td>
+	                                							<td>
+	                                								<input type="text" class="input" name="codigo_postal" value="" tabindex="5">
+	                                							</td>
+	                                						</tr>
+	                                					</table>
+	                                				</div>
+	                                			</div>
+	                                		</div>
+	                                	</div>
+	                                	<br/>
+	                                	<div class="linea">
+	                                		<div class="casilla" style="text-align:right;">
+	                                			<img alt="" style="cursor: pointer;" onclick="limpia_form_busqueda_cliente()" 
+	                                				 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"></img>
+												<span style="cursor:pointer;" onclick="nueva_busqueda()">
+													&nbsp;Buscar&nbsp;
+												</span>
+	                                		</div>
+	                                	</div>
+	                                </form>
+                                </div>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <div class="div_separador_mediano">
+                                	<img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
+                                </div>
+                                
+                                
+                                
+                                
+                                
+								<form name="cliente" action="" method="post" accept-charset="ISO-8859-1">
+									<div class="titulo">
+	                                    <img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"></img>
+	                                </div>
                                     <div class="linea">
                                         <div class="casilla">
                                             <div class="columna_izquierda">
@@ -200,7 +309,6 @@
                                                                         class="input" 
                                                                         name="id_cliente"
                                                                         value="" 
-                                                                        tabindex="1" 
                                                                         readonly="readonly">
                                                             </td>
                                                         </tr>
@@ -211,7 +319,7 @@
                                                         <tr>
                                                             <td width="1%">Clave:</td>
                                                             <td>
-                                                                <select name="id_tipo_cliente" tabindex="2" onchange="">
+                                                                <select name="id_tipo_cliente" tabindex="6" onchange="">
                                                                     <c:forEach var="tipoCliente" items="${listaTipoCliente}">
                                                                         <option value="${tipoCliente.value}">${tipoCliente.text}</option>
                                                                     </c:forEach>
@@ -231,7 +339,7 @@
                                                                         class="input" 
                                                                         name="nombre_moral" 
                                                                         value=""
-                                                                        tabindex="3">
+                                                                        tabindex="7">
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -251,7 +359,7 @@
                                                                         class="input" 
                                                                         name="nombre_representante"
                                                                         value="" 
-                                                                        tabindex="4">
+                                                                        tabindex="8">
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -267,7 +375,7 @@
                                                                         class="input"
                                                                         name="puesto"
                                                                         value=""
-                                                                        tabindex="5">
+                                                                        tabindex="9">
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -288,7 +396,7 @@
                                                                         class="input" 
                                                                         name="calle" 
                                                                         value=""
-                                                                        tabindex="6">
+                                                                        tabindex="10">
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -302,7 +410,7 @@
                                                                         class="input" 
                                                                         name="num_exterior" 
                                                                         value=""
-                                                                        tabindex="7">
+                                                                        tabindex="11">
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -318,7 +426,7 @@
                                                                         class="input" 
                                                                         name="num_interior" 
                                                                         value=""
-                                                                        tabindex="8">
+                                                                        tabindex="12">
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -332,7 +440,7 @@
                                                                         class="input" 
                                                                         name="colonia" 
                                                                         value=""
-                                                                        tabindex="9">
+                                                                        tabindex="13">
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -352,7 +460,7 @@
                                                                         class="input" 
                                                                         name="delegacion_municipio" 
                                                                         value=""
-                                                                        tabindex="10">
+                                                                        tabindex="14">
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -366,7 +474,7 @@
                                                                         class="input" 
                                                                         name="estado" 
                                                                         value=""
-                                                                        tabindex="11">
+                                                                        tabindex="15">
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -382,7 +490,7 @@
                                                                         class="input" 
                                                                         name="codigo_postal" 
                                                                         value=""
-                                                                        tabindex="12">
+                                                                        tabindex="16">
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -396,7 +504,7 @@
                                                                         class="input"
                                                                         name="pais"
                                                                         value=""
-                                                                        tabindex="13">
+                                                                        tabindex="17">
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -416,7 +524,7 @@
                                                                         class="input" 
                                                                         name="rfc" 
                                                                         value=""
-                                                                        tabindex="14">
+                                                                        tabindex="18">
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -430,7 +538,7 @@
                                                                         class="input"
                                                                         name="telefono_particular"
                                                                         value=""
-                                                                        tabindex="15">
+                                                                        tabindex="19">
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -446,7 +554,7 @@
                                                                         class="input"
                                                                         name="telefono_movil"
                                                                         value=""
-                                                                        tabindex="16">
+                                                                        tabindex="20">
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -460,7 +568,7 @@
                                                                         class="input"
                                                                         name="email"
                                                                         value=""
-                                                                        tabindex="17">
+                                                                        tabindex="21">
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -480,7 +588,7 @@
                                                                         class="input" 
                                                                         name="observaciones" 
                                                                         value=""
-                                                                        tabindex="18">
+                                                                        tabindex="22">
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -488,25 +596,24 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    <!--  <div class="linea"></div> -->
-                                    <div class="linea">
-                                        <div class="casilla" style="text-align:right;">
-                                            <img alt="" style="cursor:pointer;" onclick="limpia();"
-                                            	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"></img>
-                                             
-                                            <img alt="" style="cursor:pointer;" onclick="elimina();"
-                                            	 src="<c:url value="/resources/image/boton_eliminar.jpg"/>"></img>
-                                             
-                                            <img alt="" style="cursor:pointer;" onclick="modifica();"
-                                            	 src="<c:url value="/resources/image/boton_modificar.jpg"/>"></img>
-                                             
-                                            <img alt="" style="cursor:pointer;" onclick="crear();"
-                                            	src="<c:url value="/resources/image/boton_agregar.jpg"/>"></img>
-                                        </div>
+                                    </form>
+                                <div class="linea">
+                                    <div class="casilla" style="text-align:right;">
+                                        <img alt="" style="cursor:pointer;" onclick="limpia_form_cliente()"
+                                        	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"></img>
+                                         
+                                        <img alt="" style="cursor:pointer;" onclick="elimina()"
+                                        	 src="<c:url value="/resources/image/boton_eliminar.jpg"/>"></img>
+                                         
+                                        <img alt="" style="cursor:pointer;" onclick="modifica()"
+                                        	 src="<c:url value="/resources/image/boton_modificar.jpg"/>"></img>
+                                         
+                                        <img alt="" style="cursor:pointer;" onclick="crear()"
+                                        	src="<c:url value="/resources/image/boton_agregar.jpg"/>"></img>
                                     </div>
                                 </div>
-                            </form>
+							</div>
+                            
                         </div>
                     </div>
                     <div id="div_pie"></div>

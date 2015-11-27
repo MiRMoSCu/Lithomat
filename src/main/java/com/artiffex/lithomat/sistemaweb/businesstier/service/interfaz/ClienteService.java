@@ -18,12 +18,47 @@ public interface ClienteService {
 
 	public List<Cliente> listaCliente();
 	
-	public List<Cliente> listaClientePorNumeroPagina(int numeroPagina, int numeroRegistrosPorPagina);
-	
-	public List<ClienteDTO> listaClientePorNUmeroPaginaEnDTO(int numeroPagina, int numeroRegistrosPorPagina);
-
 	public List<ComboSelect> buscaClientePorNombre(String nombreMoral);
 	
-	public int obtieneNumeroClientes();
+	public int obtieneNumeroClientesPorParamatros(
+			boolean busquedaPorNombreMoral,
+			boolean busquedaPorRFC,
+			boolean busquedaPorClave,
+			boolean busquedaPorNombreRepresentante,
+			boolean busquedaPorCodigoPostal,
+			String nombreMoral,
+			String rfc,
+			Integer idTipoCliente,
+			String nombreRepresentante,
+			String codigoPostal
+		);
+	
+	public List<Cliente> listaClientePorNumeroPagina(
+			boolean busquedaPorNombreMoral,
+			boolean busquedaPorRFC,
+			boolean busquedaPorClave,
+			boolean busquedaPorNombreRepresentante,
+			boolean busquedaPorCodigoPostal,
+			String nombreMoral,
+			String rfc,
+			Integer idTipoCliente,
+			String nombreRepresentante,
+			String codigoPostal,
+			int numeroPagina, 
+			int numeroRegistrosPorPagina);
+	
+	public List<ClienteDTO> listaClientePorNUmeroPaginaEnDTO(
+			boolean busquedaPorNombreMoral,
+			boolean busquedaPorRFC,
+			boolean busquedaPorClave,
+			boolean busquedaPorNombreRepresentante,
+			boolean busquedaPorCodigoPostal,
+			String nombreMoral,
+			String rfc,
+			Integer idTipoCliente,
+			String nombreRepresentante,
+			String codigoPostal,
+			int numeroPagina, 
+			int numeroRegistrosPorPagina);
 		
 }

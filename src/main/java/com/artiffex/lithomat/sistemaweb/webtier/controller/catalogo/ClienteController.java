@@ -55,31 +55,66 @@ public class ClienteController {
 		model.addAttribute("tamanioMaximoArreglo", tamanioMaximoArreglo);
 		model.addAttribute("numeroPagina", numeroPagina);
 		
-		// numero total de registros
-		int numeroTotalRegistros	= clienteService.obtieneNumeroClientes();
+		// numero total de registros // BUSQUEDA DEFAULT
+		int numeroTotalRegistros	= clienteService.obtieneNumeroClientesPorParamatros( false, false, false, false, false, null, null, null, null, null );
 		model.addAttribute("numeroTotalRegistros", numeroTotalRegistros);
 
-		// lista de registros
-		List<Cliente> listaCliente = clienteService.listaClientePorNumeroPagina(numeroPagina, numeroRegistrosPorPagina);
+		// lista de registros // BUSQUEDA DEFAULT
+		List<Cliente> listaCliente = clienteService.listaClientePorNumeroPagina( false, false, false, false, false, null, null, null, null, null, numeroPagina, numeroRegistrosPorPagina);
 		model.addAttribute("listaCliente", listaCliente);
 		listaCliente = null;
+		
 		return "catalogo/cliente";
 	}// lista_cliente
+		
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
-	@RequestMapping(value = "/catalogo/lista_por_pagina", method = RequestMethod.POST)
+	@RequestMapping(value = "/catalogo/lista_por_pagina_por_parametros", method = RequestMethod.POST)
 	@ResponseBody
-	public String listaClientesPorPagina(
-			@RequestParam(value = "numero_pagina", 					required = false) Integer numeroPagina,
-			@RequestParam(value = "numero_registros_por_pagina", 	required = false) Integer numeroRegistrosPorPagina
+	public String buscaClientesPorParametros(
+			@RequestParam(value = "numero_pagina", 							required = false) Integer numeroPagina,
+			@RequestParam(value = "numero_registros_por_pagina", 			required = false) Integer numeroRegistrosPorPagina,
+			@RequestParam(value = "chkbx_busca_por_nombre_moral", 			required = false) boolean busquedaPorNombreMoral,
+			@RequestParam(value = "chkbx_busca_por_rfc", 					required = false) boolean busquedaPorRFC,
+			@RequestParam(value = "chkbx_busca_por_clave", 					required = false) boolean busquedaPorClave,
+			@RequestParam(value = "chkbx_busca_por_nombre_representante", 	required = false) boolean busquedaPorNombreRepresentante,
+			@RequestParam(value = "chkbx_busca_por_codigo_postal", 			required = false) boolean busquedaPorCodigoPostal,
+			@RequestParam(value = "nombre_moral", 							required = false) String nombreMoral,
+			@RequestParam(value = "rfc", 									required = false) String rfc,
+			@RequestParam(value = "id_tipo_cliente", 						required = false) Integer idTipoCliente,
+			@RequestParam(value = "nombre_representante", 					required = false) String nombreRepresentante,
+			@RequestParam(value = "codigo_postal", 							required = false) String codigoPostal
 		) {
-		log.info("/busca_lista_clientes");
+		log.info("/catalogo/lista_por_pagina");
 		
 		StringBuilder sb = new StringBuilder();
 		Gson gson = new Gson();
 		
-		int numeroTotalRegistros = clienteService.obtieneNumeroClientes();
-		List<ClienteDTO> listaClientes = clienteService.listaClientePorNUmeroPaginaEnDTO(numeroPagina, numeroRegistrosPorPagina);
+		int numeroTotalRegistros = clienteService.obtieneNumeroClientesPorParamatros( 
+				busquedaPorNombreMoral, 
+				busquedaPorRFC, 
+				busquedaPorClave, 
+				busquedaPorNombreRepresentante, 
+				busquedaPorCodigoPostal, 
+				nombreMoral, 
+				rfc, 
+				idTipoCliente, 
+				nombreRepresentante, 
+				codigoPostal );
+		
+		List<ClienteDTO> listaClientes = clienteService.listaClientePorNUmeroPaginaEnDTO(
+				busquedaPorNombreMoral, 
+				busquedaPorRFC, 
+				busquedaPorClave, 
+				busquedaPorNombreRepresentante, 
+				busquedaPorCodigoPostal, 
+				nombreMoral, 
+				rfc, 
+				idTipoCliente, 
+				nombreRepresentante, 
+				codigoPostal,
+				numeroPagina, 
+				numeroRegistrosPorPagina);
 		
 		sb.append("{");
 		sb.append("\"numeroTotalRegistros\":");
@@ -92,9 +127,10 @@ public class ClienteController {
 		listaClientes 	= null;
 		gson 			= null;
 		
-		return sb.toString();
+		return sb.toString();		
 	}
 
+	
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
 	public String altaCliente(
 			@RequestParam(value = "id_tipo_cliente", 		required = false) Integer idTipoCliente,
@@ -155,6 +191,7 @@ public class ClienteController {
 		return "catalogo/cliente";
 	}// alta_cliente
 
+	
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
 	public String modificaCliente(
 			@RequestParam(value = "id_cliente", 			required = false) Integer idCliente,
@@ -202,19 +239,33 @@ public class ClienteController {
 
 		clienteService.modificaCliente(cliente);
 
-		List<Cliente> listaCliente = clienteService.listaCliente();
+		// configuracion de controles de la pagina (select)
 		List<ComboSelect> listaComboSelect = tipoClienteService.listaComboSelect();
-		model.addAttribute("listaCliente", listaCliente);
 		model.addAttribute("listaTipoCliente", listaComboSelect);
-
-		cliente = null;
-		tipoCliente = null;
-		listaCliente = null;
 		listaComboSelect = null;
+		
+		// variables de configuracion del paginador
+		int numeroRegistrosPorPagina 	= 10;
+		int tamanioMaximoArreglo 		= 7;
+		int numeroPagina 				= 1;
+
+		model.addAttribute("numeroRegistrosPorPagina", numeroRegistrosPorPagina);
+		model.addAttribute("tamanioMaximoArreglo", tamanioMaximoArreglo);
+		model.addAttribute("numeroPagina", numeroPagina);
+		
+		// numero total de registros // BUSQUEDA DEFAULT
+		int numeroTotalRegistros	= clienteService.obtieneNumeroClientesPorParamatros( false, false, false, false, false, null, null, null, null, null );
+		model.addAttribute("numeroTotalRegistros", numeroTotalRegistros);
+
+		// lista de registros // BUSQUEDA DEFAULT
+		List<Cliente> listaCliente = clienteService.listaClientePorNumeroPagina( false, false, false, false, false, null, null, null, null, null, numeroPagina, numeroRegistrosPorPagina);
+		model.addAttribute("listaCliente", listaCliente);
+		listaCliente = null;
 		
 		return "catalogo/cliente";
 	}// modifica_cliente
 
+	
 	@RequestMapping(value = "/catalogo/elimina", method = RequestMethod.POST)
 	public String eliminaCliente(
 			@RequestParam(value = "id_cliente", required = false) Integer idCliente,
@@ -227,14 +278,30 @@ public class ClienteController {
 		
 		clienteService.modificaCliente(cliente);
 
-		List<Cliente> listaCliente = clienteService.listaCliente();
+		// configuracion de controles de la pagina (select)
 		List<ComboSelect> listaComboSelect = tipoClienteService.listaComboSelect();
-		model.addAttribute("listaCliente", listaCliente);
 		model.addAttribute("listaTipoCliente", listaComboSelect);
-
-		cliente = null;
-		listaCliente = null;
 		listaComboSelect = null;
+		
+		// variables de configuracion del paginador
+		int numeroRegistrosPorPagina 	= 10;
+		int tamanioMaximoArreglo 		= 7;
+		int numeroPagina 				= 1;
+
+		model.addAttribute("numeroRegistrosPorPagina", numeroRegistrosPorPagina);
+		model.addAttribute("tamanioMaximoArreglo", tamanioMaximoArreglo);
+		model.addAttribute("numeroPagina", numeroPagina);
+		
+		// numero total de registros // BUSQUEDA DEFAULT
+		int numeroTotalRegistros	= clienteService.obtieneNumeroClientesPorParamatros( false, false, false, false, false, null, null, null, null, null );
+		model.addAttribute("numeroTotalRegistros", numeroTotalRegistros);
+
+		// lista de registros // BUSQUEDA DEFAULT
+		List<Cliente> listaCliente = clienteService.listaClientePorNumeroPagina( false, false, false, false, false, null, null, null, null, null, numeroPagina, numeroRegistrosPorPagina);
+		model.addAttribute("listaCliente", listaCliente);
+		listaCliente = null;
+		
+		
 		return "catalogo/cliente";
 	}// elimina_cliente
 	

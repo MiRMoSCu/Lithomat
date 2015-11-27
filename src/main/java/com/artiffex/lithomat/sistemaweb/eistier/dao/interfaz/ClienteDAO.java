@@ -14,10 +14,10 @@ public interface ClienteDAO {
 	
 	public List<Cliente> lista();
 	
-	public List<Cliente> listaPorRango(int limiteInferior, int limiteSuperior);
-
 	public List<Cliente> buscaPorNombre(String nombreMoral);
 	
-	public int numeroClientes();
+	public int numeroClientes(String strQuery);
+	
+	public List<Cliente> listaPorRango(String strQuery);
 		
 }

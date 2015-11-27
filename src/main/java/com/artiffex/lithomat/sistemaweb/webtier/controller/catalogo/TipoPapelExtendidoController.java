@@ -69,12 +69,12 @@ public class TipoPapelExtendidoController {
 	@RequestMapping(value = "/ventana/busca", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResponse buscaTipoPapelExtendido(
-			@RequestParam(value = "busqueda_por_nombre",		required = false) boolean busquedaPorNombre,
-			@RequestParam(value = "busqueda_por_ancho",			required = false) boolean busquedaPorAncho,
-			@RequestParam(value = "busqueda_por_alto", 			required = false) boolean busquedaPorAlto,
-			@RequestParam(value = "busqueda_por_gramaje", 		required = false) boolean busquedaPorGramaje,
-			@RequestParam(value = "busqueda_por_kilogramos",	required = false) boolean busquedaPorKilogramos,
-			@RequestParam(value = "busqueda_por_proveedor", 	required = false) boolean busquedaPorProveedor,
+			@RequestParam(value = "chkbx_busca_por_nombre",		required = false) boolean busquedaPorNombre,
+			@RequestParam(value = "chkbx_busca_por_ancho",		required = false) boolean busquedaPorAncho,
+			@RequestParam(value = "chkbx_busca_por_alto", 		required = false) boolean busquedaPorAlto,
+			@RequestParam(value = "chkbx_busca_por_gramaje", 	required = false) boolean busquedaPorGramaje,
+			@RequestParam(value = "chkbx_busca_por_kilogramos",	required = false) boolean busquedaPorKilogramos,
+			@RequestParam(value = "chkbx_busca_por_proveedor", 	required = false) boolean busquedaPorProveedor,
 			@RequestParam(value = "nombre", 					required = false) String nombrePapel,
 			@RequestParam(value = "ancho", 						required = false) Float ancho,
 			@RequestParam(value = "alto", 						required = false) Float alto,

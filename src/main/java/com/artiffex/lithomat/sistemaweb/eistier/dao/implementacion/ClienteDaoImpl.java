@@ -86,33 +86,6 @@ public class ClienteDaoImpl implements ClienteDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Cliente> listaPorRango(int limiteInferior, int limiteSuperior) {
-		List<Cliente> lista = new ArrayList<Cliente>();
-		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
-			sesion.beginTransaction();
-			SQLQuery query = sesion.createSQLQuery(
-					"SELECT \r\n" + 
-					"    * \r\n" + 
-					"FROM \r\n" + 
-					"    cliente c \r\n" + 
-					"WHERE \r\n" + 
-					"    c.activo = TRUE \r\n" + 
-					"ORDER BY c.id_cliente ASC \r\n" + 
-					"LIMIT :limiteInferior , :limiteSuperior");
-			query.setParameter("limiteInferior", limiteInferior);
-			query.setParameter("limiteSuperior", limiteSuperior);
-			query.addEntity(Cliente.class);
-			lista = query.list();
-			sesion.getTransaction().commit();
-		} catch( Exception e ) {
-			log.error(e.getMessage());
-			sesion.getTransaction().rollback();
-		}
-		return lista;
-	}
-
-	@SuppressWarnings("unchecked")
 	public List<Cliente> buscaPorNombre(String nombreMoral) {
 		List<Cliente> lista = new ArrayList<Cliente>();
 		try {
@@ -130,27 +103,37 @@ public class ClienteDaoImpl implements ClienteDAO {
 		return lista;
 	}
 
-	public int numeroClientes() {
+	public int numeroClientes(String strQuery) {
 		int numeroClientes = 0;
 		try {
 			sesion = HibernateUtil.getInstance().getCurrentSession();
 			sesion.beginTransaction();
-			SQLQuery query = sesion.createSQLQuery(
-					"SELECT \r\n" + 
-					"    COUNT(*)\r\n" + 
-					"FROM\r\n" + 
-					"    cliente c\r\n" + 
-					"WHERE\r\n" + 
-					"    c.activo = TRUE;");
+			SQLQuery query = sesion.createSQLQuery(strQuery);
 			numeroClientes = ((BigInteger)query.uniqueResult()).intValue();
 			sesion.getTransaction().commit();
 			query = null;
 		} catch( Exception e ) {
-			//e.printStackTrace();
 			log.error(e.getMessage());
 			sesion.getTransaction().rollback();
 		}
 		return numeroClientes;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Cliente> listaPorRango(String strQuery) {
+		List<Cliente> lista = new ArrayList<Cliente>();
+		try {
+			sesion = HibernateUtil.getInstance().getCurrentSession();
+			sesion.beginTransaction();
+			SQLQuery query = sesion.createSQLQuery(strQuery);
+			query.addEntity(Cliente.class);
+			lista = query.list();
+			sesion.getTransaction().commit();
+		} catch( Exception e ) {
+			log.error(e.getMessage());
+			sesion.getTransaction().rollback();
+		}
+		return lista;
 	}
 
 }
