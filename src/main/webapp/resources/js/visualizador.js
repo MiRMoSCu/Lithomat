@@ -68,36 +68,62 @@ function genera_tabla_dom( jsonOrdenesProduccion ) {
     tr.appendChild( td );
     
     table.appendChild( tr );
-    $.each( jsonOrdenesProduccion, function(i, item){
-        tr = document.createElement("tr");
+    
+    if( jsonOrdenesProduccion.length > 0 ) {
+    	$.each( jsonOrdenesProduccion, function(i, item){
+            tr = document.createElement("tr");
+            
+            tr.setAttribute("onclick","muestra_detalle_nut('" + item.nut + "');")
+            if( i%2 == 0 )
+                tr.setAttribute("class","l1");
+            else
+                tr.setAttribute("class","l2");
+            td = document.createElement("td");
+            td.innerHTML = item.nut;
+            tr.appendChild( td );
+            td = document.createElement("td");
+            td.innerHTML = item.nombre;
+            tr.appendChild( td );
+            td = document.createElement("td");
+            td.innerHTML = item.descripcion;
+            tr.appendChild( td );
+            td = document.createElement("td");
+            td.innerHTML = item.fechaCotizacion;
+            tr.appendChild( td );
+            td = document.createElement("td");
+            td.innerHTML = item.nombreMoral;
+            tr.appendChild( td );
+            td = document.createElement("td");
+            td.setAttribute("id","td_" + item.nut);
+            td.setAttribute("class","estatus_" + item.idEstatusOrden);
+            td.innerHTML = item.nombreEstatus;
+            tr.appendChild( td );
+            table.appendChild( tr );
+        });
+    } else {
+    	tr = document.createElement("tr");
         
-        tr.setAttribute("onclick","muestra_detalle_nut('" + item.nut + "');")
-        if( i%2 == 0 )
-            tr.setAttribute("class","l1");
-        else
-            tr.setAttribute("class","l2");
+        tr.setAttribute("class","l1");
         td = document.createElement("td");
-        td.innerHTML = item.nut;
+        td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         td = document.createElement("td");
-        td.innerHTML = item.nombre;
+        td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         td = document.createElement("td");
-        td.innerHTML = item.descripcion;
+        td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         td = document.createElement("td");
-        td.innerHTML = item.fechaCotizacion;
+        td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         td = document.createElement("td");
-        td.innerHTML = item.nombreMoral;
+        td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         td = document.createElement("td");
-        td.setAttribute("id","td_" + item.nut);
-        td.setAttribute("class","estatus_" + item.idEstatusOrden);
-        td.innerHTML = item.nombreEstatus;
+        td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         table.appendChild( tr );
-    });
+    }
     //console.log( table );
     //console.log( table.outerHTML );
     //console.log( table.innerHTML );

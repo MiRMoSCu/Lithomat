@@ -1,10 +1,12 @@
 package com.artiffex.lithomat.sistemaweb.eistier.dao.implementacion;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
@@ -89,6 +91,39 @@ public class TipoPapelExtendidoDaoImpl implements TipoPapelExtendidoDAO {
 			lista = sesion.createQuery(query).setProperties(parametros).list();
 			sesion.getTransaction().commit();
 		} catch(Exception e) {
+			log.error(e.getMessage());
+			sesion.getTransaction().rollback();
+		}
+		return lista;
+	}
+
+	public int numeroTipoPapelExtendido(String strQuery) {
+		int numeroRegistros = 0;
+		try {
+			sesion = HibernateUtil.getInstance().getCurrentSession();
+			sesion.beginTransaction();
+			SQLQuery query = sesion.createSQLQuery(strQuery);
+			numeroRegistros = ((BigInteger)query.uniqueResult()).intValue();
+			sesion.getTransaction().commit();
+			query = null;
+		} catch(Exception e) {
+			log.error(e.getMessage());
+			sesion.getTransaction().rollback();
+		}
+		return numeroRegistros;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<TipoPapelExtendido> listaPorRango(String strQuery) {
+		List<TipoPapelExtendido> lista = new ArrayList<TipoPapelExtendido>();
+		try {
+			sesion = HibernateUtil.getInstance().getCurrentSession();
+			sesion.beginTransaction();
+			SQLQuery query = sesion.createSQLQuery(strQuery);
+			query.addEntity(TipoPapelExtendido.class);
+			lista = query.list();
+			sesion.getTransaction().commit();
+		} catch( Exception e ) {
 			log.error(e.getMessage());
 			sesion.getTransaction().rollback();
 		}

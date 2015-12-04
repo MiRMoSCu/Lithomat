@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.TipoPapelExtendidoDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.JsonResponse;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.ProveedorPapel;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPapelExtendido;
@@ -36,6 +37,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoPapelE
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoPrecioService;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ParametrosBusquedaTipoPapelExtendido;
+import com.google.gson.Gson;
 
 @Controller
 @RequestMapping("/tipo_papel_extendido")
@@ -53,9 +55,7 @@ public class TipoPapelExtendidoController {
 
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/ventana/lista", method = RequestMethod.GET)
-	public String ventanaBusquedaPapelExtendido(
-			Model model
-		)  throws IOException {
+	public String ventanaBusquedaPapelExtendido( Model model )  throws IOException {
 		log.info("/ventana_busqueda_tipo_papel_extendido");
 		
 		List<ComboSelect> listaProveedorPapel = proveedorPapelService.listaComboSelect();
@@ -117,20 +117,94 @@ public class TipoPapelExtendidoController {
 	@RequestMapping(value = "/catalogo/lista", method = RequestMethod.POST)
 	public String listaTipoPapelExtendido( Locale locale, Model model ) throws IOException {
 		log.info("/lista_tipo_papel_extendido");
-
-		List<TipoPapelExtendido> listaTipoPapelExtendido = tipoPapelExtendidoService.listaTipoPapelExtendido();
+		
+		// configuracion de controles de la pagina (select)
 		List<ComboSelect> listaProveedorPapel = proveedorPapelService.listaComboSelect();
-		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();
-		model.addAttribute("listaTipoPapelExtendido", listaTipoPapelExtendido);
 		model.addAttribute("listaProveedorPapel", listaProveedorPapel);
-		model.addAttribute("listaTipoPrecio", listaTipoPrecio);
-
-		listaTipoPapelExtendido = null;
 		listaProveedorPapel = null;
+		
+		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();
+		model.addAttribute("listaTipoPrecio", listaTipoPrecio);
 		listaTipoPrecio = null;
+		
+		// variables de configuracion del paginador
+		int numeroRegistrosPorPagina 	= 10;
+		int tamanioMaximoArreglo 		= 7;
+		int numeroPagina 				= 1;
+
+		model.addAttribute("numeroRegistrosPorPagina", numeroRegistrosPorPagina);
+		model.addAttribute("tamanioMaximoArreglo", tamanioMaximoArreglo);
+		model.addAttribute("numeroPagina", numeroPagina);
+		
+		// numero total de registros
+		int numeroTotalRegistros = tipoPapelExtendidoService.obtieneNumeroTipoPapelExtendidoPorParematros(false, false, false, false, false, false, null, null, null, null, null, null);
+		model.addAttribute("numeroTotalRegistros", numeroTotalRegistros);
+		
+		// lista de registros // BUSQUEDA DEFAULT
+		List<TipoPapelExtendido> listaTipoPapelExtendido = tipoPapelExtendidoService.listaTipoPapelExtendidoPorParametrosPorNumeroPagina(false, false, false, false, false, false, null, null, null, null, null, null, numeroPagina, numeroRegistrosPorPagina);
+		model.addAttribute("listaTipoPapelExtendido", listaTipoPapelExtendido);
+		listaTipoPapelExtendido = null;
 		
 		return "catalogo/tipo_papel_extendido";
 	}// lista_tipo_papel_extendido
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
+	@RequestMapping(value = "/catalogo/lista_por_pagina_por_parametros", method = RequestMethod.POST)
+	@ResponseBody
+	public String buscaTipoPapelExtendidoPorParametros(
+			@RequestParam(value = "numero_pagina", 					required = false) Integer numeroPagina,
+			@RequestParam(value = "numero_registros_por_pagina", 	required = false) Integer numeroRegistrosPorPagina,
+			@RequestParam(value = "chkbx_busca_por_nombre", 		required = false) boolean busquedaPorNombre,
+			@RequestParam(value = "chkbx_busca_por_gramaje", 		required = false) boolean busquedaPorGramaje,
+			@RequestParam(value = "chkbx_busca_por_kilogramos",		required = false) boolean busquedaPorKilogramos,
+			@RequestParam(value = "chkbx_busca_por_ancho", 			required = false) boolean busquedaPorAncho,
+			@RequestParam(value = "chkbx_busca_por_alto", 			required = false) boolean busquedaPorAlto,
+			@RequestParam(value = "chkbx_busca_por_proveedor", 		required = false) boolean busquedaPorProveedor,
+			@RequestParam(value = "nombre", 						required = false) String nombre,
+			@RequestParam(value = "gramaje", 						required = false) Integer gramaje,
+			@RequestParam(value = "kilogramos", 					required = false) Float kilogramos,
+			@RequestParam(value = "ancho", 							required = false) Float ancho,
+			@RequestParam(value = "alto", 							required = false) Float alto,
+			@RequestParam(value = "id_proveedor_papel", 			required = false) Integer idProveedorPapel
+		) {
+		log.info("/catalogo/lista_por_pagina");
+		
+		StringBuilder sb = new StringBuilder();
+		Gson gson = new Gson();
+		
+		int numeroTotalRegistros = tipoPapelExtendidoService.obtieneNumeroTipoPapelExtendidoPorParematros(
+				busquedaPorNombre, 
+				busquedaPorGramaje, 
+				busquedaPorKilogramos, 
+				busquedaPorAncho, 
+				busquedaPorAlto, 
+				busquedaPorProveedor, 
+				nombre, 
+				gramaje, 
+				kilogramos, 
+				ancho, 
+				alto, 
+				idProveedorPapel );
+		
+		List<TipoPapelExtendidoDTO> listaTipoPapelExtendido = tipoPapelExtendidoService.listaTipoPapelExtendidoPorParametrosPorNumeroPaginaEnDTO(busquedaPorNombre, busquedaPorGramaje, busquedaPorKilogramos, busquedaPorAncho, busquedaPorAlto, busquedaPorProveedor, nombre, gramaje, kilogramos, ancho, alto, idProveedorPapel, numeroPagina, numeroRegistrosPorPagina);
+		
+		sb.append("{");
+		sb.append("\"numeroTotalRegistros\":");
+		sb.append(numeroTotalRegistros);
+		sb.append(",");
+		sb.append("\"listaTipoPapelExtendido\":");
+		sb.append(gson.toJson(listaTipoPapelExtendido));
+		sb.append("}");
+		
+		//System.out.println(sb.toString());
+
+		listaTipoPapelExtendido	= null;
+		gson 					= null;
+		
+		return sb.toString();
+	}
+	
+	
 
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
@@ -165,20 +239,37 @@ public class TipoPapelExtendidoController {
 		tipoPapelExtendido.setActivo(true);
 
 		tipoPapelExtendidoService.creaTipoPapelExtendido(tipoPapelExtendido);
-
-		List<TipoPapelExtendido> listaTipoPapelExtendido = tipoPapelExtendidoService.listaTipoPapelExtendido();
+		
+		proveedorPapel		= null;
+		tipoPrecio 			= null;
+		tipoPapelExtendido 	= null;
+		
+		// configuracion de controles de la pagina (select)
 		List<ComboSelect> listaProveedorPapel = proveedorPapelService.listaComboSelect();
-		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();
-		model.addAttribute("listaTipoPapelExtendido", listaTipoPapelExtendido);
 		model.addAttribute("listaProveedorPapel", listaProveedorPapel);
-		model.addAttribute("listaTipoPrecio", listaTipoPrecio);
-
-		tipoPapelExtendido = null;
-		proveedorPapel = null;
-		tipoPrecio = null;
-		listaTipoPapelExtendido = null;
 		listaProveedorPapel = null;
+		
+		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();
+		model.addAttribute("listaTipoPrecio", listaTipoPrecio);
 		listaTipoPrecio = null;
+		
+		// variables de configuracion del paginador
+		int numeroRegistrosPorPagina 	= 10;
+		int tamanioMaximoArreglo 		= 7;
+		int numeroPagina 				= 1;
+
+		model.addAttribute("numeroRegistrosPorPagina", numeroRegistrosPorPagina);
+		model.addAttribute("tamanioMaximoArreglo", tamanioMaximoArreglo);
+		model.addAttribute("numeroPagina", numeroPagina);
+		
+		// numero total de registros
+		int numeroTotalRegistros = tipoPapelExtendidoService.obtieneNumeroTipoPapelExtendidoPorParematros(false, false, false, false, false, false, null, null, null, null, null, null);
+		model.addAttribute("numeroTotalRegistros", numeroTotalRegistros);
+		
+		// lista de registros // BUSQUEDA DEFAULT
+		List<TipoPapelExtendido> listaTipoPapelExtendido = tipoPapelExtendidoService.listaTipoPapelExtendidoPorParametrosPorNumeroPagina(false, false, false, false, false, false, null, null, null, null, null, null, numeroPagina, numeroRegistrosPorPagina);
+		model.addAttribute("listaTipoPapelExtendido", listaTipoPapelExtendido);
+		listaTipoPapelExtendido = null;
 		
 		return "catalogo/tipo_papel_extendido";
 	}// alta_tipo_papel_extendido
@@ -213,17 +304,34 @@ public class TipoPapelExtendidoController {
 		
 		tipoPapelExtendidoService.modificaTipoPapelExtendido(tipoPapelExtendido);
 
-		List<TipoPapelExtendido> listaTipoPapelExtendido = tipoPapelExtendidoService.listaTipoPapelExtendido();
+		tipoPapelExtendido 	= null;
+		
+		// configuracion de controles de la pagina (select)
 		List<ComboSelect> listaProveedorPapel = proveedorPapelService.listaComboSelect();
-		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();
-		model.addAttribute("listaTipoPapelExtendido", listaTipoPapelExtendido);
 		model.addAttribute("listaProveedorPapel", listaProveedorPapel);
-		model.addAttribute("listaTipoPrecio", listaTipoPrecio);
-
-		tipoPapelExtendido = null;
-		listaTipoPapelExtendido = null;
 		listaProveedorPapel = null;
+		
+		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();
+		model.addAttribute("listaTipoPrecio", listaTipoPrecio);
 		listaTipoPrecio = null;
+		
+		// variables de configuracion del paginador
+		int numeroRegistrosPorPagina 	= 10;
+		int tamanioMaximoArreglo 		= 7;
+		int numeroPagina 				= 1;
+
+		model.addAttribute("numeroRegistrosPorPagina", numeroRegistrosPorPagina);
+		model.addAttribute("tamanioMaximoArreglo", tamanioMaximoArreglo);
+		model.addAttribute("numeroPagina", numeroPagina);
+		
+		// numero total de registros
+		int numeroTotalRegistros = tipoPapelExtendidoService.obtieneNumeroTipoPapelExtendidoPorParematros(false, false, false, false, false, false, null, null, null, null, null, null);
+		model.addAttribute("numeroTotalRegistros", numeroTotalRegistros);
+		
+		// lista de registros // BUSQUEDA DEFAULT
+		List<TipoPapelExtendido> listaTipoPapelExtendido = tipoPapelExtendidoService.listaTipoPapelExtendidoPorParametrosPorNumeroPagina(false, false, false, false, false, false, null, null, null, null, null, null, numeroPagina, numeroRegistrosPorPagina);
+		model.addAttribute("listaTipoPapelExtendido", listaTipoPapelExtendido);
+		listaTipoPapelExtendido = null;
 		
 		return "catalogo/tipo_papel_extendido";
 	}// modifica_tipo_papel_extendido
@@ -241,17 +349,34 @@ public class TipoPapelExtendidoController {
 
 		tipoPapelExtendidoService.modificaTipoPapelExtendido(tipoPapelExtendido);
 
-		List<TipoPapelExtendido> listaTipoPapelExtendido = tipoPapelExtendidoService.listaTipoPapelExtendido();
+		tipoPapelExtendido 	= null;
+		
+		// configuracion de controles de la pagina (select)
 		List<ComboSelect> listaProveedorPapel = proveedorPapelService.listaComboSelect();
-		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();
-		model.addAttribute("listaTipoPapelExtendido", listaTipoPapelExtendido);
 		model.addAttribute("listaProveedorPapel", listaProveedorPapel);
-		model.addAttribute("listaTipoPrecio", listaTipoPrecio);
-
-		tipoPapelExtendido = null;
-		listaTipoPapelExtendido = null;
 		listaProveedorPapel = null;
+		
+		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();
+		model.addAttribute("listaTipoPrecio", listaTipoPrecio);
 		listaTipoPrecio = null;
+		
+		// variables de configuracion del paginador
+		int numeroRegistrosPorPagina 	= 10;
+		int tamanioMaximoArreglo 		= 7;
+		int numeroPagina 				= 1;
+
+		model.addAttribute("numeroRegistrosPorPagina", numeroRegistrosPorPagina);
+		model.addAttribute("tamanioMaximoArreglo", tamanioMaximoArreglo);
+		model.addAttribute("numeroPagina", numeroPagina);
+		
+		// numero total de registros
+		int numeroTotalRegistros = tipoPapelExtendidoService.obtieneNumeroTipoPapelExtendidoPorParematros(false, false, false, false, false, false, null, null, null, null, null, null);
+		model.addAttribute("numeroTotalRegistros", numeroTotalRegistros);
+		
+		// lista de registros // BUSQUEDA DEFAULT
+		List<TipoPapelExtendido> listaTipoPapelExtendido = tipoPapelExtendidoService.listaTipoPapelExtendidoPorParametrosPorNumeroPagina(false, false, false, false, false, false, null, null, null, null, null, null, numeroPagina, numeroRegistrosPorPagina);
+		model.addAttribute("listaTipoPapelExtendido", listaTipoPapelExtendido);
+		listaTipoPapelExtendido = null;
 		
 		return "catalogo/tipo_papel_extendido";
 	}// elimina_tipo_papel_extendido

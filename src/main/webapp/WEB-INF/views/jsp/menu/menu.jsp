@@ -50,6 +50,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+        <title>Menu</title>
         <link rel="stylesheet" href="<c:url value="/resources/css/master.css"/>" 			type="text/css"/>
         <link rel="stylesheet" href="<c:url value="/resources/css/menu_inicio.css"/>" 		type="text/css"/>
         <link rel="stylesheet" href="<c:url value="/resources/css/pagina_menu.css"/>" 		type="text/css"/>

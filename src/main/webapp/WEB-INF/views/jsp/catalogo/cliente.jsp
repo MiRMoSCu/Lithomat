@@ -166,14 +166,9 @@
                                 		</div>
                                 	</div>
                                 </div>
-                                
-                                
                                 <div class="div_separador_mediano">
                                 	<img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
                                 </div>
-                                
-                                
-                                
                                 <div class="titulo">
                                     <font size="5">CRITERIOS DE B&Uacute;SQUEDA</font>
                                 </div>
@@ -189,11 +184,11 @@
 		                                				<table>
 		                                					<tr>
 		                                						<td width="19%">
-		                                							<input type="checkbox" name="chkbx_busca_por_nombre_moral">
+		                                							<input type="checkbox" name="chkbx_busca_por_nombre_moral"/>
 		                                							<span style="cursor:pointer;" onclick="document.busqueda_cliente.chkbx_busca_por_nombre_moral.click()">Nombre:</span>
 		                                						</td>
 		                                						<td>
-		                                							<input type="text" class="input" name="nombre_moral" value="" tabindex="1">
+		                                							<input type="text" class="input" name="nombre_moral" value=""/>
 		                                						</td>
 		                                					</tr>
 		                                				</table>
@@ -208,7 +203,7 @@
 		                                							<span style="cursor:pointer;" onclick="document.busqueda_cliente.chkbx_busca_por_rfc.click()">RFC:</span>
 		                                						</td>
 		                                						<td>
-		                                							<input type="text" class="input" name="rfc" value="" tabindex="2">
+		                                							<input type="text" class="input" name="rfc" value=""/>
 		                                						</td>
 		                                					</tr>
 		                                				</table>
@@ -217,11 +212,11 @@
 		                                				<table>
 		                                					<tr>
 		                                						<td width="33%">
-		                                							<input type="checkbox" name="chkbx_busca_por_clave">
+		                                							<input type="checkbox" name="chkbx_busca_por_clave"/>
 		                                							<span style="cursor:pointer;" onclick="document.busqueda_cliente.chkbx_busca_por_clave.click()">Clave:</span>
 		                                						</td>
 		                                						<td>
-		                                							<select name="id_tipo_cliente" tabindex="3" onchange="">
+		                                							<select name="id_tipo_cliente" onchange="">
 	                                                                    <c:forEach var="tipoCliente" items="${listaTipoCliente}">
 	                                                                        <option value="${tipoCliente.value}">${tipoCliente.text}</option>
 	                                                                    </c:forEach>
@@ -240,11 +235,11 @@
 	                                					<table>
 	                                						<tr>
 	                                							<td width="29%">
-	                                								<input type="checkbox" name="chkbx_busca_por_nombre_representante">
+	                                								<input type="checkbox" name="chkbx_busca_por_nombre_representante"/>
 		                                							<span style="cursor:pointer;" onclick="document.busqueda_cliente.chkbx_busca_por_nombre_representante.click()">Representante:</span>
 	                                							</td>
 	                                							<td>
-	                                								<input type="text" class="input" name="nombre_representante" value="" tabindex="4">
+	                                								<input type="text" class="input" name="nombre_representante" value=""/>
 	                                							</td>
 	                                						</tr>
 	                                					</table>
@@ -255,11 +250,11 @@
 	                                					<table>
 	                                						<tr>
 	                                							<td width="29%">
-	                                								<input type="checkbox" name="chkbx_busca_por_codigo_postal">
+	                                								<input type="checkbox" name="chkbx_busca_por_codigo_postal"/>
 		                                							<span style="cursor:pointer;" onclick="document.busqueda_cliente.chkbx_busca_por_codigo_postal.click()">C.P.:</span>
 	                                							</td>
 	                                							<td>
-	                                								<input type="text" class="input" name="codigo_postal" value="" tabindex="5">
+	                                								<input type="text" class="input" name="codigo_postal" value=""/>
 	                                							</td>
 	                                						</tr>
 	                                					</table>
@@ -271,7 +266,7 @@
 	                                	<div class="linea">
 	                                		<div class="casilla" style="text-align:right;">
 	                                			<img alt="" style="cursor: pointer;" onclick="limpia_form_busqueda_cliente()" 
-	                                				 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"></img>
+	                                				 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
 												<span style="cursor:pointer;" onclick="nueva_busqueda()">
 													&nbsp;Buscar&nbsp;
 												</span>
@@ -279,23 +274,12 @@
 	                                	</div>
 	                                </form>
                                 </div>
-                                
-                                
-                                
-                                
-                                
-                                
                                 <div class="div_separador_mediano">
                                 	<img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
                                 </div>
-                                
-                                
-                                
-                                
-                                
 								<form name="cliente" action="" method="post" accept-charset="ISO-8859-1">
 									<div class="titulo">
-	                                    <img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"></img>
+	                                    <img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"/>
 	                                </div>
                                     <div class="linea">
                                         <div class="casilla">
@@ -319,7 +303,7 @@
                                                         <tr>
                                                             <td width="1%">Clave:</td>
                                                             <td>
-                                                                <select name="id_tipo_cliente" tabindex="6" onchange="">
+                                                                <select name="id_tipo_cliente" onchange="">
                                                                     <c:forEach var="tipoCliente" items="${listaTipoCliente}">
                                                                         <option value="${tipoCliente.value}">${tipoCliente.text}</option>
                                                                     </c:forEach>
@@ -338,8 +322,7 @@
                                                                 <input  type="text" 
                                                                         class="input" 
                                                                         name="nombre_moral" 
-                                                                        value=""
-                                                                        tabindex="7">
+                                                                        value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -358,8 +341,7 @@
                                                                 <input  type="text" 
                                                                         class="input" 
                                                                         name="nombre_representante"
-                                                                        value="" 
-                                                                        tabindex="8">
+                                                                        value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -374,8 +356,7 @@
                                                                 <input  type="text"
                                                                         class="input"
                                                                         name="puesto"
-                                                                        value=""
-                                                                        tabindex="9">
+                                                                        value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -383,7 +364,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
                                     <div class="linea">
                                         <div class="casilla">
                                             <div class="columna_izquierda">
@@ -395,8 +375,7 @@
                                                                 <input  type="text" 
                                                                         class="input" 
                                                                         name="calle" 
-                                                                        value=""
-                                                                        tabindex="10">
+                                                                        value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -409,8 +388,7 @@
                                                                 <input  type="text" 
                                                                         class="input" 
                                                                         name="num_exterior" 
-                                                                        value=""
-                                                                        tabindex="11">
+                                                                        value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -425,8 +403,7 @@
                                                                 <input  type="text" 
                                                                         class="input" 
                                                                         name="num_interior" 
-                                                                        value=""
-                                                                        tabindex="12">
+                                                                        value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -439,8 +416,7 @@
                                                                 <input  type="text" 
                                                                         class="input" 
                                                                         name="colonia" 
-                                                                        value=""
-                                                                        tabindex="13">
+                                                                        value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -459,8 +435,7 @@
                                                                 <input  type="text" 
                                                                         class="input" 
                                                                         name="delegacion_municipio" 
-                                                                        value=""
-                                                                        tabindex="14">
+                                                                        value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -473,8 +448,7 @@
                                                                 <input  type="text" 
                                                                         class="input" 
                                                                         name="estado" 
-                                                                        value=""
-                                                                        tabindex="15">
+                                                                        value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -489,8 +463,7 @@
                                                                 <input  type="text" 
                                                                         class="input" 
                                                                         name="codigo_postal" 
-                                                                        value=""
-                                                                        tabindex="16">
+                                                                        value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -503,8 +476,7 @@
                                                                 <input  type="text"
                                                                         class="input"
                                                                         name="pais"
-                                                                        value=""
-                                                                        tabindex="17">
+                                                                        value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -523,8 +495,7 @@
                                                                 <input  type="text" 
                                                                         class="input" 
                                                                         name="rfc" 
-                                                                        value=""
-                                                                        tabindex="18">
+                                                                        value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -537,8 +508,7 @@
                                                                 <input  type="text"
                                                                         class="input"
                                                                         name="telefono_particular"
-                                                                        value=""
-                                                                        tabindex="19">
+                                                                        value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -553,8 +523,7 @@
                                                                 <input  type="text"
                                                                         class="input"
                                                                         name="telefono_movil"
-                                                                        value=""
-                                                                        tabindex="20">
+                                                                        value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -567,8 +536,7 @@
                                                                 <input  type="text"
                                                                         class="input"
                                                                         name="email"
-                                                                        value=""
-                                                                        tabindex="21">
+                                                                        value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -587,8 +555,7 @@
                                                                 <input  type="text" 
                                                                         class="input" 
                                                                         name="observaciones" 
-                                                                        value=""
-                                                                        tabindex="22">
+                                                                        value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -596,7 +563,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    </form>
+                                </form>
                                 <div class="linea">
                                     <div class="casilla" style="text-align:right;">
                                         <img alt="" style="cursor:pointer;" onclick="limpia_form_cliente()"

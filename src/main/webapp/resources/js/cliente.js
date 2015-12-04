@@ -191,89 +191,171 @@ function genera_tabla_dom( jsonListaClientes ) {
     
     table.appendChild( tr );
     
-    $.each( jsonListaClientes, function(i, item){
-        tr = document.createElement("tr");
-        
-        tr.setAttribute("onclick","setCampos('" + item.idCliente + "','"  + item.clave + "','"  + item.nombreMoral + "','"  + item.nombreRepresentante + "','"  + item.puesto + "','"  + item.calle + "','"  + item.numExterior + "','"  + item.numInterior + "','"  + item.colonia + "','"  + item.delegacionMunicipio + "','"  + item.estado + "','"  + item.codigoPostal + "','"  + item.pais + "','"  + item.rfc + "','"  + item.telefonoParticular + "','"  + item.telefonoMovil + "','"  + item.email + "','" + item.observaciones + "');")
-        if( i%2 == 0 )
-            tr.setAttribute("class","l1");
-        else
-            tr.setAttribute("class","l2");
+    //console.log( jsonListaClientes );
+    if( jsonListaClientes.length > 0 ) {
+    	//console.log("entro");
+    	$.each( jsonListaClientes, function(i, item){
+            tr = document.createElement("tr");
+            
+            tr.setAttribute("onclick","setCampos('" + item.idCliente + "','"  + item.clave + "','"  + item.nombreMoral + "','"  + item.nombreRepresentante + "','"  + item.puesto + "','"  + item.calle + "','"  + item.numExterior + "','"  + item.numInterior + "','"  + item.colonia + "','"  + item.delegacionMunicipio + "','"  + item.estado + "','"  + item.codigoPostal + "','"  + item.pais + "','"  + item.rfc + "','"  + item.telefonoParticular + "','"  + item.telefonoMovil + "','"  + item.email + "','" + item.observaciones + "');")
+            if( i%2 == 0 )
+                tr.setAttribute("class","l1");
+            else
+                tr.setAttribute("class","l2");
+            
+            td = document.createElement("td");
+            td.innerHTML = item.idCliente;
+            tr.appendChild( td );
+            
+            td = document.createElement("td");
+            td.innerHTML = item.clave;
+            tr.appendChild( td );
+            
+            td = document.createElement("td");
+            td.innerHTML = item.nombreMoral;
+            tr.appendChild( td );
+            
+            td = document.createElement("td");
+            td.innerHTML = item.nombreRepresentante;
+            tr.appendChild( td );
+            
+            td = document.createElement("td");
+            td.innerHTML = item.puesto;
+            tr.appendChild( td );
+            
+            td = document.createElement("td");
+            td.innerHTML = item.calle;
+            tr.appendChild( td );
+            
+            td = document.createElement("td");
+            td.innerHTML = item.numExterior;
+            tr.appendChild( td );
+            
+            td = document.createElement("td");
+            td.innerHTML = item.numInterior;
+            tr.appendChild( td );
+            
+            td = document.createElement("td");
+            td.innerHTML = item.colonia;
+            tr.appendChild( td );
+            
+            td = document.createElement("td");
+            td.innerHTML = item.delegacionMunicipio;
+            tr.appendChild( td );
+            
+            td = document.createElement("td");
+            td.innerHTML = item.estado;
+            tr.appendChild( td );
+            
+            td = document.createElement("td");
+            td.innerHTML = item.codigoPostal;
+            tr.appendChild( td );
+            
+            td = document.createElement("td");
+            td.innerHTML = item.pais;
+            tr.appendChild( td );
+            
+            td = document.createElement("td");
+            td.innerHTML = item.rfc;
+            tr.appendChild( td );
+            
+            td = document.createElement("td");
+            td.innerHTML = item.telefonoParticular;
+            tr.appendChild( td );
+            
+            td = document.createElement("td");
+            td.innerHTML = item.telefonoMovil;
+            tr.appendChild( td );
+            
+            td = document.createElement("td");
+            td.innerHTML = item.email;
+            tr.appendChild( td );
+            
+            td = document.createElement("td");
+            td.innerHTML = item.observaciones;
+            tr.appendChild( td );
+            
+            table.appendChild( tr );
+        });
+    } else {
+    	//console.log("no entro");
+    	tr = document.createElement("tr");
+        tr.setAttribute("class","l1");
         
         td = document.createElement("td");
-        td.innerHTML = item.idCliente;
+        td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         
         td = document.createElement("td");
-        td.innerHTML = item.clave;
+        td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         
         td = document.createElement("td");
-        td.innerHTML = item.nombreMoral;
+        td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         
         td = document.createElement("td");
-        td.innerHTML = item.nombreRepresentante;
+        td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         
         td = document.createElement("td");
-        td.innerHTML = item.puesto;
+        td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         
         td = document.createElement("td");
-        td.innerHTML = item.calle;
+        td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         
         td = document.createElement("td");
-        td.innerHTML = item.numExterior;
+        td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         
         td = document.createElement("td");
-        td.innerHTML = item.numInterior;
+        td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         
         td = document.createElement("td");
-        td.innerHTML = item.colonia;
+        td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         
         td = document.createElement("td");
-        td.innerHTML = item.delegacionMunicipio;
+        td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         
         td = document.createElement("td");
-        td.innerHTML = item.estado;
+        td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         
         td = document.createElement("td");
-        td.innerHTML = item.codigoPostal;
+        td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         
         td = document.createElement("td");
-        td.innerHTML = item.pais;
+        td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         
         td = document.createElement("td");
-        td.innerHTML = item.rfc;
+        td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         
         td = document.createElement("td");
-        td.innerHTML = item.telefonoParticular;
+        td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         
         td = document.createElement("td");
-        td.innerHTML = item.telefonoMovil;
+        td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         
         td = document.createElement("td");
-        td.innerHTML = item.email;
+        td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         
         td = document.createElement("td");
-        td.innerHTML = item.observaciones;
+        td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         
         table.appendChild( tr );
-    });
+    }
     //console.log( table );
     //console.log( table.outerHTML );
     //console.log( table.innerHTML );

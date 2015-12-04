@@ -56,11 +56,11 @@ public class ClienteController {
 		model.addAttribute("numeroPagina", numeroPagina);
 		
 		// numero total de registros // BUSQUEDA DEFAULT
-		int numeroTotalRegistros	= clienteService.obtieneNumeroClientesPorParamatros( false, false, false, false, false, null, null, null, null, null );
+		int numeroTotalRegistros = clienteService.obtieneNumeroClientesPorParamatros( false, false, false, false, false, null, null, null, null, null );
 		model.addAttribute("numeroTotalRegistros", numeroTotalRegistros);
 
 		// lista de registros // BUSQUEDA DEFAULT
-		List<Cliente> listaCliente = clienteService.listaClientePorNumeroPagina( false, false, false, false, false, null, null, null, null, null, numeroPagina, numeroRegistrosPorPagina);
+		List<Cliente> listaCliente = clienteService.listaClientePorParametrosPorNumeroPagina( false, false, false, false, false, null, null, null, null, null, numeroPagina, numeroRegistrosPorPagina);
 		model.addAttribute("listaCliente", listaCliente);
 		listaCliente = null;
 		
@@ -102,7 +102,7 @@ public class ClienteController {
 				nombreRepresentante, 
 				codigoPostal );
 		
-		List<ClienteDTO> listaClientes = clienteService.listaClientePorNUmeroPaginaEnDTO(
+		List<ClienteDTO> listaClientes = clienteService.listaClientePorParametrosPorNumeroPaginaEnDTO(
 				busquedaPorNombreMoral, 
 				busquedaPorRFC, 
 				busquedaPorClave, 
@@ -178,15 +178,28 @@ public class ClienteController {
 
 		clienteService.creaCliente(cliente);
 
-		List<Cliente> listaCliente = clienteService.listaCliente();
+		// configuracion de controles de la pagina (select)
 		List<ComboSelect> listaComboSelect = tipoClienteService.listaComboSelect();
-		model.addAttribute("listaCliente", listaCliente);
 		model.addAttribute("listaTipoCliente", listaComboSelect);
-
-		cliente = null;
-		tipoCliente = null;
-		listaCliente = null;
 		listaComboSelect = null;
+		
+		// variables de configuracion del paginador
+		int numeroRegistrosPorPagina 	= 10;
+		int tamanioMaximoArreglo 		= 7;
+		int numeroPagina 				= 1;
+
+		model.addAttribute("numeroRegistrosPorPagina", numeroRegistrosPorPagina);
+		model.addAttribute("tamanioMaximoArreglo", tamanioMaximoArreglo);
+		model.addAttribute("numeroPagina", numeroPagina);
+		
+		// numero total de registros // BUSQUEDA DEFAULT
+		int numeroTotalRegistros	= clienteService.obtieneNumeroClientesPorParamatros( false, false, false, false, false, null, null, null, null, null );
+		model.addAttribute("numeroTotalRegistros", numeroTotalRegistros);
+
+		// lista de registros // BUSQUEDA DEFAULT
+		List<Cliente> listaCliente = clienteService.listaClientePorParametrosPorNumeroPagina( false, false, false, false, false, null, null, null, null, null, numeroPagina, numeroRegistrosPorPagina);
+		model.addAttribute("listaCliente", listaCliente);
+		listaCliente = null;
 		
 		return "catalogo/cliente";
 	}// alta_cliente
@@ -258,7 +271,7 @@ public class ClienteController {
 		model.addAttribute("numeroTotalRegistros", numeroTotalRegistros);
 
 		// lista de registros // BUSQUEDA DEFAULT
-		List<Cliente> listaCliente = clienteService.listaClientePorNumeroPagina( false, false, false, false, false, null, null, null, null, null, numeroPagina, numeroRegistrosPorPagina);
+		List<Cliente> listaCliente = clienteService.listaClientePorParametrosPorNumeroPagina( false, false, false, false, false, null, null, null, null, null, numeroPagina, numeroRegistrosPorPagina);
 		model.addAttribute("listaCliente", listaCliente);
 		listaCliente = null;
 		
@@ -297,7 +310,7 @@ public class ClienteController {
 		model.addAttribute("numeroTotalRegistros", numeroTotalRegistros);
 
 		// lista de registros // BUSQUEDA DEFAULT
-		List<Cliente> listaCliente = clienteService.listaClientePorNumeroPagina( false, false, false, false, false, null, null, null, null, null, numeroPagina, numeroRegistrosPorPagina);
+		List<Cliente> listaCliente = clienteService.listaClientePorParametrosPorNumeroPagina( false, false, false, false, false, null, null, null, null, null, numeroPagina, numeroRegistrosPorPagina);
 		model.addAttribute("listaCliente", listaCliente);
 		listaCliente = null;
 		

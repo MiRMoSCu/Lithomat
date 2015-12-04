@@ -3,16 +3,17 @@
 <%@ taglib prefix="form"	uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c"		uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" 	uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:url value="/?opc=catalogos"	               			var="urlMenu"/>
-<c:url value="/tipo_papel_extendido/catalogo/alta" 		var="urlAlta"/>
-<c:url value="/tipo_papel_extendido/catalogo/modifica" 	var="urlModifica"/>
-<c:url value="/tipo_papel_extendido/catalogo/elimina" 	var="urlElimina"/>
-<c:url value="/tipo_papel_extendido/catalogo/exporta" 	var="urlExporta"/>
-<c:url value="/tipo_papel_extendido/catalogo/ventana" 	var="urlVentanaModal"/>
+<c:url value="/?opc=catalogos"	               									var="urlMenu"/>
+<c:url value="/tipo_papel_extendido/catalogo/lista_por_pagina_por_parametros" 	var="urlBuscaListaPorParametros"/>
+<c:url value="/tipo_papel_extendido/catalogo/alta" 								var="urlAlta"/>
+<c:url value="/tipo_papel_extendido/catalogo/modifica" 							var="urlModifica"/>
+<c:url value="/tipo_papel_extendido/catalogo/elimina" 							var="urlElimina"/>
+<c:url value="/tipo_papel_extendido/catalogo/exporta" 							var="urlExporta"/>
+<c:url value="/tipo_papel_extendido/catalogo/ventana" 							var="urlVentanaModal"/>
 <html>
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1"></meta>
-        <title>Tipo de papel extendido</title>
+        <title>Tipo papel extendido</title>
         <style type="text/css" media="screen">
         
             table#tabla_tipo_papel_extendido {
@@ -49,20 +50,33 @@
         <link rel="stylesheet" href="<c:url value="/resources/css/master.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/font.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/menu.css"/>" type="text/css"></link>
-        <link rel="stylesheet" href="<c:url value="/resources/css/catalogo.css"/>" type="text/css"></link>
+        <link rel="stylesheet" href="<c:url value="/resources/css/catalogo_tipo_papel_extendido.css"/>" type="text/css"></link>
+        <link rel="stylesheet" href="<c:url value="/resources/css/paginador.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/shadowbox/shadowbox.css"/>" type="text/css"></link>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/paginador.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/tipo_papel_extendido.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/shadowbox/shadowbox.js"/>"></script>
         <script type="text/javascript">
         	Shadowbox.init({});
         </script>
         <script type="text/javascript">
-        	var urlMenu		= "${urlMenu}";
-            var urlAlta     = "${urlAlta}";
-            var urlModifica = "${urlModifica}";
-            var urlElimina  = "${urlElimina}";
-            var urlExporta	= "${urlExporta}";
+            var numero_total_registros	        = ${numeroTotalRegistros};
+            var numero_registros_por_pagina		= ${numeroRegistrosPorPagina};
+            var tamanio_maximo_arreglo	        = ${tamanioMaximoArreglo};	// DEBE SER MAYOR A 2
+            var numero_pagina		        	= 1;						// NO DEBE MODIFICARSE
+            
+            var tamanio_arreglo		        	= 0; 	// se inicializan en carga_datos()
+            var numero_pagina_total	        	= 0; 	// se inicializan en carga_datos()
+            var mitad_tamanio_arreglo	        = 0;	// se inicializan en carga_datos()
+        </script>
+        <script type="text/javascript">
+        	var urlMenu						= "${urlMenu}";
+        	var urlBuscaListaPorParametros	= "${urlBuscaListaPorParametros}";
+            var urlAlta 					= "${urlAlta}";
+            var urlModifica 				= "${urlModifica}";
+            var urlElimina  				= "${urlElimina}";
+            var urlExporta					= "${urlExporta}";
         </script>
         <script type="text/javascript">
 	        function regresa_menu() {
@@ -88,7 +102,7 @@
         
         </script>
     </head>
-    <body>
+    <body onload="carga_datos()">
         <div id="div_area">
             <div id="div_ancho">
                 <div id="div_hoja">
@@ -111,10 +125,15 @@
                             </div>
                         </div>
                         <div id="div_contenido">
-                            <form action="tipo_papel_extendido" method="post" accept-charset="ISO-8859-1">
+                            
                                 <div id="div_tipo_papel_extendido">
                                     <div class="titulo">
                                         <img alt="" src="<c:url value="/resources/image/titulo_tipo_papel_extendido.png"/>"></img>
+                                    </div>
+                                    <div class="linea">
+                                    	<div class="casilla">
+                                    		<div id="div_paginacion_resultados" style="float:right;"></div>
+                                    	</div>
                                     </div>
                                     <div id="div_contenedor_tabla">
                                         <div class="columna_completa">
@@ -153,166 +172,292 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="titulo">
-                                        <img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"></img>
-                                    </div>
+                                    <br/>
                                     <div class="linea">
-                                        <div class="casilla">
-                                            <div class="columna_izquierda">
-                                                <div class="mitad_columna_izquierda">
-                                                    <table>
-                                                        <tr>
-                                                            <td width="40%">Identificador:</td>
-                                                            <td>
-                                                                <input type="text" class="input"
-                                                                       name="id_tipo_papel_extendido" value=""
-                                                                       tabindex="1" readonly="readonly"></input>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                <div class="mitad_columna_derecha">
-                                                    <table>
-                                                        <tr>
-                                                            <td width="1%">Proveedor:</td>
-                                                            <td>
-                                                                <select name="id_proveedor_papel" tabindex="2" onchange="">
-                                                                    <c:forEach var="proveedorPapel" items="${listaProveedorPapel}">
-                                                                        <option value="${proveedorPapel.value}">${proveedorPapel.text}</option>
-                                                                    </c:forEach>
-                                                                </select>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div class="columna_derecha">
-                                                <div class="mitad_columna_izquierda">
-                                                    <table>
-                                                        <tr>
-                                                            <td width="1%">Nombre:</td>
-                                                            <td>
-                                                                <input type="text" class="input" name="nombre" value=""
-                                                                       tabindex="3"></input>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                <div class="mitad_columna_derecha">
-                                                    <table>
-                                                        <tr>
-                                                            <td width="1%">Gramaje:</td>
-                                                            <td>
-                                                                <input type="text" class="input" name="gramaje" value=""
-                                                                       tabindex="4"
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
-                                                                       ></input>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="linea">
-                                        <div class="casilla">
-                                            <div class="columna_izquierda">
-                                                <div class="mitad_columna_izquierda">
-                                                    <table>
-                                                        <tr>
-                                                            <td width="1%">Kilogramos:</td>
-                                                            <td>
-                                                                <input type="text" class="input" name="kilogramos"
-                                                                       value="" tabindex="5"
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"></input>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                <div class="mitad_columna_derecha">
-                                                	<table>
-                                                        <tr>
-                                                            <td width="1%">Ancho:</td>
-                                                            <td>
-                                                                <input type="text" class="input" name="ancho" value=""
-                                                                       tabindex="6"
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"></input>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div class="columna_derecha">
-                                                <div class="mitad_columna_izquierda">
-                                                    <table>
-                                                    	<tr>
-                                                            <td width="1%">Alto:</td>
-                                                            <td>
-                                                                <input type="text" class="input" name="alto" value=""
-                                                                       tabindex="7"
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"></input>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                <div class="mitad_columna_derecha">
-                                                    <table>
-                                                        <tr>
-                                                            <td width="35%">Descripci&oacute;n:</td>
-                                                            <td>
-                                                                <input type="text" class="input" name="descripcion"
-                                                                       value="" tabindex="8"></input>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="linea">
-                                        <div class="casilla">
-                                            <div class="columna_izquierda">
-                                                <div class="mitad_columna_izquierda">
-                                                    <table>
-                                                        <tr>
-                                                            <td width="1%">Precio:</td>
-                                                            <td>
-                                                                <input type="text" class="input" name="precio" value=""
-                                                                       tabindex="9"
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"></input>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                <div class="mitad_columna_derecha">
-                                                    <table>
-                                                        <tr>
-                                                            <td width="1%">Unidad:</td>
-                                                            <td>
-                                                                <select name="id_tipo_precio" tabindex="10" onchange="">
-                                                                    <c:forEach var="precio" items="${listaTipoPrecio}">
-                                                                        <option value="${precio.value}">${precio.text}</option>
-                                                                    </c:forEach>
-                                                                </select>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+	                                	<div class="casilla">
+	                                		<div id="div_paginador">
+	                                			<ul id="paginacion"></ul>
+	                                		</div>
+	                                	</div>
+	                                </div>
+	                                <div class="div_separador_mediano">
+	                                	<img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
+	                                </div>
+	                                <div class="titulo">
+	                                	<font size="5">CRITERIOS DE B&Uacute;SQUEDA</font>
+	                                </div>
+	                                <div id="div_formulario_busqueda_cliente">
+	                                	<form name="busqueda_tipo_papel_extendido" action="" method="post" accept-charset="ISO-8859-1">
+	                                		<!-- campos para uso del paginador -->
+		                                	<input type="hidden" name="numero_pagina"               value=""/>
+		                                	<input type="hidden" name="numero_registros_por_pagina" value=""/>
+		                                	<div class="linea">
+		                                		<div class="casilla">
+		                                			<div class="columna_izquierda">
+		                                				<div class="columna_completa">
+		                                					<table>
+		                                						<tr>
+		                                							<td width="19%">
+		                                								<input type="checkbox" name="chkbx_busca_por_nombre">
+		                                								<span style="cursor:pointer;" onclick="document.busqueda_tipo_papel_extendido.chkbx_busca_por_nombre.click()">Nombre:</span>
+		                                							</td>
+		                                							<td>
+		                                								<input type="text" class="input" name="nombre" value=""/>
+		                                							</td>
+		                                						</tr>
+		                                					</table>
+		                                				</div>
+		                                			</div>
+		                                			<div class="columna_derecha">
+		                                				<div class="mitad_columna_izquierda">
+		                                					<table>
+		                                						<tr>
+		                                							<td width="45%">
+		                                								<input type="checkbox" name="chkbx_busca_por_gramaje"/>
+		                                								<span style="cursor:pointer;" onclick="document.busqueda_tipo_papel_extendido.chkbx_busca_por_gramaje.click()">Gramaje:</span>
+		                                							</td>
+		                                							<td>
+		                                								<input type="text" class="input" name="gramaje" value=""
+		                                										onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
+		                                							</td>
+		                                						</tr>
+		                                					</table>	
+		                                				</div>
+		                                				<div class="mitad_columna_derecha">
+		                                					<table>
+		                                						<tr>
+		                                							<td width="50%">
+		                                								<input type="checkbox" name="chkbx_busca_por_kilogramos"/>
+		                                								<span style="cursor:pointer;" onclick="document.busqueda_tipo_papel_extendido.chkbx_busca_por_kilogramos.click()">Kilogramos:</span>
+		                                							</td>
+		                                							<td>
+		                                								<input type="text" class="input" name="kilogramos" value=""
+		                                										onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+		                                							</td>
+		                                						</tr>
+		                                					</table>
+		                                				</div>
+		                                			</div>
+		                                		</div>
+		                                	</div>
+	                                		<div class="linea">
+	                                			<div class="casilla">
+	                                				<div class="columna_izquierda">
+	                                					<div class="mitad_columna_izquierda">
+	                                						<table>
+	                                							<tr>
+	                                								<td width="35%">
+	                                									<input type="checkbox" name="chkbx_busca_por_ancho"/>
+	                                									<span style="cursor:pointer;" onclick="document.busqueda_tipo_papel_extendido.chkbx_busca_por_ancho.click()">Ancho:</span>
+	                                								</td>
+	                                								<td>
+	                                									<input type="text" class="input" name="ancho" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+	                                								</td>
+	                                							</tr>
+	                                						</table>
+	                                					</div>
+	                                					<div class="mitad_columna_derecha">
+	                                						<table>
+	                                							<tr>
+	                                								<td width="27%">
+	                                									<input type="checkbox" name="chkbx_busca_por_alto"/>
+	                                									<span style="cursor:pointer;" onclick="document.busqueda_tipo_papel_extendido.chkbx_busca_por_alto.click()">Alto:</span>
+	                                								</td>
+	                                								<td>
+	                                									<input type="text" class="input" name="alto" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}">
+	                                								</td>
+	                                							</tr>
+	                                						</table>
+	                                					</div>
+	                                				</div>
+	                                				<div class="columna_derecha">
+	                                					<div class="mitad_columna_izquierda">
+	                                						<!-- proveedor -->
+	                                						<table>
+	                                							<tr>
+	                                								<td width="50%">
+	                                									<input type="checkbox" name="chkbx_busca_por_proveedor"/>
+	                                									<span style="cursor:pointer;" onclick="document.busqueda_tipo_papel_extendido.chkbx_busca_por_proveedor.click()">Proveedor:</span>
+	                                								</td>
+	                                								<td>
+	                                									<select name="id_proveedor_papel" onchange="">
+		                                                                    <c:forEach var="proveedorPapel" items="${listaProveedorPapel}">
+		                                                                        <option value="${proveedorPapel.value}">${proveedorPapel.text}</option>
+		                                                                    </c:forEach>
+		                                                                </select>
+	                                								</td>
+	                                							</tr>
+	                                						</table>
+	                                					</div>
+	                                				</div>
+	                                			</div>
+	                                		</div>
+	                                		<br/>
+	                                		<div class="linea">
+	                                			<div class="casilla" style="text-align:right;">
+	                                				<img alt="" style="cursor:pointer;" onclick="limpia_form_busqueda_tipo_papel_sobrante()" 
+	                                					 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
+	                                				<span style="cursor:pointer;" onclick="nueva_busqueda()">
+														&nbsp;Buscar&nbsp;
+													</span>
+	                                			</div>
+	                                		</div>
+	                                	</form>
+	                                </div>
+	                                <div class="div_separador_mediano">
+	                                	<img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
+	                                </div>
+	                                <form name="tipo_papel_extendido" method="post" accept-charset="ISO-8859-1">
+	                                    <div class="titulo">
+	                                        <img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"></img>
+	                                    </div>
+	                                    <div class="linea">
+	                                        <div class="casilla">
+	                                            <div class="columna_izquierda">
+	                                                <div class="mitad_columna_izquierda">
+	                                                    <table>
+	                                                        <tr>
+	                                                            <td width="40%">Identificador:</td>
+	                                                            <td>
+	                                                                <input type="text" class="input"
+	                                                                       name="id_tipo_papel_extendido" value=""
+	                                                                       readonly="readonly"></input>
+	                                                            </td>
+	                                                        </tr>
+	                                                    </table>
+	                                                </div>
+	                                                <div class="mitad_columna_derecha">
+	                                                    <table>
+	                                                        <tr>
+	                                                            <td width="1%">Proveedor:</td>
+	                                                            <td>
+	                                                                <select name="id_proveedor_papel" onchange="">
+	                                                                    <c:forEach var="proveedorPapel" items="${listaProveedorPapel}">
+	                                                                        <option value="${proveedorPapel.value}">${proveedorPapel.text}</option>
+	                                                                    </c:forEach>
+	                                                                </select>
+	                                                            </td>
+	                                                        </tr>
+	                                                    </table>
+	                                                </div>
+	                                            </div>
+	                                            <div class="columna_derecha">
+	                                                <div class="mitad_columna_izquierda">
+	                                                    <table>
+	                                                        <tr>
+	                                                            <td width="1%">Nombre:</td>
+	                                                            <td>
+	                                                                <input type="text" class="input" name="nombre" value=""/>
+	                                                            </td>
+	                                                        </tr>
+	                                                    </table>
+	                                                </div>
+	                                                <div class="mitad_columna_derecha">
+	                                                    <table>
+	                                                        <tr>
+	                                                            <td width="1%">Gramaje:</td>
+	                                                            <td>
+	                                                                <input type="text" class="input" name="gramaje" value=""
+	                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
+	                                                            </td>
+	                                                        </tr>
+	                                                    </table>
+	                                                </div>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                    <div class="linea">
+	                                        <div class="casilla">
+	                                            <div class="columna_izquierda">
+	                                                <div class="mitad_columna_izquierda">
+	                                                    <table>
+	                                                        <tr>
+	                                                            <td width="1%">Kilogramos:</td>
+	                                                            <td>
+	                                                                <input type="text" class="input" name="kilogramos"
+	                                                                       value="" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+	                                                            </td>
+	                                                        </tr>
+	                                                    </table>
+	                                                </div>
+	                                                <div class="mitad_columna_derecha">
+	                                                	<table>
+	                                                        <tr>
+	                                                            <td width="1%">Ancho:</td>
+	                                                            <td>
+	                                                                <input type="text" class="input" name="ancho" value="" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+	                                                            </td>
+	                                                        </tr>
+	                                                    </table>
+	                                                </div>
+	                                            </div>
+	                                            <div class="columna_derecha">
+	                                                <div class="mitad_columna_izquierda">
+	                                                    <table>
+	                                                    	<tr>
+	                                                            <td width="1%">Alto:</td>
+	                                                            <td>
+	                                                                <input type="text" class="input" name="alto" value="" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+	                                                            </td>
+	                                                        </tr>
+	                                                    </table>
+	                                                </div>
+	                                                <div class="mitad_columna_derecha">
+	                                                    <table>
+	                                                        <tr>
+	                                                            <td width="35%">Descripci&oacute;n:</td>
+	                                                            <td>
+	                                                                <input type="text" class="input" name="descripcion" value=""/></input>
+	                                                            </td>
+	                                                        </tr>
+	                                                    </table>
+	                                                </div>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                    <div class="linea">
+	                                        <div class="casilla">
+	                                            <div class="columna_izquierda">
+	                                                <div class="mitad_columna_izquierda">
+	                                                    <table>
+	                                                        <tr>
+	                                                            <td width="1%">Precio:</td>
+	                                                            <td>
+	                                                                <input type="text" class="input" name="precio" value="" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+	                                                            </td>
+	                                                        </tr>
+	                                                    </table>
+	                                                </div>
+	                                                <div class="mitad_columna_derecha">
+	                                                    <table>
+	                                                        <tr>
+	                                                            <td width="1%">Unidad:</td>
+	                                                            <td>
+	                                                                <select name="id_tipo_precio" onchange="">
+	                                                                    <c:forEach var="precio" items="${listaTipoPrecio}">
+	                                                                        <option value="${precio.value}">${precio.text}</option>
+	                                                                    </c:forEach>
+	                                                                </select>
+	                                                            </td>
+	                                                        </tr>
+	                                                    </table>
+	                                                </div>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+                                   	</form>
                                     <div class="linea"></div>
                                     <div class="linea">
                                         <div class="casilla" style="text-align:right;">
                                         	<span id="imgBtnExportarPrecios" style="cursor:pointer;" onclick="exportarPrecios()">
                                         		<font color="blue">EXPORTAR PRECIOS</font>
                                         	</span>
-                                        	
+                                        	&nbsp;
                                         	<span id="imgBtnImportarPrecios" style="cursor:pointer;" onclick="importarPrecios()">
                                         		<font color="blue">IMPORTAR PRECIOS</font>
                                         	</span>
-                                        
-                                            <img alt="" style="cursor:pointer;" onclick="limpia();"
+                                        	&nbsp;
+                                            <img alt="" style="cursor:pointer;" onclick="limpia_form_tipo_papel_extendido();"
                                             	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"></img>
                                              
                                             <img alt="" style="cursor:pointer;" onclick="elimina();"
@@ -326,7 +471,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </form>
                         </div>
                     </div>
                     <div id="div_pie"></div>

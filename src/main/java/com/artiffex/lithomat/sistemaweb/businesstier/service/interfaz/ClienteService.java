@@ -33,7 +33,7 @@ public interface ClienteService {
 			String codigoPostal
 		);
 	
-	public List<Cliente> listaClientePorNumeroPagina(
+	public List<Cliente> listaClientePorParametrosPorNumeroPagina(
 			boolean busquedaPorNombreMoral,
 			boolean busquedaPorRFC,
 			boolean busquedaPorClave,
@@ -47,7 +47,7 @@ public interface ClienteService {
 			int numeroPagina, 
 			int numeroRegistrosPorPagina);
 	
-	public List<ClienteDTO> listaClientePorNUmeroPaginaEnDTO(
+	public List<ClienteDTO> listaClientePorParametrosPorNumeroPaginaEnDTO(
 			boolean busquedaPorNombreMoral,
 			boolean busquedaPorRFC,
 			boolean busquedaPorClave,

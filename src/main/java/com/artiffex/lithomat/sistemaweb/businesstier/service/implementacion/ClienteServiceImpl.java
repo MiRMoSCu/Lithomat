@@ -168,7 +168,7 @@ public class ClienteServiceImpl implements ClienteService {
 		return numRegistros;
 	}
 
-	public List<Cliente> listaClientePorNumeroPagina(
+	public List<Cliente> listaClientePorParametrosPorNumeroPagina(
 			boolean busquedaPorNombreMoral, 
 			boolean busquedaPorRFC,
 			boolean busquedaPorClave, 
@@ -274,7 +274,7 @@ public class ClienteServiceImpl implements ClienteService {
 		return lista;
 	}
 	
-	public List<ClienteDTO> listaClientePorNUmeroPaginaEnDTO(
+	public List<ClienteDTO> listaClientePorParametrosPorNumeroPaginaEnDTO(
 			boolean busquedaPorNombreMoral, 
 			boolean busquedaPorRFC,
 			boolean busquedaPorClave, 
@@ -288,96 +288,9 @@ public class ClienteServiceImpl implements ClienteService {
 			int numeroPagina, 
 			int numeroRegistrosPorPagina ) {
 		
-boolean existeParametro = false;
-		
-		StringBuilder query = new StringBuilder();
-		
-		query.append("SELECT *");
-		query.append(" ");
-		query.append("FROM cliente c");
-		query.append(" ");
-		query.append("WHERE");
-		query.append(" ");
-		
-		if( busquedaPorNombreMoral ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
-			query.append("c.nombre_moral LIKE '%");
-			query.append(nombreMoral);
-			query.append("%'");
-			query.append(" ");
-			existeParametro = true;
-		}
-		
-		if( busquedaPorRFC ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
-			query.append("c.rfc LIKE '%");
-			query.append(rfc);
-			query.append("%'");
-			query.append(" ");
-			existeParametro = true;
-		}
-		
-		if( busquedaPorClave ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
-			query.append("c.id_tipo_cliente = ");
-			query.append(idTipoCliente);
-			query.append(" ");
-			existeParametro = true;
-		}
-		
-		if( busquedaPorNombreRepresentante ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
-			query.append("c.nombre_representante LIKE '%");
-			query.append(nombreRepresentante);
-			query.append("%'");
-			query.append(" ");
-			existeParametro = true;
-		}
-		
-		if( busquedaPorCodigoPostal ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
-			query.append("c.codigo_postal LIKE '%");
-			query.append(codigoPostal);
-			query.append("%'");
-			query.append(" ");
-			existeParametro = true;
-		}
-	
-		if( existeParametro )
-			query.append("AND c.activo = TRUE");
-		else
-			query.append("c.activo = TRUE");
-		
-		query.append(" ");
-		query.append("ORDER BY c.id_cliente ASC");
-		query.append(" ");
-		query.append("LIMIT");
-		query.append(" ");
-		query.append(numeroRegistrosPorPagina * (numeroPagina - 1));
-		query.append(" , ");
-		query.append(numeroRegistrosPorPagina);
-		query.append(";");
+		List<Cliente> listaCliente = listaClientePorParametrosPorNumeroPagina(busquedaPorNombreMoral, busquedaPorRFC, busquedaPorClave, busquedaPorNombreRepresentante, busquedaPorCodigoPostal, nombreMoral, rfc, idTipoCliente, nombreRepresentante, codigoPostal, numeroPagina, numeroRegistrosPorPagina);
 		
 		List<ClienteDTO> listaClienteDTO = new ArrayList<ClienteDTO>();
-		List<Cliente> listaCliente = clienteDAO.listaPorRango( query.toString() );
-		
-		query = null;
-		
 		for (Cliente cliente : listaCliente) {
 			ClienteDTO clienteDTO = new ClienteDTO();
 			clienteDTO.setIdCliente(cliente.getIdCliente());

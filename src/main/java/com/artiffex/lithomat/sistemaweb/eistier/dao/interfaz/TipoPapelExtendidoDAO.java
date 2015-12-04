@@ -17,4 +17,8 @@ public interface TipoPapelExtendidoDAO {
 	
 	public List<TipoPapelExtendido> listaPorQuery(String query, ParametrosBusquedaTipoPapelExtendido parametros);
 	
+	public int numeroTipoPapelExtendido( String strQuery );
+	
+	public List<TipoPapelExtendido> listaPorRango( String strQuery );
+	
 }
