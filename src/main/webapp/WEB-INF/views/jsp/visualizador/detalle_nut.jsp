@@ -608,7 +608,7 @@
                                         	<div class="linea">
 	                                        	<div class="casilla" style="text-align:right;">
 	                                        		<div id="div_btn_actualizar_orden_produccion">
-	                                        			<img id="imgBtnModificarOrdenProduccion" alt="" style="cursor:pointer;" onclick="modificaOrdenProduccion()" src="<c:url value="/resources/image/boton_modificar.jpg"/>">
+	                                        			<img id="imgBtnModificarOrdenProduccion" alt="" style="cursor:pointer;" onclick="modificaOrdenProduccion()" src="<c:url value="/resources/image/boton_modificar.jpg"/>"/>
 		                                        		
 		                                        		<span id="imgBtnCancelaModificarOrdenProduccion" style="cursor:pointer; display:none;" onclick="cancelaModificarOrdenProduccion()">
 		                                        			<font  color="gray">CANCELAR</font>
@@ -863,7 +863,7 @@
 	                                        				<font color="blue">ELIMINAR</font>
 	                                        			</span>
 	                                        			-->
-	                                        			<img id="imgBtnModificarPartida" alt="" style="cursor:pointer;" onclick="modificaPartida()" src="<c:url value="/resources/image/boton_modificar.jpg"/>">
+	                                        			<img id="imgBtnModificarPartida" alt="" style="cursor:pointer;" onclick="modificaPartida()" src="<c:url value="/resources/image/boton_modificar.jpg"/>"/>
 		                                        		<span id="imgBtnCancelaModificarPartida" style="cursor:pointer; display:none;" onclick="cancelaModificarPartida()">
 		                                        			<font  color="gray">CANCELAR</font>
 		                                        		</span>
@@ -1734,7 +1734,6 @@
 			                                									class="input"
 			                                									name="cantidad"
 			                                									value=""
-			                                									tabindex="39"
 			                                									onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
 			                                									readonly/>
 			                                						</td>
@@ -1752,7 +1751,6 @@
 			                                									class="input"
 			                                									name="nombre_unidad_medida"
 			                                									value=""
-			                                									tabindex=""
 			                                									readonly/>
 			                                						</td>
 			                                					</tr>
@@ -1847,7 +1845,6 @@
                                                                                         class="input" 
                                                                                         name="indicacion_tarea_realizar" 
                                                                                         value="" 
-                                                                                        tabindex=""
                                                                                         readOnly/>
                                                                             </td>
                                                                         </tr>
@@ -1866,7 +1863,6 @@
                                                                                         class="input" 
                                                                                         name="materiales_recibe" 
                                                                                         value="" 
-                                                                                        tabindex=""
                                                                                         readOnly/>
                                                                             </td>
                                                                         </tr>
@@ -1885,7 +1881,6 @@
                                                                                         class="input" 
                                                                                         name="observaciones" 
                                                                                         value="" 
-                                                                                        tabindex=""
                                                                                         readOnly/>
                                                                             </td>
                                                                         </tr>
@@ -1936,7 +1931,6 @@
                                                                                                 class="input"
                                                                                                 name="detalle"
                                                                                                 value=""
-                                                                                                tabindex=""
                                                                                                 readonly/>
                                                                                     </td>
                                                                                 </tr>
@@ -1956,7 +1950,6 @@
                                                                                                     class="input"
                                                                                                     name="cantidad"
                                                                                                     value=""
-                                                                                                    tabindex=""
                                                                                                     onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
                                                                                                     readonly/>
                                                                                         </td>
@@ -1974,7 +1967,6 @@
                                                                                                     class="input"
                                                                                                     name="precio_total_pesos"
                                                                                                     value=""
-                                                                                                    tabindex=""
                                                                                                     onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                                                     readonly/>
                                                                                         </td>
@@ -1993,7 +1985,6 @@
                                                                                     <td>
                                                                                         <textarea   class="textarea_doble"
                                                                                                     name="especificaciones"
-                                                                                                    tabindex=""
                                                                                                     disabled></textarea>
                                                                                     </td>
                                                                                 </tr>
@@ -2080,7 +2071,6 @@
                                                                                         class="input"
                                                                                         name="indicacion_tarea_realizar"
                                                                                         value=""
-                                                                                        tabindex=""
                                                                                         readOnly/>
                                                                             </td>
                                                                         </tr>
@@ -2099,7 +2089,6 @@
                                                                                         class="input"
                                                                                         name="materiales_recibe"
                                                                                         value=""
-                                                                                        tabindex=""
                                                                                         readOnly/>
                                                                             </td>
                                                                         </tr>
@@ -2118,7 +2107,6 @@
                                                                                         class="input"
                                                                                         name="observaciones"
                                                                                         value=""
-                                                                                        tabindex=""
                                                                                         readOnly/>
                                                                             </td>
                                                                         </tr>
@@ -2169,7 +2157,6 @@
                                                                                                 class="input"
                                                                                                 name="detalle"
                                                                                                 value=""
-                                                                                                tabindex=""
                                                                                                 readonly/>
                                                                                     </td>
                                                                                 </tr>
@@ -2189,7 +2176,6 @@
                                                                                                     class="input"
                                                                                                     name="cantidad"
                                                                                                     value=""
-                                                                                                    tabindex=""
                                                                                                     onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
                                                                                                     readonly/>
                                                                                         </td>
@@ -2207,7 +2193,6 @@
                                                                                                     class="input"
                                                                                                     name="precio_total_pesos"
                                                                                                     value=""
-                                                                                                    tabindex=""
                                                                                                     onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                                                     readonly/>
                                                                                         </td>
@@ -2226,7 +2211,6 @@
                                                                                     <td>
                                                                                         <textarea   class="textarea_doble"
                                                                                                     name="especificaciones"
-                                                                                                    tabindex=""
                                                                                                     disabled></textarea>
                                                                                     </td>
                                                                                 </tr>
@@ -2311,7 +2295,6 @@
                                                                                         class="input"
                                                                                         name="indicacion_tarea_realizar"
                                                                                         value=""
-                                                                                        tabindex=""
                                                                                         readOnly/>
                                                                             </td>
                                                                         </tr>
@@ -2330,7 +2313,6 @@
                                                                                         class="input"
                                                                                         name="materiales_recibe"
                                                                                         value=""
-                                                                                        tabindex=""
                                                                                         readOnly/>
                                                                             </td>
                                                                         </tr>
@@ -2349,7 +2331,6 @@
                                                                                         class="input"
                                                                                         name="observaciones"
                                                                                         value=""
-                                                                                        tabindex=""
                                                                                         readOnly/>
                                                                             </td>
                                                                         </tr>
@@ -2400,7 +2381,6 @@
                                                                                                 class="input"
                                                                                                 name="detalle"
                                                                                                 value=""
-                                                                                                tabindex=""
                                                                                                 readonly/>
                                                                                     </td>
                                                                                 </tr>
@@ -2420,7 +2400,6 @@
                                                                                                     class="input"
                                                                                                     name="cantidad"
                                                                                                     value=""
-                                                                                                    tabindex=""
                                                                                                     onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
                                                                                                     readonly/>
                                                                                         </td>
@@ -2438,7 +2417,6 @@
                                                                                                     class="input"
                                                                                                     name="precio_total_pesos"
                                                                                                     value=""
-                                                                                                    tabindex=""
                                                                                                     onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                                                     readonly/>
                                                                                         </td>
@@ -2457,7 +2435,6 @@
                                                                                     <td>
                                                                                         <textarea   class="textarea_doble" 
                                                                                                     name="especificaciones" 
-                                                                                                    tabindex="" 
                                                                                                     disabled></textarea>
                                                                                     </td>
                                                                                 </tr>
@@ -2542,7 +2519,6 @@
                                                                                         class="input"
                                                                                         name="indicacion_tarea_realizar"
                                                                                         value=""
-                                                                                        tabindex=""
                                                                                         readOnly/>
                                                                             </td>
                                                                         </tr>
@@ -2561,7 +2537,6 @@
                                                                                         class="input"
                                                                                         name="materiales_recibe"
                                                                                         value=""
-                                                                                        tabindex=""
                                                                                         readOnly/>
                                                                             </td>
                                                                         </tr>
@@ -2580,7 +2555,6 @@
                                                                                         class="input"
                                                                                         name="observaciones"
                                                                                         value=""
-                                                                                        tabindex=""
                                                                                         readOnly/>
                                                                             </td>
                                                                         </tr>
@@ -2631,7 +2605,6 @@
                                                                                                 class="input"
                                                                                                 name="detalle"
                                                                                                 value=""
-                                                                                                tabindex=""
                                                                                                 readonly/>
                                                                                     </td>
                                                                                 </tr>
@@ -2651,7 +2624,6 @@
                                                                                                     class="input"
                                                                                                     name="ancho"
                                                                                                     value=""
-                                                                                                    tabindex=""
                                                                                                     onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                                                     readonly/>
                                                                                         </td>
@@ -2669,7 +2641,6 @@
                                                                                                     class="input"
                                                                                                     name="alto"
                                                                                                     value=""
-                                                                                                    tabindex=""
                                                                                                     onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                                                     readonly/>
                                                                                         </td>
@@ -2691,7 +2662,6 @@
                                                                                                     class="input"
                                                                                                     name="cantidad_proceso_externo"
                                                                                                     value=""
-                                                                                                    tabindex=""
                                                                                                     onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
                                                                                                     readonly/>
                                                                                         </td>
@@ -2709,7 +2679,6 @@
                                                                                                     class="input"
                                                                                                     name="precio_total_pesos"
                                                                                                     value=""
-                                                                                                    tabindex=""
                                                                                                     onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                                                     readonly/>
                                                                                         </td>
@@ -2728,7 +2697,6 @@
                                                                                     <td>
                                                                                         <textarea   class="textarea_doble"
                                                                                                     name="especificaciones"
-                                                                                                    tabindex=""
                                                                                                     disabled></textarea>
                                                                                     </td>
                                                                                 </tr>
@@ -2811,7 +2779,6 @@
                                                                             <td>
                                                                                 <textarea   class="textarea_doble"
                                                                                             name="indicacion_tarea_realizar"
-                                                                                            tabindex=""
                                                                                             disabled></textarea>
                                                                             </td>
                                                                         </tr>
@@ -2828,7 +2795,6 @@
                                                                             <td>
                                                                                 <textarea   class="textarea_doble"
                                                                                             name="materiales_recibe"
-                                                                                            tabindex=""
                                                                                             disabled></textarea>
                                                                             </td>
                                                                         </tr>
@@ -2845,7 +2811,6 @@
                                                                             <td>
                                                                                 <textarea   class="textarea_doble"
                                                                                             name="observaciones"
-                                                                                            tabindex=""
                                                                                             disabled></textarea>
                                                                             </td>
                                                                         </tr>
@@ -2898,9 +2863,7 @@
                                                                     <tr>
                                                                         <td width="1%">Material:</td>
                                                                         <td>
-                                                                        	<select name="select_material_ayuda" id="select_material_ayuda" tabindex="" disabled>
-	                                                                            
-	                                                                        </select>
+                                                                        	<select name="select_material_ayuda" id="select_material_ayuda" disabled></select>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -2912,7 +2875,7 @@
                                                                     <tr>
                                                                         <td width="1%">Responsable:</td>
                                                                         <td>
-                                                                        	<select name="select_responsable_insumo" id="select_responsable_insumo" tabindex="" disabled>
+                                                                        	<select name="select_responsable_insumo" id="select_responsable_insumo" disabled>
                                                                         		<c:forEach var="ri" items="${listaResponsableInsumo}">
 	                                                                                <option value="${ri.value}">${ri.text}</option>
 	                                                                            </c:forEach>
@@ -2934,7 +2897,6 @@
 	                                                                    <input type="text" class="input"
 	                                                                           name="observaciones"
 	                                                                           value=""
-	                                                                           tabindex=""
 	                                                                           readOnly/>
 	                                                                </td>
 	                                                            </tr>

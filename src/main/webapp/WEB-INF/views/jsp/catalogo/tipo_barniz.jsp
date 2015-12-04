@@ -66,10 +66,10 @@
                 <div id="div_hoja">
                     <div id="div_cabecera">
                         <div id="div_logo">
-                            <img alt="" src="<c:url value="/resources/image/logo.png"/>"></img>
+                            <img alt="" src="<c:url value="/resources/image/logo.png"/>"/>
                         </div>
                         <div id="div_encabezado">
-                            <img alt="" src="<c:url value="/resources/image/encabezado_catalogo.png"/>"></img>
+                            <img alt="" src="<c:url value="/resources/image/encabezado_catalogo.png"/>"/>
                         </div>
                     </div>
                     <div id="div_cuerpo">
@@ -77,7 +77,7 @@
                             <div id="div_contenido_menu">
                                 <div id="div_cerrar_sesion">
                                     <span style="cursor:pointer;" onclick="regresa_menu();">
-	                                    <img alt="" src="<c:url value="/resources/image/boton_regresar_menu.jpg"/>"></img>
+	                                    <img alt="" src="<c:url value="/resources/image/boton_regresar_menu.jpg"/>"/>
 	                                </span>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                             <form action="tipo_barniz" method="post" accept-charset="ISO-8859-1">
                                 <div id="div_tipo_barniz">
                                     <div class="titulo">
-                                        <img alt="" src="<c:url value="/resources/image/titulo_tipo_barniz.png"/>"></img>
+                                        <img alt="" src="<c:url value="/resources/image/titulo_tipo_barniz.png"/>"/>
                                     </div>
                                     <div id="div_contenedor_tabla">
                                         <div class="columna_completa">
@@ -116,7 +116,7 @@
                                         </div>
                                     </div>
                                     <div class="titulo">
-                                        <img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"></img>
+                                        <img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"/>
                                     </div>
                                     <div class="linea">
                                         <div class="casilla">
@@ -127,7 +127,7 @@
                                                             <td width="40%">Identificador:</td>
                                                             <td>
                                                                 <input type="text" class="input" name="id_tipo_barniz"
-                                                                       value="" tabindex="1" readonly="readonly"></input>
+                                                                       value="" readonly="readonly"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -143,8 +143,7 @@
                                                         <tr>
                                                             <td width="1%">Descripci&oacute;n:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="descripcion"
-                                                                       value="" tabindex="2"></input>
+                                                                <input type="text" class="input" name="descripcion" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -161,7 +160,7 @@
                                                             <td width="61%">No. Entradas maq:</td>
                                                             <td>
                                                                 <input  type="text" class="input" name="num_entradas_maquina" 
-                                                                        value="" tabindex="3"
+                                                                        value="" 
                                                                         onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
                                                             </td>
                                                         </tr>
@@ -173,8 +172,8 @@
                                                             <td width="44%">Num. Placas:</td>
                                                             <td>
                                                                 <input type="text" class="input" name="num_placas"
-                                                                       value="" tabindex="4"
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"></input>
+                                                                       value="" 
+                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -187,8 +186,7 @@
                                                             <td width="1%">Precio:</td>
                                                             <td>
                                                                 <input type="text" class="input" name="precio" value=""
-                                                                       tabindex="5"
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"></input>
+                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -198,7 +196,7 @@
                                                         <tr>
                                                             <td width="1%">Unidad:</td>
                                                             <td>
-                                                                <select name="id_tipo_precio" tabindex="6" onchange="">
+                                                                <select name="id_tipo_precio" onchange="">
                                                                     <c:forEach var="precio" items="${listaTipoPrecio}">
                                                                         <option value="${precio.value}">${precio.text}</option>
                                                                     </c:forEach>
@@ -214,16 +212,16 @@
                                     <div class="linea">
                                         <div class="casilla" style="text-align:right;">
                                             <img alt="" style="cursor:pointer;" onclick="limpia();"
-                                            	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
                                              
                                             <img alt="" style="cursor:pointer;" onclick="elimina();"
-                                            	 src="<c:url value="/resources/image/boton_eliminar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_eliminar.jpg"/>"/>
                                              
                                             <img alt="" style="cursor:pointer;" onclick="modifica();"
-                                            	 src="<c:url value="/resources/image/boton_modificar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_modificar.jpg"/>"/>
                                              
                                             <img alt="" style="cursor:pointer;" onclick="crear();"
-                                            	 src="<c:url value="/resources/image/boton_agregar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_agregar.jpg"/>"/>
                                         </div>
                                     </div>
                                 </div>

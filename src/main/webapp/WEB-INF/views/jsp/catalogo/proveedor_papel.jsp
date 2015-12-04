@@ -66,10 +66,10 @@
                 <div id="div_hoja">
                     <div id="div_cabecera">
                         <div id="div_logo">
-                            <img alt="" src="<c:url value="/resources/image/logo.png"/>"></img>
+                            <img alt="" src="<c:url value="/resources/image/logo.png"/>"/>
                         </div>
                         <div id="div_encabezado">
-                            <img alt="" src="<c:url value="/resources/image/encabezado_catalogo.png"/>"></img>
+                            <img alt="" src="<c:url value="/resources/image/encabezado_catalogo.png"/>"/>
                         </div>
                     </div>
                     <div id="div_cuerpo">
@@ -77,7 +77,7 @@
                             <div id="div_contenido_menu">
                                 <div id="div_cerrar_sesion">
                                     <span style="cursor:pointer;" onclick="regresa_menu();">
-	                                    <img alt="" src="<c:url value="/resources/image/boton_regresar_menu.jpg"/>"></img>
+	                                    <img alt="" src="<c:url value="/resources/image/boton_regresar_menu.jpg"/>"/>
 	                                </span>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                             <form action="proveedor_papel" method="post" accept-charset="ISO-8859-1">
                                 <div id="div_proveedor_papel">
                                     <div class="titulo">
-                                        <img alt="" src="<c:url value="/resources/image/titulo_proveedor_papel.png"/>"></img>
+                                        <img alt="" src="<c:url value="/resources/image/titulo_proveedor_papel.png"/>"/>
                                     </div>
                                     <div id="div_contenedor_tabla">
                                         <div class="columna_completa">
@@ -126,7 +126,7 @@
                                         </div>
                                     </div>
                                     <div class="titulo">
-                                        <img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"></img>
+                                        <img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"/>
                                     </div>
                                     <div class="linea">
                                         <div class="casilla">
@@ -137,8 +137,8 @@
                                                             <td width="40%">Identificador:</td>
                                                             <td>
                                                                 <input type="text" class="input"
-                                                                       name="id_proveedor_papel" value="" tabindex="1"
-                                                                       readonly="readonly"></input>
+                                                                       name="id_proveedor_papel" value="" 
+                                                                       readonly="readonly"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -154,8 +154,7 @@
                                                         <tr>
                                                             <td width="22%">Raz&oacute;n social:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="razon_social"
-                                                                       value="" tabindex="2"></input>
+                                                                <input type="text" class="input" name="razon_social" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -167,8 +166,7 @@
                                                         <tr>
                                                             <td width="1%">Calle:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="calle" value=""
-                                                                       tabindex="3"></input>
+                                                                <input type="text" class="input" name="calle" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -178,8 +176,7 @@
                                                         <tr>
                                                             <td width="47%">Num. exterior:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="num_exterior"
-                                                                       value="" tabindex="4"></input>
+                                                                <input type="text" class="input" name="num_exterior" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -195,8 +192,7 @@
                                                         <tr>
                                                             <td width="45%">Num. interior:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="num_interior"
-                                                                       value="" tabindex="5"></input>
+                                                                <input type="text" class="input" name="num_interior" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -206,8 +202,7 @@
                                                         <tr>
                                                             <td width="1%">Colonia:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="colonia" value=""
-                                                                       tabindex="6"></input>
+                                                                <input type="text" class="input" name="colonia" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -219,8 +214,7 @@
                                                         <tr>
                                                             <td width="1%">Delegaci&oacute;n:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="delegacion"
-                                                                       value="" tabindex="7"></input>
+                                                                <input type="text" class="input" name="delegacion" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -230,8 +224,7 @@
                                                         <tr>
                                                             <td width="1%">Estado:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="estado" value=""
-                                                                       tabindex="8"></input>
+                                                                <input type="text" class="input" name="estado" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -247,8 +240,7 @@
                                                         <tr>
                                                             <td width="48%">C&oacute;digo Postal:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="codigo_postal"
-                                                                       value="" tabindex="9"></input>
+                                                                <input type="text" class="input" name="codigo_postal" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -258,8 +250,7 @@
                                                         <tr>
                                                             <td width="1%">Tel&eacute;fono:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="telefono"
-                                                                       value="" tabindex="10"></input>
+                                                                <input type="text" class="input" name="telefono" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -271,8 +262,7 @@
                                                         <tr>
                                                             <td width="1%">Observaciones:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="observaciones"
-                                                                       value="" tabindex="11"></input>
+                                                                <input type="text" class="input" name="observaciones" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -284,16 +274,16 @@
                                     <div class="linea">
                                         <div class="casilla" style="text-align:right;">
                                             <img alt="" style="cursor:pointer;" onclick="limpia();"
-                                            	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
                                              
                                             <img alt="" style="cursor:pointer;" onclick="elimina();"
-                                            	 src="<c:url value="/resources/image/boton_eliminar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_eliminar.jpg"/>"/>
                                              
                                             <img alt="" style="cursor:pointer;" onclick="modifica();"
-                                            	 src="<c:url value="/resources/image/boton_modificar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_modificar.jpg"/>"/>
                                              
                                             <img alt="" style="cursor:pointer;" onclick="crear();"
-                                            	 src="<c:url value="/resources/image/boton_agregar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_agregar.jpg"/>"/>
                                         </div>
                                     </div>
                                 </div>

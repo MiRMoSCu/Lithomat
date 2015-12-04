@@ -80,10 +80,10 @@
                 <div id="div_hoja">
                     <div id="div_cabecera">
                         <div id="div_logo">
-                            <img alt="" src="<c:url value="/resources/image/logo.png"/>"></img>
+                            <img alt="" src="<c:url value="/resources/image/logo.png"/>"/>
                         </div>
                         <div id="div_encabezado">
-                            <img alt="" src="<c:url value="/resources/image/encabezado_catalogo.png"/>"></img>
+                            <img alt="" src="<c:url value="/resources/image/encabezado_catalogo.png"/>"/>
                         </div>
                     </div>
                     <div id="div_cuerpo">
@@ -91,7 +91,7 @@
                             <div id="div_contenido_menu">
                                 <div id="div_cerrar_sesion">
                                     <span style="cursor:pointer;" onclick="regresa_menu();">
-	                                    <img alt="" src="<c:url value="/resources/image/boton_regresar_menu.jpg"/>"></img>
+	                                    <img alt="" src="<c:url value="/resources/image/boton_regresar_menu.jpg"/>"/>
 	                                </span>
                                 </div>
                             </div>
@@ -100,7 +100,7 @@
                         	
                             <div id="div_cliente">
                                 <div class="titulo">
-                                    <img alt="" src="<c:url value="/resources/image/titulo_cliente.png"/>"></img>
+                                    <img alt="" src="<c:url value="/resources/image/titulo_cliente.png"/>"/>
                                 </div>
                                	<div class="linea">
                                		<div class="casilla">
@@ -567,16 +567,16 @@
                                 <div class="linea">
                                     <div class="casilla" style="text-align:right;">
                                         <img alt="" style="cursor:pointer;" onclick="limpia_form_cliente()"
-                                        	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"></img>
+                                        	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
                                          
                                         <img alt="" style="cursor:pointer;" onclick="elimina()"
-                                        	 src="<c:url value="/resources/image/boton_eliminar.jpg"/>"></img>
+                                        	 src="<c:url value="/resources/image/boton_eliminar.jpg"/>"/>
                                          
                                         <img alt="" style="cursor:pointer;" onclick="modifica()"
-                                        	 src="<c:url value="/resources/image/boton_modificar.jpg"/>"></img>
+                                        	 src="<c:url value="/resources/image/boton_modificar.jpg"/>"/>
                                          
                                         <img alt="" style="cursor:pointer;" onclick="crear()"
-                                        	src="<c:url value="/resources/image/boton_agregar.jpg"/>"></img>
+                                        	src="<c:url value="/resources/image/boton_agregar.jpg"/>"/>
                                     </div>
                                 </div>
 							</div>

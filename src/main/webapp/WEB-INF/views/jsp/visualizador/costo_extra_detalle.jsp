@@ -190,7 +190,6 @@
 																					class="input"
 																					name="cantidad"
 																					value=""
-																					tabindex=""
 																					onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
 																		</td>
 																	</tr>
@@ -207,7 +206,6 @@
 																					class="input"
 																					name="nombre_unidad_medida"
 																					value="${nombre_unidad_medida}"
-																					tabindex=""
 																					readonly/>
 																		</td>
 																	</tr>
@@ -226,8 +224,7 @@
 																		<input	type="text"
 																				class="input"
 																				name="especificacion"
-																				value=""
-																				tabindex=""/>
+																				value=""/>
 																	</td>
 																</tr>
 															</table>
@@ -237,10 +234,10 @@
 											</div>
 											<div class="linea">
 												<div class="casilla" style="text-align:right;">
-													<img id="" alt="" style="cursor:pointer;" onclick="limpiaFormCostoExtra()" src="<c:url value="/resources/image/boton_limpiar.jpg"/>">
-													<img id="" alt="" style="cursor:pointer;" onclick="eliminaCostoExtra();" src="<c:url value="/resources/image/boton_eliminar.jpg"/>">
-													<img id="" alt="" style="cursor:pointer;" onclick="modificaCostoExtra();" src="<c:url value="/resources/image/boton_modificar.jpg"/>">
-													<img id="" alt="" style="cursor:pointer;" onclick="creaCostoExtra();" src="<c:url value="/resources/image/boton_agregar.jpg"/>">
+													<img id="" alt="" style="cursor:pointer;" onclick="limpiaFormCostoExtra()" src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
+													<img id="" alt="" style="cursor:pointer;" onclick="eliminaCostoExtra();" src="<c:url value="/resources/image/boton_eliminar.jpg"/>"/>
+													<img id="" alt="" style="cursor:pointer;" onclick="modificaCostoExtra();" src="<c:url value="/resources/image/boton_modificar.jpg"/>"/>
+													<img id="" alt="" style="cursor:pointer;" onclick="creaCostoExtra();" src="<c:url value="/resources/image/boton_agregar.jpg"/>"/>
 												</div>
 											</div>
 										</div>

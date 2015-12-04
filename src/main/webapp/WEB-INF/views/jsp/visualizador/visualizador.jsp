@@ -150,7 +150,6 @@
                                                                             name="nut"
                                                                             value=""
                                                                             maxlength="12"
-                                                                            tabindex=""
                                                                             onkeypress=""/>
                                                                 </td>
                                                             </tr>
@@ -169,7 +168,7 @@
                                                                     <label for="radio_estatus" style="cursor:pointer;">Estatus:</label>
                                                                 </td>
                                                                 <td>
-                                                                    <select name="id_estatus_orden" tabindex="" onchange="">
+                                                                    <select name="id_estatus_orden" onchange="">
                                                                         <c:forEach var="lteo" items="${listaEstatusOrden}">
                                                                             <option value="${lteo.value}">${lteo.text}</option>
                                                                         </c:forEach>
@@ -199,7 +198,6 @@
                                                                     class="input"
                                                                     name="nombre"
                                                                     value=""
-                                                                    tabindex=""
                                                                     onkeypress=""/>
                                                         </td>
                                                     </tr>
@@ -224,7 +222,6 @@
                                                                     class="input"
                                                                     name="descripcion"
                                                                     value=""
-                                                                    tabindex=""
                                                                     onkeypress=""/>
                                                         </td>
                                                     </tr>
@@ -253,7 +250,6 @@
                                                                                     class="input"
                                                                                     name="fecha_cotizacion_inicio"
                                                                                     value=""
-                                                                                    tabindex=""
                                                                                     onkeypress=""/>
                                                                         </td>
                                                                         <td width="1%">a:</td>
@@ -262,7 +258,6 @@
                                                                                     class="input"
                                                                                     name="fecha_cotizacion_fin"
                                                                                     value=""
-                                                                                    tabindex=""
                                                                                     onkeypress=""/>
                                                                         </td>
                                                                     </tr>
@@ -288,7 +283,6 @@
                                                                         class="input"
                                                                         name="cliente"
                                                                         value=""
-                                                                        tabindex=""
                                                                         onkeypress=""/>
                                                             </td>
                                                         </tr>
@@ -300,7 +294,7 @@
                                     <div class="linea"></div>
                                     <div class="linea">
                                         <div class="casilla" style="text-align:right;">
-                                            <img alt="" style="cursor:pointer;" onclick="limpia();" src="<c:url value="/resources/image/boton_limpiar.jpg"/>"></img>
+                                            <img alt="" style="cursor:pointer;" onclick="limpia();" src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
                                             <span style="cursor:pointer;" onclick="nueva_busqueda();">&nbsp;Buscar&nbsp;</span>
                                         </div>
                                     </div>

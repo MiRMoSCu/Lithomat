@@ -66,10 +66,10 @@
                 <div id="div_hoja">
                     <div id="div_cabecera">
                         <div id="div_logo">
-                        	<img alt="" src="<c:url value="/resources/image/logo.png"/>"></img>
+                        	<img alt="" src="<c:url value="/resources/image/logo.png"/>"/>
                         </div>
                         <div id="div_encabezado">
-                        	<img alt="" src="<c:url value="/resources/image/encabezado_catalogo.png"/>"></img>
+                        	<img alt="" src="<c:url value="/resources/image/encabezado_catalogo.png"/>"/>
                         </div>
                     </div>
                     <div id="div_cuerpo">
@@ -77,7 +77,7 @@
                             <div id="div_contenido_menu">
                                 <div id="div_cerrar_sesion">
                                     <span style="cursor:pointer;" onclick="regresa_menu();">
-	                                    <img alt="" src="<c:url value="/resources/image/boton_regresar_menu.jpg"/>"></img>
+	                                    <img alt="" src="<c:url value="/resources/image/boton_regresar_menu.jpg"/>"/>
 	                                </span>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                             <form action="" method="post" accept-charset="ISO-8859-1">
                                 <div id="div_papel_sobrante">
                                     <div class="titulo">
-                                    	<img alt="" src="<c:url value="/resources/image/titulo_papel_sobrante.png"/>"></img>PAPEL SOBRANTE
+                                    	<img alt="" src="<c:url value="/resources/image/titulo_papel_sobrante.png"/>"/>PAPEL SOBRANTE
                                     </div>
                                     <div id="div_contenedor_tabla">
                                         <div class="columna_completa">
@@ -118,7 +118,7 @@
                                         </div>
                                     </div>
                                     <div class="titulo">
-                                    	<img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"></img>
+                                    	<img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"/>
                                     </div>
                                     <div class="linea">
                                         <div class="casilla">
@@ -132,8 +132,7 @@
                                                                         class="input" 
                                                                         name="id_papel_sobrante" 
                                                                         value=""
-                                                                        tabindex="1"
-                                                                        readonly="readonly">
+                                                                        readonly="readonly"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -153,8 +152,7 @@
                                                                         class="input"
                                                                         name="inicio_tabulador"
                                                                         value=""
-                                                                        tabindex="2"
-                                                                        onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;">
+                                                                        onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -168,8 +166,7 @@
                                                                         class="input"
                                                                         name="fin_tabulador"
                                                                         value=""
-                                                                        tabindex="3"
-                                                                        onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;">
+                                                                        onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -185,8 +182,7 @@
                                                                         class="input"
                                                                         name="num_tinta_frente"
                                                                         value=""
-                                                                        tabindex="4"
-                                                                        onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;">
+                                                                        onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -200,8 +196,7 @@
                                                                         class="input"
                                                                         name="num_tinta_vuelta"
                                                                         value=""
-                                                                        tabindex="5"
-                                                                        onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;">
+                                                                        onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -222,14 +217,13 @@
                                                                         <td width="1%">
                                                                             <input  type="radio"
                                                                                     name="tinta_especial"
-                                                                                    value="true"
-                                                                                    tabindex="6">S&iacute;
+                                                                                    value="true"/>S&iacute;
                                                                         </td>
                                                                         <td width="1%">
                                                                             <input  type="radio"
                                                                                     name="tinta_especial"
                                                                                     value="false"
-                                                                                    checked>No
+                                                                                    checked/>No
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -248,8 +242,7 @@
                                                                         class="input"
                                                                         name="hojas_sobrante"
                                                                         value=""
-                                                                        tabindex="7"
-                                                                        onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;">
+                                                                        onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -261,16 +254,16 @@
                                     <div class="linea">
                                         <div class="casilla" style="text-align:right;">
                                             <img alt="" style="cursor:pointer;" onclick="limpia();"
-                                            	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
                                              
                                             <img alt="" style="cursor:pointer;" onclick="elimina();"
-                                            	 src="<c:url value="/resources/image/boton_eliminar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_eliminar.jpg"/>"/>
                                              
                                             <img alt="" style="cursor:pointer;" onclick="modifica();"
-                                            	 src="<c:url value="/resources/image/boton_modificar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_modificar.jpg"/>"/>
                                              
                                             <img alt="" style="cursor:pointer;" onclick="crear();"
-                                            	 src="<c:url value="/resources/image/boton_agregar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_agregar.jpg"/>"/>
                                         </div>
                                     </div>
                                 </div>

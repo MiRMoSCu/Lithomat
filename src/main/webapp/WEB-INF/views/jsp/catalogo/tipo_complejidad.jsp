@@ -60,10 +60,10 @@
                 <div id="div_hoja">
                     <div id="div_cabecera">
                         <div id="div_logo">
-                        	<img alt="." src="<c:url value="/resources/image/logo.png"/>">
+                        	<img alt="." src="<c:url value="/resources/image/logo.png"/>"/>
                         </div>
                         <div id="div_encabezado">
-                        	<img alt="." src="<c:url value="/resources/image/encabezado_catalogo.png"/>"></img>
+                        	<img alt="." src="<c:url value="/resources/image/encabezado_catalogo.png"/>"/>
                         </div>
                     </div>
                     <div id="div_cuerpo">
@@ -71,7 +71,7 @@
                             <div id="div_contenido_menu">
                                 <div id="div_cerrar_sesion">
                                     <span style="cursor:pointer;" onclick="regresa_menu();">
-                                    	<img alt="" src="<c:url value="/resources/image/boton_regresar_menu.jpg"/>">
+                                    	<img alt="" src="<c:url value="/resources/image/boton_regresar_menu.jpg"/>"/>
 	                                </span>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                             <form action="tipo_complejidad" method="post" accept-charset="ISO-8859-1">
                                 <div id="div_tipo_complejidad">
                                     <div class="titulo">
-                                    	<img alt="" src="<c:url value="/resources/image/titulo_tipo_complejidad.png"/>"></img>TIPO COMPLEJIDAD
+                                    	<img alt="" src="<c:url value="/resources/image/titulo_tipo_complejidad.png"/>"/>TIPO COMPLEJIDAD
                                     </div>
                                     <div id="div_contenedor_tabla">
                                         <div class="columna_completa">
@@ -103,7 +103,7 @@
                                         </div>
                                     </div>
                                     <div class="titulo">
-                                    	<img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"></img>
+                                    	<img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"/>
                                     </div>
                                     <div class="linea">
                                         <div class="casilla">
@@ -114,7 +114,7 @@
                                                             <td width="1%">Identificador:</td>
                                                             <td>
                                                                 <input type="text" class="input" name="id_tipo_complejidad"
-                                                                       value="" tabindex="1" readonly="readonly"></input>
+                                                                       value="" readonly="readonly"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -124,8 +124,7 @@
                                                 		<tr>
                                                 			<td width="1%">Nombre:</td>
                                                 			<td>
-                                                				<input type="text" class="input" name="nombre" value=""
-                                                                       tabindex="2"></input>
+                                                				<input type="text" class="input" name="nombre" value=""/>
                                                 			</td>
                                                 		</tr>
                                                 	</table>
@@ -137,8 +136,7 @@
                                         				<tr>
                                         					<td width="1%">Descripci&oacute;n:</td>
                                         					<td>
-                                        						<input type="text" class="input" name="descripcion"
-                                                                       value="" tabindex="3"></input>
+                                        						<input type="text" class="input" name="descripcion" value=""/>
                                         					</td>
                                         				</tr>
                                         			</table>
@@ -150,16 +148,16 @@
                                     <div class="linea">
                                         <div class="casilla" style="text-align:right;">
                                             <img alt="" style="cursor:pointer;" onclick="limpia();"
-                                            	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
                                             <!--  
                                             <img alt="" style="cursor:pointer;" onclick="elimina();"
-                                            	 src="<c:url value="/resources/image/boton_eliminar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_eliminar.jpg"/>"/>
                                              
                                             <img alt="" style="cursor:pointer;" onclick="modifica();"
-                                            	 src="<c:url value="/resources/image/boton_modificar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_modificar.jpg"/>"/>
                                              
                                             <img alt="" style="cursor:pointer;" onclick="crear();"
-                                            	 src="<c:url value="/resources/image/boton_agregar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_agregar.jpg"/>"/>
                                            	-->
                                         </div>
                                     </div>

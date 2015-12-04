@@ -108,10 +108,10 @@
                 <div id="div_hoja">
                     <div id="div_cabecera">
                         <div id="div_logo">
-                            <img alt="" src="<c:url value="/resources/image/logo.png"/>"></img>
+                            <img alt="" src="<c:url value="/resources/image/logo.png"/>"/>
                         </div>
                         <div id="div_encabezado">
-                            <img alt="" src="<c:url value="/resources/image/encabezado_catalogo.png"/>"></img>
+                            <img alt="" src="<c:url value="/resources/image/encabezado_catalogo.png"/>"/>
                         </div>
                     </div>
                     <div id="div_cuerpo">
@@ -119,7 +119,7 @@
                             <div id="div_contenido_menu">
                                 <div id="div_cerrar_sesion">
                                     <span style="cursor:pointer;" onclick="regresa_menu();">
-	                                    <img alt="" src="<c:url value="/resources/image/boton_regresar_menu.jpg"/>"></img>
+	                                    <img alt="" src="<c:url value="/resources/image/boton_regresar_menu.jpg"/>"/>
 	                                </span>
                                 </div>
                             </div>
@@ -128,7 +128,7 @@
                             
                                 <div id="div_tipo_papel_extendido">
                                     <div class="titulo">
-                                        <img alt="" src="<c:url value="/resources/image/titulo_tipo_papel_extendido.png"/>"></img>
+                                        <img alt="" src="<c:url value="/resources/image/titulo_tipo_papel_extendido.png"/>"/>
                                     </div>
                                     <div class="linea">
                                     	<div class="casilla">
@@ -198,7 +198,7 @@
 		                                					<table>
 		                                						<tr>
 		                                							<td width="19%">
-		                                								<input type="checkbox" name="chkbx_busca_por_nombre">
+		                                								<input type="checkbox" name="chkbx_busca_por_nombre"/>
 		                                								<span style="cursor:pointer;" onclick="document.busqueda_tipo_papel_extendido.chkbx_busca_por_nombre.click()">Nombre:</span>
 		                                							</td>
 		                                							<td>
@@ -264,7 +264,7 @@
 	                                									<span style="cursor:pointer;" onclick="document.busqueda_tipo_papel_extendido.chkbx_busca_por_alto.click()">Alto:</span>
 	                                								</td>
 	                                								<td>
-	                                									<input type="text" class="input" name="alto" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}">
+	                                									<input type="text" class="input" name="alto" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
 	                                								</td>
 	                                							</tr>
 	                                						</table>
@@ -309,7 +309,7 @@
 	                                </div>
 	                                <form name="tipo_papel_extendido" method="post" accept-charset="ISO-8859-1">
 	                                    <div class="titulo">
-	                                        <img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"></img>
+	                                        <img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"/>
 	                                    </div>
 	                                    <div class="linea">
 	                                        <div class="casilla">
@@ -458,16 +458,16 @@
                                         	</span>
                                         	&nbsp;
                                             <img alt="" style="cursor:pointer;" onclick="limpia_form_tipo_papel_extendido();"
-                                            	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
                                              
                                             <img alt="" style="cursor:pointer;" onclick="elimina();"
-                                            	 src="<c:url value="/resources/image/boton_eliminar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_eliminar.jpg"/>"/>
                                              
                                             <img alt="" style="cursor:pointer;" onclick="modifica();"
-                                            	 src="<c:url value="/resources/image/boton_modificar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_modificar.jpg"/>"/>
                                              
                                             <img alt="" style="cursor:pointer;" onclick="crear();"
-                                            	 src="<c:url value="/resources/image/boton_agregar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_agregar.jpg"/>"/>
                                         </div>
                                     </div>
                                 </div>

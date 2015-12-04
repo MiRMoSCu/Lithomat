@@ -72,9 +72,8 @@
 	                        												class="input"
 	                        												name="nombre_moral"
 	                        												value="${c.nombreMoral}"
-	                        												tabindex=""
 	                        												onkeypress=""
-	                        												readOnly>
+	                        												readOnly/>
 	                        									</td>
 	                        								</tr>
 	                        							</table>
@@ -90,9 +89,8 @@
 	                        												class="input"
 	                        												name="nombre_representante"
 	                        												value="${c.nombreRepresentante}"
-	                        												tabindex=""
 	                        												onkeypress=""
-	                        												readOnly>
+	                        												readOnly/>
 	                        									</td>
 	                        								</tr>
 	                        							</table>
@@ -121,9 +119,8 @@
 	                                                                        class="input"
 	                                                                        name="nombre"
 	                                                                        value="${op.nombre}"
-	                                                                        tabindex=""
 	                                                                        onkeypress=""
-	                                                                        readonly>
+	                                                                        readonly/>
 	                                                            </td>
 	                                                        </tr>
 	                                                    </table>
@@ -140,9 +137,8 @@
 	                                                                            class="input"
 	                                                                            name="nut"
 	                                                                            value="${op.nut}"
-	                                                                            tabindex=""
 	                                                                            onkeypress=""
-	                                                                            readonly>
+	                                                                            readonly/>
 	                                                                </td>
 	                                                            </tr>
 	                                                        </table>
@@ -158,9 +154,8 @@
 	                                                                            class="input"
 	                                                                            name="fecha_generacion"
 	                                                                            value="<fmt:formatDate value="${op.fechaGeneracion}" type="both" pattern="MMM dd, yyyy"/>"
-	                                                                            tabindex=""
 	                                                                            onkeypress=""
-	                                                                            readonly>
+	                                                                            readonly/>
 	                                                                </td>
 	                                                            </tr>
 	                                                        </table>
@@ -180,9 +175,8 @@
 	                                                                    class="input"
 	                                                                    name="descripcion"
 	                                                                    value="${op.descripcion}"
-	                                                                    tabindex=""
 	                                                                    onkeypress=""
-	                                                                    readonly>
+	                                                                    readonly/>
 	                                                        </td>
 	                                                    </tr>
 	                                                </table>
@@ -211,9 +205,8 @@
 	                                                                            style="text-align:right;"
 	                                                                            name="precio_bruto"
 	                                                                            value="<fmt:formatNumber pattern="$ #,##0.00" value="${cop.precioBruto}" />"
-	                                                                            tabindex=""
 	                                                                            onkeypress=""
-	                                                                            readonly>
+	                                                                            readonly/>
 	                                                                </td>
 	                                                            </tr>
 	                                                        </table>
@@ -230,9 +223,8 @@
 	                                                                            style="text-align:right;"
 	                                                                            name="precio_cliente"
 	                                                                            value="<fmt:formatNumber pattern="$ #,##0.00" value="${cop.precioCliente}" />"
-	                                                                            tabindex=""
 	                                                                            onkeypress=""
-	                                                                            readonly>
+	                                                                            readonly/>
 	                                                                </td>
 	                                                            </tr>
 	                                                        </table>
@@ -250,9 +242,8 @@
 	                                                							class="input"
 	                                                							name="nombre_comprobante_fiscal"
 	                                                							value="${op.tipoComprobanteFiscal.nombre}"
-	                                                							tabindex=""
 	                                                							onkeypress=""
-	                                                							readOnly>
+	                                                							readOnly/>
 	                                                				</td>
 	                                                			</tr>
 	                                                		</table>
@@ -269,9 +260,8 @@
 	                                                                            style="text-align:right;"
 	                                                                            name="precio_neto"
 	                                                                            value="<fmt:formatNumber pattern="$ #,##0.00" value="${cop.precioNeto}" />"
-	                                                                            tabindex=""
 	                                                                            onkeypress=""
-	                                                                            readonly>
+	                                                                            readonly/>
 	                                                                </td>
 	                                                            </tr>
 	                                                        </table>
@@ -318,9 +308,8 @@
 		                                    											class="input"
 		                                    											name="nombre_tipo_trabajo"
 		                                    											value=""
-		                                    											tabindex=""
 		                                    											onkeypress=""
-		                                    											readonly>
+		                                    											readonly/>
 		                                    								</td>
 		                                    							</tr>
 		                                    						</table>
@@ -340,7 +329,6 @@
 		                                    											class="input"
 		                                    											name="nombre_partida"
 		                                    											value=""
-		                                    											tabindex=""
 		                                    											onkeypress=""
 		                                    											readonly>
 		                                    								</td>
@@ -358,9 +346,8 @@
 		                                    											class="input"
 		                                    											name="cantidad"
 		                                    											value=""
-		                                    											tabindex=""
 		                                    											onkeypress=""
-		                                    											readonly>
+		                                    											readonly/>
 		                                    								</td>
 		                                    							</tr>
 		                                    						</table>
@@ -379,9 +366,8 @@
 		                                   											class="input"
 		                                   											name="descripcion_partida"
 		                                   											value=""
-		                                   											tabindex=""
 		                                   											onkeypress=""
-		                                   											readonly>
+		                                   											readonly/>
 		                                   								</td>
 		                                   							</tr>
 		                                   						</table>
@@ -404,10 +390,8 @@
 			                                   											style="text-align:right;"
 			                                   											name="coste_total"
 			                                   											value=""
-			                                   											tabindex=""
 			                                   											onkeypress=""
-			                                   											readonly>
-			                                   											
+			                                   											readonly/>
 			                                   								</td>
 			                                   							</tr>
 			                                   						</table>
@@ -434,9 +418,8 @@
 		                                                                            class="input"
 		                                                                            name="descripcion"
 		                                                                            value=""
-		                                                                            tabindex=""
 		                                                                            onkeypress=""
-		                                                                            readonly>
+		                                                                            readonly/>
 		                                                                </td>
 		                                                            </tr>
 		                                                        </table>
@@ -455,9 +438,8 @@
 			                                                                            class="input"
 			                                                                            name="maquina_descripcion"
 			                                                                            value=""
-			                                                                            tabindex=""
 			                                                                            onkeypress=""
-			                                                                            readonly>
+			                                                                            readonly/>
 			                                                                </td>
 			                                                            </tr>
 			                                                        </table>
@@ -473,9 +455,8 @@
 		                                                        						class="input"
 		                                                        						name="cantidad_redondeada"
 		                                                        						value=""
-		                                                        						tabindex=""
 		                                                        						onkeypress=""
-		                                                        						readonly>
+		                                                        						readonly/>
 		                                                        			</td>
 		                                                        		</tr>
 		                                                        	</table>
@@ -495,9 +476,8 @@
 		                                            									class="input"
 		                                            									name="repeticiones_x_pliego"
 		                                            									value=""
-		                                            									tabindex=""
 		                                            									onkeypress=""
-		                                            									readOnly>
+		                                            									readOnly/>
 		                                            						</td>
 		                                            					</tr>
 		                                            				</table>
@@ -514,9 +494,8 @@
 		                                            									class="input"
 		                                            									name="numero_paginas_publicacion"
 		                                            									value=""
-		                                            									tabindex=""
 		                                            									onkeypress=""
-		                                            									readOnly>
+		                                            									readOnly/>
 		                                            						</td>
 		                                            					</tr>
 		                                            				</table>
@@ -532,9 +511,8 @@
 			                                            									class="input"
 			                                            									name="tamanio_publicacion"
 			                                            									value=""
-			                                            									tabindex=""
 			                                            									onkeypress=""
-			                                            									readOnly>
+			                                            									readOnly/>
 			                                            						</td>
 			                                            					</tr>
 			                                            				</table>
@@ -555,9 +533,8 @@
 		                                                        						class="input"
 		                                                        						name="numero_pliegos"
 		                                                        						value=""
-		                                                        						tabindex=""
 		                                                        						onkeypress=""
-		                                                        						readonly>
+		                                                        						readonly/>
 		                                            						</td>
 		                                            					</tr>
 		                                            				</table>
@@ -581,9 +558,8 @@
 			                                   											class="input"
 			                                   											name="papel_descripcion"
 			                                   											value=""
-			                                   											tabindex=""
 			                                   											onkeypress=""
-			                                   											readonly>
+			                                   											readonly/>
 			                                   								</td>
 			                                   							</tr>
 			                                   						</table>
@@ -603,9 +579,8 @@
 			                                   											class="input"
 			                                   											name="papel_cantidad_total"
 			                                   											value=""
-			                                   											tabindex=""
 			                                   											onkeypress=""
-			                                   											readonly>
+			                                   											readonly/>
 			                                   								</td>
 			                                   							</tr>
 			                                   						</table>
@@ -623,9 +598,8 @@
 			                                   												style="text-align:right;"
 			                                   												name="papel_precio_unitario"
 			                                   												value=""
-			                                   												tabindex=""
 			                                   												onkeypress=""
-			                                   												readonly>
+			                                   												readonly/>
 			                                   									</td>
 			                                   								</tr>
 			                                   							</table>
@@ -642,9 +616,8 @@
 			                                   												style="text-align:right;"
 			                                   												name="papel_coste_total"
 			                                   												value=""
-			                                   												tabindex=""
 			                                   												onkeypress=""
-			                                   												readonly>
+			                                   												readonly/>
 			                                   									</td>
 			                                   								</tr>
 			                                   							</table>
@@ -669,9 +642,8 @@
 		                                            									class="input"
 		                                            									name="tinta_descripcion"
 		                                            									value=""
-		                                            									tabindex=""
 		                                            									onkeypress=""
-		                                            									readonly>
+		                                            									readonly/>
 		                                            						</td>
 		                                            					</tr>
 		                                            				</table>
@@ -691,9 +663,8 @@
 			                                   											class="input"
 			                                   											name="tinta_num_ent_maq"
 			                                   											value=""
-			                                   											tabindex=""
 			                                   											onkeypress=""
-			                                   											readonly>
+			                                   											readonly/>
 		                                   									</td>
 		                                   								</tr>
 		                                   							</table>
@@ -711,9 +682,8 @@
 			                                   												style="text-align:right;"
 			                                   												name="tinta_precio_unitario"
 			                                   												value=""
-			                                   												tabindex=""
 			                                   												onkeypress=""
-			                                   												readonly>
+			                                   												readonly/>
 			                                   									</td>
 			                                   								</tr>
 			                                   							</table>
@@ -730,9 +700,8 @@
 			                                   												style="text-align:right;"
 			                                   												name="tinta_coste_total"
 			                                   												value=""
-			                                   												tabindex=""
 			                                   												onkeypress=""
-			                                   												readonly>
+			                                   												readonly/>
 			                                   									</td>
 			                                   								</tr>
 			                                   							</table>
@@ -757,9 +726,8 @@
 		                                            									class="input"
 		                                            									name="tinta_especial_descripcion"
 		                                            									value=""
-		                                            									tabindex=""
 		                                            									onkeypress=""
-		                                            									readonly>
+		                                            									readonly/>
 		                                            						</td>
 		                                            					</tr>
 		                                            				</table>
@@ -779,9 +747,8 @@
 			                                   											class="input"
 			                                   											name="tinta_especial_num_ent_maq"
 			                                   											value=""
-			                                   											tabindex=""
 			                                   											onkeypress=""
-			                                   											readonly>
+			                                   											readonly/>
 		                                   									</td>
 		                                   								</tr>
 		                                   							</table>
@@ -799,9 +766,8 @@
 			                                   											style="text-align:right;"
 			                                   											name="tinta_especial_precio_unitario"
 			                                   											value=""
-			                                   											tabindex=""
 			                                   											onkeypress=""
-			                                   											readonly>
+			                                   											readonly/>
 			                                   									</td>
 			                                   								</tr>
 			                                   							</table>
@@ -818,9 +784,8 @@
 			                                   											style="text-align:right;"
 			                                   											name="tinta_especial_coste_total"
 			                                   											value=""
-			                                   											tabindex=""
 			                                   											onkeypress=""
-			                                   											readonly>
+			                                   											readonly/>
 			                                   									</td>
 			                                   								</tr>
 			                                   							</table>
@@ -845,9 +810,8 @@
 		                                            									class="input"
 		                                            									name="barniz_descripcion"
 		                                            									value=""
-		                                            									tabindex=""
 		                                            									onkeypress=""
-		                                            									readonly>
+		                                            									readonly/>
 		                                            						</td>
 		                                            					</tr>
 		                                            				</table>
@@ -867,9 +831,8 @@
 			                                   											class="input"
 			                                   											name="frente_barniz_num_ent_maq"
 			                                   											value=""
-			                                   											tabindex=""
 			                                   											onkeypress=""
-			                                   											readonly>
+			                                   											readonly/>
 		                                   									</td>
 		                                   								</tr>
 		                                   							</table>
@@ -887,9 +850,8 @@
 			                                   											style="text-align:right;"
 			                                   											name="frente_barniz_precio_unitario"
 			                                   											value=""
-			                                   											tabindex=""
 			                                   											onkeypress=""
-			                                   											readonly>
+			                                   											readonly/>
 			                                   									</td>
 			                                   								</tr>
 			                                   							</table>
@@ -906,9 +868,8 @@
 			                                   											style="text-align:right;"
 			                                   											name="frente_barniz_coste_total"
 			                                   											value=""
-			                                   											tabindex=""
 			                                   											onkeypress=""
-			                                   											readonly>
+			                                   											readonly/>
 			                                   									</td>
 			                                   								</tr>
 			                                   							</table>
@@ -929,9 +890,8 @@
 			                                   											class="input"
 			                                   											name="vuelta_barniz_num_ent_maq"
 			                                   											value=""
-			                                   											tabindex=""
 			                                   											onkeypress=""
-			                                   											readonly>
+			                                   											readonly/>
 		                                   									</td>
 		                                   								</tr>
 		                                   							</table>
@@ -949,9 +909,8 @@
 			                                   											style="text-align:right;"
 			                                   											name="vuelta_barniz_precio_unitario"
 			                                   											value=""
-			                                   											tabindex=""
 			                                   											onkeypress=""
-			                                   											readonly>
+			                                   											readonly/>
 			                                   									</td>
 			                                   								</tr>
 			                                   							</table>
@@ -968,9 +927,8 @@
 			                                   												style="text-align:right;"
 			                                   												name="vuelta_barniz_coste_total"
 			                                   												value=""
-			                                   												tabindex=""
 			                                   												onkeypress=""
-			                                   												readonly>
+			                                   												readonly/>
 			                                   									</td>
 			                                   								</tr>
 			                                   							</table>
@@ -995,9 +953,8 @@
 		                                            									class="input"
 		                                            									name="placas_descripcion"
 		                                            									value=""
-		                                            									tabindex=""
 		                                            									onkeypress=""
-		                                            									readonly>
+		                                            									readonly/>
 		                                            						</td>
 		                                            					</tr>
 		                                            				</table>
@@ -1017,9 +974,8 @@
 			                                   											class="input"
 			                                   											name="placas_num_placas"
 			                                   											value=""
-			                                   											tabindex=""
 			                                   											onkeypress=""
-			                                   											readonly>
+			                                   											readonly/>
 		                                   									</td>
 		                                   								</tr>
 		                                   							</table>
@@ -1037,9 +993,8 @@
 			                                   												style="text-align:right;"
 			                                   												name="placas_precio_unitario"
 			                                   												value=""
-			                                   												tabindex=""
 			                                   												onkeypress=""
-			                                   												readonly>
+			                                   												readonly/>
 			                                   									</td>
 			                                   								</tr>
 			                                   							</table>
@@ -1056,9 +1011,8 @@
 			                                   												style="text-align:right;"
 			                                   												name="placas_coste_total"
 			                                   												value=""
-			                                   												tabindex=""
 			                                   												onkeypress=""
-			                                   												readonly>
+			                                   												readonly/>
 			                                   									</td>
 			                                   								</tr>
 			                                   							</table>
@@ -1083,9 +1037,8 @@
 			                                   											style="text-align:right;"
 			                                   											name="tipo_trabajo_detalle_coste_total"
 			                                   											value=""
-			                                   											tabindex=""
 			                                   											onkeypress=""
-			                                   											readonly>
+			                                   											readonly/>
 		                                   									</td>
 		                                   								</tr>
 		                                   							</table>
@@ -1243,9 +1196,8 @@
 		                                   												style="text-align:right;"
 		                                   												name="procesos_coste_total"
 		                                   												value=""
-			                                   											tabindex=""
 			                                   											onkeypress=""
-			                                   											readonly>
+			                                   											readonly/>
 		                                   									</td>
 		                                   								</tr>
 		                                   							</table>

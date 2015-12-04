@@ -115,64 +115,64 @@
                 <div id="div_hoja">
                     <div id="div_cabecera">
                         <div id="div_logo">
-                            <img alt="" src="<c:url value="/resources/image/logo.png"/>"></img>
+                            <img alt="" src="<c:url value="/resources/image/logo.png"/>"/>
                         </div>
                         <div id="div_encabezado">
-                            <img alt="" src="<c:url value="/resources/image/encabezado_orden_produccion.png"/>"></img>
+                            <img alt="" src="<c:url value="/resources/image/encabezado_orden_produccion.png"/>"/>
                         </div>
                     </div>
                     <div id="div_cuerpo">
                         <div id="div_menu">
                             <div id="div_contenido_menu">
                                 <div class="div_menu_item">
-                                    <img alt="" src="<c:url value="/resources/image/boton_menu_produccion.png"/>"></img>
+                                    <img alt="" src="<c:url value="/resources/image/boton_menu_produccion.png"/>"/>
                                     <ul id="menu_produccion">
                                         <li>
                                             <a href="#">
                                             	<img alt="" src="<c:url value="/resources/image/menu_diseno.png"/>"/>
                                             </a>
-                                            <img alt="" src="<c:url value="/resources/image/menu_separador.png"/>"></img>
+                                            <img alt="" src="<c:url value="/resources/image/menu_separador.png"/>"/>
                                         </li>
                                          
                                         <li>
                                             <a href="#">
                                             	<img alt="" src="<c:url value="/resources/image/menu_preprensa.png"/>"/>
                                             </a>
-                                            <img alt="" src="<c:url value="/resources/image/menu_separador.png"/>"></img>
+                                            <img alt="" src="<c:url value="/resources/image/menu_separador.png"/>"/>
                                         </li>
                                          
                                         <li>
                                             <a href="#">
                                             	<img alt="" src="<c:url value="/resources/image/menu_transporte.png"/>"/>
                                             </a>
-                                            <img alt="" src="<c:url value="/resources/image/menu_separador.png"/>"></img>
+                                            <img alt="" src="<c:url value="/resources/image/menu_separador.png"/>"/>
                                         </li>
                                          
                                         <li>
                                             <a href="#">
                                             	<img alt="" src="<c:url value="/resources/image/menu_acabado.png"/>"/>
                                             </a>
-                                            <img alt="" src="<c:url value="/resources/image/menu_separador.png"/>"></img>
+                                            <img alt="" src="<c:url value="/resources/image/menu_separador.png"/>"/>
                                         </li>
                                          
                                         <li>
                                             <a href="#">
                                             	<img alt="" src="<c:url value="/resources/image/menu_offset.png"/>"/>
                                             </a>
-                                            <img alt="" src="<c:url value="/resources/image/menu_separador.png"/>"></img>
+                                            <img alt="" src="<c:url value="/resources/image/menu_separador.png"/>"/>
                                         </li>
                                          
                                         <li>
                                             <a href="#">
                                             	<img alt="" src="<c:url value="/resources/image/menu_procesos.png"/>"/>
                                             </a>
-                                            <img alt="" src="<c:url value="/resources/image/menu_separador.png"/>"></img>
+                                            <img alt="" src="<c:url value="/resources/image/menu_separador.png"/>"/>
                                         </li>
                                     </ul>
                                 </div>
                                 <!--
                                 <div class="div_menu_item">
-                                    <img alt="" src="resources/image/boton_menu_reportes.png"></img>
+                                    <img alt="" src="resources/image/boton_menu_reportes.png"/>
                                     <ul id="menu_reportes">
                                         <li>
                                             <a href="#">Plantilla</a>
@@ -212,7 +212,7 @@
                                     </ul>
                                 </div>
                                 <div class="div_menu_item">
-                                    <img alt="" src="resources/image/boton_menu_seguridad.png"></img>
+                                    <img alt="" src="resources/image/boton_menu_seguridad.png"/>
                                     <ul id="menu_seguridad">
                                         <li>
                                             <a href="#">T.V.</a>
@@ -226,7 +226,7 @@
                                 -->
                                 <div id="div_cerrar_sesion">
                                     <span style="cursor:pointer;" onclick="regresa_menu();">
-                                    	<img alt="" src="<c:url value="/resources/image/boton_regresar_menu.jpg"/>"></img>
+                                    	<img alt="" src="<c:url value="/resources/image/boton_regresar_menu.jpg"/>"/>
                                     </span>
                                 </div>
                             </div>
@@ -244,7 +244,6 @@
                                 <div id="div_resultado_prueba"></div>
                                 <!--
                                 <select name="select_combinacion_tintas" 
-                                        tabindex=""
                                         onchange="">
                                     <c:forEach var="ct" items="${listaCombinacionTintas}">
                                         <option value="${ct.value}">${ct.text}</option>
@@ -259,7 +258,7 @@
                             <div id="div_cliente">
                                 <form name="cliente" action="" accept-charset="ISO-8859-1">
                                     <div class="titulo">
-                                        <img alt="" src="<c:url value="/resources/image/titulo_cliente.png"/>"></img>
+                                        <img alt="" src="<c:url value="/resources/image/titulo_cliente.png"/>"/>
                                     </div>
                                     <div class="div_cliente_nombre">
                                         <div class="columna_completa">
@@ -271,7 +270,6 @@
                                                         		class="input" 
                                                         		name="nombre_moral" 
                                                         		value="" 
-                                                        		tabindex="1" 
                                                         		onkeyup="searchLikeGoogle(this.value)"/>
                                                     </td>
                                                 </tr>
@@ -282,7 +280,7 @@
                                         		<option></option>
                                         	</select>
                                         </div>
-                                        <img alt="" src="<c:url value="/resources/image/separador_nombre.png"/>"></img>
+                                        <img alt="" src="<c:url value="/resources/image/separador_nombre.png"/>"/>
                                     </div>
                                     <div class="linea">
                                         <div class="casilla">
@@ -297,7 +295,6 @@
                                                                             class="input" 
                                                                             name="id_cliente"
                                                                             value="" 
-                                                                            tabindex="2"
                                                                             onkeypress="if( event.keyCode == 13 ) ajaxBuscaCliente(); else if( isNaN( String.fromCharCode (event.keyCode) ) ) {return false;}"/>
                                                                 </td>
                                                                 <td>
@@ -566,10 +563,10 @@
                                     <input type="hidden" name="id_cliente"                  value=""/>
                                     <input type="hidden" name="id_tipo_comprobante_fiscal"  value=""/>
                                     <div class="div_separador_grande">
-                                        <img alt="" src="<c:url value="/resources/image/separador_grande.png"/>"></img>
+                                        <img alt="" src="<c:url value="/resources/image/separador_grande.png"/>"/>
                                     </div>
                                     <div class="titulo">
-                                        <img alt="" src="<c:url value="/resources/image/titulo_orden.png"/>"></img>
+                                        <img alt="" src="<c:url value="/resources/image/titulo_orden.png"/>"/>
                                     </div>
                                     <div class="linea">
                                         <div class="casilla">
@@ -581,8 +578,7 @@
                                                             <input  type="text" 
                                                                     class="input"
                                                                     name="nombre"
-                                                                    value=""
-                                                                    tabindex="3"/>
+                                                                    value=""/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -599,8 +595,7 @@
                                                             <input  type="text" 
                                                                     class="input"
                                                                     name="descripcion"
-                                                                    value=""
-                                                                    tabindex="4"/>
+                                                                    value=""/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -615,9 +610,7 @@
                                                         <tr>
                                                             <td width="1%">Comprobante:</td>
                                                             <td>
-                                                                <select name="select_comprobante_fiscal" 
-                                                                        tabindex="5" 
-                                                                        onchange="">
+                                                                <select name="select_comprobante_fiscal" onchange="">
                                                                     <c:forEach var="ltcf" items="${listaTipoComprobanteFiscal}">
                                                                         <option value="${ltcf.value}">${ltcf.text}</option>
                                                                     </c:forEach>
@@ -636,13 +629,11 @@
                                                             	<input 	type="text"
                                                             			class="input"
                                                             			id="datepicker"
-                                                            			name="fecha_prometida_entrega"
-                                                            			tabindex="6"/>
+                                                            			name="fecha_prometida_entrega"/>
                                                             	<!-- 
                                                                 <input  type="date" 
                                                                         class="input" 
-                                                                        name="fecha_prometida_entrega" 
-                                                                        tabindex="6"/>
+                                                                        name="fecha_prometida_entrega"/>
                                                                 -->
                                                             </td>
                                                         </tr>
@@ -675,7 +666,7 @@
 <!-- div_visualizador_partidas, display:none; -->
                             <div id="div_visualizador_partidas" style="display:none;">
                                 <div class="div_separador_mediano">
-                                    <img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"></img>
+                                    <img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
                                 </div>
                                 <div class="titulo">
                                     <font size="5">LISTA DE PARTIDAS</font>
@@ -730,8 +721,7 @@
                                                                     <input  type="radio" 
                                                                             name="tipo_trabajo"
                                                                             value="1" 
-                                                                            checked="checked"
-                                                                            tabindex="7"/>
+                                                                            checked="checked"/>
                                                                 </td>
                                                                 <td>
                                                                     <img alt=""
@@ -795,8 +785,7 @@
                                                                 <input  type="text" 
                                                                         class="input" 
                                                                         name="nombre_partida"
-                                                                        value=""
-                                                                        tabindex="8"/>
+                                                                        value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -813,7 +802,6 @@
                                                                             class="input" 
                                                                             name="cantidad"
                                                                             value="" 
-                                                                            tabindex="9"
                                                                             onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
                                                                 </td>
                                                             </tr>
@@ -826,7 +814,7 @@
                                                             <tr>
                                                                 <td width="1%">Tipo:</td>
                                                                 <td>
-                                                                    <select name="select_forma_trabajo" tabindex="10">
+                                                                    <select name="select_forma_trabajo">
                                                                         <c:forEach var="tft" items="${listaTipoFormaTrabajo}">
                                                                             <option value="${tft.value}">${tft.text}</option>
                                                                         </c:forEach>
@@ -849,8 +837,7 @@
                                                             <input  type="text" 
                                                                     class="input" 
                                                                     name="descripcion_partida"
-                                                                    value=""
-                                                                    tabindex="11"/>
+                                                                    value=""/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -867,8 +854,7 @@
                                                             <input  type="file" 
                                                                     class="input" 
                                                                     name="diagrama_formacion"
-                                                                    value=""
-                                                                    tabindex="12"/>
+                                                                    value=""/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -884,8 +870,7 @@
                                                             <td width="10%" valign="top" style="padding-top:4px;">Obs. Generales:</td>
                                                             <td>
                                                                 <textarea class="textarea_doble"
-                                                                          name="observaciones_generales" 
-                                                                          tabindex="13"></textarea>
+                                                                          name="observaciones_generales"></textarea>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -898,8 +883,7 @@
                                                             <td width="10%" valign="top" style="padding-top:4px;">Obs. Aprobaci&oacute;n:</td>
                                                             <td>
                                                                 <textarea class="textarea_doble"
-                                                                          name="observaciones_aprobacion" 
-                                                                          tabindex="14"></textarea>
+                                                                          name="observaciones_aprobacion"></textarea>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -1009,8 +993,7 @@
                                                             <input  type="text" 
                                                                     class="input"
                                                                     name="descripcion_partida_detalle"
-                                                                    value=""
-                                                                    tabindex="15"/>
+                                                                    value=""/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -1030,7 +1013,6 @@
                                                                             class="input" 
                                                                             name="ancho" 
                                                                             value=""
-                                                                            tabindex="16"
                                                                             onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                             onkeyup="document.getElementsByName('ancho_extendido')[0].value=value;"
                                                                             onblur="javascript:calculaHojas();"/>
@@ -1049,7 +1031,6 @@
                                                                             class="input" 
                                                                             name="alto" 
                                                                             value=""
-                                                                            tabindex="17"
                                                                             onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                             onkeyup="document.getElementsByName('alto_extendido')[0].value=value;"
                                                                             onblur="javascript:calculaHojas();"/>
@@ -1070,7 +1051,6 @@
                                                                             class="input" 
                                                                             name="ancho_extendido" 
                                                                             value=""
-                                                                            tabindex="18"
                                                                             onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                             onblur="document.getElementsByName('ancho_extendido')[0].value=value;"/>
                                                                 </td>
@@ -1088,7 +1068,6 @@
                                                                             class="input" 
                                                                             name="alto_extendido" 
                                                                             value=""
-                                                                            tabindex="19"
                                                                             onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                             onblur="document.getElementsByName('alto_extendido')[0].value=value;"/>
                                                                 </td>
@@ -1110,8 +1089,7 @@
                                                                 <td>
                                                                     <input  type="checkbox" 
                                                                             class="input"
-                                                                            name="proporciona_papel"
-                                                                            tabindex="20"/>
+                                                                            name="proporciona_papel"/>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -1125,8 +1103,7 @@
                                                                 <td>
                                                                     <input  type="checkbox" 
                                                                             class="input"
-                                                                            name="proporciona_placas"
-                                                                            tabindex="21"/>
+                                                                            name="proporciona_placas"/>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -1142,8 +1119,7 @@
                                                                 <td>
                                                                     <input  type="checkbox" 
                                                                             class="input"
-                                                                            name="proporciona_tinta_especial"
-                                                                            tabindex="22"/>
+                                                                            name="proporciona_tinta_especial"/>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -1157,8 +1133,7 @@
                                                                 <td>
                                                                     <input  type="checkbox" 
                                                                             class="input"
-                                                                            name="proporciona_barniz"
-                                                                            tabindex="23"/>
+                                                                            name="proporciona_barniz"/>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -1189,7 +1164,6 @@
                                                             			readonly/>
                                                             	<!-- 
                                                                 <select name="select_tipo_papel_extendido" 
-                                                                        tabindex="24"
                                                                         onchange="javascrip:obtieneDatosPapel(this.value)">
                                                                 </select>
                                                                 -->
@@ -1212,7 +1186,6 @@
                                                                         class="input"
                                                                         name="repeticiones_x_pliego" 
                                                                         value=""
-                                                                        tabindex="25"
                                                                         onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
                                                             </td>
                                                         </tr>
@@ -1228,7 +1201,6 @@
                                                                             class="input"
                                                                             name="numero_paginas_publicacion"
                                                                             value="0"
-                                                                            tabindex="25"
                                                                             onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
                                                                 </td>
                                                             </tr>
@@ -1241,7 +1213,7 @@
                                                             <tr>
                                                                 <td width="1%">Tama&ntilde;o:</td>
                                                                 <td>
-                                                                    <select name="select_tamanio_publicacion" tabindex="25">
+                                                                    <select name="select_tamanio_publicacion">
                                                                         <c:forEach var="tp" items="${listaTamanioPublicacion}">
                                                                             <option value="${tp.value}">${tp.text}</option>
                                                                         </c:forEach>
@@ -1287,7 +1259,7 @@
                                                             <tr>
                                                                 <td width="40%">Num. Tinta:</td>
                                                                 <td>
-                                                                    <select name="select_frente_combinacion_tintas" tabindex="26">
+                                                                    <select name="select_frente_combinacion_tintas">
                                                                         <c:forEach var="ct" items="${listaCombinacionTintas}">
                                                                             <option value="${ct.value}">${ct.text}</option>
                                                                         </c:forEach>
@@ -1307,7 +1279,6 @@
                                                                             class="input"
                                                                             name="frente_num_tinta_especial" 
                                                                             value="0"
-                                                                            tabindex="27"
                                                                             onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
                                                                 </td>
                                                             </tr>
@@ -1324,8 +1295,7 @@
                                                                 <input  type="text" 
                                                                         class="input"
                                                                         name="frente_descripcion_tinta_especial"
-                                                                        value="" 
-                                                                        tabindex="28"/>
+                                                                        value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -1342,7 +1312,7 @@
                                                         <tr>
                                                             <td width="19%">Tipo barniz:</td>
                                                             <td>
-                                                                <select name="select_frente_tipo_barniz" tabindex="29">
+                                                                <select name="select_frente_tipo_barniz">
                                                                     <c:forEach var="tb" items="${listaTipoBarniz}">
                                                                         <option value="${tb.value}">${tb.text}</option>
                                                                     </c:forEach>
@@ -1367,7 +1337,7 @@
                                                             <tr>
                                                                 <td width="40%">Num. Tinta:</td>
                                                                 <td>
-                                                                    <select name="select_vuelta_combinacion_tintas" tabindex="30">
+                                                                    <select name="select_vuelta_combinacion_tintas">
                                                                         <c:forEach var="ct" items="${listaCombinacionTintas}">
                                                                             <option value="${ct.value}">${ct.text}</option>
                                                                         </c:forEach>
@@ -1387,7 +1357,6 @@
                                                                             class="input"
                                                                             name="vuelta_num_tinta_especial" 
                                                                             value="0"
-                                                                            tabindex="31"
                                                                             onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
                                                                 </td>
                                                             </tr>
@@ -1404,8 +1373,7 @@
                                                                 <input  type="text" 
                                                                         class="input"
                                                                         name="vuelta_descripcion_tinta_especial"
-                                                                        value="" 
-                                                                        tabindex="32"/>
+                                                                        value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -1422,7 +1390,7 @@
                                                         <tr>
                                                             <td width="19%">Tipo barniz:</td>
                                                             <td>
-                                                                <select name="select_vuelta_tipo_barniz" tabindex="33">
+                                                                <select name="select_vuelta_tipo_barniz">
                                                                     <c:forEach var="tb" items="${listaTipoBarniz}">
                                                                         <option value="${tb.value}">${tb.text}</option>
                                                                     </c:forEach>
@@ -1448,9 +1416,7 @@
                                                         <tr>
                                                             <td width="1%">M&aacute;quina:</td>
                                                             <td>
-                                                                <select name="select_maquina" 
-                                                                        tabindex="34"
-                                                                        onchange="buscaTipoPlaca( this );">
+                                                                <select name="select_maquina" onchange="buscaTipoPlaca( this );">
                                                                     <c:forEach var="m" items="${listaMaquina}">
                                                                         <option value="${m.value}">${m.text}</option>
                                                                     </c:forEach>
@@ -1466,7 +1432,7 @@
                                                         <tr>
                                                             <td width="18%">Tipo placa:</td>
                                                             <td>
-                                                                <select name="select_tipo_placa" tabindex="35"></select>
+                                                                <select name="select_tipo_placa"></select>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -1482,8 +1448,7 @@
                                     					<tr>
                                     						<td width="32%">Tipo de Complejidad</td>
                                     						<td>
-                                    							<select name="select_tipo_complejidad"
-                                    									tabindex="36">
+                                    							<select name="select_tipo_complejidad">
                                     								<c:forEach var="x" items="${listaTipoComplejidad}">
                                     									<option value="${x.value}">${x.text}</option>
                                     								</c:forEach>
@@ -1671,7 +1636,7 @@
 		                                					<tr>
 		                                						<td width="41%">Costo Extra:</td>
 		                                						<td>
-		                                							<select name="select_costo_extra" tabindex="37" onchange="ajaxUnidadCostoExtra()">
+		                                							<select name="select_costo_extra" onchange="ajaxUnidadCostoExtra()">
 		                                								<c:forEach var="costoExtra" items="${listaCostoExtra}">
 	                                                                        <option value="${costoExtra.value}">${costoExtra.text}</option>
 	                                                                    </c:forEach>
@@ -1687,7 +1652,7 @@
 		                                					<tr>
 		                                						<td width="1%">Responsable:</td>
 		                                						<td>
-		                                							<select name="select_responsable_insumo" tabindex="38">
+		                                							<select name="select_responsable_insumo">
 																		<c:forEach var="ri" items="${listaResponsableInsumo}">
 																			<option value="${ri.value}">${ri.text}</option>
 																		</c:forEach>
@@ -1709,7 +1674,6 @@
 		                                									class="input"
 		                                									name="cantidad"
 		                                									value=""
-		                                									tabindex="39"
 		                                									onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
 		                                						</td>
 		                                					</tr>
@@ -1726,7 +1690,6 @@
 		                                									class="input"
 		                                									name="nombre_unidad_medida"
 		                                									value="${nombre_unidad_medida}"
-		                                									tabindex=""
 		                                									readonly/>
 		                                						</td>
 		                                					</tr>
@@ -1747,8 +1710,7 @@
 		                                						<input	type="text"
 		                                								class="input"
 		                                								name="especificacion"
-		                                								value=""
-		                                								tabindex="40"/>
+		                                								value=""/>
 		                                					</td>
 		                                				</tr>
 		                                			</table>
@@ -1842,8 +1804,7 @@
                                                                             <input  type="text" 
                                                                                     class="input" 
                                                                                     name="indicacion_tarea_realizar" 
-                                                                                    value="" 
-                                                                                    tabindex=""/>
+                                                                                    value=""/>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -1860,8 +1821,7 @@
                                                                             <input  type="text" 
                                                                                     class="input" 
                                                                                     name="materiales_recibe" 
-                                                                                    value="" 
-                                                                                    tabindex=""/>
+                                                                                    value=""/>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -1878,8 +1838,7 @@
                                                                             <input  type="text" 
                                                                                     class="input" 
                                                                                     name="observaciones" 
-                                                                                    value="" 
-                                                                                    tabindex=""/>
+                                                                                    value=""/>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -1928,7 +1887,6 @@
                                                                                             class="input"
                                                                                             name="detalle"
                                                                                             value=""
-                                                                                            tabindex=""
                                                                                             readonly/>
                                                                                 </td>
                                                                             </tr>
@@ -1948,7 +1906,6 @@
                                                                                                 class="input"
                                                                                                 name="cantidad"
                                                                                                 value=""
-                                                                                                tabindex=""
                                                                                                 onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
                                                                                                 readonly/>
                                                                                     </td>
@@ -1966,7 +1923,6 @@
                                                                                                 class="input"
                                                                                                 name="precio_total_pesos"
                                                                                                 value=""
-                                                                                                tabindex=""
                                                                                                 onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                                                 readonly/>
                                                                                     </td>
@@ -1985,7 +1941,6 @@
                                                                                 <td>
                                                                                     <textarea   class="textarea_doble"
                                                                                                 name="especificaciones"
-                                                                                                tabindex=""
                                                                                                 disabled></textarea>
                                                                                 </td>
                                                                             </tr>
@@ -2054,8 +2009,7 @@
                                                                             <input  type="text"
                                                                                     class="input"
                                                                                     name="indicacion_tarea_realizar"
-                                                                                    value=""
-                                                                                    tabindex=""/>
+                                                                                    value=""/>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -2072,8 +2026,7 @@
                                                                             <input  type="text"
                                                                                     class="input"
                                                                                     name="materiales_recibe"
-                                                                                    value=""
-                                                                                    tabindex=""/>
+                                                                                    value=""/>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -2090,8 +2043,7 @@
                                                                             <input  type="text"
                                                                                     class="input"
                                                                                     name="observaciones"
-                                                                                    value=""
-                                                                                    tabindex=""/>
+                                                                                    value=""/>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -2140,7 +2092,6 @@
                                                                                             class="input"
                                                                                             name="detalle"
                                                                                             value=""
-                                                                                            tabindex=""
                                                                                             readonly/>
                                                                                 </td>
                                                                             </tr>
@@ -2160,7 +2111,6 @@
                                                                                                 class="input"
                                                                                                 name="cantidad"
                                                                                                 value=""
-                                                                                                tabindex=""
                                                                                                 onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
                                                                                                 readonly/>
                                                                                     </td>
@@ -2178,7 +2128,6 @@
                                                                                                 class="input"
                                                                                                 name="precio_total_pesos"
                                                                                                 value=""
-                                                                                                tabindex=""
                                                                                                 onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                                                 readonly/>
                                                                                     </td>
@@ -2197,7 +2146,6 @@
                                                                                 <td>
                                                                                     <textarea   class="textarea_doble"
                                                                                                 name="especificaciones"
-                                                                                                tabindex=""
                                                                                                 disabled></textarea>
                                                                                 </td>
                                                                             </tr>
@@ -2257,8 +2205,7 @@
                                                                             <input  type="text"
                                                                                     class="input"
                                                                                     name="indicacion_tarea_realizar"
-                                                                                    value=""
-                                                                                    tabindex=""/>
+                                                                                    value=""/>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -2275,8 +2222,7 @@
                                                                             <input  type="text"
                                                                                     class="input"
                                                                                     name="materiales_recibe"
-                                                                                    value=""
-                                                                                    tabindex=""/>
+                                                                                    value=""/>
                                                                         </td>
                                                                     </tr>
                                                                 </table>       
@@ -2293,8 +2239,7 @@
                                                                             <input  type="text"
                                                                                     class="input"
                                                                                     name="observaciones"
-                                                                                    value=""
-                                                                                    tabindex=""/>
+                                                                                    value=""/>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -2343,7 +2288,6 @@
                                                                                             class="input"
                                                                                             name="detalle"
                                                                                             value=""
-                                                                                            tabindex=""
                                                                                             readonly/>
                                                                                 </td>
                                                                             </tr>
@@ -2363,7 +2307,6 @@
                                                                                                 class="input"
                                                                                                 name="cantidad"
                                                                                                 value=""
-                                                                                                tabindex=""
                                                                                                 onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
                                                                                                 readonly/>
                                                                                     </td>
@@ -2381,7 +2324,6 @@
                                                                                                 class="input"
                                                                                                 name="precio_total_pesos"
                                                                                                 value=""
-                                                                                                tabindex=""
                                                                                                 onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                                                 readonly/>
                                                                                     </td>
@@ -2400,7 +2342,6 @@
                                                                                 <td>
                                                                                     <textarea   class="textarea_doble" 
                                                                                                 name="especificaciones" 
-                                                                                                tabindex="" 
                                                                                                 disabled></textarea>
                                                                                 </td>
                                                                             </tr>
@@ -2469,8 +2410,7 @@
                                                                             <input  type="text"
                                                                                     class="input"
                                                                                     name="indicacion_tarea_realizar"
-                                                                                    value=""
-                                                                                    tabindex=""/>
+                                                                                    value=""/>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -2487,8 +2427,7 @@
                                                                             <input  type="text"
                                                                                     class="input"
                                                                                     name="materiales_recibe"
-                                                                                    value=""
-                                                                                    tabindex=""/>
+                                                                                    value=""/>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -2505,8 +2444,7 @@
                                                                             <input  type="text"
                                                                                     class="input"
                                                                                     name="observaciones"
-                                                                                    value=""
-                                                                                    tabindex=""/>
+                                                                                    value=""/>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -2555,7 +2493,6 @@
                                                                                             class="input"
                                                                                             name="detalle"
                                                                                             value=""
-                                                                                            tabindex=""
                                                                                             readonly/>
                                                                                 </td>
                                                                             </tr>
@@ -2575,7 +2512,6 @@
                                                                                                 class="input"
                                                                                                 name="ancho"
                                                                                                 value=""
-                                                                                                tabindex=""
                                                                                                 onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                                                 readonly/>
                                                                                     </td>
@@ -2593,7 +2529,6 @@
                                                                                                 class="input"
                                                                                                 name="alto"
                                                                                                 value=""
-                                                                                                tabindex=""
                                                                                                 onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                                                 readonly/>
                                                                                     </td>
@@ -2615,7 +2550,6 @@
                                                                                                 class="input"
                                                                                                 name="cantidad_proceso_externo"
                                                                                                 value=""
-                                                                                                tabindex=""
                                                                                                 onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
                                                                                                 readonly/>
                                                                                     </td>
@@ -2633,7 +2567,6 @@
                                                                                                 class="input"
                                                                                                 name="precio_total_pesos"
                                                                                                 value=""
-                                                                                                tabindex=""
                                                                                                 onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                                                 readonly/>
                                                                                     </td>
@@ -2652,7 +2585,6 @@
                                                                                 <td>
                                                                                     <textarea   class="textarea_doble"
                                                                                                 name="especificaciones"
-                                                                                                tabindex=""
                                                                                                 disabled></textarea>
                                                                                 </td>
                                                                             </tr>
@@ -2718,8 +2650,7 @@
                                                                         <td width="1%" valign="top" style="padding-top:4px;">Indicaciones:</td>
                                                                         <td>
                                                                             <textarea   class="textarea_doble"
-                                                                                        name="indicacion_tarea_realizar"
-                                                                                        tabindex=""></textarea>
+                                                                                        name="indicacion_tarea_realizar"></textarea>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -2734,8 +2665,7 @@
                                                                         <td width="15%" valign="top" style="padding-top:4px;">Materiales recibe:</td>
                                                                         <td>
                                                                             <textarea   class="textarea_doble"
-                                                                                        name="materiales_recibe"
-                                                                                        tabindex=""></textarea>
+                                                                                        name="materiales_recibe"></textarea>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -2750,8 +2680,7 @@
                                                                         <td width="1%" valign="top" style="padding-top:4px;">Observaciones:</td>
                                                                         <td>
                                                                             <textarea   class="textarea_doble"
-                                                                                        name="observaciones"
-                                                                                        tabindex=""></textarea>
+                                                                                        name="observaciones"></textarea>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -2807,7 +2736,7 @@
                                                                 <tr>
                                                                     <td width="1%">Material:</td>
                                                                     <td>
-                                                                        <select name="select_material_ayuda" id="select_material_ayuda" tabindex="">
+                                                                        <select name="select_material_ayuda" id="select_material_ayuda">
                                                                             <c:forEach var="ma" items="${listaMaterialAyuda}">
                                                                                 <option value="${ma.value}">${ma.text}</option>
                                                                             </c:forEach>
@@ -2823,7 +2752,7 @@
                                                                 <tr>
                                                                     <td width="1%">Responsable:</td>
                                                                     <td>
-                                                                        <select name="select_responsable_insumo" id="select_responsable_insumo" tabindex="">
+                                                                        <select name="select_responsable_insumo" id="select_responsable_insumo">
                                                                             <c:forEach var="ri" items="${listaResponsableInsumo}">
                                                                                 <option value="${ri.value}">${ri.text}</option>
                                                                             </c:forEach>
@@ -2845,8 +2774,7 @@
                                                                     <td>
                                                                         <input type="text" class="input"
                                                                                name="observaciones"
-                                                                               value=""
-                                                                               tabindex=""/>
+                                                                               value=""/>
                                                                     </td>
                                                                 </tr>
                                                             </table>

@@ -66,10 +66,10 @@
                 <div id="div_hoja">
                     <div id="div_cabecera">
                         <div id="div_logo">
-                            <img alt="" src="<c:url value="/resources/image/logo.png"/>"></img>
+                            <img alt="" src="<c:url value="/resources/image/logo.png"/>"/>
                         </div>
                         <div id="div_encabezado">
-                            <img alt="" src="<c:url value="/resources/image/encabezado_catalogo.png"/>"></img>
+                            <img alt="" src="<c:url value="/resources/image/encabezado_catalogo.png"/>"/>
                         </div>
                     </div>
                     <div id="div_cuerpo">
@@ -77,7 +77,7 @@
                             <div id="div_contenido_menu">
                                 <div id="div_cerrar_sesion">
                                     <span style="cursor:pointer;" onclick="regresa_menu();">
-	                                    <img alt="" src="<c:url value="/resources/image/boton_regresar_menu.jpg"/>"></img>
+	                                    <img alt="" src="<c:url value="/resources/image/boton_regresar_menu.jpg"/>"/>
 	                                </span>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                             <form action="tamanio_publicacion" method="post" accept-charset="ISO-8859-1">
                                 <div id="div_tamanio_publicacion">
                                     <div class="titulo">
-                                        <img alt="" src="<c:url value="/resources/image/titulo_tamanio_publicacion.png"/>"></img>
+                                        <img alt="" src="<c:url value="/resources/image/titulo_tamanio_publicacion.png"/>"/>
                                     </div>
                                     <div id="div_contenedor_tabla">
                                         <div class="columna_completa">
@@ -116,7 +116,7 @@
                                         </div>
                                     </div>
                                     <div class="titulo">
-                                        <img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"></img>
+                                        <img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"/>
                                     </div>
                                     <div class="linea">
                                         <div class="casilla">
@@ -128,7 +128,7 @@
                                                             <td>
                                                                 <input type="text" class="input"
                                                                        name="id_tamanio_publicacion" value=""
-                                                                       tabindex="1" readonly="readonly"></input>
+                                                                       readonly="readonly"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -138,8 +138,7 @@
                                                         <tr>
                                                             <td width="1%">Nombre:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="nombre" value=""
-                                                                       tabindex="2"></input>
+                                                                <input type="text" class="input" name="nombre" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -151,8 +150,7 @@
                                                         <tr>
                                                             <td width="67%">Tama&ntilde;o de fracci&oacute;n:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="tamanio_fraccion"
-                                                                       value="" tabindex="3"></input>
+                                                                <input type="text" class="input" name="tamanio_fraccion" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -163,8 +161,8 @@
                                                             <td width="67%">N&uacute;mero de p&aacute;ginas:</td>
                                                             <td>
                                                                 <input type="text" class="input" name="numero_paginas"
-                                                                       value="" tabindex="4"
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"></input>
+                                                                       value="" 
+                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -181,8 +179,8 @@
                                                             <td width="56%">N&uacute;mero d&eacute;cimal:</td>
                                                             <td>
                                                                 <input type="text" class="input" name="numero_decimal"
-                                                                       value="" tabindex="5"
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"></input>
+                                                                       value="" 
+                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -193,8 +191,8 @@
                                                             <td width="61%">N&uacute;mero de doblez:</td>
                                                             <td>
                                                                 <input type="text" class="input" name="numero_doblez"
-                                                                       value="" tabindex="6"
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"></input>
+                                                                       value="" 
+                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -206,16 +204,16 @@
                                     <div class="linea">
                                         <div class="casilla" style="text-align:right;">
                                             <img alt="" style="cursor:pointer;" onclick="limpia();"
-                                            	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
                                              
                                             <img alt="" style="cursor:pointer;" onclick="elimina();"
-                                            	 src="<c:url value="/resources/image/boton_eliminar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_eliminar.jpg"/>"/>
                                              
                                             <img alt="" style="cursor:pointer;" onclick="modifica();"
-                                            	 src="<c:url value="/resources/image/boton_modificar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_modificar.jpg"/>"/>
                                              
                                             <img alt="" style="cursor:pointer;" onclick="crear();"
-                                            	 src="<c:url value="/resources/image/boton_agregar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_agregar.jpg"/>"/>
                                         </div>
                                     </div>
                                 </div>

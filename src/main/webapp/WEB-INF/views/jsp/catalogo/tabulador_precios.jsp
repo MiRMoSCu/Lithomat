@@ -66,10 +66,10 @@
                 <div id="div_hoja">
                     <div id="div_cabecera">
                         <div id="div_logo">
-                            <img alt="" src="<c:url value="/resources/image/logo.png"/>"></img>
+                            <img alt="" src="<c:url value="/resources/image/logo.png"/>"/>
                         </div>
                         <div id="div_encabezado">
-                            <img alt="" src="<c:url value="/resources/image/encabezado_catalogo.png"/>"></img>
+                            <img alt="" src="<c:url value="/resources/image/encabezado_catalogo.png"/>"/>
                         </div>
                     </div>
                     <div id="div_cuerpo">
@@ -77,7 +77,7 @@
                             <div id="div_contenido_menu">
                                 <div id="div_cerrar_sesion">
                                     <span style="cursor:pointer;" onclick="regresa_menu();">
-	                                    <img alt="" src="<c:url value="/resources/image/boton_regresar_menu.jpg"/>"></img>
+	                                    <img alt="" src="<c:url value="/resources/image/boton_regresar_menu.jpg"/>"/>
 	                                </span>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                             <form action="tabulador_precios" method="post" accept-charset="ISO-8859-1">
                                 <div id="div_tabulador_precios">
                                     <div class="titulo">
-                                        <img alt="" src="<c:url value="/resources/image/titulo_tabulador_precios.png"/>"></img>
+                                        <img alt="" src="<c:url value="/resources/image/titulo_tabulador_precios.png"/>"/>
                                     </div>
                                     <div id="div_contenedor_tabla">
                                         <div class="columna_completa">
@@ -124,7 +124,7 @@
                                         </div>
                                     </div>
                                     <div class="titulo">
-                                        <img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"></img>
+                                        <img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"/>
                                     </div>
                                     <div class="linea">
                                         <div class="casilla">
@@ -135,8 +135,8 @@
                                                             <td width="40%">Identificador:</td>
                                                             <td>
                                                                 <input type="text" class="input"
-                                                                       name="id_tabulador_precios" value="" tabindex="1"
-                                                                       readonly="readonly"></input>
+                                                                       name="id_tabulador_precios" value="" 
+                                                                       readonly="readonly"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -146,7 +146,7 @@
                                                         <tr>
                                                             <td width="1%">M&aacute;quina:</td>
                                                             <td>
-                                                                <select name="id_maquina" tabindex="2" onchange="">
+                                                                <select name="id_maquina" onchange="">
                                                                     <c:forEach var="maquina" items="${listaMaquina}">
                                                                         <option value="${maquina.value}">${maquina.text}</option>
                                                                     </c:forEach>
@@ -162,8 +162,7 @@
                                                         <tr>
                                                             <td width="26%">Nombre insumo:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="nombre_insumo"
-                                                                       value="" tabindex="3"></input>
+                                                                <input type="text" class="input" name="nombre_insumo" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -179,8 +178,7 @@
                                                         <tr>
                                                             <td width="1%">Descripci&oacute;n:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="descripcion"
-                                                                       value="" tabindex="4"></input>
+                                                                <input type="text" class="input" name="descripcion" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -192,8 +190,7 @@
                                                         <tr>
                                                             <td width="26%">Inicio:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="inicio_tabulador"
-                                                                       value="" tabindex="5"></input>
+                                                                <input type="text" class="input" name="inicio_tabulador" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -203,8 +200,7 @@
                                                         <tr>
                                                             <td width="26%">Fin:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="fin_tabulador"
-                                                                       value="" tabindex="6"></input>
+                                                                <input type="text" class="input" name="fin_tabulador" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -221,8 +217,7 @@
                                                             <td width="60%">Precio C. Sencilla:</td>
                                                             <td>
                                                                 <input type="text" class="input" name="precio_complejidad_sencilla" value=""
-                                                                       tabindex="7"
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"></input>
+                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -233,8 +228,7 @@
                                                             <td width="60%">Precio C. Regular:</td>
                                                             <td>
                                                                 <input type="text" class="input" name="precio_complejidad_regular" value=""
-                                                                       tabindex="8"
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"></input>
+                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -247,8 +241,7 @@
                                         					<td width="56%">Precio C. Dificil:</td>
                                                             <td>
                                                                 <input type="text" class="input" name="precio_complejidad_dificil" value=""
-                                                                       tabindex="9"
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"></input>
+                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
                                                             </td>
                                         				</tr>
                                         			</table>
@@ -258,7 +251,7 @@
                                         				<tr>
                                         					<td width="1%">Unidad:</td>
                                                             <td>
-                                                                <select name="id_tipo_precio" tabindex="10" onchange="">
+                                                                <select name="id_tipo_precio" onchange="">
                                                                     <c:forEach var="precio" items="${listaTipoPrecio}">
                                                                         <option value="${precio.value}">${precio.text}</option>
                                                                     </c:forEach>
@@ -274,16 +267,16 @@
                                     <div class="linea">
                                         <div class="casilla" style="text-align:right;">
                                             <img alt="" style="cursor:pointer;" onclick="limpia();"
-                                            	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
                                              
                                             <img alt="" style="cursor:pointer;" onclick="elimina();"
-                                            	 src="<c:url value="/resources/image/boton_eliminar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_eliminar.jpg"/>"/>
                                              
                                             <img alt="" style="cursor:pointer;" onclick="modifica();"
-                                            	 src="<c:url value="/resources/image/boton_modificar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_modificar.jpg"/>"/>
                                              
                                             <img alt="" style="cursor:pointer;" onclick="crear();"
-                                            	 src="<c:url value="/resources/image/boton_agregar.jpg"/>"></img>
+                                            	 src="<c:url value="/resources/image/boton_agregar.jpg"/>"/>
                                         </div>
                                     </div>
                                 </div>

@@ -55,7 +55,7 @@
 													<tr>
 														<td width="1%">Excel:</td>
 														<td>
-															<input type="file" class="input" name="upfile"><br/>
+															<input type="file" class="input" name="upfile"/><br/>
 														</td>	
 													</tr>
 												</table>

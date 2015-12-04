@@ -27,7 +27,7 @@
                         <div id="div_tipo_papel_extendido">
                         	<br/>
 							<div class="titulo">
-								<img alt="" src="<c:url value="/resources/image/titulo_tipo_papel_extendido.png"/>"></img>
+								<img alt="" src="<c:url value="/resources/image/titulo_tipo_papel_extendido.png"/>"/>
 							</div>
 							<div id="div_contenedor_tabla">
 								<div class="columna_completa">
@@ -85,7 +85,7 @@
 							<form name="tipo_trabajo_detalle" action="" method="POST">
 								<input type="hidden" name="id_tipo_papel_extendido"	value="">
 								<div class="div_separador_mediano">
-									<img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>">
+									<img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
 								</div>
 								<div class="linea">
 									<div class="casilla">
@@ -106,7 +106,7 @@
 									</div>
 								</div>
 								<div class="div_separador_chico">
-									<img alt="" src="<c:url value="/resources/image/separador_chico.jpg"/>">
+									<img alt="" src="<c:url value="/resources/image/separador_chico.jpg"/>"/>
 								</div>
 								<div class="titulo">
 									<font size="5">CRITERIOS DE B&Uacute;SQUEDA</font>
@@ -122,7 +122,7 @@
 															<span style="cursor:pointer;" onclick="document.tipo_trabajo_detalle.chkbx_busca_por_nombre.click()">Nombre:</span>
 														</td>
 														<td>
-															<input type="text" class="input" name="nombre" value="" tabindex="1"/>
+															<input type="text" class="input" name="nombre" value=""/>
 														</td>
 													</tr>
 												</table>
@@ -137,7 +137,7 @@
 															<span style="cursor:pointer;" onclick="document.tipo_trabajo_detalle.chkbx_busca_por_ancho.click()">Ancho:</span>
 														</td>
 														<td>
-															<input type="text" class="input" name="ancho" value="" tabindex="2" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+															<input type="text" class="input" name="ancho" value="" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
 														</td>
 													</tr>
 												</table>
@@ -150,7 +150,7 @@
 															<span style="cursor:pointer;" onclick="document.tipo_trabajo_detalle.chkbx_busca_por_alto.click()">Alto:</span>
 														</td>
 														<td>
-															<input type="text" class="input" name="alto" value="" tabindex="3" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+															<input type="text" class="input" name="alto" value="" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
 														</td>
 													</tr>
 												</table>
@@ -169,7 +169,7 @@
 															<span style="cursor:pointer;" onclick="document.tipo_trabajo_detalle.chkbx_busca_por_gramaje.click()">Gramaje:</span>
 														</td>
 														<td>
-															<input type="text" class="input" name="gramaje" value="" tabindex="4" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"></input>
+															<input type="text" class="input" name="gramaje" value="" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
 														</td>
 													</tr>
 												</table>
@@ -182,7 +182,7 @@
 															<span style="cursor:pointer;" onclick="document.tipo_trabajo_detalle.chkbx_busca_por_kilogramos.click()">Kilogramos:</span>
 														</td>
 														<td>
-															<input type="text" class="input" name="kilogramos" value="" tabindex="5" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"></input>
+															<input type="text" class="input" name="kilogramos" value="" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
 														</td>
 													</tr>
 												</table>
@@ -198,7 +198,7 @@
 															
 														</td>
 														<td>
-															<select name="id_proveedor_papel" tabindex="6" onchange="">
+															<select name="id_proveedor_papel" onchange="">
 																<c:forEach var="proveedorPapel"
 																	items="${listaProveedorPapel}">
 																	<option value="${proveedorPapel.value}">${proveedorPapel.text}</option>
@@ -215,7 +215,7 @@
 								<!-- <div class="linea"></div> -->
 								<div class="linea">
 									<div class="casilla" style="text-align: right;">
-										<img alt="" style="cursor: pointer;" onclick="limpia()" src="<c:url value="/resources/image/boton_limpiar.jpg"/>"></img>
+										<img alt="" style="cursor: pointer;" onclick="limpia()" src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
 										<span style="cursor:pointer;" onclick="busca()">
 											&nbsp;Buscar&nbsp;
 										</span>

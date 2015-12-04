@@ -29,9 +29,9 @@
 						<div id="div_contenido">
 							<br>
 							<form name="condiciones_produccion" method="post" target="_blank">
-								<input type="hidden" name="nut" 						value="${nut}">
-								<input type="hidden" name="id_tipo_reporte" 			value="">
-								<input type="hidden" name="id_tipo_formato_impresion" 	value="">
+								<input type="hidden" name="nut" 						value="${nut}"/>
+								<input type="hidden" name="id_tipo_reporte" 			value=""/>
+								<input type="hidden" name="id_tipo_formato_impresion" 	value=""/>
 								<div class="titulo">
 									<font size="5">REPORTE</font>
 								</div>

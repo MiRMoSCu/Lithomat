@@ -385,29 +385,29 @@
                 <div id="div_hoja">
                     <div id="div_cabecera">
                         <div id="div_logo">
-                            <img alt="" src="<c:url value="/resources/image/logo.png"/>">
+                            <img alt="" src="<c:url value="/resources/image/logo.png"/>"/>
                         </div>
                         <div id="div_encabezado">
-                            <img alt="" src="<c:url value="/resources/image/encabezado_menu.png"/>">
+                            <img alt="" src="<c:url value="/resources/image/encabezado_menu.png"/>"/>
                         </div>
                     </div>
                     <div id="div_cuerpo">
                         <div id="div_menu">
                         	<div class="div_menu_inicio">
                         		<div class="div_submenu_inicio">
-                        			<img alt="Producci&oacute;n" src="<c:url value="/resources/image/menu_inicio_produccion.png"/>" title="Producci&oacute;n" onclick="menu_principal('produccion')">
+                        			<img alt="Producci&oacute;n" src="<c:url value="/resources/image/menu_inicio_produccion.png"/>" title="Producci&oacute;n" onclick="menu_principal('produccion')"/>
                         		</div>
                         		<div class="div_submenu_inicio">
-                        			<img alt="Reportes" src="<c:url value="/resources/image/menu_inicio_reportes.png"/>" title="Reportes" onclick="menu_principal('reportes')">
+                        			<img alt="Reportes" src="<c:url value="/resources/image/menu_inicio_reportes.png"/>" title="Reportes" onclick="menu_principal('reportes')"/>
                         		</div>
                         		<div class="div_submenu_inicio">
-                        			<img alt="Cat&aacute;logos" src="<c:url value="/resources/image/menu_inicio_catalogos.png"/>" title="Cat&aacute;logos" onclick="menu_principal('catalogos')">
+                        			<img alt="Cat&aacute;logos" src="<c:url value="/resources/image/menu_inicio_catalogos.png"/>" title="Cat&aacute;logos" onclick="menu_principal('catalogos')"/>
                         		</div>
                         		<div class="div_submenu_inicio">
-                        			<img alt="Seguridad" src="<c:url value="/resources/image/menu_inicio_seguridad.png"/>" title="Seguridad" onclick="menu_principal('seguridad')">
+                        			<img alt="Seguridad" src="<c:url value="/resources/image/menu_inicio_seguridad.png"/>" title="Seguridad" onclick="menu_principal('seguridad')"/>
                         		</div>
                         		<div class="div_submenu_inicio_cerrar_sesion">
-                        			<img alt="" src="<c:url value="/resources/image/boton_cerrar.jpg"/>" onclick="menu('salir');">
+                        			<img alt="" src="<c:url value="/resources/image/boton_cerrar.jpg"/>" onclick="menu('salir');"/>
                         		</div>
                         	</div>
                             <div id="div_cerrar_sesion">

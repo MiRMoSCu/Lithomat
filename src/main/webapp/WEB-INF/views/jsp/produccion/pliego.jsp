@@ -39,8 +39,7 @@
                                                                     class="input"
                                                                     name="rebase_en_milimetros"
                                                                     value="0"
-                                                                    onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
-                                                                    tabindex="1">
+                                                                    onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -56,8 +55,7 @@
                                                                     class="input"
                                                                     name="medianiles_en_milimetros"
                                                                     value="0"
-                                                                    onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
-                                                                    tabindex="2">
+                                                                    onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -73,8 +71,7 @@
                                                                     class="input"
                                                                     name="pinzas_en_centimetros"
                                                                     value="0"
-                                                                    onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
-                                                                    tabindex="3">
+                                                                    onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -84,7 +81,7 @@
                                 </div>
                                 <div class="linea">
                                     <div class="casilla" style="text-align: right;">
-                                        <img alt="" style="cursor:pointer;" onclick="limpiaRebase()" src="<c:url value="/resources/image/boton_limpiar.jpg"/>">
+                                        <img alt="" style="cursor:pointer;" onclick="limpiaRebase()" src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
                                     </div>
                                 </div>
                                 <div class="titulo">
@@ -139,8 +136,7 @@
                                                                     class="input"
                                                                     name="numero_pliego"
                                                                     value="" 
-                                                                    tabindex=""
-                                                                    readonly>
+                                                                    readonly/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -160,8 +156,7 @@
                                                                     class="input"
                                                                     name="hojas_requeridas"
                                                                     value="" 
-                                                                    tabindex=""
-                                                                    readonly>
+                                                                    readonly/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -177,9 +172,8 @@
                                                                     class="input"
                                                                     name="hojas_sobrantes"
                                                                     value="" 
-                                                                    tabindex="4"
                                                                     onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
-                                                                    onkeyup="sumatoria();">
+                                                                    onkeyup="sumatoria();"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -195,8 +189,7 @@
                                                                     class="input"
                                                                     name="hojas_totales"
                                                                     value="" 
-                                                                    tabindex=""
-                                                                    readonly>
+                                                                    readonly/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -213,8 +206,7 @@
                                 					<td>
                                 						<input 	type="checkbox"
                                 								class="input"
-                                								name="mismos_sobrantes"
-                                								tabindex="5" />
+                                								name="mismos_sobrantes"/>
                                 					</td>
                                 				</tr>
                                 			</table>
@@ -231,8 +223,7 @@
                                                         <input  type="text"
                                                                 class="input"
                                                                 name="observaciones"
-                                                                value=""
-                                                                tabindex="6">
+                                                                value=""/>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -248,8 +239,7 @@
                                                     <td align="left">
                                                         <input  type="checkbox" 
                                                                 class="input"
-                                                                name="mismas_placas"
-                                                                tabindex="7">
+                                                                name="mismas_placas"/>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -264,7 +254,6 @@
                                                     <td width="18%">Tipo vuelta:</td>
                                                     <td>
                                                         <select name="tipo_vuelta" 
-                                                                tabindex="8" 
                                                                 onchange="">
                                                             <c:forEach var="v" items="${listaTipoVuelta}">
                                                                 <option value="${v.value}">${v.text}</option>
@@ -280,9 +269,9 @@
                                 <br/>
                                 <div class="linea">
                                     <div class="casilla" style="text-align: right;">
-                                        <img alt="" style="cursor:pointer;" onclick="limpiaPliego();" src="<c:url value="/resources/image/boton_limpiar.jpg"/>">
-                                        <img alt="" style="cursor:pointer;" onclick="modificaRegistro();" src="<c:url value="/resources/image/boton_modificar.jpg"/>">
-                                        <img alt="" style="cursor:pointer;" onclick="agregaRegistro();" src="<c:url value="/resources/image/boton_agregar.jpg"/>">
+                                        <img alt="" style="cursor:pointer;" onclick="limpiaPliego();" src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
+                                        <img alt="" style="cursor:pointer;" onclick="modificaRegistro();" src="<c:url value="/resources/image/boton_modificar.jpg"/>"/>
+                                        <img alt="" style="cursor:pointer;" onclick="agregaRegistro();" src="<c:url value="/resources/image/boton_agregar.jpg"/>"/>
                                     </div>
                                 </div>
                             </div>
