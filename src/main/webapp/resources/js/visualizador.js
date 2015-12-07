@@ -211,10 +211,9 @@ function realiza_consulta_paginador(){
         data:$("[name='visualizador']").serialize(),
         success:function( response ) {
         	//console.log(response);
-        	genera_tabla_dom( response.listaOrdenesProduccion );
-        	//jsonResponse = JSON.parse(response);
-            //genera_tabla_dom( jsonResponse.ordenesProduccion );
-            //jsonResponse = null;
+        	objJson = JSON.parse( response )
+        	genera_tabla_dom( objJson.listaOrdenesProduccion );
+        	objJson = null;
         },
         error:function( e ) {
             alert("\u00A1Algo sali\u00f3 mal! pero no pasa nada, todo tiene soluci\u00f3n.");

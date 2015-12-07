@@ -97,7 +97,6 @@
                             </div>
                         </div>
                         <div id="div_contenido">
-                        	
                             <div id="div_cliente">
                                 <div class="titulo">
                                     <img alt="" src="<c:url value="/resources/image/titulo_cliente.png"/>"/>

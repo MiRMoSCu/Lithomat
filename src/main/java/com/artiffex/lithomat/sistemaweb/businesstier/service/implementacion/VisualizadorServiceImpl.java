@@ -418,7 +418,7 @@ public class VisualizadorServiceImpl implements VisualizadorService {
 		}
 
 		listaOrdenesProduccion = visualizadorDAO.listaOrdenesProduccion(query, parametros);
-
+		
 		return listaOrdenesProduccion;
 	}
 

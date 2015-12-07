@@ -208,7 +208,7 @@ public class VisualizadorController {
 	 * busca orden de produccion con los parametros especificados
 	 */
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
-	@RequestMapping(value = "/busca_ordenes_produccion", method = RequestMethod.POST, headers = "Accept=application/json")
+	@RequestMapping(value = "/busca_ordenes_produccion", method = RequestMethod.POST /*, headers = "Accept=application/json"*/)
 	@ResponseBody
 	public String buscaOrdenesProduccion(
 			@RequestParam(value = "tipo_busqueda", 					required = false) Integer tipoBusqueda,
@@ -248,7 +248,7 @@ public class VisualizadorController {
 		sb.append("\"listaOrdenesProduccion\":");
 		sb.append(gson.toJson(listaOrdenesProduccion));
 		sb.append("}");
-
+		
 		listaOrdenesProduccion	= null;
 		gson 					= null;
 

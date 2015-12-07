@@ -1,5 +1,5 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ page contentType="text/html;charset=ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:url value="/?opc=produccion"	               			var="urlMenu"/>
@@ -8,7 +8,7 @@
 <fmt:setLocale value="en_US" scope="session" />
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+        <meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1"></meta>
         <title>Visuallzador</title>
         <link rel="stylesheet" href="<c:url value="/resources/css/master.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/menu.css"/>" type="text/css"></link>
