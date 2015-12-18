@@ -1,5 +1,6 @@
 package com.artiffex.lithomat.sistemaweb.webtier.controller.ordenproduccion;
 
+import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -12,6 +13,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.util.Streams;
 import org.apache.log4j.Logger;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -68,45 +70,49 @@ public class PartidaController {
 		log.info("/agrega_partida");
 		
 		Timestamp fechaGeneracion = new Timestamp(Calendar.getInstance().getTimeInMillis());
-
-		JsonResponse jsonResponse = new JsonResponse();
-
+		JsonResponse jsonResponse = new JsonResponse();		
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		if (isMultipart) {
 			ServletFileUpload uploader = new ServletFileUpload(new DiskFileItemFactory());
+			uploader.setHeaderEncoding( request.getCharacterEncoding() );
 			uploader.setSizeMax(104857600); // 1024 * 1024 * 100 = 100MB
 			Partida partida = new Partida();
 			try {
+				InputStream stream = null;
 				List<FileItem> fileItemsList = uploader.parseRequest(request);
 				Iterator<FileItem> fileItemsIterator = fileItemsList.iterator();
 				while (fileItemsIterator.hasNext()) {
 					FileItem item = fileItemsIterator.next();
 					if (item.isFormField()) {
+						stream = item.getInputStream();
 						if ("id_orden_produccion".equals(item.getFieldName())) {
 							OrdenProduccion ordenProduccion = new OrdenProduccion();
 							ordenProduccion.setIdOrdenProduccion(Integer.valueOf(item.getString()));
 							partida.setOrdenProduccion(ordenProduccion);
+							ordenProduccion = null;
 						}
 						if ("id_tipo_trabajo".equals(item.getFieldName())) {
 							TipoTrabajo tipoTrabajo = new TipoTrabajo();
 							tipoTrabajo.setIdTipoTrabajo(Integer.valueOf(item.getString()));
 							partida.setTipoTrabajo(tipoTrabajo);
+							tipoTrabajo = null;
 						}
-						if ("nombre_partida".equals(item.getFieldName()))
-							partida.setNombrePartida(item.getString());
+						if ("nombre_partida".equals(item.getFieldName())) // para que imprima correctamente acentos y la ñ: Streams
+							partida.setNombrePartida(Streams.asString(stream,"UTF-8"));
 						if ("cantidad".equals(item.getFieldName()))
 							partida.setCantidad(Integer.valueOf(item.getString()));
 						if ("id_tipo_forma_trabajo".equals(item.getFieldName())) {
 							TipoFormaTrabajo tipoFormaTrabajo = new TipoFormaTrabajo();
 							tipoFormaTrabajo.setIdTipoFormaTrabajo(Integer.valueOf(item.getString()));
 							partida.setTipoFormaTrabajo(tipoFormaTrabajo);
+							tipoFormaTrabajo = null;
 						}
 						if ("descripcion_partida".equals(item.getFieldName()))
-							partida.setDescripcionPartida(item.getString());
+							partida.setDescripcionPartida(Streams.asString(stream,"UTF-8"));
 						if ("observaciones_generales".equals(item.getFieldName()))
-							partida.setObservacionesGenerales(item.getString());
+							partida.setObservacionesGenerales(Streams.asString(stream,"UTF-8"));
 						if ("observaciones_aprobacion".equals(item.getFieldName()))
-							partida.setObservacionesAprobacion(item.getString());
+							partida.setObservacionesAprobacion(Streams.asString(stream,"UTF-8"));
 					} else {
 						if ("diagrama_formacion".equals(item.getFieldName())) {
 							if (item.getSize() > 0)

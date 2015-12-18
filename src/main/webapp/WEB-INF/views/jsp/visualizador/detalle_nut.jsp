@@ -54,26 +54,26 @@
         <script type="text/javascript" src="<c:url value="/resources/js/master.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_orden_produccion.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_partida.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_tipo_trabajo_detalle.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_agrega_costo_extra_detalle.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_costo_extra_detalle.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_disenio.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_agrega_disenio_detalle.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_disenio_detalle.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_preprensa.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_agrega_preprensa_detalle.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_preprensa_detalle.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_transporte.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_agrega_transporte_detalle.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_transporte_detalle.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_acabado.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_agrega_acabado_detalle.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_acabado_detalle.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_offset.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_agrega_material_ayuda.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion_material_ayuda.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_orden_produccion_modificacion.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_partida_modificacion.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_tipo_trabajo_detalle_modificacion.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_costo_extra_detalle_agrega.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_costo_extra_detalle_modificacion.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_disenio_modificacion.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_disenio_detalle_agrega.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_disenio_detalle_modificacion.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_preprensa_modificacion.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_preprensa_detalle_agrega.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_preprensa_detalle_modificacion.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_transporte_modificacion.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_transporte_detalle_agrega.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_transporte_detalle_modificacion.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_acabado_modificacion.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_acabado_detalle_agrega.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_acabado_detalle_modificacion.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_offset_modificacion.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_material_ayuda_agrega.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_material_ayuda_modificacion.js"/>"></script>
         <script type="text/javascript">
             //inicializacion jquery
             $(document).ready(function (){});
@@ -148,6 +148,7 @@
     <body onload="javascript:inicializa();">
     	<fmt:setLocale value="en_US" scope="session" />
 		<c:set var="estatus_cotizacion" value="1"/>
+		<c:set var="estatus_finalizado" value="10"/>
         <div id="div_area">
             <div id="div_ancho">
                 <div id="div_hoja">
@@ -1635,7 +1636,7 @@
 											</div>
 	                                	</div>
 	                                </div>
-	                                <c:if test="${historialEstatus.estatusOrden.idEstatusOrden == estatus_cotizacion}">
+	                                <c:if test="${historialEstatus.estatusOrden.idEstatusOrden != estatus_finalizado}">
 	                                	<div style="width:800px; margin-left:auto; margin-right:auto; overflow-x:scroll;">
 		                                	<div class="linea" style="padding-top:5px;">
 			                                	<div class="casilla" style="text-align:right;">
@@ -1780,7 +1781,7 @@
 		                                		</div>
 		                                	</div>
 		                                </div>
-		                                <c:if test="${historialEstatus.estatusOrden.idEstatusOrden == estatus_cotizacion}">
+		                                <c:if test="${historialEstatus.estatusOrden.idEstatusOrden != estatus_finalizado}">
 		                                	<div class="linea">
 			                                	<div class="casilla" style="text-align:right;">
 			                                		<div id="div_btn_agregar_costo_extra_detalle">
@@ -1795,7 +1796,6 @@
 			                                	</div>
 			                                </div>
 		                                </c:if>
-		                                
 	                                </form>
 								</div>  
                                 
