@@ -1049,10 +1049,10 @@ public class CalificacionServiceImpl implements CalificacionService {
 				otttd.setMaquina(tipoTrabajoDetalle.getMaquina().getNombre());
 				otttd.setTipoPlaca(tipoTrabajoDetalle.getTipoPlaca().getDescripcion());
 				otttd.setDescripcion(tipoTrabajoDetalle.getDescripcion());
-				otttd.setAncho((int)tipoTrabajoDetalle.getAncho());
-				otttd.setAlto((int)tipoTrabajoDetalle.getAlto());
-				otttd.setAnchoExtendido((int)tipoTrabajoDetalle.getAnchoExtendido());
-				otttd.setAltoExtendido((int)tipoTrabajoDetalle.getAltoExtendido());
+				otttd.setAncho(tipoTrabajoDetalle.getAncho());
+				otttd.setAlto(tipoTrabajoDetalle.getAlto());
+				otttd.setAnchoExtendido(tipoTrabajoDetalle.getAnchoExtendido());
+				otttd.setAltoExtendido(tipoTrabajoDetalle.getAltoExtendido());
 				otttd.setTipoPapel(tipoTrabajoDetalleService.obtienePapelDescripcionBasica(tipoTrabajoDetalle.getIdTipoTrabajoDetalle()));
 				otttd.setNumeroPaginas(tipoTrabajoDetalle.getNumeroPaginasPublicacion());
 				otttd.setTamanioPublicacion(tipoTrabajoDetalle.getTamanioPublicacion().getNombre());

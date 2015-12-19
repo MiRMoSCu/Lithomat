@@ -34,6 +34,7 @@ function muestra_detalle_nut( nut ) {
 } // muestra_detalle_nut
 
 function genera_tabla_dom( jsonOrdenesProduccion ) {
+	
     var table = document.createElement("table");
     table.setAttribute("id","tabla_registros");
     var tr = document.createElement("tr");
@@ -184,15 +185,13 @@ function nueva_busqueda() {
             url:urlBuscaOrdenesProduccion,
             data:$("[name='visualizador']").serialize(),
             success:function( response ) {
-            	//jsonResponse = JSON.parse(response);
+            	var jsonResponse = JSON.parse(response);
                 // generacion de tabla con registros
-                //genera_tabla_dom( jsonResponse.ordenesProduccion );
-            	genera_tabla_dom( response.listaOrdenesProduccion );
+                genera_tabla_dom( jsonResponse.listaOrdenesProduccion );
                 // inicializacion de variables
-                //numero_total_registros = jsonResponse.numeroTotalRegistros;
-            	numero_total_registros = response.numeroTotalRegistros;
+                numero_total_registros = jsonResponse.numeroTotalRegistros;
                 carga_datos();
-                //jsonResponse = null;
+                jsonResponse = null;
             },
             error:function( e ) {
                 alert("\u00A1Algo sali\u00f3 mal! pero todo tiene soluci\u00f3n.");

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2015-10-13T19:14:04 -->
+<!-- 2015-12-18T18:10:35 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdenTrabajoTipoTrabajoDetalle" pageWidth="570" pageHeight="305" columnWidth="570" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="eb0687f4-9642-4499-bda2-af76c80f4685">
 	<parameter name="SUBREPORT_PLIEGO" class="java.lang.String"/>
 	<queryString>
@@ -9,10 +9,10 @@
 	<field name="maquina" class="java.lang.String"/>
 	<field name="tipoPlaca" class="java.lang.String"/>
 	<field name="descripcion" class="java.lang.String"/>
-	<field name="ancho" class="java.lang.Integer"/>
-	<field name="alto" class="java.lang.Integer"/>
-	<field name="anchoExtendido" class="java.lang.Integer"/>
-	<field name="altoExtendido" class="java.lang.Integer"/>
+	<field name="ancho" class="java.lang.Float"/>
+	<field name="alto" class="java.lang.Float"/>
+	<field name="anchoExtendido" class="java.lang.Float"/>
+	<field name="altoExtendido" class="java.lang.Float"/>
 	<field name="tipoPapel" class="java.lang.String"/>
 	<field name="numeroPaginas" class="java.lang.Integer"/>
 	<field name="tamanioPublicacion" class="java.lang.String"/>
@@ -99,7 +99,7 @@
 				<text><![CDATA[Ancho (cm.):]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="145" y="151" width="20" height="15" uuid="f18341d6-f6a0-43be-b5ff-d2adae62b01d">
+				<reportElement x="145" y="151" width="35" height="15" uuid="f18341d6-f6a0-43be-b5ff-d2adae62b01d">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
@@ -168,7 +168,7 @@
 				<reportElement x="213" y="4" width="155" height="1" uuid="c107ecfc-a6cc-4e14-aa7a-5f5230c6c42e"/>
 			</line>
 			<textField>
-				<reportElement x="145" y="167" width="20" height="15" uuid="e20bacec-606e-4409-b114-ad69d3651346">
+				<reportElement x="145" y="167" width="35" height="15" uuid="e20bacec-606e-4409-b114-ad69d3651346">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
@@ -224,7 +224,7 @@
 				<textFieldExpression><![CDATA[$F{frenteTintaEspecial}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="145" y="136" width="20" height="15" uuid="cdf9be53-a11b-414d-af62-ff509cdc1b99">
+				<reportElement x="145" y="136" width="35" height="15" uuid="cdf9be53-a11b-414d-af62-ff509cdc1b99">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
@@ -260,7 +260,7 @@
 				<textFieldExpression><![CDATA[$F{vueltaTipoBarniz}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="415" y="136" width="20" height="15" uuid="55eb75ca-b764-48d5-91e6-599933238ba5">
+				<reportElement x="415" y="136" width="35" height="15" uuid="55eb75ca-b764-48d5-91e6-599933238ba5">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
@@ -268,7 +268,7 @@
 				<textFieldExpression><![CDATA[$F{alto}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="415" y="151" width="20" height="15" uuid="b8e02c11-c85c-4bc8-b358-8ebc7a240cec">
+				<reportElement x="415" y="151" width="35" height="15" uuid="b8e02c11-c85c-4bc8-b358-8ebc7a240cec">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
@@ -276,7 +276,7 @@
 				<textFieldExpression><![CDATA[$F{altoExtendido}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="415" y="167" width="20" height="15" uuid="f4d1c2a7-98ac-4edf-9ee9-2db653f5b3a1">
+				<reportElement x="415" y="167" width="35" height="15" uuid="f4d1c2a7-98ac-4edf-9ee9-2db653f5b3a1">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>

@@ -129,21 +129,6 @@
             var strJsonListaProcesoExterno      = '${jsonListaProcesoExterno}';
             var strJsonListaMaterialAyuda       = '${jsonListaMaterialAyuda}';
         </script>
-        <script type="text/javascript">
-        
-        	function eliminaPartida() {
-        		// DEBE BUSCAR QUE HAYA MAS DE UNA PARTIDA PARA PODER ELIMINAR
-        		// DEBE ACTUALIZAR LA TABLA Y OCULTAR TODOS LOS DIVS
-        		// DEBE ELIMINAR LOS TTD Y PLIEGOS ASOCIADOS
-        		// DEBE ELIMINAR LOS REGISTROS DISENIO; TRANSPORTE, etc..
-        		// DEBE ELIMINAR LOS REGISTROS DISENIO_DETALLE
-        	}
-        	
-        	function eliminaTipoTrabajoDetalle() {
-        		
-        	}
-        
-        </script>
     </head>
     <body onload="javascript:inicializa();">
     	<fmt:setLocale value="en_US" scope="session" />

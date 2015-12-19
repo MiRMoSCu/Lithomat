@@ -10,10 +10,10 @@ public class OrdenTrabajoTipoTrabajoDetalle implements Serializable {
 	private String maquina;
 	private String tipoPlaca;
 	private String descripcion;
-	private Integer ancho;
-	private Integer alto;
-	private Integer anchoExtendido;
-	private Integer altoExtendido;
+	private float ancho;
+	private float alto;
+	private float anchoExtendido;
+	private float altoExtendido;
 	private String tipoPapel;
 	private Integer numeroPaginas;
 	private String tamanioPublicacion;
@@ -45,28 +45,28 @@ public class OrdenTrabajoTipoTrabajoDetalle implements Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public Integer getAncho() {
+	public float getAncho() {
 		return ancho;
 	}
-	public void setAncho(Integer ancho) {
+	public void setAncho(float ancho) {
 		this.ancho = ancho;
 	}
-	public Integer getAlto() {
+	public float getAlto() {
 		return alto;
 	}
-	public void setAlto(Integer alto) {
+	public void setAlto(float alto) {
 		this.alto = alto;
 	}
-	public Integer getAnchoExtendido() {
+	public float getAnchoExtendido() {
 		return anchoExtendido;
 	}
-	public void setAnchoExtendido(Integer anchoExtendido) {
+	public void setAnchoExtendido(float anchoExtendido) {
 		this.anchoExtendido = anchoExtendido;
 	}
-	public Integer getAltoExtendido() {
+	public float getAltoExtendido() {
 		return altoExtendido;
 	}
-	public void setAltoExtendido(Integer altoExtendido) {
+	public void setAltoExtendido(float altoExtendido) {
 		this.altoExtendido = altoExtendido;
 	}
 	public String getTipoPapel() {
