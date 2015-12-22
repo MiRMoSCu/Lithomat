@@ -1,4 +1,4 @@
-package com.artiffex.lithomat.sistemaweb.webtier.controller.ordenproduccion;
+package com.artiffex.lithomat.sistemaweb.webtier.controller.produccion;
 
 import java.util.List;
 
@@ -100,8 +100,8 @@ public class PliegoController {
 		try {
 			Object obj = parser.parse(json);
 			JSONArray array = (JSONArray)obj;
-			for(int i=0; i<array.size(); i++) {
-				System.out.println(array.get(i));
+			for ( int i = 0; i < array.size(); i++ ) {
+				//System.out.println(array.get(i));
 				pliegoService.activaPliego( Integer.parseInt( array.get(i).toString() ) );
 			}
 			jsonResponse.setEstatusOperacion(1);

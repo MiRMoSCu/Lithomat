@@ -223,21 +223,26 @@ public class PliegoServiceImpl implements PliegoService {
 					String descripcionTintaVuelta = tipoTrabajoDetalle.getVueltaCombinacionTintas().getDescripcion();
 					
 					StringBuilder cadenaFinal = new StringBuilder();
-					for (int i = 0; i < descripcionTintaFrente.length(); i++) {
-						try {
-							cadenaFinal.append(descripcionTintaFrente.charAt(i));
-						} catch (Exception e) {
-							e.printStackTrace();
+					if ( tipoTrabajoDetalle.getFrenteCombinacionTintas().getNumTintas() > 0 ) 
+						for ( int i = 0; i < descripcionTintaFrente.length(); i++ ) { 
+							try {
+								cadenaFinal.append(descripcionTintaFrente.charAt(i));
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
 						}
-					}
-					for (int i = 0; i < descripcionTintaVuelta.length(); i++) {
-						try {
-							if (cadenaFinal.toString().indexOf(descripcionTintaVuelta.charAt(i)) == -1)
-								cadenaFinal.append(descripcionTintaVuelta.charAt(i));
-						} catch (Exception e) {
-							e.printStackTrace();
+					
+					if ( tipoTrabajoDetalle.getVueltaCombinacionTintas().getNumTintas() > 0 ) 
+						for ( int i = 0; i < descripcionTintaVuelta.length(); i++ ) { 
+							try {
+								if ( cadenaFinal.toString().indexOf(descripcionTintaVuelta.charAt(i)) == -1 )
+									cadenaFinal.append(descripcionTintaVuelta.charAt(i));
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
 						}
-					}
+					
+					//System.out.println( cadenaFinal );
 					
 					// FRENTE
 					int fteVtaNumEntMaqTinta 			= cadenaFinal.length();

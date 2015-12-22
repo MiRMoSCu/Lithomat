@@ -1,4 +1,4 @@
-package com.artiffex.lithomat.sistemaweb.webtier.controller.ordenproduccion;
+package com.artiffex.lithomat.sistemaweb.webtier.controller.produccion;
 
 import javax.annotation.Resource;
 
@@ -10,45 +10,44 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.artiffex.lithomat.sistemaweb.businesstier.entity.Disenio;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.JsonResponse;
-import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.DisenioService;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.Offset;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.OffsetService;
 
 @Controller
-@RequestMapping("/disenio")
-public class DisenioController {
+@RequestMapping("/offset")
+public class OffsetController {
 	
-	private static final Logger log = Logger.getLogger(DisenioController.class);
+	private static final Logger log = Logger.getLogger(OffsetController.class);
 	
 	@Resource
-	private DisenioService disenioService;
-	
+	private OffsetService offsetService;
 
+	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/modifica", method = RequestMethod.POST, headers = "Accept=application/json")
 	@ResponseBody
-	public JsonResponse modificaDisenio(
-			@RequestParam(value = "id_disenio", 				required = false) Integer idDisenio,
+	public JsonResponse modificaOffset(
+			@RequestParam(value = "id_offset", 					required = false) Integer idOffset,
 			@RequestParam(value = "indicacion_tarea_realizar", 	required = false) String indicacionTareaRealizar,
 			@RequestParam(value = "materiales_recibe", 			required = false) String materialesRecibe,
 			@RequestParam(value = "observaciones", 				required = false) String observaciones
 		) {
-		log.info("/modifica_disenio");
-		
-		Disenio disenio = disenioService.buscaDisenio(idDisenio);
-		disenio.setIndicacionTareaRealizar(indicacionTareaRealizar);
-		disenio.setMaterialesRecibe(materialesRecibe);
-		disenio.setObservaciones(observaciones);
-		
-		disenioService.modificaDisenio(disenio);
+		log.info("/modifica_offset");
+
+		Offset offset = offsetService.buscaOffset(idOffset);
+		offset.setIndicacionTareaRealizar(indicacionTareaRealizar);
+		offset.setMaterialesRecibe(materialesRecibe);
+		offset.setObservaciones(observaciones);
+
+		offsetService.modificaOffset(offset);
 
 		JsonResponse jsonResponse = new JsonResponse();
 		jsonResponse.setEstatusOperacion(1);
-		jsonResponse.setIdDisenio(idDisenio);
 
-		disenio = null;
+		offset 	= null;
 		
 		return jsonResponse;
-	} // modificaDisenio
+	} // modificaOffset
 	
 }

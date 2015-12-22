@@ -1922,6 +1922,7 @@
                                                                                         <input  type="text"
                                                                                                 class="input"
                                                                                                 name="precio_total_pesos"
+                                                                                                title="Precio total en pesos"
                                                                                                 value=""
                                                                                                 onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                                                 readonly/>
@@ -2127,6 +2128,7 @@
                                                                                         <input  type="text"
                                                                                                 class="input"
                                                                                                 name="precio_total_pesos"
+                                                                                                title="Precio total en pesos"
                                                                                                 value=""
                                                                                                 onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                                                 readonly/>
@@ -2323,6 +2325,7 @@
                                                                                         <input  type="text"
                                                                                                 class="input"
                                                                                                 name="precio_total_pesos"
+                                                                                                title="Precio total en pesos"
                                                                                                 value=""
                                                                                                 onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                                                 readonly/>
@@ -2566,6 +2569,7 @@
                                                                                         <input  type="text"
                                                                                                 class="input"
                                                                                                 name="precio_total_pesos"
+                                                                                                title="Precio total en pesos"
                                                                                                 value=""
                                                                                                 onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                                                 readonly/>

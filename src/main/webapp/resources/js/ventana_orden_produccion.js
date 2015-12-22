@@ -45,4 +45,5 @@ function enviarFormulario() {
 			}
 		});
 	}
+	delete correcto;
 }

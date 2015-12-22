@@ -1,4 +1,4 @@
-package com.artiffex.lithomat.sistemaweb.webtier.controller.ordenproduccion;
+package com.artiffex.lithomat.sistemaweb.webtier.controller.produccion;
 
 import java.sql.Timestamp;
 import java.util.Calendar;

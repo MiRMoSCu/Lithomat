@@ -1951,6 +1951,7 @@
                                                                                             <input  type="text"
                                                                                                     class="input"
                                                                                                     name="precio_total_pesos"
+                                                                                                    title="Precio total en pesos"
                                                                                                     value=""
                                                                                                     onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                                                     readonly/>
@@ -2177,6 +2178,7 @@
                                                                                             <input  type="text"
                                                                                                     class="input"
                                                                                                     name="precio_total_pesos"
+                                                                                                    title="Precio total en pesos"
                                                                                                     value=""
                                                                                                     onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                                                     readonly/>
@@ -2401,6 +2403,7 @@
                                                                                             <input  type="text"
                                                                                                     class="input"
                                                                                                     name="precio_total_pesos"
+                                                                                                    title="Precio total en pesos"
                                                                                                     value=""
                                                                                                     onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                                                     readonly/>
@@ -2663,6 +2666,7 @@
                                                                                             <input  type="text"
                                                                                                     class="input"
                                                                                                     name="precio_total_pesos"
+                                                                                                    title="Precio total en pesos"
                                                                                                     value=""
                                                                                                     onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                                                     readonly/>
@@ -2968,10 +2972,9 @@
 		                                   					<tr>
 		                                   						<td width="1%">Estatus:</td>
 		                                   						<td>
-		                                    						<select name="select_estatus_orden_produccion"
-		                                    								onchange="">
-				                                    					<c:forEach var="te" items="${listaEstatusOrden}">
-				                                    						<option value="${te.value}">${te.text}</option>
+		                                    						<select name="select_estatus_orden_produccion" onchange="">
+				                                    					<c:forEach var="seop" items="${listaEstatusOrden}">
+				                                    						<option value="${seop.value}">${seop.text}</option>
 				                                    					</c:forEach>
 				                                    				</select>
 		                                   						</td>

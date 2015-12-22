@@ -41,6 +41,7 @@
 <c:url value="/turno_laboral/catalogo/lista" 			var="urlTurnoLaboral" />
 <c:url value="/tipo_vuelta/catalogo/lista" 				var="urlTipoVuelta" />
 <!-- SEGURIDAD -->
+<c:url value="/seguridad/ventana_cambio_estatus"		var="urlVentanaCambioEstatus" />
 <c:url value="/perfil/catalogo/lista" 					var="urlPerfil" />
 <c:url value="/perfil_x_usuario/catalogo/lista" 		var="urlPerfilXUsuario" />
 <c:url value="/usuario/catalogo/lista" 					var="urlUsuario" />
@@ -99,6 +100,7 @@
             var urlTurnoLaboral					= '${urlTurnoLaboral}';
             var urlTipoVuelta					= '${urlTipoVuelta}';
          // ***
+         	var urlVentanaCambioEstatus			= '${urlVentanaCambioEstatus}';
             var urlPerfil						= '${urlPerfil}';
             var urlPerfilXUsuario				= '${urlPerfilXUsuario}';
             var urlUsuario						= '${urlUsuario}';
@@ -345,6 +347,18 @@
                     	document.forms[0].submit();
                     	break;
                 // *******************
+                    case 'ventana_cambio_estatus':
+                    	Shadowbox.open({
+                    		content:urlVentanaCambioEstatus,
+                    		player:'iframe',
+                    		width:600,
+                    		height:300,
+                    		options:{
+                    			modal:true,
+                    			overlayOpacity:0.75
+                    		}
+                    	});
+                    	break;
                     case 'perfil':
                     	document.forms["opcion_menu"].action = urlPerfil;
                     	document.forms["opcion_menu"].method = "post";
@@ -423,6 +437,7 @@
                                 			<div class="titulo_menu">
                                 				PRODUCCI&Oacute;N
                                 			</div>
+                                		<!-- ROLE_ROOT -->
                                 			<security:authorize access="hasRole('ROLE_ROOT')">
                                 				<div id="div_opcion_orden_produccion" class="boton_dinamico" onclick="menu('orden_produccion');">
                                 					<span class="texto_boton">Orden Producci&oacute;n</span>
@@ -431,6 +446,7 @@
 	                                				<span class="texto_boton">Visualizador</span>
 	                                			</div>
 							        		</security:authorize>
+							        	<!-- ROLE_ADMIN -->
 							        		<security:authorize access="hasRole('ROLE_ADMIN')">
 							        			<div id="div_opcion_orden_produccion" class="boton_dinamico" onclick="menu('orden_produccion');">
                                 					<span class="texto_boton">Orden Producci&oacute;n</span>
@@ -439,6 +455,7 @@
 	                                				<span class="texto_boton">Visualizador</span>
 	                                			</div>
 							        		</security:authorize>
+							        	<!-- ROLE_COTIZADOR -->
 							        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
 							        			<div id="div_opcion_orden_produccion" class="boton_dinamico" onclick="menu('orden_produccion');">
                                 					<span class="texto_boton">Orden Producci&oacute;n</span>
@@ -474,6 +491,7 @@
 	                                		<div class="titulo_menu">
                                 				REPORTES
                                 			</div>
+                                		<!-- ROLE_ROOT -->
 	                                		<security:authorize access="hasRole('ROLE_ROOT')">
                                 				<div id="div_opcion_reporte_orden_produccion" class="boton_dinamico" onclick="menu('ventana_reporte_orden_produccion');">
                                 					<span class="texto_boton">Orden Producci&oacute;n</span>
@@ -488,6 +506,7 @@
                                 					<span class="texto_boton">Cola Impresi&oacute;n</span>
 	                                			</div>
 							        		</security:authorize>
+							        	<!-- ROLE_ADMIN -->
 							        		<security:authorize access="hasRole('ROLE_ADMIN')">
 							        			<div id="div_opcion_reporte_orden_produccion" class="boton_dinamico" onclick="menu('ventana_reporte_orden_produccion');">
                                 					<span class="texto_boton">Orden Producci&oacute;n</span>
@@ -502,6 +521,7 @@
                                 					<span class="texto_boton">Cola Impresi&oacute;n</span>
 	                                			</div>
 							        		</security:authorize>
+							        	<!-- ROLE_COTIZADORT -->
 							        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
 							        			<div id="div_opcion_reporte_orden_produccion" class="boton_dinamico" onclick="menu('ventana_reporte_orden_produccion');">
                                 					<span class="texto_boton">Orden Producci&oacute;n</span>
@@ -540,6 +560,7 @@
 	                                		<div class="titulo_menu">
                                 				CAT&Aacute;LOGOS
                                 			</div>
+                                		<!-- ROLE_ROOT -->
 	                                		<security:authorize access="hasRole('ROLE_ROOT')">
                                 				<div id="div_opcion_cliente" class="boton_dinamico" onclick="menu('cliente');">
 	                                				<span class="texto_boton">Cliente</span>
@@ -629,6 +650,7 @@
 	                                				<span class="texto_boton">(+) Tipo trabajo</span>
 	                                			</div>
 							        		</security:authorize>
+							        	<!-- ROLE_ADMIN -->
 							        		<security:authorize access="hasRole('ROLE_ADMIN')">
 							        			<div id="div_opcion_cliente" class="boton_dinamico" onclick="menu('cliente');">
 	                                				<span class="texto_boton">Cliente</span>
@@ -706,6 +728,7 @@
 	                                				<span class="texto_boton">Turno laboral</span>
 	                                			</div>
 							        		</security:authorize>
+							        	<!-- ROLE_COTIZADORT -->
 							        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
 							        			<div id="div_opcion_cliente" class="boton_dinamico" onclick="menu('cliente');">
 	                                				<span class="texto_boton">Cliente</span>
@@ -741,7 +764,11 @@
 	                                		<div class="titulo_menu">
                                 				SEGURIDAD
                                 			</div>
+                                		<!-- ROLE_ROOT -->
 	                                		<security:authorize access="hasRole('ROLE_ROOT')">
+	                                			<div id="div_opcion_cambio_estatus" class="boton_dinamico" onclick="menu('ventana_cambio_estatus');">
+	                                				<span class="texto_boton">Cambio estatus</span>
+	                                			</div>
                                 				<div id="div_opcion_perfil" class="boton_dinamico" onclick="menu('perfil');">
 	                                				<span class="texto_boton">(+) Perfil</span>
 	                                			</div>
@@ -752,8 +779,11 @@
 	                                				<span class="texto_boton">(+) Usuario</span>
 	                                			</div>
 							        		</security:authorize>
+							        	<!-- ROLE_ADMIN -->
 							        		<security:authorize access="hasRole('ROLE_ADMIN')">
-							        			
+							        			<div id="div_opcion_cambio_estatus" class="boton_dinamico" onclick="menu('ventana_cambio_estatus');">
+	                                				<span class="texto_boton">Cambio estatus</span>
+	                                			</div>
 							        		</security:authorize>
 							        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
 							        		
