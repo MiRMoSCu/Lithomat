@@ -918,9 +918,9 @@ public class CalificacionServiceImpl implements CalificacionService {
 					sb.append(" ");
 					sb.append(tipoTrabajoDetalle.getTipoPapelExtendido().getGramaje());
 					sb.append(" gr. ");
-					sb.append((int)tipoTrabajoDetalle.getTipoPapelExtendido().getAncho());
-					sb.append(" x ");
 					sb.append((int)tipoTrabajoDetalle.getTipoPapelExtendido().getAlto());
+					sb.append(" x ");
+					sb.append((int)tipoTrabajoDetalle.getTipoPapelExtendido().getAncho());
 					sb.append(" cm. (");
 					sb.append(tipoTrabajoDetalle.getTipoPapelExtendido().getKilogramos());
 					sb.append(" kg.)");
@@ -999,15 +999,18 @@ public class CalificacionServiceImpl implements CalificacionService {
 		OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
 		List<Partida> listaPartida = partidaService.listaPartidaPorOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
 		for (Partida partida : listaPartida) {
+			//System.out.println("PARTIDA: " + partida.getDescripcionPartida());
 			OrdenTrabajoPartida otp = new OrdenTrabajoPartida();
 			List<OrdenTrabajoTipoTrabajoDetalle> listaOrdenTrabajoTipoTrabajoDetalle = new ArrayList<OrdenTrabajoTipoTrabajoDetalle>();
 			List<TipoTrabajoDetalle> listaTipoTrabajoDetalle = tipoTrabajoDetalleService.listaTipoTrabajoDetallePorPartida(partida.getIdPartida());
 			for (TipoTrabajoDetalle tipoTrabajoDetalle : listaTipoTrabajoDetalle) {
+				//System.out.println("TIPO TRABAJO DETALLE: " + tipoTrabajoDetalle.getDescripcion());
 				OrdenTrabajoTipoTrabajoDetalle otttd = new OrdenTrabajoTipoTrabajoDetalle();
 				List<OrdenTrabajoPliego> listaOrdenTrabajoPliego = new ArrayList<OrdenTrabajoPliego>();
 				List<Pliego> listaPliegos = pliegoService.listaPliegoPorTipoTrabajoDetalle(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());
 				int cont = 1;
 				for (Pliego pliego : listaPliegos) {
+					//System.out.println("PLIEGO: " + pliego.getIdPliego());
 					OrdenTrabajoPliego otpl = new OrdenTrabajoPliego();
 					otpl.setId(cont++);
 					otpl.setPapel(tipoTrabajoDetalleService.obtienePapelDescripcionBasica(tipoTrabajoDetalle.getIdTipoTrabajoDetalle()));
@@ -1162,6 +1165,10 @@ public class CalificacionServiceImpl implements CalificacionService {
 		ot 				= null;
 		listaPartida 	= null;
 		ordenProduccion = null;
+		
+		//Gson gson = new Gson();
+		//String json = gson.toJson( listaOrdenTrabajo );
+		//System.out.println("JSON:\n" + json);
 		
 		return listaOrdenTrabajo;
 	}

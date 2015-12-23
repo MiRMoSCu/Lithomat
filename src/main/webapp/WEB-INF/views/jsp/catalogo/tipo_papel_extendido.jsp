@@ -145,8 +145,8 @@
                                                         <th>Nombre</th>
                                                         <th>Gramaje</th>
                                                         <th>Kilogramos</th>
-                                                        <th>Ancho</th>
                                                         <th>Alto</th>
+                                                        <th>Ancho</th>
                                                         <th>Descripci&oacute;n</th>
                                                         <th>Precio</th>
                                                         <th>Unidad</th>
@@ -155,14 +155,14 @@
 													<fmt:formatNumber var="formatAncho" value="${tipoPapelExtendido.ancho}" maxFractionDigits="0" />
 													<fmt:formatNumber var="formatAlto" value="${tipoPapelExtendido.alto}" maxFractionDigits="0" />
 													<tr class='${i.count%2==0?"l2":"l1"}'
-                                                        onclick="setCampos('${tipoPapelExtendido.idTipoPapelExtendido}', '${tipoPapelExtendido.proveedorPapel.razonSocial}', '${tipoPapelExtendido.nombre}', '${tipoPapelExtendido.gramaje}', '${tipoPapelExtendido.kilogramos}', '${formatAncho}', '${formatAlto}', '${tipoPapelExtendido.descripcion}', '${tipoPapelExtendido.precio}', '${tipoPapelExtendido.tipoPrecio.nombre}');">
+                                                        onclick="setCampos('${tipoPapelExtendido.idTipoPapelExtendido}', '${tipoPapelExtendido.proveedorPapel.razonSocial}', '${tipoPapelExtendido.nombre}', '${tipoPapelExtendido.gramaje}', '${tipoPapelExtendido.kilogramos}','${formatAlto}', '${formatAncho}', '${tipoPapelExtendido.descripcion}', '${tipoPapelExtendido.precio}', '${tipoPapelExtendido.tipoPrecio.nombre}');">
                                                         <td>${tipoPapelExtendido.idTipoPapelExtendido}</td>
                                                         <td>${tipoPapelExtendido.proveedorPapel.razonSocial}</td>
                                                         <td>${tipoPapelExtendido.nombre}</td>
                                                         <td>${tipoPapelExtendido.gramaje}</td>
                                                         <td>${tipoPapelExtendido.kilogramos}</td>
-                                                        <td>${formatAncho}</td>
                                                         <td>${formatAlto}</td>
+                                                        <td>${formatAncho}</td>
                                                         <td>${tipoPapelExtendido.descripcion}</td>
                                                         <td>${tipoPapelExtendido.precio}</td>
                                                         <td>${tipoPapelExtendido.tipoPrecio.nombre}</td>
@@ -246,12 +246,12 @@
 	                                					<div class="mitad_columna_izquierda">
 	                                						<table>
 	                                							<tr>
-	                                								<td width="35%">
-	                                									<input type="checkbox" name="chkbx_busca_por_ancho"/>
-	                                									<span style="cursor:pointer;" onclick="document.busqueda_tipo_papel_extendido.chkbx_busca_por_ancho.click()">Ancho:</span>
+	                                								<td width="27%">
+	                                									<input type="checkbox" name="chkbx_busca_por_alto"/>
+	                                									<span style="cursor:pointer;" onclick="document.busqueda_tipo_papel_extendido.chkbx_busca_por_alto.click()">Alto:</span>
 	                                								</td>
 	                                								<td>
-	                                									<input type="text" class="input" name="ancho" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+	                                									<input type="text" class="input" name="alto" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
 	                                								</td>
 	                                							</tr>
 	                                						</table>
@@ -259,12 +259,12 @@
 	                                					<div class="mitad_columna_derecha">
 	                                						<table>
 	                                							<tr>
-	                                								<td width="27%">
-	                                									<input type="checkbox" name="chkbx_busca_por_alto"/>
-	                                									<span style="cursor:pointer;" onclick="document.busqueda_tipo_papel_extendido.chkbx_busca_por_alto.click()">Alto:</span>
+	                                								<td width="35%">
+	                                									<input type="checkbox" name="chkbx_busca_por_ancho"/>
+	                                									<span style="cursor:pointer;" onclick="document.busqueda_tipo_papel_extendido.chkbx_busca_por_ancho.click()">Ancho:</span>
 	                                								</td>
 	                                								<td>
-	                                									<input type="text" class="input" name="alto" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+	                                									<input type="text" class="input" name="ancho" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
 	                                								</td>
 	                                							</tr>
 	                                						</table>
@@ -382,10 +382,10 @@
 	                                                </div>
 	                                                <div class="mitad_columna_derecha">
 	                                                	<table>
-	                                                        <tr>
-	                                                            <td width="1%">Ancho:</td>
+	                                                    	<tr>
+	                                                            <td width="1%">Alto:</td>
 	                                                            <td>
-	                                                                <input type="text" class="input" name="ancho" value="" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+	                                                                <input type="text" class="input" name="alto" value="" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
 	                                                            </td>
 	                                                        </tr>
 	                                                    </table>
@@ -394,10 +394,10 @@
 	                                            <div class="columna_derecha">
 	                                                <div class="mitad_columna_izquierda">
 	                                                    <table>
-	                                                    	<tr>
-	                                                            <td width="1%">Alto:</td>
+	                                                        <tr>
+	                                                            <td width="1%">Ancho:</td>
 	                                                            <td>
-	                                                                <input type="text" class="input" name="alto" value="" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+	                                                                <input type="text" class="input" name="ancho" value="" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
 	                                                            </td>
 	                                                        </tr>
 	                                                    </table>

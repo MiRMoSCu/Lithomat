@@ -65,7 +65,7 @@ public class ReporteServiceImpl implements ReporteService {
 				registro.setNombreCliente( tipoTrabajoDetalle.getPartida().getOrdenProduccion().getCliente().getNombreMoral() );
 				registro.setDecripcion( tipoTrabajoDetalle.getDescripcion() );
 				registro.setPapel( tipoTrabajoDetalle.getTipoPapelExtendido().getNombre() + " " + tipoTrabajoDetalle.getTipoPapelExtendido().getGramaje() + " grs." );
-				registro.setMedida( (int)tipoTrabajoDetalle.getTipoPapelExtendido().getAncho() + " x " + (int)tipoTrabajoDetalle.getTipoPapelExtendido().getAlto() );
+				registro.setMedida( (int)tipoTrabajoDetalle.getTipoPapelExtendido().getAlto() + " x " + (int)tipoTrabajoDetalle.getTipoPapelExtendido().getAncho() );
 				registro.setTiro( pliego.getHojasTotales() );
 				registro.setTintas( pliego.getFrenteNumTotalPlacas() + " x " + pliego.getVueltaNumTotalPlacas() );
 					StringBuilder descripcionTintas = new StringBuilder();

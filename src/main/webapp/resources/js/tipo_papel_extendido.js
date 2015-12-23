@@ -11,7 +11,7 @@ $(document).ready(function () {
 //FUNCIONES PARA LA MODIFICACION DEL REGISTRO
 
 /* funciones */
-function setCampos( id_tipo_papel_extendido, razon_social, nombre, gramaje, kilogramos, ancho, alto, descripcion, precio, nombre_precio ) {
+function setCampos( id_tipo_papel_extendido, razon_social, nombre, gramaje, kilogramos, alto, ancho, descripcion, precio, nombre_precio ) {
 
     //Busqueda de proveedor_papel
     var select_proveedor = document.forms["tipo_papel_extendido"].id_proveedor_papel;
@@ -39,8 +39,8 @@ function setCampos( id_tipo_papel_extendido, razon_social, nombre, gramaje, kilo
     document.forms["tipo_papel_extendido"].nombre.value                      = nombre;
     document.forms["tipo_papel_extendido"].gramaje.value                     = gramaje;
     document.forms["tipo_papel_extendido"].kilogramos.value                  = kilogramos;
-    document.forms["tipo_papel_extendido"].ancho.value                       = ancho;
     document.forms["tipo_papel_extendido"].alto.value                        = alto;
+    document.forms["tipo_papel_extendido"].ancho.value                       = ancho;
     document.forms["tipo_papel_extendido"].descripcion.value                 = descripcion;
     document.forms["tipo_papel_extendido"].precio.value                      = precio;
     document.forms["tipo_papel_extendido"].id_tipo_precio.selectedIndex      = index_precio;
@@ -50,8 +50,8 @@ function crear() {
     if (document.forms["tipo_papel_extendido"].nombre.value == "" 
      || document.forms["tipo_papel_extendido"].gramaje.value == ""
      || document.forms["tipo_papel_extendido"].kilogramos.value == ""
-     || document.forms["tipo_papel_extendido"].ancho.value == ""
      || document.forms["tipo_papel_extendido"].alto.value == ""
+     || document.forms["tipo_papel_extendido"].ancho.value == ""
      || document.forms["tipo_papel_extendido"].precio.value == "" )
         alert("Todos los campos son obligatorios, favor de informarlos.");
     else {
@@ -62,11 +62,11 @@ function crear() {
 
 function modifica() {
     if (document.forms["tipo_papel_extendido"].nombre.value == "" 
-     || document.forms["tipo_papel_extendido"].gramaje.value == ""
-     || document.forms["tipo_papel_extendido"].kilogramos.value == ""
-     || document.forms["tipo_papel_extendido"].ancho.value == ""
-     || document.forms["tipo_papel_extendido"].alto.value == ""
-     || document.forms["tipo_papel_extendido"].precio.value == "")
+    	|| document.forms["tipo_papel_extendido"].gramaje.value == ""
+    	|| document.forms["tipo_papel_extendido"].kilogramos.value == ""
+    	|| document.forms["tipo_papel_extendido"].alto.value == ""
+    	|| document.forms["tipo_papel_extendido"].ancho.value == ""
+    	|| document.forms["tipo_papel_extendido"].precio.value == "")
         alert("Todos los campos son obligatorios, favor de informarlos.");
     else {
         document.forms["tipo_papel_extendido"].action = urlModifica;
@@ -87,8 +87,8 @@ function limpia_form_tipo_papel_extendido() {
     document.forms["tipo_papel_extendido"].nombre.value                      = "";
     document.forms["tipo_papel_extendido"].gramaje.value                     = "";
     document.forms["tipo_papel_extendido"].kilogramos.value                  = "";
-    document.forms["tipo_papel_extendido"].ancho.value                       = "";
     document.forms["tipo_papel_extendido"].alto.value                        = "";
+    document.forms["tipo_papel_extendido"].ancho.value                       = "";
     document.forms["tipo_papel_extendido"].descripcion.value                 = "";
     document.forms["tipo_papel_extendido"].precio.value                      = "";
     document.forms["tipo_papel_extendido"].id_tipo_precio.selectedIndex      = 0;
@@ -129,13 +129,13 @@ function genera_tabla_dom( jsonListaTipoPapelExtendido ) {
     tr.appendChild( td );
     
     td = document.createElement("th");
-    td.innerHTML = "Ancho";
-    //td.setAttribute("width","10%");
+    td.innerHTML = "Alto";
+    //td.setAttribute("width","15%");
     tr.appendChild( td );
     
     td = document.createElement("th");
-    td.innerHTML = "Alto";
-    //td.setAttribute("width","15%");
+    td.innerHTML = "Ancho";
+    //td.setAttribute("width","10%");
     tr.appendChild( td );
     
     td = document.createElement("th");
@@ -161,7 +161,7 @@ function genera_tabla_dom( jsonListaTipoPapelExtendido ) {
     	$.each( jsonListaTipoPapelExtendido, function(i, item){
             tr = document.createElement("tr");
             
-            tr.setAttribute("onclick","setCampos('" + item.idTipoPapelExtendido + "','"  + item.razonSocial + "','"  + item.nombre + "','"  + item.gramaje + "','"  + item.kilogramos.toFixed(1) + "','"  + item.ancho + "','"  + item.alto + "','"  + item.descripcion + "','"  + item.precio.toFixed(1) + "','"  + item.nombrePrecio + "');")
+            tr.setAttribute("onclick","setCampos('" + item.idTipoPapelExtendido + "','"  + item.razonSocial + "','"  + item.nombre + "','"  + item.gramaje + "','"  + item.kilogramos.toFixed(1) + "','" + item.alto + "','" + item.ancho + "','" + item.descripcion + "','"  + item.precio.toFixed(1) + "','"  + item.nombrePrecio + "');")
             if( i%2 == 0 )
                 tr.setAttribute("class","l1");
             else
@@ -188,11 +188,11 @@ function genera_tabla_dom( jsonListaTipoPapelExtendido ) {
             tr.appendChild( td );
             
             td = document.createElement("td");
-            td.innerHTML = item.ancho;
+            td.innerHTML = item.alto;
             tr.appendChild( td );
             
             td = document.createElement("td");
-            td.innerHTML = item.alto;
+            td.innerHTML = item.ancho;
             tr.appendChild( td );
             
             td = document.createElement("td");
@@ -449,15 +449,15 @@ function limpia_form_busqueda_tipo_papel_sobrante() {
 	document.busqueda_tipo_papel_extendido.chkbx_busca_por_nombre.checked 		= false;
 	document.busqueda_tipo_papel_extendido.chkbx_busca_por_gramaje.checked 		= false;
 	document.busqueda_tipo_papel_extendido.chkbx_busca_por_kilogramos.checked 	= false;
-	document.busqueda_tipo_papel_extendido.chkbx_busca_por_ancho.checked 		= false;
 	document.busqueda_tipo_papel_extendido.chkbx_busca_por_alto.checked 		= false;
+	document.busqueda_tipo_papel_extendido.chkbx_busca_por_ancho.checked 		= false;
 	document.busqueda_tipo_papel_extendido.chkbx_busca_por_proveedor.checked 	= false;
 	// limpia input text
 	document.busqueda_tipo_papel_extendido.nombre.value 					= "";
 	document.busqueda_tipo_papel_extendido.gramaje.value 					= "";
 	document.busqueda_tipo_papel_extendido.kilogramos.value 				= "";
-	document.busqueda_tipo_papel_extendido.ancho.value 						= "";
 	document.busqueda_tipo_papel_extendido.alto.value 						= "";
+	document.busqueda_tipo_papel_extendido.ancho.value 						= "";
 	document.busqueda_tipo_papel_extendido.id_proveedor_papel.selectedIndex = 0;
 	// realiza nueva busqueda
 	nueva_busqueda();

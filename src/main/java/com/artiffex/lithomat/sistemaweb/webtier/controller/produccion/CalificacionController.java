@@ -175,9 +175,9 @@ public class CalificacionController {
 			sb.append(" ");
 			sb.append(tipoTrabajoDetalle.getTipoPapelExtendido().getGramaje());
 			sb.append(" gr. ");
-			sb.append((int)tipoTrabajoDetalle.getTipoPapelExtendido().getAncho());
-			sb.append(" x ");
 			sb.append((int)tipoTrabajoDetalle.getTipoPapelExtendido().getAlto());
+			sb.append(" x ");
+			sb.append((int)tipoTrabajoDetalle.getTipoPapelExtendido().getAncho());
 			sb.append(" cm. (");
 			sb.append(tipoTrabajoDetalle.getTipoPapelExtendido().getKilogramos());
 			sb.append(" kg.) [");

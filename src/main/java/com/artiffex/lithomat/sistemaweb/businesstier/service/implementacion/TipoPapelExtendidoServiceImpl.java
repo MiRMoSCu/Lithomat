@@ -295,8 +295,8 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 			tpeDTO.setNombre( tipoPapelExtendido.getNombre() );
 			tpeDTO.setGramaje( tipoPapelExtendido.getGramaje() );
 			tpeDTO.setKilogramos( tipoPapelExtendido.getKilogramos() );
-			tpeDTO.setAncho( tipoPapelExtendido.getAncho() );
 			tpeDTO.setAlto( tipoPapelExtendido.getAlto() );
+			tpeDTO.setAncho( tipoPapelExtendido.getAncho() );
 			tpeDTO.setDescripcion( tipoPapelExtendido.getDescripcion()==null?"":tipoPapelExtendido.getDescripcion() );
 			tpeDTO.setPrecio( tipoPapelExtendido.getPrecio() );
 			tpeDTO.setNombrePrecio( tipoPapelExtendido.getTipoPrecio().getNombre() );
@@ -340,8 +340,8 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 		html.append("<th>Nombre</th>");
 		html.append("<th>Gramaje</th>");
 		html.append("<th>Kilogramos</th>");
-		html.append("<th>Ancho</th>");
 		html.append("<th>Alto</th>");
+		html.append("<th>Ancho</th>");
 		html.append("<th>Precio</th>");
 		html.append("<th>Unidad</th>");
 		html.append("</tr>");
@@ -362,8 +362,8 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 						+ "&#39;" + tipoPapelExtendido.getNombre() + "&#39;,"
 						+ "&#39;" + tipoPapelExtendido.getGramaje() + "&#39;,"
 						+ "&#39;" + tipoPapelExtendido.getKilogramos() + "&#39;,"
-						+ "&#39;" + (int)tipoPapelExtendido.getAncho() + "&#39;,"
 						+ "&#39;" + (int)tipoPapelExtendido.getAlto() + "&#39;,"
+						+ "&#39;" + (int)tipoPapelExtendido.getAncho() + "&#39;,"
 						+ "&#39;" + tipoPapelExtendido.getPrecio() + "&#39;"
 						+ ");'");
 				html.append("ondblclick=\"this.click(); window.parent.Shadowbox.close();\"");
@@ -390,11 +390,11 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 				html.append("</td>");
 				
 				html.append("<td>");
-				html.append((int)tipoPapelExtendido.getAncho());
+				html.append((int)tipoPapelExtendido.getAlto());
 				html.append("</td>");
 				
 				html.append("<td>");
-				html.append((int)tipoPapelExtendido.getAlto());
+				html.append((int)tipoPapelExtendido.getAncho());
 				html.append("</td>");
 				
 				html.append("<td>");
@@ -432,11 +432,11 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 			html.append("<td>");
 			html.append("&nbsp;");
 			html.append("</td>");
-			// ancho
+			// alto
 			html.append("<td>");
 			html.append("&nbsp;");
 			html.append("</td>");
-			// alto
+			// ancho
 			html.append("<td>");
 			html.append("&nbsp;");
 			html.append("</td>");
@@ -465,9 +465,9 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 			sb.append(" ");
 			sb.append(tipoPapelExtendido.getGramaje());
 			sb.append(" gr. ");
-			sb.append((int)tipoPapelExtendido.getAncho());
-			sb.append(" x ");
 			sb.append((int)tipoPapelExtendido.getAlto());
+			sb.append(" x ");
+			sb.append((int)tipoPapelExtendido.getAncho());
 			sb.append(" cm. (");
 			sb.append(tipoPapelExtendido.getKilogramos());
 			sb.append(" kg.) ($");
@@ -519,14 +519,14 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 	        HSSFCell cell_kilogramos = row.createCell(4);
 	        cell_kilogramos.setCellValue("KILOGRAMOS");
 	        cell_kilogramos.setCellStyle(cellStyle_centro);
-	        	// celda F (5)
-	        HSSFCell cell_ancho = row.createCell(5);
-	        cell_ancho.setCellValue("ANCHO");
-	        cell_ancho.setCellStyle(cellStyle_centro);
-	        	// celda G (6)
-	        HSSFCell cell_alto = row.createCell(6);
+	    		// celda G (5)
+	        HSSFCell cell_alto = row.createCell(5);
 	        cell_alto.setCellValue("ALTO");
 	        cell_alto.setCellStyle(cellStyle_centro);
+	        	// celda F (6)
+	        HSSFCell cell_ancho = row.createCell(6);
+	        cell_ancho.setCellValue("ANCHO");
+	        cell_ancho.setCellStyle(cellStyle_centro);
 	        	// celda H (7)
 	        HSSFCell cell_precio = row.createCell(7);
 	        cell_precio.setCellValue("PRECIO");
@@ -547,8 +547,8 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 				row.createCell(2).setCellValue( tipoPapelExtendido.getNombre() );
 				row.createCell(3).setCellValue( tipoPapelExtendido.getGramaje() );
 				row.createCell(4).setCellValue( tipoPapelExtendido.getKilogramos() );
-				row.createCell(5).setCellValue( tipoPapelExtendido.getAncho() );
-				row.createCell(6).setCellValue( tipoPapelExtendido.getAlto() );
+				row.createCell(5).setCellValue( tipoPapelExtendido.getAlto() );
+				row.createCell(6).setCellValue( tipoPapelExtendido.getAncho() );
 				row.createCell(7).setCellValue( tipoPapelExtendido.getPrecio() );
 				row.createCell(8).setCellValue( tipoPapelExtendido.getTipoPrecio().getNombre() );
 				cont++;

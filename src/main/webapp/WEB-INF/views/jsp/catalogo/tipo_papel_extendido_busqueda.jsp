@@ -39,8 +39,8 @@
 												<th>Nombre</th>
 												<th>Gramaje</th>
 												<th>Kilogramos</th>
-												<th>Ancho</th>
 												<th>Alto</th>
+												<th>Ancho</th>
 												<th>Precio</th>
 												<th>Unidad</th>
 											</tr>
@@ -50,15 +50,15 @@
 													<fmt:parseNumber var="formatAncho" type="number" integerOnly="true" value="${tipoPapelExtendido.ancho}" />
 													<fmt:parseNumber var="formatAlto" type="number" integerOnly="true" value="${tipoPapelExtendido.alto}" />
 													<tr class='${i.count%2==0?"l2":"l1"}'
-														onclick="setCampos('${tipoPapelExtendido.idTipoPapelExtendido}', '${tipoPapelExtendido.proveedorPapel.razonSocial}', '${tipoPapelExtendido.nombre}', '${tipoPapelExtendido.gramaje}', '${tipoPapelExtendido.kilogramos}', '${tipoPapelExtendido.ancho}', '${tipoPapelExtendido.alto}', '${tipoPapelExtendido.descripcion}', '${tipoPapelExtendido.precio}', '${tipoPapelExtendido.tipoPrecio.nombre}');"
+														onclick="setCampos('${tipoPapelExtendido.idTipoPapelExtendido}', '${tipoPapelExtendido.proveedorPapel.razonSocial}', '${tipoPapelExtendido.nombre}', '${tipoPapelExtendido.gramaje}', '${tipoPapelExtendido.kilogramos}', '${tipoPapelExtendido.alto}', '${tipoPapelExtendido.ancho}', '${tipoPapelExtendido.descripcion}', '${tipoPapelExtendido.precio}', '${tipoPapelExtendido.tipoPrecio.nombre}');"
 														ondblclick="this.click(); window.parent.Shadowbox.close();">
 														<td>${tipoPapelExtendido.idTipoPapelExtendido}</td>
 														<td>${tipoPapelExtendido.proveedorPapel.razonSocial}</td>
 														<td>${tipoPapelExtendido.nombre}</td>
 														<td>${tipoPapelExtendido.gramaje}</td>
 														<td>${tipoPapelExtendido.kilogramos}</td>
-														<td>${formatAncho}</td>
 														<td>${formatAlto}</td>
+														<td>${formatAncho}</td>
 														<td>${tipoPapelExtendido.precio}</td>
 														<td>${tipoPapelExtendido.tipoPrecio.nombre}</td>
 													</tr>
@@ -132,12 +132,12 @@
 											<div class="mitad_columna_izquierda">
 												<table>
 													<tr>
-														<td width="35%">
-															<input type="checkbox" name="chkbx_busca_por_ancho"/>
-															<span style="cursor:pointer;" onclick="document.tipo_trabajo_detalle.chkbx_busca_por_ancho.click()">Ancho:</span>
+														<td width="27%">
+															<input type="checkbox" name="chkbx_busca_por_alto"/>
+															<span style="cursor:pointer;" onclick="document.tipo_trabajo_detalle.chkbx_busca_por_alto.click()">Alto:</span>
 														</td>
 														<td>
-															<input type="text" class="input" name="ancho" value="" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+															<input type="text" class="input" name="alto" value="" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
 														</td>
 													</tr>
 												</table>
@@ -145,12 +145,12 @@
 											<div class="mitad_columna_derecha">
 												<table>
 													<tr>
-														<td width="27%">
-															<input type="checkbox" name="chkbx_busca_por_alto"/>
-															<span style="cursor:pointer;" onclick="document.tipo_trabajo_detalle.chkbx_busca_por_alto.click()">Alto:</span>
+														<td width="35%">
+															<input type="checkbox" name="chkbx_busca_por_ancho"/>
+															<span style="cursor:pointer;" onclick="document.tipo_trabajo_detalle.chkbx_busca_por_ancho.click()">Ancho:</span>
 														</td>
 														<td>
-															<input type="text" class="input" name="alto" value="" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+															<input type="text" class="input" name="ancho" value="" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
 														</td>
 													</tr>
 												</table>

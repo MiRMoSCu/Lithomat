@@ -54,9 +54,9 @@ public class TipoTrabajoDetalleServiceImpl implements TipoTrabajoDetalleService 
 			sb.append(" ");
 			sb.append(tipoTrabajoDetalle.getTipoPapelExtendido().getGramaje());
 			sb.append(" gr. ");
-			sb.append((int)tipoTrabajoDetalle.getTipoPapelExtendido().getAncho());
-			sb.append(" x ");
 			sb.append((int)tipoTrabajoDetalle.getTipoPapelExtendido().getAlto());
+			sb.append(" x ");
+			sb.append((int)tipoTrabajoDetalle.getTipoPapelExtendido().getAncho());
 			sb.append(" cm. (");
 			sb.append(tipoTrabajoDetalle.getTipoPapelExtendido().getKilogramos());
 			sb.append(" kg.) ($");
@@ -231,9 +231,9 @@ public class TipoTrabajoDetalleServiceImpl implements TipoTrabajoDetalleService 
 		TipoTrabajoDetalle ttd = tipoTrabajoDetalleDAO.busca(idTipoTrabajoDetalle);
 		papelDescripcion.append(ttd.getTipoPapelExtendido().getNombre());
 		papelDescripcion.append(" ");
-		papelDescripcion.append((int)ttd.getTipoPapelExtendido().getAncho());
-		papelDescripcion.append("x");
 		papelDescripcion.append((int)ttd.getTipoPapelExtendido().getAlto());
+		papelDescripcion.append("x");
+		papelDescripcion.append((int)ttd.getTipoPapelExtendido().getAncho());
 		papelDescripcion.append(" ");
 		papelDescripcion.append(ttd.getTipoPapelExtendido().getGramaje());
 		papelDescripcion.append("g.");
