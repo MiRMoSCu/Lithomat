@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2015-12-23T01:34:19 -->
+<!-- 2015-12-23T22:03:47 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdenTrabajoPartida" pageWidth="580" pageHeight="1000" columnWidth="580" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a8665aab-f47b-49c1-9a8c-fc9185390bff">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -40,121 +40,11 @@
 	<field name="listaOffsetDTO" class="java.util.List"/>
 	<field name="listaMaterialAyudaDTO" class="java.util.List"/>
 	<field name="listaOrdenTrabajoTipoTrabajoDetalle" class="java.util.List"/>
-	<group name="Group1">
-		<groupHeader>
-			<band height="55">
-				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				<subreport>
-					<reportElement x="5" y="0" width="570" height="50" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="589dd18e-682a-4e90-a86f-1f60ef8d04f7">
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					</reportElement>
-					<subreportParameter name="SUBREPORT_MATERIAL_AYUDA">
-						<subreportParameterExpression><![CDATA[$P{SUBREPORT_MATERIAL_AYUDA}]]></subreportParameterExpression>
-					</subreportParameter>
-					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaMaterialAyudaDTO})]]></dataSourceExpression>
-					<subreportExpression><![CDATA[$P{SUBREPORT_MATERIAL_AYUDA}]]></subreportExpression>
-				</subreport>
-			</band>
-		</groupHeader>
-	</group>
-	<group name="Group2">
-		<groupHeader>
-			<band height="55">
-				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				<subreport>
-					<reportElement x="5" y="0" width="570" height="50" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="35f82df5-7146-469d-971c-5a3d6920c36b">
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
-					<subreportParameter name="SUBREPORT_DISENIO_DETALLE">
-						<subreportParameterExpression><![CDATA[$P{SUBREPORT_DISENIO_DETALLE}]]></subreportParameterExpression>
-					</subreportParameter>
-					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaDisenioDTO})]]></dataSourceExpression>
-					<subreportExpression><![CDATA[$P{SUBREPORT_DISENIO}]]></subreportExpression>
-				</subreport>
-			</band>
-		</groupHeader>
-	</group>
-	<group name="Group3">
-		<groupHeader>
-			<band height="56">
-				<subreport>
-					<reportElement x="5" y="0" width="570" height="50" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="09adc6bd-2871-4e14-bbe3-70fb553255f0">
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					</reportElement>
-					<subreportParameter name="SUBREPORT_PREPRENSA_DETALLE">
-						<subreportParameterExpression><![CDATA[$P{SUBREPORT_PREPRENSA_DETALLE}]]></subreportParameterExpression>
-					</subreportParameter>
-					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaPreprensaDTO})]]></dataSourceExpression>
-					<subreportExpression><![CDATA[$P{SUBREPORT_PREPRENSA}]]></subreportExpression>
-				</subreport>
-			</band>
-		</groupHeader>
-	</group>
-	<group name="Group4">
-		<groupHeader>
-			<band height="50">
-				<subreport>
-					<reportElement x="5" y="0" width="570" height="50" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="2067721f-d648-410f-a8d1-2b3ec9edf04d">
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					</reportElement>
-					<subreportParameter name="SUBREPORT_TRANSPORTE_DETALLE">
-						<subreportParameterExpression><![CDATA[$P{SUBREPORT_TRANSPORTE_DETALLE}]]></subreportParameterExpression>
-					</subreportParameter>
-					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaTransporteDTO})]]></dataSourceExpression>
-					<subreportExpression><![CDATA[$P{SUBREPORT_TRANSPORTE}]]></subreportExpression>
-				</subreport>
-			</band>
-		</groupHeader>
-	</group>
-	<group name="Group5">
-		<groupHeader>
-			<band height="50">
-				<subreport>
-					<reportElement x="5" y="0" width="570" height="50" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="d5f29ae9-13ca-4110-a0cf-b03162fb3fd8">
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					</reportElement>
-					<subreportParameter name="SUBREPORT_ACABADO_DETALLE">
-						<subreportParameterExpression><![CDATA[$P{SUBREPORT_ACABADO_DETALLE}]]></subreportParameterExpression>
-					</subreportParameter>
-					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaAcabadoDTO})]]></dataSourceExpression>
-					<subreportExpression><![CDATA[$P{SUBREPORT_ACABADO}]]></subreportExpression>
-				</subreport>
-			</band>
-		</groupHeader>
-	</group>
-	<group name="Group6">
-		<groupHeader>
-			<band height="50">
-				<subreport>
-					<reportElement x="5" y="0" width="570" height="50" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="72b52a76-1109-41c1-89ee-42a6abd99224">
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					</reportElement>
-					<subreportParameter name="SUBREPORT_OFFSET">
-						<subreportParameterExpression><![CDATA[$P{SUBREPORT_OFFSET}]]></subreportParameterExpression>
-					</subreportParameter>
-					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaOffsetDTO})]]></dataSourceExpression>
-					<subreportExpression><![CDATA[$P{SUBREPORT_OFFSET}]]></subreportExpression>
-				</subreport>
-			</band>
-		</groupHeader>
-	</group>
-	<title>
-		<band height="200">
+	<detail>
+		<band height="205" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<staticText>
-				<reportElement x="20" y="9" width="60" height="20" uuid="ed1cf41e-9c41-46c8-bfbe-59d768f2cf64">
+				<reportElement x="20" y="9" width="60" height="20" uuid="bf474aac-314e-4517-8f5b-7f36397f7e85">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
@@ -164,12 +54,12 @@
 				<text><![CDATA[Partida]]></text>
 			</staticText>
 			<line>
-				<reportElement x="144" y="4" width="297" height="1" uuid="94ecf5cb-a615-4521-be36-097bf9d07a56">
+				<reportElement x="142" y="6" width="297" height="1" uuid="bb779c4d-8ea7-4681-8de6-913e200b2a2f">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 			</line>
 			<staticText>
-				<reportElement x="20" y="29" width="96" height="15" uuid="b780a58d-9ae3-41e1-b434-8abf42cbaa1f">
+				<reportElement x="20" y="29" width="96" height="15" uuid="89320d16-db38-44ed-9d57-bf66353184da">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -180,7 +70,7 @@
 				<text><![CDATA[Cantidad:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="116" y="29" width="39" height="15" uuid="edeae7dd-28c8-48a8-8499-df462629f026">
+				<reportElement x="116" y="29" width="39" height="15" uuid="7b46db75-b6d4-4103-b324-e93704af5af6">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -188,7 +78,7 @@
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{cantidad})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="20" y="123" width="58" height="15" uuid="567c1b0b-b836-48c3-ae31-6291b5529638">
+				<reportElement x="20" y="123" width="58" height="15" uuid="77fee9f6-285f-4a06-929a-96d99d5cee10">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
@@ -198,7 +88,7 @@
 				<text><![CDATA[Diagrama:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="45" y="90" width="240" height="33" uuid="fa47cc9e-69be-42b7-b4a2-7a3375a1d4a3">
+				<reportElement x="45" y="90" width="240" height="33" uuid="06372d81-018e-4b89-91ea-a925ae7f6ae3">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -208,7 +98,7 @@
 				<textFieldExpression><![CDATA[$F{observacionesGenerales}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="20" y="75" width="96" height="15" uuid="7152ff3d-6a90-4b60-be5f-4c5ff92eb507">
+				<reportElement x="20" y="75" width="96" height="15" uuid="5817ad35-00f7-4ae3-820e-6fb04722f863">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
@@ -218,7 +108,7 @@
 				<text><![CDATA[Obs. generales:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="116" y="60" width="428" height="15" uuid="ce9f28e5-4c0d-477c-b533-1a1142391a10">
+				<reportElement x="116" y="60" width="428" height="15" uuid="9c8fa945-434a-48f9-b286-6ce2b1a2c6a0">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -226,7 +116,7 @@
 				<textFieldExpression><![CDATA[$F{descripcionPartida}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="116" y="44" width="428" height="15" uuid="088948c7-8ba5-4883-8608-8877adc7607f">
+				<reportElement x="116" y="44" width="428" height="15" uuid="464144c3-9eb0-4be6-8cfe-28a036309d1c">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -234,10 +124,10 @@
 				<textFieldExpression><![CDATA[$F{nombrePartida}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement x="90" y="123" width="400" height="67" uuid="a0159df2-1e9b-457a-9e5c-26cceff8693a"/>
+				<reportElement x="90" y="123" width="400" height="67" uuid="fe3001d0-86fc-4359-b5c7-3cb12f71f7ab"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="157" y="29" width="100" height="15" uuid="7cfd9cf9-9e8a-40d2-9c5a-8657d32ed5bf">
+				<reportElement x="157" y="29" width="100" height="15" uuid="859774a8-5971-469b-aad4-712ab5d12c2c">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
@@ -248,7 +138,7 @@
 				<text><![CDATA[unidades]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="317" y="91" width="240" height="32" uuid="c31b8257-fd96-4296-a438-ad2e16654a2f">
+				<reportElement x="317" y="91" width="240" height="32" uuid="47106e01-3994-4f22-8134-5ea818f2e6ed">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -258,7 +148,7 @@
 				<textFieldExpression><![CDATA[$F{observacionesAprobacion}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="290" y="75" width="96" height="15" uuid="bd9c5dab-2a79-4abf-9cfa-d4becd203053">
+				<reportElement x="290" y="75" width="96" height="15" uuid="c7314367-07f2-4f97-a352-eacef3bc9eb1">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -269,7 +159,7 @@
 				<text><![CDATA[Obs. aprobación:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="20" y="60" width="96" height="15" uuid="ce6357c4-c41d-4baa-a9a2-6e9f2624bd3b">
+				<reportElement x="20" y="60" width="96" height="15" uuid="286ba218-6156-403a-82b0-caee50f1c55d">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -280,7 +170,7 @@
 				<text><![CDATA[Descripción:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="20" y="44" width="96" height="15" uuid="d7506e8e-ac4f-4824-9288-0e8d00854817">
+				<reportElement x="20" y="44" width="96" height="15" uuid="7e034481-3aba-4b4c-b650-5583742595ec">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -291,15 +181,92 @@
 				<text><![CDATA[Nombre:]]></text>
 			</staticText>
 		</band>
-	</title>
-	<detail>
-		<band height="56" splitType="Stretch">
-			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+		<band height="50">
+			<subreport>
+				<reportElement x="5" y="0" width="570" height="50" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="589dd18e-682a-4e90-a86f-1f60ef8d04f7">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<subreportParameter name="SUBREPORT_MATERIAL_AYUDA">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_MATERIAL_AYUDA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaMaterialAyudaDTO})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_MATERIAL_AYUDA}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50">
+			<subreport>
+				<reportElement x="5" y="0" width="570" height="50" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="35f82df5-7146-469d-971c-5a3d6920c36b">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<subreportParameter name="SUBREPORT_DISENIO_DETALLE">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DISENIO_DETALLE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaDisenioDTO})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DISENIO}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50">
+			<subreport>
+				<reportElement x="5" y="0" width="570" height="50" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="09adc6bd-2871-4e14-bbe3-70fb553255f0">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<subreportParameter name="SUBREPORT_PREPRENSA_DETALLE">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_PREPRENSA_DETALLE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaPreprensaDTO})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_PREPRENSA}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50">
+			<subreport>
+				<reportElement x="5" y="0" width="570" height="50" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="2067721f-d648-410f-a8d1-2b3ec9edf04d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<subreportParameter name="SUBREPORT_TRANSPORTE_DETALLE">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_TRANSPORTE_DETALLE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaTransporteDTO})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_TRANSPORTE}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50">
+			<subreport>
+				<reportElement x="5" y="0" width="570" height="50" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="d5f29ae9-13ca-4110-a0cf-b03162fb3fd8">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<subreportParameter name="SUBREPORT_ACABADO_DETALLE">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_ACABADO_DETALLE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaAcabadoDTO})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_ACABADO}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50">
+			<subreport>
+				<reportElement x="5" y="0" width="570" height="50" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="72b52a76-1109-41c1-89ee-42a6abd99224">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<subreportParameter name="SUBREPORT_OFFSET">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_OFFSET}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaOffsetDTO})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_OFFSET}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="51">
 			<subreport>
 				<reportElement x="5" y="0" width="570" height="50" uuid="364844dc-51d2-43f3-adda-c5410db9ca90">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
 				<subreportParameter name="SUBREPORT_PLIEGO">
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_PLIEGO}]]></subreportParameterExpression>
