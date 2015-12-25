@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2015-08-27T18:12:11 -->
+<!-- 2015-12-24T20:59:22 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RemisionChild" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="75315364-8f17-454b-bd3d-bfc8fc859dfe">
 	<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -59,26 +59,31 @@ new Double( $F{clienteProporcionaBarniz} == true ? 0 : $F{frenteBarnizCosteTotal
 new Double( $F{clienteProporcionaBarniz} == true ? 0 : $F{vueltaBarnizCosteTotal} ) + 
 new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} ) )]]></variableExpression>
 	</variable>
-	<columnHeader>
+	<title>
 		<band height="35">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<line>
-				<reportElement x="182" y="28" width="230" height="1" uuid="4aeb111a-1b85-4120-916e-dfbf1092b096"/>
+				<reportElement x="182" y="28" width="230" height="1" uuid="f488a80a-2501-43fa-9abd-757caa75c866"/>
 			</line>
 			<textField>
-				<reportElement x="104" y="7" width="452" height="15" uuid="8551132d-29c1-421f-8cba-f88bedc4776e">
+				<reportElement x="110" y="7" width="452" height="15" uuid="26d27f0e-7576-4cf7-97b2-59937ab16dcb">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{nombre}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="23" y="7" width="80" height="15" uuid="75b52c80-48fd-4762-a318-54be309a56b9">
+				<reportElement x="23" y="7" width="85" height="15" uuid="abc4f798-84f3-4503-a178-02e5d1d8e34e">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Nombre partida:]]></text>
 			</staticText>
 		</band>
-	</columnHeader>
+	</title>
 	<detail>
 		<band height="186">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>

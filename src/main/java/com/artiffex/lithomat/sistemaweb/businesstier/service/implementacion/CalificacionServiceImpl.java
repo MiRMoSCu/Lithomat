@@ -987,6 +987,10 @@ public class CalificacionServiceImpl implements CalificacionService {
 		dfDosDecimales 					= null;
 		dfCuatroDecimales 				= null;
 		
+		//Gson gson = new Gson();
+		//String json = gson.toJson( listaRemision );
+		//System.out.println("JSON:\n" + json);
+		
 		return listaRemision;
 	}
 	
