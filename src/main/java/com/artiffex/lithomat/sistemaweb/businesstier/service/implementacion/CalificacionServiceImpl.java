@@ -1087,6 +1087,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 			otp.setCantidad(partida.getCantidad());
 			otp.setNombrePartida(partida.getNombrePartida());
 			otp.setDescripcionPartida(partida.getDescripcionPartida());
+			otp.setTipoFormaTrabajo(partida.getTipoFormaTrabajo().getNombre());
 			otp.setObservacionesGenerales(partida.getObservacionesGenerales());
 			otp.setObservacionesAprobacion(partida.getObservacionesAprobacion());
 			

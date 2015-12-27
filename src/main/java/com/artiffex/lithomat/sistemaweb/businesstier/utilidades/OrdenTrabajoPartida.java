@@ -18,6 +18,7 @@ public class OrdenTrabajoPartida implements Serializable {
 	private Integer cantidad;
 	private String nombrePartida;
 	private String descripcionPartida;
+	private String tipoFormaTrabajo;
 	private String observacionesGenerales;
 	private String observacionesAprobacion;
 	private List<DisenioDTO> listaDisenioDTO;
@@ -52,6 +53,12 @@ public class OrdenTrabajoPartida implements Serializable {
 	}
 	public void setDescripcionPartida(String descripcionPartida) {
 		this.descripcionPartida = descripcionPartida;
+	}
+	public String getTipoFormaTrabajo() {
+		return tipoFormaTrabajo;
+	}
+	public void setTipoFormaTrabajo(String tipoFormaTrabajo) {
+		this.tipoFormaTrabajo = tipoFormaTrabajo;
 	}
 	public String getObservacionesGenerales() {
 		return observacionesGenerales;

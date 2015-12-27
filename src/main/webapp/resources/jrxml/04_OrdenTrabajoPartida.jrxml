@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2015-12-23T22:03:47 -->
+<!-- 2015-12-26T20:22:17 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdenTrabajoPartida" pageWidth="580" pageHeight="1000" columnWidth="580" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a8665aab-f47b-49c1-9a8c-fc9185390bff">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -31,6 +31,7 @@
 	<field name="cantidad" class="java.lang.Integer"/>
 	<field name="nombrePartida" class="java.lang.String"/>
 	<field name="descripcionPartida" class="java.lang.String"/>
+	<field name="tipoFormaTrabajo" class="java.lang.String"/>
 	<field name="observacionesGenerales" class="java.lang.String"/>
 	<field name="observacionesAprobacion" class="java.lang.String"/>
 	<field name="listaDisenioDTO" class="java.util.List"/>
@@ -78,7 +79,7 @@
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{cantidad})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="20" y="123" width="58" height="15" uuid="77fee9f6-285f-4a06-929a-96d99d5cee10">
+				<reportElement x="20" y="146" width="58" height="15" uuid="77fee9f6-285f-4a06-929a-96d99d5cee10">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
@@ -88,7 +89,7 @@
 				<text><![CDATA[Diagrama:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="45" y="90" width="240" height="33" uuid="06372d81-018e-4b89-91ea-a925ae7f6ae3">
+				<reportElement x="45" y="107" width="240" height="33" uuid="06372d81-018e-4b89-91ea-a925ae7f6ae3">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -98,7 +99,7 @@
 				<textFieldExpression><![CDATA[$F{observacionesGenerales}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="20" y="75" width="96" height="15" uuid="5817ad35-00f7-4ae3-820e-6fb04722f863">
+				<reportElement x="20" y="92" width="96" height="15" uuid="5817ad35-00f7-4ae3-820e-6fb04722f863">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
@@ -123,9 +124,6 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{nombrePartida}]]></textFieldExpression>
 			</textField>
-			<rectangle>
-				<reportElement x="90" y="123" width="400" height="67" uuid="fe3001d0-86fc-4359-b5c7-3cb12f71f7ab"/>
-			</rectangle>
 			<staticText>
 				<reportElement x="157" y="29" width="100" height="15" uuid="859774a8-5971-469b-aad4-712ab5d12c2c">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -138,7 +136,7 @@
 				<text><![CDATA[unidades]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="317" y="91" width="240" height="32" uuid="47106e01-3994-4f22-8134-5ea818f2e6ed">
+				<reportElement x="317" y="108" width="240" height="32" uuid="47106e01-3994-4f22-8134-5ea818f2e6ed">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -148,7 +146,7 @@
 				<textFieldExpression><![CDATA[$F{observacionesAprobacion}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="290" y="75" width="96" height="15" uuid="c7314367-07f2-4f97-a352-eacef3bc9eb1">
+				<reportElement x="290" y="92" width="96" height="15" uuid="c7314367-07f2-4f97-a352-eacef3bc9eb1">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -180,6 +178,26 @@
 				</textElement>
 				<text><![CDATA[Nombre:]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="20" y="76" width="96" height="15" uuid="4e8443cd-3a0f-4cf1-9ff4-03038c52f02f">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Forma trabajo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="116" y="77" width="428" height="15" uuid="535435db-fd6a-4c39-88d1-e0e83149c502">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{tipoFormaTrabajo}]]></textFieldExpression>
+			</textField>
 		</band>
 		<band height="50">
 			<subreport>
