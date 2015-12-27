@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2015-12-24T20:59:22 -->
+<!-- 2015-12-27T02:21:23 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RemisionChild" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="75315364-8f17-454b-bd3d-bfc8fc859dfe">
 	<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -23,6 +23,7 @@
 	<parameter name="costeTotalProcesosPartida" class="java.lang.Double"/>
 	<field name="descripcion" class="java.lang.String"/>
 	<field name="cantidadOriginal" class="java.lang.Integer"/>
+	<field name="cantidadRedondeada" class="java.lang.Integer"/>
 	<field name="clienteProporcionaPapel" class="java.lang.Boolean"/>
 	<field name="clienteProporcionaTinta" class="java.lang.Boolean"/>
 	<field name="clienteProporcionaTintaEspecial" class="java.lang.Boolean"/>
@@ -88,16 +89,18 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} ) )]
 		<band height="186">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
 			<textField>
-				<reportElement x="495" y="136" width="70" height="14" uuid="3c7ed9c1-eb64-45ce-94ee-59fa6d9a87ef">
+				<reportElement x="495" y="136" width="70" height="14" isRemoveLineWhenBlank="true" uuid="3c7ed9c1-eb64-45ce-94ee-59fa6d9a87ef">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{clienteProporcionaPlacas} == false && (Double.compare($F{placasCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new String( $F{clienteProporcionaPlacas} == true ? "Cliente" : "Lithomat" )]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="97" y="120" width="236" height="15" uuid="83b39e57-59ca-4bb3-99ee-7ec77f100615">
+				<reportElement x="97" y="120" width="236" height="15" isRemoveLineWhenBlank="true" uuid="83b39e57-59ca-4bb3-99ee-7ec77f100615">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{clienteProporcionaBarniz} == false && (Double.compare($F{vueltaBarnizCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
@@ -105,10 +108,11 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} ) )]
 				<text><![CDATA[(concepto barniz vuelta)]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="411" y="136" width="83" height="14" uuid="2ca32472-3219-4408-940e-226fe891abf9">
+				<reportElement x="411" y="136" width="83" height="14" isRemoveLineWhenBlank="true" uuid="2ca32472-3219-4408-940e-226fe891abf9">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{clienteProporcionaPlacas} == false && (Double.compare($F{placasCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(Double.valueOf(
@@ -116,15 +120,18 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} ) )]
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="27" y="136" width="50" height="14" uuid="988dcf8a-5d99-4ef1-a4df-90487922a0c8"/>
+				<reportElement x="27" y="136" width="50" height="14" isRemoveLineWhenBlank="true" uuid="988dcf8a-5d99-4ef1-a4df-90487922a0c8">
+					<printWhenExpression><![CDATA[$F{clienteProporcionaPlacas} == false && (Double.compare($F{placasCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{placasNumPlacas})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="411" y="120" width="83" height="14" uuid="9c1d05cf-c68c-45a0-afca-4b70e2bef06f">
+				<reportElement x="411" y="120" width="83" height="14" isRemoveLineWhenBlank="true" uuid="9c1d05cf-c68c-45a0-afca-4b70e2bef06f">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{clienteProporcionaBarniz} == false && (Double.compare($F{vueltaBarnizCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(Double.valueOf(
@@ -132,15 +139,18 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} ) )]
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="97" y="72" width="236" height="14" uuid="66e05f91-a6aa-459b-8a5b-da5a979a67b0"/>
+				<reportElement x="97" y="72" width="236" height="14" isRemoveLineWhenBlank="true" uuid="66e05f91-a6aa-459b-8a5b-da5a979a67b0">
+					<printWhenExpression><![CDATA[$F{clienteProporcionaTinta} == false && (Double.compare($F{tintaCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
+				</reportElement>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{tintaDescripcion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="411" y="72" width="83" height="14" uuid="c8830724-1b9c-48f0-a145-7aed7f9625bf">
+				<reportElement x="411" y="72" width="83" height="14" isRemoveLineWhenBlank="true" uuid="c8830724-1b9c-48f0-a145-7aed7f9625bf">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{clienteProporcionaTinta} == false && (Double.compare($F{tintaCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(Double.valueOf(
@@ -148,13 +158,15 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} ) )]
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="97" y="56" width="236" height="14" uuid="b9815604-24b5-4497-8413-159d919f29b5"/>
+				<reportElement x="97" y="56" width="236" height="14" isRemoveLineWhenBlank="true" uuid="b9815604-24b5-4497-8413-159d919f29b5">
+					<printWhenExpression><![CDATA[$F{clienteProporcionaPapel} == false && (Double.compare($F{papelCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
+				</reportElement>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{papelDescripcion}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="142" y="18" width="50" height="14" uuid="62bf3feb-7c70-4776-82ee-50845ee90d48"/>
-				<textElement>
+				<reportElement x="135" y="18" width="50" height="14" uuid="62bf3feb-7c70-4776-82ee-50845ee90d48"/>
+				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[unidades.]]></text>
@@ -174,39 +186,48 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} )
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="340" y="88" width="70" height="14" uuid="6c2e1ea0-0a09-480f-841f-5a5f7a845462"/>
+				<reportElement x="340" y="88" width="70" height="14" isRemoveLineWhenBlank="true" uuid="6c2e1ea0-0a09-480f-841f-5a5f7a845462">
+					<printWhenExpression><![CDATA[$F{clienteProporcionaTintaEspecial} == false && (Double.compare($F{tintaEspecialCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00####").format(Double.valueOf(
 	$F{clienteProporcionaTintaEspecial}==true?0:$F{tintaEspecialPrecioUnitario}
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="27" y="72" width="50" height="14" uuid="ec907cd4-8ee8-4f23-b657-2917249bf6f6">
+				<reportElement x="27" y="72" width="50" height="14" isRemoveLineWhenBlank="true" uuid="ec907cd4-8ee8-4f23-b657-2917249bf6f6">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{clienteProporcionaTinta} == false && (Double.compare($F{tintaCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{tintaNumEntMaq})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="97" y="136" width="236" height="14" uuid="84612075-9a5c-4f55-94ba-f07fe6b86bc0"/>
+				<reportElement x="97" y="136" width="236" height="14" isRemoveLineWhenBlank="true" uuid="84612075-9a5c-4f55-94ba-f07fe6b86bc0">
+					<printWhenExpression><![CDATA[$F{clienteProporcionaPlacas} == false && (Double.compare($F{placasCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
+				</reportElement>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{placasDescripcion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="27" y="88" width="50" height="14" uuid="7f06df70-3597-4b36-9e85-b581852fd854"/>
+				<reportElement x="27" y="88" width="50" height="14" isRemoveLineWhenBlank="true" uuid="7f06df70-3597-4b36-9e85-b581852fd854">
+					<printWhenExpression><![CDATA[$F{clienteProporcionaTintaEspecial} == false && (Double.compare($F{tintaEspecialCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{tintaEspecialNumEntMaq})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="27" y="120" width="50" height="14" uuid="4e9c2318-b6cb-4a65-add4-21b672b47f8e">
+				<reportElement x="27" y="120" width="50" height="14" isRemoveLineWhenBlank="true" uuid="4e9c2318-b6cb-4a65-add4-21b672b47f8e">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{clienteProporcionaBarniz} == false && (Double.compare($F{vueltaBarnizCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{vueltaBarnizNumEntMaq})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="411" y="56" width="83" height="14" uuid="4ecc2c34-ed23-4dd7-adf8-e279df5ec0e4">
+				<reportElement x="411" y="56" width="83" height="14" isRemoveLineWhenBlank="true" uuid="4ecc2c34-ed23-4dd7-adf8-e279df5ec0e4">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{clienteProporcionaPapel} == false && (Double.compare($F{papelCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(Double.valueOf(
@@ -214,8 +235,9 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} )
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="340" y="136" width="70" height="14" uuid="f4f241cd-6e8b-4eb3-929f-75c072b1cf7e">
+				<reportElement x="340" y="136" width="70" height="14" isRemoveLineWhenBlank="true" uuid="f4f241cd-6e8b-4eb3-929f-75c072b1cf7e">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{clienteProporcionaPlacas} == false && (Double.compare($F{placasCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(Double.valueOf(
@@ -223,9 +245,10 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} )
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="411" y="104" width="83" height="14" uuid="eb9000f9-8983-4e17-b57f-dce00c258299">
+				<reportElement x="411" y="104" width="83" height="14" isRemoveLineWhenBlank="true" uuid="eb9000f9-8983-4e17-b57f-dce00c258299">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{clienteProporcionaBarniz} == false && (Double.compare($F{frenteBarnizCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(Double.valueOf(
@@ -233,20 +256,23 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} )
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="495" y="56" width="70" height="14" uuid="17e274ac-980d-4df7-bcce-14a0995653dd"/>
+				<reportElement x="495" y="56" width="70" height="14" isRemoveLineWhenBlank="true" uuid="17e274ac-980d-4df7-bcce-14a0995653dd">
+					<printWhenExpression><![CDATA[$F{clienteProporcionaPapel} == false && (Double.compare($F{papelCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new String( $F{clienteProporcionaPapel} == true ? "Cliente" : "Lithomat" )]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="87" y="18" width="50" height="14" uuid="534f36d3-80cc-4238-8d4f-36eb9cacf204"/>
-				<textElement textAlignment="Right">
+				<reportElement x="82" y="18" width="50" height="14" uuid="534f36d3-80cc-4238-8d4f-36eb9cacf204"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true" isItalic="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{cantidadOriginal})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="340" y="120" width="70" height="14" uuid="e6d2d798-01c3-46da-b140-e64a2ca9a595">
+				<reportElement x="340" y="120" width="70" height="14" isRemoveLineWhenBlank="true" uuid="e6d2d798-01c3-46da-b140-e64a2ca9a595">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{clienteProporcionaBarniz} == false && (Double.compare($F{vueltaBarnizCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00####").format(Double.valueOf(
@@ -254,8 +280,9 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} )
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="340" y="56" width="70" height="14" uuid="f0f3bdaf-38f4-4dc8-81c1-3f1346610dfc">
+				<reportElement x="340" y="56" width="70" height="14" isRemoveLineWhenBlank="true" uuid="f0f3bdaf-38f4-4dc8-81c1-3f1346610dfc">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{clienteProporcionaPapel} == false && (Double.compare($F{papelCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00#####").format(Double.valueOf(
@@ -263,7 +290,9 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} )
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="27" y="104" width="50" height="14" uuid="4b5997ba-6e1a-4ab5-a34b-bd05c3946cb6"/>
+				<reportElement x="27" y="104" width="50" height="14" isRemoveLineWhenBlank="true" uuid="4b5997ba-6e1a-4ab5-a34b-bd05c3946cb6">
+					<printWhenExpression><![CDATA[$F{clienteProporcionaBarniz} == false && (Double.compare($F{frenteBarnizCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{frenteBarnizNumEntMaq})]]></textFieldExpression>
 			</textField>
@@ -296,9 +325,10 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} )
 				<text><![CDATA[SubTotal:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="340" y="72" width="70" height="14" uuid="08da84ec-7c8b-497b-90e1-2d82e3c3e9db">
+				<reportElement x="340" y="72" width="70" height="14" isRemoveLineWhenBlank="true" uuid="08da84ec-7c8b-497b-90e1-2d82e3c3e9db">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{clienteProporcionaTinta} == false && (Double.compare($F{tintaCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00####").format(Double.valueOf(
@@ -306,7 +336,9 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} )
 ))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="340" y="104" width="70" height="14" uuid="bc5db635-ca07-46b4-aaa8-4ad445e3f660"/>
+				<reportElement x="340" y="104" width="70" height="14" isRemoveLineWhenBlank="true" uuid="bc5db635-ca07-46b4-aaa8-4ad445e3f660">
+					<printWhenExpression><![CDATA[$F{clienteProporcionaBarniz} == false && (Double.compare($F{frenteBarnizCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00####").format(Double.valueOf(
 	$F{clienteProporcionaBarniz}==true?0:$F{frenteBarnizPrecioUnitario}
@@ -314,7 +346,7 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} )
 			</textField>
 			<textField>
 				<reportElement x="82" y="3" width="492" height="14" uuid="1615ef9c-a08a-44dd-a363-6f6c6110f028"/>
-				<textElement>
+				<textElement verticalAlignment="Middle">
 					<font size="11" isBold="true" isItalic="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
@@ -327,17 +359,23 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} )
 				<text><![CDATA[P. Total]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="495" y="72" width="70" height="14" uuid="ad18b4ce-4fe0-40ef-a70a-f2f52b989922"/>
+				<reportElement x="495" y="72" width="70" height="14" isRemoveLineWhenBlank="true" uuid="ad18b4ce-4fe0-40ef-a70a-f2f52b989922">
+					<printWhenExpression><![CDATA[$F{clienteProporcionaTinta} == false && (Double.compare($F{tintaCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new String( $F{clienteProporcionaTinta} == true ? "Cliente" : "Lithomat" )]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="97" y="88" width="236" height="14" uuid="4a329e22-54d0-4033-bae7-e5eaf57f49d3"/>
+				<reportElement x="97" y="88" width="236" height="14" isRemoveLineWhenBlank="true" uuid="4a329e22-54d0-4033-bae7-e5eaf57f49d3">
+					<printWhenExpression><![CDATA[$F{clienteProporcionaTintaEspecial} == false && (Double.compare($F{tintaEspecialCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
+				</reportElement>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{tintaEspecialDescripcion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="97" y="104" width="236" height="14" uuid="e0f4c250-aefa-47d9-9bfb-95711a25fb58"/>
+				<reportElement x="97" y="104" width="236" height="14" isRemoveLineWhenBlank="true" uuid="e0f4c250-aefa-47d9-9bfb-95711a25fb58">
+					<printWhenExpression><![CDATA[$F{clienteProporcionaBarniz} == false && (Double.compare($F{frenteBarnizCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
+				</reportElement>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{barnizDescripcion}]]></textFieldExpression>
 			</textField>
@@ -347,9 +385,10 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} )
 				<text><![CDATA[Trabajo:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="411" y="88" width="83" height="14" uuid="a61d58b9-0e67-4363-93c3-dcf7f31fffc9">
+				<reportElement x="411" y="88" width="83" height="14" isRemoveLineWhenBlank="true" uuid="a61d58b9-0e67-4363-93c3-dcf7f31fffc9">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{clienteProporcionaTintaEspecial} == false && (Double.compare($F{tintaEspecialCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(Double.valueOf(
@@ -357,7 +396,7 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} )
 ))]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="387" y="151" width="140" height="15" uuid="be280e1e-7d44-4e42-aa89-d661e40c7bea">
+				<reportElement x="393" y="151" width="140" height="15" uuid="be280e1e-7d44-4e42-aa89-d661e40c7bea">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
@@ -371,7 +410,9 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} )
 				<text><![CDATA[Concepto]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="495" y="104" width="70" height="14" uuid="c1c7b557-2233-4f2e-afb6-1d3e500b66d9"/>
+				<reportElement x="495" y="104" width="70" height="14" isRemoveLineWhenBlank="true" uuid="c1c7b557-2233-4f2e-afb6-1d3e500b66d9">
+					<printWhenExpression><![CDATA[$F{clienteProporcionaBarniz} == false && (Double.compare($F{frenteBarnizCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new String( $F{clienteProporcionaBarniz} == true ? "Cliente" : "Lithomat" )]]></textFieldExpression>
 			</textField>
@@ -383,17 +424,39 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} )
 				<text><![CDATA[Responsable]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="495" y="88" width="70" height="14" uuid="18cae96c-4e1b-4cdd-a782-bafd49c17aa5"/>
+				<reportElement x="495" y="88" width="70" height="14" isRemoveLineWhenBlank="true" uuid="18cae96c-4e1b-4cdd-a782-bafd49c17aa5">
+					<printWhenExpression><![CDATA[$F{clienteProporcionaTintaEspecial} == false && (Double.compare($F{tintaEspecialCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new String( $F{clienteProporcionaTintaEspecial} == true ? "Cliente" : "Lithomat" )]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="27" y="56" width="50" height="14" uuid="b619b192-3306-4e9b-9546-359e955a84f5">
+				<reportElement x="27" y="56" width="50" height="14" isRemoveLineWhenBlank="true" uuid="b619b192-3306-4e9b-9546-359e955a84f5">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{clienteProporcionaPapel} == false && (Double.compare($F{papelCosteTotal}, new Double(0)) != 0)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{papelCantidadTotal})]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="210" y="18" width="130" height="14" uuid="b3f5c224-fab3-4e1d-b254-c5b625e563f3"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Redondeado al tabulador:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="345" y="18" width="50" height="14" uuid="20db8997-92ca-437c-853e-4a39552a4cd5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{cantidadRedondeada})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="398" y="18" width="50" height="14" uuid="3b96fd63-aed0-4fef-b644-530397db8b5f"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[unidades.]]></text>
+			</staticText>
 		</band>
 	</detail>
 	<lastPageFooter>
@@ -426,97 +489,111 @@ new Double( $F{clienteProporcionaPlacas} == true ? 0 : $F{placasCosteTotal} )
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(new Double($P{subpartidasCosteTotal}))]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="340" y="36" width="70" height="14" uuid="d0bfbd04-496f-4aca-9d51-2701d8670411"/>
+				<reportElement x="340" y="36" width="70" height="14" isRemoveLineWhenBlank="true" uuid="d0bfbd04-496f-4aca-9d51-2701d8670411">
+					<printWhenExpression><![CDATA[Double.compare($P{disenioCosteTotal}, new Double(0)) != 0]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<text><![CDATA[Diseño:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="411" y="36" width="83" height="14" uuid="9e23266e-1ee9-4cc1-a530-4f06b861dbd2">
+				<reportElement x="411" y="36" width="83" height="14" isRemoveLineWhenBlank="true" uuid="9e23266e-1ee9-4cc1-a530-4f06b861dbd2">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<printWhenExpression><![CDATA[Double.compare($P{disenioCosteTotal}, new Double(0)) != 0]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(new Double($P{disenioCosteTotal}))]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="340" y="52" width="70" height="14" uuid="57924b55-cf7b-48e4-89bb-129fdf226f26"/>
+				<reportElement x="340" y="52" width="70" height="14" isRemoveLineWhenBlank="true" uuid="57924b55-cf7b-48e4-89bb-129fdf226f26">
+					<printWhenExpression><![CDATA[Double.compare($P{preprensaCosteTotal}, new Double(0)) != 0]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<text><![CDATA[Preprensa:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="411" y="52" width="83" height="14" uuid="1e17617a-d27c-4e1f-bc93-db187c354471">
+				<reportElement x="411" y="52" width="83" height="14" isRemoveLineWhenBlank="true" uuid="1e17617a-d27c-4e1f-bc93-db187c354471">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<printWhenExpression><![CDATA[Double.compare($P{preprensaCosteTotal}, new Double(0)) != 0]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(new Double($P{preprensaCosteTotal}))]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="340" y="68" width="70" height="14" uuid="806b69b8-4b38-4d49-9bc9-1e23cf0875c1">
+				<reportElement x="340" y="68" width="70" height="14" isRemoveLineWhenBlank="true" uuid="806b69b8-4b38-4d49-9bc9-1e23cf0875c1">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[Double.compare($P{transporteCosteTotal}, new Double(0)) != 0]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<text><![CDATA[Transporte:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="411" y="68" width="83" height="14" uuid="e249862e-8670-484e-b5c0-994a9c7ab630">
+				<reportElement x="411" y="68" width="83" height="14" isRemoveLineWhenBlank="true" uuid="e249862e-8670-484e-b5c0-994a9c7ab630">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<printWhenExpression><![CDATA[Double.compare($P{transporteCosteTotal}, new Double(0)) != 0]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(new Double($P{transporteCosteTotal}))]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="340" y="84" width="70" height="14" uuid="5678951b-0cf6-477b-833b-781f8aa22502">
+				<reportElement x="340" y="84" width="70" height="14" isRemoveLineWhenBlank="true" uuid="5678951b-0cf6-477b-833b-781f8aa22502">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[Double.compare($P{acabadoCosteTotal}, new Double(0)) != 0]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<text><![CDATA[Acabado:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="411" y="84" width="83" height="14" uuid="4c93eaed-7830-4fac-af22-24d230798831">
+				<reportElement x="411" y="84" width="83" height="14" isRemoveLineWhenBlank="true" uuid="4c93eaed-7830-4fac-af22-24d230798831">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<printWhenExpression><![CDATA[Double.compare($P{acabadoCosteTotal}, new Double(0)) != 0]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(new Double($P{acabadoCosteTotal}))]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="340" y="101" width="70" height="14" uuid="626b541e-a8a6-4472-96a5-aab2c8ebb7be">
+				<reportElement x="340" y="101" width="70" height="14" isRemoveLineWhenBlank="true" uuid="626b541e-a8a6-4472-96a5-aab2c8ebb7be">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[Double.compare($P{offsetCosteTotal}, new Double(0)) != 0]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<text><![CDATA[Offset:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="411" y="101" width="83" height="14" uuid="76274a5a-ca33-4b9f-b7a8-45140a5095ba">
+				<reportElement x="411" y="101" width="83" height="14" isRemoveLineWhenBlank="true" uuid="76274a5a-ca33-4b9f-b7a8-45140a5095ba">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<printWhenExpression><![CDATA[Double.compare($P{offsetCosteTotal}, new Double(0)) != 0]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(new Double($P{offsetCosteTotal}))]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="340" y="117" width="70" height="14" uuid="29115a27-a05c-493d-b917-6143d1eda451">
+				<reportElement x="340" y="117" width="70" height="14" isRemoveLineWhenBlank="true" uuid="29115a27-a05c-493d-b917-6143d1eda451">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[Double.compare($P{costoExtraTotal}, new Double(0)) != 0]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<text><![CDATA[Costos extras:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="411" y="117" width="83" height="14" uuid="d4d004c9-d524-4a77-a323-9c6d0be609b6">
+				<reportElement x="411" y="117" width="83" height="14" isRemoveLineWhenBlank="true" uuid="d4d004c9-d524-4a77-a323-9c6d0be609b6">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<printWhenExpression><![CDATA[Double.compare($P{costoExtraTotal}, new Double(0)) != 0]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(new Double($P{costoExtraTotal}))]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="389" y="131" width="140" height="15" uuid="91162607-81c3-4bfc-86e5-31ae45530202">
+				<reportElement x="395" y="131" width="140" height="15" uuid="91162607-81c3-4bfc-86e5-31ae45530202">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>

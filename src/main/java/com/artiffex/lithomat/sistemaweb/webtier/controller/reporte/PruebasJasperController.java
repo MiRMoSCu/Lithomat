@@ -190,6 +190,7 @@ public class PruebasJasperController {
 			
 			HashMap<String, Object> parameterMap = new HashMap<String, Object>();
 			parameterMap.put("parametro_uno", "la pantera rosa");
+			parameterMap.put("boolean_print", false);
 
 			InputStream reportStream 	= context.getResourceAsStream(DIRECTORIO_ORIGEN + "Prueba_2.jasper");
 			OutputStream outputStream 	= response.getOutputStream();

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 5.6.2.final using JasperReports Library version 5.6.1  -->
-<!-- 2015-02-15T04:45:14 -->
+<!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
+<!-- 2015-12-26T21:57:57 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Prueba_2" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="30" uuid="ee08b45b-ee7f-433c-a569-65c1610a376d">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<parameter name="parametro_uno" class="java.lang.String"/>
+	<parameter name="boolean_print" class="java.lang.Boolean"/>
 	<field name="nut" class="java.lang.String"/>
 	<field name="nombre" class="java.lang.String"/>
 	<field name="descripcion" class="java.lang.String"/>
@@ -76,13 +77,26 @@
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="30" splitType="Stretch">
+		<band height="58" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<textField>
-				<reportElement x="0" y="1" width="100" height="14" uuid="1c0c009c-5bf5-4edb-96fc-96122e9be708"/>
+				<reportElement x="0" y="1" width="220" height="14" uuid="1c0c009c-5bf5-4edb-96fc-96122e9be708">
+					<printWhenExpression><![CDATA[$P{boolean_print} == true]]></printWhenExpression>
+				</reportElement>
 				<textElement>
 					<font fontName="Courier"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{parametro_uno}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="20" width="160" height="14" uuid="a87cea97-85f1-4f4f-a335-d39257afb959">
+					<printWhenExpression><![CDATA[$P{boolean_print} == true]]></printWhenExpression>
+				</reportElement>
+				<text><![CDATA[QUIERO QUE TE IMPRIMAS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="30" width="153" height="12" uuid="ebc7f347-c6cd-4418-9890-e9c3b1ad6844"/>
+				<textFieldExpression><![CDATA[$P{boolean_print}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>

@@ -908,6 +908,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 				_CalificacionTrabajoDetalle calificacionTrabajoDetalle = new _CalificacionTrabajoDetalle();
 				calificacionTrabajoDetalle.setDescripcion(tipoTrabajoDetalle.getDescripcion());
 				calificacionTrabajoDetalle.setCantidadOriginal(partida.getCantidad());
+				calificacionTrabajoDetalle.setCantidadRedondeada(ctd.getCantidadRedondeada());
 				calificacionTrabajoDetalle.setClienteProporcionaPapel(tipoTrabajoDetalle.isClienteProporcionaPapel());
 				calificacionTrabajoDetalle.setClienteProporcionaTinta(tipoTrabajoDetalle.isClienteProporcionaTinta());
 				calificacionTrabajoDetalle.setClienteProporcionaTintaEspecial(tipoTrabajoDetalle.isClienteProporcionaTintaEspecial());
