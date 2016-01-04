@@ -32,8 +32,8 @@
 			<column name="porcentaje_descuento"/>
 			<type name="integer"/>
 		</property>
-		<property name="precioBrutoConDescuento">
-			<column name="precio_bruto_con_descuento"/>
+		<property name="precioClienteConDescuento">
+			<column name="precio_cliente_con_descuento"/>
 			<type name="double"/>
 		</property>
 		<property name="precioNeto">

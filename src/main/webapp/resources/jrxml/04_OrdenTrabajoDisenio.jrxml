@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2015-10-22T12:39:41 -->
+<!-- 2016-01-02T00:22:55 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdenTrabajoDisenio" pageWidth="570" pageHeight="185" columnWidth="570" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e9a0b461-b3b4-4723-bb1a-3c6d12992121">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<parameter name="SUBREPORT_DISENIO_DETALLE" class="java.lang.String"/>
@@ -16,13 +16,13 @@
 			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<printWhenExpression><![CDATA[new Boolean(!$F{indicacionTareaRealizar}.equals("") || !$F{materialesRecibe}.equals("") || !$F{observaciones}.equals(""))]]></printWhenExpression>
 			<staticText>
-				<reportElement x="15" y="30" width="125" height="15" uuid="c9710fde-dc9c-4108-83d9-c40c09af91ab">
+				<reportElement x="15" y="30" width="125" height="15" forecolor="#DE8004" uuid="c9710fde-dc9c-4108-83d9-c40c09af91ab">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<text><![CDATA[Indicación tarea realizar:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="145" y="30" width="414" height="30" uuid="aedac574-4fef-49bd-8102-619c5900b7b2">
+				<reportElement x="145" y="30" width="414" height="30" forecolor="#DE8004" uuid="aedac574-4fef-49bd-8102-619c5900b7b2">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -30,27 +30,27 @@
 				<textFieldExpression><![CDATA[$F{indicacionTareaRealizar}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="15" y="60" width="125" height="15" uuid="dcf262b5-bd12-47bd-b5e1-80ccdc4bd0a8"/>
+				<reportElement x="15" y="60" width="125" height="15" forecolor="#DE8004" uuid="dcf262b5-bd12-47bd-b5e1-80ccdc4bd0a8"/>
 				<text><![CDATA[Materiales que recibe:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="145" y="60" width="414" height="30" uuid="770d13d9-7f7c-4438-8fff-9c0474bc70d1">
+				<reportElement x="145" y="60" width="414" height="30" forecolor="#DE8004" uuid="770d13d9-7f7c-4438-8fff-9c0474bc70d1">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{materialesRecibe}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="15" y="90" width="125" height="15" uuid="a0d6c30c-ae90-4902-96fc-f88b5b9f576e"/>
+				<reportElement x="15" y="90" width="125" height="15" forecolor="#DE8004" uuid="a0d6c30c-ae90-4902-96fc-f88b5b9f576e"/>
 				<text><![CDATA[Observaciones:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="145" y="90" width="414" height="30" uuid="793fca42-8aea-4643-a4cc-3de492d9caa3">
+				<reportElement x="145" y="90" width="414" height="30" forecolor="#DE8004" uuid="793fca42-8aea-4643-a4cc-3de492d9caa3">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{observaciones}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement positionType="Float" x="15" y="0" width="65" height="20" uuid="af4f12cb-cbac-4b26-ab0c-05ed1380354d">
+				<reportElement positionType="Float" x="15" y="0" width="65" height="20" forecolor="#DE8004" uuid="af4f12cb-cbac-4b26-ab0c-05ed1380354d">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
@@ -60,7 +60,7 @@
 				<text><![CDATA[Diseño]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="145" y="0" width="415" height="20" isRemoveLineWhenBlank="true" uuid="9e5cc0f5-9d8d-4a50-8141-83f1d42d6f63">
+				<reportElement positionType="Float" x="145" y="0" width="415" height="20" isRemoveLineWhenBlank="true" forecolor="#DE8004" uuid="9e5cc0f5-9d8d-4a50-8141-83f1d42d6f63">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>

@@ -14,7 +14,7 @@ public class CalificacionOrdenProduccion implements Serializable {
 	private int tipoClienteFactorDivisor;
 	private double precioCliente;
 	private int porcentajeDescuento;
-	private double precioBrutoConDescuento;
+	private double precioClienteConDescuento;
 	private double precioNeto;
 	private String observaciones;
 	private String condicionesProduccion;
@@ -64,11 +64,11 @@ public class CalificacionOrdenProduccion implements Serializable {
 	public void setPorcentajeDescuento(int porcentajeDescuento) {
 		this.porcentajeDescuento = porcentajeDescuento;
 	}
-	public double getPrecioBrutoConDescuento() {
-		return precioBrutoConDescuento;
+	public double getPrecioClienteConDescuento() {
+		return precioClienteConDescuento;
 	}
-	public void setPrecioBrutoConDescuento(double precioBrutoConDescuento) {
-		this.precioBrutoConDescuento = precioBrutoConDescuento;
+	public void setPrecioClienteConDescuento(double precioClienteConDescuento) {
+		this.precioClienteConDescuento = precioClienteConDescuento;
 	}
 	public double getPrecioNeto() {
 		return precioNeto;

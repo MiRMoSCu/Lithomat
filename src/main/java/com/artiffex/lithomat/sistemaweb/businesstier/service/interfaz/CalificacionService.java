@@ -24,9 +24,7 @@ public interface CalificacionService {
 	public _CalificacionPartida buscaCalificacionPartida(int idPartida);
 	
 	public CalificacionProcesosPartida buscaCalificacionProcesos(int idPartida);
-	
-	//public float obtienePrecioNetoPorNut(String nut);
-	
+		
 	//**************************
 	
 	public void actualizaOrdenProduccion(int idOrdenProduccion);
@@ -34,6 +32,8 @@ public interface CalificacionService {
 	public void actualizaPartida(int idOrdenProduccion);
 	
 	public void actualizaProcesosPartida(int idOrdenProduccion);
+	
+	public void actualizaDescuento(String nut, int porcentajeDescuento);
 	
 	//**************************
 	// JASPER REPORTS

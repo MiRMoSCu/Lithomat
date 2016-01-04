@@ -38,7 +38,7 @@
                                                             <input  type="text"
                                                                     class="input"
                                                                     name="rebase_en_milimetros"
-                                                                    value="0"
+                                                                    value="5"
                                                                     onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
                                                         </td>
                                                     </tr>
@@ -54,7 +54,7 @@
                                                             <input  type="text"
                                                                     class="input"
                                                                     name="medianiles_en_milimetros"
-                                                                    value="0"
+                                                                    value="5"
                                                                     onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
                                                         </td>
                                                     </tr>
@@ -70,7 +70,7 @@
                                                             <input  type="text"
                                                                     class="input"
                                                                     name="pinzas_en_centimetros"
-                                                                    value="0"
+                                                                    value="1"
                                                                     onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
                                                         </td>
                                                     </tr>

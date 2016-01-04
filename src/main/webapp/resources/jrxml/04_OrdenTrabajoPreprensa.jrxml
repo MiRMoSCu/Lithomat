@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2015-10-22T12:43:00 -->
+<!-- 2016-01-02T00:27:11 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdenTrabajoPreprensa" pageWidth="570" pageHeight="185" columnWidth="570" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e9a0b461-b3b4-4723-bb1a-3c6d12992121">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<parameter name="SUBREPORT_PREPRENSA_DETALLE" class="java.lang.String"/>
@@ -15,13 +15,13 @@
 		<band height="120" splitType="Stretch">
 			<printWhenExpression><![CDATA[new Boolean(!$F{indicacionTareaRealizar}.equals("") || !$F{materialesRecibe}.equals("") || !$F{observaciones}.equals(""))]]></printWhenExpression>
 			<staticText>
-				<reportElement x="15" y="30" width="125" height="15" uuid="0efdaa67-bec9-424a-81dc-763ec6a25854">
+				<reportElement x="15" y="30" width="125" height="15" forecolor="#0D7008" uuid="0efdaa67-bec9-424a-81dc-763ec6a25854">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<text><![CDATA[Indicación tarea realizar:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="145" y="30" width="414" height="30" uuid="96c139c6-a774-4c0c-99dd-f10cd7b6f549">
+				<reportElement x="145" y="30" width="414" height="30" forecolor="#0D7008" uuid="96c139c6-a774-4c0c-99dd-f10cd7b6f549">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -29,13 +29,13 @@
 				<textFieldExpression><![CDATA[$F{indicacionTareaRealizar}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="15" y="60" width="125" height="15" uuid="0516dd05-a1a7-4212-807f-576a4b894e0a">
+				<reportElement x="15" y="60" width="125" height="15" forecolor="#0D7008" uuid="0516dd05-a1a7-4212-807f-576a4b894e0a">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<text><![CDATA[Materiales que recibe:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="145" y="60" width="414" height="30" uuid="bdb7dfbd-ba5c-4f10-9781-a08611905f97">
+				<reportElement x="145" y="60" width="414" height="30" forecolor="#0D7008" uuid="bdb7dfbd-ba5c-4f10-9781-a08611905f97">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
@@ -43,18 +43,18 @@
 				<textFieldExpression><![CDATA[$F{materialesRecibe}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="15" y="90" width="125" height="15" uuid="beb5505c-5962-4ffd-8318-3abf2c423810"/>
+				<reportElement x="15" y="90" width="125" height="15" forecolor="#0D7008" uuid="beb5505c-5962-4ffd-8318-3abf2c423810"/>
 				<text><![CDATA[Observaciones:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="145" y="90" width="414" height="30" uuid="518525b2-e200-4894-9ac4-02d5870a19f9">
+				<reportElement x="145" y="90" width="414" height="30" forecolor="#0D7008" uuid="518525b2-e200-4894-9ac4-02d5870a19f9">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{observaciones}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement positionType="Float" x="15" y="0" width="85" height="20" uuid="3721fc9b-19c4-4464-8c59-518290ae5fa9">
+				<reportElement positionType="Float" x="15" y="0" width="85" height="20" forecolor="#0D7008" uuid="3721fc9b-19c4-4464-8c59-518290ae5fa9">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
@@ -64,7 +64,7 @@
 				<text><![CDATA[Preprensa]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="145" y="0" width="415" height="20" isRemoveLineWhenBlank="true" uuid="b22300a0-bd17-4948-9220-e090d388dc1b">
+				<reportElement positionType="Float" x="145" y="0" width="415" height="20" isRemoveLineWhenBlank="true" forecolor="#0D7008" uuid="b22300a0-bd17-4948-9220-e090d388dc1b">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>

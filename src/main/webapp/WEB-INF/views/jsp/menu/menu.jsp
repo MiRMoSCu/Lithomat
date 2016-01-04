@@ -41,7 +41,8 @@
 <c:url value="/turno_laboral/catalogo/lista" 			var="urlTurnoLaboral" />
 <c:url value="/tipo_vuelta/catalogo/lista" 				var="urlTipoVuelta" />
 <!-- SEGURIDAD -->
-<c:url value="/seguridad/ventana_cambio_estatus"		var="urlVentanaCambioEstatus" />
+<c:url value="/cambio_estatus/ventana"					var="urlVentanaCambioEstatus" />
+<c:url value="/descuento/ventana"						var="urlVentanaDescuento" />
 <c:url value="/perfil/catalogo/lista" 					var="urlPerfil" />
 <c:url value="/perfil_x_usuario/catalogo/lista" 		var="urlPerfilXUsuario" />
 <c:url value="/usuario/catalogo/lista" 					var="urlUsuario" />
@@ -101,6 +102,7 @@
             var urlTipoVuelta					= '${urlTipoVuelta}';
          // ***
          	var urlVentanaCambioEstatus			= '${urlVentanaCambioEstatus}';
+         	var urlVentanaDescuento				= '${urlVentanaDescuento}';
             var urlPerfil						= '${urlPerfil}';
             var urlPerfilXUsuario				= '${urlPerfilXUsuario}';
             var urlUsuario						= '${urlUsuario}';
@@ -352,7 +354,19 @@
                     		content:urlVentanaCambioEstatus,
                     		player:'iframe',
                     		width:600,
-                    		height:300,
+                    		height:310,
+                    		options:{
+                    			modal:true,
+                    			overlayOpacity:0.75
+                    		}
+                    	});
+                    	break;
+                    case 'ventana_descuento':
+                    	Shadowbox.open({
+                    		content:urlVentanaDescuento,
+                    		player:'iframe',
+                    		width:600,
+                    		height:635,
                     		options:{
                     			modal:true,
                     			overlayOpacity:0.75
@@ -572,7 +586,7 @@
 	                                				<span class="texto_boton">Costo extra</span>
 	                                			</div>
 	                                			<div id="div_opcion_estatus_orden" class="boton_dinamico" onclick="menu('estatus_orden');">
-	                                				<span class="texto_boton">(+) Estatus orden</span>
+	                                				<span class="texto_boton">Estatus orden</span>
 	                                			</div>
 	                                			<div id="div_opcion_maquina" class="boton_dinamico" onclick="menu('maquina');">
 	                                				<span class="texto_boton">M&aacute;quina</span>
@@ -623,7 +637,7 @@
 	                                				<span class="texto_boton">Tipo cliente</span>
 	                                			</div>
 	                                			<div id="div_opcion_tipo_complejidad" class="boton_dinamico" onclick="menu('tipo_complejidad');">
-	                                				<span class="texto_boton">(+) Tipo complejidad</span>
+	                                				<span class="texto_boton">Tipo complejidad</span>
 	                                			</div>
 	                                			<div id="div_opcion_tipo_comprobante_fiscal" class="boton_dinamico" onclick="menu('tipo_comprobante_fiscal');">
 	                                				<span class="texto_boton">Tipo comprobante fiscal</span>
@@ -644,10 +658,10 @@
 	                                				<span class="texto_boton">Turno laboral</span>
 	                                			</div>
 	                                			<div id="div_opcion_tipo_precio" class="boton_dinamico" onclick="menu('tipo_precio');">
-	                                				<span class="texto_boton">(+) Tipo precio</span>
+	                                				<span class="texto_boton">Tipo precio</span>
 	                                			</div>
 	                                			<div id="div_opcion_tipo_trabajo" class="boton_dinamico" onclick="menu('tipo_trabajo');">
-	                                				<span class="texto_boton">(+) Tipo trabajo</span>
+	                                				<span class="texto_boton">Tipo trabajo</span>
 	                                			</div>
 							        		</security:authorize>
 							        	<!-- ROLE_ADMIN -->
@@ -769,14 +783,17 @@
 	                                			<div id="div_opcion_cambio_estatus" class="boton_dinamico" onclick="menu('ventana_cambio_estatus');">
 	                                				<span class="texto_boton">Cambio estatus</span>
 	                                			</div>
+	                                			<div id="div_opcion_descuento" class="boton_dinamico" onclick="menu('ventana_descuento');">
+	                                				<span class="texto_boton">Descuento</span>
+	                                			</div>
                                 				<div id="div_opcion_perfil" class="boton_dinamico" onclick="menu('perfil');">
-	                                				<span class="texto_boton">(+) Perfil</span>
+	                                				<span class="texto_boton">Perfil</span>
 	                                			</div>
 	                                			<div id="div_opcion_perfil_por_usuario" class="boton_dinamico" onclick="menu('perfil_x_usuario');">
-	                                				<span class="texto_boton">(+) Perfil por usuario</span>
+	                                				<span class="texto_boton">Perfil por usuario</span>
 	                                			</div>
 	                                			<div id="div_opcion_usuario" class="boton_dinamico" onclick="menu('usuario');">
-	                                				<span class="texto_boton">(+) Usuario</span>
+	                                				<span class="texto_boton">Usuario</span>
 	                                			</div>
 							        		</security:authorize>
 							        	<!-- ROLE_ADMIN -->

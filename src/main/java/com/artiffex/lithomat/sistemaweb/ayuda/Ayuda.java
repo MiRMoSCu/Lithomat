@@ -1,23 +1,33 @@
 package com.artiffex.lithomat.sistemaweb.ayuda;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.List;
-import java.util.Properties;
+import java.util.HashMap;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 
-import com.artiffex.lithomat.sistemaweb.businesstier.entity.EstatusOrden;
-import com.artiffex.lithomat.sistemaweb.eistier.dao.implementacion.EstatusOrdenDaoImpl;
+import com.google.gson.Gson;
 
 
 public class Ayuda {
 
+	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(Ayuda.class);
 	
 	public static void main(String args[]) {
 		
+		HashMap<Object, Object> hm = new HashMap<Object, Object>();
+		hm.put("boolean", true);
+		hm.put("precio", 123);
+		hm.put("pin","hola");
+		
+		
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(hm);
+		System.out.println(json);
+		
+		
+		
+		/*
 		try {
 			File file = new File("hola");
 			System.out.println(file.getAbsolutePath());
@@ -41,6 +51,8 @@ public class Ayuda {
 			System.out.println(estatusOrden.getNombre() + "\t");
 		}
 		System.out.println();
+		
+		*/
 		
 		/*
 		HistorialEstatusDaoImpl historialEstatusDao = new HistorialEstatusDaoImpl();

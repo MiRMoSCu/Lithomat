@@ -73,7 +73,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 	private CalificacionProcesosPartidaDAO calificacionProcesosPartidaDAO;
 	@Resource
 	private CalificacionOrdenProduccionDAO calificacionOrdenProduccionDAO;
-	
+	// Service
 	@Resource
 	private OrdenProduccionService ordenProduccionService;
 	@Resource
@@ -191,8 +191,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 				int vueltaBarnizNumEntMaq = (Integer)sumatorias.get("vueltaBarnizNumEntMaq");
 				float vueltaBarnizPrecioUnitario = precioUnitarioTabulador * (1 + (tipoTrabajoDetalle.getVueltaTipoBarniz().getPrecio() / tipoTrabajoDetalle.getVueltaTipoBarniz().getTipoPrecio().getFactorDivisor()));
 				float vueltaBarnizCosteTotal = cantidadRedondeada * vueltaBarnizNumEntMaq * vueltaBarnizPrecioUnitario;
-				
-				
 				
 				// SUMATORIA DE COSTES
 				if (!tipoTrabajoDetalle.isClienteProporcionaPapel()) {
@@ -337,19 +335,16 @@ public class CalificacionServiceImpl implements CalificacionService {
 		
 		listaPartida = null;
 		
-		
 		// *** ***** ***
 		// PRECIO CLIENTE
 		float porcentajeTipoCliente = ordenProduccion.getCliente().getTipoCliente().getPrecio() / ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getFactorDivisor();
 		float precioCliente = (float)precioBruto * (1 + porcentajeTipoCliente);
 		
-			
 		// *** ***** ***
 		// PRECIO TIPO COMPROBANTE
 		float porcentajeTipoComprobante = ordenProduccion.getTipoComprobanteFiscal().getPrecio() / ordenProduccion.getTipoComprobanteFiscal().getTipoPrecio().getFactorDivisor();
 		float porcentajeComprobante = precioCliente * (1 + porcentajeTipoComprobante);
 		float precioNeto = porcentajeTipoComprobante == 0 ? precioCliente : porcentajeComprobante;
-
 		
 		// *** ***** ***
 		// creacion de registro
@@ -360,6 +355,8 @@ public class CalificacionServiceImpl implements CalificacionService {
 		calificacionOrdenProduccion.setTipoClientePrecio(ordenProduccion.getCliente().getTipoCliente().getPrecio());
 		calificacionOrdenProduccion.setTipoClienteFactorDivisor(ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getFactorDivisor());
 		calificacionOrdenProduccion.setPrecioCliente(precioCliente);
+		calificacionOrdenProduccion.setPorcentajeDescuento(0);
+		calificacionOrdenProduccion.setPrecioClienteConDescuento(precioCliente);
 		calificacionOrdenProduccion.setPrecioNeto(precioNeto);
 		calificacionOrdenProduccion.setFechaGeneracion(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 		calificacionOrdenProduccion.setActivo(true);
@@ -408,36 +405,40 @@ public class CalificacionServiceImpl implements CalificacionService {
 		
 		OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccion(idOrdenProduccion);
 		CalificacionOrdenProduccion cop = calificacionOrdenProduccionDAO.buscaPorOrdenProduccion(idOrdenProduccion);
-		double precioBruto = cop.getPrecioBruto();
+		float precioBruto = (float)cop.getPrecioBruto();
 		
 		// *** ***** ***
 		// PRECIO CLIENTE
 		float porcentajeTipoCliente = ordenProduccion.getCliente().getTipoCliente().getPrecio() / ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getFactorDivisor();
-		float precioCliente = (float)precioBruto * (1 + porcentajeTipoCliente);
+		float precioCliente = precioBruto * (1 + porcentajeTipoCliente);
+		
+		// *** ***** ***
+		// PRECIO CLIENTE CON DESCUENTO
+		float precioClienteConDescuento = precioCliente;
+		if ( cop.getPorcentajeDescuento() > 0 ) 
+			precioClienteConDescuento = precioCliente - (precioCliente * ((float)cop.getPorcentajeDescuento() / 100));
 		
 		// *** ***** ***
 		// PRECIO TIPO COMPROBANTE
 		float porcentajeTipoComprobante = ordenProduccion.getTipoComprobanteFiscal().getPrecio() / ordenProduccion.getTipoComprobanteFiscal().getTipoPrecio().getFactorDivisor();
-		float porcentajeComprobante = precioCliente * (1 + porcentajeTipoComprobante);
-		float precioNeto = porcentajeTipoComprobante == 0 ? precioCliente : porcentajeComprobante;
+		float porcentajeComprobante = precioClienteConDescuento * (1 + porcentajeTipoComprobante);
+		float precioNeto = porcentajeTipoComprobante == 0 ? precioClienteConDescuento : porcentajeComprobante;
 		
 		// *** ***** ***
-		// actualizacion de registro
-		CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionOrdenProduccionDAO.buscaPorOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
+		// actualización de datos
+		cop.setPrecioBruto(precioBruto);
+		cop.setTipoClientePrecio(ordenProduccion.getCliente().getTipoCliente().getPrecio());
+		cop.setTipoClienteFactorDivisor(ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getFactorDivisor());
+		cop.setPrecioCliente(precioCliente);
+		cop.setPrecioClienteConDescuento(precioClienteConDescuento);
+		cop.setPrecioNeto(precioNeto);
+		cop.setFechaGeneracion(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+		cop.setObservaciones("registro modificado en la fecha: fecha_generacion");
 
-		calificacionOrdenProduccion.setPrecioBruto(precioBruto);
-		calificacionOrdenProduccion.setTipoClientePrecio(ordenProduccion.getCliente().getTipoCliente().getPrecio());
-		calificacionOrdenProduccion.setTipoClienteFactorDivisor(ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getFactorDivisor());
-		calificacionOrdenProduccion.setPrecioCliente(precioCliente);
-		calificacionOrdenProduccion.setPrecioNeto(precioNeto);
-		calificacionOrdenProduccion.setFechaGeneracion(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-		calificacionOrdenProduccion.setObservaciones("registro modificado en la fecha: fecha_generacion");
-
-		calificacionOrdenProduccionDAO.modifica(calificacionOrdenProduccion); // UPDATE
+		calificacionOrdenProduccionDAO.modifica(cop); // UPDATE
 		
 		ordenProduccion				= null;
 		cop 						= null;
-		calificacionOrdenProduccion	= null;
 		
 	} // actualizaOrdenProduccion
 	
@@ -670,25 +671,32 @@ public class CalificacionServiceImpl implements CalificacionService {
 		listaPartida = null;
 		
 		// *** ***** ***
+		// búsqueda de registro
+		CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionOrdenProduccionDAO.buscaPorOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
+		
+		// *** ***** ***
 		// PRECIO CLIENTE
 		float porcentajeTipoCliente = ordenProduccion.getCliente().getTipoCliente().getPrecio() / ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getFactorDivisor();
 		float precioCliente = (float)precioBruto * (1 + porcentajeTipoCliente);
+		
+		// *** ***** ***
+		// PRECIO CLIENTE CON DESCUENTO
+		float precioClienteConDescuento = precioCliente;
+		if ( calificacionOrdenProduccion.getPorcentajeDescuento() > 0 ) 
+			precioClienteConDescuento = precioCliente - (precioCliente * ((float)calificacionOrdenProduccion.getPorcentajeDescuento() / 100));
 
 		// *** ***** ***
 		// PRECIO TIPO COMPROBANTE
 		float porcentajeTipoComprobante = ordenProduccion.getTipoComprobanteFiscal().getPrecio() / ordenProduccion.getTipoComprobanteFiscal().getTipoPrecio().getFactorDivisor();
-		float porcentajeComprobante = precioCliente * (1 + porcentajeTipoComprobante);
-		float precioNeto = porcentajeTipoComprobante == 0 ? precioCliente : porcentajeComprobante;
-		
-		// *** ***** ***
-		// creacion de registro
-		CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionOrdenProduccionDAO.buscaPorOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
+		float porcentajeComprobante = precioClienteConDescuento * (1 + porcentajeTipoComprobante);
+		float precioNeto = porcentajeTipoComprobante == 0 ? precioClienteConDescuento : porcentajeComprobante;
 			
 		calificacionOrdenProduccion.setOrdenProduccion(ordenProduccion);
 		calificacionOrdenProduccion.setPrecioBruto(precioBruto);
 		calificacionOrdenProduccion.setTipoClientePrecio(ordenProduccion.getCliente().getTipoCliente().getPrecio());
 		calificacionOrdenProduccion.setTipoClienteFactorDivisor(ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getFactorDivisor());
 		calificacionOrdenProduccion.setPrecioCliente(precioCliente);
+		calificacionOrdenProduccion.setPrecioClienteConDescuento(precioClienteConDescuento);
 		calificacionOrdenProduccion.setPrecioNeto(precioNeto);
 		calificacionOrdenProduccion.setFechaGeneracion(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 
@@ -776,27 +784,32 @@ public class CalificacionServiceImpl implements CalificacionService {
 		listaPartida = null;
 		
 		// *** ***** ***
+		// busqueda de registro
+		CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionOrdenProduccionDAO.buscaPorOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
+		
+		// *** ***** ***
 		// PRECIO CLIENTE
 		float porcentajeTipoCliente = ordenProduccion.getCliente().getTipoCliente().getPrecio() / ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getFactorDivisor();
 		float precioCliente = (float)precioBruto * (1 + porcentajeTipoCliente);
 		
+		// *** ***** ***
+		// PRECIO CLIENTE CON DESCUENTO
+		float precioClienteConDescuento = precioCliente;
+		if ( calificacionOrdenProduccion.getPorcentajeDescuento() > 0 ) 
+			precioClienteConDescuento = precioCliente - (precioCliente * ((float)calificacionOrdenProduccion.getPorcentajeDescuento() / 100));
 			
 		// *** ***** ***
 		// PRECIO TIPO COMPROBANTE
 		float porcentajeTipoComprobante = ordenProduccion.getTipoComprobanteFiscal().getPrecio() / ordenProduccion.getTipoComprobanteFiscal().getTipoPrecio().getFactorDivisor();
-		float porcentajeComprobante = precioCliente * (1 + porcentajeTipoComprobante);
-		float precioNeto = porcentajeTipoComprobante == 0 ? precioCliente : porcentajeComprobante;
-
-		
-		// *** ***** ***
-		// creacion de registro
-		CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionOrdenProduccionDAO.buscaPorOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
+		float porcentajeComprobante = precioClienteConDescuento * (1 + porcentajeTipoComprobante);
+		float precioNeto = porcentajeTipoComprobante == 0 ? precioClienteConDescuento : porcentajeComprobante;
 			
 		calificacionOrdenProduccion.setOrdenProduccion(ordenProduccion);
 		calificacionOrdenProduccion.setPrecioBruto(precioBruto);
 		calificacionOrdenProduccion.setTipoClientePrecio(ordenProduccion.getCliente().getTipoCliente().getPrecio());
 		calificacionOrdenProduccion.setTipoClienteFactorDivisor(ordenProduccion.getCliente().getTipoCliente().getTipoPrecio().getFactorDivisor());
 		calificacionOrdenProduccion.setPrecioCliente(precioCliente);
+		calificacionOrdenProduccion.setPrecioClienteConDescuento(precioClienteConDescuento);
 		calificacionOrdenProduccion.setPrecioNeto(precioNeto);
 		calificacionOrdenProduccion.setFechaGeneracion(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 
@@ -810,6 +823,37 @@ public class CalificacionServiceImpl implements CalificacionService {
 		precioNeto 					= 0;
 		calificacionOrdenProduccion	= null;
 
+	}
+	
+	
+	public void actualizaDescuento(String nut, int porcentajeDescuento) {
+		// busqueda de informacion
+		OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
+		CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionOrdenProduccionDAO.buscaPorOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
+		
+		// modificacion de informacion
+		System.out.println(porcentajeDescuento);
+		calificacionOrdenProduccion.setPorcentajeDescuento(porcentajeDescuento);
+			// calculo de precio_cliente_con_descuento
+			float precioCliente = (float)calificacionOrdenProduccion.getPrecioCliente();
+		
+			// *** ***** ***
+			// PRECIO CLIENTE CON DESCUENTO
+			float precioClienteConDescuento = precioCliente - (precioCliente * ((float)porcentajeDescuento/100));
+		calificacionOrdenProduccion.setPrecioClienteConDescuento(precioClienteConDescuento);
+		
+			// *** ***** ***
+			// PRECIO TIPO COMPROBANTE
+			float porcentajeTipoComprobante = ordenProduccion.getTipoComprobanteFiscal().getPrecio() / ordenProduccion.getTipoComprobanteFiscal().getTipoPrecio().getFactorDivisor();
+			float porcentajeComprobante = precioClienteConDescuento * (1 + porcentajeTipoComprobante);
+			float precioNeto = porcentajeTipoComprobante == 0 ? precioClienteConDescuento : porcentajeComprobante;
+			System.out.println(precioNeto);
+		calificacionOrdenProduccion.setPrecioNeto(precioNeto);
+		
+		calificacionOrdenProduccionDAO.modifica(calificacionOrdenProduccion); // UPDATE
+		
+		calificacionOrdenProduccion = null;
+		ordenProduccion				= null;
 	}
 	
 	/********* CONDICIONES PRODUCCION *********/

@@ -253,6 +253,47 @@
                                                 <div class="mitad_columna_izquierda">
                                                 	<div class="columna_completa">
                                                 		<table>
+                                                            <tr>
+                                                                <td width="50%">Descuento (%):</td>
+                                                                <td>
+                                                                    <input  type="text" 
+                                                                            class="input"
+                                                                            name="porcentaje_descuento"
+                                                                            value="${calificacionOrdenProduccion.porcentajeDescuento}"
+                                                                            onkeypress=""
+                                                                            readonly/>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                	</div>
+                                                </div>
+                                                <div class="mitad_columna_derecha">
+                                                    <div class="columna_completa">
+                                                        <table>
+                                                            <tr>
+                                                                <td width="40%">Precio final:</td>
+                                                                <td>
+                                                                    <input  type="text" 
+                                                                            class="input"
+                                                                            style="text-align:right;"
+                                                                            name="precio_cliente_con_descuento"
+                                                                            value="<fmt:formatNumber pattern="$ #,##0.00" value="${calificacionOrdenProduccion.precioClienteConDescuento}" />"
+                                                                            onkeypress=""
+                                                                            readonly/>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="linea">
+                                    	<div class="casilla">
+                                    		<div class="columna_derecha">
+                                    			<div class="mitad_columna_izquierda">
+                                    				<div class="columna_completa">
+                                    					<table>
                                                 			<tr>
                                                 				<td width="1%">Comprobante:</td>
                                                 				<td>
@@ -265,11 +306,11 @@
                                                 				</td>
                                                 			</tr>
                                                 		</table>
-                                                	</div>
-                                                </div>
-                                                <div class="mitad_columna_derecha">
-                                                    <div class="columna_completa">
-                                                        <table>
+                                    				</div>
+                                    			</div>
+                                    			<div class="mitad_columna_derecha">
+                                    				<div class="columna_completa">
+                                    					<table>
                                                             <tr>
                                                                 <td width="40%">Precio neto:</td>
                                                                 <td>
@@ -283,10 +324,10 @@
                                                                 </td>
                                                             </tr>
                                                         </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    				</div>
+                                    			</div>
+                                    		</div>
+                                    	</div>
                                     </div>
                                 </form>
                             </div>

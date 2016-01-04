@@ -1,6 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c"	uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" 	uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:url value="/?opc=produccion"	               			var="urlMenu"/>
 <c:url value="/visualizador/busca_ordenes_produccion"   var="urlBuscaOrdenesProduccion"/>
@@ -98,16 +99,31 @@
                                                         <th width="20%">Cliente</th>
                                                         <th width="10%">Estatus</th>
                                                     </tr>
-                                                <c:forEach var="registro" items="${listaOrdenesProduccion}" varStatus="i">
-                                                    <tr class="${i.count%2==0?'l2':'l1'}" onclick="muestra_detalle_nut('${registro.nut}');">
-                                                        <td>${registro.nut}</td>
-                                                        <td>${registro.nombre}</td>
-                                                        <td>${registro.descripcion}</td>
-                                                        <td><fmt:formatDate value="${registro.fechaCotizacion}" type="both" pattern="MMM dd, yyyy"/></td>
-                                                        <td>${registro.nombreMoral}</td>
-                                                        <td id="td_${registro.nut}" class="estatus_${registro.idEstatusOrden}">${registro.nombreEstatus}</td>
-                                                    </tr>
-                                                </c:forEach>
+                                                <c:choose>
+                                                	<c:when test="${fn:length(listaOrdenesProduccion) gt 0}">
+                                                		<c:forEach var="registro" items="${listaOrdenesProduccion}" varStatus="i">
+		                                                    <tr class="${i.count%2==0?'l2':'l1'}" onclick="muestra_detalle_nut('${registro.nut}');">
+		                                                        <td>${registro.nut}</td>
+		                                                        <td>${registro.nombre}</td>
+		                                                        <td>${registro.descripcion}</td>
+		                                                        <td><fmt:formatDate value="${registro.fechaCotizacion}" type="both" pattern="MMM dd, yyyy"/></td>
+		                                                        <td>${registro.nombreMoral}</td>
+		                                                        <td id="td_${registro.nut}" class="estatus_${registro.idEstatusOrden}">${registro.nombreEstatus}</td>
+		                                                    </tr>
+		                                                </c:forEach>
+                                                	</c:when>
+                                                	<c:otherwise>
+                                                		<tr class="l1">
+                                                			<td>&nbsp;</td>
+                                                			<td>&nbsp;</td>
+                                                			<td>&nbsp;</td>
+                                                			<td>&nbsp;</td>
+                                                			<td>&nbsp;</td>
+                                                			<td>&nbsp;</td>
+                                                		</tr>
+                                                	</c:otherwise>
+                                                
+                                                </c:choose>
                                                 </table>
                                             </div>
                                         </div>

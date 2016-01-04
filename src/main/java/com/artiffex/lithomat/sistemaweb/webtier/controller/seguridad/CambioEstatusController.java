@@ -25,10 +25,10 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.OrdenProdu
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
 
 @Controller
-@RequestMapping("/seguridad")
-public class SeguridadController {
+@RequestMapping("/cambio_estatus")
+public class CambioEstatusController {
 	
-	private static final Logger log = Logger.getLogger(SeguridadController.class);
+	private static final Logger log = Logger.getLogger(CambioEstatusController.class);
 	
 	@Resource
 	private EstatusOrdenService estatusOrdenService;
@@ -39,13 +39,25 @@ public class SeguridadController {
 	
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
-	@RequestMapping(value = "/cambio_estatus", method = RequestMethod.POST)
+	@RequestMapping(value = "/ventana", method = RequestMethod.GET)
+	public String ventanaCambioEstatus( Model model ) throws IOException {
+		log.info("/cambio_estatus/ventana_cambio_estatus");
+		
+		List<ComboSelect> listaEstatusOrden = estatusOrdenService.listaComboSelect();
+		model.addAttribute("listaEstatusOrden", listaEstatusOrden);
+		listaEstatusOrden = null;
+		
+		return "seguridad/ventana_cambio_estatus";
+	}
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
+	@RequestMapping(value = "/acepta", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean cambioEstatus( 
 			@RequestParam(value = "nut", 				required = false) String nut,
 			@RequestParam(value = "id_estatus_orden",	required = false) Integer idEstatusOrden
 		) throws IOException {
-		log.info("/seguridad/cambio_estatus");
+		log.info("/cambio_estatus/ventana_cambio_estatus");
 		
 		Timestamp fechaGeneracion = new Timestamp(Calendar.getInstance().getTimeInMillis());
 		
@@ -66,22 +78,6 @@ public class SeguridadController {
 		fechaGeneracion		= null;
 
 		return true;
-	}
-	
-	
-	// URL de ventanas
-	//******************************************************************************************
-	
-	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
-	@RequestMapping(value = "/ventana_cambio_estatus", method = RequestMethod.GET)
-	public String ventanaCambioEstatus( Model model ) throws IOException {
-		log.info("/seguridad/ventana_cambio_estatus");
-		
-		List<ComboSelect> listaEstatusOrden = estatusOrdenService.listaComboSelect();
-		model.addAttribute("listaEstatusOrden", listaEstatusOrden);
-		listaEstatusOrden = null;
-		
-		return "seguridad/ventana_cambio_estatus";
 	}
 
 }
