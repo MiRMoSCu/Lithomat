@@ -207,8 +207,10 @@ public class ReporteController {
 			e.printStackTrace(printWriter);
 			response.setContentType("text/plain");
 			response.getOutputStream().print(stringWriter.toString());
+		} finally {
+			parameterMap		= null;
+			listaOrdenTrabajo 	= null;
 		}
-		listaOrdenTrabajo = null;
 	}
 	
 	
@@ -217,6 +219,7 @@ public class ReporteController {
 		calificacionService.guardaCondicionesProduccion(nut, condicionesProduccion);
 		OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
 		Cliente cliente = clienteService.buscaCliente(ordenProduccion.getCliente().getIdCliente());
+		CalificacionOrdenProduccion calificacion = calificacionService.buscaCalificacionOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
 		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
 		// logo
 		parameterMap.put("path_logo", context.getResource("/resources/image/logo.png").getPath());
@@ -264,6 +267,10 @@ public class ReporteController {
 		parameterMap.put("direccion", sb.toString());
 		// condiciones_produccion
 		parameterMap.put("condiciones_produccion", condicionesProduccion);
+		// PRECIOS
+		parameterMap.put("precio_cliente", calificacion.getPrecioCliente());
+		parameterMap.put("porcentaje_descuento", calificacion.getPorcentajeDescuento());
+		parameterMap.put("precio_cliente_con_descuento", calificacion.getPrecioClienteConDescuento());
 		// lista de partida
 		List<ReporteCotizacionDTO> listaPartida = calificacionService.obtieneListaPrecioCotizacionPartida(nut);
 		try {
@@ -313,8 +320,6 @@ public class ReporteController {
 			}
 			outputStream.flush();
 			outputStream.close();
-			ordenProduccion = null;
-			cliente			= null;
 			
 		} catch (JRException e) {
 			// display stack trace in the browser
@@ -323,6 +328,12 @@ public class ReporteController {
 			e.printStackTrace(printWriter);
 			response.setContentType("text/plain");
 			response.getOutputStream().print(stringWriter.toString());
+		} finally {
+			listaPartida	= null;
+			parameterMap	= null;
+			calificacion	= null;
+			cliente			= null;
+			ordenProduccion = null;
 		}
 	}
 	
@@ -338,6 +349,9 @@ public class ReporteController {
 		parameterMap.put("nombreCliente",ordenProduccion.getCliente().getNombreMoral());
 		parameterMap.put("nombreOrdenProduccion",ordenProduccion.getNombre());
 		parameterMap.put("precioCliente",cop.getPrecioCliente());
+		parameterMap.put("porcentajeDescuento",cop.getPorcentajeDescuento());
+		parameterMap.put("precioClienteConDescuento", cop.getPrecioClienteConDescuento());
+		parameterMap.put("precioNeto",cop.getPrecioNeto());
 		cop				= null;
 		ordenProduccion = null;
 		// INFORMACION DEL DATA SOURCE
@@ -397,8 +411,12 @@ public class ReporteController {
 			e.printStackTrace(printWriter);
 			response.setContentType("text/plain");
 			response.getOutputStream().print(stringWriter.toString());
+		} finally {
+			listaRemision = null;
+			parameterMap	= null;
+			cop				= null;
+			ordenProduccion = null;
 		}
-		listaRemision = null;
 	}
 	
 	
@@ -413,6 +431,8 @@ public class ReporteController {
 		parameterMap.put("nombreCliente",ordenProduccion.getCliente().getNombreMoral());
 		parameterMap.put("nombreOrdenProduccion",ordenProduccion.getNombre());
 		parameterMap.put("precioCliente",cop.getPrecioCliente());
+		parameterMap.put("porcentajeDescuento",cop.getPorcentajeDescuento());
+		parameterMap.put("precioClienteConDescuento", cop.getPrecioClienteConDescuento());
 		parameterMap.put("precioNeto",cop.getPrecioNeto());
 		cop				= null;
 		ordenProduccion = null;
@@ -473,8 +493,12 @@ public class ReporteController {
 			e.printStackTrace(printWriter);
 			response.setContentType("text/plain");
 			response.getOutputStream().print(stringWriter.toString());
+		} finally {
+			listaRemision = null;
+			parameterMap	= null;
+			cop				= null;
+			ordenProduccion	= null;
 		}
-		listaRemision = null;
 	}
 	
 	
@@ -491,8 +515,9 @@ public class ReporteController {
 		} catch( Exception e ) {
 			log.error("Error al enviar el archivo de excel");
 			e.printStackTrace();
+		} finally {
+			documento = null;
 		}
-		documento = null;
 	}
 	
 	// URL de JSP's
@@ -704,7 +729,6 @@ public class ReporteController {
 		List<ComboSelect> listaEstatusOrden = estatusOrdenService.listaComboSelect();
 		model.addAttribute("listaEstatusOrden",listaEstatusOrden);
 		listaEstatusOrden = null;
-		
 		return "reporte/ventana_cola_impresion";
 	}
 

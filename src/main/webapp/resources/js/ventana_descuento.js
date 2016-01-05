@@ -44,10 +44,14 @@ function calculaDescuento() {
 		var validaciones_correctas = true;
 		
 		if ( !parseInt(document.descuento.porcentaje_descuento_modificado_porcentaje.value) ) {
-			validaciones_correctas = false;
-			alert("Favor de informar una numero entero");
-			document.descuento.porcentaje_descuento_modificado_porcentaje.value = "";
-			document.descuento.porcentaje_descuento_modificado_porcentaje.focus();
+			if ( document.descuento.porcentaje_descuento_modificado_porcentaje.value == "0" )
+				validaciones_correctas = true;
+			else {
+				validaciones_correctas = false;
+				alert("Favor de informar una numero entero mayor a cero");
+				document.descuento.porcentaje_descuento_modificado_porcentaje.value = "";
+				document.descuento.porcentaje_descuento_modificado_porcentaje.focus();
+			}
 		}
 		
 		if ( validaciones_correctas

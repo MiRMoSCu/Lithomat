@@ -883,29 +883,29 @@ public class CalificacionServiceImpl implements CalificacionService {
 	public List<ReporteCotizacionDTO> obtieneListaPrecioCotizacionPartida(String nut) {
 		List<ReporteCotizacionDTO> listaPartidaReporte = new ArrayList<ReporteCotizacionDTO>();
 		OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
+		// obtiene el porcentaje de ganancia del cliente guardado en el registro de la base de datos y es != del que tiene el cliente actualmente
+		CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionOrdenProduccionDAO.buscaPorOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
+		float porcentajeTipoCliente = calificacionOrdenProduccion.getTipoClientePrecio() / calificacionOrdenProduccion.getTipoClienteFactorDivisor();
+		calificacionOrdenProduccion	= null;
+		// busca las partidas
 		List<Partida> listaPartida = partidaService.listaPartidaPorOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
 		for (Partida partida : listaPartida) {
-			
 			ReporteCotizacionDTO partidaReporte = new ReporteCotizacionDTO();
 			partidaReporte.setCantidad(partida.getCantidad());
 			partidaReporte.setDescripcion(partida.getDescripcionPartida());
-				
 				CalificacionProcesosPartida cpp 		= calificacionProcesosPartidaDAO.buscaPorPartida(partida.getIdPartida());
-				float porcentajeTipoCliente = partida.getOrdenProduccion().getCliente().getTipoCliente().getPrecio() / partida.getOrdenProduccion().getCliente().getTipoCliente().getTipoPrecio().getFactorDivisor();
 				double costeTotalProcesosPartida 		= cpp.getCosteTotalProcesosPartida();
 				double costeGananciaRespectoTipoCliente = (double)(costeTotalProcesosPartida * (1 + porcentajeTipoCliente));
-			
 			partidaReporte.setPrecioUnitario( (double)(costeGananciaRespectoTipoCliente / partida.getCantidad()) );
 			partidaReporte.setPrecioCliente( (double)costeGananciaRespectoTipoCliente );
 			listaPartidaReporte.add(partidaReporte);
-			
 			cpp				= null;
 			partidaReporte	= null;
 			partida 		= null;
 		}
+		listaPartida				= null;
 		
-		listaPartida	= null;
-		ordenProduccion = null;
+		ordenProduccion 			= null;
 		
 		return listaPartidaReporte;
 	}

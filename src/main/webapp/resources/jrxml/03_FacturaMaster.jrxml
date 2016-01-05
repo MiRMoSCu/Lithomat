@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2015-10-27T17:45:51 -->
+<!-- 2016-01-04T23:17:28 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RemisionMaster" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ea907b63-9974-4aec-a146-9c41310c93d3">
 	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
 	<parameter name="nut" class="java.lang.String"/>
 	<parameter name="nombreCliente" class="java.lang.String"/>
 	<parameter name="nombreOrdenProduccion" class="java.lang.String"/>
 	<parameter name="precioCliente" class="java.lang.Double"/>
+	<parameter name="porcentajeDescuento" class="java.lang.Integer"/>
+	<parameter name="precioClienteConDescuento" class="java.lang.Double"/>
 	<parameter name="precioNeto" class="java.lang.Double"/>
 	<field name="nombre" class="java.lang.String"/>
 	<field name="gananciaClientePorcentaje" class="java.lang.Double"/>
@@ -19,6 +21,14 @@
 	<field name="offsetCosteTotal" class="java.lang.Double"/>
 	<field name="costoExtraTotal" class="java.lang.Double"/>
 	<field name="listaCalificacionTrabajoDetalle" class="java.util.List"/>
+	<variable name="descuento" class="java.lang.Double">
+		<variableExpression><![CDATA[$P{precioCliente} - $P{precioClienteConDescuento}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="iva" class="java.lang.Double">
+		<variableExpression><![CDATA[$P{precioNeto} - $P{precioClienteConDescuento}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
 	<title>
 		<band height="114" splitType="Stretch">
 			<staticText>
@@ -112,51 +122,58 @@
 		</band>
 	</detail>
 	<lastPageFooter>
-		<band height="99">
+		<band height="122">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<staticText>
-				<reportElement x="257" y="77" width="115" height="22" uuid="66ab6385-36c3-4aa3-9696-ae9ebba0d705">
+				<reportElement x="250" y="100" width="115" height="22" uuid="66ab6385-36c3-4aa3-9696-ae9ebba0d705">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="13" isBold="true"/>
+					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Gran Total:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="384" y="77" width="90" height="22" uuid="d86f5def-a54b-444a-be2c-6b3a016530f8">
+				<reportElement x="370" y="100" width="105" height="22" uuid="d86f5def-a54b-444a-be2c-6b3a016530f8">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="13"/>
+					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(new Double($P{precioNeto}))]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="262" y="10" width="115" height="22" uuid="83a79de3-2967-4502-b7f8-c786942d66d6">
+				<reportElement x="250" y="0" width="115" height="20" isRemoveLineWhenBlank="true" uuid="83a79de3-2967-4502-b7f8-c786942d66d6">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{porcentajeDescuento} != 0]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="13" isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Precio sin IVA:]]></text>
+				<text><![CDATA[Total sin IVA:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="384" y="10" width="90" height="22" uuid="d6a2836d-9107-4132-8547-d16f17f21363">
+				<reportElement x="370" y="0" width="105" height="20" isRemoveLineWhenBlank="true" uuid="d6a2836d-9107-4132-8547-d16f17f21363">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{porcentajeDescuento} != 0]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="13"/>
+					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(new Double($P{precioCliente}))]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="262" y="35" width="115" height="22" uuid="1028523b-6462-40b4-b9cf-5ede9197eb79">
+				<reportElement x="250" y="68" width="115" height="22" uuid="1028523b-6462-40b4-b9cf-5ede9197eb79">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -167,14 +184,78 @@
 				<text><![CDATA[IVA:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="384" y="35" width="90" height="22" uuid="7edc5746-7af5-46e1-b4df-0b4131c5edcf">
+				<reportElement x="370" y="68" width="105" height="22" uuid="7edc5746-7af5-46e1-b4df-0b4131c5edcf">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="13"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(new Double($P{precioNeto} - $P{precioCliente}))]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(new Double($V{iva}))]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="260" y="20" width="60" height="20" isRemoveLineWhenBlank="true" uuid="bd0ffb7d-f530-4144-84e0-5703edfdb1b9">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{porcentajeDescuento} != 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Desc.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="48" width="115" height="20" uuid="87c94114-77ed-4ce5-a907-3089d33372bb">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio sin IVA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="370" y="48" width="105" height="20" uuid="9dd0ad9b-caaf-4c0d-a779-e72320d27bd0">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(new Double($P{precioClienteConDescuento}))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="20" width="45" height="20" isRemoveLineWhenBlank="true" uuid="e03dbced-716b-4ce3-8dcc-4adbe830e98d">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{porcentajeDescuento} != 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{porcentajeDescuento} + " %:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="20" width="105" height="20" isRemoveLineWhenBlank="true" uuid="df8ffaf6-d0d5-468e-b8ca-0ae740f1dda1">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{porcentajeDescuento} != 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(new Double($V{descuento}))]]></textFieldExpression>
 			</textField>
 		</band>
 	</lastPageFooter>

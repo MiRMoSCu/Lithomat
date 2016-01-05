@@ -23,6 +23,8 @@ function buscaCondicionesProduccion() {
 				if( objJson.existeRegistro ) {
 					if( objJson.condicionesProduccion != null || objJson.condicionesProduccion != "" || objJson.condicionesProduccion != "null" )
 						document,reporte_cotizacion.condiciones_produccion.value = objJson.condicionesProduccion;
+					else
+						document,reporte_cotizacion.condiciones_produccion.value = "";
 				} else {
 					alert("NUT no encontrado; favor de verificarlo.");
 				}
