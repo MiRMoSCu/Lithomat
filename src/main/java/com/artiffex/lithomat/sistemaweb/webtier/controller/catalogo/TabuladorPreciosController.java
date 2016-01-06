@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Maquina;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TabuladorPrecios;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoComplejidad;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPrecio;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.MaquinaService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TabuladorPreciosService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoComplejidadService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoPrecioService;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
 
@@ -33,6 +35,8 @@ public class TabuladorPreciosController {
 	@Resource
 	private MaquinaService maquinaService;
 	@Resource
+	private TipoComplejidadService tipoComplejidadService;
+	@Resource
 	private TipoPrecioService tipoPrecioService;
 
 	
@@ -43,14 +47,18 @@ public class TabuladorPreciosController {
 
 		List<TabuladorPrecios> listaTabuladorPrecios = tabuladorPreciosService.listaTabuladorPrecios();
 		List<ComboSelect> listaMaquina = maquinaService.listaComboSelect();
+		List<ComboSelect> listaTipoComplejidad = tipoComplejidadService.listaComboSelect();
 		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();
+		
 		model.addAttribute("listaTabuladorPrecios", listaTabuladorPrecios);
 		model.addAttribute("listaMaquina", listaMaquina);
+		model.addAttribute("listaTipoComplejidad", listaTipoComplejidad);
 		model.addAttribute("listaTipoPrecio", listaTipoPrecio);
 
-		listaTabuladorPrecios = null;
-		listaMaquina = null;
-		listaTipoPrecio = null;
+		listaTabuladorPrecios 	= null;
+		listaMaquina 			= null;
+		listaTipoComplejidad	= null;
+		listaTipoPrecio 		= null;
 		
 		return "catalogo/tabulador_precios";
 	}// lista_tabulador_precios
@@ -63,9 +71,8 @@ public class TabuladorPreciosController {
 			@RequestParam(value = "descripcion", 					required = false) String descripcion,
 			@RequestParam(value = "inicio_tabulador", 				required = false) Integer inicioTabulador,
 			@RequestParam(value = "fin_tabulador", 					required = false) Integer finTabulador,
-			@RequestParam(value = "precio_complejidad_sencilla",	required = false) float precioComplejidadSencilla,
-			@RequestParam(value = "precio_complejidad_regular",		required = false) float precioComplejidadRegular,
-			@RequestParam(value = "precio_complejidad_dificil",		required = false) float precioComplejidadDificil,
+			@RequestParam(value = "id_tipo_complejidad", 			required = false) Integer idTipoComplejidad,
+			@RequestParam(value = "precio",							required = false) float precio,
 			@RequestParam(value = "id_tipo_precio", 				required = false) Integer idTipoPrecio,
 			Model model
 		) throws IOException {
@@ -79,9 +86,10 @@ public class TabuladorPreciosController {
 		tabuladorPrecios.setDescripcion(descripcion);
 		tabuladorPrecios.setInicioTabulador(inicioTabulador);
 		tabuladorPrecios.setFinTabulador(finTabulador);
-		tabuladorPrecios.setPrecioComplejidadSencilla(precioComplejidadSencilla);
-		tabuladorPrecios.setPrecioComplejidadRegular(precioComplejidadRegular);
-		tabuladorPrecios.setPrecioComplejidadDificil(precioComplejidadDificil);
+			TipoComplejidad tipoComplejidad = new TipoComplejidad();
+			tipoComplejidad.setIdTipoComplejidad(idTipoComplejidad);
+		tabuladorPrecios.setTipoComplejidad(tipoComplejidad);
+		tabuladorPrecios.setPrecio(precio);
 			TipoPrecio tipoPrecio = new TipoPrecio();
 			tipoPrecio.setIdTipoPrecio(idTipoPrecio);
 		tabuladorPrecios.setTipoPrecio(tipoPrecio);
@@ -91,17 +99,21 @@ public class TabuladorPreciosController {
 
 		List<TabuladorPrecios> listaTabuladorPrecios = tabuladorPreciosService.listaTabuladorPrecios();
 		List<ComboSelect> listaMaquina = maquinaService.listaComboSelect();
+		List<ComboSelect> listaTipoComplejidad = tipoComplejidadService.listaComboSelect();
 		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();
+		
 		model.addAttribute("listaTabuladorPrecios", listaTabuladorPrecios);
 		model.addAttribute("listaMaquina", listaMaquina);
+		model.addAttribute("listaTipoComplejidad", listaTipoComplejidad);
 		model.addAttribute("listaTipoPrecio", listaTipoPrecio);
 
-		tabuladorPrecios = null;
-		maquina = null;
-		tipoPrecio = null;
-		listaTabuladorPrecios = null;
-		listaMaquina = null;
-		listaTipoPrecio = null;
+		tabuladorPrecios 		= null;
+		maquina 				= null;
+		tipoPrecio 				= null;
+		listaTabuladorPrecios 	= null;
+		listaMaquina 			= null;
+		listaTipoComplejidad 	= null;
+		listaTipoPrecio 		= null;
 		
 		return "catalogo/tabulador_precios";
 	}// alta_tabulador_precios
@@ -115,9 +127,8 @@ public class TabuladorPreciosController {
 			@RequestParam(value = "descripcion", 					required = false) String descripcion,
 			@RequestParam(value = "inicio_tabulador", 				required = false) Integer inicioTabulador,
 			@RequestParam(value = "fin_tabulador", 					required = false) Integer finTabulador,
-			@RequestParam(value = "precio_complejidad_sencilla",	required = false) float precioComplejidadSencilla,
-			@RequestParam(value = "precio_complejidad_regular",		required = false) float precioComplejidadRegular,
-			@RequestParam(value = "precio_complejidad_dificil",		required = false) float precioComplejidadDificil,
+			@RequestParam(value = "id_tipo_complejidad", 			required = false) Integer idTipoComplejidad,
+			@RequestParam(value = "precio",							required = false) float precio,
 			@RequestParam(value = "id_tipo_precio", 				required = false) Integer idTipoPrecio,
 			Model model
 		) throws IOException {
@@ -129,24 +140,27 @@ public class TabuladorPreciosController {
 		tabuladorPrecios.setDescripcion(descripcion);
 		tabuladorPrecios.setInicioTabulador(inicioTabulador);
 		tabuladorPrecios.setFinTabulador(finTabulador);
-		tabuladorPrecios.setPrecioComplejidadSencilla(precioComplejidadSencilla);
-		tabuladorPrecios.setPrecioComplejidadRegular(precioComplejidadRegular);
-		tabuladorPrecios.setPrecioComplejidadDificil(precioComplejidadDificil);
+		tabuladorPrecios.getTipoComplejidad().setIdTipoComplejidad(idTipoComplejidad);
+		tabuladorPrecios.setPrecio(precio);
 		tabuladorPrecios.getTipoPrecio().setIdTipoPrecio(idTipoPrecio);
 		
 		tabuladorPreciosService.modificaTabuladorPrecios(tabuladorPrecios);
 
 		List<TabuladorPrecios> listaTabuladorPrecios = tabuladorPreciosService.listaTabuladorPrecios();
 		List<ComboSelect> listaMaquina = maquinaService.listaComboSelect();
+		List<ComboSelect> listaTipoComplejidad = tipoComplejidadService.listaComboSelect();
 		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();
+		
 		model.addAttribute("listaTabuladorPrecios", listaTabuladorPrecios);
 		model.addAttribute("listaMaquina", listaMaquina);
+		model.addAttribute("listaTipoComplejidad", listaTipoComplejidad);
 		model.addAttribute("listaTipoPrecio", listaTipoPrecio);
 
-		tabuladorPrecios = null;
-		listaTabuladorPrecios = null;
-		listaMaquina = null;
-		listaTipoPrecio = null;
+		tabuladorPrecios 		= null;
+		listaTabuladorPrecios 	= null;
+		listaMaquina 			= null;
+		listaTipoComplejidad 	= null;
+		listaTipoPrecio 		= null;
 		
 		return "catalogo/tabulador_precios";
 	}// modifica_tabulador_precios
@@ -166,14 +180,18 @@ public class TabuladorPreciosController {
 
 		List<TabuladorPrecios> listaTabuladorPrecios = tabuladorPreciosService.listaTabuladorPrecios();
 		List<ComboSelect> listaMaquina = maquinaService.listaComboSelect();
+		List<ComboSelect> listaTipoComplejidad = tipoComplejidadService.listaComboSelect();
 		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();
+		
 		model.addAttribute("listaTabuladorPrecios", listaTabuladorPrecios);
 		model.addAttribute("listaMaquina", listaMaquina);
+		model.addAttribute("listaTipoComplejidad", listaTipoComplejidad);
 		model.addAttribute("listaTipoPrecio", listaTipoPrecio);
 
-		listaTabuladorPrecios = null;
-		listaMaquina = null;
-		listaTipoPrecio = null;
+		listaTabuladorPrecios 	= null;
+		listaMaquina 			= null;
+		listaTipoComplejidad	= null;
+		listaTipoPrecio 		= null;
 		
 		return "catalogo/tabulador_precios";
 	}// elimina_tabulador_precios

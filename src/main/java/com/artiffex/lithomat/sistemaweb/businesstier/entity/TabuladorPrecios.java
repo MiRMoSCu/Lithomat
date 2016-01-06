@@ -12,9 +12,8 @@ public class TabuladorPrecios implements Serializable {
 	private String descripcion;
 	private int inicioTabulador;
 	private int finTabulador;
-	private float precioComplejidadSencilla;
-	private float precioComplejidadRegular;
-	private float precioComplejidadDificil;
+	private TipoComplejidad tipoComplejidad;
+	private float precio;
 	private TipoPrecio tipoPrecio;
 	private boolean activo;
 	
@@ -55,23 +54,17 @@ public class TabuladorPrecios implements Serializable {
 	public void setFinTabulador(int finTabulador) {
 		this.finTabulador = finTabulador;
 	}
-	public float getPrecioComplejidadSencilla() {
-		return precioComplejidadSencilla;
+	public TipoComplejidad getTipoComplejidad() {
+		return tipoComplejidad;
 	}
-	public void setPrecioComplejidadSencilla(float precioComplejidadSencilla) {
-		this.precioComplejidadSencilla = precioComplejidadSencilla;
+	public void setTipoComplejidad(TipoComplejidad tipoComplejidad) {
+		this.tipoComplejidad = tipoComplejidad;
 	}
-	public float getPrecioComplejidadRegular() {
-		return precioComplejidadRegular;
+	public float getPrecio() {
+		return precio;
 	}
-	public void setPrecioComplejidadRegular(float precioComplejidadRegular) {
-		this.precioComplejidadRegular = precioComplejidadRegular;
-	}
-	public float getPrecioComplejidadDificil() {
-		return precioComplejidadDificil;
-	}
-	public void setPrecioComplejidadDificil(float precioComplejidadDificil) {
-		this.precioComplejidadDificil = precioComplejidadDificil;
+	public void setPrecio(float precio) {
+		this.precio = precio;
 	}
 	public TipoPrecio getTipoPrecio() {
 		return tipoPrecio;
@@ -85,5 +78,4 @@ public class TabuladorPrecios implements Serializable {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-		
 }

@@ -638,9 +638,8 @@ CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`tabulador_precios` (
   `descripcion` VARCHAR(250) NULL,
   `inicio_tabulador` INT NULL,
   `fin_tabulador` INT NULL,
-  `precio_complejidad_sencilla` FLOAT NULL,
-  `precio_complejidad_regular` FLOAT NULL,
-  `precio_complejidad_dificil` FLOAT NULL,
+  `id_tipo_complejidad` INT UNSIGNED NOT NULL,
+  `precio` FLOAT NULL,
   `id_tipo_precio` INT UNSIGNED NOT NULL,
   `activo` TINYINT(1) NULL,
   `filler_varchar_1` VARCHAR(250) NULL,
@@ -652,6 +651,7 @@ CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`tabulador_precios` (
   PRIMARY KEY (`id_tabulador_precios`),
   INDEX `fk_tabulador_precios_maquina1_idx` (`id_maquina` ASC),
   INDEX `fk_tabulador_precios_tipo_precio1_idx` (`id_tipo_precio` ASC),
+  INDEX `fk_tabulador_precios_tipo_complejidad1_idx` (`id_tipo_complejidad` ASC),
   CONSTRAINT `fk_tabulador_precios_maquina1`
     FOREIGN KEY (`id_maquina`)
     REFERENCES `lithomat_artiffex`.`maquina` (`id_maquina`)
@@ -660,6 +660,11 @@ CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`tabulador_precios` (
   CONSTRAINT `fk_tabulador_precios_tipo_precio1`
     FOREIGN KEY (`id_tipo_precio`)
     REFERENCES `lithomat_artiffex`.`tipo_precio` (`id_tipo_precio`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tabulador_precios_tipo_complejidad1`
+    FOREIGN KEY (`id_tipo_complejidad`)
+    REFERENCES `lithomat_artiffex`.`tipo_complejidad` (`id_tipo_complejidad`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

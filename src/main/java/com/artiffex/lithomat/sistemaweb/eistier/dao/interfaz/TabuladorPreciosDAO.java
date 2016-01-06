@@ -10,7 +10,7 @@ public interface TabuladorPreciosDAO {
 	
 	public TabuladorPrecios busca(int idTabuladorPrecios);
 	
-	public float buscaPrecioTabulador(String sqlQuery, int idMaquina, int cantidad);
+	public float buscaPrecioTabulador(String sqlQuery);
 
 	public void modifica(TabuladorPrecios tabuladorPrecios);
 

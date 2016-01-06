@@ -37,31 +37,27 @@ public class TabuladorPreciosServiceImpl implements TabuladorPreciosService {
 		StringBuilder sqlQuery = new StringBuilder();
 		
 		sqlQuery.append("SELECT ");
-		switch( idTipoComplejidad ) {
-			case 1:
-				sqlQuery.append("CAST((tp.precio_complejidad_sencilla / tipo_precio.factor_divisor) AS DECIMAL (6,3)) precio_unitario ");
-				break;
-			case 2:
-				sqlQuery.append("CAST((tp.precio_complejidad_regular / tipo_precio.factor_divisor) AS DECIMAL (6,3)) precio_unitario ");
-				break;
-			case 3:
-				sqlQuery.append("CAST((tp.precio_complejidad_dificil / tipo_precio.factor_divisor) AS DECIMAL (6,3)) precio_unitario ");
-				break;
-			default:
-				sqlQuery.append("CAST((tp.precio_complejidad_regular / tipo_precio.factor_divisor) AS DECIMAL (6,3)) precio_unitario ");
-				break;
-		}
+		sqlQuery.append("CAST((tp.precio / tprecio.factor_divisor) AS DECIMAL (6,3)) precio_unitario ");
 		sqlQuery.append("FROM ");
-		sqlQuery.append("maquina m, tabulador_precios tp, tipo_precio tipo_precio ");
+		sqlQuery.append("tabulador_precios tp, ");
+		sqlQuery.append("tipo_precio tprecio ");
 		sqlQuery.append("WHERE ");
-		sqlQuery.append("m.id_maquina = tp.id_maquina ");
-		sqlQuery.append("AND tp.id_tipo_precio = tipo_precio.id_tipo_precio ");
-		sqlQuery.append("AND tp.id_maquina = :idMaquina ");
-		sqlQuery.append("AND :cantidadMasUno > tp.inicio_tabulador ");
-		sqlQuery.append("AND :cantidadMenosUno < tp.fin_tabulador ");
+		sqlQuery.append("tp.id_tipo_precio = tprecio.id_tipo_precio ");
+		sqlQuery.append("AND tp.id_maquina = ");
+		sqlQuery.append(idMaquina);
+		sqlQuery.append(" ");
+		sqlQuery.append("AND tp.id_tipo_complejidad = ");
+		sqlQuery.append(idTipoComplejidad);
+		sqlQuery.append(" ");
+		sqlQuery.append("AND ");
+		sqlQuery.append(cantidad + 1);
+		sqlQuery.append(" > tp.inicio_tabulador ");
+		sqlQuery.append("AND ");
+		sqlQuery.append(cantidad - 1);
+		sqlQuery.append(" < tp.fin_tabulador ");
 		sqlQuery.append("AND tp.activo = TRUE;");
 		
-		precioUnitario = tabuladorPreciosDAO.buscaPrecioTabulador(sqlQuery.toString(), idMaquina, cantidad);
+		precioUnitario = tabuladorPreciosDAO.buscaPrecioTabulador(sqlQuery.toString());
 		
 		sqlQuery = null;
 		return precioUnitario;

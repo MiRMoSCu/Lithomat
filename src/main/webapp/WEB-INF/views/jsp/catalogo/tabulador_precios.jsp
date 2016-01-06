@@ -99,23 +99,21 @@
                                                         <th>Descripci&oacute;n</th>
                                                         <th>Inicio</th>
                                                         <th>Fin</th>
-                                                        <th>P.C. Senc.</th>
-                                                        <th>P.C. Reg</th>
-                                                        <th>P.C. Dif.</th>
+                                                        <th>Complejidad</th>
+                                                        <th>Precio</th>
                                                         <th>Unidad</th>
                                                     </tr>
                                                 <c:forEach var="tabuladorPrecios" items="${listaTabuladorPrecios}" varStatus="i">
                                                     <tr class='${i.count%2==0?"l2":"l1"}'
-                                                        onclick="setCampos('${tabuladorPrecios.idTabuladorPrecios}','${tabuladorPrecios.maquina.nombre}','${tabuladorPrecios.nombreInsumo}','${tabuladorPrecios.descripcion}','${tabuladorPrecios.inicioTabulador}','${tabuladorPrecios.finTabulador}','${tabuladorPrecios.precioComplejidadSencilla}','${tabuladorPrecios.precioComplejidadRegular}','${tabuladorPrecios.precioComplejidadDificil}','${tabuladorPrecios.tipoPrecio.nombre}');">
+                                                        onclick="setCampos('${tabuladorPrecios.idTabuladorPrecios}','${tabuladorPrecios.maquina.nombre}','${tabuladorPrecios.nombreInsumo}','${tabuladorPrecios.descripcion}','${tabuladorPrecios.inicioTabulador}','${tabuladorPrecios.finTabulador}','${tabuladorPrecios.tipoComplejidad.nombre}','${tabuladorPrecios.precio}','${tabuladorPrecios.tipoPrecio.nombre}');">
                                                         <td>${tabuladorPrecios.idTabuladorPrecios}</td>
                                                         <td>${tabuladorPrecios.maquina.nombre}</td>
                                                         <td>${tabuladorPrecios.nombreInsumo}</td>
                                                         <td>${tabuladorPrecios.descripcion}</td>
                                                         <td>${tabuladorPrecios.inicioTabulador}</td>
                                                         <td>${tabuladorPrecios.finTabulador}</td>
-                                                        <td>${tabuladorPrecios.precioComplejidadSencilla}</td>
-                                                        <td>${tabuladorPrecios.precioComplejidadRegular}</td>
-                                                        <td>${tabuladorPrecios.precioComplejidadDificil}</td>
+                                                        <td>${tabuladorPrecios.tipoComplejidad.nombre}</td>
+                                                        <td>${tabuladorPrecios.precio}</td>
                                                         <td>${tabuladorPrecios.tipoPrecio.nombre}</td>
                                                     </tr>
                                                 </c:forEach>
@@ -214,10 +212,13 @@
                                                 <div class="mitad_columna_izquierda">
                                                     <table>
                                                         <tr>
-                                                            <td width="60%">Precio C. Sencilla:</td>
+                                                            <td width="60%">Complejidad:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="precio_complejidad_sencilla" value=""
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+                                                                <select name="id_tipo_complejidad" onchange="">
+                                                                    <c:forEach var="complejidad" items="${listaTipoComplejidad}">
+                                                                        <option value="${complejidad.value}">${complejidad.text}</option>
+                                                                    </c:forEach>
+                                                                </select>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -225,9 +226,9 @@
                                                 <div class="mitad_columna_derecha">
                                                     <table>
                                                         <tr>
-                                                            <td width="60%">Precio C. Regular:</td>
+                                                            <td width="1%">Precio:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="precio_complejidad_regular" value=""
+                                                                <input type="text" class="input" name="precio" value=""
                                                                        onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
                                                             </td>
                                                         </tr>
@@ -236,17 +237,6 @@
                                             </div>
                                         	<div class="columna_derecha">
                                         		<div class="mitad_columna_izquierda">
-                                        			<table>
-                                        				<tr>
-                                        					<td width="56%">Precio C. Dificil:</td>
-                                                            <td>
-                                                                <input type="text" class="input" name="precio_complejidad_dificil" value=""
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
-                                                            </td>
-                                        				</tr>
-                                        			</table>
-                                        		</div>
-                                        		<div class="mitad_columna_derecha">
                                         			<table>
                                         				<tr>
                                         					<td width="1%">Unidad:</td>

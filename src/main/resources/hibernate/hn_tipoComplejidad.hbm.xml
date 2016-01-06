@@ -28,5 +28,11 @@
 			</key>
 			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajoDetalle"/>
 		</set>
+		<set name="tabuladorPrecios" table="tabulador_precios" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_tipo_complejidad" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TabuladorPrecios"/>
+		</set>
 	</class>
 </hibernate-mapping>

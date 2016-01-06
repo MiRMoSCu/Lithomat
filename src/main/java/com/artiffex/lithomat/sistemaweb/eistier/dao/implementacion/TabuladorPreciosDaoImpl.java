@@ -54,15 +54,12 @@ public class TabuladorPreciosDaoImpl implements TabuladorPreciosDAO {
 		return tabuladorPrecios;
 	}
 	
-	public float buscaPrecioTabulador(String sqlQuery, int idMaquina, int cantidad) {
+	public float buscaPrecioTabulador(String sqlQuery) {
 		float precioTabulador = 0f;
 		try {
 			sesion = HibernateUtil.getInstance().getCurrentSession();
 			sesion.beginTransaction();
 			SQLQuery query = sesion.createSQLQuery(sqlQuery);
-			query.setParameter("idMaquina", idMaquina);
-			query.setParameter("cantidadMasUno", cantidad+1);
-			query.setParameter("cantidadMenosUno", cantidad-1);
 			precioTabulador = ((BigDecimal)query.uniqueResult()).floatValue();
 			sesion.getTransaction().commit();
 			query = null;
@@ -91,7 +88,7 @@ public class TabuladorPreciosDaoImpl implements TabuladorPreciosDAO {
 		try {
 			sesion = HibernateUtil.getInstance().getCurrentSession();
 			sesion.beginTransaction();
-			lista = sesion.createQuery("from TabuladorPrecios tp where tp.activo = true order by tp.maquina.idMaquina asc, tp.inicioTabulador asc").list();
+			lista = sesion.createQuery("from TabuladorPrecios tp where tp.activo = true order by tp.maquina.idMaquina asc, tp.tipoComplejidad asc, tp.inicioTabulador asc").list();
 			sesion.getTransaction().commit();
 		} catch(Exception e) {
 			log.error(e.getMessage());

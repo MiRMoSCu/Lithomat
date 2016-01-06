@@ -14,6 +14,7 @@ public class TipoComplejidad implements Serializable {
 	private boolean activo;
 	// esta clase esta relacionada [uno a muchos] con las tablas:
 	private Set<TipoTrabajoDetalle> tipoTrabajoDetalle = new HashSet<TipoTrabajoDetalle>();
+	private Set<TabuladorPrecios> tabuladorPrecios = new HashSet<TabuladorPrecios>();
 	
 	
 	public int getIdTipoComplejidad() {
@@ -46,5 +47,10 @@ public class TipoComplejidad implements Serializable {
 	public void setTipoTrabajoDetalle(Set<TipoTrabajoDetalle> tipoTrabajoDetalle) {
 		this.tipoTrabajoDetalle = tipoTrabajoDetalle;
 	}
-	
+	public Set<TabuladorPrecios> getTabuladorPrecios() {
+		return tabuladorPrecios;
+	}
+	public void setTabuladorPrecios(Set<TabuladorPrecios> tabuladorPrecios) {
+		this.tabuladorPrecios = tabuladorPrecios;
+	}
 }
