@@ -42,6 +42,7 @@
 <c:url value="/turno_laboral/catalogo/lista" 			var="urlTurnoLaboral" />
 <!-- SEGURIDAD -->
 <c:url value="/cambio_estatus/ventana"					var="urlVentanaCambioEstatus" />
+<c:url value="/contrasenia/ventana"						var="urlVentanaCambioContrasenia" />
 <c:url value="/descuento/ventana"						var="urlVentanaDescuento" />
 <c:url value="/perfil/catalogo/lista" 					var="urlPerfil" />
 <c:url value="/perfil_x_usuario/catalogo/lista" 		var="urlPerfilXUsuario" />
@@ -103,6 +104,7 @@
             var urlTurnoLaboral					= '${urlTurnoLaboral}';
          // *** Seguridad
          	var urlVentanaCambioEstatus			= '${urlVentanaCambioEstatus}';
+         	var urlVentanaCambioContrasenia		= '${urlVentanaCambioContrasenia}';
          	var urlVentanaDescuento				= '${urlVentanaDescuento}';
             var urlPerfil						= '${urlPerfil}';
             var urlPerfilXUsuario				= '${urlPerfilXUsuario}';
@@ -149,6 +151,7 @@
             var urlTurnoLaboral					= '${urlTurnoLaboral}';
          // *** Seguridad
          	var urlVentanaCambioEstatus			= '${urlVentanaCambioEstatus}';
+         	var urlVentanaCambioContrasenia		= '${urlVentanaCambioContrasenia}';
          // ***
             var urlSalir						= '${urlSalir}';
        	</script>
@@ -166,6 +169,7 @@
             var urlCliente						= '${urlCliente}';
             var urlTipoPapelExtendido			= '${urlTipoPapelExtendido}';
          // *** Seguridad
+         	var urlVentanaCambioContrasenia		= '${urlVentanaCambioContrasenia}';
          // ***
             var urlSalir						= '${urlSalir}';
        	</script>
@@ -424,6 +428,18 @@
                     		}
                     	});
                     	break;
+                    case 'ventana_cambio_contrasenia':
+                    	Shadowbox.open({
+                    		content:urlVentanaCambioContrasenia,
+                    		player:'iframe',
+                    		width:600,
+                    		height:345,
+                    		options:{
+                    			modal:true,
+                    			overlayOpacity:0.75
+                    		}
+                    	});
+                    	break;
                     case 'ventana_descuento':
                     	Shadowbox.open({
                     		content:urlVentanaDescuento,
@@ -638,6 +654,9 @@
                                 			<div id="div_opcion_cambio_estatus" class="boton_dinamico" onclick="menu('ventana_cambio_estatus');">
                                 				<span class="texto_boton">Cambio estatus</span>
                                 			</div>
+                                			<div id="div_opcion_cambio_contrasenia" class="boton_dinamico" onclick="menu('ventana_cambio_contrasenia');">
+                                				<span class="texto_boton">Contrase&ntilde;a</span>
+                                			</div>
                                 			<div id="div_opcion_descuento" class="boton_dinamico" onclick="menu('ventana_descuento');">
                                 				<span class="texto_boton">Descuento</span>
                                 			</div>
@@ -761,6 +780,9 @@
                                 			<div id="div_opcion_cambio_estatus" class="boton_dinamico" onclick="menu('ventana_cambio_estatus');">
                                 				<span class="texto_boton">Cambio estatus</span>
                                 			</div>
+                                			<div id="div_opcion_cambio_contrasenia" class="boton_dinamico" onclick="menu('ventana_cambio_contrasenia');">
+                                				<span class="texto_boton">Contrase&ntilde;a</span>
+                                			</div>
                                 		</div>
                                 	</security:authorize>
                                 	
@@ -797,6 +819,9 @@
                                 		</div>
                                 		<div id="div_pestania_seguridad" style="display:none; background-color: transparent;">
 	                                		<div class="titulo_menu">SEGURIDAD</div>
+	                                		<div id="div_opcion_cambio_contrasenia" class="boton_dinamico" onclick="menu('ventana_cambio_contrasenia');">
+                                				<span class="texto_boton">Contrase&ntilde;a</span>
+                                			</div>
                                 		</div>
                                 	</security:authorize>
                                 	

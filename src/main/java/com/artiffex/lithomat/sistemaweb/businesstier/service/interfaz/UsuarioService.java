@@ -11,6 +11,8 @@ public interface UsuarioService {
 	
 	public Usuario buscaUsuario(int idUsuario);
 	
+	public Usuario buscaUsuario(String nombreUsuario);
+	
 	public void modificaUsuario(Usuario usuario);
 	
 	public List<Usuario> listaUsuario();

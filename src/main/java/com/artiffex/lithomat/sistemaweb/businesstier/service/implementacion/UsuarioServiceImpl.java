@@ -30,6 +30,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public Usuario buscaUsuario(int idUsuario) {
 		return usuarioDAO.busca(idUsuario);
 	}
+	
+	public Usuario buscaUsuario(String nombreUsuario) {
+		return usuarioDAO.busca(nombreUsuario);
+	}
 
 	public List<Usuario> listaUsuario() {
 		return usuarioDAO.lista();

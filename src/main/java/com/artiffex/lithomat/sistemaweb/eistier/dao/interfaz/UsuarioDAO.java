@@ -10,6 +10,8 @@ public interface UsuarioDAO {
 	
 	public Usuario busca(int idUsuario);
 	
+	public Usuario busca(String nombreUsuario);
+	
 	public void modifica(Usuario usuario);
 	
 	public List<Usuario> lista();

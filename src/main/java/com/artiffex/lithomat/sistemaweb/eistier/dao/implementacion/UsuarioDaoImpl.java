@@ -51,6 +51,23 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 		}
 		return usuario;
 	}
+	
+	public Usuario busca(String nombreUsuario) {
+		Usuario usuario = null;
+		try {
+			sesion = HibernateUtil.getInstance().getCurrentSession();
+			sesion.beginTransaction();
+			Query query = sesion.createQuery("from Usuario u where u.usuario = :nombreUsuario");
+			query.setParameter("nombreUsuario", nombreUsuario);
+			usuario = (Usuario)query.uniqueResult();
+			sesion.getTransaction().commit();
+			query = null;
+		} catch(Exception e) {
+			log.error(e.getMessage());
+			sesion.getTransaction().rollback();
+		}
+		return usuario;
+	}
 
 	public void modifica(Usuario usuario) {
 		try {

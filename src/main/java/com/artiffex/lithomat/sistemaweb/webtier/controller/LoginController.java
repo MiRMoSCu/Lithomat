@@ -14,9 +14,7 @@ public class LoginController {
 
 	
 	@RequestMapping("/")
-	public String welcomeFile(
-			Model model
-		) {
+	public String welcomeFile( Model model ) {
 		log.info("/");
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("user",user.getUsername());
