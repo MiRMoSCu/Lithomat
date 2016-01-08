@@ -55,7 +55,8 @@ public class CambioEstatusController {
 	@ResponseBody
 	public boolean cambioEstatus( 
 			@RequestParam(value = "nut", 				required = false) String nut,
-			@RequestParam(value = "id_estatus_orden",	required = false) Integer idEstatusOrden
+			@RequestParam(value = "id_estatus_orden",	required = false) Integer idEstatusOrden,
+			@RequestParam(value = "observaciones",		required = false) String observaciones
 		) throws IOException {
 		log.info("/cambio_estatus/ventana_cambio_estatus");
 		
@@ -68,6 +69,7 @@ public class CambioEstatusController {
 			estatusOrden.setIdEstatusOrden(idEstatusOrden);
 		historialEstatus.setEstatusOrden(estatusOrden);
 		historialEstatus.setFecha(fechaGeneracion);
+		historialEstatus.setObservaciones(observaciones);
 		historialEstatus.setActivo(true);
 		
 		historialEstatusService.creaHistorialEstatus(historialEstatus);

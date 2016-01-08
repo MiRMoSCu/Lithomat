@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`orden_produccion` (
   `id_usuario` INT UNSIGNED NOT NULL,
   `id_cliente` INT UNSIGNED NOT NULL,
   `id_tipo_comprobante_fiscal` INT UNSIGNED NOT NULL,
-  `nut` VARCHAR(12) NULL,
+  `nut` VARCHAR(10) NULL,
   `nombre` VARCHAR(120) NULL,
   `descripcion` VARCHAR(500) NULL,
   `fecha_cotizacion` TIMESTAMP NULL,

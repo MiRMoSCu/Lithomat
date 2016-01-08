@@ -12,7 +12,7 @@
 
 #div_hoja {
     width: 499px;
-    height: 150px; /* AQUI SE MODIFICA TAMAÑO*/
+    height: 185px; /* AQUI SE MODIFICA TAMAÑO*/
     float: left;
     background-color: #fff;
 }
@@ -31,7 +31,7 @@
 
 #div_fondo_der{
     width: 29px;
-    height: 119px;	/* div_hoja - 31 */
+    height: 154px;	/* div_hoja - 31 */
     background-image: url('../image/s_der.png');
     background-repeat: repeat-y;
 }

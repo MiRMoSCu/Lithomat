@@ -38,8 +38,8 @@
 <c:url value="/tipo_placa/catalogo/lista" 				var="urlTipoPlaca" />
 <c:url value="/tipo_precio/catalogo/lista" 				var="urlTipoPrecio" />
 <c:url value="/tipo_trabajo/catalogo/lista" 			var="urlTipoTrabajo" />
-<c:url value="/turno_laboral/catalogo/lista" 			var="urlTurnoLaboral" />
 <c:url value="/tipo_vuelta/catalogo/lista" 				var="urlTipoVuelta" />
+<c:url value="/turno_laboral/catalogo/lista" 			var="urlTurnoLaboral" />
 <!-- SEGURIDAD -->
 <c:url value="/cambio_estatus/ventana"					var="urlVentanaCambioEstatus" />
 <c:url value="/descuento/ventana"						var="urlVentanaDescuento" />
@@ -48,7 +48,6 @@
 <c:url value="/usuario/catalogo/lista" 					var="urlUsuario" />
 <!-- CERRAR SESION -->
 <c:url value="/j_spring_security_logout" 				var="urlSalir" />
-
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
@@ -62,15 +61,17 @@
 	     	// inicializacion shadowbox
 	        Shadowbox.init({});
         </script>
-        <script type="text/javascript">
+	<security:authorize access="hasRole('ROLE_ROOT')">
+       	<script type="text/javascript">
+       	// *** Produccion
         	var urlOrdenProduccion 				= '${urlOrdenProduccion}';	
         	var urlVisualizador					= '${urlVisualizador}';
-        // ***
+        // *** Reportes
         	var urlVentanaOrdenProduccion		= '${urlVentanaOrdenProduccion}';
         	var urlVentanaCotizacion			= '${urlVentanaCotizacion}';
         	var urlVentanaNotaRemisionFactura	= '${urlVentanaNotaRemisionFactura}';
         	var urlVentanaColaImpresion			= '${urlVentanaColaImpresion}';
-        // ***
+        // *** Catalogos
             var urlCliente						= '${urlCliente}';
             var urlCombinacionTintas			= '${urlCombinacionTintas}';
             var urlCostoExtra					= '${urlCostoExtra}';
@@ -98,9 +99,9 @@
             var urlTipoPlaca					= '${urlTipoPlaca}';
             var urlTipoPrecio					= '${urlTipoPrecio}';
             var urlTipoTrabajo					= '${urlTipoTrabajo}';
-            var urlTurnoLaboral					= '${urlTurnoLaboral}';
             var urlTipoVuelta					= '${urlTipoVuelta}';
-         // ***
+            var urlTurnoLaboral					= '${urlTurnoLaboral}';
+         // *** Seguridad
          	var urlVentanaCambioEstatus			= '${urlVentanaCambioEstatus}';
          	var urlVentanaDescuento				= '${urlVentanaDescuento}';
             var urlPerfil						= '${urlPerfil}';
@@ -108,7 +109,69 @@
             var urlUsuario						= '${urlUsuario}';
          // ***
             var urlSalir						= '${urlSalir}';
-            
+       	</script>
+	</security:authorize>
+	<security:authorize access="hasRole('ROLE_ADMIN')">
+		<script type="text/javascript">
+		// *** Produccion
+        	var urlOrdenProduccion 				= '${urlOrdenProduccion}';	
+        	var urlVisualizador					= '${urlVisualizador}';
+        // *** Reportes
+        	var urlVentanaOrdenProduccion		= '${urlVentanaOrdenProduccion}';
+        	var urlVentanaCotizacion			= '${urlVentanaCotizacion}';
+        	var urlVentanaNotaRemisionFactura	= '${urlVentanaNotaRemisionFactura}';
+        	var urlVentanaColaImpresion			= '${urlVentanaColaImpresion}';
+        // *** Catalogos
+            var urlCliente						= '${urlCliente}';
+            var urlCombinacionTintas			= '${urlCombinacionTintas}';
+            var urlCostoExtra					= '${urlCostoExtra}';
+            var urlMaquina						= '${urlMaquina}';
+            var urlMaterialAyuda				= '${urlMaterialAyuda}';
+            var urlPapelSobrante				= '${urlPapelSobrante}';
+            var urlPrensista					= '${urlPrensista}';
+            var urlProcesoDisenio				= '${urlProcesoDisenio}';
+            var urlProcesoExterno				= '${urlProcesoExterno}';
+            var urlProcesoPreprensa				= '${urlProcesoPreprensa}';
+            var urlProcesoTransporte			= '${urlProcesoTransporte}';
+            var urlProveedorExterno				= '${urlProveedorExterno}';
+            var urlProveedorPapel				= '${urlProveedorPapel}';
+            var urlResponsableInsumo			= '${urlResponsableInsumo}';
+            var urlTabuladorPrecios				= '${urlTabuladorPrecios}';
+            var urlTamanioPublicacion			= '${urlTamanioPublicacion}';
+            var urlTintaEspecial				= '${urlTintaEspecial}';
+            var urlTipoBarniz					= '${urlTipoBarniz}';
+            var urlTipoCliente					= '${urlTipoCliente}';
+            var urlTipoComprobanteFiscal		= '${urlTipoComprobanteFiscal}';
+            var urlTipoFormaTrabajo				= '${urlTipoFormaTrabajo}';
+            var urlTipoPapelExtendido			= '${urlTipoPapelExtendido}';
+            var urlTipoPlaca					= '${urlTipoPlaca}';
+            var urlTipoVuelta					= '${urlTipoVuelta}';
+            var urlTurnoLaboral					= '${urlTurnoLaboral}';
+         // *** Seguridad
+         	var urlVentanaCambioEstatus			= '${urlVentanaCambioEstatus}';
+         // ***
+            var urlSalir						= '${urlSalir}';
+       	</script>
+	</security:authorize>
+	<security:authorize access="hasRole('ROLE_COTIZADOR')">
+		<script type="text/javascript">
+		// *** Produccion
+        	var urlOrdenProduccion 				= '${urlOrdenProduccion}';	
+        	var urlVisualizador					= '${urlVisualizador}';
+        // *** Reportes
+        	var urlVentanaOrdenProduccion		= '${urlVentanaOrdenProduccion}';
+        	var urlVentanaCotizacion			= '${urlVentanaCotizacion}';
+        	var urlVentanaNotaRemisionFactura	= '${urlVentanaNotaRemisionFactura}';
+        // *** Catalogos
+            var urlCliente						= '${urlCliente}';
+            var urlTipoPapelExtendido			= '${urlTipoPapelExtendido}';
+         // *** Seguridad
+         // ***
+            var urlSalir						= '${urlSalir}';
+       	</script>
+	</security:authorize>
+        <script type="text/javascript">
+        
             function menu_principal( opcion_principal ) {
             	switch( opcion_principal ) {
             		case 'produccion':
@@ -354,7 +417,7 @@
                     		content:urlVentanaCambioEstatus,
                     		player:'iframe',
                     		width:600,
-                    		height:310,
+                    		height:345,
                     		options:{
                     			modal:true,
                     			overlayOpacity:0.75
@@ -444,391 +507,302 @@
                         </div>
                         <div id="div_contenido">
                             <div id="div_formulario">
-                                <form name="opcion_menu" action="" accept-charset="ISO-8859-1"></form>
+                                <form name="opcion_menu" action="" accept-charset="ISO-8859-1">
                                 	<div id="div_pestania">
-						<!-- PESTAÑA PRODUCCION -->
+                                	
+                                	<security:authorize access="hasRole('ROLE_ROOT')">
                                 		<div id="div_pestania_produccion" style="display:block; background-color: transparent;">
                                 			<div class="titulo_menu">
                                 				PRODUCCI&Oacute;N
                                 			</div>
-                                		<!-- ROLE_ROOT -->
-                                			<security:authorize access="hasRole('ROLE_ROOT')">
-                                				<div id="div_opcion_orden_produccion" class="boton_dinamico" onclick="menu('orden_produccion');">
-                                					<span class="texto_boton">Orden Producci&oacute;n</span>
-	                                			</div>
-	                                			<div id="div_opcion_visualizador" class="boton_dinamico" onclick="menu('visualizador');">
-	                                				<span class="texto_boton">Visualizador</span>
-	                                			</div>
-							        		</security:authorize>
-							        	<!-- ROLE_ADMIN -->
-							        		<security:authorize access="hasRole('ROLE_ADMIN')">
-							        			<div id="div_opcion_orden_produccion" class="boton_dinamico" onclick="menu('orden_produccion');">
-                                					<span class="texto_boton">Orden Producci&oacute;n</span>
-	                                			</div>
-	                                			<div id="div_opcion_visualizador" class="boton_dinamico" onclick="menu('visualizador');">
-	                                				<span class="texto_boton">Visualizador</span>
-	                                			</div>
-							        		</security:authorize>
-							        	<!-- ROLE_COTIZADOR -->
-							        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
-							        			<div id="div_opcion_orden_produccion" class="boton_dinamico" onclick="menu('orden_produccion');">
-                                					<span class="texto_boton">Orden Producci&oacute;n</span>
-	                                			</div>
-	                                			<div id="div_opcion_visualizador" class="boton_dinamico" onclick="menu('visualizador');">
-	                                				<span class="texto_boton">Visualizador</span>
-	                                			</div>
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_DISEÑO')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_ACABADO')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_CLIENTE')">
-							        		
-							        		</security:authorize>
-	                                	</div>
-						<!-- PESTAÑA REPORTES -->
-	                                	<div id="div_pestania_reportes" style="display:none; background-color: transparent;">
+	                                		<div id="div_opcion_orden_produccion" class="boton_dinamico" onclick="menu('orden_produccion');">
+	                              					<span class="texto_boton">Orden Producci&oacute;n</span>
+	                               			</div>
+	                               			<div id="div_opcion_visualizador" class="boton_dinamico" onclick="menu('visualizador');">
+	                               				<span class="texto_boton">Visualizador</span>
+	                               			</div>
+	                               		</div>
+	                               		<div id="div_pestania_reportes" style="display:none; background-color: transparent;">
 	                                		<div class="titulo_menu">
                                 				REPORTES
                                 			</div>
-                                		<!-- ROLE_ROOT -->
-	                                		<security:authorize access="hasRole('ROLE_ROOT')">
-                                				<div id="div_opcion_reporte_orden_produccion" class="boton_dinamico" onclick="menu('ventana_reporte_orden_produccion');">
-                                					<span class="texto_boton">Orden Producci&oacute;n</span>
-	                                			</div>
-	                                			<div id="div_opcion_reporte_cotizacion" class="boton_dinamico" onclick="menu('ventana_reporte_cotizacion');">
-                                					<span class="texto_boton">Cotizaci&oacute;n</span>
-	                                			</div>
-	                                			<div id="div_opcion_reporte_nota_remision" class="boton_dinamico" onclick="menu('ventana_reporte_nota_remision');">
-                                					<span class="texto_boton">Nota <br/> Remisi&oacute;n / Factura</span>
-	                                			</div>
-	                                			<div id="div_opcion_reporte_cola_impresion" class="boton_dinamico" onclick="menu('ventana_reporte_cola_impresion');">
-                                					<span class="texto_boton">Cola Impresi&oacute;n</span>
-	                                			</div>
-							        		</security:authorize>
-							        	<!-- ROLE_ADMIN -->
-							        		<security:authorize access="hasRole('ROLE_ADMIN')">
-							        			<div id="div_opcion_reporte_orden_produccion" class="boton_dinamico" onclick="menu('ventana_reporte_orden_produccion');">
-                                					<span class="texto_boton">Orden Producci&oacute;n</span>
-	                                			</div>
-	                                			<div id="div_opcion_reporte_cotizacion" class="boton_dinamico" onclick="menu('ventana_reporte_cotizacion');">
-                                					<span class="texto_boton">Cotizaci&oacute;n</span>
-	                                			</div>
-	                                			<div id="div_opcion_reporte_nota_remision" class="boton_dinamico" onclick="menu('ventana_reporte_nota_remision');">
-                                					<span class="texto_boton">Nota <br/> Remisi&oacute;n / Factura</span>
-	                                			</div>
-	                                			<div id="div_opcion_reporte_cola_impresion" class="boton_dinamico" onclick="menu('ventana_reporte_cola_impresion');">
-                                					<span class="texto_boton">Cola Impresi&oacute;n</span>
-	                                			</div>
-							        		</security:authorize>
-							        	<!-- ROLE_COTIZADORT -->
-							        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
-							        			<div id="div_opcion_reporte_orden_produccion" class="boton_dinamico" onclick="menu('ventana_reporte_orden_produccion');">
-                                					<span class="texto_boton">Orden Producci&oacute;n</span>
-	                                			</div>
-	                                			<div id="div_opcion_reporte_cotizacion" class="boton_dinamico" onclick="menu('ventana_reporte_cotizacion');">
-                                					<span class="texto_boton">Cotizaci&oacute;n</span>
-	                                			</div>
-	                                			<div id="div_opcion_reporte_nota_remision" class="boton_dinamico" onclick="menu('ventana_reporte_nota_remision');">
-                                					<span class="texto_boton">Nota <br/> Remisi&oacute;n / Factura</span>
-	                                			</div>
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_DISEÑO')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_ACABADO')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_CLIENTE')">
-							        		
-							        		</security:authorize>
-	                                	</div>
-						<!-- PESTAÑA CATALOGOS -->
-	                                	<div id="div_pestania_catalogos" style="display:none; background-color: transparent;">
+                                			<div id="div_opcion_reporte_orden_produccion" class="boton_dinamico" onclick="menu('ventana_reporte_orden_produccion');">
+                               					<span class="texto_boton">Orden Producci&oacute;n</span>
+                                			</div>
+                                			<div id="div_opcion_reporte_cotizacion" class="boton_dinamico" onclick="menu('ventana_reporte_cotizacion');">
+                               					<span class="texto_boton">Cotizaci&oacute;n</span>
+                                			</div>
+                                			<div id="div_opcion_reporte_nota_remision" class="boton_dinamico" onclick="menu('ventana_reporte_nota_remision');">
+                               					<span class="texto_boton">Nota <br/> Remisi&oacute;n / Factura</span>
+                                			</div>
+                                			<div id="div_opcion_reporte_cola_impresion" class="boton_dinamico" onclick="menu('ventana_reporte_cola_impresion');">
+                               					<span class="texto_boton">Cola Impresi&oacute;n</span>
+                                			</div>
+                                		</div>
+                                		<div id="div_pestania_catalogos" style="display:none; background-color: transparent;">
 	                                		<div class="titulo_menu">
                                 				CAT&Aacute;LOGOS
                                 			</div>
-                                		<!-- ROLE_ROOT -->
-	                                		<security:authorize access="hasRole('ROLE_ROOT')">
-                                				<div id="div_opcion_cliente" class="boton_dinamico" onclick="menu('cliente');">
-	                                				<span class="texto_boton">Cliente</span>
-	                                			</div>
-	                                			<div id="div_opcion_combinacion_de_tintas" class="boton_dinamico" onclick="menu('combinacion_tintas');">
-	                                				<span class="texto_boton">Combinaci&oacute;n de tintas</span>
-	                                			</div>
-	                                			<div id="div_opcion_costo_extra" class="boton_dinamico" onclick="menu('costo_extra');">
-	                                				<span class="texto_boton">Costo extra</span>
-	                                			</div>
-	                                			<div id="div_opcion_estatus_orden" class="boton_dinamico" onclick="menu('estatus_orden');">
-	                                				<span class="texto_boton">Estatus orden</span>
-	                                			</div>
-	                                			<div id="div_opcion_maquina" class="boton_dinamico" onclick="menu('maquina');">
-	                                				<span class="texto_boton">M&aacute;quina</span>
-	                                			</div>
-	                                			<div id="div_opcion_material_ayuda" class="boton_dinamico" onclick="menu('material_ayuda');">
-	                                				<span class="texto_boton">Material ayuda</span>
-	                                			</div>
-	                                			<div id="div_opcion_papel_sobrante" class="boton_dinamico" onclick="menu('papel_sobrante');">
-	                                				<span class="texto_boton">Papel sobrante</span>
-	                                			</div>
-	                                			<div id="div_opcion_prensista" class="boton_dinamico" onclick="menu('prensista');">
-	                                				<span class="texto_boton">Prensista</span>
-	                                			</div>
-	                                			<div id="div_opcion_proceso_disenio" class="boton_dinamico" onclick="menu('proceso_disenio');">
-	                                				<span class="texto_boton">Proceso dise&ntilde;o</span>
-	                                			</div>
-	                                			<div id="div_opcion_proceso_preprensa" class="boton_dinamico" onclick="menu('proceso_preprensa');">
-	                                				<span class="texto_boton">Proceso preprensa</span>
-	                                			</div>
-	                                			<div id="div_opcion_proceso_transporte" class="boton_dinamico" onclick="menu('proceso_transporte');">
-	                                				<span class="texto_boton">Proceso transporte</span>
-	                                			</div>
-	                                			<div id="div_opcion_proceso_externo" class="boton_dinamico" onclick="menu('proceso_externo');">
-	                                				<span class="texto_boton">Proceso externo</span>
-	                                			</div>
-	                                			<div id="div_opcion_proveedor_externo" class="boton_dinamico" onclick="menu('proveedor_externo');">
-	                                				<span class="texto_boton">Proveedor externo</span>
-	                                			</div>
-	                                			<div id="div_opcion_proveedor_papel" class="boton_dinamico" onclick="menu('proveedor_papel');">
-	                                				<span class="texto_boton">Proveedor papel</span>
-	                                			</div>
-	                                			<div id="div_opcion_responsable_insumo" class="boton_dinamico" onclick="menu('responsable_insumo');">
-	                                				<span class="texto_boton">Responsable insumo</span>
-	                                			</div>
-	                                			<div id="div_opcion_tabulador_precios" class="boton_dinamico" onclick="menu('tabulador_precios');">
-	                                				<span class="texto_boton">Tabulador precios</span>
-	                                			</div>
-	                                			<div id="div_opcion_tamanio_publicacion" class="boton_dinamico" onclick="menu('tamanio_publicacion');">
-	                                				<span class="texto_boton">Tama&ntilde;o publicaci&oacute;n</span>
-	                                			</div>
-	                                			<div id="div_opcion_tinta_especial" class="boton_dinamico" onclick="menu('tinta_especial');">
-	                                				<span class="texto_boton">Tinta especial</span>
-	                                			</div>
-	                                			<div id="div_opcion_tipo_barniz" class="boton_dinamico" onclick="menu('tipo_barniz');">
-	                                				<span class="texto_boton">Tipo barniz</span>
-	                                			</div>
-	                                			<div id="div_opcion_tipo_cliente" class="boton_dinamico" onclick="menu('tipo_cliente');">
-	                                				<span class="texto_boton">Tipo cliente</span>
-	                                			</div>
-	                                			<div id="div_opcion_tipo_complejidad" class="boton_dinamico" onclick="menu('tipo_complejidad');">
-	                                				<span class="texto_boton">Tipo complejidad</span>
-	                                			</div>
-	                                			<div id="div_opcion_tipo_comprobante_fiscal" class="boton_dinamico" onclick="menu('tipo_comprobante_fiscal');">
-	                                				<span class="texto_boton">Tipo comprobante fiscal</span>
-	                                			</div>
-	                                			<div id="div_opcion_tipo_forma_trabajo" class="boton_dinamico" onclick="menu('tipo_forma_trabajo');">
-	                                				<span class="texto_boton">Tipo forma trabajo</span>
-	                                			</div>
-	                                			<div id="div_opcion_tipo_papel_extendido" class="boton_dinamico" onclick="menu('tipo_papel_extendido');">
-	                                				<span class="texto_boton">Tipo papel extendido</span>
-	                                			</div>
-	                                			<div id="div_opcion_tipo_placa" class="boton_dinamico" onclick="menu('tipo_placa');">
-	                                				<span class="texto_boton">Tipo placa</span>
-	                                			</div>
-	                                			<div id="div_opcion_tipo_vuelta" class="boton_dinamico" onclick="menu('tipo_vuelta');">
-	                                				<span class="texto_boton">Tipo vuelta</span>
-	                                			</div>
-	                                			<div id="div_opcion_turno_laboral" class="boton_dinamico" onclick="menu('turno_laboral');">
-	                                				<span class="texto_boton">Turno laboral</span>
-	                                			</div>
-	                                			<div id="div_opcion_tipo_precio" class="boton_dinamico" onclick="menu('tipo_precio');">
-	                                				<span class="texto_boton">Tipo precio</span>
-	                                			</div>
-	                                			<div id="div_opcion_tipo_trabajo" class="boton_dinamico" onclick="menu('tipo_trabajo');">
-	                                				<span class="texto_boton">Tipo trabajo</span>
-	                                			</div>
-							        		</security:authorize>
-							        	<!-- ROLE_ADMIN -->
-							        		<security:authorize access="hasRole('ROLE_ADMIN')">
-							        			<div id="div_opcion_cliente" class="boton_dinamico" onclick="menu('cliente');">
-	                                				<span class="texto_boton">Cliente</span>
-	                                			</div>
-	                                			<div id="div_opcion_tipo_papel_extendido" class="boton_dinamico" onclick="menu('tipo_papel_extendido');">
-	                                				<span class="texto_boton">Tipo papel extendido</span>
-	                                			</div>
-	                                			<div id="div_opcion_combinacion_de_tintas" class="boton_dinamico" onclick="menu('combinacion_tintas');">
-	                                				<span class="texto_boton">Combinaci&oacute;n de tintas</span>
-	                                			</div>
-	                                			<div id="div_opcion_costo_extra" class="boton_dinamico" onclick="menu('costo_extra');">
-	                                				<span class="texto_boton">Costo extra</span>
-	                                			</div>
-	                                			<div id="div_opcion_maquina" class="boton_dinamico" onclick="menu('maquina');">
-	                                				<span class="texto_boton">M&aacute;quina</span>
-	                                			</div>
-	                                			<div id="div_opcion_material_ayuda" class="boton_dinamico" onclick="menu('material_ayuda');">
-	                                				<span class="texto_boton">Material ayuda</span>
-	                                			</div>
-	                                			<div id="div_opcion_papel_sobrante" class="boton_dinamico" onclick="menu('papel_sobrante');">
-	                                				<span class="texto_boton">Papel sobrante</span>
-	                                			</div>
-	                                			<div id="div_opcion_prensista" class="boton_dinamico" onclick="menu('prensista');">
-	                                				<span class="texto_boton">Prensista</span>
-	                                			</div>
-	                                			<div id="div_opcion_proceso_disenio" class="boton_dinamico" onclick="menu('proceso_disenio');">
-	                                				<span class="texto_boton">Proceso dise&ntilde;o</span>
-	                                			</div>
-	                                			<div id="div_opcion_proceso_preprensa" class="boton_dinamico" onclick="menu('proceso_preprensa');">
-	                                				<span class="texto_boton">Proceso preprensa</span>
-	                                			</div>
-	                                			<div id="div_opcion_proceso_transporte" class="boton_dinamico" onclick="menu('proceso_transporte');">
-	                                				<span class="texto_boton">Proceso transporte</span>
-	                                			</div>
-	                                			<div id="div_opcion_proceso_externo" class="boton_dinamico" onclick="menu('proceso_externo');">
-	                                				<span class="texto_boton">Proceso externo</span>
-	                                			</div>
-	                                			<div id="div_opcion_proveedor_externo" class="boton_dinamico" onclick="menu('proveedor_externo');">
-	                                				<span class="texto_boton">Proveedor externo</span>
-	                                			</div>
-	                                			<div id="div_opcion_proveedor_papel" class="boton_dinamico" onclick="menu('proveedor_papel');">
-	                                				<span class="texto_boton">Proveedor papel</span>
-	                                			</div>
-	                                			<div id="div_opcion_responsable_insumo" class="boton_dinamico" onclick="menu('responsable_insumo');">
-	                                				<span class="texto_boton">Responsable insumo</span>
-	                                			</div>
-	                                			<div id="div_opcion_tabulador_precios" class="boton_dinamico" onclick="menu('tabulador_precios');">
-	                                				<span class="texto_boton">Tabulador precios</span>
-	                                			</div>
-	                                			<div id="div_opcion_tamanio_publicacion" class="boton_dinamico" onclick="menu('tamanio_publicacion');">
-	                                				<span class="texto_boton">Tama&ntilde;o publicaci&oacute;n</span>
-	                                			</div>
-	                                			<div id="div_opcion_tinta_especial" class="boton_dinamico" onclick="menu('tinta_especial');">
-	                                				<span class="texto_boton">Tinta especial</span>
-	                                			</div>
-	                                			<div id="div_opcion_tipo_barniz" class="boton_dinamico" onclick="menu('tipo_barniz');">
-	                                				<span class="texto_boton">Tipo barniz</span>
-	                                			</div>
-	                                			<div id="div_opcion_tipo_cliente" class="boton_dinamico" onclick="menu('tipo_cliente');">
-	                                				<span class="texto_boton">Tipo cliente</span>
-	                                			</div>
-	                                			<div id="div_opcion_tipo_comprobante_fiscal" class="boton_dinamico" onclick="menu('tipo_comprobante_fiscal');">
-	                                				<span class="texto_boton">Tipo comprobante fiscal</span>
-	                                			</div>
-	                                			<div id="div_opcion_tipo_forma_trabajo" class="boton_dinamico" onclick="menu('tipo_forma_trabajo');">
-	                                				<span class="texto_boton">Tipo forma trabajo</span>
-	                                			</div>
-	                                			<div id="div_opcion_tipo_placa" class="boton_dinamico" onclick="menu('tipo_placa');">
-	                                				<span class="texto_boton">Tipo placa</span>
-	                                			</div>
-	                                			<div id="div_opcion_tipo_vuelta" class="boton_dinamico" onclick="menu('tipo_vuelta');">
-	                                				<span class="texto_boton">Tipo vuelta</span>
-	                                			</div>
-	                                			<div id="div_opcion_turno_laboral" class="boton_dinamico" onclick="menu('turno_laboral');">
-	                                				<span class="texto_boton">Turno laboral</span>
-	                                			</div>
-							        		</security:authorize>
-							        	<!-- ROLE_COTIZADORT -->
-							        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
-							        			<div id="div_opcion_cliente" class="boton_dinamico" onclick="menu('cliente');">
-	                                				<span class="texto_boton">Cliente</span>
-	                                			</div>
-	                                			<div id="div_opcion_tipo_papel_extendido" class="boton_dinamico" onclick="menu('tipo_papel_extendido');">
-	                                				<span class="texto_boton">Tipo papel extendido</span>
-	                                			</div>
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_DISEÑO')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_ACABADO')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_CLIENTE')">
-							        		
-							        		</security:authorize>
-	                                	</div>
-						<!-- PESTAÑA SEGURIDAD -->
-	                                	<div id="div_pestania_seguridad" style="display:none; background-color: transparent;">
+                                			<div id="div_opcion_cliente" class="boton_dinamico" onclick="menu('cliente');">
+                                				<span class="texto_boton">Cliente</span>
+                                			</div>
+                                			<div id="div_opcion_combinacion_de_tintas" class="boton_dinamico" onclick="menu('combinacion_tintas');">
+                                				<span class="texto_boton">Combinaci&oacute;n de tintas</span>
+                                			</div>
+                                			<div id="div_opcion_costo_extra" class="boton_dinamico" onclick="menu('costo_extra');">
+                                				<span class="texto_boton">Costo extra</span>
+                                			</div>
+                                			<div id="div_opcion_estatus_orden" class="boton_dinamico" onclick="menu('estatus_orden');">
+                                				<span class="texto_boton">Estatus orden</span>
+                                			</div>
+                                			<div id="div_opcion_maquina" class="boton_dinamico" onclick="menu('maquina');">
+                                				<span class="texto_boton">M&aacute;quina</span>
+                                			</div>
+                                			<div id="div_opcion_material_ayuda" class="boton_dinamico" onclick="menu('material_ayuda');">
+                                				<span class="texto_boton">Material ayuda</span>
+                                			</div>
+                                			<div id="div_opcion_papel_sobrante" class="boton_dinamico" onclick="menu('papel_sobrante');">
+                                				<span class="texto_boton">Papel sobrante</span>
+                                			</div>
+                                			<div id="div_opcion_prensista" class="boton_dinamico" onclick="menu('prensista');">
+                                				<span class="texto_boton">Prensista</span>
+                                			</div>
+                                			<div id="div_opcion_proceso_disenio" class="boton_dinamico" onclick="menu('proceso_disenio');">
+                                				<span class="texto_boton">Proceso dise&ntilde;o</span>
+                                			</div>
+                                			<div id="div_opcion_proceso_preprensa" class="boton_dinamico" onclick="menu('proceso_preprensa');">
+                                				<span class="texto_boton">Proceso preprensa</span>
+                                			</div>
+                                			<div id="div_opcion_proceso_transporte" class="boton_dinamico" onclick="menu('proceso_transporte');">
+                                				<span class="texto_boton">Proceso transporte</span>
+                                			</div>
+                                			<div id="div_opcion_proceso_externo" class="boton_dinamico" onclick="menu('proceso_externo');">
+                                				<span class="texto_boton">Proceso externo</span>
+                                			</div>
+                                			<div id="div_opcion_proveedor_externo" class="boton_dinamico" onclick="menu('proveedor_externo');">
+                                				<span class="texto_boton">Proveedor externo</span>
+                                			</div>
+                                			<div id="div_opcion_proveedor_papel" class="boton_dinamico" onclick="menu('proveedor_papel');">
+                                				<span class="texto_boton">Proveedor papel</span>
+                                			</div>
+                                			<div id="div_opcion_responsable_insumo" class="boton_dinamico" onclick="menu('responsable_insumo');">
+                                				<span class="texto_boton">Responsable insumo</span>
+                                			</div>
+                                			<div id="div_opcion_tabulador_precios" class="boton_dinamico" onclick="menu('tabulador_precios');">
+                                				<span class="texto_boton">Tabulador precios</span>
+                                			</div>
+                                			<div id="div_opcion_tamanio_publicacion" class="boton_dinamico" onclick="menu('tamanio_publicacion');">
+                                				<span class="texto_boton">Tama&ntilde;o publicaci&oacute;n</span>
+                                			</div>
+                                			<div id="div_opcion_tinta_especial" class="boton_dinamico" onclick="menu('tinta_especial');">
+                                				<span class="texto_boton">Tinta especial</span>
+                                			</div>
+                                			<div id="div_opcion_tipo_barniz" class="boton_dinamico" onclick="menu('tipo_barniz');">
+                                				<span class="texto_boton">Tipo barniz</span>
+                                			</div>
+                                			<div id="div_opcion_tipo_cliente" class="boton_dinamico" onclick="menu('tipo_cliente');">
+                                				<span class="texto_boton">Tipo cliente</span>
+                                			</div>
+                                			<div id="div_opcion_tipo_complejidad" class="boton_dinamico" onclick="menu('tipo_complejidad');">
+                                				<span class="texto_boton">Tipo complejidad</span>
+                                			</div>
+                                			<div id="div_opcion_tipo_comprobante_fiscal" class="boton_dinamico" onclick="menu('tipo_comprobante_fiscal');">
+                                				<span class="texto_boton">Tipo comprobante fiscal</span>
+                                			</div>
+                                			<div id="div_opcion_tipo_forma_trabajo" class="boton_dinamico" onclick="menu('tipo_forma_trabajo');">
+                                				<span class="texto_boton">Tipo forma trabajo</span>
+                                			</div>
+                                			<div id="div_opcion_tipo_papel_extendido" class="boton_dinamico" onclick="menu('tipo_papel_extendido');">
+                                				<span class="texto_boton">Tipo papel extendido</span>
+                                			</div>
+                                			<div id="div_opcion_tipo_placa" class="boton_dinamico" onclick="menu('tipo_placa');">
+                                				<span class="texto_boton">Tipo placa</span>
+                                			</div>
+                                			<div id="div_opcion_tipo_vuelta" class="boton_dinamico" onclick="menu('tipo_vuelta');">
+                                				<span class="texto_boton">Tipo vuelta</span>
+                                			</div>
+                                			<div id="div_opcion_turno_laboral" class="boton_dinamico" onclick="menu('turno_laboral');">
+                                				<span class="texto_boton">Turno laboral</span>
+                                			</div>
+                                			<div id="div_opcion_tipo_precio" class="boton_dinamico" onclick="menu('tipo_precio');">
+                                				<span class="texto_boton">Tipo precio</span>
+                                			</div>
+                                			<div id="div_opcion_tipo_trabajo" class="boton_dinamico" onclick="menu('tipo_trabajo');">
+                                				<span class="texto_boton">Tipo trabajo</span>
+                                			</div>
+                                		</div>
+                                		<div id="div_pestania_seguridad" style="display:none; background-color: transparent;">
 	                                		<div class="titulo_menu">
                                 				SEGURIDAD
                                 			</div>
-                                		<!-- ROLE_ROOT -->
-	                                		<security:authorize access="hasRole('ROLE_ROOT')">
-	                                			<div id="div_opcion_cambio_estatus" class="boton_dinamico" onclick="menu('ventana_cambio_estatus');">
-	                                				<span class="texto_boton">Cambio estatus</span>
-	                                			</div>
-	                                			<div id="div_opcion_descuento" class="boton_dinamico" onclick="menu('ventana_descuento');">
-	                                				<span class="texto_boton">Descuento</span>
-	                                			</div>
-                                				<div id="div_opcion_perfil" class="boton_dinamico" onclick="menu('perfil');">
-	                                				<span class="texto_boton">Perfil</span>
-	                                			</div>
-	                                			<div id="div_opcion_perfil_por_usuario" class="boton_dinamico" onclick="menu('perfil_x_usuario');">
-	                                				<span class="texto_boton">Perfil por usuario</span>
-	                                			</div>
-	                                			<div id="div_opcion_usuario" class="boton_dinamico" onclick="menu('usuario');">
-	                                				<span class="texto_boton">Usuario</span>
-	                                			</div>
-							        		</security:authorize>
-							        	<!-- ROLE_ADMIN -->
-							        		<security:authorize access="hasRole('ROLE_ADMIN')">
-							        			<div id="div_opcion_cambio_estatus" class="boton_dinamico" onclick="menu('ventana_cambio_estatus');">
-	                                				<span class="texto_boton">Cambio estatus</span>
-	                                			</div>
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_COTIZADOR')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_PRODUCCION')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_DISEÑO')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_PREPRENSA')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_TRANSPORTE')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_PROCESO_EXTERNO')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_ACABADO')">
-							        		
-							        		</security:authorize>
-							        		<security:authorize access="hasRole('ROLE_CLIENTE')">
-							        		
-							        		</security:authorize>
-	                                	</div>	
-                                	</div>
-                            </div>
+                                			<div id="div_opcion_cambio_estatus" class="boton_dinamico" onclick="menu('ventana_cambio_estatus');">
+                                				<span class="texto_boton">Cambio estatus</span>
+                                			</div>
+                                			<div id="div_opcion_descuento" class="boton_dinamico" onclick="menu('ventana_descuento');">
+                                				<span class="texto_boton">Descuento</span>
+                                			</div>
+                               				<div id="div_opcion_perfil" class="boton_dinamico" onclick="menu('perfil');">
+                                				<span class="texto_boton">Perfil</span>
+                                			</div>
+                                			<div id="div_opcion_perfil_por_usuario" class="boton_dinamico" onclick="menu('perfil_x_usuario');">
+                                				<span class="texto_boton">Perfil por usuario</span>
+                                			</div>
+                                			<div id="div_opcion_usuario" class="boton_dinamico" onclick="menu('usuario');">
+                                				<span class="texto_boton">Usuario</span>
+                                			</div>
+                                		</div>
+                                	</security:authorize>
+                                	
+                                	<security:authorize access="hasRole('ROLE_ADMIN')">
+                                		<div id="div_pestania_produccion" style="display:block; background-color: transparent;">
+                                			<div class="titulo_menu">PRODUCCI&Oacute;N</div>
+                                			<div id="div_opcion_orden_produccion" class="boton_dinamico" onclick="menu('orden_produccion');">
+                               					<span class="texto_boton">Orden Producci&oacute;n</span>
+                                			</div>
+                                			<div id="div_opcion_visualizador" class="boton_dinamico" onclick="menu('visualizador');">
+                                				<span class="texto_boton">Visualizador</span>
+                                			</div>
+                                		</div>
+                                		<div id="div_pestania_reportes" style="display:none; background-color: transparent;">
+	                                		<div class="titulo_menu">REPORTES</div>
+                                			<div id="div_opcion_reporte_orden_produccion" class="boton_dinamico" onclick="menu('ventana_reporte_orden_produccion');">
+                               					<span class="texto_boton">Orden Producci&oacute;n</span>
+                                			</div>
+                                			<div id="div_opcion_reporte_cotizacion" class="boton_dinamico" onclick="menu('ventana_reporte_cotizacion');">
+                               					<span class="texto_boton">Cotizaci&oacute;n</span>
+                                			</div>
+                                			<div id="div_opcion_reporte_nota_remision" class="boton_dinamico" onclick="menu('ventana_reporte_nota_remision');">
+                               					<span class="texto_boton">Nota <br/> Remisi&oacute;n / Factura</span>
+                                			</div>
+                                			<div id="div_opcion_reporte_cola_impresion" class="boton_dinamico" onclick="menu('ventana_reporte_cola_impresion');">
+                               					<span class="texto_boton">Cola Impresi&oacute;n</span>
+                                			</div>
+                                		</div>
+                                		<div id="div_pestania_catalogos" style="display:none; background-color: transparent;">
+	                                		<div class="titulo_menu">CAT&Aacute;LOGOS</div>
+                                			<div id="div_opcion_cliente" class="boton_dinamico" onclick="menu('cliente');">
+                                				<span class="texto_boton">Cliente</span>
+                                			</div>
+                                			<div id="div_opcion_combinacion_de_tintas" class="boton_dinamico" onclick="menu('combinacion_tintas');">
+                                				<span class="texto_boton">Combinaci&oacute;n de tintas</span>
+                                			</div>
+                                			<div id="div_opcion_costo_extra" class="boton_dinamico" onclick="menu('costo_extra');">
+                                				<span class="texto_boton">Costo extra</span>
+                                			</div>
+                                			<div id="div_opcion_maquina" class="boton_dinamico" onclick="menu('maquina');">
+                                				<span class="texto_boton">M&aacute;quina</span>
+                                			</div>
+                                			<div id="div_opcion_material_ayuda" class="boton_dinamico" onclick="menu('material_ayuda');">
+                                				<span class="texto_boton">Material ayuda</span>
+                                			</div>
+                                			<div id="div_opcion_papel_sobrante" class="boton_dinamico" onclick="menu('papel_sobrante');">
+                                				<span class="texto_boton">Papel sobrante</span>
+                                			</div>
+                                			<div id="div_opcion_prensista" class="boton_dinamico" onclick="menu('prensista');">
+                                				<span class="texto_boton">Prensista</span>
+                                			</div>
+                                			<div id="div_opcion_proceso_disenio" class="boton_dinamico" onclick="menu('proceso_disenio');">
+                                				<span class="texto_boton">Proceso dise&ntilde;o</span>
+                                			</div>
+                                			<div id="div_opcion_proceso_preprensa" class="boton_dinamico" onclick="menu('proceso_preprensa');">
+                                				<span class="texto_boton">Proceso preprensa</span>
+                                			</div>
+                                			<div id="div_opcion_proceso_transporte" class="boton_dinamico" onclick="menu('proceso_transporte');">
+                                				<span class="texto_boton">Proceso transporte</span>
+                                			</div>
+                                			<div id="div_opcion_proceso_externo" class="boton_dinamico" onclick="menu('proceso_externo');">
+                                				<span class="texto_boton">Proceso externo</span>
+                                			</div>
+                                			<div id="div_opcion_proveedor_externo" class="boton_dinamico" onclick="menu('proveedor_externo');">
+                                				<span class="texto_boton">Proveedor externo</span>
+                                			</div>
+                                			<div id="div_opcion_proveedor_papel" class="boton_dinamico" onclick="menu('proveedor_papel');">
+                                				<span class="texto_boton">Proveedor papel</span>
+                                			</div>
+                                			<div id="div_opcion_responsable_insumo" class="boton_dinamico" onclick="menu('responsable_insumo');">
+                                				<span class="texto_boton">Responsable insumo</span>
+                                			</div>
+                                			<div id="div_opcion_tabulador_precios" class="boton_dinamico" onclick="menu('tabulador_precios');">
+                                				<span class="texto_boton">Tabulador precios</span>
+                                			</div>
+                                			<div id="div_opcion_tamanio_publicacion" class="boton_dinamico" onclick="menu('tamanio_publicacion');">
+                                				<span class="texto_boton">Tama&ntilde;o publicaci&oacute;n</span>
+                                			</div>
+                                			<div id="div_opcion_tinta_especial" class="boton_dinamico" onclick="menu('tinta_especial');">
+                                				<span class="texto_boton">Tinta especial</span>
+                                			</div>
+                                			<div id="div_opcion_tipo_barniz" class="boton_dinamico" onclick="menu('tipo_barniz');">
+                                				<span class="texto_boton">Tipo barniz</span>
+                                			</div>
+                                			<div id="div_opcion_tipo_cliente" class="boton_dinamico" onclick="menu('tipo_cliente');">
+                                				<span class="texto_boton">Tipo cliente</span>
+                                			</div>
+                                			<div id="div_opcion_tipo_comprobante_fiscal" class="boton_dinamico" onclick="menu('tipo_comprobante_fiscal');">
+                                				<span class="texto_boton">Tipo comprobante fiscal</span>
+                                			</div>
+                                			<div id="div_opcion_tipo_forma_trabajo" class="boton_dinamico" onclick="menu('tipo_forma_trabajo');">
+                                				<span class="texto_boton">Tipo forma trabajo</span>
+                                			</div>
+                                			<div id="div_opcion_tipo_papel_extendido" class="boton_dinamico" onclick="menu('tipo_papel_extendido');">
+                                				<span class="texto_boton">Tipo papel extendido</span>
+                                			</div>
+                                			<div id="div_opcion_tipo_placa" class="boton_dinamico" onclick="menu('tipo_placa');">
+                                				<span class="texto_boton">Tipo placa</span>
+                                			</div>
+                                			<div id="div_opcion_tipo_vuelta" class="boton_dinamico" onclick="menu('tipo_vuelta');">
+                                				<span class="texto_boton">Tipo vuelta</span>
+                                			</div>
+                                			<div id="div_opcion_turno_laboral" class="boton_dinamico" onclick="menu('turno_laboral');">
+                                				<span class="texto_boton">Turno laboral</span>
+                                			</div>
+                                		</div>
+                                		<div id="div_pestania_seguridad" style="display:none; background-color: transparent;">
+	                                		<div class="titulo_menu">SEGURIDAD</div>
+                                			<div id="div_opcion_cambio_estatus" class="boton_dinamico" onclick="menu('ventana_cambio_estatus');">
+                                				<span class="texto_boton">Cambio estatus</span>
+                                			</div>
+                                		</div>
+                                	</security:authorize>
+                                	
+                                	<security:authorize access="hasRole('ROLE_COTIZADOR')">
+                                		<div id="div_pestania_produccion" style="display:block; background-color: transparent;">
+                                			<div class="titulo_menu">PRODUCCI&Oacute;N</div>
+                                			<div id="div_opcion_orden_produccion" class="boton_dinamico" onclick="menu('orden_produccion');">
+                               					<span class="texto_boton">Orden Producci&oacute;n</span>
+                                			</div>
+                                			<div id="div_opcion_visualizador" class="boton_dinamico" onclick="menu('visualizador');">
+                                				<span class="texto_boton">Visualizador</span>
+                                			</div>
+                                		</div>
+                                		<div id="div_pestania_reportes" style="display:none; background-color: transparent;">
+	                                		<div class="titulo_menu">REPORTES</div>
+                                			<div id="div_opcion_reporte_orden_produccion" class="boton_dinamico" onclick="menu('ventana_reporte_orden_produccion');">
+                               					<span class="texto_boton">Orden Producci&oacute;n</span>
+                                			</div>
+                                			<div id="div_opcion_reporte_cotizacion" class="boton_dinamico" onclick="menu('ventana_reporte_cotizacion');">
+                               					<span class="texto_boton">Cotizaci&oacute;n</span>
+                                			</div>
+                                			<div id="div_opcion_reporte_nota_remision" class="boton_dinamico" onclick="menu('ventana_reporte_nota_remision');">
+                               					<span class="texto_boton">Nota <br/> Remisi&oacute;n / Factura</span>
+                                			</div>
+                                		</div>
+                                		<div id="div_pestania_catalogos" style="display:none; background-color: transparent;">
+	                                		<div class="titulo_menu">CAT&Aacute;LOGOS</div>
+                                			<div id="div_opcion_cliente" class="boton_dinamico" onclick="menu('cliente');">
+                                				<span class="texto_boton">Cliente</span>
+                                			</div>
+                                			<div id="div_opcion_tipo_papel_extendido" class="boton_dinamico" onclick="menu('tipo_papel_extendido');">
+                                				<span class="texto_boton">Tipo papel extendido</span>
+                                			</div>
+                                		</div>
+                                		<div id="div_pestania_seguridad" style="display:none; background-color: transparent;">
+	                                		<div class="titulo_menu">SEGURIDAD</div>
+                                		</div>
+                                	</security:authorize>
+                                	
+                            		</div>
+                           		</form>
+                           	</div>
                         </div>
                     </div>
                     <div id="div_pie"></div>

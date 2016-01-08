@@ -165,7 +165,7 @@
                                                                             class="input"
                                                                             name="nut"
                                                                             value=""
-                                                                            maxlength="12"
+                                                                            maxlength="10"
                                                                             onkeypress=""/>
                                                                 </td>
                                                             </tr>

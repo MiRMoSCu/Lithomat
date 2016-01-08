@@ -43,6 +43,7 @@
 	                        						<input	type="text"
 	                        								class="input"
 	                        								name="nut"
+	                        								maxlength="10"
 	                        								onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
 	                        								value=""/>
 	                        					</td>
@@ -63,6 +64,23 @@
 	                        								<option value="${seop.value}">${seop.text}</option>
 	                        							</c:forEach>
 	                        						</select>
+	                        					</td>
+	                        				</tr>
+	                        			</table>
+	                        		</div>
+	                        	</div>
+	                        </div>
+	                        <div class="linea">
+	                        	<div class="casilla">
+	                        		<div class="columna_completa">
+	                        			<table>
+	                        				<tr>
+	                        					<td width="1%">Observaciones:</td>
+	                        					<td>
+	                        						<input	type="text"
+	                        								class="input"
+	                        								name="observaciones"
+	                        								value=""/>
 	                        					</td>
 	                        				</tr>
 	                        			</table>

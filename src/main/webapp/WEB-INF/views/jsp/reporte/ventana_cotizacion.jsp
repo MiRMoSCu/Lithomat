@@ -45,6 +45,7 @@
 	                        						<input	type="text"
 	                        								class="input"
 	                        								name="nut"
+	                        								maxlength="10"
 	                        								onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
 	                        								value=""/>
 	                        					</td>

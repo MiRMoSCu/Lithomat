@@ -19,7 +19,7 @@
 			var urlBusca = "${urlBusca}";
 		</script>
 	</head>
-	<body>
+	<body onload="document.tipo_trabajo_detalle.nombre.focus()">
  		<div id="div_area">
             <div id="div_ancho">
                 <div id="div_hoja">
@@ -218,6 +218,9 @@
 										<img alt="" style="cursor: pointer;" onclick="limpia()" src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
 										<span style="cursor:pointer;" onclick="busca()">
 											&nbsp;Buscar&nbsp;
+										</span>
+										<span style="cursor:pointer;" onclick="window.parent.Shadowbox.close()">
+											&nbsp;Aceptar&nbsp;
 										</span>
 									</div>
 								</div>

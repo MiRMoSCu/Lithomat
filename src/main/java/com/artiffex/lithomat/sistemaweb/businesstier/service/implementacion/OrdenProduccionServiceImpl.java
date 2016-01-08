@@ -85,8 +85,9 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
 		nut.append(diaAnio);
 		nut.append(contador);
 		nut.append(digitoVerificador);
+		// nut.toString();
 
-		return nut.toString(); //nut.substring(2).toString();
+		return  nut.substring(2).toString();
 	}
 
 	public int creaOrdenProduccion(OrdenProduccion ordenProduccion) {

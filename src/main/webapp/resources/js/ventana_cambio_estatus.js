@@ -10,6 +10,7 @@ function limpiarFormulario() {
 	document.cambio_estatus.id_estatus_orden.value 							= "";
 	document.cambio_estatus.nut.value										= "";
 	document.cambio_estatus.select_estatus_orden_produccion.selectedIndex 	= 0;
+	document.cambio_estatus.observaciones.value								= "";
 }
 
 function enviarFormulario() {
@@ -17,11 +18,19 @@ function enviarFormulario() {
 	document.cambio_estatus.id_estatus_orden.value = $("[name=select_estatus_orden_produccion]").val();
 	// validacion
 	var correcto = true;
-	if ( document.cambio_estatus.nut.value == "" ) {
+	if ( correcto
+			&& document.cambio_estatus.nut.value == "" ) {
 		correcto = false;
 		alert("Favor de especificar el NUT");
 		document.cambio_estatus.nut.focus();
 	}
+	if ( correcto
+			&& document.cambio_estatus.observaciones.value == "" ) {
+		correcto = false;
+		alert("Favor de especificar el porque del cambio de estatus");
+		document.cambio_estatus.observaiones.focus();
+	}
+	
 	if ( correcto ) {
 		// verifica que nut exista
 		document.body.style.cursor = "wait";
