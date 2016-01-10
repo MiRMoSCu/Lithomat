@@ -2,14 +2,16 @@ package com.artiffex.lithomat.sistemaweb.businesstier.entity;
 
 import java.io.Serializable;
 
-public class CalificacionProcesosPartida implements Serializable {
+public class CalificacionPartida implements Serializable {
 
 	private static final long serialVersionUID = -7877195355320836615L;
 
-	private int idCalificacionProcesosPartida;
+	private int idCalificacionPartida;
 	private Partida partida;
-	private double costeTotalProcesosPartida;
-	private double subpartidasCosteTotal;
+	private int cantidadOriginal;
+	private double partidaCosteTotal;
+	private double impresionPartidaCosteTotal;
+	private double procesosPartidaCosteTotal;
 	private double disenioCosteTotal;
 	private double preprensaCosteTotal;
 	private double transporteCosteTotal;
@@ -19,11 +21,11 @@ public class CalificacionProcesosPartida implements Serializable {
 	private boolean activo;
 	
 	
-	public int getIdCalificacionProcesosPartida() {
-		return idCalificacionProcesosPartida;
+	public int getIdCalificacionPartida() {
+		return idCalificacionPartida;
 	}
-	public void setIdCalificacionProcesosPartida(int idCalificacionProcesosPartida) {
-		this.idCalificacionProcesosPartida = idCalificacionProcesosPartida;
+	public void setIdCalificacionPartida(int idCalificacionPartida) {
+		this.idCalificacionPartida = idCalificacionPartida;
 	}
 	public Partida getPartida() {
 		return partida;
@@ -31,17 +33,29 @@ public class CalificacionProcesosPartida implements Serializable {
 	public void setPartida(Partida partida) {
 		this.partida = partida;
 	}
-	public double getCosteTotalProcesosPartida() {
-		return costeTotalProcesosPartida;
+	public int getCantidadOriginal() {
+		return cantidadOriginal;
 	}
-	public void setCosteTotalProcesosPartida(double costeTotalProcesosPartida) {
-		this.costeTotalProcesosPartida = costeTotalProcesosPartida;
+	public void setCantidadOriginal(int cantidadOriginal) {
+		this.cantidadOriginal = cantidadOriginal;
 	}
-	public double getSubpartidasCosteTotal() {
-		return subpartidasCosteTotal;
+	public double getPartidaCosteTotal() {
+		return partidaCosteTotal;
 	}
-	public void setSubpartidasCosteTotal(double subpartidasCosteTotal) {
-		this.subpartidasCosteTotal = subpartidasCosteTotal;
+	public void setPartidaCosteTotal(double partidaCosteTotal) {
+		this.partidaCosteTotal = partidaCosteTotal;
+	}
+	public double getImpresionPartidaCosteTotal() {
+		return impresionPartidaCosteTotal;
+	}
+	public void setImpresionPartidaCosteTotal(double impresionPartidaCosteTotal) {
+		this.impresionPartidaCosteTotal = impresionPartidaCosteTotal;
+	}
+	public double getProcesosPartidaCosteTotal() {
+		return procesosPartidaCosteTotal;
+	}
+	public void setProcesosPartidaCosteTotal(double procesosPartidaCosteTotal) {
+		this.procesosPartidaCosteTotal = procesosPartidaCosteTotal;
 	}
 	public double getDisenioCosteTotal() {
 		return disenioCosteTotal;
@@ -85,7 +99,4 @@ public class CalificacionProcesosPartida implements Serializable {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	
-	
-	
 }

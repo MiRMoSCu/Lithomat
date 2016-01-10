@@ -25,39 +25,47 @@ function convertDate(inputFormat) {
 	return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
 }
 
-function limpiaFormSubPartida() {
+function limpiaFormPliego() {
+	document.resumen_pliego.papel_descripcion.value 				= "";
+	document.resumen_pliego.papel_cantidad_total.value 				= "";
+	document.resumen_pliego.papel_precio_unitario.value 			= "";
+	document.resumen_pliego.papel_coste_total.value 				= "";
+	document.resumen_pliego.tinta_descripcion.value 				= "";
+	document.resumen_pliego.tinta_num_ent_maq.value 				= "";
+	document.resumen_pliego.tinta_precio_unitario.value 			= "";
+	document.resumen_pliego.tinta_coste_total.value 				= "";
+	document.resumen_pliego.tinta_especial_descripcion.value 		= "";
+	document.resumen_pliego.tinta_especial_num_ent_maq.value 		= "";
+	document.resumen_pliego.tinta_especial_precio_unitario.value 	= "";
+	document.resumen_pliego.tinta_especial_coste_total.value 		= "";
+	document.resumen_pliego.barniz_descripcion.value 				= "";
+	document.resumen_pliego.frente_barniz_num_ent_maq.value 		= "";
+	document.resumen_pliego.frente_barniz_precio_unitario.value 	= "";
+	document.resumen_pliego.frente_barniz_coste_total.value 		= "";
+	document.resumen_pliego.vuelta_barniz_num_ent_maq.value 		= "";
+	document.resumen_pliego.vuelta_barniz_precio_unitario.value 	= "";
+	document.resumen_pliego.vuelta_barniz_coste_total.value 		= "";
+	document.resumen_pliego.placas_descripcion.value 				= "";
+	document.resumen_pliego.placas_num_placas.value 				= "";
+	document.resumen_pliego.placas_precio_unitario.value 			= "";
+	document.resumen_pliego.placas_coste_total.value 				= "";
+	document.resumen_pliego.pliego_coste_total.value 				= "";
+} // limpiaFormPliego
+
+function limpiaFormTipoTrabajoDetalle() {
 	document.resumen_tipo_trabajo_detalle.descripcion.value 						= "";
 	document.resumen_tipo_trabajo_detalle.maquina_descripcion.value 				= "";
-	document.resumen_tipo_trabajo_detalle.cantidad_redondeada.value 				= "";
+	document.resumen_tipo_trabajo_detalle.tamanio_publicacion.value 				= "";
 	document.resumen_tipo_trabajo_detalle.repeticiones_x_pliego.value 				= "";
 	document.resumen_tipo_trabajo_detalle.numero_paginas_publicacion.value 			= "";
-	document.resumen_tipo_trabajo_detalle.tamanio_publicacion.value 				= "";
-	document.resumen_tipo_trabajo_detalle.numero_pliegos.value 						= "";
-	document.resumen_tipo_trabajo_detalle.papel_descripcion.value 					= "";
-	document.resumen_tipo_trabajo_detalle.papel_cantidad_total.value 				= "";
-	document.resumen_tipo_trabajo_detalle.papel_precio_unitario.value 				= "";
 	document.resumen_tipo_trabajo_detalle.papel_coste_total.value 					= "";
-	document.resumen_tipo_trabajo_detalle.tinta_descripcion.value 					= "";
-	document.resumen_tipo_trabajo_detalle.tinta_num_ent_maq.value 					= "";
-	document.resumen_tipo_trabajo_detalle.tinta_precio_unitario.value 				= "";
 	document.resumen_tipo_trabajo_detalle.tinta_coste_total.value 					= "";
-	document.resumen_tipo_trabajo_detalle.tinta_especial_descripcion.value 			= "";
-	document.resumen_tipo_trabajo_detalle.tinta_especial_num_ent_maq.value 			= "";
-	document.resumen_tipo_trabajo_detalle.tinta_especial_precio_unitario.value 		= "";
 	document.resumen_tipo_trabajo_detalle.tinta_especial_coste_total.value 			= "";
-	document.resumen_tipo_trabajo_detalle.barniz_descripcion.value 					= "";
-	document.resumen_tipo_trabajo_detalle.frente_barniz_num_ent_maq.value 			= "";
-	document.resumen_tipo_trabajo_detalle.frente_barniz_precio_unitario.value 		= "";
 	document.resumen_tipo_trabajo_detalle.frente_barniz_coste_total.value 			= "";
-	document.resumen_tipo_trabajo_detalle.vuelta_barniz_num_ent_maq.value 			= "";
-	document.resumen_tipo_trabajo_detalle.vuelta_barniz_precio_unitario.value 		= "";
 	document.resumen_tipo_trabajo_detalle.vuelta_barniz_coste_total.value 			= "";
-	document.resumen_tipo_trabajo_detalle.placas_descripcion.value 					= "";
-	document.resumen_tipo_trabajo_detalle.placas_num_placas.value 					= "";
-	document.resumen_tipo_trabajo_detalle.placas_precio_unitario.value 				= "";
 	document.resumen_tipo_trabajo_detalle.placas_coste_total.value 					= "";
-	document.resumen_tipo_trabajo_detalle.tipo_trabajo_detalle_coste_total.value 	= "";
-} // limpiaFormSubPartida
+	document.resumen_tipo_trabajo_detalle.tipo_trabajo_detalle_coste_total.value	= "";
+} // limpiaFormTipoTrabajoDetalle
 
 function limpiaFormProcesos(){
 	
@@ -147,33 +155,38 @@ function limpiaFormProcesos(){
 } // limpiaFormProcesos
 
 function limpiaFormPartida(){
-	document.resumen_partida.nombre_tipo_trabajo.value	= "";
-	document.resumen_partida.nombre_partida.value		= "";
-	document.resumen_partida.cantidad.value				= "";
-	document.resumen_partida.descripcion_partida.value	= "";
-	document.resumen_partida.coste_total.value			= "";
+	document.resumen_partida.nombre_tipo_trabajo.value				= "";
+	document.resumen_partida.nombre_partida.value					= "";
+	document.resumen_partida.cantidad.value							= "";
+	document.resumen_partida.descripcion_partida.value				= "";
+	document.resumen_partida.impresion_partida_coste_total.value	= "";
+	document.resumen_partida.procesos_partida_coste_total.value		= "";
+	document.resumen_partida.partida_coste_total.value				= "";
 } // limpiaFormPartida
 
 function limpiaCampos(){
-	limpiaFormSubPartida();
-	limpiaFormProcesos();
 	limpiaFormPartida();
+	limpiaFormTipoTrabajoDetalle();
+	limpiaFormPliego();
+	limpiaFormProcesos();
 } // limpiaCampos
 
 function ajaxPartida( id_partida ) {
 	limpiaFormPartida();
-	var nut = document.orden_produccion.nut.value;
 	$.ajax({
 		type:'POST',
 		url:urlResumenCalificacionPartida,
-		data:{nut:nut, id_partida:id_partida},
+		data:{nut:document.orden_produccion.nut.value,id_partida:id_partida},
 		success:function(response){
-			//console.log(response);
-			document.resumen_partida.nombre_tipo_trabajo.value	= response.nombreTipoTrabajo;
-			document.resumen_partida.nombre_partida.value		= response.nombrePartida;
-			document.resumen_partida.cantidad.value				= response.cantidad;
-			document.resumen_partida.descripcion_partida.value	= response.descripcionPartida;
-			document.resumen_partida.coste_total.value			= "$ " + (response.costeTotal).formatMoney(2);
+			console.log(response);
+			document.resumen_partida.nombre_tipo_trabajo.value				= response.nombreTipoTrabajo;
+			document.resumen_partida.nombre_partida.value					= response.nombrePartida;
+			document.resumen_partida.cantidad.value							= response.cantidad;
+			document.resumen_partida.descripcion_partida.value				= response.descripcionPartida;
+			document.resumen_partida.impresion_partida_coste_total.value	= "$ " + (response.impresionPartidaCosteTotal).formatMoney(2);
+			document.resumen_partida.procesos_partida_coste_total.value		= "$ " + (response.procesosPartidaCosteTotal).formatMoney(2);
+			document.resumen_partida.partida_coste_total.value				= "$ " + (response.partidaCosteTotal).formatMoney(2);
+			delete response;
 		},
 		error:function(e){
 			alert("Error. No fue posible conectarse con el servidor");
@@ -181,88 +194,92 @@ function ajaxPartida( id_partida ) {
 	});
 } // ajaxPartida
 
-function ajaxSubPartida( id_tipo_trabajo_detalle ) {
-	limpiaFormSubPartida();
-	var nut = document.orden_produccion.nut.value;
+function ajaxTrabajoDetalle( id_tipo_trabajo_detalle ) {
+	limpiaFormTipoTrabajoDetalle();
 	$.ajax({
 		type:'POST',
 		url:urlResumenCalificacionTrabajoDetalle,
-		data:{nut:nut, id_tipo_trabajo_detalle:id_tipo_trabajo_detalle},
+		data:{nut:document.orden_produccion.nut.value,id_tipo_trabajo_detalle:id_tipo_trabajo_detalle},
 		success:function(response) {
-			//console.log(response);
 			document.resumen_tipo_trabajo_detalle.descripcion.value 						= response.descripcion;
 			document.resumen_tipo_trabajo_detalle.maquina_descripcion.value 				= response.maquinaDescripcion;
-			document.resumen_tipo_trabajo_detalle.cantidad_redondeada.value 				= response.cantidadRedondeada;
+			document.resumen_tipo_trabajo_detalle.tamanio_publicacion.value 				= response.tamanioPublicacion;
 			document.resumen_tipo_trabajo_detalle.repeticiones_x_pliego.value 				= response.repeticionesXPliego;
 			document.resumen_tipo_trabajo_detalle.numero_paginas_publicacion.value 			= response.numeroPaginasPublicacion;
-			document.resumen_tipo_trabajo_detalle.tamanio_publicacion.value 				= response.tamanioPublicacion;
-        	document.resumen_tipo_trabajo_detalle.numero_pliegos.value 						= response.numeroPliegos;
-        	document.resumen_tipo_trabajo_detalle.papel_descripcion.value 					= response.papelDescripcion;
-        	document.resumen_tipo_trabajo_detalle.papel_cantidad_total.value 				= response.papelCantidadTotal;
-        	document.resumen_tipo_trabajo_detalle.papel_precio_unitario.value 				= "$ " + (response.papelPrecioUnitario).formatMoney(4);
-        	document.resumen_tipo_trabajo_detalle.papel_coste_total.value 					= "$ " + (response.papelCosteTotal).formatMoney(2);
-        	document.resumen_tipo_trabajo_detalle.tinta_descripcion.value 					= response.tintaDescripcion;
-        	document.resumen_tipo_trabajo_detalle.tinta_num_ent_maq.value 					= response.tintaNumEntMaq;
-        	document.resumen_tipo_trabajo_detalle.tinta_precio_unitario.value 				= "$ " + (response.tintaPrecioUnitario).formatMoney(3);
-        	document.resumen_tipo_trabajo_detalle.tinta_coste_total.value 					= "$ " + (response.tintaCosteTotal).formatMoney(2);
-        	document.resumen_tipo_trabajo_detalle.tinta_especial_descripcion.value 			= response.tintaEspecialDescripcion;
-        	document.resumen_tipo_trabajo_detalle.tinta_especial_num_ent_maq.value 			= response.tintaEspecialNumEntMaq;
-        	document.resumen_tipo_trabajo_detalle.tinta_especial_precio_unitario.value 		= "$ " + (response.tintaEspecialPrecioUnitario).formatMoney(3);
-        	document.resumen_tipo_trabajo_detalle.tinta_especial_coste_total.value 			= "$ " + (response.tintaEspecialCosteTotal).formatMoney(2);
-        	document.resumen_tipo_trabajo_detalle.barniz_descripcion.value 					= response.barnizDescripcion;
-        	document.resumen_tipo_trabajo_detalle.frente_barniz_num_ent_maq.value 			= response.frenteBarnizNumEntMaq;
-        	document.resumen_tipo_trabajo_detalle.frente_barniz_precio_unitario.value 		= "$ " + (response.frenteBarnizPrecioUnitario).formatMoney(3);
-        	document.resumen_tipo_trabajo_detalle.frente_barniz_coste_total.value 			= "$ " + (response.frenteBarnizCosteTotal).formatMoney(2);
-        	document.resumen_tipo_trabajo_detalle.vuelta_barniz_num_ent_maq.value 			= response.vueltaBarnizNumEntMaq;
-        	document.resumen_tipo_trabajo_detalle.vuelta_barniz_precio_unitario.value 		= "$ " + (response.vueltaBarnizPrecioUnitario).formatMoney(3);
-        	document.resumen_tipo_trabajo_detalle.vuelta_barniz_coste_total.value 			= "$ " + (response.vueltaBarnizCosteTotal).formatMoney(2);
-        	document.resumen_tipo_trabajo_detalle.placas_descripcion.value 					= response.placasDescripcion;
-        	document.resumen_tipo_trabajo_detalle.placas_num_placas.value 					= response.placasNumPlacas;
-        	document.resumen_tipo_trabajo_detalle.placas_precio_unitario.value 				= "$ " + (response.placasPrecioUnitario).formatMoney(2);
-        	document.resumen_tipo_trabajo_detalle.placas_coste_total.value 					= "$ " + (response.placasCosteTotal).formatMoney(2);
-        	
-        	var sumatoria = 0;
-        	// papel
-        	if( response.clienteProporcionaPapel )
-        		document.resumen_tipo_trabajo_detalle.papel_coste_total.style.textDecoration = "line-through";
-        	else {
-        		document.resumen_tipo_trabajo_detalle.papel_coste_total.style.textDecoration = "none";
-        		sumatoria += response.papelCosteTotal;
-        	}
-        	// tinta
-        	if( response.clienteProporcionaTinta )
-        		document.resumen_tipo_trabajo_detalle.tinta_coste_total.style.textDecoration = "line-through";
-        	else {
-        		document.resumen_tipo_trabajo_detalle.tinta_coste_total.style.textDecoration = "none";
-        		sumatoria += response.tintaCosteTotal;
-        	}
-        	// tinta especial
-        	if( response.clienteProporcionaTintaEspecial )
+			document.resumen_tipo_trabajo_detalle.papel_coste_total.value 					= "$ " + (response.papelCosteTotal).formatMoney(2);
+			document.resumen_tipo_trabajo_detalle.tinta_coste_total.value 					= "$ " + (response.tintaCosteTotal).formatMoney(2);
+			document.resumen_tipo_trabajo_detalle.tinta_especial_coste_total.value 			= "$ " + (response.tintaEspecialCosteTotal).formatMoney(2);
+			document.resumen_tipo_trabajo_detalle.frente_barniz_coste_total.value 			= "$ " + (response.frenteBarnizCosteTotal).formatMoney(2);
+			document.resumen_tipo_trabajo_detalle.vuelta_barniz_coste_total.value 			= "$ " + (response.vueltaBarnizCosteTotal).formatMoney(2);
+			document.resumen_tipo_trabajo_detalle.placas_coste_total.value 					= "$ " + (response.placasCosteTotal).formatMoney(2);
+			document.resumen_tipo_trabajo_detalle.tipo_trabajo_detalle_coste_total.value	= "$ " + (response.tipoTrabajoDetalleCosteTotal).formatMoney(2);
+			if ( response.clienteProporcionaPapel )
+        		document.resumen_tipo_trabajo_detalle.papel_coste_total.style.textDecoration 			= "line-through";
+        	if ( response.clienteProporcionaTinta )
+        		document.resumen_tipo_trabajo_detalle.tinta_coste_total.style.textDecoration 			= "line-through";
+        	if ( response.clienteProporcionaTintaEspecial )
         		document.resumen_tipo_trabajo_detalle.tinta_especial_coste_total.style.textDecoration = "line-through";
-        	else {
-        		document.resumen_tipo_trabajo_detalle.tinta_especial_coste_total.style.textDecoration = "none";
-        		sumatoria += response.tintaEspecialCosteTotal;
+        	if ( response.clienteProporcionaBarniz ) {
+        		document.resumen_tipo_trabajo_detalle.frente_barniz_coste_total.style.textDecoration 	= "line-through";
+        		document.resumen_tipo_trabajo_detalle.vuelta_barniz_coste_total.style.textDecoration 	= "line-through";
         	}
-        	// barniz
-        	if( response.clienteProporcionaBarniz ) {
-        		document.resumen_tipo_trabajo_detalle.frente_barniz_coste_total.style.textDecoration = "line-through";
-        		document.resumen_tipo_trabajo_detalle.vuelta_barniz_coste_total.style.textDecoration = "line-through";
-        	} else {
-        		document.resumen_tipo_trabajo_detalle.frente_barniz_coste_total.style.textDecoration = "none";
-        		document.resumen_tipo_trabajo_detalle.vuelta_barniz_coste_total.style.textDecoration = "none";
-        		sumatoria += response.frenteBarnizCosteTotal;
-        		sumatoria += response.vueltaBarnizCosteTotal;
+        	if ( response.clienteProporcionaPlacas )
+        		document.resumen_tipo_trabajo_detalle.placas_coste_total.style.textDecoration 		= "line-through";
+        	
+        	delete response;
+		},
+		error:function(e) {
+			alert("Error. No fue posible conectarse con el servidor");
+		}
+	});
+}
+
+function ajaxPliego( id_pliego ) {
+	limpiaFormPliego();
+	$.ajax({
+		type:'POST',
+		url:urlResumenCalificacionPliego,
+		data:{nut:document.orden_produccion.nut.value,id_pliego:id_pliego},
+		success:function(response) {
+			//console.log(response);
+        	document.resumen_pliego.papel_descripcion.value 				= response.papelDescripcion;
+        	document.resumen_pliego.papel_cantidad_total.value 				= response.papelCantidadTotal;
+        	document.resumen_pliego.papel_precio_unitario.value 			= "$ " + (response.papelPrecioUnitario).formatMoney(4);
+        	document.resumen_pliego.papel_coste_total.value 				= "$ " + (response.papelCosteTotal).formatMoney(2);
+        	document.resumen_pliego.tinta_descripcion.value 				= response.tintaDescripcion;
+        	document.resumen_pliego.tinta_num_ent_maq.value 				= response.tintaNumEntMaq;
+        	document.resumen_pliego.tinta_precio_unitario.value 			= "$ " + (response.tintaPrecioUnitario).formatMoney(3);
+        	document.resumen_pliego.tinta_coste_total.value 				= "$ " + (response.tintaCosteTotal).formatMoney(2);
+        	document.resumen_pliego.tinta_especial_descripcion.value 		= response.tintaEspecialDescripcion;
+        	document.resumen_pliego.tinta_especial_num_ent_maq.value 		= response.tintaEspecialNumEntMaq;
+        	document.resumen_pliego.tinta_especial_precio_unitario.value 	= "$ " + (response.tintaEspecialPrecioUnitario).formatMoney(3);
+        	document.resumen_pliego.tinta_especial_coste_total.value 		= "$ " + (response.tintaEspecialCosteTotal).formatMoney(2);
+        	document.resumen_pliego.barniz_descripcion.value 				= response.barnizDescripcion;
+        	document.resumen_pliego.frente_barniz_num_ent_maq.value 		= response.frenteBarnizNumEntMaq;
+        	document.resumen_pliego.frente_barniz_precio_unitario.value 	= "$ " + (response.frenteBarnizPrecioUnitario).formatMoney(3);
+        	document.resumen_pliego.frente_barniz_coste_total.value 		= "$ " + (response.frenteBarnizCosteTotal).formatMoney(2);
+        	document.resumen_pliego.vuelta_barniz_num_ent_maq.value 		= response.vueltaBarnizNumEntMaq;
+        	document.resumen_pliego.vuelta_barniz_precio_unitario.value 	= "$ " + (response.vueltaBarnizPrecioUnitario).formatMoney(3);
+        	document.resumen_pliego.vuelta_barniz_coste_total.value 		= "$ " + (response.vueltaBarnizCosteTotal).formatMoney(2);
+        	document.resumen_pliego.placas_descripcion.value 				= response.placasDescripcion;
+        	document.resumen_pliego.placas_num_placas.value 				= response.placasNumPlacas;
+        	document.resumen_pliego.placas_precio_unitario.value 			= "$ " + (response.placasPrecioUnitario).formatMoney(2);
+        	document.resumen_pliego.placas_coste_total.value 				= "$ " + (response.placasCosteTotal).formatMoney(2);
+        	document.resumen_pliego.pliego_coste_total.value 				= "$ " + (response.pliegoCosteTotal).formatMoney(2);
+        	
+        	if ( response.clienteProporcionaPapel )
+        		document.resumen_pliego.papel_coste_total.style.textDecoration 			= "line-through";
+        	if ( response.clienteProporcionaTinta )
+        		document.resumen_pliego.tinta_coste_total.style.textDecoration 			= "line-through";
+        	if ( response.clienteProporcionaTintaEspecial )
+        		document.resumen_pliego.tinta_especial_coste_total.style.textDecoration = "line-through";
+        	if ( response.clienteProporcionaBarniz ) {
+        		document.resumen_pliego.frente_barniz_coste_total.style.textDecoration 	= "line-through";
+        		document.resumen_pliego.vuelta_barniz_coste_total.style.textDecoration 	= "line-through";
         	}
-        	// placas
-        	if( response.clienteProporcionaPlacas )
-        		document.resumen_tipo_trabajo_detalle.placas_coste_total.style.textDecoration = "line-through";
-        	else {
-        		document.resumen_tipo_trabajo_detalle.placas_coste_total.style.textDecoration = "none";
-        		sumatoria += response.placasCosteTotal;
-        	}
-        		
-        	document.resumen_tipo_trabajo_detalle.tipo_trabajo_detalle_coste_total.value 		= "$ " + (sumatoria).formatMoney(2);
-        	delete sumatoria;
+        	if ( response.clienteProporcionaPlacas )
+        		document.resumen_pliego.placas_coste_total.style.textDecoration 		= "line-through";
+        	
         	delete response;
 		},
 		error:function(e) {
@@ -273,11 +290,10 @@ function ajaxSubPartida( id_tipo_trabajo_detalle ) {
 
 function ajaxProcesos( id_partida ) {
 	limpiaFormProcesos();
-	var nut = document.orden_produccion.nut.value;
 	$.ajax({
 		type:'POST',
 		url:urlResumenCalificacionProcesos,
-		data:{nut:nut, id_partida:id_partida},
+		data:{nut:document.orden_produccion.nut.value,id_partida:id_partida},
 		success:function(response){
 			//console.log(response);
 			document.getElementById("div_tabla_lista_costos_extras_detalle").innerHTML 	= response.htmlTablaCostosExtras;
@@ -285,16 +301,10 @@ function ajaxProcesos( id_partida ) {
 			document.getElementById("div_tabla_lista_procesos_preprensa").innerHTML 	= response.htmlTablaProcesosPreprensa;
 			document.getElementById("div_tabla_lista_procesos_transporte").innerHTML 	= response.htmlTablaProcesosTransporte;
 			document.getElementById("div_tabla_lista_procesos_acabado").innerHTML 		= response.htmlTablaProcesosAcabado;
-			var costeProcesosTotal = 
-				response.disenioCosteTotal +
-				response.preprensaCosteTotal +
-				response.transporteCosteTotal +
-				response.acabadoCosteTotal + 
-				response.costoExtraTotal;
-			document.resumen_procesos.procesos_coste_total.value = "$ " + (costeProcesosTotal).formatMoney(2);
-			delete costeProcesosTotal;
+			document.resumen_procesos.procesos_coste_total.value 						= "$ " + (response.procesosPartidaCosteTotal).formatMoney(2);
+			delete response;
 		},
-		error:function(response){
+		error:function(e){
 			alert("Error. No fue posible conectarse con el servidor");
 		}
 	});
@@ -302,7 +312,7 @@ function ajaxProcesos( id_partida ) {
 
 
 function carga_datos() {
-	
+	//console.log(jsonArbol);
 	$("#arbol_partidas").on("changed.jstree", function(e, data){
         if( data.selected.length ) {
             //console.log( data );
@@ -310,32 +320,44 @@ function carga_datos() {
             var identificador = "" + data.instance.get_node( data.selected[0] ).id + "";
             //console.log(identificador);
             var arreglo = identificador.split(":");
-            if( arreglo[0] == "IdOrdProd" ) {
+            if ( arreglo[0] == "IdOrdProd" ) {
             	//console.log("entro a idOrdProd")
             	document.getElementById("div_orden_produccion_detalle").style.display 	= "block";
             	document.getElementById("div_partida_detalle").style.display 			= "none";
             	document.getElementById("div_tipo_trabajo_detalle").style.display 		= "none";
+            	document.getElementById("div_pliego_detalle").style.display 			= "none";
             	document.getElementById("div_procesos_acabado_detalle").style.display 	= "none";
             	
-            } else if( arreglo[0] == "IdPartida" ) {
+            } else if ( arreglo[0] == "IdPartida" ) {
                 //console.log("entro a IdPartida");
             	document.getElementById("div_orden_produccion_detalle").style.display 	= "none";
             	document.getElementById("div_partida_detalle").style.display 			= "block";
             	document.getElementById("div_tipo_trabajo_detalle").style.display 		= "none";
+            	document.getElementById("div_pliego_detalle").style.display 			= "none";
             	document.getElementById("div_procesos_acabado_detalle").style.display 	= "none";
                 ajaxPartida( arreglo[1] );
-            } else if( arreglo[0] == "IdSubpartida" ) {
-                //console.log("entro a IdSubpartida");
+            } else if ( arreglo[0] == "IdTipoTrabajoDetalle" ) {
+                //console.log("entro a IdTipoTrabajoDetalle");
             	document.getElementById("div_orden_produccion_detalle").style.display 	= "none";
             	document.getElementById("div_partida_detalle").style.display 			= "none";
             	document.getElementById("div_tipo_trabajo_detalle").style.display 		= "block";
+            	document.getElementById("div_pliego_detalle").style.display 			= "none";
             	document.getElementById("div_procesos_acabado_detalle").style.display 	= "none";
-            	ajaxSubPartida( arreglo[1] );
-            } else if(arreglo[0] == "IdProcExt") {
+            	ajaxTrabajoDetalle( arreglo[1] );
+            } else if ( arreglo[0] == "IdPliego" ) {
+            	//console.log("entro a IdPliego");
+            	document.getElementById("div_orden_produccion_detalle").style.display 	= "none";
+            	document.getElementById("div_partida_detalle").style.display 			= "none";
+            	document.getElementById("div_tipo_trabajo_detalle").style.display 		= "none";
+            	document.getElementById("div_pliego_detalle").style.display 			= "block";
+            	document.getElementById("div_procesos_acabado_detalle").style.display 	= "none";
+            	ajaxPliego( arreglo[1] );
+            } else if (arreglo[0] == "IdProcExt") {
             	//console.log("entro a IdProcExt");
             	document.getElementById("div_orden_produccion_detalle").style.display 	= "none";
             	document.getElementById("div_partida_detalle").style.display 			= "none";
             	document.getElementById("div_tipo_trabajo_detalle").style.display 		= "none";
+            	document.getElementById("div_pliego_detalle").style.display 			= "none";
             	document.getElementById("div_procesos_acabado_detalle").style.display 	= "block";
             	ajaxProcesos( arreglo[1] );
             }

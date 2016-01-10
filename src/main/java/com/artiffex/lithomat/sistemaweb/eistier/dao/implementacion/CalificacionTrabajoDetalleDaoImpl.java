@@ -10,7 +10,7 @@ import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CalificacionTrabajo
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.GenericJdbcDAO;
 import com.artiffex.lithomat.sistemaweb.eistier.hibernate.HibernateUtil;
 
-@Repository("resumenCalificacionTrabajoDetalleDAO")
+@Repository("calificacionTrabajoDetalleDAO")
 public class CalificacionTrabajoDetalleDaoImpl extends GenericJdbcDAO implements CalificacionTrabajoDetalleDAO {
 	
 	private static final Logger log = Logger.getLogger(CalificacionTrabajoDetalleDaoImpl.class);

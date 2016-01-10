@@ -63,11 +63,11 @@
 			</key>
 			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.MaterialAyudaXPartida"/>
 		</set>
-		<set name="calificacionProcesosPartida" table="calificacion_procesos_partida" inverse="true" lazy="true" fetch="select">
+		<set name="calificacionPartida" table="calificacion_partida" inverse="true" lazy="true" fetch="select">
 			<key>
 				<column name="id_partida" not-null="true"/>
 			</key>
-			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionProcesosPartida"/>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionPartida"/>
 		</set>
 		<set name="disenio" table="disenio" inverse="true" lazy="true" fetch="select">
 			<key>

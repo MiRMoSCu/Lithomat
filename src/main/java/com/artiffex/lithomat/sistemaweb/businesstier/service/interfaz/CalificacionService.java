@@ -6,11 +6,11 @@ import com.artiffex.lithomat.sistemaweb.ayuda.CalificacionTrabajoDetalleDTOAyuda
 import com.artiffex.lithomat.sistemaweb.ayuda.OrdenProduccionDTOAyuda;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.ReporteCotizacionDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionOrdenProduccion;
-import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionProcesosPartida;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionPartida;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionPliego;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionTrabajoDetalle;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.OrdenTrabajo;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.Remision;
-import com.artiffex.lithomat.sistemaweb.businesstier.utilidades._CalificacionPartida;
 
 
 public interface CalificacionService {
@@ -19,12 +19,12 @@ public interface CalificacionService {
 	
 	public CalificacionOrdenProduccion buscaCalificacionOrdenProduccion(int idOrdenProduccion);
 	
+	public CalificacionPartida buscaCalificacionPartida(int idPartida);
+	
 	public CalificacionTrabajoDetalle buscaCalificacionTrabajoDetalle(int idTipoTrabajoDetalle);
 	
-	public _CalificacionPartida buscaCalificacionPartida(int idPartida);
+	public CalificacionPliego buscaCalificacionPliego(int idPliego);
 	
-	public CalificacionProcesosPartida buscaCalificacionProcesos(int idPartida);
-		
 	//**************************
 	
 	public void actualizaOrdenProduccion(int idOrdenProduccion);

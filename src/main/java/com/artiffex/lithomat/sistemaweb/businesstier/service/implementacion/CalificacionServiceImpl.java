@@ -26,7 +26,8 @@ import com.artiffex.lithomat.sistemaweb.businesstier.dto.ReporteCotizacionDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.TransporteDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.TransporteDetalleDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionOrdenProduccion;
-import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionProcesosPartida;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionPartida;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionPliego;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionTrabajoDetalle;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.OrdenProduccion;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Partida;
@@ -54,11 +55,9 @@ import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.OrdenTrabajoPart
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.OrdenTrabajoPliego;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.OrdenTrabajoTipoTrabajoDetalle;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.Remision;
-import com.artiffex.lithomat.sistemaweb.businesstier.utilidades._CalificacionPartida;
-import com.artiffex.lithomat.sistemaweb.businesstier.utilidades._CalificacionTrabajoDetalle;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CalificacionOrdenProduccionDAO;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CalificacionPartidaDAO;
-import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CalificacionProcesosPartidaDAO;
+import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CalificacionPliegoDAO;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CalificacionTrabajoDetalleDAO;
 
 @Service("resumenCalificacionService")
@@ -66,13 +65,13 @@ public class CalificacionServiceImpl implements CalificacionService {
 
 	// DAO
 	@Resource
-	private CalificacionTrabajoDetalleDAO calificacionTrabajoDetalleDAO;
+	private CalificacionOrdenProduccionDAO calificacionOrdenProduccionDAO;
 	@Resource
 	private CalificacionPartidaDAO calificacionPartidaDAO;
 	@Resource
-	private CalificacionProcesosPartidaDAO calificacionProcesosPartidaDAO;
+	private CalificacionTrabajoDetalleDAO calificacionTrabajoDetalleDAO;
 	@Resource
-	private CalificacionOrdenProduccionDAO calificacionOrdenProduccionDAO;
+	private CalificacionPliegoDAO calificacionPliegoDAO;
 	// Service
 	@Resource
 	private OrdenProduccionService ordenProduccionService;
@@ -124,215 +123,211 @@ public class CalificacionServiceImpl implements CalificacionService {
 		for (Partida partida : listaPartida) {
 			
 			// subpartidas_coste_total = sumatoria(trabajo_detalle[n].coste_total_tipo_trabajo_detalle) donde n = 1,...,m
-			double subpartidasCosteTotal 	= 0;
+			double partidaCosteTotal		 	= 0;
+			double impresionPartidaCosteTotal	= 0;
+			double procesosPartidaCosteTotal 	= 0;
+			double disenioCosteTotal 			= 0;
+			double preprensaCosteTotal 			= 0;
+			double transporteCosteTotal 		= 0;
+			double acabadoCosteTotal			= 0;
+			double offsetCosteTotal 			= 0;
+			double costoExtraTotal 				= 0;
 			
 			List<TipoTrabajoDetalle> listaTipoTrabajoDetalle = tipoTrabajoDetalleService.listaTipoTrabajoDetallePorPartida(partida.getIdPartida());
 			for(TipoTrabajoDetalle tipoTrabajoDetalle : listaTipoTrabajoDetalle ) {
 				
 				// *** INICIALIZACION ***
-				// coste_total_tipo_trabajo_detalle = papel_coste + placas_coste + tinta_coste + tinta_especial_coste + barniz_coste
-				double costeTotalTipoTrabajoDetalle	= 0.0;
-				
-				// * cantidad original y cantidad redondeada
-				int cantidadOriginal 	= tipoTrabajoDetalle.getPartida().getCantidad();
-				int cantidadRedondeada = 0;
-				
-				if (cantidadOriginal <= 1000)
-					cantidadRedondeada = 1000;
-				else if ((cantidadOriginal % 1000) > 300)
-					cantidadRedondeada = ((cantidadOriginal / 1000) + 1) * 1000;
-				else
-					cantidadRedondeada = (cantidadOriginal / 1000) * 1000;
-				
+				// tipo_trabajo_detalle_coste_total = (papel_coste + placas_coste + tinta_coste + tinta_especial_coste + barniz_coste) POR CADA PLIEGO
+				double tipoTrabajoDetalleCosteTotal				= 0;
+				double trabajoDetallePapelCosteTotal			= 0;
+				double trabajoDetallePlacasCosteTotal			= 0;
+				double trabajoDetalleTintaCosteTotal			= 0;
+				double trabajoDetalleTintaEspecialCosteTotal	= 0;
+				double trabajoDetalleFrenteBarnizCosteTotal		= 0;
+				double trabajoDetalleVueltaBarnizCosteTotal		= 0;
 				// * tipo complejidad
 				int idTipoComplejidad = tipoTrabajoDetalle.getTipoComplejidad().getIdTipoComplejidad();
-				
 				// * maquina
 				int idMaquina = tipoTrabajoDetalle.getMaquina().getIdMaquina();
 				
-				// * precio tabulador
-				float precioUnitarioTabulador = tabuladorPreciosService.obtienePrecioUnitarioTabulador(idTipoComplejidad, idMaquina, cantidadRedondeada);
-				
-				// *** COMPONENTES IMPRESION ***
-				HashMap<String, Object> sumatorias = tipoTrabajoDetalleService.obtieneSumatorias(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());
-				
-				// *** ***** ***
-				// PAPEL
-				int papelCantidadTotal = (Integer)sumatorias.get("papelCantidadTotal");
-				float papelPrecioUnitario = tipoTrabajoDetalle.getTipoPapelExtendido().getPrecio() / tipoTrabajoDetalle.getTipoPapelExtendido().getTipoPrecio().getFactorDivisor(); 
-				float papelCosteTotal = papelCantidadTotal * papelPrecioUnitario;
-				
-				// *** ***** ***
-				// PLACAS
-				int placasNumPlacas = (Integer)sumatorias.get("placasNumPlacas");
-				float placasPrecioUnitario = tipoTrabajoDetalle.getTipoPlaca().getPrecio() / tipoTrabajoDetalle.getTipoPlaca().getTipoPrecio().getFactorDivisor();
-				float placasCosteTotal = placasNumPlacas * placasPrecioUnitario;
-				
-				// *** ***** ***
-				// TIRO (TINTA)
-				int tintaNumEntMaq = (Integer)sumatorias.get("tintaNumEntMaq");
-				float tintaCosteTotal = cantidadRedondeada * tintaNumEntMaq * precioUnitarioTabulador;
-				
-				// *** ***** ***
-				// TIRO (TINTA ESPECIAL)
-				int tintaEspecialNumEntMaq = (Integer)sumatorias.get("tintaEspecialNumEntMaq");
-				HashMap<String, Object> hashTintaEspecialPrecio = tintaEspecialService.getHashPrecioYTipoPrecio();
-				float tintaEspecialPrecioUnitario = precioUnitarioTabulador * (1 + ((Float)hashTintaEspecialPrecio.get("precio") / Integer.parseInt(hashTintaEspecialPrecio.get("factorDivisor").toString())));  
-				float tintaEspecialCosteTotal = cantidadRedondeada * tintaEspecialNumEntMaq * tintaEspecialPrecioUnitario;
-				
-				// *** ***** ***
-				// TIRO (BARNIZ FRENTE)
-				int frenteBarnizNumEntMaq = (Integer)sumatorias.get("frenteBarnizNumEntMaq");
-				float frenteBarnizPrecioUnitario = precioUnitarioTabulador * (1 + (tipoTrabajoDetalle.getFrenteTipoBarniz().getPrecio() / tipoTrabajoDetalle.getFrenteTipoBarniz().getTipoPrecio().getFactorDivisor()));
-				float frenteBarnizCosteTotal = cantidadRedondeada * frenteBarnizNumEntMaq * frenteBarnizPrecioUnitario;
-				
-				// *** ***** ***
-				// TIRO (BARNIZ VUELTA)
-				int vueltaBarnizNumEntMaq = (Integer)sumatorias.get("vueltaBarnizNumEntMaq");
-				float vueltaBarnizPrecioUnitario = precioUnitarioTabulador * (1 + (tipoTrabajoDetalle.getVueltaTipoBarniz().getPrecio() / tipoTrabajoDetalle.getVueltaTipoBarniz().getTipoPrecio().getFactorDivisor()));
-				float vueltaBarnizCosteTotal = cantidadRedondeada * vueltaBarnizNumEntMaq * vueltaBarnizPrecioUnitario;
-				
-				// SUMATORIA DE COSTES
-				if (!tipoTrabajoDetalle.isClienteProporcionaPapel()) {
-					costeTotalTipoTrabajoDetalle += papelCosteTotal;
+				List<Pliego> listaPliego = pliegoService.listaPliegoPorTipoTrabajoDetalle(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());
+				for (Pliego pliego : listaPliego) {
+					
+					// hojas requeridas original 
+					int hojasRequeridasOriginal 		= pliego.getHojasRequeridas();
+					
+					// hojas requeridas redondeo --> para buscar el tabulador de precio correcto
+					int hojasRequeridasRedondeo 		= 0;
+					if (hojasRequeridasOriginal <= 1000)
+						hojasRequeridasRedondeo = 1000;
+					else if ((hojasRequeridasOriginal % 1000) > 300)
+						hojasRequeridasRedondeo = ((hojasRequeridasOriginal / 1000) + 1) * 1000;
+					else
+						hojasRequeridasRedondeo = (hojasRequeridasOriginal / 1000) * 1000;
+					
+					// precio_tabulador correspondiente a las hojas requeridas redondeadas
+					float precioUnitarioTabulador 		= tabuladorPreciosService.obtienePrecioUnitarioTabulador(idTipoComplejidad, idMaquina, hojasRequeridasRedondeo);
+					
+					// papel
+					int papelCantidadTotal 				= pliego.getHojasTotales();
+					float papelPrecioUnitario 			= tipoTrabajoDetalle.getTipoPapelExtendido().getPrecio() / tipoTrabajoDetalle.getTipoPapelExtendido().getTipoPrecio().getFactorDivisor();
+					double papelCosteTotal 				= papelCantidadTotal * papelPrecioUnitario;
+					trabajoDetallePapelCosteTotal		+= papelCosteTotal;
+					
+					// placas
+					int placasNumPlacas					= pliego.getFrenteNumTotalPlacas() + pliego.getVueltaNumTotalPlacas();
+					float placasPrecioUnitario			= tipoTrabajoDetalle.getTipoPlaca().getPrecio() / tipoTrabajoDetalle.getTipoPlaca().getTipoPrecio().getFactorDivisor();
+					double placasCosteTotal				= placasNumPlacas * placasPrecioUnitario;
+					trabajoDetallePlacasCosteTotal		+= placasCosteTotal;
+					
+					// tiro tinta
+					int tintaNumEntMaq					= pliego.getFrenteNumEntradasMaquinaTinta() + pliego.getVueltaNumEntradasMaquinaTinta();
+					float tintaPrecioUnitario			= precioUnitarioTabulador;
+					double tintaCosteTotal				= hojasRequeridasRedondeo * tintaNumEntMaq * tintaPrecioUnitario;
+					trabajoDetalleTintaCosteTotal		+= tintaCosteTotal;
+					
+					// tiro tinta especial	// SE PUEDE HACER MAS FACIL AL BUSCAR EL UNICO REGISTRO
+					HashMap<String, Object> hashTintaEspecialPrecio = tintaEspecialService.getHashPrecioYTipoPrecio();
+					int tintaEspecialNumEntMaq			= pliego.getFrenteNumEntradasMaquinaTintaEspecial() + pliego.getVueltaNumEntradasMaquinaTintaEspecial();
+					float tintaEspecialPrecioUnitario	= precioUnitarioTabulador * (1 + ((Float)hashTintaEspecialPrecio.get("precio") / Integer.parseInt(hashTintaEspecialPrecio.get("factorDivisor").toString())));
+					double tintaEspecialCosteTotal		= hojasRequeridasRedondeo * tintaEspecialNumEntMaq * tintaEspecialPrecioUnitario;
+					hashTintaEspecialPrecio 			= null;
+					trabajoDetalleTintaEspecialCosteTotal	+= tintaEspecialCosteTotal;
+					
+					// tiro frente barniz
+					int frenteBarnizNumEntMaq			= pliego.getFrenteNumEntradasMaquinaBarniz();
+					float frenteBarnizPrecioUnitario	= precioUnitarioTabulador * (1 + (tipoTrabajoDetalle.getFrenteTipoBarniz().getPrecio() / tipoTrabajoDetalle.getFrenteTipoBarniz().getTipoPrecio().getFactorDivisor()));
+					double frenteBarnizCosteTotal		= hojasRequeridasRedondeo * frenteBarnizNumEntMaq * frenteBarnizPrecioUnitario;
+					trabajoDetalleFrenteBarnizCosteTotal += frenteBarnizCosteTotal;
+					
+					int vueltaBarnizNumEntMaq			= pliego.getVueltaNumEntradasMaquinaBarniz();
+					float vueltaBarnizPrecioUnitario	= precioUnitarioTabulador * (1 + (tipoTrabajoDetalle.getVueltaTipoBarniz().getPrecio() / tipoTrabajoDetalle.getVueltaTipoBarniz().getTipoPrecio().getFactorDivisor()));
+					double vueltaBarnizCosteTotal		= hojasRequeridasRedondeo * vueltaBarnizNumEntMaq * vueltaBarnizPrecioUnitario;
+					trabajoDetalleVueltaBarnizCosteTotal += vueltaBarnizCosteTotal;
+					
+					// SUMATORIA DE COSTES
+					double pliegoCosteTotal				= 0;
+					if (!tipoTrabajoDetalle.isClienteProporcionaPapel()) {
+						pliegoCosteTotal += papelCosteTotal;
+					}
+					if (!tipoTrabajoDetalle.isClienteProporcionaPlacas()) {
+						pliegoCosteTotal += placasCosteTotal;
+					}
+					if (!tipoTrabajoDetalle.isClienteProporcionaTinta()) {
+						pliegoCosteTotal += tintaCosteTotal;
+					}
+					if (!tipoTrabajoDetalle.isClienteProporcionaTintaEspecial()) {
+						pliegoCosteTotal += tintaEspecialCosteTotal;
+					}
+					if (!tipoTrabajoDetalle.isClienteProporcionaBarniz()) {
+						pliegoCosteTotal += frenteBarnizCosteTotal;
+						pliegoCosteTotal += vueltaBarnizCosteTotal;
+					}
+					
+					// sumatoria de costes pliegos
+					tipoTrabajoDetalleCosteTotal += pliegoCosteTotal;
+					
+					CalificacionPliego calificacionPliego = new CalificacionPliego();
+					
+					calificacionPliego.setPliego(pliego);
+					calificacionPliego.setPliegoCosteTotal(pliegoCosteTotal);
+					calificacionPliego.setHojasRequeridasOriginal(hojasRequeridasOriginal);
+					calificacionPliego.setHojasRequeridasRedondeo(hojasRequeridasRedondeo);
+					calificacionPliego.setPrecioUnitarioTabulador(precioUnitarioTabulador);
+					calificacionPliego.setPapelCantidadTotal(papelCantidadTotal);
+					calificacionPliego.setPapelPrecioUnitario(papelPrecioUnitario);
+					calificacionPliego.setPapelCosteTotal(papelCosteTotal);
+					calificacionPliego.setPlacasNumPlacas(placasNumPlacas);
+					calificacionPliego.setPlacasPrecioUnitario(placasPrecioUnitario);
+					calificacionPliego.setPlacasCosteTotal(placasCosteTotal);
+					calificacionPliego.setTintaNumEntMaq(tintaNumEntMaq);
+					calificacionPliego.setTintaPrecioUnitario(tintaPrecioUnitario);
+					calificacionPliego.setTintaCosteTotal(tintaCosteTotal);
+					calificacionPliego.setTintaEspecialNumEntMaq(tintaEspecialNumEntMaq);
+					calificacionPliego.setTintaEspecialPrecioUnitario(tintaEspecialPrecioUnitario);
+					calificacionPliego.setTintaEspecialCosteTotal(tintaEspecialCosteTotal);
+					calificacionPliego.setFrenteBarnizNumEntMaq(frenteBarnizNumEntMaq);
+					calificacionPliego.setFrenteBarnizPrecioUnitario(frenteBarnizPrecioUnitario);
+					calificacionPliego.setFrenteBarnizCosteTotal(frenteBarnizCosteTotal);
+					calificacionPliego.setVueltaBarnizNumEntMaq(vueltaBarnizNumEntMaq);
+					calificacionPliego.setVueltaBarnizPrecioUnitario(vueltaBarnizPrecioUnitario);
+					calificacionPliego.setVueltaBarnizCosteTotal(vueltaBarnizCosteTotal);
+					calificacionPliego.setActivo(true);
+					
+					calificacionPliegoDAO.crea(calificacionPliego);
+					
+					calificacionPliego = null;
+					pliego = null;
 				}
-				if (!tipoTrabajoDetalle.isClienteProporcionaPlacas()) {
-					costeTotalTipoTrabajoDetalle += placasCosteTotal;
-				}
-				if (!tipoTrabajoDetalle.isClienteProporcionaTinta()) {
-					costeTotalTipoTrabajoDetalle += tintaCosteTotal;
-				}
-				if (!tipoTrabajoDetalle.isClienteProporcionaTintaEspecial()) {
-					costeTotalTipoTrabajoDetalle += tintaEspecialCosteTotal;
-				}
-				if (!tipoTrabajoDetalle.isClienteProporcionaBarniz()) {
-					costeTotalTipoTrabajoDetalle += frenteBarnizCosteTotal;
-					costeTotalTipoTrabajoDetalle += vueltaBarnizCosteTotal;
-				}
+				listaPliego = null;
 				
+				// sumatoria coste partida
+				partidaCosteTotal += tipoTrabajoDetalleCosteTotal;
 				
-				// *** ***** ***
-				// creacion de registro
+				// creacion de registro calificacion trabajo detalle
 				CalificacionTrabajoDetalle calificacionTrabajoDetalle = new CalificacionTrabajoDetalle();
 
 				calificacionTrabajoDetalle.setTipoTrabajoDetalle(tipoTrabajoDetalle);
-				calificacionTrabajoDetalle.setCosteTotalTipoTrabajoDetalle((float)costeTotalTipoTrabajoDetalle);
-					
-				calificacionTrabajoDetalle.setCantidadOriginal(cantidadOriginal);
-				calificacionTrabajoDetalle.setCantidadRedondeada(cantidadRedondeada);
-				calificacionTrabajoDetalle.setPrecioUnitarioTabulador(precioUnitarioTabulador);
-				
-				calificacionTrabajoDetalle.setPapelCantidadTotal(papelCantidadTotal);
-				calificacionTrabajoDetalle.setPapelPrecioUnitario(papelPrecioUnitario);
-				calificacionTrabajoDetalle.setPapelCosteTotal(papelCosteTotal);
-				
-				calificacionTrabajoDetalle.setPlacasNumPlacas(placasNumPlacas);
-				calificacionTrabajoDetalle.setPlacasPrecioUnitario(placasPrecioUnitario);
-				calificacionTrabajoDetalle.setPlacasCosteTotal(placasCosteTotal);
-				
-				calificacionTrabajoDetalle.setTintaNumEntMaq(tintaNumEntMaq);
-				calificacionTrabajoDetalle.setTintaPrecioUnitario(precioUnitarioTabulador);
-				calificacionTrabajoDetalle.setTintaCosteTotal(tintaCosteTotal);
-				
-				calificacionTrabajoDetalle.setTintaEspecialNumEntMaq(tintaEspecialNumEntMaq);
-				calificacionTrabajoDetalle.setTintaEspecialPrecioUnitario(tintaEspecialPrecioUnitario);
-				calificacionTrabajoDetalle.setTintaEspecialCosteTotal(tintaEspecialCosteTotal);
-				
-				calificacionTrabajoDetalle.setFrenteBarnizNumEntMaq(frenteBarnizNumEntMaq);
-				calificacionTrabajoDetalle.setFrenteBarnizPrecioUnitario(frenteBarnizPrecioUnitario);
-				calificacionTrabajoDetalle.setFrenteBarnizCosteTotal(frenteBarnizCosteTotal);
-				
-				calificacionTrabajoDetalle.setVueltaBarnizNumEntMaq(vueltaBarnizNumEntMaq);
-				calificacionTrabajoDetalle.setVueltaBarnizPrecioUnitario(vueltaBarnizPrecioUnitario);
-				calificacionTrabajoDetalle.setVueltaBarnizCosteTotal(vueltaBarnizCosteTotal);
-				
+				calificacionTrabajoDetalle.setTipoTrabajoDetalleCosteTotal(tipoTrabajoDetalleCosteTotal);
+				calificacionTrabajoDetalle.setPapelCosteTotal(trabajoDetallePapelCosteTotal);
+				calificacionTrabajoDetalle.setPlacasCosteTotal(trabajoDetallePlacasCosteTotal);
+				calificacionTrabajoDetalle.setTintaCosteTotal(trabajoDetalleTintaCosteTotal);
+				calificacionTrabajoDetalle.setTintaEspecialCosteTotal(trabajoDetalleTintaEspecialCosteTotal);
+				calificacionTrabajoDetalle.setFrenteBarnizCosteTotal(trabajoDetalleFrenteBarnizCosteTotal);
+				calificacionTrabajoDetalle.setVueltaBarnizCosteTotal(trabajoDetalleVueltaBarnizCosteTotal);
 				calificacionTrabajoDetalle.setActivo(true);
 
 				calificacionTrabajoDetalleDAO.crea(calificacionTrabajoDetalle);
 				
-				// SUMATORIA SUBPARTIDAS_COSTE_TOTAL
-				subpartidasCosteTotal 	+= costeTotalTipoTrabajoDetalle;
-				
-				// limpieza variables
-				costeTotalTipoTrabajoDetalle	= 0; 
-				idMaquina 						= 0;
-				cantidadOriginal 				= 0;
-				cantidadRedondeada 				= 0;
-				precioUnitarioTabulador 		= 0;
-				papelCantidadTotal 				= 0;
-				papelPrecioUnitario 			= 0;
-				papelCosteTotal 				= 0;
-				placasNumPlacas 				= 0;
-				placasPrecioUnitario 			= 0;
-				placasCosteTotal 				= 0;
-				tintaNumEntMaq 					= 0;
-				tintaCosteTotal 				= 0;
-				tintaEspecialNumEntMaq 			= 0;
-				hashTintaEspecialPrecio 		= null;
-				tintaEspecialPrecioUnitario 	= 0;
-				tintaEspecialCosteTotal 		= 0;
-				frenteBarnizNumEntMaq 			= 0;
-				frenteBarnizPrecioUnitario 		= 0;
-				frenteBarnizCosteTotal 			= 0;
-				vueltaBarnizNumEntMaq 			= 0;
-				vueltaBarnizPrecioUnitario 		= 0;
-				vueltaBarnizCosteTotal 			= 0;
-				tipoTrabajoDetalle				= null;
-				calificacionTrabajoDetalle		= null;
+				calificacionTrabajoDetalle 	= null;
+				tipoTrabajoDetalle			= null;
 			}
-			
 			listaTipoTrabajoDetalle = null;
-			
-			float disenioCosteTotal 	= partidaService.obtieneDisenioCosteTotal(partida.getIdPartida());
-			float preprensaCosteTotal 	= partidaService.obtienePreprensaCosteTotal(partida.getIdPartida());
-			float transporteCosteTotal 	= partidaService.obtieneTransporteCosteTotal(partida.getIdPartida());
-			float acabadoCosteTotal 	= partidaService.obtieneAcabadoCosteTotal(partida.getIdPartida());
-			float offsetCosteTotal 		= 0;
-			float costoExtraTotal 		= partidaService.obtieneCostoExtraCosteTotal(partida.getIdPartida());
+			impresionPartidaCosteTotal	= partidaCosteTotal;
+			disenioCosteTotal 			= partidaService.obtieneDisenioCosteTotal(partida.getIdPartida());
+			preprensaCosteTotal 		= partidaService.obtienePreprensaCosteTotal(partida.getIdPartida());
+			transporteCosteTotal 		= partidaService.obtieneTransporteCosteTotal(partida.getIdPartida());
+			acabadoCosteTotal 			= partidaService.obtieneAcabadoCosteTotal(partida.getIdPartida());
+			offsetCosteTotal 			= 0;
+			costoExtraTotal 			= partidaService.obtieneCostoExtraCosteTotal(partida.getIdPartida());
 			
 			// SUMATORIA PARA CALCULO PRECIO BRUTO
 			// coste_total_procesos_partida = subpartidas_coste_total + sumatoria(disenio.coste_total + preprensa_coste_total + transporte_coste_total + acabado_coste_total + offset_coste_total + costo_extra)
-			double costeTotalProcesosPartida = 0;
 			
-			costeTotalProcesosPartida += subpartidasCosteTotal;
-			costeTotalProcesosPartida += disenioCosteTotal;
-			costeTotalProcesosPartida += preprensaCosteTotal;
-			costeTotalProcesosPartida += transporteCosteTotal;
-			costeTotalProcesosPartida += acabadoCosteTotal;
-			costeTotalProcesosPartida += offsetCosteTotal;
-			costeTotalProcesosPartida += costoExtraTotal;
+			procesosPartidaCosteTotal += disenioCosteTotal;
+			procesosPartidaCosteTotal += preprensaCosteTotal;
+			procesosPartidaCosteTotal += transporteCosteTotal;
+			procesosPartidaCosteTotal += acabadoCosteTotal;
+			procesosPartidaCosteTotal += offsetCosteTotal;
+			procesosPartidaCosteTotal += costoExtraTotal;
 
+			partidaCosteTotal += procesosPartidaCosteTotal;
+			
 			//creacion de registro
-			CalificacionProcesosPartida calificacionProcesosPartida = new CalificacionProcesosPartida();
+			CalificacionPartida calificacionPartida = new CalificacionPartida();
 			
-			calificacionProcesosPartida.setPartida(partida);
-			calificacionProcesosPartida.setCosteTotalProcesosPartida((float)costeTotalProcesosPartida);
-			calificacionProcesosPartida.setSubpartidasCosteTotal((float)subpartidasCosteTotal);
-			calificacionProcesosPartida.setDisenioCosteTotal(disenioCosteTotal);
-			calificacionProcesosPartida.setPreprensaCosteTotal(preprensaCosteTotal);
-			calificacionProcesosPartida.setTransporteCosteTotal(transporteCosteTotal);
-			calificacionProcesosPartida.setAcabadoCosteTotal(acabadoCosteTotal);
-			calificacionProcesosPartida.setOffsetCosteTotal(offsetCosteTotal);
-			calificacionProcesosPartida.setCostoExtraTotal(costoExtraTotal);
-			calificacionProcesosPartida.setActivo(true);
+			calificacionPartida.setPartida(partida);
+			calificacionPartida.setCantidadOriginal(partida.getCantidad());
+			calificacionPartida.setPartidaCosteTotal(partidaCosteTotal);
+			calificacionPartida.setImpresionPartidaCosteTotal(impresionPartidaCosteTotal);
+			calificacionPartida.setProcesosPartidaCosteTotal(procesosPartidaCosteTotal);
+			calificacionPartida.setDisenioCosteTotal(disenioCosteTotal);
+			calificacionPartida.setPreprensaCosteTotal(preprensaCosteTotal);
+			calificacionPartida.setTransporteCosteTotal(transporteCosteTotal);
+			calificacionPartida.setAcabadoCosteTotal(acabadoCosteTotal);
+			calificacionPartida.setOffsetCosteTotal(offsetCosteTotal);
+			calificacionPartida.setCostoExtraTotal(costoExtraTotal);
+			calificacionPartida.setActivo(true);
 			
-			calificacionProcesosPartidaDAO.crea(calificacionProcesosPartida);
+			calificacionPartidaDAO.crea(calificacionPartida);
+			
+			calificacionPartida = null;
 			
 			// SUMATORIA PRECIO_BRUTO
-			precioBruto += costeTotalProcesosPartida;
+			precioBruto += partidaCosteTotal;
 			
-			//limpieza variables
-			partida						= null;
-			costeTotalProcesosPartida 	= 0;
-			disenioCosteTotal 			= 0;
-			preprensaCosteTotal 		= 0;
-			transporteCosteTotal 		= 0;
-			acabadoCosteTotal 			= 0;
-			offsetCosteTotal 			= 0;
-			costoExtraTotal 			= 0;
-			calificacionProcesosPartida	= null;
+			partida	= null;
 		}
-		
 		listaPartida = null;
 		
 		// *** ***** ***
@@ -362,12 +357,9 @@ public class CalificacionServiceImpl implements CalificacionService {
 		calificacionOrdenProduccion.setActivo(true);
 
 		calificacionOrdenProduccionDAO.crea(calificacionOrdenProduccion);
-
-		precioBruto					= 0;
-		precioCliente 				= 0;
-		porcentajeComprobante 		= 0;
-		precioNeto 					= 0;
+		
 		calificacionOrdenProduccion	= null;
+		ordenProduccion = null;
 
 		return 1;
 	} // creaCalificacion
@@ -378,20 +370,17 @@ public class CalificacionServiceImpl implements CalificacionService {
 		return calificacionOrdenProduccionDAO.buscaPorOrdenProduccion(idOrdenProduccion);
 	} // buscaCalificacionOrdenProduccion
 	
-	
-	public _CalificacionPartida buscaCalificacionPartida(int idPartida) {
-		return calificacionPartidaDAO.busca(idPartida);
+	public CalificacionPartida buscaCalificacionPartida(int idPartida) {
+		return calificacionPartidaDAO.buscaPorPartida(idPartida);
 	} // buscaCalificacionPartida
-	
-	
+
 	public CalificacionTrabajoDetalle buscaCalificacionTrabajoDetalle(int idTipoTrabajoDetalle) {
 		return calificacionTrabajoDetalleDAO.buscaPorTipoTrabajoDetalle(idTipoTrabajoDetalle);
 	} // buscaCalificacionTrabajoDetalle
 	
-	
-	public CalificacionProcesosPartida buscaCalificacionProcesos(int idPartida) {
-		return calificacionProcesosPartidaDAO.buscaPorPartida(idPartida);
-	} // buscaCalificacionProcesos
+	public CalificacionPliego buscaCalificacionPliego(int idPliego) {
+		return calificacionPliegoDAO.buscaPorPliego(idPliego);
+	} // buscaCalificacionPliego
 	
 	/********* ACTUALIZACION *********/
 	
@@ -552,7 +541,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 				// *** ***** ***
 				// modificacion de registro
 				CalificacionTrabajoDetalle calificacionTrabajoDetalle = calificacionTrabajoDetalleDAO.buscaPorTipoTrabajoDetalle(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());
-
+/*
 				calificacionTrabajoDetalle.setTipoTrabajoDetalle(tipoTrabajoDetalle);
 				calificacionTrabajoDetalle.setCosteTotalTipoTrabajoDetalle((float)costeTotalTipoTrabajoDetalle);
 					
@@ -583,7 +572,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 				calificacionTrabajoDetalle.setVueltaBarnizNumEntMaq(vueltaBarnizNumEntMaq);
 				calificacionTrabajoDetalle.setVueltaBarnizPrecioUnitario(vueltaBarnizPrecioUnitario);
 				calificacionTrabajoDetalle.setVueltaBarnizCosteTotal(vueltaBarnizCosteTotal);
-				
+	*/			
 				calificacionTrabajoDetalleDAO.modifica(calificacionTrabajoDetalle);
 				
 				// SUMATORIA SUBPARTIDAS_COSTE_TOTAL
@@ -639,8 +628,8 @@ public class CalificacionServiceImpl implements CalificacionService {
 			costeTotalProcesosPartida += costoExtraTotal;
 
 			//creacion de registro
-			CalificacionProcesosPartida calificacionProcesosPartida = calificacionProcesosPartidaDAO.buscaPorPartida(partida.getIdPartida());
-			
+			CalificacionPartida calificacionProcesosPartida = calificacionPartidaDAO.buscaPorPartida(partida.getIdPartida());
+/*
 			calificacionProcesosPartida.setPartida(partida);
 			calificacionProcesosPartida.setCosteTotalProcesosPartida((float)costeTotalProcesosPartida);
 			calificacionProcesosPartida.setSubpartidasCosteTotal((float)subpartidasCosteTotal);
@@ -650,8 +639,8 @@ public class CalificacionServiceImpl implements CalificacionService {
 			calificacionProcesosPartida.setAcabadoCosteTotal(acabadoCosteTotal);
 			calificacionProcesosPartida.setOffsetCosteTotal(offsetCosteTotal);
 			calificacionProcesosPartida.setCostoExtraTotal(costoExtraTotal);
-			
-			calificacionProcesosPartidaDAO.modifica(calificacionProcesosPartida);
+		*/	
+			calificacionPartidaDAO.modifica(calificacionProcesosPartida);
 			
 			// SUMATORIA PRECIO_BRUTO
 			precioBruto += costeTotalProcesosPartida;
@@ -737,10 +726,10 @@ public class CalificacionServiceImpl implements CalificacionService {
 			//		)
 			
 			//busqueda de registro
-			CalificacionProcesosPartida calificacionProcesosPartida = calificacionProcesosPartidaDAO.buscaPorPartida(partida.getIdPartida());
-			
+			CalificacionPartida calificacionProcesosPartida = calificacionPartidaDAO.buscaPorPartida(partida.getIdPartida());
+			/*
 			double subpartidasCosteTotal 	= calificacionProcesosPartida.getSubpartidasCosteTotal();
-			
+			*/
 			float disenioCosteTotal 	= partidaService.obtieneDisenioCosteTotal(partida.getIdPartida());
 			float preprensaCosteTotal 	= partidaService.obtienePreprensaCosteTotal(partida.getIdPartida());
 			float transporteCosteTotal 	= partidaService.obtieneTransporteCosteTotal(partida.getIdPartida());
@@ -750,7 +739,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 			
 			// SUMATORIA PARA CALCULO PRECIO BRUTO
 			double costeTotalProcesosPartida = 0;
-			
+			/*
 			costeTotalProcesosPartida += subpartidasCosteTotal;
 			costeTotalProcesosPartida += disenioCosteTotal;
 			costeTotalProcesosPartida += preprensaCosteTotal;
@@ -767,18 +756,18 @@ public class CalificacionServiceImpl implements CalificacionService {
 			calificacionProcesosPartida.setAcabadoCosteTotal(acabadoCosteTotal);
 			calificacionProcesosPartida.setOffsetCosteTotal(offsetCosteTotal);
 			calificacionProcesosPartida.setCostoExtraTotal(costoExtraTotal);
-			
-			calificacionProcesosPartidaDAO.modifica(calificacionProcesosPartida); // UPDATE
+			*/
+			calificacionPartidaDAO.modifica(calificacionProcesosPartida); // UPDATE
 			
 			// SUMATORIA PRECIO_BRUTO
 			precioBruto += costeTotalProcesosPartida;
-			
+			/*
 			//limpieza variables
 			partida						= null;
 			costeTotalProcesosPartida 	= 0;
 			subpartidasCosteTotal		= 0;
 			calificacionProcesosPartida	= null;
-			
+			*/
 		}
 		
 		listaPartida = null;
@@ -890,10 +879,11 @@ public class CalificacionServiceImpl implements CalificacionService {
 		// busca las partidas
 		List<Partida> listaPartida = partidaService.listaPartidaPorOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
 		for (Partida partida : listaPartida) {
+			/*
 			ReporteCotizacionDTO partidaReporte = new ReporteCotizacionDTO();
 			partidaReporte.setCantidad(partida.getCantidad());
 			partidaReporte.setDescripcion(partida.getDescripcionPartida());
-				CalificacionProcesosPartida cpp 		= calificacionProcesosPartidaDAO.buscaPorPartida(partida.getIdPartida());
+				CalificacionPartida cpp 		= calificacionProcesosPartidaDAO.buscaPorPartida(partida.getIdPartida());
 				double costeTotalProcesosPartida 		= cpp.getCosteTotalProcesosPartida();
 				double costeGananciaRespectoTipoCliente = (double)(costeTotalProcesosPartida * (1 + porcentajeTipoCliente));
 			partidaReporte.setPrecioUnitario( (double)(costeGananciaRespectoTipoCliente / partida.getCantidad()) );
@@ -902,6 +892,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 			cpp				= null;
 			partidaReporte	= null;
 			partida 		= null;
+			*/
 		}
 		listaPartida				= null;
 		
@@ -928,9 +919,10 @@ public class CalificacionServiceImpl implements CalificacionService {
 			
 		List<Partida> listaPartida = partidaService.listaPartidaPorOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
 		for (Partida partida : listaPartida) {
-			CalificacionProcesosPartida calificacionProcesosPartida = calificacionProcesosPartidaDAO.buscaPorPartida(partida.getIdPartida());
+			CalificacionPartida calificacionProcesosPartida = calificacionPartidaDAO.buscaPorPartida(partida.getIdPartida());
 			
 			Remision remision = new Remision();
+			/*
 			List<_CalificacionTrabajoDetalle> listaCalificacionTrabajoDetalle = new ArrayList<_CalificacionTrabajoDetalle>();
 			
 			remision.setNombre(partida.getNombrePartida());
@@ -943,11 +935,11 @@ public class CalificacionServiceImpl implements CalificacionService {
 			remision.setAcabadoCosteTotal(Double.valueOf(dfDosDecimales.format(calificacionProcesosPartida.getAcabadoCosteTotal() * (1 + gananciaCliente))));
 			remision.setOffsetCosteTotal(Double.valueOf(dfDosDecimales.format(calificacionProcesosPartida.getOffsetCosteTotal() * (1 + gananciaCliente))));
 			remision.setCostoExtraTotal(Double.valueOf(dfDosDecimales.format(calificacionProcesosPartida.getCostoExtraTotal() * (1 + gananciaCliente))));
-			
+			*/
 			List<TipoTrabajoDetalle> listaTipoTrabajoDetalle = tipoTrabajoDetalleService.listaTipoTrabajoDetallePorPartida(partida.getIdPartida());
 			for (TipoTrabajoDetalle tipoTrabajoDetalle : listaTipoTrabajoDetalle) {
 				CalificacionTrabajoDetalle ctd = calificacionTrabajoDetalleDAO.buscaPorTipoTrabajoDetalle(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());
-				
+				/*
 				// No es DTO porque contiene más informacion que la copia de un Entity en un DTO
 				_CalificacionTrabajoDetalle calificacionTrabajoDetalle = new _CalificacionTrabajoDetalle();
 				calificacionTrabajoDetalle.setDescripcion(tipoTrabajoDetalle.getDescripcion());
@@ -1015,12 +1007,13 @@ public class CalificacionServiceImpl implements CalificacionService {
 				calificacionTrabajoDetalle 		= null;
 				ctd 							= null;
 				tipoTrabajoDetalle 				= null;
+				*/
 			}
-			remision.setListaCalificacionTrabajoDetalle(listaCalificacionTrabajoDetalle);
+			//remision.setListaCalificacionTrabajoDetalle(listaCalificacionTrabajoDetalle);
 			listaRemision.add(remision);
 			
 			listaTipoTrabajoDetalle 		= null;
-			listaCalificacionTrabajoDetalle	= null;
+			//listaCalificacionTrabajoDetalle	= null;
 			remision 						= null;
 			calificacionProcesosPartida 	= null;
 			partida 						= null;
@@ -1232,6 +1225,10 @@ public class CalificacionServiceImpl implements CalificacionService {
 	public List<CalificacionTrabajoDetalleDTOAyuda> obtieneEjemploVOPapel() {
 		return calificacionOrdenProduccionDAO.ejemploListaPapel();
 	}
+
+	
+
+	
 	
 }
 

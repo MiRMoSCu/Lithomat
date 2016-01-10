@@ -12,7 +12,6 @@
 		<many-to-one name="tipoTrabajoDetalle" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajoDetalle" fetch="select">
 			<column name="id_tipo_trabajo_detalle"/>
 		</many-to-one>
-		
 		<property name="rebaseEnMilimetros">
 			<column name="rebase_en_milimetros"/>
 			<type name="integer"/>
@@ -106,6 +105,12 @@
 				<column name="id_pliego" not-null="true"/>
 			</key>
 			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.OffsetDetalle"/>
+		</set>
+		<set name="calificacionPliego" table="calificacion_pliego" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_pliego" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionPliego"/>
 		</set>
 	</class>
 </hibernate-mapping>

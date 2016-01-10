@@ -33,6 +33,7 @@ public class Pliego implements Serializable {
 	private Set<FechaPrensistaMaquina> fechaPrensistaMaquina = new HashSet<FechaPrensistaMaquina>();
 	private Set<CalendarioOrdenProduccion> calendarioOrdenProduccion = new HashSet<CalendarioOrdenProduccion>();
 	private Set<OffsetDetalle> offsetDetalle = new HashSet<OffsetDetalle>();
+	private Set<CalificacionPliego> calificacionPliego = new HashSet<CalificacionPliego>();
 	
 	
 	public int getIdPliego() {
@@ -183,5 +184,10 @@ public class Pliego implements Serializable {
 	public void setOffsetDetalle(Set<OffsetDetalle> offsetDetalle) {
 		this.offsetDetalle = offsetDetalle;
 	}
-	
+	public Set<CalificacionPliego> getCalificacionPliego() {
+		return calificacionPliego;
+	}
+	public void setCalificacionPliego(Set<CalificacionPliego> calificacionPliego) {
+		this.calificacionPliego = calificacionPliego;
+	}
 }

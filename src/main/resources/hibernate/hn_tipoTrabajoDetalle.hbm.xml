@@ -128,5 +128,11 @@
 			</key>
 			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.CostoExtraDetalle"/>
 		</set>
+		<set name="calificacionTrabajoDetalle" table="calificacion_trabajo_detalle" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_tipo_trabajo_detalle" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionTrabajoDetalle"/>
+		</set>
 	</class>
 </hibernate-mapping>

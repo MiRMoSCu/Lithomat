@@ -1306,27 +1306,12 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`calificacion_trabajo_detalle` (
   `id_calificacion_trabajo_detalle` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_tipo_trabajo_detalle` INT UNSIGNED NOT NULL,
-  `coste_total_tipo_trabajo_detalle` DECIMAL(12,2) NULL,
-  `cantidad_original` INT NULL,
-  `cantidad_redondeada` INT NULL,
-  `precio_unitario_tabulador` FLOAT NULL,
-  `papel_cantidad_total` INT NULL,
-  `papel_precio_unitario` FLOAT NULL,
+  `tipo_trabajo_detalle_coste_total` DECIMAL(12,2) NULL,
   `papel_coste_total` DECIMAL(12,2) NULL,
-  `placas_num_placas` INT NULL,
-  `placas_precio_unitario` FLOAT NULL,
   `placas_coste_total` DECIMAL(12,2) NULL,
-  `tinta_num_ent_maq` INT NULL,
-  `tinta_precio_unitario` FLOAT NULL,
   `tinta_coste_total` DECIMAL(12,2) NULL,
-  `tinta_especial_num_ent_maq` INT NULL,
-  `tinta_especial_precio_unitario` FLOAT NULL,
   `tinta_especial_coste_total` DECIMAL(12,2) NULL,
-  `frente_barniz_num_ent_maq` INT NULL,
-  `frente_barniz_precio_unitario` FLOAT NULL,
   `frente_barniz_coste_total` DECIMAL(12,2) NULL,
-  `vuelta_barniz_num_ent_maq` INT NULL,
-  `vuelta_barniz_precio_unitario` FLOAT NULL,
   `vuelta_barniz_coste_total` DECIMAL(12,2) NULL,
   `activo` TINYINT(1) NULL,
   PRIMARY KEY (`id_calificacion_trabajo_detalle`),
@@ -1403,13 +1388,15 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `lithomat_artiffex`.`calificacion_procesos_partida`
+-- Table `lithomat_artiffex`.`calificacion_partida`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`calificacion_procesos_partida` (
-  `id_calificacion_procesos_partida` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`calificacion_partida` (
+  `id_calificacion_partida` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_partida` INT UNSIGNED NOT NULL,
-  `coste_total_procesos_partida` DECIMAL(12,2) NULL,
-  `subpartidas_coste_total` DECIMAL(12,2) NULL,
+  `cantidad_original` INT NULL,
+  `partida_coste_total` DECIMAL(12,2) NULL,
+  `impresion_partida_coste_total` DECIMAL(12,2) NULL,
+  `procesos_partida_coste_total` DECIMAL(12,2) NULL,
   `disenio_coste_total` DECIMAL(12,2) NULL,
   `preprensa_coste_total` DECIMAL(12,2) NULL,
   `transporte_coste_total` DECIMAL(12,2) NULL,
@@ -1417,7 +1404,7 @@ CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`calificacion_procesos_partida` (
   `offset_coste_total` DECIMAL(12,2) NULL,
   `costo_extra_total` DECIMAL(12,2) NULL,
   `activo` TINYINT(1) NULL,
-  PRIMARY KEY (`id_calificacion_procesos_partida`),
+  PRIMARY KEY (`id_calificacion_partida`),
   INDEX `fk_resumen_calificacion_partida_partida1_idx` (`id_partida` ASC),
   CONSTRAINT `fk_resumen_calificacion_partida_partida1`
     FOREIGN KEY (`id_partida`)
@@ -1482,6 +1469,45 @@ CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`perfil_x_usuario` (
   CONSTRAINT `fk_perfil_x_usuario_usuario1`
     FOREIGN KEY (`id_usuario`)
     REFERENCES `lithomat_artiffex`.`usuario` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `lithomat_artiffex`.`calificacion_pliego`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`calificacion_pliego` (
+  `id_calificacion_pliego` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_pliego` INT UNSIGNED NOT NULL,
+  `pliego_coste_total` DECIMAL(12,2) NULL,
+  `hojas_requeridas_original` INT NULL,
+  `hojas_requeridas_redondeo` INT NULL,
+  `precio_unitario_tabulador` FLOAT NULL,
+  `papel_cantidad_total` INT NULL,
+  `papel_precio_unitario` FLOAT NULL,
+  `papel_coste_total` DECIMAL(12,2) NULL,
+  `placas_num_placas` INT NULL,
+  `placas_precio_unitario` FLOAT NULL,
+  `placas_coste_total` DECIMAL(12,2) NULL,
+  `tinta_num_ent_maq` INT NULL,
+  `tinta_precio_unitario` FLOAT NULL,
+  `tinta_coste_total` DECIMAL(12,2) NULL,
+  `tinta_especial_num_ent_maq` INT NULL,
+  `tinta_especial_precio_unitario` FLOAT NULL,
+  `tinta_especial_coste_total` DECIMAL(12,2) NULL,
+  `frente_barniz_num_ent_maq` INT NULL,
+  `frente_barniz_precio_unitario` FLOAT NULL,
+  `frente_barniz_coste_total` DECIMAL(12,2) NULL,
+  `vuelta_barniz_num_ent_maq` INT NULL,
+  `vuelta_barniz_precio_unitario` FLOAT NULL,
+  `vuelta_barniz_coste_total` DECIMAL(12,2) NULL,
+  `activo` TINYINT(1) NULL,
+  PRIMARY KEY (`id_calificacion_pliego`),
+  INDEX `fk_calificacion_pliego_pliego1_idx` (`id_pliego` ASC),
+  CONSTRAINT `fk_calificacion_pliego_pliego1`
+    FOREIGN KEY (`id_pliego`)
+    REFERENCES `lithomat_artiffex`.`pliego` (`id_pliego`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

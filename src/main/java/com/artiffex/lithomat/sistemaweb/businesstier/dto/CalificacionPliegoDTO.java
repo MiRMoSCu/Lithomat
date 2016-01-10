@@ -1,49 +1,36 @@
-package com.artiffex.lithomat.sistemaweb.businesstier.utilidades;
+package com.artiffex.lithomat.sistemaweb.businesstier.dto;
 
 import java.io.Serializable;
 
-public class _CalificacionTrabajoDetalle implements Serializable {
+public class CalificacionPliegoDTO implements Serializable {
 
-	private static final long serialVersionUID = -8745211744326136703L;
+	private static final long serialVersionUID = 6385829750628030524L;
 	
-	private int idCalificacionTrabajoDetalle;
-	private double costeTotalTipoTrabajoDetalle;
-	private int cantidadOriginal;
-	private int cantidadRedondeada;
-	private float precioUnitarioTabulador;
+	private int idCalificacionPliego;
+	private double pliegoCosteTotal;
+	private String papelDescripcion;
 	private int papelCantidadTotal;
 	private float papelPrecioUnitario;
 	private double papelCosteTotal;
+	private String placasDescripcion;
 	private int placasNumPlacas;
 	private float placasPrecioUnitario;
 	private double placasCosteTotal;
+	private String tintaDescripcion;
 	private int tintaNumEntMaq;
 	private float tintaPrecioUnitario;
 	private double tintaCosteTotal;
+	private String tintaEspecialDescripcion;
 	private int tintaEspecialNumEntMaq;
 	private float tintaEspecialPrecioUnitario;
 	private double tintaEspecialCosteTotal;
+	private String barnizDescripcion;
 	private int frenteBarnizNumEntMaq;
 	private float frenteBarnizPrecioUnitario;
 	private double frenteBarnizCosteTotal;
 	private int vueltaBarnizNumEntMaq;
 	private float vueltaBarnizPrecioUnitario;
 	private double vueltaBarnizCosteTotal;
-	private boolean activo;
-	// campos para enviarse en ajax
-	private String nombreCliente;
-	private String nut;
-	private String descripcion;
-	private String maquinaDescripcion;
-	private int repeticionesXPliego;
-	private int numeroPaginasPublicacion;
-	private String tamanioPublicacion;
-	private int numeroPliegos;
-	private String papelDescripcion;
-	private String tintaDescripcion;
-	private String tintaEspecialDescripcion;
-	private String barnizDescripcion;
-	private String placasDescripcion;
 	private boolean clienteProporcionaPapel;
 	private boolean clienteProporcionaTinta;
 	private boolean clienteProporcionaTintaEspecial;
@@ -51,35 +38,23 @@ public class _CalificacionTrabajoDetalle implements Serializable {
 	private boolean clienteProporcionaPlacas;
 	
 	
-	public int getIdCalificacionTrabajoDetalle() {
-		return idCalificacionTrabajoDetalle;
+	public int getIdCalificacionPliego() {
+		return idCalificacionPliego;
 	}
-	public void setIdCalificacionTrabajoDetalle(int idCalificacionTrabajoDetalle) {
-		this.idCalificacionTrabajoDetalle = idCalificacionTrabajoDetalle;
+	public void setIdCalificacionPliego(int idCalificacionPliego) {
+		this.idCalificacionPliego = idCalificacionPliego;
 	}
-	public double getCosteTotalTipoTrabajoDetalle() {
-		return costeTotalTipoTrabajoDetalle;
+	public double getPliegoCosteTotal() {
+		return pliegoCosteTotal;
 	}
-	public void setCosteTotalTipoTrabajoDetalle(double costeTotalTipoTrabajoDetalle) {
-		this.costeTotalTipoTrabajoDetalle = costeTotalTipoTrabajoDetalle;
+	public void setPliegoCosteTotal(double pliegoCosteTotal) {
+		this.pliegoCosteTotal = pliegoCosteTotal;
 	}
-	public int getCantidadOriginal() {
-		return cantidadOriginal;
+	public String getPapelDescripcion() {
+		return papelDescripcion;
 	}
-	public void setCantidadOriginal(int cantidadOriginal) {
-		this.cantidadOriginal = cantidadOriginal;
-	}
-	public int getCantidadRedondeada() {
-		return cantidadRedondeada;
-	}
-	public void setCantidadRedondeada(int cantidadRedondeada) {
-		this.cantidadRedondeada = cantidadRedondeada;
-	}
-	public float getPrecioUnitarioTabulador() {
-		return precioUnitarioTabulador;
-	}
-	public void setPrecioUnitarioTabulador(float precioUnitarioTabulador) {
-		this.precioUnitarioTabulador = precioUnitarioTabulador;
+	public void setPapelDescripcion(String papelDescripcion) {
+		this.papelDescripcion = papelDescripcion;
 	}
 	public int getPapelCantidadTotal() {
 		return papelCantidadTotal;
@@ -99,6 +74,12 @@ public class _CalificacionTrabajoDetalle implements Serializable {
 	public void setPapelCosteTotal(double papelCosteTotal) {
 		this.papelCosteTotal = papelCosteTotal;
 	}
+	public String getPlacasDescripcion() {
+		return placasDescripcion;
+	}
+	public void setPlacasDescripcion(String placasDescripcion) {
+		this.placasDescripcion = placasDescripcion;
+	}
 	public int getPlacasNumPlacas() {
 		return placasNumPlacas;
 	}
@@ -116,6 +97,12 @@ public class _CalificacionTrabajoDetalle implements Serializable {
 	}
 	public void setPlacasCosteTotal(double placasCosteTotal) {
 		this.placasCosteTotal = placasCosteTotal;
+	}
+	public String getTintaDescripcion() {
+		return tintaDescripcion;
+	}
+	public void setTintaDescripcion(String tintaDescripcion) {
+		this.tintaDescripcion = tintaDescripcion;
 	}
 	public int getTintaNumEntMaq() {
 		return tintaNumEntMaq;
@@ -135,6 +122,12 @@ public class _CalificacionTrabajoDetalle implements Serializable {
 	public void setTintaCosteTotal(double tintaCosteTotal) {
 		this.tintaCosteTotal = tintaCosteTotal;
 	}
+	public String getTintaEspecialDescripcion() {
+		return tintaEspecialDescripcion;
+	}
+	public void setTintaEspecialDescripcion(String tintaEspecialDescripcion) {
+		this.tintaEspecialDescripcion = tintaEspecialDescripcion;
+	}
 	public int getTintaEspecialNumEntMaq() {
 		return tintaEspecialNumEntMaq;
 	}
@@ -152,6 +145,12 @@ public class _CalificacionTrabajoDetalle implements Serializable {
 	}
 	public void setTintaEspecialCosteTotal(double tintaEspecialCosteTotal) {
 		this.tintaEspecialCosteTotal = tintaEspecialCosteTotal;
+	}
+	public String getBarnizDescripcion() {
+		return barnizDescripcion;
+	}
+	public void setBarnizDescripcion(String barnizDescripcion) {
+		this.barnizDescripcion = barnizDescripcion;
 	}
 	public int getFrenteBarnizNumEntMaq() {
 		return frenteBarnizNumEntMaq;
@@ -189,90 +188,6 @@ public class _CalificacionTrabajoDetalle implements Serializable {
 	public void setVueltaBarnizCosteTotal(double vueltaBarnizCosteTotal) {
 		this.vueltaBarnizCosteTotal = vueltaBarnizCosteTotal;
 	}
-	public boolean isActivo() {
-		return activo;
-	}
-	public void setActivo(boolean activo) {
-		this.activo = activo;
-	}
-	public String getNombreCliente() {
-		return nombreCliente;
-	}
-	public void setNombreCliente(String nombreCliente) {
-		this.nombreCliente = nombreCliente;
-	}
-	public String getNut() {
-		return nut;
-	}
-	public void setNut(String nut) {
-		this.nut = nut;
-	}
-	public String getDescripcion() {
-		return descripcion;
-	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-	public String getMaquinaDescripcion() {
-		return maquinaDescripcion;
-	}
-	public void setMaquinaDescripcion(String maquinaDescripcion) {
-		this.maquinaDescripcion = maquinaDescripcion;
-	}
-	public int getRepeticionesXPliego() {
-		return repeticionesXPliego;
-	}
-	public void setRepeticionesXPliego(int repeticionesXPliego) {
-		this.repeticionesXPliego = repeticionesXPliego;
-	}
-	public int getNumeroPaginasPublicacion() {
-		return numeroPaginasPublicacion;
-	}
-	public void setNumeroPaginasPublicacion(int numeroPaginasPublicacion) {
-		this.numeroPaginasPublicacion = numeroPaginasPublicacion;
-	}
-	public String getTamanioPublicacion() {
-		return tamanioPublicacion;
-	}
-	public void setTamanioPublicacion(String tamanioPublicacion) {
-		this.tamanioPublicacion = tamanioPublicacion;
-	}
-	public int getNumeroPliegos() {
-		return numeroPliegos;
-	}
-	public void setNumeroPliegos(int numeroPliegos) {
-		this.numeroPliegos = numeroPliegos;
-	}
-	public String getPapelDescripcion() {
-		return papelDescripcion;
-	}
-	public void setPapelDescripcion(String papelDescripcion) {
-		this.papelDescripcion = papelDescripcion;
-	}
-	public String getTintaDescripcion() {
-		return tintaDescripcion;
-	}
-	public void setTintaDescripcion(String tintaDescripcion) {
-		this.tintaDescripcion = tintaDescripcion;
-	}
-	public String getTintaEspecialDescripcion() {
-		return tintaEspecialDescripcion;
-	}
-	public void setTintaEspecialDescripcion(String tintaEspecialDescripcion) {
-		this.tintaEspecialDescripcion = tintaEspecialDescripcion;
-	}
-	public String getBarnizDescripcion() {
-		return barnizDescripcion;
-	}
-	public void setBarnizDescripcion(String barnizDescripcion) {
-		this.barnizDescripcion = barnizDescripcion;
-	}
-	public String getPlacasDescripcion() {
-		return placasDescripcion;
-	}
-	public void setPlacasDescripcion(String placasDescripcion) {
-		this.placasDescripcion = placasDescripcion;
-	}
 	public boolean isClienteProporcionaPapel() {
 		return clienteProporcionaPapel;
 	}
@@ -304,5 +219,4 @@ public class _CalificacionTrabajoDetalle implements Serializable {
 	public void setClienteProporcionaPlacas(boolean clienteProporcionaPlacas) {
 		this.clienteProporcionaPlacas = clienteProporcionaPlacas;
 	}
-	
 }

@@ -14,10 +14,12 @@ import com.artiffex.lithomat.sistemaweb.businesstier.entity.EstatusOrden;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.HistorialEstatus;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.OrdenProduccion;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Partida;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.Pliego;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajoDetalle;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.HistorialEstatusService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.OrdenProduccionService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PartidaService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PliegoService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoTrabajoDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.Util;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.OrdenProduccionDAO;
@@ -45,6 +47,8 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
 	private PartidaService partidaService;
 	@Resource
 	private TipoTrabajoDetalleService tipoTrabajoDetalleService;
+	@Resource
+	private PliegoService pliegoService;
 	
 
 	@SuppressWarnings("static-access")
@@ -177,8 +181,23 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
 			for( int j=0; j<listaTipoTrabajoDetalle.size(); j++ ) {
 				TipoTrabajoDetalle tipoTrabajoDetalle = listaTipoTrabajoDetalle.get(j);
 				sb.append("{");
-				sb.append("\"id\":\"IdSubpartida:" + tipoTrabajoDetalle.getIdTipoTrabajoDetalle() + "\",");
-				sb.append("\"text\":\"" + tipoTrabajoDetalle.getDescripcion() + "\"");
+				sb.append("\"id\":\"IdTipoTrabajoDetalle:" + tipoTrabajoDetalle.getIdTipoTrabajoDetalle() + "\",");
+				sb.append("\"text\":\"" + tipoTrabajoDetalle.getDescripcion() + "\",");
+				sb.append("\"state\":{\"opened\":true},");
+				sb.append("\"children\":[");
+				List<Pliego> listaPliego = pliegoService.listaPliegoPorTipoTrabajoDetalle(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());
+				for ( int k=0; k<listaPliego.size(); k++ ) {
+					Pliego pliego = listaPliego.get(k);
+					sb.append("{");
+					sb.append("\"id\":\"IdPliego:" + pliego.getIdPliego() + "\",");
+					sb.append("\"text\":\"Pliego " + (k+1) + "\"");
+					sb.append("}");
+					if ( k+1 < listaPliego.size() )
+						sb.append(",");
+					pliego = null;
+				}
+				listaPliego = null;
+				sb.append("]");
 				sb.append("}");
 				if( j+1 < listaTipoTrabajoDetalle.size() )
 					sb.append(",");

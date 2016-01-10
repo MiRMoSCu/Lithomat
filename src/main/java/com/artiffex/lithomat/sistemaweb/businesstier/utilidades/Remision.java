@@ -17,7 +17,7 @@ public class Remision implements Serializable {
 	private double acabadoCosteTotal;
 	private double offsetCosteTotal;
 	private double costoExtraTotal;
-	private List<_CalificacionTrabajoDetalle> listaCalificacionTrabajoDetalle;
+	//private List<_CalificacionTrabajoDetalle> listaCalificacionTrabajoDetalle;
 	
 	
 	public String getNombre() {
@@ -80,12 +80,6 @@ public class Remision implements Serializable {
 	public void setCostoExtraTotal(double costoExtraTotal) {
 		this.costoExtraTotal = costoExtraTotal;
 	}
-	public List<_CalificacionTrabajoDetalle> getListaCalificacionTrabajoDetalle() {
-		return listaCalificacionTrabajoDetalle;
-	}
-	public void setListaCalificacionTrabajoDetalle(
-			List<_CalificacionTrabajoDetalle> listaCalificacionTrabajoDetalle) {
-		this.listaCalificacionTrabajoDetalle = listaCalificacionTrabajoDetalle;
-	}
+	
 	
 }

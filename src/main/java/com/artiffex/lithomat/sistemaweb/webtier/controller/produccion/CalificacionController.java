@@ -11,11 +11,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.CalificacionPartidaDTO;
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.CalificacionPliegoDTO;
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.CalificacionProcesosDTO;
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.CalificacionTrabajoDetalleDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionOrdenProduccion;
-import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionProcesosPartida;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionPartida;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionPliego;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionTrabajoDetalle;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Cliente;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.OrdenProduccion;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.Partida;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.Pliego;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajoDetalle;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.AcabadoDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CalificacionService;
@@ -23,13 +30,11 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.ClienteSer
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CostoExtraDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.DisenioDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.OrdenProduccionService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PartidaService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PliegoService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PreprensaDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoTrabajoDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TransporteDetalleService;
-import com.artiffex.lithomat.sistemaweb.businesstier.utilidades._CalificacionPartida;
-import com.artiffex.lithomat.sistemaweb.businesstier.utilidades._CalificacionProcesosPartida;
-import com.artiffex.lithomat.sistemaweb.businesstier.utilidades._CalificacionTrabajoDetalle;
 
 @Controller
 @RequestMapping("/calificacion")
@@ -39,6 +44,8 @@ public class CalificacionController {
 	
 	@Resource
 	private OrdenProduccionService ordenProduccionService;
+	@Resource
+	private PartidaService partidaService;
 	@Resource
 	private TipoTrabajoDetalleService tipoTrabajoDetalleService;
 	@Resource
@@ -99,12 +106,12 @@ public class CalificacionController {
 		return "produccion/calificacion";
 	} // calificacionOrdenProduccion
 	
-	
+
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/resumen_partida", method = RequestMethod.POST)
 	@ResponseBody
-	public _CalificacionPartida resumenCalificacionPartida(
-			@RequestParam(value = "nut", required = false) String nut,
+	public CalificacionPartidaDTO resumenCalificacionPartida(
+			@RequestParam(value = "nut", 		required = false) String nut,
 			@RequestParam(value = "id_partida", required = false) Integer idPartida
 		) {
 		log.info("/resumen_calificacion_partida");
@@ -115,20 +122,36 @@ public class CalificacionController {
 		calificacionOrdenProduccion	= null;
 		ordenProduccion 			= null;
 		
-		_CalificacionPartida calificacionPartida = calificacionService.buscaCalificacionPartida(idPartida);
-		float costeTotal = calificacionPartida.getCosteTotal();
-		calificacionPartida.setCosteTotal( costeTotal * (1 + porcentajeCliente) );
+		CalificacionPartida cp = calificacionService.buscaCalificacionPartida(idPartida);;
+		Partida partida = partidaService.buscaPartida(idPartida);
 		
-		return calificacionPartida;
+		double impresionPartidaCosteTotal 	= cp.getImpresionPartidaCosteTotal() * (1 + porcentajeCliente);
+		double procesosPartidaCosteTotal	= cp.getProcesosPartidaCosteTotal() * (1 + porcentajeCliente);
+		double partidaCosteTotal			= cp.getPartidaCosteTotal() * (1 + porcentajeCliente);
+		
+		CalificacionPartidaDTO cpDTO = new CalificacionPartidaDTO();
+		
+		cpDTO.setNombreTipoTrabajo(partida.getTipoTrabajo().getNombre());
+		cpDTO.setNombrePartida(partida.getNombrePartida());
+		cpDTO.setCantidad(partida.getCantidad());
+		cpDTO.setDescripcionPartida(partida.getDescripcionPartida());
+		cpDTO.setImpresionPartidaCosteTotal(impresionPartidaCosteTotal);
+		cpDTO.setProcesosPartidaCosteTotal(procesosPartidaCosteTotal);
+		cpDTO.setPartidaCosteTotal(partidaCosteTotal);
+		
+		partida	= null;
+		cp		= null;
+		
+		return cpDTO;
 	} // resumenCalificacionPartida
 	
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/resumen_trabajo_detalle", method = RequestMethod.POST)
 	@ResponseBody
-	public _CalificacionTrabajoDetalle resumenCalificacionTrabajoDetalle(
-			@RequestParam(value = "nut", required = false) String nut,
-			@RequestParam(value = "id_tipo_trabajo_detalle", required = false) Integer idTipoTrabajoDetalle
+	public CalificacionTrabajoDetalleDTO resumenCalificacionTrabajoDetalle(
+			@RequestParam(value = "nut", 						required = false) String nut,
+			@RequestParam(value = "id_tipo_trabajo_detalle", 	required = false) Integer idTipoTrabajoDetalle
 		) {
 		log.info("/resumen_calificacion_trabajo_detalle");
 		
@@ -138,89 +161,161 @@ public class CalificacionController {
 		calificacionOrdenProduccion	= null;
 		ordenProduccion 			= null;
 		
-		_CalificacionTrabajoDetalle ctd = new _CalificacionTrabajoDetalle();
-		
-		CalificacionTrabajoDetalle calificacionTrabajoDetalle = calificacionService.buscaCalificacionTrabajoDetalle(idTipoTrabajoDetalle);
-		ctd.setCantidadRedondeada(calificacionTrabajoDetalle.getCantidadRedondeada());
-		ctd.setPapelCantidadTotal(calificacionTrabajoDetalle.getPapelCantidadTotal());
-		ctd.setPapelPrecioUnitario(calificacionTrabajoDetalle.getPapelPrecioUnitario() * (1 + porcentajeCliente));
-		ctd.setPapelCosteTotal(calificacionTrabajoDetalle.getPapelCosteTotal() * (1 + porcentajeCliente));
-		ctd.setPlacasNumPlacas(calificacionTrabajoDetalle.getPlacasNumPlacas());
-		ctd.setPlacasPrecioUnitario(calificacionTrabajoDetalle.getPlacasPrecioUnitario() * (1 + porcentajeCliente));
-		ctd.setPlacasCosteTotal(calificacionTrabajoDetalle.getPlacasCosteTotal() * (1 + porcentajeCliente));
-		ctd.setTintaNumEntMaq(calificacionTrabajoDetalle.getTintaNumEntMaq());
-		ctd.setTintaPrecioUnitario(calificacionTrabajoDetalle.getTintaPrecioUnitario() * (1 + porcentajeCliente));
-		ctd.setTintaCosteTotal(calificacionTrabajoDetalle.getTintaCosteTotal() * (1 + porcentajeCliente));
-		ctd.setTintaEspecialNumEntMaq(calificacionTrabajoDetalle.getTintaEspecialNumEntMaq());
-		ctd.setTintaEspecialPrecioUnitario(calificacionTrabajoDetalle.getTintaEspecialPrecioUnitario() * (1 + porcentajeCliente));
-		ctd.setTintaEspecialCosteTotal(calificacionTrabajoDetalle.getTintaEspecialCosteTotal() * (1 + porcentajeCliente));
-		ctd.setFrenteBarnizNumEntMaq(calificacionTrabajoDetalle.getFrenteBarnizNumEntMaq());
-		ctd.setFrenteBarnizPrecioUnitario(calificacionTrabajoDetalle.getFrenteBarnizPrecioUnitario() * (1 + porcentajeCliente));
-		ctd.setFrenteBarnizCosteTotal(calificacionTrabajoDetalle.getFrenteBarnizCosteTotal() * (1 + porcentajeCliente));
-		ctd.setVueltaBarnizNumEntMaq(calificacionTrabajoDetalle.getVueltaBarnizNumEntMaq());
-		ctd.setVueltaBarnizPrecioUnitario(calificacionTrabajoDetalle.getVueltaBarnizPrecioUnitario() * (1 + porcentajeCliente));
-		ctd.setVueltaBarnizCosteTotal(calificacionTrabajoDetalle.getVueltaBarnizCosteTotal() * (1 + porcentajeCliente));
-		
-		calificacionTrabajoDetalle = null;
-		
+		CalificacionTrabajoDetalle ctd = calificacionService.buscaCalificacionTrabajoDetalle(idTipoTrabajoDetalle);
 		TipoTrabajoDetalle tipoTrabajoDetalle = tipoTrabajoDetalleService.buscaTipoTrabajoDetalle(idTipoTrabajoDetalle);
-		ctd.setDescripcion(tipoTrabajoDetalle.getDescripcion());
-		ctd.setMaquinaDescripcion(tipoTrabajoDetalle.getMaquina().getNombre());
-		ctd.setRepeticionesXPliego(tipoTrabajoDetalle.getRepeticionesXPliego());
-		ctd.setNumeroPaginasPublicacion(tipoTrabajoDetalle.getNumeroPaginasPublicacion());
-		ctd.setTamanioPublicacion(tipoTrabajoDetalle.getTamanioPublicacion().getNombre());
-		ctd.setNumeroPliegos(pliegoService.cuentaPliegosPorTipoTrabajoDetalle(idTipoTrabajoDetalle));
-			StringBuilder sb = new StringBuilder();
-			sb.append(tipoTrabajoDetalle.getTipoPapelExtendido().getNombre());
-			sb.append(" ");
-			sb.append(tipoTrabajoDetalle.getTipoPapelExtendido().getGramaje());
-			sb.append(" gr. ");
-			sb.append((int)tipoTrabajoDetalle.getTipoPapelExtendido().getAlto());
-			sb.append(" x ");
-			sb.append((int)tipoTrabajoDetalle.getTipoPapelExtendido().getAncho());
-			sb.append(" cm. (");
-			sb.append(tipoTrabajoDetalle.getTipoPapelExtendido().getKilogramos());
-			sb.append(" kg.) [");
-			sb.append(tipoTrabajoDetalle.getTipoPapelExtendido().getProveedorPapel().getRazonSocial());
-			sb.append("]");
-		ctd.setPapelDescripcion(sb.toString());
-			sb.delete(0, sb.length());
-			sb.append("F: ");
-			sb.append(tipoTrabajoDetalle.getFrenteCombinacionTintas().getDescripcion());
-			sb.append(" -- V: ");
-			sb.append(tipoTrabajoDetalle.getVueltaCombinacionTintas().getDescripcion());
-		ctd.setTintaDescripcion(sb.toString());
-			sb.delete(0, sb.length());
-			sb.append("F: ");
-			sb.append(tipoTrabajoDetalle.getFrenteDescripcionTintaEspecial());
-			sb.append(" -- V: ");
-			sb.append(tipoTrabajoDetalle.getVueltaDescripcionTintaEspecial());
-		ctd.setTintaEspecialDescripcion(sb.toString());
-			sb.delete(0, sb.length());
-			sb.append("F: ");
-			sb.append(tipoTrabajoDetalle.getFrenteTipoBarniz().getDescripcion());
-			sb.append(" -- V: ");
-			sb.append(tipoTrabajoDetalle.getVueltaTipoBarniz().getDescripcion());
-		ctd.setBarnizDescripcion(sb.toString());
-		ctd.setPlacasDescripcion(tipoTrabajoDetalle.getTipoPlaca().getDescripcion());
-			sb = null;
-		ctd.setClienteProporcionaPapel(tipoTrabajoDetalle.isClienteProporcionaPapel());
-		ctd.setClienteProporcionaTinta(tipoTrabajoDetalle.isClienteProporcionaTinta());
-		ctd.setClienteProporcionaTintaEspecial(tipoTrabajoDetalle.isClienteProporcionaTintaEspecial());
-		ctd.setClienteProporcionaBarniz(tipoTrabajoDetalle.isClienteProporcionaBarniz());
-		ctd.setClienteProporcionaPlacas(tipoTrabajoDetalle.isClienteProporcionaPlacas());
 		
-		tipoTrabajoDetalle 			= null;
+		double tipoTrabajoDetalleCosteTotal = ctd.getTipoTrabajoDetalleCosteTotal() * (1 + porcentajeCliente);
+		double papelCosteTotal				= ctd.getPapelCosteTotal() * (1 + porcentajeCliente);
+		double placasCosteTotal				= ctd.getPlacasCosteTotal() * (1 + porcentajeCliente);
+		double tintaCosteTotal				= ctd.getTintaCosteTotal() * (1 + porcentajeCliente);
+		double tintaEspecialCosteTotal		= ctd.getTintaEspecialCosteTotal() * (1 + porcentajeCliente);
+		double frenteBarnizCosteTotal		= ctd.getFrenteBarnizCosteTotal() * (1 + porcentajeCliente);
+		double vueltaBarnizCosteTotal		= ctd.getVueltaBarnizCosteTotal() * (1 + porcentajeCliente);
 		
-		return ctd;
+		CalificacionTrabajoDetalleDTO ctdDTO = new CalificacionTrabajoDetalleDTO();
+		
+		ctdDTO.setTipoTrabajoDetalleCosteTotal(tipoTrabajoDetalleCosteTotal);
+		ctdDTO.setPapelCosteTotal(papelCosteTotal);
+		ctdDTO.setPlacasCosteTotal(placasCosteTotal);
+		ctdDTO.setTintaCosteTotal(tintaCosteTotal);
+		ctdDTO.setTintaEspecialCosteTotal(tintaEspecialCosteTotal);
+		ctdDTO.setFrenteBarnizCosteTotal(frenteBarnizCosteTotal);
+		ctdDTO.setVueltaBarnizCosteTotal(vueltaBarnizCosteTotal);
+		ctdDTO.setDescripcion(tipoTrabajoDetalle.getDescripcion());
+		ctdDTO.setMaquinaDescripcion(tipoTrabajoDetalle.getMaquina().getNombre());
+		ctdDTO.setRepeticionesXPliego(tipoTrabajoDetalle.getRepeticionesXPliego());
+		ctdDTO.setNumeroPaginasPublicacion(tipoTrabajoDetalle.getNumeroPaginasPublicacion());
+		ctdDTO.setTamanioPublicacion(tipoTrabajoDetalle.getTamanioPublicacion().getNombre());
+		ctdDTO.setClienteProporcionaPapel(tipoTrabajoDetalle.isClienteProporcionaPapel());
+		ctdDTO.setClienteProporcionaTinta(tipoTrabajoDetalle.isClienteProporcionaTinta());
+		ctdDTO.setClienteProporcionaTintaEspecial(tipoTrabajoDetalle.isClienteProporcionaTintaEspecial());
+		ctdDTO.setClienteProporcionaBarniz(tipoTrabajoDetalle.isClienteProporcionaBarniz());
+		ctdDTO.setClienteProporcionaPlacas(tipoTrabajoDetalle.isClienteProporcionaPlacas());
+		
+		tipoTrabajoDetalle	= null;
+		ctd 				= null;
+		
+		return ctdDTO;
 	} // buscaCalificacionTrabajoDetalle
+	
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
+	@RequestMapping(value = "/resumen_pliego", method = RequestMethod.POST)
+	@ResponseBody
+	public CalificacionPliegoDTO resumenCalificacionPliego(
+			@RequestParam(value = "nut", 		required = false) String nut,
+			@RequestParam(value = "id_pliego", 	required = false) Integer idPliego
+		) {
+		log.info("/resumen_calificacion_pliego");
+		
+		OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
+		CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionService.buscaCalificacionOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
+		float porcentajeCliente = calificacionOrdenProduccion.getTipoClientePrecio() / calificacionOrdenProduccion.getTipoClienteFactorDivisor();
+		calificacionOrdenProduccion	= null;
+		ordenProduccion 			= null;
+		
+		CalificacionPliego cp = calificacionService.buscaCalificacionPliego(idPliego);
+		Pliego pliego = pliegoService.buscaPliego(idPliego);
+		TipoTrabajoDetalle tipoTrabajoDetalle = tipoTrabajoDetalleService.buscaTipoTrabajoDetalle(pliego.getTipoTrabajoDetalle().getIdTipoTrabajoDetalle());
+		StringBuilder sb = new StringBuilder();
+		
+		double pliegoCosteTotal 			= cp.getPliegoCosteTotal() * (1 + porcentajeCliente);
+		sb.append(tipoTrabajoDetalle.getTipoPapelExtendido().getNombre());
+		sb.append(" ");
+		sb.append(tipoTrabajoDetalle.getTipoPapelExtendido().getGramaje());
+		sb.append(" gr. ");
+		sb.append((int)tipoTrabajoDetalle.getTipoPapelExtendido().getAlto());
+		sb.append(" x ");
+		sb.append((int)tipoTrabajoDetalle.getTipoPapelExtendido().getAncho());
+		sb.append(" cm. (");
+		sb.append(tipoTrabajoDetalle.getTipoPapelExtendido().getKilogramos());
+		sb.append(" kg.) [");
+		sb.append(tipoTrabajoDetalle.getTipoPapelExtendido().getProveedorPapel().getRazonSocial());
+		sb.append("]");
+		String papelDescripcion 			= sb.toString();
+		float papelPrecioUnitario 			= cp.getPapelPrecioUnitario() * (1 + porcentajeCliente);
+		double papelCosteTotal				= cp.getPapelCosteTotal() * (1 + porcentajeCliente);
+		
+		String placasDescripcion			= sb.toString();
+		float placasPrecioUnitario			= cp.getPlacasPrecioUnitario() * (1 + porcentajeCliente);
+		double placasCosteTotal				= cp.getPlacasCosteTotal() * (1 + porcentajeCliente);
+		
+		sb.delete(0, sb.length());
+		sb.append("F: ");
+		sb.append(tipoTrabajoDetalle.getFrenteCombinacionTintas().getDescripcion());
+		sb.append(" -- V: ");
+		sb.append(tipoTrabajoDetalle.getVueltaCombinacionTintas().getDescripcion());
+		String tintaDescripcion				= sb.toString();
+		float tintaPrecioUnitario			= cp.getTintaPrecioUnitario() * (1 + porcentajeCliente);
+		double tintaCosteTotal				= cp.getTintaCosteTotal() * (1 + porcentajeCliente);
+		
+		sb.delete(0, sb.length());
+		sb.append("F: ");
+		sb.append(tipoTrabajoDetalle.getFrenteDescripcionTintaEspecial());
+		sb.append(" -- V: ");
+		sb.append(tipoTrabajoDetalle.getVueltaDescripcionTintaEspecial());
+		String tintaEspecialDescripcion		= sb.toString();
+		float tintaEspecialPrecioUnitario	= cp.getTintaEspecialPrecioUnitario() * (1 + porcentajeCliente);
+		double tintaEspecialCosteTotal		= cp.getTintaEspecialCosteTotal() * (1+ porcentajeCliente);
+		
+		sb.delete(0, sb.length());
+		sb.append("F: ");
+		sb.append(tipoTrabajoDetalle.getFrenteTipoBarniz().getDescripcion());
+		sb.append(" -- V: ");
+		sb.append(tipoTrabajoDetalle.getVueltaTipoBarniz().getDescripcion());
+		String barnizDescripcion			= sb.toString();
+		float frenteBarnizPrecioUnitario	= cp.getFrenteBarnizPrecioUnitario() * (1 + porcentajeCliente);
+		double frenteBarnizCosteTotal		= cp.getFrenteBarnizCosteTotal() * (1 + porcentajeCliente);
+		float vueltaBarnizPrecioUnitario	= cp.getVueltaBarnizPrecioUnitario() * (1 + porcentajeCliente);
+		double vueltaBarnizCosteTotal		= cp.getVueltaBarnizCosteTotal() * (1 + porcentajeCliente);
+		
+		CalificacionPliegoDTO cpDTO = new CalificacionPliegoDTO();
+		
+		cpDTO.setIdCalificacionPliego(cp.getIdCalificacionPliego());
+		cpDTO.setPliegoCosteTotal(pliegoCosteTotal);
+		cpDTO.setPapelDescripcion(papelDescripcion);
+		cpDTO.setPapelCantidadTotal(cp.getPapelCantidadTotal());
+		cpDTO.setPapelPrecioUnitario(papelPrecioUnitario);
+		cpDTO.setPapelCosteTotal(papelCosteTotal);
+		cpDTO.setPlacasDescripcion(placasDescripcion);
+		cpDTO.setPlacasNumPlacas(cp.getPlacasNumPlacas());
+		cpDTO.setPlacasPrecioUnitario(placasPrecioUnitario);
+		cpDTO.setPlacasCosteTotal(placasCosteTotal);
+		cpDTO.setTintaDescripcion(tintaDescripcion);
+		cpDTO.setTintaNumEntMaq(cp.getTintaNumEntMaq());
+		cpDTO.setTintaPrecioUnitario(tintaPrecioUnitario);
+		cpDTO.setTintaCosteTotal(tintaCosteTotal);
+		cpDTO.setTintaEspecialDescripcion(tintaEspecialDescripcion);
+		cpDTO.setTintaEspecialNumEntMaq(cp.getTintaEspecialNumEntMaq());
+		cpDTO.setTintaEspecialPrecioUnitario(tintaEspecialPrecioUnitario);
+		cpDTO.setTintaEspecialCosteTotal(tintaEspecialCosteTotal);
+		cpDTO.setBarnizDescripcion(barnizDescripcion);
+		cpDTO.setFrenteBarnizNumEntMaq(cp.getFrenteBarnizNumEntMaq());
+		cpDTO.setFrenteBarnizPrecioUnitario(frenteBarnizPrecioUnitario);
+		cpDTO.setFrenteBarnizCosteTotal(frenteBarnizCosteTotal);
+		cpDTO.setVueltaBarnizNumEntMaq(cp.getVueltaBarnizNumEntMaq());
+		cpDTO.setVueltaBarnizPrecioUnitario(vueltaBarnizPrecioUnitario);
+		cpDTO.setVueltaBarnizCosteTotal(vueltaBarnizCosteTotal);
+		cpDTO.setClienteProporcionaPapel(tipoTrabajoDetalle.isClienteProporcionaPapel());
+		cpDTO.setClienteProporcionaTinta(tipoTrabajoDetalle.isClienteProporcionaTinta());
+		cpDTO.setClienteProporcionaTintaEspecial(tipoTrabajoDetalle.isClienteProporcionaTintaEspecial());
+		cpDTO.setClienteProporcionaBarniz(tipoTrabajoDetalle.isClienteProporcionaBarniz());
+		cpDTO.setClienteProporcionaPlacas(tipoTrabajoDetalle.isClienteProporcionaPlacas());
+		
+		sb					= null;
+		tipoTrabajoDetalle	= null;
+		pliego 				= null;
+		cp					= null;
+		
+		return cpDTO;
+	}
 	
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/resumen_procesos", method = RequestMethod.POST)
 	@ResponseBody
-	public _CalificacionProcesosPartida resumenCalificacionProcesosPartida(
-			@RequestParam(value = "nut", required = false) String nut,
+	public CalificacionProcesosDTO resumenCalificacionProcesos(
+			@RequestParam(value = "nut", 		required = false) String nut,
 			@RequestParam(value = "id_partida", required = false) Integer idPartida
 		) {
 		log.info("/resumen_calificacion_procesos");
@@ -231,28 +326,22 @@ public class CalificacionController {
 		calificacionOrdenProduccion	= null;
 		ordenProduccion 			= null;
 		
-		CalificacionProcesosPartida calificacionProcesosPartida = calificacionService.buscaCalificacionProcesos(idPartida);
+		CalificacionPartida calificacionPartida = calificacionService.buscaCalificacionPartida(idPartida);
 		
-		_CalificacionProcesosPartida cpp = new _CalificacionProcesosPartida();
-		cpp.setIdCalificacionProcesosPartida(calificacionProcesosPartida.getIdCalificacionProcesosPartida());
-		cpp.setCosteTotalProcesosPartida(calificacionProcesosPartida.getCosteTotalProcesosPartida() * (1 + porcentajeCliente));
-		cpp.setSubpartidasCosteTotal(calificacionProcesosPartida.getSubpartidasCosteTotal() * (1 + porcentajeCliente));
-		cpp.setDisenioCosteTotal(calificacionProcesosPartida.getDisenioCosteTotal() * (1 + porcentajeCliente));
-		cpp.setPreprensaCosteTotal(calificacionProcesosPartida.getPreprensaCosteTotal() * (1 + porcentajeCliente));
-		cpp.setTransporteCosteTotal(calificacionProcesosPartida.getTransporteCosteTotal() * (1 + porcentajeCliente));
-		cpp.setAcabadoCosteTotal(calificacionProcesosPartida.getAcabadoCosteTotal() * (1 + porcentajeCliente));
-		cpp.setOffsetCosteTotal(calificacionProcesosPartida.getOffsetCosteTotal() * (1 + porcentajeCliente));
-		cpp.setCostoExtraTotal(calificacionProcesosPartida.getCostoExtraTotal() * (1 + porcentajeCliente));
+		double procesosPartidaCosteTotal = calificacionPartida.getProcesosPartidaCosteTotal() * (1 + porcentajeCliente);
 		
-		calificacionProcesosPartida = null;
+		CalificacionProcesosDTO cpp = new CalificacionProcesosDTO();
 		
+		cpp.setProcesosPartidaCosteTotal(procesosPartidaCosteTotal);
 		cpp.setHtmlTablaCostosExtras( costosExtrasDetalleService.listaHTMLProcesosYPrecioConPorcentajeCliente(idPartida, porcentajeCliente) );
 		cpp.setHtmlTablaProcesosDisenio( disenioDetalleService.listaHTMLProcesosYPrecioConPorcentajeCliente(idPartida, porcentajeCliente) );
 		cpp.setHtmlTablaProcesosPreprensa( preprensaDetalleService.listaHTMLProcesosYPrecioConPorcentajeCliente(idPartida, porcentajeCliente) );
 		cpp.setHtmlTablaProcesosTransporte( transporteDetalleService.listaHTMLProcesosYPrecioConPorcentajeCliente(idPartida, porcentajeCliente) );
 		cpp.setHtmlTablaProcesosAcabado( acabadoDetalleService.listaHTMLProcesosYPrecioConPorcentajeCliente(idPartida, porcentajeCliente) );
 		
+		calificacionPartida = null;
+		
 		return cpp;
 	} // resumenCalificacionProcesosPartida
-
+	
 }

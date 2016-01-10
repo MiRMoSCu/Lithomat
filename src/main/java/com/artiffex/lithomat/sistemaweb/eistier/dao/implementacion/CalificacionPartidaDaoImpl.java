@@ -1,54 +1,81 @@
 package com.artiffex.lithomat.sistemaweb.eistier.dao.implementacion;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import org.apache.log4j.Logger;
-import org.springframework.jdbc.core.RowMapper;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
-import com.artiffex.lithomat.sistemaweb.businesstier.utilidades._CalificacionPartida;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionPartida;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CalificacionPartidaDAO;
-import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.GenericJdbcDAO;
+import com.artiffex.lithomat.sistemaweb.eistier.hibernate.HibernateUtil;
 
 @Repository("calificacionPartidaDAO")
-public class CalificacionPartidaDaoImpl extends GenericJdbcDAO implements CalificacionPartidaDAO {
+public class CalificacionPartidaDaoImpl implements CalificacionPartidaDAO {
 	
 	private static final Logger log = Logger.getLogger(CalificacionPartidaDaoImpl.class);
+	private Session sesion;
 	
-	private static final String queryBusca =
-			"SELECT \n" + 
-			"    tt.nombre nombre_tipo_trabajo,\n" + 
-			"    p.nombre_partida,\n" + 
-			"    p.cantidad,\n" + 
-			"    p.descripcion_partida,\n" + 
-			"    cpp.coste_total_procesos_partida\n" + 
-			"FROM\n" + 
-			"    partida p,\n" + 
-			"    tipo_trabajo tt,\n" + 
-			"    calificacion_procesos_partida cpp\n" + 
-			"WHERE\n" + 
-			"    tt.id_tipo_trabajo = p.id_tipo_trabajo\n" + 
-			"        AND cpp.id_partida = p.id_partida\n" + 
-			"        AND p.id_partida = ?;";
+	// constructor
+	public CalificacionPartidaDaoImpl() { }
 
-	public _CalificacionPartida busca(int idPartida) {
-		log.info("busca");
-		return getJdbcTemplate().queryForObject(
-					queryBusca, 
-					new Object[] { idPartida },
-					new RowMapper<_CalificacionPartida>() {
-						public _CalificacionPartida mapRow(ResultSet rs, int i) throws SQLException {
-							_CalificacionPartida calificacionPartida = new _CalificacionPartida();
-							calificacionPartida.setNombreTipoTrabajo(rs.getString("nombre_tipo_trabajo"));
-							calificacionPartida.setNombrePartida(rs.getString("nombre_partida"));
-							calificacionPartida.setCantidad(rs.getInt("cantidad"));
-							calificacionPartida.setDescripcionPartida(rs.getString("descripcion_partida"));
-							calificacionPartida.setCosteTotal(rs.getFloat("coste_total_procesos_partida"));
-							return calificacionPartida;
-						}
-					}
-				);
+	public int crea(CalificacionPartida calificacionPartida) {
+		int id = 0;
+		try {
+			sesion = HibernateUtil.getInstance().getCurrentSession();
+			sesion.beginTransaction();
+			id = (Integer)sesion.save(calificacionPartida);
+			sesion.getTransaction().commit();
+		} catch(Exception e) {
+			log.error(e.getMessage());
+			sesion.getTransaction().rollback();
+		}
+		return id;
+	}
+
+	public CalificacionPartida busca(int idCalificacionPartida) {
+		CalificacionPartida calificacionProcesosPartida = null;
+		try {
+			sesion = HibernateUtil.getInstance().getCurrentSession();
+			sesion.beginTransaction();
+			Query query = sesion.createQuery("from CalificacionPartida cp where cp.idCalificacionPartida = :idCalificacionPartida");
+			query.setParameter("idCalificacionPartida", idCalificacionPartida);
+			calificacionProcesosPartida = (CalificacionPartida)query.uniqueResult();
+			sesion.getTransaction().commit();
+			query = null;
+		} catch(Exception e) {
+			log.error(e.getMessage());
+			sesion.getTransaction().rollback();
+		}
+		return calificacionProcesosPartida;
+	}
+
+	public CalificacionPartida buscaPorPartida(int idPartida) {
+		CalificacionPartida calificacionProcesosPartida = null;
+		try {
+			sesion = HibernateUtil.getInstance().getCurrentSession();
+			sesion.beginTransaction();
+			Query query = sesion.createQuery("from CalificacionPartida cp where cp.activo = true and cp.partida.idPartida = :idPartida");
+			query.setParameter("idPartida", idPartida);
+			calificacionProcesosPartida = (CalificacionPartida)query.uniqueResult();
+			sesion.getTransaction().commit();
+			query = null;
+		} catch(Exception e) {
+			log.error(e.getMessage());
+			sesion.getTransaction().rollback();
+		}
+		return calificacionProcesosPartida;
+	}
+
+	public void modifica(CalificacionPartida calificacionPartida) {
+		try {
+			sesion = HibernateUtil.getInstance().getCurrentSession();
+			sesion.beginTransaction();
+			sesion.update(calificacionPartida);
+			sesion.getTransaction().commit();
+		} catch(Exception e) {
+			log.error(e.getMessage());
+			sesion.getTransaction().rollback();
+		}
 	}
 	
 }

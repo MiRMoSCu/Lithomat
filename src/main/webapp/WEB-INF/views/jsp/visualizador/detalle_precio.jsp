@@ -6,6 +6,7 @@
 <c:url value="/visualizador/obtiene_detalle_nut"		var="urlObtieneDetalleNut"/>
 <c:url value="/calificacion/resumen_partida"			var="urlResumenCalificacionPartida"/>
 <c:url value="/calificacion/resumen_trabajo_detalle"	var="urlResumenCalificacionTrabajoDetalle"/>
+<c:url value="/calificacion/resumen_pliego"				var="urlResumenCalificacionPliego"/>
 <c:url value="/calificacion/resumen_procesos"			var="urlResumenCalificacionProcesos"/>
 <c:url value="/reporte/ventana_condiciones_produccion"	var="urlVentanaCondicionesProduccion"/>
 <fmt:setLocale value="en_US" scope="session" />
@@ -31,6 +32,7 @@
 			var urlObtieneDetalleNut					= "${urlObtieneDetalleNut}";
 			var urlResumenCalificacionPartida			= "${urlResumenCalificacionPartida}";
         	var urlResumenCalificacionTrabajoDetalle 	= "${urlResumenCalificacionTrabajoDetalle}";
+        	var urlResumenCalificacionPliego			= "${urlResumenCalificacionPliego}";
         	var urlResumenCalificacionProcesos			= "${urlResumenCalificacionProcesos}";
         	var urlVentanaCondicionesProduccion			= "${urlVentanaCondicionesProduccion}";
         </script>
@@ -335,7 +337,7 @@
 	                                    	<div id="div_partida_detalle" style="width:100%; height:100%; background:#fff; float:left; display:none;">
 	                                    		<form name="resumen_partida" action="" accept-charset="utf-8">
 		                                    		<div class="titulo">
-		                                    			<font size="4">CALIFICACI&Oacute;N DE PARTIDA</font>
+		                                    			<font size="4">CALIFICACI&Oacute;N DE TRABAJO</font>
 		                                    		</div>
 		                                    		<div class="linea">
 		                                    			<div class="casilla">
@@ -418,6 +420,64 @@
 		                                    		<div class="div_separador_chico">
 		                                            	<img alt="" src="<c:url value="/resources/image/separador_chico.jpg"/>"/>
 		                                            </div>
+		                                            <div class="linea">
+		                                            	<div class="casilla">
+		                                            		<div class="mitad_columna_izquierda">
+		                                            			<div class="titulo">
+					                                            	<font size="4">IMPRESI&Oacute;N</font>
+					                                            </div>
+		                                            		</div>
+		                                            		<div class="columna_derecha">
+		                                            			<div class="mitad_columna_izquierda">
+		                                            				<div class="columna_completa">
+		                                            					<table>
+			                                            					<tr>
+			                                            						<td width="1%">Total:</td>
+			                                            						<td>
+			                                            							<input	type="text"
+			                                                        						class="input"
+			                                                        						style="text-align:right;"
+			                                                        						name="impresion_partida_coste_total"
+			                                                        						value=""
+			                                                        						onkeypress=""
+			                                                        						readonly/>
+			                                            						</td>
+			                                            					</tr>
+			                                            				</table>
+		                                            				</div>
+		                                            			</div>
+		                                            		</div>
+		                                            	</div>
+		                                            </div>
+		                                            <div class="linea">
+		                                            	<div class="casilla">
+		                                            		<div class="mitad_columna_izquierda">
+		                                            			<div class="titulo">
+					                                            	<font size="4">PROCESOS</font>
+					                                            </div>
+		                                            		</div>
+		                                            		<div class="columna_derecha">
+		                                            			<div class="mitad_columna_izquierda">
+		                                            				<div class="columna_completa">
+		                                            					<table>
+			                                            					<tr>
+			                                            						<td width="1%">Total:</td>
+			                                            						<td>
+			                                            							<input	type="text"
+			                                                        						class="input"
+			                                                        						style="text-align:right;"
+			                                                        						name="procesos_partida_coste_total"
+			                                                        						value=""
+			                                                        						onkeypress=""
+			                                                        						readonly/>
+			                                            						</td>
+			                                            					</tr>
+			                                            				</table>
+		                                            				</div>
+		                                            			</div>
+		                                            		</div>
+		                                            	</div>
+		                                            </div>
 		                                    		<div class="linea">
 		                                    			<div class="casilla">
 		                                    				<div class="mitad_columna_derecha">
@@ -429,7 +489,7 @@
 			                                   									<input	type="text"
 			                                   											class="input"
 			                                   											style="text-align:right;"
-			                                   											name="coste_total"
+			                                   											name="partida_coste_total"
 			                                   											value=""
 			                                   											onkeypress=""
 			                                   											readonly/>
@@ -446,9 +506,9 @@
 	                                    	<div id="div_tipo_trabajo_detalle" style="width:100%; height:100%; background:#fff; float:left; display:none;">
 	                                    		<form name="resumen_tipo_trabajo_detalle" action="" accept-charset="utf-8">
 		                                    		<div class="titulo">
-		                                    			<font size="4">CALIFICACI&Oacute;N DE SUBPARTIDA</font>
+		                                    			<font size="4">CALIFICACI&Oacute;N DE IMPRESI&Oacute;N</font>
 		                                    		</div>
-		                                   			<div class="linea">
+		                                    		<div class="linea">
 		                                                <div class="casilla">
 		                                                    <div class="columna_completa">
 		                                                        <table>
@@ -488,28 +548,7 @@
 		                                                	</div>
 		                                                	<div class="mitad_columna_derecha">
 		                                                		<div class="columna_completa">
-		                                                        	<table>
-		                                                        		<tr>
-		                                                        			<td width="60%">Cant. redondeada:</td>
-		                                                        			<td>
-		                                                        				<input	type="text"
-		                                                        						class="input"
-		                                                        						name="cantidad_redondeada"
-		                                                        						value=""
-		                                                        						onkeypress=""
-		                                                        						readonly/>
-		                                                        			</td>
-		                                                        		</tr>
-		                                                        	</table>
-		                                                    	</div>
-		                                                	</div>
-		                                                </div>
-		                                            </div>
-		                                            <div class="linea">
-		                                            	<div class="casilla">
-		                                            		<div class="mitad_columna_izquierda">
-		                                            			<div class="columna_completa">
-		                                            				<table>
+		                                                			<table>
 		                                            					<tr>
 		                                            						<td width="57%">No. Repeticiones:</td>
 		                                            						<td>
@@ -522,12 +561,15 @@
 		                                            						</td>
 		                                            					</tr>
 		                                            				</table>
-		                                            			</div>
-		                                            		</div>
-		                                            		<div class="columna_derecha">
-		                                            			<div class="mitad_columna_izquierda">
-		                                            				<div class="columna_completa">
-		                                            					<table>
+		                                                    	</div>
+		                                                	</div>
+		                                                </div>
+		                                            </div>
+		                                            <div class="linea">
+		                                            	<div class="casilla">
+		                                            		<div class="mitad_columna_izquierda">
+		                                            			<div class="columna_completa">
+		                                            				<table>
 		                                            					<tr>
 		                                            						<td width="43%">No. P&aacute;ginas:</td>
 		                                            						<td>
@@ -540,9 +582,10 @@
 		                                            						</td>
 		                                            					</tr>
 		                                            				</table>
-		                                            				</div>
 		                                            			</div>
-		                                            			<div class="mitad_columna_derecha">
+		                                            		</div>
+		                                            		<div class="columna_derecha">
+		                                            			<div class="mitad_columna_izquierda">
 		                                            				<div class="columna_completa">
 		                                            					<table>
 			                                            					<tr>
@@ -562,27 +605,216 @@
 		                                            		</div>
 		                                            	</div>
 		                                            </div>
+		                                            <div class="div_separador_chico">
+	                                            		<img alt="" src="<c:url value="/resources/image/separador_chico.jpg"/>"/>
+	                                            	</div>
+	                                            	
 		                                            <div class="linea">
 		                                            	<div class="casilla">
 		                                            		<div class="mitad_columna_izquierda">
-		                                            			<div class="columna_completa">
-		                                            				<table>
-		                                            					<tr>
-		                                            						<td width="40%">No. Pliegos:</td>
-		                                            						<td>
-		                                            							<input	type="text"
-		                                                        						class="input"
-		                                                        						name="numero_pliegos"
-		                                                        						value=""
-		                                                        						onkeypress=""
-		                                                        						readonly/>
-		                                            						</td>
-		                                            					</tr>
-		                                            				</table>
+	                                            				<div class="titulo">
+					                                            	<font size="4">PAPEL</font>
+					                                            </div>
+		                                            		</div>
+		                                            		<div class="columna_derecha">
+		                                            			<div class="mitad_columna_izquierda">
+		                                            				<div class="columna_completa">
+		                                            					<table>
+			                                            					<tr>
+			                                            						<td width="1%">Total:</td>
+			                                            						<td>
+			                                            							<input	type="text"
+			                                                        						class="input"
+			                                                        						style="text-align:right;"
+			                                                        						name="papel_coste_total"
+			                                                        						value=""
+			                                                        						onkeypress=""
+			                                                        						readonly/>
+			                                            						</td>
+			                                            					</tr>
+			                                            				</table>
+		                                            				</div>
 		                                            			</div>
 		                                            		</div>
 		                                            	</div>
 		                                            </div>
+		                                            <div class="linea">
+		                                            	<div class="casilla">
+		                                            		<div class="mitad_columna_izquierda">
+	                                            				<div class="titulo">
+					                                            	<font size="4">TINTA</font>
+					                                            </div>
+		                                            		</div>
+		                                            		<div class="columna_derecha">
+		                                            			<div class="mitad_columna_izquierda">
+		                                            				<div class="columna_completa">
+		                                            					<table>
+			                                            					<tr>
+			                                            						<td width="1%">Total:</td>
+			                                            						<td>
+			                                            							<input	type="text"
+			                                                        						class="input"
+			                                                        						style="text-align:right;"
+			                                                        						name="tinta_coste_total"
+			                                                        						value=""
+			                                                        						onkeypress=""
+			                                                        						readonly/>
+			                                            						</td>
+			                                            					</tr>
+			                                            				</table>
+		                                            				</div>
+		                                            			</div>
+		                                            		</div>
+		                                            	</div>
+		                                            </div>
+		                                            <div class="linea">
+		                                            	<div class="casilla">
+		                                            		<div class="mitad_columna_izquierda">
+	                                            				<div class="titulo">
+					                                            	<font size="4">TINTA ESPECIAL</font>
+					                                            </div>
+		                                            		</div>
+		                                            		<div class="columna_derecha">
+		                                            			<div class="mitad_columna_izquierda">
+		                                            				<div class="columna_completa">
+		                                            					<table>
+			                                            					<tr>
+			                                            						<td width="1%">Total:</td>
+			                                            						<td>
+			                                            							<input	type="text"
+			                                                        						class="input"
+			                                                        						style="text-align:right;"
+			                                                        						name="tinta_especial_coste_total"
+			                                                        						value=""
+			                                                        						onkeypress=""
+			                                                        						readonly/>
+			                                            						</td>
+			                                            					</tr>
+			                                            				</table>
+		                                            				</div>
+		                                            			</div>
+		                                            		</div>
+		                                            	</div>
+		                                            </div>
+		                                            <div class="linea">
+		                                            	<div class="casilla">
+		                                            		<div class="mitad_columna_izquierda">
+	                                            				<div class="titulo">
+					                                            	<font size="4">BARNIZ FRENTE</font>
+					                                            </div>
+		                                            		</div>
+		                                            		<div class="columna_derecha">
+		                                            			<div class="mitad_columna_izquierda">
+		                                            				<div class="columna_completa">
+		                                            					<table>
+			                                            					<tr>
+			                                            						<td width="1%">Total:</td>
+			                                            						<td>
+			                                            							<input	type="text"
+			                                                        						class="input"
+			                                                        						style="text-align:right;"
+			                                                        						name="frente_barniz_coste_total"
+			                                                        						value=""
+			                                                        						onkeypress=""
+			                                                        						readonly/>
+			                                            						</td>
+			                                            					</tr>
+			                                            				</table>
+		                                            				</div>
+		                                            			</div>
+		                                            		</div>
+		                                            	</div>
+		                                            </div>
+		                                            <div class="linea">
+		                                            	<div class="casilla">
+		                                            		<div class="mitad_columna_izquierda">
+	                                            				<div class="titulo">
+					                                            	<font size="4">BARNIZ VUELTA</font>
+					                                            </div>
+		                                            		</div>
+		                                            		<div class="columna_derecha">
+		                                            			<div class="mitad_columna_izquierda">
+		                                            				<div class="columna_completa">
+			                                            				<table>
+			                                            					<tr>
+			                                            						<td width="1%">Total:</td>
+			                                            						<td>
+			                                            							<input	type="text"
+			                                                        						class="input"
+			                                                        						style="text-align:right;"
+			                                                        						name="vuelta_barniz_coste_total"
+			                                                        						value=""
+			                                                        						onkeypress=""
+			                                                        						readonly/>
+			                                            						</td>
+			                                            					</tr>
+			                                            				</table>
+			                                            			</div>
+		                                            			</div>
+		                                            		</div>
+		                                            	</div>
+		                                            </div>
+		                                            <div class="linea">
+		                                            	<div class="casilla">
+		                                            		<div class="mitad_columna_izquierda">
+	                                            				<div class="titulo">
+					                                            	<font size="4">PLACAS</font>
+					                                            </div>
+		                                            		</div>
+		                                            		<div class="columna_derecha">
+		                                            			<div class="mitad_columna_izquierda">
+		                                            				<div class="columna_completa">
+		                                            					<table>
+			                                            					<tr>
+			                                            						<td width="1%">Total:</td>
+			                                            						<td>
+			                                            							<input	type="text"
+			                                                        						class="input"
+			                                                        						style="text-align:right;"
+			                                                        						name="placas_coste_total"
+			                                                        						value=""
+			                                                        						onkeypress=""
+			                                                        						readonly/>
+			                                            						</td>
+			                                            					</tr>
+			                                            				</table>
+		                                            				</div>
+		                                            			</div>
+		                                            		</div>
+		                                            	</div>
+		                                            </div>
+		                                            <div class="linea">
+		                                            	<div class="casilla">
+		                                            		<div class="columna_derecha">
+		                                            			<div class="mitad_columna_derecha">
+		                                            				<div class="columna_completa">
+		                                            					<table>
+		                                            						<tr>
+		                                            							<td width="1%">TOTAL:</td>
+		                                            							<td>
+		                                            								<input	type="text"
+			                                                        						class="input"
+			                                                        						style="text-align:right;"
+			                                                        						name="tipo_trabajo_detalle_coste_total"
+			                                                        						value=""
+			                                                        						onkeypress=""
+			                                                        						readonly/>
+		                                            							</td>
+		                                            						</tr>
+		                                            					</table>
+		                                            				</div>
+		                                            			</div>
+		                                            		</div>
+		                                            	</div>
+		                                            </div>
+	                                   			</form>
+	                                    	</div>
+	<!-- div_pliego -->
+	                                    	<div id="div_pliego_detalle" style="width:100%; height:100%; background:#fff; float:left; display:none;">
+	                                    		<form name="resumen_pliego" action="" accept-charset="ISO-8859-1">
+	                                    			<div class="titulo">
+		                                    			<font size="4">CALIFICACI&Oacute;N DE PLIEGO</font>
+		                                    		</div>
 		                              <!-- PAPEL -->
 		                                            <div class="titulo">
 		                                            	<font size="4">PAPEL</font>
@@ -1076,7 +1308,7 @@
 		                                   										<input	type="text"
 			                                   											class="input"
 			                                   											style="text-align:right;"
-			                                   											name="tipo_trabajo_detalle_coste_total"
+			                                   											name="pliego_coste_total"
 			                                   											value=""
 			                                   											onkeypress=""
 			                                   											readonly/>
@@ -1087,7 +1319,7 @@
 		                                   					</div>
 		                                   				</div>
 		                                   			</div>
-	                                   			</form>
+	                                    		</form>
 	                                    	</div>
 	<!-- div_procesos_acabado_detalle -->
 	                                    	<div id="div_procesos_acabado_detalle" style="width:100%; height:100%; background:#fff; float:left; display:none;">

@@ -43,7 +43,8 @@
 		<mapping resource="hibernate/hn_acabadoDetalle.hbm.xml"/>
 		<mapping resource="hibernate/hn_calendarioOrdenProduccion.hbm.xml"/>
 		<mapping resource="hibernate/hn_calificacionOrdenProduccion.hbm.xml"/>
-		<mapping resource="hibernate/hn_calificacionProcesosPartida.hbm.xml"/>
+		<mapping resource="hibernate/hn_calificacionPliego.hbm.xml"/>
+		<mapping resource="hibernate/hn_calificacionPartida.hbm.xml"/>
 		<mapping resource="hibernate/hn_calificacionTrabajoDetalle.hbm.xml"/>
 		<mapping resource="hibernate/hn_cliente.hbm.xml"/>
 		<mapping resource="hibernate/hn_cobranza.hbm.xml"/>

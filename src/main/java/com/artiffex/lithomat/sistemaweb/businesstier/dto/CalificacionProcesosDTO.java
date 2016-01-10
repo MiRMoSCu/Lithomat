@@ -1,17 +1,13 @@
-package com.artiffex.lithomat.sistemaweb.businesstier.utilidades;
+package com.artiffex.lithomat.sistemaweb.businesstier.dto;
 
 import java.io.Serializable;
 
-import com.artiffex.lithomat.sistemaweb.businesstier.entity.Partida;
-
-public class _CalificacionProcesosPartida implements Serializable {
-
-	private static final long serialVersionUID = 2585102229363074568L;
+public class CalificacionProcesosDTO implements Serializable {
 	
-	private int idCalificacionProcesosPartida;
-	private Partida partida;
-	private double costeTotalProcesosPartida;
-	private double subpartidasCosteTotal;
+	private static final long serialVersionUID = 6788821796028514223L;
+	
+	private int idCalificacionPartida;
+	private double procesosPartidaCosteTotal;
 	private double disenioCosteTotal;
 	private double preprensaCosteTotal;
 	private double transporteCosteTotal;
@@ -27,29 +23,17 @@ public class _CalificacionProcesosPartida implements Serializable {
 	private String htmlTablaProcesosAcabado;
 	
 	
-	public int getIdCalificacionProcesosPartida() {
-		return idCalificacionProcesosPartida;
+	public int getIdCalificacionPartida() {
+		return idCalificacionPartida;
 	}
-	public void setIdCalificacionProcesosPartida(int idCalificacionProcesosPartida) {
-		this.idCalificacionProcesosPartida = idCalificacionProcesosPartida;
+	public void setIdCalificacionPartida(int idCalificacionPartida) {
+		this.idCalificacionPartida = idCalificacionPartida;
 	}
-	public Partida getPartida() {
-		return partida;
+	public double getProcesosPartidaCosteTotal() {
+		return procesosPartidaCosteTotal;
 	}
-	public void setPartida(Partida partida) {
-		this.partida = partida;
-	}
-	public double getCosteTotalProcesosPartida() {
-		return costeTotalProcesosPartida;
-	}
-	public void setCosteTotalProcesosPartida(double costeTotalProcesosPartida) {
-		this.costeTotalProcesosPartida = costeTotalProcesosPartida;
-	}
-	public double getSubpartidasCosteTotal() {
-		return subpartidasCosteTotal;
-	}
-	public void setSubpartidasCosteTotal(double subpartidasCosteTotal) {
-		this.subpartidasCosteTotal = subpartidasCosteTotal;
+	public void setProcesosPartidaCosteTotal(double procesosPartidaCosteTotal) {
+		this.procesosPartidaCosteTotal = procesosPartidaCosteTotal;
 	}
 	public double getDisenioCosteTotal() {
 		return disenioCosteTotal;

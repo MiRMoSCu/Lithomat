@@ -24,7 +24,7 @@ public class Partida implements Serializable {
 	// esta clase esta relacionada [uno a muchos] con las tablas: 
 	private Set<TipoTrabajoDetalle> tipoTrabajoDetalle = new HashSet<TipoTrabajoDetalle>();
 	private Set<MaterialAyudaXPartida> materialAyudaXPartida = new HashSet<MaterialAyudaXPartida>();
-	private Set<CalificacionProcesosPartida> calificacionProcesosPartida = new HashSet<CalificacionProcesosPartida>();
+	private Set<CalificacionPartida> calificacionPartida = new HashSet<CalificacionPartida>();
 	private Set<Disenio> disenio = new HashSet<Disenio>();
 	private Set<Preprensa> preprensa = new HashSet<Preprensa>();
 	private Set<Transporte> transporte = new HashSet<Transporte>();
@@ -117,12 +117,11 @@ public class Partida implements Serializable {
 			Set<MaterialAyudaXPartida> materialAyudaXPartida) {
 		this.materialAyudaXPartida = materialAyudaXPartida;
 	}
-	public Set<CalificacionProcesosPartida> getCalificacionProcesosPartida() {
-		return calificacionProcesosPartida;
+	public Set<CalificacionPartida> getCalificacionPartida() {
+		return calificacionPartida;
 	}
-	public void setCalificacionProcesosPartida(
-			Set<CalificacionProcesosPartida> calificacionProcesosPartida) {
-		this.calificacionProcesosPartida = calificacionProcesosPartida;
+	public void setCalificacionPartida(Set<CalificacionPartida> calificacionPartida) {
+		this.calificacionPartida = calificacionPartida;
 	}
 	public Set<Disenio> getDisenio() {
 		return disenio;
@@ -154,5 +153,4 @@ public class Partida implements Serializable {
 	public void setOffset(Set<Offset> offset) {
 		this.offset = offset;
 	}
-	
 }

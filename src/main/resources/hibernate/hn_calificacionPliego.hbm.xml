@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionPliego" table="calificacion_pliego" dynamic-update="true" optimistic-lock="dirty">
+		<id name="idCalificacionPliego">
+			<column name="id_calificacion_pliego"/>
+			<type name="integer"/>
+			<generator class="increment"/>
+		</id>
+		<many-to-one name="pliego" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Pliego" fetch="select">
+			<column name="id_pliego"/>
+		</many-to-one>
+		<property name="pliegoCosteTotal">
+			<column name="pliego_coste_total"/>
+			<type name="double"/>
+		</property>
+		<property name="hojasRequeridasOriginal">
+			<column name="hojas_requeridas_original"/>
+			<type name="integer"/>
+		</property>
+		<property name="hojasRequeridasRedondeo">
+			<column name="hojas_requeridas_redondeo"/>
+			<type name="integer"/>
+		</property>
+		<property name="precioUnitarioTabulador">
+			<column name="precio_unitario_tabulador"/>
+			<type name="float"/>
+		</property>
+		<property name="papelCantidadTotal">
+			<column name="papel_cantidad_total"/>
+			<type name="integer"/>
+		</property>
+		<property name="papelPrecioUnitario">
+			<column name="papel_precio_unitario"/>
+			<type name="float"/>
+		</property>
+		<property name="papelCosteTotal">
+			<column name="papel_coste_total"/>
+			<type name="double"/>
+		</property>
+		<property name="placasNumPlacas">
+			<column name="placas_num_placas"/>
+			<type name="integer"/>
+		</property>
+		<property name="placasPrecioUnitario">
+			<column name="placas_precio_unitario"/>
+			<type name="float"/>
+		</property>
+		<property name="placasCosteTotal">
+			<column name="placas_coste_total"/>
+			<type name="double"/>
+		</property>
+		<property name="tintaNumEntMaq">
+			<column name="tinta_num_ent_maq"/>
+			<type name="integer"/>
+		</property>
+		<property name="tintaPrecioUnitario">
+			<column name="tinta_precio_unitario"/>
+			<type name="float"/>
+		</property>
+		<property name="tintaCosteTotal">
+			<column name="tinta_coste_total"/>
+			<type name="double"/>
+		</property>
+		<property name="tintaEspecialNumEntMaq">
+			<column name="tinta_especial_num_ent_maq"/>
+			<type name="integer"/>
+		</property>
+		<property name="tintaEspecialPrecioUnitario">
+			<column name="tinta_especial_precio_unitario"/>
+			<type name="float"/>
+		</property>
+		<property name="tintaEspecialCosteTotal">
+			<column name="tinta_especial_coste_total"/>
+			<type name="double"/>
+		</property>
+		<property name="frenteBarnizNumEntMaq">
+			<column name="frente_barniz_num_ent_maq"/>
+			<type name="integer"/>
+		</property>
+		<property name="frenteBarnizPrecioUnitario">
+			<column name="frente_barniz_precio_unitario"/>
+			<type name="float"/>
+		</property>
+		<property name="frenteBarnizCosteTotal">
+			<column name="frente_barniz_coste_total"/>
+			<type name="double"/>
+		</property>
+		<property name="vueltaBarnizNumEntMaq">
+			<column name="vuelta_barniz_num_ent_maq"/>
+			<type name="integer"/>
+		</property>
+		<property name="vueltaBarnizPrecioUnitario">
+			<column name="vuelta_barniz_precio_unitario"/>
+			<type name="float"/>
+		</property>
+		<property name="vueltaBarnizCosteTotal">
+			<column name="vuelta_barniz_coste_total"/>
+			<type name="double"/>
+		</property>
+		<property name="activo">
+			<column name="activo"/>
+			<type name="boolean"/>
+		</property>
+	</class>
+</hibernate-mapping>
