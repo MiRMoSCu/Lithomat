@@ -14,6 +14,7 @@ public class CalificacionTrabajoDetalleDTO implements Serializable {
 	private double tintaEspecialCosteTotal;
 	private double frenteBarnizCosteTotal;
 	private double vueltaBarnizCosteTotal;
+	// campos utilizados para mostrar información en pantalla
 	private String descripcion;
 	private String maquinaDescripcion;
 	private int repeticionesXPliego;

@@ -8,7 +8,7 @@
 <c:url value="/calificacion/resumen_trabajo_detalle"	var="urlResumenCalificacionTrabajoDetalle"/>
 <c:url value="/calificacion/resumen_pliego"				var="urlResumenCalificacionPliego"/>
 <c:url value="/calificacion/resumen_procesos"			var="urlResumenCalificacionProcesos"/>
-<c:url value="/reporte/ventana_condiciones_produccion"	var="urlCondicionesProduccion"/>
+<c:url value="/reporte/ventana_condiciones_produccion"	var="urlVentanaCondicionesProduccion"/>
 <fmt:setLocale value="en_US" scope="session" />
 <html>
     <head>
@@ -34,7 +34,7 @@
         	var urlResumenCalificacionTrabajoDetalle 	= "${urlResumenCalificacionTrabajoDetalle}";
         	var urlResumenCalificacionPliego			= "${urlResumenCalificacionPliego}";
         	var urlResumenCalificacionProcesos			= "${urlResumenCalificacionProcesos}";
-        	var urlCondicionesProduccion				= "${urlCondicionesProduccion}";
+        	var urlVentanaCondicionesProduccion			= "${urlVentanaCondicionesProduccion}";
         </script>
         <script type="text/javascript">
         	var jsonArbol = '${jsonArbol}';

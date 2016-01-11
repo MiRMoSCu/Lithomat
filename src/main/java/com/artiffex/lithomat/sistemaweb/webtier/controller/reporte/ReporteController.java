@@ -51,7 +51,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.OrdenProdu
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.ReporteService;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.OrdenTrabajo;
-import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.Remision;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.RemisionPartida;
 
 @Controller
 @RequestMapping("/reporte")
@@ -355,7 +355,7 @@ public class ReporteController {
 		cop				= null;
 		ordenProduccion = null;
 		// INFORMACION DEL DATA SOURCE
-		List<Remision> listaRemision = calificacionService.obtieneRemisionPorNut(nut);
+		List<RemisionPartida> listaRemision = calificacionService.obtieneRemisionPorNut(nut);
 		try {
 			OutputStream outputStream 				= response.getOutputStream();
 			InputStream reportStream 				= context.getResourceAsStream(DIRECTORIO_ORIGEN + "02_RemisionMaster.jasper");			
@@ -437,7 +437,7 @@ public class ReporteController {
 		cop				= null;
 		ordenProduccion = null;
 		// INFORMACION DEL DATA SOURCE
-		List<Remision> listaRemision = calificacionService.obtieneRemisionPorNut(nut);
+		List<RemisionPartida> listaRemision = calificacionService.obtieneRemisionPorNut(nut);
 		try {
 			OutputStream outputStream 				= response.getOutputStream();
 			InputStream reportStream 				= context.getResourceAsStream(DIRECTORIO_ORIGEN + "03_FacturaMaster.jasper");			

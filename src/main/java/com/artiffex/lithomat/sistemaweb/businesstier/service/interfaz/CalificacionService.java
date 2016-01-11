@@ -10,7 +10,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionPartida;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionPliego;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionTrabajoDetalle;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.OrdenTrabajo;
-import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.Remision;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.RemisionPartida;
 
 
 public interface CalificacionService {
@@ -44,7 +44,7 @@ public interface CalificacionService {
 	
 	public List<ReporteCotizacionDTO> obtieneListaPrecioCotizacionPartida(String nut);
 	
-	public List<Remision> obtieneRemisionPorNut(String nut);
+	public List<RemisionPartida> obtieneRemisionPorNut(String nut);
 	
 	public List<OrdenTrabajo> obtieneOrdenTrabajo(String nut);
 	

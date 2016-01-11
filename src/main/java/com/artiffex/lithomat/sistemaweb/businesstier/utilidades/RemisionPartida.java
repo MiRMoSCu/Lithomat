@@ -3,21 +3,23 @@ package com.artiffex.lithomat.sistemaweb.businesstier.utilidades;
 import java.io.Serializable;
 import java.util.List;
 
-public class Remision implements Serializable {
+public class RemisionPartida implements Serializable {
 
 	private static final long serialVersionUID = -2348656573688879379L;
 	
 	private String nombre;
-	private double gananciaClientePorcentaje;
-	private double costeTotalProcesosPartida;
-	private double subpartidasCosteTotal;
+	private int cantidad;
+	private double porcentajeGananciaCliente;
+	private double partidaCosteTotal;
+	private double impresionPartidaCosteTotal;
+	private double procesosPartidaCosteTotal;
 	private double disenioCosteTotal;
 	private double preprensaCosteTotal;
 	private double transporteCosteTotal;
 	private double acabadoCosteTotal;
 	private double offsetCosteTotal;
 	private double costoExtraTotal;
-	//private List<_CalificacionTrabajoDetalle> listaCalificacionTrabajoDetalle;
+	private List<RemisionTrabajoDetalle> listaRemisionTrabajoDetalle;
 	
 	
 	public String getNombre() {
@@ -26,23 +28,35 @@ public class Remision implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public double getGananciaClientePorcentaje() {
-		return gananciaClientePorcentaje;
+	public int getCantidad() {
+		return cantidad;
 	}
-	public void setGananciaClientePorcentaje(double gananciaClientePorcentaje) {
-		this.gananciaClientePorcentaje = gananciaClientePorcentaje;
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
 	}
-	public double getCosteTotalProcesosPartida() {
-		return costeTotalProcesosPartida;
+	public double getPorcentajeGananciaCliente() {
+		return porcentajeGananciaCliente;
 	}
-	public void setCosteTotalProcesosPartida(double costeTotalProcesosPartida) {
-		this.costeTotalProcesosPartida = costeTotalProcesosPartida;
+	public void setPorcentajeGananciaCliente(double porcentajeGananciaCliente) {
+		this.porcentajeGananciaCliente = porcentajeGananciaCliente;
 	}
-	public double getSubpartidasCosteTotal() {
-		return subpartidasCosteTotal;
+	public double getPartidaCosteTotal() {
+		return partidaCosteTotal;
 	}
-	public void setSubpartidasCosteTotal(double subpartidasCosteTotal) {
-		this.subpartidasCosteTotal = subpartidasCosteTotal;
+	public void setPartidaCosteTotal(double partidaCosteTotal) {
+		this.partidaCosteTotal = partidaCosteTotal;
+	}
+	public double getImpresionPartidaCosteTotal() {
+		return impresionPartidaCosteTotal;
+	}
+	public void setImpresionPartidaCosteTotal(double impresionPartidaCosteTotal) {
+		this.impresionPartidaCosteTotal = impresionPartidaCosteTotal;
+	}
+	public double getProcesosPartidaCosteTotal() {
+		return procesosPartidaCosteTotal;
+	}
+	public void setProcesosPartidaCosteTotal(double procesosPartidaCosteTotal) {
+		this.procesosPartidaCosteTotal = procesosPartidaCosteTotal;
 	}
 	public double getDisenioCosteTotal() {
 		return disenioCosteTotal;
@@ -80,6 +94,11 @@ public class Remision implements Serializable {
 	public void setCostoExtraTotal(double costoExtraTotal) {
 		this.costoExtraTotal = costoExtraTotal;
 	}
-	
-	
+	public List<RemisionTrabajoDetalle> getListaRemisionTrabajoDetalle() {
+		return listaRemisionTrabajoDetalle;
+	}
+	public void setListaRemisionTrabajoDetalle(
+			List<RemisionTrabajoDetalle> listaRemisionTrabajoDetalle) {
+		this.listaRemisionTrabajoDetalle = listaRemisionTrabajoDetalle;
+	}
 }
