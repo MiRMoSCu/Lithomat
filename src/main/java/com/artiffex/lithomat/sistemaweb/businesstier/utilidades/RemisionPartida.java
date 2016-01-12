@@ -9,9 +9,6 @@ public class RemisionPartida implements Serializable {
 	
 	private String nombre;
 	private int cantidad;
-	private double porcentajeGananciaCliente;
-	private double partidaCosteTotal;
-	private double impresionPartidaCosteTotal;
 	private double procesosPartidaCosteTotal;
 	private double disenioCosteTotal;
 	private double preprensaCosteTotal;
@@ -33,24 +30,6 @@ public class RemisionPartida implements Serializable {
 	}
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
-	}
-	public double getPorcentajeGananciaCliente() {
-		return porcentajeGananciaCliente;
-	}
-	public void setPorcentajeGananciaCliente(double porcentajeGananciaCliente) {
-		this.porcentajeGananciaCliente = porcentajeGananciaCliente;
-	}
-	public double getPartidaCosteTotal() {
-		return partidaCosteTotal;
-	}
-	public void setPartidaCosteTotal(double partidaCosteTotal) {
-		this.partidaCosteTotal = partidaCosteTotal;
-	}
-	public double getImpresionPartidaCosteTotal() {
-		return impresionPartidaCosteTotal;
-	}
-	public void setImpresionPartidaCosteTotal(double impresionPartidaCosteTotal) {
-		this.impresionPartidaCosteTotal = impresionPartidaCosteTotal;
 	}
 	public double getProcesosPartidaCosteTotal() {
 		return procesosPartidaCosteTotal;

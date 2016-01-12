@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
+<!-- 2016-01-12T05:38:53 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="02_RemisionOrdenProduccion" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="04cf5287-9ff7-4d10-b916-42b0cc077919">
+	<parameter name="SUBREPORT_PARTIDA" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="SUBREPORT_TIPO_TRABAJO_DETALLE" class="java.lang.String"/>
+	<parameter name="SUBREPORT_PLIEGO" class="java.lang.String"/>
+	<parameter name="IMPRIME_IVA" class="java.lang.Boolean"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="nut" class="java.lang.String"/>
+	<field name="nombreCliente" class="java.lang.String"/>
+	<field name="nombreOrdenProduccion" class="java.lang.String"/>
+	<field name="precioCliente" class="java.lang.Double"/>
+	<field name="porcentajeDescuento" class="java.lang.Integer"/>
+	<field name="precioClienteConDescuento" class="java.lang.Double"/>
+	<field name="precioNeto" class="java.lang.Double"/>
+	<field name="listaRemisionPartida" class="java.util.List"/>
+	<variable name="descuento" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{precioCliente} - $F{precioClienteConDescuento}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="iva" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{precioNeto} - $F{precioClienteConDescuento}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<title>
+		<band height="20">
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="200" height="20" isRemoveLineWhenBlank="true" uuid="7749e248-4d40-4e62-9e8a-653c2ad6e51d">
+					<printWhenExpression><![CDATA[$P{IMPRIME_IVA} == false]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lithomat: Nota de Remisión]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="200" height="20" isRemoveLineWhenBlank="true" uuid="e97b3e08-fe67-4a9f-9559-0b50defc6e83">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{IMPRIME_IVA} == true]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lithomat: Nota de Factura]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="60" splitType="Stretch">
+			<textField>
+				<reportElement x="100" y="8" width="100" height="15" uuid="5ef1d1a3-ab65-49f3-b7a7-55dce607c70f"/>
+				<textFieldExpression><![CDATA[$F{nut}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="8" width="100" height="15" uuid="7ba612ef-c653-45fd-8d3b-b120e3489efb">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[NUT:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="23" width="455" height="15" uuid="1a912ade-396d-41bd-bc23-31aad16115e0"/>
+				<textFieldExpression><![CDATA[$F{nombreCliente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="23" width="100" height="15" uuid="09cd851c-f990-4239-a13b-dddb17c2e6ea">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Nombre Cliente:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="38" width="455" height="15" uuid="d3e9c959-7e78-4a55-8617-e232223a3c58"/>
+				<textFieldExpression><![CDATA[$F{nombreOrdenProduccion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="38" width="100" height="15" uuid="165f5ea2-bad7-4d9b-af21-74081affb6f9">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Nombre Orden:]]></text>
+			</staticText>
+		</band>
+		<band height="100">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="100" uuid="7f43743f-a61f-427f-8ec0-e5dd18dd79a1">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<subreportParameter name="SUBREPORT_PARTIDA">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_PARTIDA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_TIPO_TRABAJO_DETALLE">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_TIPO_TRABAJO_DETALLE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_PLIEGO">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_PLIEGO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaRemisionPartida})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_PARTIDA}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="105">
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="420" y="0" width="100" height="15" isRemoveLineWhenBlank="true" uuid="b8d8022c-2db4-4d1a-8437-46ef574ef4c0">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[(Double.compare(new Double($F{porcentajeDescuento}), new Double(0)) != 0)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(Double.valueOf($F{precioCliente}))]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="320" y="0" width="100" height="15" isRemoveLineWhenBlank="true" uuid="572bbf81-0c27-400c-8097-52d87ec6760a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[(Double.compare(new Double($F{porcentajeDescuento}), new Double(0)) != 0)]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="376" y="15" width="44" height="15" isRemoveLineWhenBlank="true" uuid="90ad7044-9fec-447d-b02f-e476f0ff0632">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[(Double.compare(new Double($F{porcentajeDescuento}), new Double(0)) != 0)]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{porcentajeDescuento} + " %:"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="320" y="15" width="56" height="15" isRemoveLineWhenBlank="true" uuid="39cd158e-5dbb-4707-bc18-0bd9e65a1b64">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<printWhenExpression><![CDATA[(Double.compare(new Double($F{porcentajeDescuento}), new Double(0)) != 0)]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Descuento]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="420" y="45" width="100" height="15" uuid="d0d9d248-eb42-41cd-8a2c-28504a9aa0e0">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(Double.valueOf($F{precioClienteConDescuento}))]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="320" y="45" width="100" height="15" uuid="ea1e93be-63d0-47e7-aed7-1deace0b6ed6">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="420" y="15" width="100" height="15" isRemoveLineWhenBlank="true" uuid="4cd44d34-ed15-4a96-b7a3-b9d48c2ba37d">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<printWhenExpression><![CDATA[(Double.compare(new Double($F{porcentajeDescuento}), new Double(0)) != 0)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(Double.valueOf($V{descuento}))]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="360" y="60" width="60" height="15" isRemoveLineWhenBlank="true" uuid="d8be0849-c801-4cc6-b29e-36b20798edad">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{IMPRIME_IVA} == true]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[IVA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="420" y="60" width="100" height="15" isRemoveLineWhenBlank="true" uuid="a98057f7-6a33-4c7b-974e-688b0323e912">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{IMPRIME_IVA} == true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(Double.valueOf($V{iva}))]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="390" y="30" width="176" height="15" isRemoveLineWhenBlank="true" uuid="075d152a-d66e-453e-9650-16d9ad21e103">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[(Double.compare(new Double($F{porcentajeDescuento}), new Double(0)) != 0)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[-----------------------------]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="395" y="75" width="176" height="15" isRemoveLineWhenBlank="true" uuid="f947be38-2cf4-4e32-b770-74dddaf2455c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{IMPRIME_IVA} == true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[-----------------------------]]></text>
+			</staticText>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="420" y="90" width="100" height="15" isRemoveLineWhenBlank="true" uuid="81cd4ec8-a96e-4eb3-b8bb-5324aa3b1619">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{IMPRIME_IVA} == true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(Double.valueOf($F{precioNeto}))]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="320" y="90" width="100" height="15" isRemoveLineWhenBlank="true" uuid="d409cd5e-d6c4-4dd2-9c7c-63c4d21e5c84">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{IMPRIME_IVA} == true]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

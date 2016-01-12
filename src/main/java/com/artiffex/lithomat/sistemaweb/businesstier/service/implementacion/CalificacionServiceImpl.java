@@ -53,6 +53,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.OrdenTrabajo;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.OrdenTrabajoPartida;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.OrdenTrabajoPliego;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.OrdenTrabajoTipoTrabajoDetalle;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.RemisionOrdenProduccion;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.RemisionPartida;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.RemisionPliego;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.RemisionTrabajoDetalle;
@@ -60,6 +61,7 @@ import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CalificacionOrdenPr
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CalificacionPartidaDAO;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CalificacionPliegoDAO;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CalificacionTrabajoDetalleDAO;
+import com.google.gson.Gson;
 
 @Service("resumenCalificacionService")
 public class CalificacionServiceImpl implements CalificacionService {
@@ -880,12 +882,32 @@ public class CalificacionServiceImpl implements CalificacionService {
 	}
 	
 	
-	public List<RemisionPartida> obtieneRemisionPorNut(String nut) {
+	public List<RemisionOrdenProduccion> obtieneRemisionPorNut(String nut) {
 		
 		// obtencion de informacion
+		List<RemisionOrdenProduccion> listaRemisionOrdenProduccion = new ArrayList<RemisionOrdenProduccion>();
+		
 		OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
 		CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionOrdenProduccionDAO.buscaPorOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
-		float porcentajeGananciaCliente = calificacionOrdenProduccion.getTipoClientePrecio() / calificacionOrdenProduccion.getTipoClienteFactorDivisor();
+		
+		float porcentajeGananciaCliente 	= calificacionOrdenProduccion.getTipoClientePrecio() / calificacionOrdenProduccion.getTipoClienteFactorDivisor();
+		String nombreCliente 				= ordenProduccion.getCliente().getNombreMoral();
+		String nombreOrdenProduccion		= ordenProduccion.getNombre();
+		double precioCliente				= calificacionOrdenProduccion.getPrecioCliente();
+		int porcentajeDescuento				= calificacionOrdenProduccion.getPorcentajeDescuento();
+		double precioClienteConDescuento	= calificacionOrdenProduccion.getPrecioClienteConDescuento();
+		double precioNeto					= calificacionOrdenProduccion.getPrecioNeto();
+		
+		calificacionOrdenProduccion 	= null;
+		
+		RemisionOrdenProduccion remisionOrdenProduccion = new RemisionOrdenProduccion();
+		remisionOrdenProduccion.setNut(nut);
+		remisionOrdenProduccion.setNombreCliente(nombreCliente);
+		remisionOrdenProduccion.setNombreOrdenProduccion(nombreOrdenProduccion);
+		remisionOrdenProduccion.setPrecioCliente(precioCliente);
+		remisionOrdenProduccion.setPorcentajeDescuento(porcentajeDescuento);
+		remisionOrdenProduccion.setPrecioClienteConDescuento(precioClienteConDescuento);
+		remisionOrdenProduccion.setPrecioNeto(precioNeto);
 		
 		// lista de remision necesaria para el reporte
 		List<RemisionPartida> listaRemisionPartida = new ArrayList<RemisionPartida>();
@@ -896,9 +918,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 			
 			String nombre						= partida.getNombrePartida();
 			int cantidad						= partida.getCantidad();
-			double partidaCosteTotal 			= calificacionPartida.getPartidaCosteTotal() * (1 + porcentajeGananciaCliente);
-			double impresionPartidaCosteTotal	= calificacionPartida.getImpresionPartidaCosteTotal() * (1 + porcentajeGananciaCliente);
-			double procesosPartidaCosteTotal	= calificacionPartida.getProcesosPartidaCosteTotal() + (1 + porcentajeGananciaCliente);
+			double procesosPartidaCosteTotal	= calificacionPartida.getProcesosPartidaCosteTotal() * (1 + porcentajeGananciaCliente);
 			double disenioCosteTotal			= calificacionPartida.getDisenioCosteTotal() * (1 + porcentajeGananciaCliente);
 			double preprensaCosteTotal			= calificacionPartida.getPreprensaCosteTotal() * (1 + porcentajeGananciaCliente);
 			double transporteCosteTotal			= calificacionPartida.getTransporteCosteTotal() * (1 + porcentajeGananciaCliente);
@@ -911,9 +931,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 			RemisionPartida remisionPartida = new RemisionPartida();
 			remisionPartida.setNombre(nombre);
 			remisionPartida.setCantidad(cantidad);
-			remisionPartida.setPorcentajeGananciaCliente(porcentajeGananciaCliente);
-			remisionPartida.setPartidaCosteTotal(partidaCosteTotal);
-			remisionPartida.setImpresionPartidaCosteTotal(impresionPartidaCosteTotal);
 			remisionPartida.setProcesosPartidaCosteTotal(procesosPartidaCosteTotal);
 			remisionPartida.setDisenioCosteTotal(disenioCosteTotal);
 			remisionPartida.setPreprensaCosteTotal(preprensaCosteTotal);
@@ -929,23 +946,13 @@ public class CalificacionServiceImpl implements CalificacionService {
 				CalificacionTrabajoDetalle calificacionTrabajoDetalle = calificacionTrabajoDetalleDAO.buscaPorTipoTrabajoDetalle(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());
 				
 				String descripcion 					= tipoTrabajoDetalle.getDescripcion();
-				double ttdPapelCosteTotal			= calificacionTrabajoDetalle.getPapelCosteTotal() * (1 + porcentajeGananciaCliente);
-				double ttdPlacasCosteTotal			= calificacionTrabajoDetalle.getPlacasCosteTotal() * (1 + porcentajeGananciaCliente);
-				double ttdTintaCosteTotal			= calificacionTrabajoDetalle.getTintaCosteTotal() * (1 + porcentajeGananciaCliente);
-				double ttdTintaEspecialCosteTotal	= calificacionTrabajoDetalle.getTintaEspecialCosteTotal() * (1 + porcentajeGananciaCliente);
-				double ttdFrenteBarnizCosteTotal	= calificacionTrabajoDetalle.getFrenteBarnizCosteTotal() * (1 + porcentajeGananciaCliente);
-				double ttdVueltaBarnizCosteTotal	= calificacionTrabajoDetalle.getVueltaBarnizCosteTotal() * (1 + porcentajeGananciaCliente);
+				double tipoTrabajoDetalleCosteTotal	= calificacionTrabajoDetalle.getTipoTrabajoDetalleCosteTotal() * (1 + porcentajeGananciaCliente);
 				
 				calificacionTrabajoDetalle	= null;
 				
 				RemisionTrabajoDetalle remisionTrabajoDetalle = new RemisionTrabajoDetalle();
 				remisionTrabajoDetalle.setDescripcion(descripcion);
-				remisionTrabajoDetalle.setPapelCosteTotal(ttdPapelCosteTotal);
-				remisionTrabajoDetalle.setPlacasCosteTotal(ttdPlacasCosteTotal);
-				remisionTrabajoDetalle.setTintaCosteTotal(ttdTintaCosteTotal);
-				remisionTrabajoDetalle.setTintaEspecialCosteTotal(ttdTintaEspecialCosteTotal);
-				remisionTrabajoDetalle.setFrenteBarnizCosteTotal(ttdFrenteBarnizCosteTotal);
-				remisionTrabajoDetalle.setVueltaBarnizCosteTotal(ttdVueltaBarnizCosteTotal);
+				remisionTrabajoDetalle.setTipoTrabajoDetalleCosteTotal(tipoTrabajoDetalleCosteTotal);
 				
 				List<RemisionPliego> listaRemisionPliego = new ArrayList<RemisionPliego>();
 				List<Pliego> listaPliego = pliegoService.listaPliegoPorTipoTrabajoDetalle(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());
@@ -986,6 +993,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 					
 					CalificacionPliego calificacionPliego = calificacionPliegoDAO.buscaPorPliego(pliego.getIdPliego());
 					
+					int		hojasRequeridasRedondeo		= calificacionPliego.getHojasRequeridasRedondeo();
 					double 	pliegoCosteTotal 			= calificacionPliego.getPliegoCosteTotal() * (1 + porcentajeGananciaCliente);
 					int 	papelCantidadTotal			= calificacionPliego.getPapelCantidadTotal();
 					float 	papelPrecioUnitario			= calificacionPliego.getPapelPrecioUnitario() * (1 + porcentajeGananciaCliente);
@@ -1009,6 +1017,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 					calificacionPliego 	= null;
 					
 					RemisionPliego remisionPliego = new RemisionPliego();
+					remisionPliego.setHojasRequeridasRedondeo(hojasRequeridasRedondeo);
 					remisionPliego.setPliegoCosteTotal(pliegoCosteTotal);
 					remisionPliego.setPapelDescripcion(papelDescripcion);
 					remisionPliego.setPapelCantidadTotal(papelCantidadTotal);
@@ -1033,11 +1042,11 @@ public class CalificacionServiceImpl implements CalificacionService {
 					remisionPliego.setVueltaBarnizNumEntMaq(vueltaBarnizNumEntMaq);
 					remisionPliego.setVueltaBarnizPrecioUnitario(vueltaBarnizPrecioUnitario);
 					remisionPliego.setVueltaBarnizCosteTotal(vueltaBarnizCosteTotal);
-					remisionPliego.isClienteProporcionaPapel();
-					remisionPliego.isClienteProporcionaTinta();
-					remisionPliego.isClienteProporcionaTintaEspecial();
-					remisionPliego.isClienteProporcionaBarniz();
-					remisionPliego.isClienteProporcionaPlacas();
+					remisionPliego.setClienteProporcionaPapel(tipoTrabajoDetalle.isClienteProporcionaPapel());
+					remisionPliego.setClienteProporcionaTinta(tipoTrabajoDetalle.isClienteProporcionaTinta());
+					remisionPliego.setClienteProporcionaTintaEspecial(tipoTrabajoDetalle.isClienteProporcionaTintaEspecial());
+					remisionPliego.setClienteProporcionaBarniz(tipoTrabajoDetalle.isClienteProporcionaBarniz());
+					remisionPliego.setClienteProporcionaPlacas(tipoTrabajoDetalle.isClienteProporcionaPlacas());
 					
 					listaRemisionPliego.add(remisionPliego);
 					
@@ -1066,14 +1075,19 @@ public class CalificacionServiceImpl implements CalificacionService {
 			partida 						= null;
 		}
 		listaPartida 					= null;
-		calificacionOrdenProduccion 	= null;
+		remisionOrdenProduccion.setListaRemisionPartida(listaRemisionPartida);
+		listaRemisionOrdenProduccion.add(remisionOrdenProduccion);
+		listaRemisionPartida 			= null;
+		remisionOrdenProduccion			= null;
+		nombreCliente 					= null;
+		nombreOrdenProduccion			= null;
 		ordenProduccion 				= null;
 		
 		//Gson gson = new Gson();
-		//String json = gson.toJson( listaRemision );
+		//String json = gson.toJson( listaRemisionOrdenProduccion );
 		//System.out.println("JSON:\n" + json);
 		
-		return listaRemisionPartida;
+		return listaRemisionOrdenProduccion;
 	}
 	
 	
@@ -1253,9 +1267,9 @@ public class CalificacionServiceImpl implements CalificacionService {
 		listaPartida 	= null;
 		ordenProduccion = null;
 		
-		//Gson gson = new Gson();
-		//String json = gson.toJson( listaOrdenTrabajo );
-		//System.out.println("JSON:\n" + json);
+		Gson gson = new Gson();
+		String json = gson.toJson( listaOrdenTrabajo );
+		System.out.println("JSON:\n" + json);
 		
 		return listaOrdenTrabajo;
 	}

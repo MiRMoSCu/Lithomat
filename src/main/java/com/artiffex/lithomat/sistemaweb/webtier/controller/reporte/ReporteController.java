@@ -51,7 +51,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.OrdenProdu
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.ReporteService;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.OrdenTrabajo;
-import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.RemisionPartida;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.RemisionOrdenProduccion;
 
 @Controller
 @RequestMapping("/reporte")
@@ -339,26 +339,18 @@ public class ReporteController {
 	
 	
 	private void notaRemision( String nut, int idTipoFormatoImpresion, HttpServletRequest request, HttpServletResponse response ) throws IOException {
-		OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
-		CalificacionOrdenProduccion cop = calificacionService.buscaCalificacionOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
 		String path = request.getSession().getServletContext().getRealPath("/");
 		// PARAMETROS
 		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
-		parameterMap.put("SUBREPORT_DIR",path + DIRECTORIO_ORIGEN + "02_RemisionChild.jasper");
-		parameterMap.put("nut",nut);
-		parameterMap.put("nombreCliente",ordenProduccion.getCliente().getNombreMoral());
-		parameterMap.put("nombreOrdenProduccion",ordenProduccion.getNombre());
-		parameterMap.put("precioCliente",cop.getPrecioCliente());
-		parameterMap.put("porcentajeDescuento",cop.getPorcentajeDescuento());
-		parameterMap.put("precioClienteConDescuento", cop.getPrecioClienteConDescuento());
-		parameterMap.put("precioNeto",cop.getPrecioNeto());
-		cop				= null;
-		ordenProduccion = null;
+		parameterMap.put("SUBREPORT_PARTIDA",path + DIRECTORIO_ORIGEN + "02_RemisionFacturaPartida.jasper");
+		parameterMap.put("SUBREPORT_TIPO_TRABAJO_DETALLE",path + DIRECTORIO_ORIGEN + "02_RemisionFacturaTipoTrabajoDetalle.jasper");
+		parameterMap.put("SUBREPORT_PLIEGO",path + DIRECTORIO_ORIGEN + "02_RemisionFacturaPliego.jasper");
+		parameterMap.put("IMPRIME_IVA",false);
 		// INFORMACION DEL DATA SOURCE
-		List<RemisionPartida> listaRemision = calificacionService.obtieneRemisionPorNut(nut);
+		List<RemisionOrdenProduccion> listaRemision = calificacionService.obtieneRemisionPorNut(nut);
 		try {
 			OutputStream outputStream 				= response.getOutputStream();
-			InputStream reportStream 				= context.getResourceAsStream(DIRECTORIO_ORIGEN + "02_RemisionMaster.jasper");			
+			InputStream reportStream 				= context.getResourceAsStream(DIRECTORIO_ORIGEN + "02_RemisionFacturaOrdenProduccion.jasper");			
 			JRBeanCollectionDataSource dataSource 	= new JRBeanCollectionDataSource(listaRemision);
 			JasperPrint jasperPrint 				= JasperFillManager.fillReport( reportStream, parameterMap, dataSource );
 			//System.out.println("tipo_formato:" + tipo_formato);
@@ -414,33 +406,23 @@ public class ReporteController {
 		} finally {
 			listaRemision = null;
 			parameterMap	= null;
-			cop				= null;
-			ordenProduccion = null;
 		}
 	}
 	
 	
 	private void notaFactura( String nut, int idTipoFormatoImpresion, HttpServletRequest request, HttpServletResponse response ) throws IOException {
-		OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
-		CalificacionOrdenProduccion cop = calificacionService.buscaCalificacionOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
 		String path = request.getSession().getServletContext().getRealPath("/");
 		// PARAMETROS
 		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
-		parameterMap.put("SUBREPORT_DIR",path + DIRECTORIO_ORIGEN + "02_RemisionChild.jasper");
-		parameterMap.put("nut",nut);
-		parameterMap.put("nombreCliente",ordenProduccion.getCliente().getNombreMoral());
-		parameterMap.put("nombreOrdenProduccion",ordenProduccion.getNombre());
-		parameterMap.put("precioCliente",cop.getPrecioCliente());
-		parameterMap.put("porcentajeDescuento",cop.getPorcentajeDescuento());
-		parameterMap.put("precioClienteConDescuento", cop.getPrecioClienteConDescuento());
-		parameterMap.put("precioNeto",cop.getPrecioNeto());
-		cop				= null;
-		ordenProduccion = null;
+		parameterMap.put("SUBREPORT_PARTIDA",path + DIRECTORIO_ORIGEN + "02_RemisionFacturaPartida.jasper");
+		parameterMap.put("SUBREPORT_TIPO_TRABAJO_DETALLE",path + DIRECTORIO_ORIGEN + "02_RemisionFacturaTipoTrabajoDetalle.jasper");
+		parameterMap.put("SUBREPORT_PLIEGO",path + DIRECTORIO_ORIGEN + "02_RemisionFacturaPliego.jasper");
+		parameterMap.put("IMPRIME_IVA",true);
 		// INFORMACION DEL DATA SOURCE
-		List<RemisionPartida> listaRemision = calificacionService.obtieneRemisionPorNut(nut);
+		List<RemisionOrdenProduccion> listaRemision = calificacionService.obtieneRemisionPorNut(nut);
 		try {
 			OutputStream outputStream 				= response.getOutputStream();
-			InputStream reportStream 				= context.getResourceAsStream(DIRECTORIO_ORIGEN + "03_FacturaMaster.jasper");			
+			InputStream reportStream 				= context.getResourceAsStream(DIRECTORIO_ORIGEN + "02_RemisionFacturaOrdenProduccion.jasper");			
 			JRBeanCollectionDataSource dataSource 	= new JRBeanCollectionDataSource(listaRemision);
 			JasperPrint jasperPrint 				= JasperFillManager.fillReport( reportStream, parameterMap, dataSource );
 			//System.out.println("tipo_formato:" + tipo_formato);
@@ -496,8 +478,6 @@ public class ReporteController {
 		} finally {
 			listaRemision = null;
 			parameterMap	= null;
-			cop				= null;
-			ordenProduccion	= null;
 		}
 	}
 	

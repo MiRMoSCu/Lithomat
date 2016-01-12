@@ -7,6 +7,7 @@ public class RemisionPliego implements Serializable {
 	private static final long serialVersionUID = 442943849340083801L;
 	
 	private double pliegoCosteTotal;
+	private int hojasRequeridasRedondeo;
 	private String papelDescripcion;
 	private int papelCantidadTotal;
 	private float papelPrecioUnitario;
@@ -42,6 +43,12 @@ public class RemisionPliego implements Serializable {
 	}
 	public void setPliegoCosteTotal(double pliegoCosteTotal) {
 		this.pliegoCosteTotal = pliegoCosteTotal;
+	}
+	public int getHojasRequeridasRedondeo() {
+		return hojasRequeridasRedondeo;
+	}
+	public void setHojasRequeridasRedondeo(int hojasRequeridasRedondeo) {
+		this.hojasRequeridasRedondeo = hojasRequeridasRedondeo;
 	}
 	public String getPapelDescripcion() {
 		return papelDescripcion;
