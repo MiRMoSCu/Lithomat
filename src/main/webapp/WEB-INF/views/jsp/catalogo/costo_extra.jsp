@@ -2,6 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<fmt:setLocale value="en_US" scope="session" />
 <c:url value="/?opc=catalogos"					var="urlMenu"/>
 <c:url value="/costo_extra/catalogo/alta" 		var="urlAlta"/>
 <c:url value="/costo_extra/catalogo/modifica" 	var="urlModifica"/>
@@ -83,7 +85,7 @@
                             </div>
                         </div>
                         <div id="div_contenido">
-                            <form:form action="" method="post" acceptCharset="ISO-8859-1">
+                            <form action="" method="post">
                                 <div id="div_costo_extra">
                                     <div class="titulo">
                                         <img alt="" src="<c:url value="/resources/image/titulo_costo_extra.png"/>"/>
@@ -105,7 +107,7 @@
                                                         <td>${costoExtra.idCostoExtra}</td>
                                                         <td>${costoExtra.nombre}</td>
                                                         <td>${costoExtra.descripcion}</td>
-                                                        <td>${costoExtra.precio}</td>
+                                                        <td><fmt:formatNumber pattern="#,##0.00" value="${costoExtra.precio}"/></td>
                                                         <td>${costoExtra.tipoPrecio.nombre}</td>
                                                     </tr>
                                                 </c:forEach>
@@ -209,7 +211,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </form:form>
+                            </form>
                         </div>
                     </div>
                     <div id="div_pie"></div>

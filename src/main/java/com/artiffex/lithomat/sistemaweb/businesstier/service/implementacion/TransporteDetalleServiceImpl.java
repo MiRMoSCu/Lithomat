@@ -61,7 +61,7 @@ public class TransporteDetalleServiceImpl implements TransporteDetalleService {
 	}
 
 	public String listaHTML(int idTransporte) {
-
+		DecimalFormat formato = new DecimalFormat("#,###");
 		List<TransporteDetalle> listaTransporteDetalle = transporteDetalleDAO.listaPorTransporte(idTransporte);
 
 		StringBuilder html = new StringBuilder();
@@ -94,7 +94,7 @@ public class TransporteDetalleServiceImpl implements TransporteDetalleService {
 				html.append("</td>");
 
 				html.append("<td>");
-				html.append(transporteDetalle.getCantidad());
+				html.append(formato.format(transporteDetalle.getCantidad()));
 				html.append("</td>");
 
 				html.append("<td>");
@@ -130,12 +130,13 @@ public class TransporteDetalleServiceImpl implements TransporteDetalleService {
 		html.append("</table>");
 
 		listaTransporteDetalle = null;
+		formato = null;
 		
 		return html.toString();
 	}
 	
 	public String listaHTMLModificacionPorTransporte(int idTransporte) {
-		
+		DecimalFormat formato = new DecimalFormat("#,###");
 		List<TransporteDetalle> listaTransporteDetalle = transporteDetalleDAO.listaPorTransporte(idTransporte);
 
 		StringBuilder html = new StringBuilder();
@@ -176,7 +177,7 @@ public class TransporteDetalleServiceImpl implements TransporteDetalleService {
 				html.append("</td>");
 
 				html.append("<td>");
-				html.append(transporteDetalle.getCantidad());
+				html.append(formato.format(transporteDetalle.getCantidad()));
 				html.append("</td>");
 
 				html.append("<td>");
@@ -212,6 +213,7 @@ public class TransporteDetalleServiceImpl implements TransporteDetalleService {
 		html.append("</table>");
 
 		listaTransporteDetalle = null;
+		formato = null;
 		
 		return html.toString();
 	}
@@ -290,6 +292,8 @@ public class TransporteDetalleServiceImpl implements TransporteDetalleService {
 		html.append("</table>");
 
 		listaTransporteDetalle = null;
+		numFormat = null;
+		
 		return html.toString();
 	}
 
@@ -366,6 +370,8 @@ public class TransporteDetalleServiceImpl implements TransporteDetalleService {
 		html.append("</table>");
 
 		listaTransporteDetalle = null;
+		numFormat = null;
+		
 		return html.toString();
 	}
 }

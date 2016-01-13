@@ -55,7 +55,7 @@ function setCampos(id_tabulador_precios, nombre_maquina, nombre_insumo, descripc
     document.forms[0].descripcion.value             	= descripcion;
     document.forms[0].inicio_tabulador.value        	= inicio_tabulador;
     document.forms[0].fin_tabulador.value           	= fin_tabulador;
-    document.forms[0].precio.value						= precio_complejidad_sencilla;    
+    document.forms[0].precio.value						= precio;    
 }
 
 function crear() {

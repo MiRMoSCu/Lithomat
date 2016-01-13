@@ -2,6 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<fmt:setLocale value="en_US" scope="session" />
 <c:url value="/?opc=catalogos"	               	var="urlMenu"/>
 <c:url value="/tipo_barniz/catalogo/alta" 		var="urlAlta"/>
 <c:url value="/tipo_barniz/catalogo/modifica" 	var="urlModifica"/>
@@ -107,7 +109,7 @@
                                                         <td>${tipoBarniz.descripcion}</td>
                                                         <td>${tipoBarniz.numEntradasMaquina}</td>
                                                         <td>${tipoBarniz.numPlacas}</td>
-                                                        <td>${tipoBarniz.precio}</td>
+                                                        <td><fmt:formatNumber pattern="#,##0.00" value="${tipoBarniz.precio}"/></td>
                                                         <td>${tipoBarniz.tipoPrecio.nombre}</td>
                                                     </tr>
                                                 </c:forEach>

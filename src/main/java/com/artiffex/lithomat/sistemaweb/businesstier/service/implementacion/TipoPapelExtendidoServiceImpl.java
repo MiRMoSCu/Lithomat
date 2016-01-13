@@ -3,6 +3,7 @@ package com.artiffex.lithomat.sistemaweb.businesstier.service.implementacion;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -331,6 +332,8 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 		List<TipoPapelExtendido> lista = tipoPapelExtendidoDAO.listaPorQuery(query.toString(), parametros);
 		
 		query = null;
+		
+		DecimalFormat formato = new DecimalFormat("#,##0.00");
 		StringBuilder html = new StringBuilder();
 		
 		html.append("<table id=\"tabla_tipo_papel_extendido\">");
@@ -398,7 +401,7 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 				html.append("</td>");
 				
 				html.append("<td>");
-				html.append(tipoPapelExtendido.getPrecio());
+				html.append(formato.format(tipoPapelExtendido.getPrecio()));
 				html.append("</td>");
 				
 				html.append("<td>");
@@ -450,6 +453,8 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 			html.append("</td>");
 		}
 		html.append("</table");
+		
+		formato = null;
 		
 		return html.toString();
 	}

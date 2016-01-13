@@ -64,8 +64,8 @@ public class ReporteServiceImpl implements ReporteService {
 				registro.setNut( tipoTrabajoDetalle.getPartida().getOrdenProduccion().getNut() );
 				registro.setNombreCliente( tipoTrabajoDetalle.getPartida().getOrdenProduccion().getCliente().getNombreMoral() );
 				registro.setDecripcion( tipoTrabajoDetalle.getDescripcion() );
-				registro.setPapel( tipoTrabajoDetalle.getTipoPapelExtendido().getNombre() + " " + tipoTrabajoDetalle.getTipoPapelExtendido().getGramaje() + " grs." );
-				registro.setMedida( (int)tipoTrabajoDetalle.getTipoPapelExtendido().getAlto() + " x " + (int)tipoTrabajoDetalle.getTipoPapelExtendido().getAncho() );
+				registro.setPapel( tipoTrabajoDetalle.getTipoPapelExtendido().getNombre() + " " + (int)tipoTrabajoDetalle.getTipoPapelExtendido().getAlto() + "x" + (int)tipoTrabajoDetalle.getTipoPapelExtendido().getAncho() + " " + tipoTrabajoDetalle.getTipoPapelExtendido().getGramaje() + " grs." );
+				registro.setMedida( (int)tipoTrabajoDetalle.getAlto() + " x " + (int)tipoTrabajoDetalle.getAncho() );
 				registro.setTiro( pliego.getHojasTotales() );
 				registro.setTintas( pliego.getFrenteNumTotalPlacas() + " x " + pliego.getVueltaNumTotalPlacas() );
 					StringBuilder descripcionTintas = new StringBuilder();
@@ -208,9 +208,9 @@ public class ReporteServiceImpl implements ReporteService {
 	        	row.createCell(CELDA_CLIENTE).setCellValue( registroColaImpresionDTO.getNombreCliente() );
 	        	row.createCell(CELDA_DESCRIPCION).setCellValue( registroColaImpresionDTO.getDecripcion() );
 	        	row.createCell(CELDA_PAPEL).setCellValue( registroColaImpresionDTO.getPapel() );
-	        		row.createCell(CELDA_MEDIDA).setCellValue( registroColaImpresionDTO.getMedida() );
+	        	row.createCell(CELDA_MEDIDA).setCellValue( registroColaImpresionDTO.getMedida() );
 	        	row.createCell(CELDA_TIRO).setCellValue( registroColaImpresionDTO.getTiro() );
-	        		row.createCell(CELDA_TINTAS).setCellValue( registroColaImpresionDTO.getTintas() );
+	        	row.createCell(CELDA_TINTAS).setCellValue( registroColaImpresionDTO.getTintas() );
 	        	row.createCell(CELDA_COLORES_FTE).setCellValue( registroColaImpresionDTO.getColoresFrente() );
 	        	row.createCell(CELDA_COLORES_VTA).setCellValue( registroColaImpresionDTO.getColoresVuelta() );
 	        	row.createCell(CELDA_PLACAS).setCellValue( registroColaImpresionDTO.getPlacas() );

@@ -2,6 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<fmt:setLocale value="en_US" scope="session" />
 <c:url value="/?opc=catalogos"	               		var="urlMenu"/>
 <c:url value="/proceso_disenio/catalogo/alta"       var="urlAlta"/>
 <c:url value="/proceso_disenio/catalogo/modifica"   var="urlModifica"/>
@@ -105,7 +107,7 @@
                                                         <td>${procesoDisenio.idProcesoDisenio}</td>
                                                         <td>${procesoDisenio.nombreProceso}</td>
                                                         <td>${procesoDisenio.descripcion}</td>
-                                                        <td>${procesoDisenio.precio}</td>
+                                                        <td><fmt:formatNumber pattern="#,##0.00" value="${procesoDisenio.precio}"/></td>
                                                         <td>${procesoDisenio.tipoPrecio.nombre}</td>
                                                     </tr>
                                                 </c:forEach>

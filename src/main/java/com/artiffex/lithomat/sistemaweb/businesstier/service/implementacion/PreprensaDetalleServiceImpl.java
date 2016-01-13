@@ -61,6 +61,7 @@ public class PreprensaDetalleServiceImpl implements PreprensaDetalleService {
 	}
 	
 	public String listaHTML(int idPreprensa) {
+		DecimalFormat formato = new DecimalFormat("#,###");
 		List<PreprensaDetalle> listaPreprensaDetalle = preprensaDetalleDAO.listaPorPreprensa(idPreprensa);
 
 		StringBuilder html = new StringBuilder();
@@ -92,7 +93,7 @@ public class PreprensaDetalleServiceImpl implements PreprensaDetalleService {
 				html.append("</td>");
 
 				html.append("<td>");
-				html.append(preprensaDetalle.getCantidad());
+				html.append(formato.format(preprensaDetalle.getCantidad()));
 				html.append("</td>");
 
 				html.append("<td>");
@@ -128,12 +129,13 @@ public class PreprensaDetalleServiceImpl implements PreprensaDetalleService {
 		html.append("</table>");
 
 		listaPreprensaDetalle = null;
+		formato = null;
 		
 		return html.toString();
 	}
 	
 	public String listaHTMLModificacionPorPreprensa(int idPreprensa) {
-		
+		DecimalFormat formato = new DecimalFormat("#,###");
 		List<PreprensaDetalle> listaPreprensaDetalle = preprensaDetalleDAO.listaPorPreprensa(idPreprensa);
 
 		StringBuilder html = new StringBuilder();
@@ -174,7 +176,7 @@ public class PreprensaDetalleServiceImpl implements PreprensaDetalleService {
 				html.append("</td>");
 
 				html.append("<td>");
-				html.append(preprensaDetalle.getCantidad());
+				html.append(formato.format(preprensaDetalle.getCantidad()));
 				html.append("</td>");
 
 				html.append("<td>");
@@ -210,6 +212,7 @@ public class PreprensaDetalleServiceImpl implements PreprensaDetalleService {
 		html.append("</table>");
 
 		listaPreprensaDetalle = null;
+		formato = null;
 		
 		return html.toString();
 	}
@@ -287,6 +290,7 @@ public class PreprensaDetalleServiceImpl implements PreprensaDetalleService {
 		html.append("</table>");
 
 		listaPreprensaDetalle = null;
+		numFormat = null;
 		
 		return html.toString();
 	}
@@ -363,6 +367,7 @@ public class PreprensaDetalleServiceImpl implements PreprensaDetalleService {
 		html.append("</table>");
 
 		listaPreprensaDetalle = null;
+		numFormat = null;
 		
 		return html.toString();
 	}

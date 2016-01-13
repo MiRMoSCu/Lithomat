@@ -61,7 +61,7 @@ public class DisenioDetalleServiceImpl implements DisenioDetalleService {
 	}
 	
 	public String listaHTML(int idDisenio) {
-
+		DecimalFormat formato = new DecimalFormat("#,###");
 		List<DisenioDetalle> listaDisenioDetalle = disenioDetalleDAO.listaPorDisenio(idDisenio);
 
 		StringBuilder html = new StringBuilder();
@@ -94,7 +94,7 @@ public class DisenioDetalleServiceImpl implements DisenioDetalleService {
 				html.append("</td>");
 
 				html.append("<td>");
-				html.append(disenioDetalle.getCantidad());
+				html.append(formato.format(disenioDetalle.getCantidad()));
 				html.append("</td>");
 
 				html.append("<td>");
@@ -129,12 +129,13 @@ public class DisenioDetalleServiceImpl implements DisenioDetalleService {
 		html.append("</table>");
 
 		listaDisenioDetalle = null;
+		formato	= null;
 
 		return html.toString();
 	}
 	
 	public String listaHTMLModificacionPorDisenio(int idDisenio) {
-		
+		DecimalFormat formato = new DecimalFormat("#,###");
 		List<DisenioDetalle> listaDisenioDetalle = disenioDetalleDAO.listaPorDisenio(idDisenio);
 		
 		StringBuilder html = new StringBuilder();
@@ -175,7 +176,7 @@ public class DisenioDetalleServiceImpl implements DisenioDetalleService {
 				html.append("</td>");
 
 				html.append("<td>");
-				html.append(disenioDetalle.getCantidad());
+				html.append(formato.format(disenioDetalle.getCantidad()));
 				html.append("</td>");
 
 				html.append("<td>");
@@ -210,6 +211,7 @@ public class DisenioDetalleServiceImpl implements DisenioDetalleService {
 		html.append("</table>");
 
 		listaDisenioDetalle = null;
+		formato	= null;
 
 		return html.toString();
 		
@@ -288,6 +290,7 @@ public class DisenioDetalleServiceImpl implements DisenioDetalleService {
 		html.append("</table>");
 
 		listaDisenioDetalle = null;
+		numFormat = null;
 
 		return html.toString();
 	}
@@ -365,6 +368,7 @@ public class DisenioDetalleServiceImpl implements DisenioDetalleService {
 		html.append("</table>");
 
 		listaDisenioDetalle = null;
+		numFormat = null;
 
 		return html.toString();
 	}

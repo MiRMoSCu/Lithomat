@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:url value="/pliego/agrega" var="urlAgregaPliego"/>
 <html>
     <head>
@@ -104,9 +105,9 @@
                                             <tr class='${i.count%2==0?"l1":"l2"}'
                                                 onclick="setCampos('${i.count}', '${pliego.hojasRequeridas}', '${pliego.hojasSobrantes}', '${pliego.hojasTotales}', '${pliego.observaciones}', '${pliego.vueltaMismasPlacas}', '${pliego.tipoVuelta.nombre}');">
                                                 <td>${i.count}</td>
-                                                <td>${pliego.hojasRequeridas}</td>
-                                                <td>${pliego.hojasSobrantes}</td>
-                                                <td>${pliego.hojasTotales}</td>
+                                                <td><fmt:formatNumber pattern="#,###" value="${pliego.hojasRequeridas}"/></td>
+                                                <td><fmt:formatNumber pattern="#,###" value="${pliego.hojasSobrantes}"/></td>
+                                                <td><fmt:formatNumber pattern="#,###" value="${pliego.hojasTotales}"/></td>
                                                 <td>${pliego.observaciones}</td>
                                                 <c:choose>
                                                     <c:when test="${pliego.vueltaMismasPlacas}">

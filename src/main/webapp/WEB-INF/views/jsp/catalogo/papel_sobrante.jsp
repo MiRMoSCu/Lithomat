@@ -2,6 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<fmt:setLocale value="en_US" scope="session" />
 <c:url value="/?opc=catalogos"	               		var="urlMenu"/>
 <c:url value="/papel_sobrante/catalogo/alta"     	var="urlAlta"/>
 <c:url value="/papel_sobrante/catalogo/modifica" 	var="urlModifica"/>
@@ -105,12 +107,12 @@
                                                     <tr class='${i.count%2==0?"l2":"l1"}' 
                                                         onclick="setCampos('${papelSobrante.idPapelSobrante}','${papelSobrante.inicioTabulador}','${papelSobrante.finTabulador}','${papelSobrante.frenteNumTinta}','${papelSobrante.vueltaNumTinta}','${papelSobrante.tintaEspecial}','${papelSobrante.hojasSobrante}');">
                                                         <td>${papelSobrante.idPapelSobrante}</td>
-                                                        <td>${papelSobrante.inicioTabulador}</td>
-                                                        <td>${papelSobrante.finTabulador}</td>
+                                                        <td><fmt:formatNumber pattern="#,###" value="${papelSobrante.inicioTabulador}"/></td>
+                                                        <td><fmt:formatNumber pattern="#,###" value="${papelSobrante.finTabulador}"/></td>
                                                         <td>${papelSobrante.frenteNumTinta}</td>
                                                         <td>${papelSobrante.vueltaNumTinta}</td>
                                                         <td>${papelSobrante.tintaEspecial}</td>
-                                                        <td>${papelSobrante.hojasSobrante}</td>
+                                                        <td><fmt:formatNumber pattern="#,###" value="${papelSobrante.hojasSobrante}"/></td>
                                                     </tr>
                                                 </c:forEach>
                                                 </table>

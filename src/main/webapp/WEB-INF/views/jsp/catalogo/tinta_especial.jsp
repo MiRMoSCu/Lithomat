@@ -2,6 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<fmt:setLocale value="en_US" scope="session" />
 <c:url value="/?opc=catalogos"	               		var="urlMenu"/>
 <c:url value="/tinta_especial/catalogo/modifica" 	var="urlModifica"/>
 <html>
@@ -97,7 +99,7 @@
                                                     <tr class='${i.count%2==0?"l2":"l1"}'
                                                         onclick="setCampos('${tintaEspecial.idTintaEspecial}','${tintaEspecial.precio}', '${tintaEspecial.tipoPrecio.nombre}');">
                                                         <td>${tintaEspecial.idTintaEspecial}</td>
-                                                        <td>${tintaEspecial.precio}</td>
+                                                        <td><fmt:formatNumber pattern="#,##0.00" value="${tintaEspecial.precio}"/></td>
                                                         <td>${tintaEspecial.tipoPrecio.nombre}</td>
                                                     </tr>
                                                 </c:forEach>

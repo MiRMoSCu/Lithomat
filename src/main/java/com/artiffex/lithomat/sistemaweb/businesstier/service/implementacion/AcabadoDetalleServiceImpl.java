@@ -62,6 +62,7 @@ public class AcabadoDetalleServiceImpl implements AcabadoDetalleService {
 	}
 
 	public String listaHTML(int idAcabado) {
+		DecimalFormat formato = new DecimalFormat("#,###");
 		List<AcabadoDetalle> listaAcabadoDetalle = acabadoDetalleDAO.listaPorAcabado(idAcabado);
 
 		StringBuilder html = new StringBuilder();
@@ -94,7 +95,7 @@ public class AcabadoDetalleServiceImpl implements AcabadoDetalleService {
 				html.append("</td>");
 
 				html.append("<td>");
-				html.append(acabadoDetalle.getCantidadProcesoExterno());
+				html.append(formato.format(acabadoDetalle.getCantidadProcesoExterno()));
 				html.append("</td>");
 
 				html.append("<td>");
@@ -130,12 +131,13 @@ public class AcabadoDetalleServiceImpl implements AcabadoDetalleService {
 		html.append("</table>");
 
 		listaAcabadoDetalle = null;
+		formato = null;
 		
 		return html.toString();
 	}
 	
 	public String listaHTMLModificacionPorAcabado(int idAcabado) {
-		
+		DecimalFormat formato = new DecimalFormat("#,###");
 		List<AcabadoDetalle> listaAcabadoDetalle = acabadoDetalleDAO.listaPorAcabado(idAcabado);
 
 		StringBuilder html = new StringBuilder();
@@ -178,7 +180,7 @@ public class AcabadoDetalleServiceImpl implements AcabadoDetalleService {
 				html.append("</td>");
 
 				html.append("<td>");
-				html.append(acabadoDetalle.getCantidadProcesoExterno());
+				html.append(formato.format(acabadoDetalle.getCantidadProcesoExterno()));
 				html.append("</td>");
 
 				html.append("<td>");
@@ -214,6 +216,7 @@ public class AcabadoDetalleServiceImpl implements AcabadoDetalleService {
 		html.append("</table>");
 
 		listaAcabadoDetalle = null;
+		formato = null;
 		
 		return html.toString();
 	}
@@ -292,6 +295,8 @@ public class AcabadoDetalleServiceImpl implements AcabadoDetalleService {
 		html.append("</table>");
 
 		listaAcabadoDetalle = null;
+		numFormat = null;
+		
 		return html.toString();
 	}
 
@@ -368,6 +373,8 @@ public class AcabadoDetalleServiceImpl implements AcabadoDetalleService {
 		html.append("</table>");
 
 		listaAcabadoDetalle = null;
+		numFormat = null;
+		
 		return html.toString();
 	}
 }

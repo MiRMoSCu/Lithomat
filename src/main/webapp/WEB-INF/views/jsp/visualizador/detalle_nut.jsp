@@ -632,7 +632,7 @@
                                                         <td>${i.count}</td>
                                                         <td>${partida.tipoTrabajo.nombre}</td>
                                                         <td id="td_${partida.idPartida}_nombre_partida">${partida.nombrePartida}</td>
-                                                        <td id="td_${partida.idPartida}_cantidad">${partida.cantidad}</td>
+                                                        <td id="td_${partida.idPartida}_cantidad"><fmt:formatNumber pattern="#,###" value="${partida.cantidad}"/></td>
                                                         <td id="td_${partida.idPartida}_descripcion_partida">${partida.descripcionPartida}</td>
                                                     </tr>
                                                 </c:forEach>
@@ -947,24 +947,6 @@
                                                         <div class="columna_completa">
                                                             <table>
                                                                 <tr>
-                                                                    <td width="40%">Ancho (cm):</td>
-                                                                    <td>
-                                                                        <input  type="text" 
-                                                                                class="input" 
-                                                                                name="ancho" 
-                                                                                value=""
-                                                                                onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
-                                                                                onkeyup="document.getElementsByName('ancho_extendido')[0].value=value;"
-                                                                                readonly/>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mitad_columna_derecha">
-                                                        <div class="columna_completa">
-                                                            <table>
-                                                                <tr>
                                                                     <td width="32%">Alto (cm):</td>
                                                                     <td>
                                                                         <input  type="text" 
@@ -979,27 +961,27 @@
                                                             </table>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="columna_derecha">
-                                                    <div class="mitad_columna_izquierda">
+                                                    <div class="mitad_columna_derecha">
                                                         <div class="columna_completa">
-                                                            <table>
+                                                        	<table>
                                                                 <tr>
-                                                                    <td width="74%">Ancho extendido (cm):</td>
+                                                                    <td width="40%">Ancho (cm):</td>
                                                                     <td>
                                                                         <input  type="text" 
                                                                                 class="input" 
-                                                                                name="ancho_extendido" 
+                                                                                name="ancho" 
                                                                                 value=""
                                                                                 onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
-                                                                                onblur="document.getElementsByName('ancho_extendido')[0].value=value;"
+                                                                                onkeyup="document.getElementsByName('ancho_extendido')[0].value=value;"
                                                                                 readonly/>
                                                                     </td>
                                                                 </tr>
                                                             </table>
                                                         </div>
                                                     </div>
-                                                    <div class="mitad_columna_derecha">
+                                                </div>
+                                                <div class="columna_derecha">
+                                                    <div class="mitad_columna_izquierda">
                                                         <div class="columna_completa">
                                                             <table>
                                                                 <tr>
@@ -1011,6 +993,24 @@
                                                                                 value=""
                                                                                 onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                                 onblur="document.getElementsByName('alto_extendido')[0].value=value;"
+                                                                                readonly/>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mitad_columna_derecha">
+                                                        <div class="columna_completa">
+                                                        	<table>
+                                                                <tr>
+                                                                    <td width="74%">Ancho extendido (cm):</td>
+                                                                    <td>
+                                                                        <input  type="text" 
+                                                                                class="input" 
+                                                                                name="ancho_extendido" 
+                                                                                value=""
+                                                                                onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
+                                                                                onblur="document.getElementsByName('ancho_extendido')[0].value=value;"
                                                                                 readonly/>
                                                                     </td>
                                                                 </tr>
@@ -2606,11 +2606,11 @@
                                                                             <div class="columna_completa">
                                                                                 <table>
                                                                                     <tr>
-                                                                                        <td width="1%">Ancho:</td>
+                                                                                        <td width="1%">Alto:</td>
                                                                                         <td>
                                                                                             <input  type="text"
                                                                                                     class="input"
-                                                                                                    name="ancho"
+                                                                                                    name="alto"
                                                                                                     value=""
                                                                                                     onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                                                     readonly/>
@@ -2621,13 +2621,13 @@
                                                                         </div>
                                                                         <div class="cuarto_columna_derecha">
                                                                             <div class="columna_completa">
-                                                                                <table>
+                                                                            	<table>
                                                                                     <tr>
-                                                                                        <td width="1%">Alto:</td>
+                                                                                        <td width="1%">Ancho:</td>
                                                                                         <td>
                                                                                             <input  type="text"
                                                                                                     class="input"
-                                                                                                    name="alto"
+                                                                                                    name="ancho"
                                                                                                     value=""
                                                                                                     onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
                                                                                                     readonly/>

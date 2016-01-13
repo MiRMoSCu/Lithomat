@@ -3,6 +3,7 @@
 <%@ taglib prefix="form"	uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c"		uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" 	uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="en_US" scope="session" />
 <c:url value="/?opc=catalogos"	               									var="urlMenu"/>
 <c:url value="/tipo_papel_extendido/catalogo/lista_por_pagina_por_parametros" 	var="urlBuscaListaPorParametros"/>
 <c:url value="/tipo_papel_extendido/catalogo/alta" 								var="urlAlta"/>
@@ -164,7 +165,7 @@
                                                         <td>${formatAlto}</td>
                                                         <td>${formatAncho}</td>
                                                         <td>${tipoPapelExtendido.descripcion}</td>
-                                                        <td>${tipoPapelExtendido.precio}</td>
+                                                        <td><fmt:formatNumber pattern="#,##0.00" value="${tipoPapelExtendido.precio}"/></td>
                                                         <td>${tipoPapelExtendido.tipoPrecio.nombre}</td>
                                                     </tr>
                                                 </c:forEach>

@@ -1,5 +1,6 @@
 package com.artiffex.lithomat.sistemaweb.businesstier.service.implementacion;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -170,6 +171,7 @@ public class PartidaServiceImpl implements PartidaService {
 	}
 	
 	public String buscaHTML(int idOrdenProduccion) {
+		DecimalFormat formato = new DecimalFormat("#,###");
 		List<Partida> listaPartida = partidaDAO.listaPorOrdenProduccion(idOrdenProduccion);
 		StringBuilder html = new StringBuilder();
 		html.append("<table id=\'tabla_lista_partidas\'>");
@@ -204,7 +206,7 @@ public class PartidaServiceImpl implements PartidaService {
 				html.append("</td>");
 
 				html.append("<td>");
-				html.append(partida.getCantidad());
+				html.append(formato.format(partida.getCantidad()));
 				html.append("</td>");
 
 				html.append("<td>");
@@ -246,7 +248,8 @@ public class PartidaServiceImpl implements PartidaService {
 
 		html.append("</table>");
 		
-		listaPartida = null;
+		listaPartida 	= null;
+		formato			= null;
 
 		return html.toString();
 	}

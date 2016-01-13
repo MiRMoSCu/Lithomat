@@ -2,6 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<fmt:setLocale value="en_US" scope="session" />
 <c:url value="/?opc=catalogos"	               		var="urlMenu"/>
 <c:url value="/tabulador_precios/catalogo/alta" 	var="urlAlta"/>
 <c:url value="/tabulador_precios/catalogo/modifica" var="urlModifica"/>
@@ -110,10 +112,10 @@
                                                         <td>${tabuladorPrecios.maquina.nombre}</td>
                                                         <td>${tabuladorPrecios.nombreInsumo}</td>
                                                         <td>${tabuladorPrecios.descripcion}</td>
-                                                        <td>${tabuladorPrecios.inicioTabulador}</td>
-                                                        <td>${tabuladorPrecios.finTabulador}</td>
+                                                        <td><fmt:formatNumber pattern="#,###" value="${tabuladorPrecios.inicioTabulador}"/></td>
+                                                        <td><fmt:formatNumber pattern="#,###" value="${tabuladorPrecios.finTabulador}"/></td>
                                                         <td>${tabuladorPrecios.tipoComplejidad.nombre}</td>
-                                                        <td>${tabuladorPrecios.precio}</td>
+                                                        <td><fmt:formatNumber pattern="#,##0.00" value="${tabuladorPrecios.precio}"/></td>
                                                         <td>${tabuladorPrecios.tipoPrecio.nombre}</td>
                                                     </tr>
                                                 </c:forEach>

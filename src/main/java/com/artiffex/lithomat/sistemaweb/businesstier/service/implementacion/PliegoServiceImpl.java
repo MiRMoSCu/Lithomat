@@ -1,5 +1,6 @@
 package com.artiffex.lithomat.sistemaweb.businesstier.service.implementacion;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -344,6 +345,7 @@ public class PliegoServiceImpl implements PliegoService {
 	
 	public String buscaHTML(int idTipoTrabajoDetalle) {
 		// lista de pliegos
+		DecimalFormat formato = new DecimalFormat("#,###");
 		List<Pliego> lista = pliegoDAO.listaPorTipoTrabajoDetalle(idTipoTrabajoDetalle);
 
 		StringBuilder html = new StringBuilder();
@@ -399,19 +401,19 @@ public class PliegoServiceImpl implements PliegoService {
 				html.append("</td>");
 
 				html.append("<td>");
-				html.append(pliego.getHojasRequeridas());
+				html.append(formato.format(pliego.getHojasRequeridas()));
 				html.append("</td>");
 
 				totalHojasRequeridas += pliego.getHojasRequeridas();
 
 				html.append("<td>");
-				html.append(pliego.getHojasSobrantes());
+				html.append(formato.format(pliego.getHojasSobrantes()));
 				html.append("</td>");
 
 				totalHojasSobrantes += pliego.getHojasSobrantes();
 
 				html.append("<td>");
-				html.append(pliego.getHojasTotales());
+				html.append(formato.format(pliego.getHojasTotales()));
 				html.append("</td>");
 
 				totalHojasTotales += pliego.getHojasTotales();
@@ -510,31 +512,33 @@ public class PliegoServiceImpl implements PliegoService {
 		html.append("<td></td>");
 		html.append("<td></td>");
 		html.append("<td><i>");
-		html.append(totalHojasRequeridas);
+		html.append(formato.format(totalHojasRequeridas));
 		html.append("</i></td>");
 		html.append("<td><i>");
-		html.append(totalHojasSobrantes);
+		html.append(formato.format(totalHojasSobrantes));
 		html.append("</i></td>");
 		html.append("<td><i>");
-		html.append(totalHojasTotales);
+		html.append(formato.format(totalHojasTotales));
 		html.append("</i></td>");
 		html.append("<td></td>");
 		html.append("<td><i>");
-		html.append(totalEntradasFrente);
+		html.append(formato.format(totalEntradasFrente));
 		html.append("</i></td>");
 		html.append("<td><i>");
-		html.append(totalPlacasFrente);
+		html.append(formato.format(totalPlacasFrente));
 		html.append("</i></td>");
 		html.append("<td><i>");
-		html.append(totalEntradasVuelta);
+		html.append(formato.format(totalEntradasVuelta));
 		html.append("</i></td>");
 		html.append("<td><i>");
-		html.append(totalPlacasVuelta);
+		html.append(formato.format(totalPlacasVuelta));
 		html.append("</i></td>");
 		html.append("</tr>");
 		html.append("</table>");
 
 		lista = null;
+		formato = null;
+		
 		return html.toString();
 	}
 

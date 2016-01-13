@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2016-01-02T00:19:17 -->
+<!-- 2016-01-13T02:52:50 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdenTrabajoPartida" pageWidth="580" pageHeight="1000" columnWidth="580" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a8665aab-f47b-49c1-9a8c-fc9185390bff">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -52,7 +52,7 @@
 				<textElement verticalAlignment="Middle">
 					<font size="14" isBold="true" isItalic="false" isUnderline="false"/>
 				</textElement>
-				<text><![CDATA[Partida]]></text>
+				<text><![CDATA[Trabajo]]></text>
 			</staticText>
 			<line>
 				<reportElement x="142" y="6" width="297" height="1" forecolor="#073A6E" uuid="bb779c4d-8ea7-4681-8de6-913e200b2a2f">
