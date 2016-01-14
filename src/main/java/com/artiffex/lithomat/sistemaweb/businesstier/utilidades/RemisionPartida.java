@@ -9,6 +9,7 @@ public class RemisionPartida implements Serializable {
 	
 	private String nombre;
 	private int cantidad;
+	private double partidaCosteTotal;
 	private double procesosPartidaCosteTotal;
 	private double disenioCosteTotal;
 	private double preprensaCosteTotal;
@@ -30,6 +31,12 @@ public class RemisionPartida implements Serializable {
 	}
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
+	}
+	public double getPartidaCosteTotal() {
+		return partidaCosteTotal;
+	}
+	public void setPartidaCosteTotal(double partidaCosteTotal) {
+		this.partidaCosteTotal = partidaCosteTotal;
 	}
 	public double getProcesosPartidaCosteTotal() {
 		return procesosPartidaCosteTotal;

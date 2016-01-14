@@ -105,9 +105,9 @@
                                             <tr class='${i.count%2==0?"l1":"l2"}'
                                                 onclick="setCampos('${i.count}', '${pliego.hojasRequeridas}', '${pliego.hojasSobrantes}', '${pliego.hojasTotales}', '${pliego.observaciones}', '${pliego.vueltaMismasPlacas}', '${pliego.tipoVuelta.nombre}');">
                                                 <td>${i.count}</td>
-                                                <td><fmt:formatNumber pattern="#,###" value="${pliego.hojasRequeridas}"/></td>
-                                                <td><fmt:formatNumber pattern="#,###" value="${pliego.hojasSobrantes}"/></td>
-                                                <td><fmt:formatNumber pattern="#,###" value="${pliego.hojasTotales}"/></td>
+                                                <td>${pliego.hojasRequeridas}</td>
+                                                <td>${pliego.hojasSobrantes}</td>
+                                                <td>${pliego.hojasTotales}</td>
                                                 <td>${pliego.observaciones}</td>
                                                 <c:choose>
                                                     <c:when test="${pliego.vueltaMismasPlacas}">

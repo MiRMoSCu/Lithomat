@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2016-01-12T04:33:12 -->
+<!-- 2016-01-13T21:48:46 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RemisionChild" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="75315364-8f17-454b-bd3d-bfc8fc859dfe">
 	<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -17,11 +17,11 @@
 	<field name="tipoTrabajoDetalleCosteTotal" class="java.lang.Double"/>
 	<field name="listaRemisionPliego" class="java.util.List"/>
 	<detail>
-		<band height="20">
+		<band height="15">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
 			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<textField>
-				<reportElement x="124" y="5" width="454" height="15" uuid="6e2907a3-4628-43cd-9038-e07ff0cdf158">
+				<reportElement x="124" y="0" width="454" height="15" uuid="6e2907a3-4628-43cd-9038-e07ff0cdf158">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -30,8 +30,9 @@
 				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="26" y="5" width="98" height="15" uuid="efb6e24e-6d5d-4d53-91f5-568a2d4f94ec">
+				<reportElement x="26" y="0" width="98" height="15" uuid="efb6e24e-6d5d-4d53-91f5-568a2d4f94ec">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Detalle impresión:]]></text>
@@ -50,14 +51,6 @@
 			</subreport>
 		</band>
 		<band height="30">
-			<staticText>
-				<reportElement x="390" y="0" width="176" height="15" uuid="dbf65b42-b119-44bf-a9fd-da371cbe6bc3">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[-----------------------------]]></text>
-			</staticText>
 			<textField>
 				<reportElement x="420" y="15" width="100" height="15" uuid="b47dd800-1865-4965-b8c7-c94d628e8378">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -66,12 +59,22 @@
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("$ #,##0.00").format(Double.valueOf($F{tipoTrabajoDetalleCosteTotal}))]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="320" y="15" width="100" height="15" uuid="22ae39c1-1c8f-41cb-be23-c69b84225c4c">
+				<reportElement x="310" y="15" width="110" height="15" uuid="22ae39c1-1c8f-41cb-be23-c69b84225c4c">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
-				<text><![CDATA[SubTotal Impresión:]]></text>
+				<text><![CDATA[Total IMPRESIÓN:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="0" width="150" height="15" uuid="2bf6b68c-1bdc-4b6b-b00c-64108ba2a1d3">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[-----------------------------]]></text>
 			</staticText>
 		</band>
 	</detail>

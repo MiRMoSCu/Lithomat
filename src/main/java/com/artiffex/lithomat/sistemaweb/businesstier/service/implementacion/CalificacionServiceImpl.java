@@ -918,6 +918,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 			
 			String nombre						= partida.getNombrePartida();
 			int cantidad						= partida.getCantidad();
+			double partidaCosteTotal			= calificacionPartida.getPartidaCosteTotal() * (1 + porcentajeGananciaCliente);
 			double procesosPartidaCosteTotal	= calificacionPartida.getProcesosPartidaCosteTotal() * (1 + porcentajeGananciaCliente);
 			double disenioCosteTotal			= calificacionPartida.getDisenioCosteTotal() * (1 + porcentajeGananciaCliente);
 			double preprensaCosteTotal			= calificacionPartida.getPreprensaCosteTotal() * (1 + porcentajeGananciaCliente);
@@ -931,6 +932,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 			RemisionPartida remisionPartida = new RemisionPartida();
 			remisionPartida.setNombre(nombre);
 			remisionPartida.setCantidad(cantidad);
+			remisionPartida.setPartidaCosteTotal(partidaCosteTotal);
 			remisionPartida.setProcesosPartidaCosteTotal(procesosPartidaCosteTotal);
 			remisionPartida.setDisenioCosteTotal(disenioCosteTotal);
 			remisionPartida.setPreprensaCosteTotal(preprensaCosteTotal);
