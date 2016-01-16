@@ -11,7 +11,13 @@
         <link rel="stylesheet" href="<c:url value="/resources/css/pliego.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/master.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/font.css"/>" type="text/css"></link>
-		<script type="text/javascript" src="<c:url value="/resources/js/pliego.js"/>"></script>        
+        <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/utilidades.js"/>"></script>
+		<script type="text/javascript" src="<c:url value="/resources/js/pliego.js"/>"></script>
+		<script type="text/javascript">
+            // inicializacion jquery
+            $(document).ready(function (){});
+        </script>        
         <script type="text/javascript">
             var urlAgregaPliego = '${urlAgregaPliego}';
         </script>
@@ -40,7 +46,7 @@
                                                                     class="input"
                                                                     name="rebase_en_milimetros"
                                                                     value="5"
-                                                                    onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+                                                                    onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -56,7 +62,7 @@
                                                                     class="input"
                                                                     name="medianiles_en_milimetros"
                                                                     value="5"
-                                                                    onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+                                                                    onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -72,7 +78,7 @@
                                                                     class="input"
                                                                     name="pinzas_en_centimetros"
                                                                     value="1"
-                                                                    onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+                                                                    onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -173,7 +179,7 @@
                                                                     class="input"
                                                                     name="hojas_sobrantes"
                                                                     value="" 
-                                                                    onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
+                                                                    onkeydown="revisaNumero(false, this.value, event, null, null)"
                                                                     onkeyup="sumatoria();"/>
                                                         </td>
                                                     </tr>

@@ -244,16 +244,17 @@ public class TipoTrabajoDetalleController {
 		jsonResponse.setEstatusOperacion(1);
 		
 		// INSTRUCCIONES:
-		// elimina los pliegos ya existentes porque hay nueva informacion y debe calculrse  nuevos pliegos.
-		// POR TANTO:
+		// elimina los pliegos ya existentes porque hay nueva informacion y debe calculrse  nuevos pliegos
+		// y se elimina logicamente la calificacion de esos pliegos ya existentes.
+		// POR TANTO, SI ACEPTA LOS NUEVOS PLIEGOS:
 		// 1) se debe saber cuales son los pliegos eliminados
 		// SI acepta los nuevos pliegos, OK
-		// SINO acepta los nuevos pliegos, entonces 
+		// SINO, entonces 
 		//		a) se debe activar los pliegos anteriores en la tabla PLIEGO (los que se acaban de eliminar)
 		// 		b) se debe actualizar el valor anterior modificado de base de datos en la tabla TIPO_TRABAJO_DETALLE 
 		//			porque no hay nuevos pliegos insertados con la nueva información porque no se acepto. 
 		List<Integer> listaIdPliegosEliminados = pliegoService.eliminaPliegoPorTipoTrabajoDetalle(idTipoTrabajoDetalle);
-		jsonResponse.setTextoJson( new Gson().toJson(listaIdPliegosEliminados) );
+		jsonResponse.setTextoJson( new Gson().toJson(listaIdPliegosEliminados).toString() );
 		
 		tipoTrabajoDetalle = null;
 		

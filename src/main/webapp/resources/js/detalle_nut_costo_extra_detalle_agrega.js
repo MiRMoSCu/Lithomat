@@ -124,7 +124,8 @@ function aceptaAgregarCostoExtraDetalle() {
 	// VALIDACIONES
 	var correcto = true;
 	
-	if( document.costo_extra_detalle.cantidad.value == "" ) {
+	if( document.costo_extra_detalle.cantidad.value == ""
+		|| isNaN(document.costo_extra_detalle.cantidad.value)) {
 		correcto = false;
 		alert("Favor de indicar la cantidad");
 		document.costo_extra_detalle.cantidad.focus();

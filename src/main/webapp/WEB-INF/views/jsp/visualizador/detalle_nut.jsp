@@ -51,6 +51,7 @@
         <link rel="stylesheet" href="<c:url value="/resources/shadowbox/shadowbox.css"/>" type="text/css"></link>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/shadowbox/shadowbox.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/utilidades.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/master.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion.js"/>"></script>
@@ -740,7 +741,7 @@
                                                                                 class="input" 
                                                                                 name="cantidad"
                                                                                 value="" 
-                                                                                onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
+                                                                                onkeydown="revisaNumero(false, this.value, event, null, null)"
                                                                                 readonly/>
                                                                     </td>
                                                                 </tr>
@@ -953,7 +954,7 @@
                                                                                 class="input" 
                                                                                 name="alto" 
                                                                                 value=""
-                                                                                onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
+                                                                                onkeydown="revisaNumero(true, this.value, event, null, null)"
                                                                                 onkeyup="document.getElementsByName('alto_extendido')[0].value=value;"
                                                                                 readonly/>
                                                                     </td>
@@ -971,7 +972,7 @@
                                                                                 class="input" 
                                                                                 name="ancho" 
                                                                                 value=""
-                                                                                onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
+                                                                                onkeydown="revisaNumero(true, this.value, event, null, null)"
                                                                                 onkeyup="document.getElementsByName('ancho_extendido')[0].value=value;"
                                                                                 readonly/>
                                                                     </td>
@@ -991,7 +992,7 @@
                                                                                 class="input" 
                                                                                 name="alto_extendido" 
                                                                                 value=""
-                                                                                onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
+                                                                                onkeydown="revisaNumero(true, this.value, event, null, null)"
                                                                                 onblur="document.getElementsByName('alto_extendido')[0].value=value;"
                                                                                 readonly/>
                                                                     </td>
@@ -1009,7 +1010,7 @@
                                                                                 class="input" 
                                                                                 name="ancho_extendido" 
                                                                                 value=""
-                                                                                onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
+                                                                                onkeydown="revisaNumero(true, this.value, event, null, null)"
                                                                                 onblur="document.getElementsByName('ancho_extendido')[0].value=value;"
                                                                                 readonly/>
                                                                     </td>
@@ -1153,7 +1154,7 @@
                                                                             class="input"
                                                                             name="repeticiones_x_pliego" 
                                                                             value=""
-                                                                            onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
+                                                                            onkeydown="revisaNumero(false, this.value, event, null, null)"
                                                                             readonly/>
                                                                 </td>
                                                             </tr>
@@ -1169,7 +1170,7 @@
                                                                                 class="input"
                                                                                 name="numero_paginas_publicacion"
                                                                                 value="0"
-                                                                                onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
+                                                                                onkeydown="revisaNumero(false, this.value, event, null, null)"
                                                                                 readonly/>
                                                                     </td>
                                                                 </tr>
@@ -1248,7 +1249,7 @@
                                                                                 class="input"
                                                                                 name="frente_num_tinta_especial" 
                                                                                 value=""
-                                                                                onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
+                                                                                onkeydown="revisaNumero(false, this.value, event, null, null)"
                                                                                 readonly/>
                                                                     </td>
                                                                 </tr>
@@ -1342,7 +1343,7 @@
                                                                                 class="input"
                                                                                 name="vuelta_num_tinta_especial" 
                                                                                 value=""
-                                                                                onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
+                                                                                onkeydown="revisaNumero(false, this.value, event, null, null)"
                                                                                 readonly/>
                                                                     </td>
                                                                 </tr>
@@ -1720,7 +1721,7 @@
 			                                									class="input"
 			                                									name="cantidad"
 			                                									value=""
-			                                									onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
+			                                									onkeydown="revisaNumero(false, this.value, event, null, null)"
 			                                									readonly/>
 			                                						</td>
 			                                					</tr>
@@ -1935,7 +1936,7 @@
                                                                                                     class="input"
                                                                                                     name="cantidad"
                                                                                                     value=""
-                                                                                                    onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
+                                                                                                    onkeydown="revisaNumero(false, this.value, event, null, null)"
                                                                                                     readonly/>
                                                                                         </td>
                                                                                     </tr>
@@ -1953,7 +1954,7 @@
                                                                                                     name="precio_total_pesos"
                                                                                                     title="Precio total en pesos"
                                                                                                     value=""
-                                                                                                    onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
+                                                                                                    onkeydown="revisaNumero(true, this.value, event, null, null)"
                                                                                                     readonly/>
                                                                                         </td>
                                                                                     </tr>
@@ -2162,7 +2163,7 @@
                                                                                                     class="input"
                                                                                                     name="cantidad"
                                                                                                     value=""
-                                                                                                    onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
+                                                                                                    onkeydown="revisaNumero(false, this.value, event, null, null)"
                                                                                                     readonly/>
                                                                                         </td>
                                                                                     </tr>
@@ -2180,7 +2181,7 @@
                                                                                                     name="precio_total_pesos"
                                                                                                     title="Precio total en pesos"
                                                                                                     value=""
-                                                                                                    onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
+                                                                                                    onkeydown="revisaNumero(false, this.value, event, null, null)"
                                                                                                     readonly/>
                                                                                         </td>
                                                                                     </tr>
@@ -2387,7 +2388,7 @@
                                                                                                     class="input"
                                                                                                     name="cantidad"
                                                                                                     value=""
-                                                                                                    onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
+                                                                                                    onkeydown="revisaNumero(false, this.value, event, null, null)"
                                                                                                     readonly/>
                                                                                         </td>
                                                                                     </tr>
@@ -2405,7 +2406,7 @@
                                                                                                     name="precio_total_pesos"
                                                                                                     title="Precio total en pesos"
                                                                                                     value=""
-                                                                                                    onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
+                                                                                                    onkeydown="revisaNumero(true, this.value, event, null, null)"
                                                                                                     readonly/>
                                                                                         </td>
                                                                                     </tr>
@@ -2612,7 +2613,7 @@
                                                                                                     class="input"
                                                                                                     name="alto"
                                                                                                     value=""
-                                                                                                    onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
+                                                                                                    onkeydown="revisaNumero(true, this.value, event, null, null)"
                                                                                                     readonly/>
                                                                                         </td>
                                                                                     </tr>
@@ -2629,7 +2630,7 @@
                                                                                                     class="input"
                                                                                                     name="ancho"
                                                                                                     value=""
-                                                                                                    onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
+                                                                                                    onkeydown="revisaNumero(true, this.value, event, null, null)"
                                                                                                     readonly/>
                                                                                         </td>
                                                                                     </tr>
@@ -2650,7 +2651,7 @@
                                                                                                     class="input"
                                                                                                     name="cantidad_proceso_externo"
                                                                                                     value=""
-                                                                                                    onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
+                                                                                                    onkeydown="revisaNumero(false, this.value, event, null, null)"
                                                                                                     readonly/>
                                                                                         </td>
                                                                                     </tr>
@@ -2668,7 +2669,7 @@
                                                                                                     name="precio_total_pesos"
                                                                                                     title="Precio total en pesos"
                                                                                                     value=""
-                                                                                                    onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
+                                                                                                    onkeydown="revisaNumero(true, this.value, event, null, null)"
                                                                                                     readonly/>
                                                                                         </td>
                                                                                     </tr>

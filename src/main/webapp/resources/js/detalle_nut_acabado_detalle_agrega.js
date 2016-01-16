@@ -118,7 +118,7 @@ function aceptaAgregarAcabadoDetalle() {
     }
     
     // se especifica la cantidad y debe ser mayor a cero
-    if( cantidad == "" || parseInt( cantidad ) <= 0  ) {
+    if( cantidad == "" || isNaN(cantidad) || parseInt( cantidad ) <= 0  ) {
         correcto = false;
         alert("Es necesario especificar la cantidad mayor a cero");
         document.acabado_detalle.cantidad_proceso_externo.focus();

@@ -275,9 +275,8 @@ public class PartidaServiceImpl implements PartidaService {
 		List<TipoTrabajoDetalle> listaTipoTrabajoDetalle = null;
 		
 		switch( partida.getTipoTrabajo().getIdTipoTrabajo() ) {
-			
 			case TIPO_TRABAJO_FLYER:
-
+				// por cada tipo_trabajo_detalle involucrado, y a su vex, cada pliego: actualiza papel
 				listaTipoTrabajoDetalle = tipoTrabajoDetalleService.listaTipoTrabajoDetallePorPartida(idPartida);
 				for (TipoTrabajoDetalle tipoTrabajoDetalle : listaTipoTrabajoDetalle) {
 					int repeticionesXPliego 	= tipoTrabajoDetalle.getRepeticionesXPliego();
@@ -301,9 +300,8 @@ public class PartidaServiceImpl implements PartidaService {
 				}
 				papelSobrante = null;
 				break;
-				
 			case TIPO_TRABAJO_REVISTA:
-				
+				// por cada tipo_trabajo_detalle involucrado, y a su vex, cada pliego: actualiza papel
 				listaTipoTrabajoDetalle = tipoTrabajoDetalleService.listaTipoTrabajoDetallePorPartida(idPartida);
 				for (TipoTrabajoDetalle tipoTrabajoDetalle : listaTipoTrabajoDetalle) {
 					
@@ -333,7 +331,6 @@ public class PartidaServiceImpl implements PartidaService {
 				}
 				papelSobrante = null;
 				break;
-				
 			case TIPO_TRABAJO_OTRO:
 				break;
 		}

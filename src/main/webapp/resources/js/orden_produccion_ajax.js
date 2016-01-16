@@ -5,11 +5,10 @@ var cerradoOKVentanaListaPliegos = false;
 
 // funciones
 
-function searchLikeGoogle(str){
+function searchLikeGoogle(str,event){
 	//console.log(event);
 	//alert(str);
 	if( str.trim() != "" ) {
-		
 		var input = String.fromCharCode(event.keyCode);
 		if (/[a-zA-Z0-9-_]/.test(input)) {
 			$.ajax({
@@ -71,7 +70,8 @@ function preparaAjaxBuscaCliente() {
 }
 
 
-function enterSearchLikeGoogle() {
+function enterSearchLikeGoogle(event) {
+	//console.log(event);
 	//console.log("entro a enterSearchLikeGoogle");
 	document.cliente.nombre_moral.value = document.cliente.select_search.options[document.cliente.select_search.selectedIndex].text;
 	if( event.keyCode == 13 ) {
@@ -84,8 +84,19 @@ function ajaxBuscaCliente() {
     //alert( $('#form_cliente').serialize() );
     document.forms["cliente"].elements["id_cliente"].blur();
     var id_cliente = document.forms["cliente"].elements["id_cliente"].value;
-    if( id_cliente != "" ) {
-        document.body.style.cursor = "wait";
+    var correcto = true;
+    if ( correcto 
+    		&& id_cliente == "" ) {
+    	correcto = false;
+    	alert("Campo Id. Cliente no puede estar vac\u00edo. Favor de informarlo.");
+    }
+    if( correcto 
+    		&& isNaN( id_cliente ) ) {
+    	correcto = false;
+    	alert("Campo Id. Cliente debe ser un numero.");
+    }
+    if ( correcto ) {
+    	document.body.style.cursor = "wait";
         $.ajax({
             type:"POST",
             url:urlBuscaCliente,
@@ -118,10 +129,8 @@ function ajaxBuscaCliente() {
                 limpiaFormCliente();
             }
         });
-        delete id_cliente;
-    } else {
-    	alert("Campo Id. Cliente no puede estar vac\u00edo. Favor de informarlo.");
     }
+    delete id_cliente;
 } // ajaxBuscaCliente()
 
 
@@ -139,14 +148,16 @@ function ajaxAgregaOrdenProduccion() {
     var correcto = true;
     
     // revisa que el campo id_cliente no este vacio
-    if( correcto && id_cliente == "" ) {
+    if( correcto 
+    		&& id_cliente == "" ) {
         correcto = false;
         alert("Campo Id. Cliente no puede estar vac\u00edo. Favor de informarlo.");
         document.forms["cliente"].elements["id_cliente"].focus();
     }
     
     // revisa que el nombre y la descripcion de la orden no esten vacios
-    if( correcto && nombre_orden == "" || descripcion == "" ) {
+    if( correcto 
+    		&& ( nombre_orden == "" || descripcion == "") ) {
         correcto = false;
         alert("Campos Nombre y Descripcion de la orden de procducci\u00f3n no pueden estar vac\u00edos. Favor de informarlos.");
     }
@@ -235,9 +246,16 @@ function ajaxAgregaPartida() {
     var correcto = true;
     
     // Revisa que nombre de partida, cantidad y descripcion no sean vacios
-    if( nombre_partida == "" || cantidad == "" || descripcion == "" ) {
+    if( correcto 
+    		&& ( nombre_partida == "" || cantidad == "" || descripcion == "" ) ) {
         correcto = false;
         alert("Los campos nombre, cantidad y descripci\u00f3n no pueden estar vac\u00edos. Favor de informarlos.");
+    }
+    
+    if ( correcto 
+    		&& isNaN(cantidad) ) {
+    	correcto = false;
+    	alert("El campo cantidad deber ser un n\u00FAmero.");
     }
     
     if( correcto ) {
@@ -367,15 +385,47 @@ function ajaxAgregaTipoTrabajoDetalle() {
     var correcto = true;
     
     // Revisa que descripcion, ancho y alto no este vacios
-    if( descripcion_partida_detalle == "" || ancho == "" || alto == "" ) {
+    if( correcto 
+    		&& descripcion_partida_detalle == "" ) {
         correcto = false;
-        alert("Los campos descripci\u00f3n, ancho y alto no pueden estar vac\u00edos. Favor de informarlos.");
+        alert("El campo descripci\u00f3n no puede estar vac\u00edo. Favor de informarlos.");
+    }
+    if ( correcto 
+    		&& isNaN(alto) ) {
+    	 correcto = false;
+    	 alert("El campo alto debe ser num\u00E9rico");
+    	 document.forms["tipo_trabajo_detalle"].elements["alto"].value = "";
+    	 document.forms["tipo_trabajo_detalle"].elements["alto"].focus();
+    }
+    if ( correcto 
+    		&& isNaN(ancho) ) {
+    	 correcto = false;
+    	 alert("El campo ancho debe ser num\u00E9rico");
+    	 document.forms["tipo_trabajo_detalle"].elements["ancho"].value = "";
+    	 document.forms["tipo_trabajo_detalle"].elements["ancho"].focus();
+    }
+    if ( correcto 
+    		&& isNaN(document.forms["tipo_trabajo_detalle"].elements["alto_extendido"].value)) {
+    	 correcto = false;
+    	 alert("El campo alto extendido debe ser num\u00E9rico");
+    	 document.forms["tipo_trabajo_detalle"].elements["alto_extendido"].value = "";
+    	 document.forms["tipo_trabajo_detalle"].elements["alto_extendido"].focus();
+    }
+    if ( correcto 
+    		&& isNaN(document.forms["tipo_trabajo_detalle"].elements["ancho_extendido"].value)) {
+    	 correcto = false;
+    	 alert("El campo ancho extendido debe ser num\u00E9rico");
+    	 document.forms["tipo_trabajo_detalle"].elements["ancho_extendido"].value = "";
+    	 document.forms["tipo_trabajo_detalle"].elements["ancho_extendido"].focus();
     }
     
     // Valida que el numero de repeticiones por flyer o paginas de revista sea mayor que cero
     switch( parseInt( id_tipo_trabajo ) ) {
         case 1:
-            if( repeticiones_x_pliego == "" || parseInt( repeticiones_x_pliego ) <= 0 ) {
+            if( correcto 
+            		&& ( repeticiones_x_pliego == "" 
+            			|| isNaN(repeticiones_x_pliego) 
+            			|| parseInt( repeticiones_x_pliego ) <= 0 ) ) {
                 correcto = false;
                 alert("El n\u00famero de repeticiones deber ser un n\u00famero positivo mayor de cero");
                 document.forms["tipo_trabajo_detalle"].elements["repeticiones_x_pliego"].focus();
@@ -383,13 +433,18 @@ function ajaxAgregaTipoTrabajoDetalle() {
             break;
         
         case 2:
-            if( numero_paginas_publicacion == "" || parseInt( numero_paginas_publicacion ) <= 0 || parseInt( numero_paginas_publicacion )%4 != 0 ) {
+            if( correcto
+            		&& ( numero_paginas_publicacion == ""
+            			|| isNaN( numero_paginas_publicacion )
+            			|| parseInt( numero_paginas_publicacion ) <= 0 
+            			|| parseInt( numero_paginas_publicacion )%4 != 0 ) ) {
                 correcto = false;
                 alert("El n\u00famero de p\u00e1ginas deber ser un n\u00famero positivo mayor de cero y multiplo de 4");
                 document.forms["tipo_trabajo_detalle"].elements["numero_paginas_publicacion"].focus();
             }
             
-            if( document.forms["tipo_trabajo_detalle"].elements["select_tamanio_publicacion"].value == "1" ) {
+            if( correcto
+            		&& document.forms["tipo_trabajo_detalle"].elements["select_tamanio_publicacion"].value == "1" ) {
                 correcto = false;
                 alert("El tama\u00f1o de la publicaci\u00f3n debe ser especificado");
                 document.forms["tipo_trabajo_detalle"].elements["select_tamanio_publicacion"].focus();
@@ -404,47 +459,85 @@ function ajaxAgregaTipoTrabajoDetalle() {
     } // switch validacion tipo trabajo
     
     // valida que existe papel
-    if( correcto && descripcion_tipo_papel_extendido == "" ) {
+    if( correcto 
+    		&& descripcion_tipo_papel_extendido == "" ) {
     	correcto = false;
     	alert("Favor de especificar el tipo de papel");
     	document.forms["tipo_trabajo_detalle"].elements["tipo_papel_extendido"].focus();
     }
     
     // valida que si no hay tinta normal en frente, debe forzosamente haber tinta especial en frente
-    if( correcto && frente_id_combinacion_tintas == "16" ) {
+    if( correcto 
+    		&& frente_id_combinacion_tintas == "16" ) {
         // valida en frente si la tinta especial es mayor a cero, exista obligatoriamente una descripcion.
-        if( frente_num_tinta_especial == "" || parseInt( frente_num_tinta_especial ) <= 0 ) {
+        if( frente_num_tinta_especial == "" 
+        		|| isNaN( frente_num_tinta_especial )
+        		|| parseInt( frente_num_tinta_especial ) <= 0 ) {
             correcto = false;
             alert("Es necesario que exista al menos tinta especial en el frente");
             document.forms["tipo_trabajo_detalle"].elements["frente_num_tinta_especial"].focus();
         }   
     }
-    
-    /*
-    // valida que si no hay tinta normal en vuelta, debe forzosamente haber tinta especial en vuelta
-    if( vuelta_id_combinacion_tintas == "16" ) {
-        // valida en vuelta si la tinta especial es mayor a cero, exista obligatoriamente una descripcion.
-        if( vuelta_num_tinta_especial == '' || parseInt( vuelta_num_tinta_especial ) <= 0 ) {
-            correcto = false;
-            alert('Es necesario que exista al menos tinta especial en la vuelta');
-            document.forms['tipo_trabajo_detalle'].elements['vuelta_num_tinta_especial'].focus();
-        }
+   
+    // valida que informacion de frente num tinta especial
+    if ( correcto 
+    		&& frente_num_tinta_especial == "" ) {
+    	correcto = false;
+    	alert("El numero de frente tinta especial debe ser cero");
+    	document.forms["tipo_trabajo_detalle"].elements["frente_num_tinta_especial"].focus();
     }
-    */
-    
-    // valida en frente si la tinta especial es mayor a cero, exista obligatoriamente una descripcion.
-    if( correcto && (frente_num_tinta_especial == "" || parseInt( frente_num_tinta_especial ) < 0 || ( parseInt( frente_num_tinta_especial ) > 0 && frente_descripcion_tinta_especial == "" ) ) ) {
-        correcto = false;
-        alert("Es necesario que la cantidad de tinta sea mayor a cero, o especificar la desrcipci\u00f3n de la tinta especial en el frente");
-        document.forms["tipo_trabajo_detalle"].elements["frente_descripcion_tinta_especial"].focus();
+    if ( correcto 
+    		&& frente_num_tinta_especial != ""
+    		&& isNaN( frente_num_tinta_especial ) ) {
+    	correcto = false;
+    	alert("El dato de frente tinta especial debe ser un numero");
+    	document.forms["tipo_trabajo_detalle"].elements["frente_num_tinta_especial"].focus();
+    }
+    if ( correcto 
+    		&& parseInt( frente_num_tinta_especial ) > 0 
+    		&& frente_descripcion_tinta_especial == "" ) {
+    	correcto = false;
+    	alert("El numero de frente tinta especial es mayor a cero; debe especificar la descripcion de frente tinta especial");
+    	document.forms["tipo_trabajo_detalle"].elements["frente_descripcion_tinta_especial"].focus();
+    }
+    if ( correcto
+    		&& frente_descripcion_tinta_especial != "" 
+    		&& ( parseInt( frente_num_tinta_especial ) == 0 
+    				|| parseInt( frente_num_tinta_especial ) < 0 ) ) {
+    	correcto = false;
+    	alert("Tiene especificada una descripcion de frente tinta especial; debe especificar que frente tinta especial es al menos 1");
+    	document.forms["tipo_trabajo_detalle"].elements["frente_num_tinta_especial"].focus();
     }
     
-    // valida en vuelta si la tinta especial es mayor a cero, exista obligatoriamente una descripcion.
-    if( correcto && (vuelta_num_tinta_especial == "" || parseInt( vuelta_num_tinta_especial ) < 0 || ( parseInt( vuelta_num_tinta_especial ) > 0 && vuelta_descripcion_tinta_especial == "" ) ) ) {
-        correcto = false;
-        alert("Es necesario que la cantidad de tinta sea mayor a cero, o especificar la desrcipci\u00f3n de la tinta especial en la vuelta");
-        document.forms["tipo_trabajo_detalle"].elements["vuelta_descripcion_tinta_especial"].focus();
+    // valida que informacion de vuelta num tinta especial
+    if ( correcto 
+    		&& vuelta_num_tinta_especial == "" ) {
+    	correcto = false;
+    	alert("El numero de vuelta tinta especial debe ser cero");
+    	document.forms["tipo_trabajo_detalle"].elements["vuelta_num_tinta_especial"].focus();
     }
+    if ( correcto 
+    		&& vuelta_num_tinta_especial != ""
+    		&& isNaN( vuelta_num_tinta_especial ) ) {
+    	correcto = false;
+    	alert("El dato de vuelta tinta especial debe ser un numero");
+    	document.forms["tipo_trabajo_detalle"].elements["vuelta_num_tinta_especial"].focus();
+    }
+    if ( correcto 
+    		&& parseInt( vuelta_num_tinta_especial ) > 0 
+    		&& vuelta_descripcion_tinta_especial == "" ) {
+    	correcto = false;
+    	alert("El numero de vuelta tinta especial es mayor a cero; debe especificar la descripcion de vuelta tinta especial");
+    	document.forms["tipo_trabajo_detalle"].elements["vuelta_descripcion_tinta_especial"].focus();
+    }
+    if ( correcto
+    		&& vuelta_descripcion_tinta_especial != "" 
+    		&& ( parseInt( vuelta_num_tinta_especial ) == 0 || parseInt( vuelta_num_tinta_especial ) < 0 ) ) {
+    	correcto = false;
+    	alert("Tiene especificada una descripcion de vuelta tinta especial; debe especificar que vuelta tinta especial es al menos 1");
+    	document.forms["tipo_trabajo_detalle"].elements["vuelta_num_tinta_especial"].focus();
+    }
+    
     
     if( correcto ) {
         document.body.style.cursor = "wait";
@@ -575,19 +668,29 @@ function ajaxAgregaCostoExtraDetalle() {
 	// VALIDACIONES
 	var correcto = true;
 	
-	if( document.forms["costo_extra_detalle"].elements["cantidad"].value == "" ) {
+	if( correcto 
+			&& document.forms["costo_extra_detalle"].elements["cantidad"].value == "" ) {
 		correcto = false;
 		alert("Es necesario especificar la cantidad de costo extra");
 		document.forms["costo_extra_detalle"].elements["cantidad"].focus();
 	}
 	
-	if( correcto && document.forms["costo_extra_detalle"].elements["select_costo_extra"].selectedIndex == "-1" ) {
+	if ( correcto 
+			&& isNaN(document.forms["costo_extra_detalle"].elements["cantidad"].value) ) {
+		correcto = false;
+		alert("La cantidad de costo extra debe ser un n\u00FAmero entero");
+		document.forms["costo_extra_detalle"].elements["cantidad"].focus();
+	}
+	
+	if( correcto 
+			&& document.forms["costo_extra_detalle"].elements["select_costo_extra"].selectedIndex == "-1" ) {
 		correcto = false;
 		alert("Es necesario especificar el costo extra");
 		document.forms["costo_extra_detalle"].elements["select_costo_extra"].focus();
 	}
 	
-	if( correcto && document.forms["costo_extra_detalle"].elements["select_responsable_insumo"].selectedIndex == "-1" ) {
+	if( correcto 
+			&& document.forms["costo_extra_detalle"].elements["select_responsable_insumo"].selectedIndex == "-1" ) {
 		correcto = false;
 		alert("Es necesario especificar el responsable del insumo");
 		document.forms["costo_extra_detalle"].elements["select_costo_extra"].focus();
@@ -674,7 +777,8 @@ function ajaxAgregaDisenio() {
     var correcto = true;
     
     // indicacion no este vacia
-    if( indicacion_tarea == "" ) {
+    if( correcto 
+    		&& indicacion_tarea == "" ) {
         correcto = false;
         alert("Es necesario especificar las indicaciones");
         document.forms["disenio"].elements["indicacion_tarea_realizar"].focus();
@@ -740,28 +844,38 @@ function ajaxAgregaDisenioDetalle() {
     var correcto = true;
     
     // esta seleccionado alguna opcion del select
-    if( document.forms["disenio_detalle"].elements["select_proceso_disenio"].selectedIndex == "-1" ) {
+    if( correcto 
+    		&& document.forms["disenio_detalle"].elements["select_proceso_disenio"].selectedIndex == "-1" ) {
         correcto = false;
         alert("Es necesario especificar el tipo detalle del dise\u00f1o");
         document.forms["disenio_detalle"].elements["select_proceso_disenio"].focus();
     }
     
     // se especifica la cantidad y debe ser mayor a cero
-    if( correcto && ( cantidad == "" || parseInt( cantidad ) <= 0 )  ) {
+    if( correcto 
+    		&& ( cantidad == "" || isNaN(cantidad) || parseInt( cantidad ) <= 0 )  ) {
         correcto = false;
         alert("Es necesario especificar la cantidad mayor a cero");
         document.forms["disenio_detalle"].elements["cantidad"].focus();
     }
     
     // se dan las especificaciones del trabajo
-    if( correcto && especificaciones == "" ) {
+    if( correcto 
+    		&& especificaciones == "" ) {
         correcto = false;
         alert("Es necesario dar alguna especificaci\u00f3n");
         document.forms["disenio_detalle"].elements["especificaciones"].focus();
     }
     
     // valida que sea obligatorio el campo y ademas numero flotante
-    if( correcto && !$.isNumeric( precio_total_pesos ) ) {
+    if ( correcto 
+    		&& isNaN(precio_total_pesos) ) {
+    	correcto = false;
+        alert("Es necesario un numero correcto en precio");
+        document.forms["disenio_detalle"].elements["precio_total_pesos"].focus();
+    }
+    if( correcto 
+    		&& ( !$.isNumeric( precio_total_pesos ) || isNaN(precio_total_pesos) ) ) {
         correcto = false;
         alert("Es necesario un numero correcto en precio");
         document.forms["disenio_detalle"].elements["precio_total_pesos"].focus();
@@ -822,7 +936,8 @@ function ajaxAgregaPreprensa() {
     // VALIDACIONES
     var correcto = true;
     
-    if( indicacion_tarea == "" ) {
+    if( correcto
+    		&& indicacion_tarea == "" ) {
         correcto = false;
         alert("Es necesario especificar las indicaciones");
         document.forms["preprensa"].elements["indicacion_tarea_realizar"].focus();
@@ -888,30 +1003,40 @@ function ajaxAgregaPreprensaDetalle() {
     var correcto = true;
     
     // esta seleccionado alguna opcion del select
-    if( document.forms["preprensa_detalle"].elements["select_proceso_preprensa"].selectedIndex == "-1" ) {
+    if( correcto
+    		&& document.forms["preprensa_detalle"].elements["select_proceso_preprensa"].selectedIndex == "-1" ) {
         correcto = false;
         alert("Es necesario especificar el tipo detalle de preprensa");
         document.forms["preprensa_detalle"].elements["select_proceso_preprensa"].focus();
     }
     
     // se especifica la cantidad y debe ser mayor a cero
-    if( correcto && ( cantidad == "" || parseInt( cantidad ) <= 0 )  ) {
+    if ( correcto 
+    		&& isNaN(cantidad) ) {
+    	correcto = false;
+        alert("Es necesario especificar un n\u00FAmero correcto en cantidad");
+        document.forms["preprensa_detalle"].elements["cantidad"].focus();
+    }
+    if( correcto 
+    		&& ( cantidad == "" || isNaN(cantidad) || parseInt( cantidad ) <= 0 ) ) {
         correcto = false;
         alert("Es necesario especificar la cantidad mayor a cero");
         document.forms["preprensa_detalle"].elements["cantidad"].focus();
     }
     
     // se dan las especificaciones del trabajo
-    if( correcto && especificaciones == "" ) {
+    if( correcto 
+    		&& especificaciones == "" ) {
         correcto = false;
         alert("Es necesario dar alguna especificaci\u00f3n");
         document.forms["preprensa_detalle"].elements["especificaciones"].focus();
     }
     
     // valida que sea obligatorio el campo y ademas numero flotante
-    if( correcto && !$.isNumeric( precio_total_pesos ) ) {
+    if( correcto 
+    		&& ( !$.isNumeric( precio_total_pesos || isNaN(precio_total_pesos ) ) ) ) {
         correcto = false;
-        alert("Es necesario un numero correcto en precio");
+        alert("Es necesario un n\u00FAmero correcto en precio");
         document.forms["preprensa_detalle"].elements["precio_total_pesos"].focus();
     }
     
@@ -957,6 +1082,7 @@ function ajaxAgregaPreprensaDetalle() {
     
     delete cantidad;
     delete especificaciones;
+    delete precio_total_pesos;
     delete correcto;
 } // ajaxAgregaDisenioDetalle()
 
@@ -969,7 +1095,8 @@ function ajaxAgregaTransporte() {
     // VALIDACIONES
     var correcto = true;
     
-    if( indicacion_tarea == "" ) {
+    if( correcto 
+    		&& indicacion_tarea == "" ) {
         correcto = false;
         alert("Es necesario especificar las indicaciones");
         document.forms["transporte"].elements["indicacion_tarea_realizar"].focus();
@@ -1035,28 +1162,32 @@ function ajaxAgregaTransporteDetalle() {
     var correcto = true;
     
     // esta seleccionado alguna opcion del select
-    if( document.forms["transporte_detalle"].elements["select_proceso_transporte"].selectedIndex == "-1" ) {
+    if( correcto 
+    		&& document.forms["transporte_detalle"].elements["select_proceso_transporte"].selectedIndex == "-1" ) {
         correcto = false;
         alert("Es necesario especificar el tipo detalle del transporte");
         document.forms["transporte_detalle"].elements["select_proceso_transporte"].focus();
     }
     
     // se especifica la cantidad y debe ser mayor a cero
-    if( correcto && ( cantidad == "" || parseInt( cantidad ) <= 0 ) ) {
+    if( correcto 
+    		&& ( cantidad == "" || isNaN(cantidad) || parseInt( cantidad ) <= 0 ) ) {
         correcto = false;
         alert("Es necesario especificar la cantidad mayor a cero");
         document.forms["transporte_detalle"].elements["cantidad"].focus();
     }
     
     // se dan las especifiaciones del trabajo
-    if( correcto && especificaciones == "" ) {
+    if( correcto 
+    		&& especificaciones == "" ) {
         correcto = false;
         alert("Es necesario dar alguna especificaci\u00f3n");
         document.forms["transporte_detalle"].elements["especificaciones"].focus();
     }
     
     // valida que sea obligatorio el campo y ademas numero flotante
-    if( correcto && !$.isNumeric( precio_total_pesos ) ) {
+    if( correcto 
+    		&& ( !$.isNumeric( precio_total_pesos || isNaN(precio_total_pesos)) ) ) {
         correcto = false;
         alert("Es necesario un numero correcto en precio");
         document.forms["transporte_detalle"].elements["precio_total_pesos"].focus();
@@ -1104,6 +1235,7 @@ function ajaxAgregaTransporteDetalle() {
     
     delete cantidad;
     delete especificaciones;
+    delete precio_total_pesos;
     delete correcto;
 } // ajaxAgregaDetalleTransporte()
 
@@ -1182,28 +1314,32 @@ function ajaxAgregaAcabadoDetalle() {
     var correcto = true;
     
     // esta seleccionado alguna opcion del select
-    if( document.forms["acabado_detalle"].elements["select_proceso_externo"].selectedIndex == "-1" ) {
+    if( correcto
+    		&& document.forms["acabado_detalle"].elements["select_proceso_externo"].selectedIndex == "-1" ) {
         correcto = false;
         alert("Es necesario especificar el tipo detalle del acabado");
         document.forms["acabado_detalle"].elements["select_proceso_acabado"].focus();
     }
     
     // se especifica la cantidad y debe ser mayor a cero
-    if( correcto && ( cantidad == "" || parseInt( cantidad ) <= 0 ) ) {
+    if( correcto 
+    		&& ( cantidad == "" || isNaN(cantidad) || parseInt( cantidad ) <= 0 ) ) {
         correcto = false;
         alert("Es necesario especificar la cantidad mayor a cero");
         document.forms["acabado_detalle"].elements["cantidad_proceso_externo"].focus();
     }
     
     // se dan las especifiaciones del trabajo
-    if( correcto && especificaciones == "" ) {
+    if( correcto 
+    		&& especificaciones == "" ) {
         correcto = false;
         alert("Es necesario dar alguna especificaci\u00f3n");
         document.forms["acabado_detalle"].elements["especificaciones"].focus();
     }
     
     // valida que sea obligatorio el campo y ademas numero flotante
-    if( correcto && !$.isNumeric( precio_total_pesos ) ) {
+    if( correcto 
+    		&& ( !$.isNumeric( precio_total_pesos || isNaN(precio_total_pesos) ) ) ){
         correcto = false;
         alert("Es necesario un numero correcto en precio");
         document.forms["acabado_detalle"].elements["precio_total_pesos"].focus();
@@ -1251,6 +1387,7 @@ function ajaxAgregaAcabadoDetalle() {
     
     delete cantidad;
     delete especificaciones;
+    delete precio_total_pesos;
     delete correcto;
 } // ajaxAgregaAcabadoDetalle()
 
@@ -1321,19 +1458,22 @@ function ajaxAgregaMaterialAyuda() {
     // VALIDACIONES
     var correcto = true;
     
-    if( document.forms["material_ayuda"].elements["select_material_ayuda"].selectedIndex == "-1" ) {
+    if( correcto 
+    		&& document.forms["material_ayuda"].elements["select_material_ayuda"].selectedIndex == "-1" ) {
         correcto = false;
         alert("Es necesario especificar el tipo de material de ayuda");
         document.forms["material_ayuda"].elements["select_material_ayuda"].focus();
     }
     
-    if( correcto && document.forms["material_ayuda"].elements["select_responsable_insumo"].selectedIndex == "-1" ) {
+    if( correcto 
+    		&& document.forms["material_ayuda"].elements["select_responsable_insumo"].selectedIndex == "-1" ) {
         correcto = false;
         alert("Es necesario especificar el responsable del material de ayuda");
         document.forms["material_ayuda"].elements["select_responsable_insumo"].focus();
     }
     
-    if( correcto && observaciones == "" ) {
+    if( correcto 
+    		&& observaciones == "" ) {
         correcto = false;
         alert("Es necesario especificar las observaciones del material de ayuda");
         document.forms["material_ayuda"].elements["observaciones"].focus();

@@ -29,7 +29,7 @@ function activaCamposFormPartida() {
 	var clave 	= document.partida.forma_trabajo.value;
 	var select 	= document.partida.select_forma_trabajo;
 	for(var i=0; i < select.length; i++) {
-		if( select.options[i].innerText == clave ) {
+		if( select.options[i].text == clave ) {
 			index = i;
 			break;
 		}
@@ -105,7 +105,8 @@ function aceptaModificarPartida() {
 	
 	var correcto = true;
 	
-	if( document.partida.cantidad.value == "" ) {
+	if( document.partida.cantidad.value == ""
+		|| isNaN(document.partida.cantidad.value)) {
 		correcto = false;
 		alert("Favor de informar el campo cantidad");
 	}
@@ -148,6 +149,8 @@ function aceptaModificarPartida() {
 						// oculta divs
 						document.getElementById("div_tipo_trabajo_detalle").style.display = "none";
 						document.getElementById("div_visualizador_pliegos").style.display = "none";
+						document.getElementById("div_visualizador_costo_extra_detalle").style.display = "none";
+						document.getElementById("div_costo_extra_detalle").style.display = "none";
 						document.getElementById("div_pestania").style.display = "none";
 						document.getElementById("div_material_ayuda").style.display = "none";
 						break;

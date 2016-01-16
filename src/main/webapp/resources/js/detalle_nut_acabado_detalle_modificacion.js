@@ -50,12 +50,14 @@ function aceptaModificarAcabadoDetalle() {
 	
 	var correcto = true;
 	
-	if( document.acabado_detalle.cantidad_proceso_externo.value == "" ) {
+	if( document.acabado_detalle.cantidad_proceso_externo.value == ""
+			|| isNaN(document.acabado_detalle.cantidad_proceso_externo.value) ) {
 		correcto = false;
 		alert("Favor de informar el campo Cantidad");
 	}
 	
-	if( document.acabado_detalle.precio_total_pesos.value == "" ) {
+	if( document.acabado_detalle.precio_total_pesos.value == ""
+			|| isNaN(document.acabado_detalle.precio_total_pesos.value) ) {
 		correcto = false;
 		alert("Favor de informar el campo precio");
 	}

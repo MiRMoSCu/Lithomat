@@ -10,6 +10,7 @@
 		<link rel="stylesheet" href="<c:url value="/resources/css/master.css"/>" type="text/css"></link>
 		<link rel="stylesheet" href="<c:url value="/resources/css/index.css"/>" type="text/css"></link>
 		<script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
+		<script type="text/javascript" src="<c:url value="/resources/js/utilidades.js"/>"></script>
 		<script type="text/javascript" src="<c:url value="/resources/js/login.js"/>"></script>
 	</head>
 	<body>
@@ -38,8 +39,11 @@
 						</div>
 						<div id="div_contenedor_input_contrasenia">
 							<div id="div_input_contrasenia">
-								<input type="text" name="contrasenia" value="Contraseña"
-									onblur="javascript:revisaContrasenia(this);">
+								<input 	type="text" 
+										name="contrasenia" 
+										value="Contraseña"
+										onkeydown="aceptaIntro(event,'enviaFormulario',null)"
+										onblur="javascript:revisaContrasenia(this);">
 							</div>
 						</div>
 						<div id="div_imagen_contrasenia">
@@ -55,7 +59,7 @@
 						<div id="div_boton_enviar">
 							<img name="boton_inicio_sesion" alt=".."
 								src="<c:url value="/resources/image/boton_inicio_sesion.png"/>"
-								style="cursor: pointer;" onclick="javascript:enviaFormulario();">
+								style="cursor: pointer;" onclick="enviaFormulario();">
 						</div>
 					</div>
 				</div>

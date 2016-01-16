@@ -45,7 +45,6 @@ public class PliegoController {
 		// envia datos del combo select
 		List<ComboSelect> listaTipoVuelta = tipoVueltaService.listaComboSelect();
 		List<Pliego> listaPliego = pliegoService.calculaListaPliegos(idTipoTrabajoDetalle);
-
 		// envia id_tipo_trabajo_detalle para que se imprimr en jsp
 		model.addAttribute("id_tipo_trabajo_detalle", idTipoTrabajoDetalle);
 		model.addAttribute("listaTipoVuelta", listaTipoVuelta);
@@ -102,6 +101,7 @@ public class PliegoController {
 			JSONArray array = (JSONArray)obj;
 			for ( int i = 0; i < array.size(); i++ ) {
 				//System.out.println(array.get(i));
+				// dentro de la funcion se activa pliego y calificacion_pliego
 				pliegoService.activaPliego( Integer.parseInt( array.get(i).toString() ) );
 			}
 			jsonResponse.setEstatusOperacion(1);

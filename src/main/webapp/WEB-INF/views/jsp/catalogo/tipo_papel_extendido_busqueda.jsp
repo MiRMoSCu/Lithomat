@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="<c:url value="/resources/css/font.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/tipo_papel_extendido_busqueda.css"/>" type="text/css"></link>
 		<script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
+		<script type="text/javascript" src="<c:url value="/resources/js/utilidades.js"/>"></script>
 		<script type="text/javascript" src="<c:url value="/resources/js/tipo_papel_extendido_busqueda.js"/>"></script>
 		<script type="text/javascript">
 			var urlBusca = "${urlBusca}";
@@ -122,7 +123,11 @@
 															<span style="cursor:pointer;" onclick="document.tipo_trabajo_detalle.chkbx_busca_por_nombre.click()">Nombre:</span>
 														</td>
 														<td>
-															<input type="text" class="input" name="nombre" value=""/>
+															<input 	type="text" 
+																	class="input" 
+																	name="nombre"
+																	onkeydown="aceptaIntro(event, 'busca', null)" 
+																	value=""/>
 														</td>
 													</tr>
 												</table>
@@ -132,12 +137,16 @@
 											<div class="mitad_columna_izquierda">
 												<table>
 													<tr>
-														<td width="27%">
+														<td width="28%">
 															<input type="checkbox" name="chkbx_busca_por_alto"/>
 															<span style="cursor:pointer;" onclick="document.tipo_trabajo_detalle.chkbx_busca_por_alto.click()">Alto:</span>
 														</td>
 														<td>
-															<input type="text" class="input" name="alto" value="" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+															<input 	type="text" 
+																	class="input" 
+																	name="alto" 
+																	value="" 
+																	onkeydown="revisaNumero(false, this.value, event, 'busca', null)"/>
 														</td>
 													</tr>
 												</table>
@@ -150,7 +159,11 @@
 															<span style="cursor:pointer;" onclick="document.tipo_trabajo_detalle.chkbx_busca_por_ancho.click()">Ancho:</span>
 														</td>
 														<td>
-															<input type="text" class="input" name="ancho" value="" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+															<input 	type="text" 
+																	class="input" 
+																	name="ancho" 
+																	value="" 
+																	onkeydown="revisaNumero(false, this.value, event, 'busca', null)"/>
 														</td>
 													</tr>
 												</table>
@@ -169,7 +182,11 @@
 															<span style="cursor:pointer;" onclick="document.tipo_trabajo_detalle.chkbx_busca_por_gramaje.click()">Gramaje:</span>
 														</td>
 														<td>
-															<input type="text" class="input" name="gramaje" value="" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
+															<input 	type="text" 
+																	class="input" 
+																	name="gramaje" 
+																	value="" 
+																	onkeydown="revisaNumero(false, this.value, event, 'busca', null)"/>
 														</td>
 													</tr>
 												</table>
@@ -177,12 +194,16 @@
 											<div class="mitad_columna_derecha">
 												<table>
 													<tr>
-														<td width="50%">
+														<td width="51%">
 															<input type="checkbox" name="chkbx_busca_por_kilogramos"/>
 															<span style="cursor:pointer;" onclick="document.tipo_trabajo_detalle.chkbx_busca_por_kilogramos.click()">Kilogramos:</span>
 														</td>
 														<td>
-															<input type="text" class="input" name="kilogramos" value="" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+															<input 	type="text" 
+																	class="input" 
+																	name="kilogramos" 
+																	value="" 
+																	onkeydown="revisaNumero(true, this.value, event, 'busca', null)"/>
 														</td>
 													</tr>
 												</table>

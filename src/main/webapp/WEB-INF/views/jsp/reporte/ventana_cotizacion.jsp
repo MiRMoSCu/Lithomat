@@ -13,6 +13,7 @@
 		<link rel="stylesheet" href="<c:url value="/resources/css/master.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/font.css"/>" type="text/css"></link>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/utilidades.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/ventana_cotizacion.js"/>"></script>
         <script type="text/javascript">
 			// inicializacion jquery
@@ -46,7 +47,7 @@
 	                        								class="input"
 	                        								name="nut"
 	                        								maxlength="10"
-	                        								onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
+	                        								onkeydown="revisaNumero(false, this.value, event, 'ajaxBuscaCliente', null)"
 	                        								value=""/>
 	                        					</td>
 	                        				</tr>

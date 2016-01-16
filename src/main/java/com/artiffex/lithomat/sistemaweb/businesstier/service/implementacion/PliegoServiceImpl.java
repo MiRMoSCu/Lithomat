@@ -12,6 +12,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionPliego;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.PapelSobrante;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Pliego;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TamanioPublicacion;
@@ -22,6 +23,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PapelSobra
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PliegoService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TamanioPublicacionService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoTrabajoDetalleService;
+import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CalificacionPliegoDAO;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.PliegoDAO;
 
 @Service("pliegoService")
@@ -33,6 +35,8 @@ public class PliegoServiceImpl implements PliegoService {
 
 	@Resource
 	private PliegoDAO pliegoDAO;
+	@Resource
+	private CalificacionPliegoDAO calificacionPliegoDAO;
 	
 	@Resource
 	private PapelSobranteService papelSobranteService;
@@ -186,6 +190,7 @@ public class PliegoServiceImpl implements PliegoService {
 		try {
 			Object obj 					= parser.parse(json);
 			JSONObject jsonObject 		= (JSONObject) obj;
+			System.out.println("jsonObject: " + jsonObject);
 			JSONArray arreglo 			= (JSONArray) jsonObject.get("pliegos");
 			@SuppressWarnings("unchecked")
 			Iterator<Object> iterator 	= arreglo.iterator();
@@ -193,6 +198,7 @@ public class PliegoServiceImpl implements PliegoService {
 			while (iterator.hasNext()) {
 
 				JSONObject jsonObject_2 = (JSONObject) iterator.next();
+				
 				// System.out.println(
 				// jsonObject_2.get("hojas_requeridas").toString() ); //
 				// System.out.println(
@@ -305,14 +311,13 @@ public class PliegoServiceImpl implements PliegoService {
 				pliegoInsert.setTipoVuelta(tipoVuelta);
 				pliegoInsert.setNumeroDecimal(Float.parseFloat(jsonObject_2.get("numero_decimal").toString()));
 				pliegoInsert.setActivo(true);
-
+				
 				pliegoDAO.crea(pliegoInsert);
 
 				tipoTrabajoDetalle 	= null;
 				pliegoInsert 		= null;
 				jsonObject_2 		= null;
 			}
-
 			iterator = null;
 			arreglo = null;
 			jsonObject = null;
@@ -321,7 +326,6 @@ public class PliegoServiceImpl implements PliegoService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		parser = null;
 		
 		return 1;
@@ -547,18 +551,31 @@ public class PliegoServiceImpl implements PliegoService {
 		List<Pliego> listaPliego = pliegoDAO.listaPorTipoTrabajoDetalle(idTipoTrabajoDetalle);
 		for (Pliego pliego : listaPliego) {
 			listaIdPliegoEliminado.add(pliego.getIdPliego());
+			// eliminacion logica del pliego
 			pliego.setActivo(false);
 			pliegoDAO.modifica(pliego);
-			pliego = null;
+			// eliminacion logica de calificacion_pliego
+			CalificacionPliego calificacionPliego = calificacionPliegoDAO.buscaPorPliego(pliego.getIdPliego());
+			calificacionPliego.setActivo(false);
+			calificacionPliegoDAO.modifica(calificacionPliego);
+			calificacionPliego 	= null;
+			pliego 				= null;
 		}
 		listaPliego = null;
 		return listaIdPliegoEliminado;
 	}
 
 	public void activaPliego(int idPliego) {
+		// activa pliego
 		Pliego pliego = pliegoDAO.busca(idPliego);
 		pliego.setActivo(true);
 		pliegoDAO.modifica(pliego);
+		pliego = null;
+		// activa calificacion_pliego
+		CalificacionPliego calificacionPliego = calificacionPliegoDAO.buscaPorPliego(idPliego);
+		calificacionPliego.setActivo(true);
+		calificacionPliegoDAO.modifica(calificacionPliego);
+		calificacionPliego = null;
 	}
 
 	public int cuentaPliegosPorTipoTrabajoDetalle(int idTipoTrabajoDetalle) {

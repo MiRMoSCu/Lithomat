@@ -49,6 +49,7 @@
         <link rel="stylesheet" href="<c:url value="/resources/css/catalogo_cliente.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/paginador.css"/>" type="text/css"></link>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/utilidades.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/paginador.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/cliente.js"/>"></script>
         <script type="text/javascript">
@@ -182,7 +183,7 @@
 		                                			<div class="columna_completa">
 		                                				<table>
 		                                					<tr>
-		                                						<td width="19%">
+		                                						<td width="20%">
 		                                							<input type="checkbox" name="chkbx_busca_por_nombre_moral"/>
 		                                							<span style="cursor:pointer;" onclick="document.busqueda_cliente.chkbx_busca_por_nombre_moral.click()">Nombre:</span>
 		                                						</td>
@@ -233,7 +234,7 @@
 	                                				<div class="columna_completa">
 	                                					<table>
 	                                						<tr>
-	                                							<td width="29%">
+	                                							<td width="30%">
 	                                								<input type="checkbox" name="chkbx_busca_por_nombre_representante"/>
 		                                							<span style="cursor:pointer;" onclick="document.busqueda_cliente.chkbx_busca_por_nombre_representante.click()">Representante:</span>
 	                                							</td>

@@ -52,7 +52,16 @@ function modificaRegistro() {
         correcto = false;
     }
     
-    if( document.forms["pliego"].elements["hojas_totales"].value == "NaN" ) {
+    if ( correcto 
+    		&& document.forms["pliego"].elements["hojas_sobrantes"].value == "" 
+    			|| isNaN(document.forms["pliego"].elements["hojas_sobrantes"].value) ) {
+    	correcto = false;
+        alert("La cantidad de hojas sobrantes es incorrecta. Favor de corregir.");
+    }
+    
+    if( correcto 
+    		&& (document.forms["pliego"].elements["hojas_totales"].value == "NaN"
+    			|| isNaN(document.forms["pliego"].elements["hojas_totales"].value) ) ) {
         correcto = false;
         alert("La sumatoria de hojas requeridas y hojas sobrantes es incorrecta. Favor de corregir.");
     }
@@ -65,7 +74,7 @@ function modificaRegistro() {
         var mismos_sobrantes		= document.forms[0].elements["mismos_sobrantes"].checked == true ? true : false;
         var observaciones           = document.forms[0].elements["observaciones"].value;
         var vuelta_mismas_placas    = document.forms[0].elements["mismas_placas"].checked == true ? true : false;
-        var tipo_vuelta             = document.forms[0].elements["tipo_vuelta"].options[ document.forms[0].elements["tipo_vuelta"].selectedIndex ].innerText;
+        var tipo_vuelta             = document.forms[0].elements["tipo_vuelta"].options[ document.forms[0].elements["tipo_vuelta"].selectedIndex ].text;
 
         var tableDOM = document.getElementById("tabla_hojas_pliego");
         var hojas_sobrantes_original;
@@ -143,37 +152,32 @@ function agregaRegistro() {
     var listaObject = new ListaObject();
     var tableDOM    = document.getElementById("tabla_hojas_pliego");
     
-    for( var i = 1; i < tableDOM.rows.length; i++ ) { // i=0 es el encabezado de la tabla
-        
+    for( var i=1; i<tableDOM.rows.length; i++ ) { // i=0 es el encabezado de la tabla
         var pliego = new Pliego();
-        
         pliego.id_pliego            = tableDOM.rows[i].cells[0].innerHTML;
         pliego.hojas_requeridas     = tableDOM.rows[i].cells[1].innerHTML;
         pliego.hojas_sobrantes      = tableDOM.rows[i].cells[2].innerHTML;
         pliego.hojas_totales        = tableDOM.rows[i].cells[3].innerHTML;
         pliego.observaciones        = tableDOM.rows[i].cells[4].innerHTML;
         pliego.vuelta_mismas_placas = tableDOM.rows[i].cells[5].innerHTML.trim() == "Si" ? true : false ;
-        for( var j = 0; j < document.forms[0].tipo_vuelta.length; j++ ) {
-            if( tableDOM.rows[i].cells[6].innerHTML == document.forms[0].tipo_vuelta.options[j].innerText ) {
+        for( var j=0; j<document.forms[0].tipo_vuelta.length; j++ ) {
+            if( tableDOM.rows[i].cells[6].innerHTML == document.forms[0].tipo_vuelta.options[j].text ) {
                 pliego.id_tipo_vuelta = document.forms[0].tipo_vuelta.options[j].value;
                 break;
             }
         }
         pliego.numero_decimal		= tableDOM.rows[i].cells[7].innerHTML;
-        
         listaObject.pliegos.push( pliego );
         delete pliego;
     }
-    
+    //console.log( listaObject );
+    //console.log( JSON.stringify( listaObject ) );
     document.forms["pliego"].elements["json"].value = JSON.stringify( listaObject );
     document.forms["pliego"].action = urlAgregaPliego;
-    
     // cambia cursor
     document.body.style.cursor = "wait";
-    
     delete listaObject;
     delete tableDOM;
-    
     document.forms["pliego"].submit();
 }
 

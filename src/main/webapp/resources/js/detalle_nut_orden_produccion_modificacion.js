@@ -23,7 +23,7 @@ function activaCamposFormOrdenProduccion() {
 	var clave	= document.orden_produccion.comprobante_fiscal.value;
 	var select 	= document.orden_produccion.select_comprobante_fiscal;
 	for( var i=0; i < select.length; i++ ) {
-		if( select.options[i].innerText == clave ) {
+		if( select.options[i].text == clave ) {
 			index = i;
 			break;
 		}

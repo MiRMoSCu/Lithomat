@@ -123,7 +123,7 @@ function activaCamposFormTipoTrabajoDetalle() {
 	var clave	= document.tipo_trabajo_detalle.tipo_papel.value;
 	var select 	= document.tipo_trabajo_detalle.select_tipo_papel_extendido;
 	for( var i=0; i<select.length; i++ ) {
-		if( select.options[i].innerText == clave ) {
+		if( select.options[i].text == clave ) {
 			select.selectedIndex	= i;
 			break;
 		}
@@ -133,7 +133,7 @@ function activaCamposFormTipoTrabajoDetalle() {
 	clave	= document.tipo_trabajo_detalle.tamanio_pubicacion.value;
 	select 	= document.tipo_trabajo_detalle.select_tamanio_publicacion;
 	for( var i=0; i<select.length; i++ ) {
-		if( select.options[i].innerText == clave ) {
+		if( select.options[i].text == clave ) {
 			select.selectedIndex	= i;
 			break;
 		}
@@ -143,7 +143,7 @@ function activaCamposFormTipoTrabajoDetalle() {
 	clave	= document.tipo_trabajo_detalle.frente_combinacion_tintas.value;
 	select 	= document.tipo_trabajo_detalle.select_frente_combinacion_tintas;
 	for( var i=0; i<select.length; i++ ) {
-		if( select.options[i].innerText == clave ) {
+		if( select.options[i].text == clave ) {
 			select.selectedIndex	= i;
 			break;
 		}
@@ -153,7 +153,7 @@ function activaCamposFormTipoTrabajoDetalle() {
 	clave	= document.tipo_trabajo_detalle.frente_tipo_barniz.value;
 	select 	= document.tipo_trabajo_detalle.select_frente_tipo_barniz;
 	for( var i=0; i<select.length; i++ ) {
-		if( select.options[i].innerText == clave ) {
+		if( select.options[i].text == clave ) {
 			select.selectedIndex	= i;
 			break;
 		}
@@ -163,7 +163,7 @@ function activaCamposFormTipoTrabajoDetalle() {
 	clave	= document.tipo_trabajo_detalle.vuelta_combinacion_tintas.value;
 	select 	= document.tipo_trabajo_detalle.select_vuelta_combinacion_tintas;
 	for( var i=0; i<select.length; i++ ) {
-		if( select.options[i].innerText == clave ) {
+		if( select.options[i].text == clave ) {
 			select.selectedIndex	= i;
 			break;
 		}
@@ -173,7 +173,7 @@ function activaCamposFormTipoTrabajoDetalle() {
 	clave	= document.tipo_trabajo_detalle.vuelta_tipo_barniz.value;
 	select 	= document.tipo_trabajo_detalle.select_vuelta_tipo_barniz;
 	for( var i=0; i<select.length; i++ ) {
-		if( select.options[i].innerText == clave ) {
+		if( select.options[i].text == clave ) {
 			select.selectedIndex	= i;
 			break;
 		}
@@ -183,7 +183,7 @@ function activaCamposFormTipoTrabajoDetalle() {
 	clave	= document.tipo_trabajo_detalle.maquina.value;
 	select 	= document.tipo_trabajo_detalle.select_maquina;
 	for( var i=0; i<select.length; i++ ) {
-		if( select.options[i].innerText == clave ) {
+		if( select.options[i].text == clave ) {
 			select.selectedIndex	= i;
 			break;
 		}
@@ -197,7 +197,7 @@ function activaCamposFormTipoTrabajoDetalle() {
 	select	= document.tipo_trabajo_detalle.select_tipo_placa;
 	var encontroOpcion 	= false;
 	for( var i=0; i<select.length; i++ ) {
-		if( select.options[i].innerText == clave ) {
+		if( select.options[i].text == clave ) {
 			select.selectedIndex	= i;
 			encontroOpcion = true;
 			break;
@@ -212,7 +212,7 @@ function activaCamposFormTipoTrabajoDetalle() {
 	clave 	= document.tipo_trabajo_detalle.tipo_complejidad.value;
 	select 	= document.tipo_trabajo_detalle.select_tipo_complejidad;
 	for( var i=0; i<select.length; i++ ) {
-		if( select.options[i].innerText == clave ) {
+		if( select.options[i].text == clave ) {
 			select.selectedIndex	= i;
 			break;
 		}
@@ -392,32 +392,56 @@ function aceptaModificarTTD() {
 	var correcto = true;
 	
 	// Revisa que ancho y alto no este vacios
-    if( document.tipo_trabajo_detalle.ancho.value == "" 
-    		|| document.tipo_trabajo_detalle.alto.value == "" ) {
-        correcto = false;
-        alert("Los campos descripci\u00f3n, ancho y alto no pueden estar vac\u00edos. Favor de informarlos.");
-    }
+	if( correcto 
+			&& isNaN(document.tipo_trabajo_detalle.alto.value) ) {
+		correcto = false;
+		alert("El campo alto debe ser un numero. Favor de informarlo");
+		document.tipo_trabajo_detalle.alto.value.focus();
+	}
+	if ( correcto
+			&& isNaN(document.tipo_trabajo_detalle.ancho.value ) ) {
+		correcto = false;
+		alert("El campo ancho debe ser un numero. Favor de informarlo");
+		document.tipo_trabajo_detalle.ancho.focus(); 
+	}
+	if ( correcto
+			&& isNaN(document.tipo_trabajo_detalle.alto_extendido.value) ) {
+		correcto = false;
+		alert("El campo alto extendido debe ser un numero. Favor de informarlo");
+		document.tipo_trabajo_detalle.alto_extendido.value.focus();
+	}
+	if ( correcto
+			&& isNaN(document.tipo_trabajo_detalle.ancho_extendido.value ) ) {
+		correcto = false;
+		alert("El campo ancho extendido debe ser un numero. Favor de informarlo");
+		document.tipo_trabajo_detalle.ancho_extendido.focus(); 
+	}
 	
     switch( parseInt( document.partida.tipo_trabajo.value ) ) {
         case 1:
-            if( document.tipo_trabajo_detalle.repeticiones_x_pliego.value == "" 
-            		|| parseInt( document.tipo_trabajo_detalle.repeticiones_x_pliego.value ) <= 0 ) {
+            if( correcto
+            		&& ( document.tipo_trabajo_detalle.repeticiones_x_pliego.value == ""
+            		|| isNaN( document.tipo_trabajo_detalle.repeticiones_x_pliego.value )
+            		|| parseInt( document.tipo_trabajo_detalle.repeticiones_x_pliego.value ) <= 0 ) ) {
                 correcto = false;
                 alert("El n\u00famero de repeticiones deber ser un n\u00famero positivo mayor de cero");
-                document.forms["tipo_trabajo_detalle"].elements["repeticiones_x_pliego"].focus();
+                document.tipo_trabajo_detalle.repeticiones_x_pliego.focus();
             }
             break;
         
         case 2:
-            if( document.tipo_trabajo_detalle.numero_paginas_publicacion.value == "" 
+            if( correcto 
+            		&& ( document.tipo_trabajo_detalle.numero_paginas_publicacion.value == ""
+            		|| isNaN( document.tipo_trabajo_detalle.numero_paginas_publicacion.value )
             		|| parseInt( document.tipo_trabajo_detalle.numero_paginas_publicacion.value ) <= 0 
-            		|| parseInt( document.tipo_trabajo_detalle.numero_paginas_publicacion.value )%4 != 0 ) {
+            		|| parseInt( document.tipo_trabajo_detalle.numero_paginas_publicacion.value )%4 != 0 ) ) {
                 correcto = false;
                 alert("El n\u00famero de p\u00e1ginas deber ser un n\u00famero positivo mayor de cero y multiplo de 4");
-                document.forms["tipo_trabajo_detalle"].elements["numero_paginas_publicacion"].focus();
+                document.tipo_trabajo_detalle.numero_paginas_publicacion.focus();
             }
             
-            if( document.tipo_trabajo_detalle.select_tamanio_publicacion.value == "1" ) {
+            if( correcto
+            		&& document.tipo_trabajo_detalle.select_tamanio_publicacion.value == "1" ) {
                 correcto = false;
                 alert("El tama\u00f1o de la publicaci\u00f3n debe ser especificado");
                 document.forms["tipo_trabajo_detalle"].elements["select_tamanio_publicacion"].focus();
@@ -432,35 +456,48 @@ function aceptaModificarTTD() {
     } // switch validacion tipo trabajo
     
      // valida que si no hay tinta normal en frente, debe forzosamente haber tinta especial en frente
-    if( document.tipo_trabajo_detalle.frente_id_combinacion_tintas.value == "16" ) {
+    if( correcto 
+    		&& document.tipo_trabajo_detalle.frente_id_combinacion_tintas.value == "16" ) {
         // valida en frente si la tinta especial es mayor a cero, exista obligatoriamente una descripcion.
-        if( document.tipo_trabajo_detalle.frente_num_tinta_especial.value == "" 
+        if( document.tipo_trabajo_detalle.frente_num_tinta_especial.value == ""
+        		|| isNaN(document.tipo_trabajo_detalle.frente_num_tinta_especial)
         		|| parseInt( document.tipo_trabajo_detalle.frente_num_tinta_especial.value ) <= 0 ) {
             correcto = false;
             alert("Es necesario que exista al menos tinta especial en el frente");
-            document.forms["tipo_trabajo_detalle"].elements["frente_num_tinta_especial"].focus();
+            document.tipo_trabajo_detalle.frente_num_tinta_especial.focus();
         }   
     }
     
  	// valida en frente si la tinta especial es mayor a cero, exista obligatoriamente una descripcion.
-    if( document.tipo_trabajo_detalle.frente_num_tinta_especial.value == "" 
-    		|| parseInt( document.tipo_trabajo_detalle.frente_num_tinta_especial.value ) < 0 
-    		|| ( parseInt( document.tipo_trabajo_detalle.frente_num_tinta_especial.value ) > 0 
-    				&& document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.value == "" ) ) {
-        correcto = false;
-        alert("Es necesario que la cantidad de tinta sea mayor a cero, o especificar la desrcipci\u00f3n de la tinta especial en el frente");
-        document.forms["tipo_trabajo_detalle"].elements["frente_descripcion_tinta_especial"].focus();
+    
+    if ( correcto 
+    		&& frente_num_tinta_especial == "" ) {
+    	correcto = false;
+    	alert("El numero de frente tinta especial debe ser cero");
+    	document.tipo_trabajo_detalle.frente_num_tinta_especial.focus();
     }
- 	
- 	// valida en vuelta si la tinta especial es mayor a cero, exista obligatoriamente una descripcion.
-    if( document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value == "" 
-    		|| parseInt( document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value ) < 0 
-    		|| ( parseInt( document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value ) > 0 
-    				&& document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.value == "" ) ) {
-        correcto = false;
-        alert("Es necesario que la cantidad de tinta sea mayor a cero, o especificar la desrcipci\u00f3n de la tinta especial en la vuelta");
-        document.forms["tipo_trabajo_detalle"].elements["vuelta_descripcion_tinta_especial"].focus();
+    if ( correcto 
+    		&& frente_num_tinta_especial != ""
+    		&& isNaN( frente_num_tinta_especial ) ) {
+    	correcto = false;
+    	alert("El dato de frente tinta especial debe ser un numero");
+    	document.tipo_trabajo_detalle.frente_num_tinta_especial.focus();
     }
+    if ( correcto 
+    		&& parseInt( frente_num_tinta_especial ) > 0 
+    		&& frente_descripcion_tinta_especial == "" ) {
+    	correcto = false;
+    	alert("El numero de frente tinta especial es mayor a cero; debe especificar la descripcion de frente tinta especial");
+    	document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.focus();
+    }
+    if ( correcto
+    		&& frente_descripcion_tinta_especial != "" 
+    		&& ( parseInt( frente_num_tinta_especial ) == 0 || parseInt( frente_num_tinta_especial ) < 0 ) ) {
+    	correcto = false;
+    	alert("Tiene especificada una descripcion de frente tinta especial; debe especificar que frente tinta especial es al menos 1");
+    	document.tipo_trabajo_detalle.frente_num_tinta_especial.focus();
+    }
+    
 	
 	if( correcto ) {
 		// realiza ajax
@@ -473,30 +510,33 @@ function aceptaModificarTTD() {
 			url:urlActualizaTipoTrabajoDetalle,
 			data:$("[name=tipo_trabajo_detalle]").serialize(),
 			success:function(response) {
+				
+				console.log(response);
+				
 				document.body.style.cursor = "default";
 				switch(response.estatusOperacion) {
-				case 0: // error
-					cancelaModificarTTD();
-					alert("No fue posible actualizar la informacion.");
-					break;
-				default: // exito
-					// guarda informacion de pliegos
-					obj_ttd.listaIdPliegoEliminado = response.textoJson;
-					// guarda html ista de pliegos anterior
-					obj_ttd.htmlListaPliegos = document.getElementById("div_tabla_lista_pliegos").innerHTML;
-					// abre ventana creacion de pliegos para nueva informacion 
-					Shadowbox.open({
-                        content:urlCalculaPliego + "?id_tipo_trabajo_detalle=" + document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value,
-                        player:"iframe",
-                        width:861,
-                        height:704,
-                        options:{ 
-                        	modal: true,
-                            overlayOpacity: 0.75,
-                            onClose: revisaCierreSegundaVentanaModal
-                        }
-                    });
-					break;
+					case 0: // error
+						cancelaModificarTTD();
+						alert("No fue posible actualizar la informacion.");
+						break;
+					default: // exito
+						// guarda informacion de pliegos
+						obj_ttd.listaIdPliegoEliminado = response.textoJson;
+						// guarda html ista de pliegos anterior
+						obj_ttd.htmlListaPliegos = document.getElementById("div_tabla_lista_pliegos").innerHTML;
+						// abre ventana creacion de pliegos para nueva informacion 
+						Shadowbox.open({
+	                        content:urlCalculaPliego + "?id_tipo_trabajo_detalle=" + document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value,
+	                        player:"iframe",
+	                        width:861,
+	                        height:704,
+	                        options:{ 
+	                        	modal: true,
+	                            overlayOpacity: 0.75,
+	                            onClose: revisaCierreSegundaVentanaModal
+	                        }
+	                    });
+						break;
 				}
 				muestraBotonesModificarPorSeccion();
 			},

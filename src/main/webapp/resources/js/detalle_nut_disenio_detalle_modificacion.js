@@ -55,12 +55,14 @@ function aceptaModificarDisenioDetalle() {
 	
 	var correcto = true;
 	
-	if( document.disenio_detalle.cantidad.value == "" ) {
+	if( document.disenio_detalle.cantidad.value == ""
+		|| isNaN(document.disenio_detalle.cantidad.value)) {
 		correcto = false;
 		alert("Favor de informar el campo Cantidad");
 	}
 	
-	if( document.disenio_detalle.precio_total_pesos.value == "" ) {
+	if( document.disenio_detalle.precio_total_pesos.value == ""
+		|| isNaN(document.disenio_detalle.precio_total_pesos.value)) {
 		correcto = false;
 		alert("Favor de informar el campo precio");
 	}

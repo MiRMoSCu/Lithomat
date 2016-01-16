@@ -48,12 +48,14 @@ function aceptaModificarTransporteDetalle() {
 	
 	var correcto = true;
 	
-	if( document.transporte_detalle.cantidad.value == "" ) {
+	if( document.transporte_detalle.cantidad.value == ""
+		|| isNaN(document.transporte_detalle.cantidad.value) ) {
 		correcto = false;
 		alert("Favor de informar el campo Cantidad");
 	}
 	
-	if( document.transporte_detalle.precio_total_pesos.value == "" ) {
+	if( document.transporte_detalle.precio_total_pesos.value == ""
+		|| isNaN(document.transporte_detalle.precio_total_pesos.value) ) {
 		correcto = false;
 		alert("Favor de informar el campo precio");
 	}

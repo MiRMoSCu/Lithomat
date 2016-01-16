@@ -61,7 +61,6 @@ import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CalificacionOrdenPr
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CalificacionPartidaDAO;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CalificacionPliegoDAO;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CalificacionTrabajoDetalleDAO;
-import com.google.gson.Gson;
 
 @Service("resumenCalificacionService")
 public class CalificacionServiceImpl implements CalificacionService {
@@ -375,13 +374,16 @@ public class CalificacionServiceImpl implements CalificacionService {
 		return calificacionOrdenProduccionDAO.buscaPorOrdenProduccion(idOrdenProduccion);
 	} // buscaCalificacionOrdenProduccion
 	
+	
 	public CalificacionPartida buscaCalificacionPartida(int idPartida) {
 		return calificacionPartidaDAO.buscaPorPartida(idPartida);
 	} // buscaCalificacionPartida
 
+	
 	public CalificacionTrabajoDetalle buscaCalificacionTrabajoDetalle(int idTipoTrabajoDetalle) {
 		return calificacionTrabajoDetalleDAO.buscaPorTipoTrabajoDetalle(idTipoTrabajoDetalle);
 	} // buscaCalificacionTrabajoDetalle
+	
 	
 	public CalificacionPliego buscaCalificacionPliego(int idPliego) {
 		return calificacionPliegoDAO.buscaPorPliego(idPliego);
@@ -561,31 +563,68 @@ public class CalificacionServiceImpl implements CalificacionService {
 					tipoTrabajoDetalleCosteTotal += pliegoCosteTotal;
 					
 					CalificacionPliego calificacionPliego = calificacionPliegoDAO.buscaPorPliego(pliego.getIdPliego());
-					
-					calificacionPliego.setPliegoCosteTotal(pliegoCosteTotal);
-					calificacionPliego.setHojasRequeridasOriginal(hojasRequeridasOriginal);
-					calificacionPliego.setHojasRequeridasRedondeo(hojasRequeridasRedondeo);
-					calificacionPliego.setPrecioUnitarioTabulador(precioUnitarioTabulador);
-					calificacionPliego.setPapelCantidadTotal(papelCantidadTotal);
-					calificacionPliego.setPapelPrecioUnitario(papelPrecioUnitario);
-					calificacionPliego.setPapelCosteTotal(papelCosteTotal);
-					calificacionPliego.setPlacasNumPlacas(placasNumPlacas);
-					calificacionPliego.setPlacasPrecioUnitario(placasPrecioUnitario);
-					calificacionPliego.setPlacasCosteTotal(placasCosteTotal);
-					calificacionPliego.setTintaNumEntMaq(tintaNumEntMaq);
-					calificacionPliego.setTintaPrecioUnitario(tintaPrecioUnitario);
-					calificacionPliego.setTintaCosteTotal(tintaCosteTotal);
-					calificacionPliego.setTintaEspecialNumEntMaq(tintaEspecialNumEntMaq);
-					calificacionPliego.setTintaEspecialPrecioUnitario(tintaEspecialPrecioUnitario);
-					calificacionPliego.setTintaEspecialCosteTotal(tintaEspecialCosteTotal);
-					calificacionPliego.setFrenteBarnizNumEntMaq(frenteBarnizNumEntMaq);
-					calificacionPliego.setFrenteBarnizPrecioUnitario(frenteBarnizPrecioUnitario);
-					calificacionPliego.setFrenteBarnizCosteTotal(frenteBarnizCosteTotal);
-					calificacionPliego.setVueltaBarnizNumEntMaq(vueltaBarnizNumEntMaq);
-					calificacionPliego.setVueltaBarnizPrecioUnitario(vueltaBarnizPrecioUnitario);
-					calificacionPliego.setVueltaBarnizCosteTotal(vueltaBarnizCosteTotal);
-					
-					calificacionPliegoDAO.modifica(calificacionPliego);
+					if ( calificacionPliego == null ) {
+						// SE HA MODIFICADO TipoTrabajoDetalle
+						// se han creado nuevos pliegos
+						// NULL = Rehacer la calificacion viene de un cambio tipo trabajo detalle
+						// crear calificacion para pliego
+						calificacionPliego = new CalificacionPliego();
+						calificacionPliego.setPliego(pliego);
+						calificacionPliego.setPliegoCosteTotal(pliegoCosteTotal);
+						calificacionPliego.setHojasRequeridasOriginal(hojasRequeridasOriginal);
+						calificacionPliego.setHojasRequeridasRedondeo(hojasRequeridasRedondeo);
+						calificacionPliego.setPrecioUnitarioTabulador(precioUnitarioTabulador);
+						calificacionPliego.setPapelCantidadTotal(papelCantidadTotal);
+						calificacionPliego.setPapelPrecioUnitario(papelPrecioUnitario);
+						calificacionPliego.setPapelCosteTotal(papelCosteTotal);
+						calificacionPliego.setPlacasNumPlacas(placasNumPlacas);
+						calificacionPliego.setPlacasPrecioUnitario(placasPrecioUnitario);
+						calificacionPliego.setPlacasCosteTotal(placasCosteTotal);
+						calificacionPliego.setTintaNumEntMaq(tintaNumEntMaq);
+						calificacionPliego.setTintaPrecioUnitario(tintaPrecioUnitario);
+						calificacionPliego.setTintaCosteTotal(tintaCosteTotal);
+						calificacionPliego.setTintaEspecialNumEntMaq(tintaEspecialNumEntMaq);
+						calificacionPliego.setTintaEspecialPrecioUnitario(tintaEspecialPrecioUnitario);
+						calificacionPliego.setTintaEspecialCosteTotal(tintaEspecialCosteTotal);
+						calificacionPliego.setFrenteBarnizNumEntMaq(frenteBarnizNumEntMaq);
+						calificacionPliego.setFrenteBarnizPrecioUnitario(frenteBarnizPrecioUnitario);
+						calificacionPliego.setFrenteBarnizCosteTotal(frenteBarnizCosteTotal);
+						calificacionPliego.setVueltaBarnizNumEntMaq(vueltaBarnizNumEntMaq);
+						calificacionPliego.setVueltaBarnizPrecioUnitario(vueltaBarnizPrecioUnitario);
+						calificacionPliego.setVueltaBarnizCosteTotal(vueltaBarnizCosteTotal);
+						calificacionPliego.setActivo(true);
+						
+						calificacionPliegoDAO.crea(calificacionPliego);
+					} else {
+						// SE HA MODIFICADO Partida
+						// calificacion pliegos existe
+						// NOT NULL = rehacer la calificacion viene de un cambio en partida
+						// modificar calificacion de un pliego existente
+						calificacionPliego.setPliegoCosteTotal(pliegoCosteTotal);
+						calificacionPliego.setHojasRequeridasOriginal(hojasRequeridasOriginal);
+						calificacionPliego.setHojasRequeridasRedondeo(hojasRequeridasRedondeo);
+						calificacionPliego.setPrecioUnitarioTabulador(precioUnitarioTabulador);
+						calificacionPliego.setPapelCantidadTotal(papelCantidadTotal);
+						calificacionPliego.setPapelPrecioUnitario(papelPrecioUnitario);
+						calificacionPliego.setPapelCosteTotal(papelCosteTotal);
+						calificacionPliego.setPlacasNumPlacas(placasNumPlacas);
+						calificacionPliego.setPlacasPrecioUnitario(placasPrecioUnitario);
+						calificacionPliego.setPlacasCosteTotal(placasCosteTotal);
+						calificacionPliego.setTintaNumEntMaq(tintaNumEntMaq);
+						calificacionPliego.setTintaPrecioUnitario(tintaPrecioUnitario);
+						calificacionPliego.setTintaCosteTotal(tintaCosteTotal);
+						calificacionPliego.setTintaEspecialNumEntMaq(tintaEspecialNumEntMaq);
+						calificacionPliego.setTintaEspecialPrecioUnitario(tintaEspecialPrecioUnitario);
+						calificacionPliego.setTintaEspecialCosteTotal(tintaEspecialCosteTotal);
+						calificacionPliego.setFrenteBarnizNumEntMaq(frenteBarnizNumEntMaq);
+						calificacionPliego.setFrenteBarnizPrecioUnitario(frenteBarnizPrecioUnitario);
+						calificacionPliego.setFrenteBarnizCosteTotal(frenteBarnizCosteTotal);
+						calificacionPliego.setVueltaBarnizNumEntMaq(vueltaBarnizNumEntMaq);
+						calificacionPliego.setVueltaBarnizPrecioUnitario(vueltaBarnizPrecioUnitario);
+						calificacionPliego.setVueltaBarnizCosteTotal(vueltaBarnizCosteTotal);
+						
+						calificacionPliegoDAO.modifica(calificacionPliego);
+					}
 					
 					calificacionPliego	= null;
 					pliego 				= null;
@@ -1269,9 +1308,9 @@ public class CalificacionServiceImpl implements CalificacionService {
 		listaPartida 	= null;
 		ordenProduccion = null;
 		
-		Gson gson = new Gson();
-		String json = gson.toJson( listaOrdenTrabajo );
-		System.out.println("JSON:\n" + json);
+		//Gson gson = new Gson();
+		//String json = gson.toJson( listaOrdenTrabajo );
+		//System.out.println("JSON:\n" + json);
 		
 		return listaOrdenTrabajo;
 	}
@@ -1286,9 +1325,5 @@ public class CalificacionServiceImpl implements CalificacionService {
 		return calificacionOrdenProduccionDAO.ejemploListaPapel();
 	}
 
-	
-
-	
-	
 }
 

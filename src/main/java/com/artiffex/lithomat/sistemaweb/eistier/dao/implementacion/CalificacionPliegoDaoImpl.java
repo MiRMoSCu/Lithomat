@@ -38,12 +38,13 @@ public class CalificacionPliegoDaoImpl extends GenericJdbcDAO implements Calific
 		try {
 			sesion = HibernateUtil.getInstance().getCurrentSession();
 			sesion.beginTransaction();
-			Query query = sesion.createQuery("from CalificacionPliego cp where cp.pliego.idPliego = :idPliego");
+			Query query = sesion.createQuery("from CalificacionPliego cp where cp.activo = true and cp.pliego.idPliego = :idPliego");
 			query.setParameter("idPliego", idPliego);
 			calificacionPliego = (CalificacionPliego)query.uniqueResult();
-			sesion.getTransaction().commit();
+     		sesion.getTransaction().commit();
 			query = null;
 		} catch(Exception e) {
+			e.printStackTrace();
 			log.error(e.getMessage());
 			sesion.getTransaction().rollback();
 		}

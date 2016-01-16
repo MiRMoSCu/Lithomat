@@ -11,6 +11,7 @@
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1"></meta>
         <title>Visuallzador</title>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="<c:url value="/resources/css/master.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/menu.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/font.css"/>" type="text/css"></link>
@@ -18,11 +19,24 @@
         <link rel="stylesheet" href="<c:url value="/resources/css/visualizador.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/paginador.css"/>" type="text/css"></link>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
+        <script type="text/javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script type="text/javascript" src="<c:url value="/resources/shadowbox/shadowbox.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/utilidades.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/visualizador.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/paginador.js"/>"></script>
         <script type="text/javascript">
-            Shadowbox.init({ });
+        	$(document).ready(function (){});
+            Shadowbox.init({});
+            $(function() {
+				$("[name=fecha_cotizacion_inicio]").datepicker({
+					dateFormat:'yy-mm-dd',
+				});
+			});
+            $(function() {
+				$("[name=fecha_cotizacion_fin]").datepicker({
+					dateFormat:'yy-mm-dd',
+				});
+			});
         </script>
         <script type="text/javascript">
             var numero_total_registros	        = ${numeroTotalRegistros};
@@ -152,7 +166,7 @@
                                                     <div class="columna_completa">
                                                         <table>
                                                             <tr>
-                                                                <td width="29%">
+                                                                <td width="30%">
                                                                     <input  id="radio_nut"
                                                                             type="radio"
                                                                             name="radio_tipo_busqueda"
@@ -166,7 +180,7 @@
                                                                             name="nut"
                                                                             value=""
                                                                             maxlength="10"
-                                                                            onkeypress=""/>
+                                                                            onkeydown="revisaNumero(false, this.value, event, 'nueva_busqueda', null)"/>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -202,12 +216,12 @@
                                             <div class="columna_completa">
                                                 <table>
                                                     <tr>
-                                                        <td width="12%">
+                                                        <td width="10%">
                                                             <input  id="radio_nombre_op"
                                                                     type="radio"
                                                                     name="radio_tipo_busqueda"
                                                                     value="3"/>
-                                                            <label for="radio_nombre_op" style="cursor:pointer;">Nombre OP:</label>
+                                                            <label for="radio_nombre_op" style="cursor:pointer;">Nombre:</label>
                                                         </td>
                                                         <td>
                                                             <input  type="text"
@@ -226,12 +240,12 @@
                                             <div class="columna_completa">
                                                 <table>
                                                     <tr>
-                                                        <td width="15%">
+                                                        <td width="13%">
                                                             <input  id="radio_descripcion_op"
                                                                     type="radio"
                                                                     name="radio_tipo_busqueda"
                                                                     value="4"/>
-                                                            <label for="radio_descripcion_op" style="cursor:pointer;">Descripci&oacute;n OP:</label>
+                                                            <label for="radio_descripcion_op" style="cursor:pointer;">Descripci&oacute;n:</label>
                                                         </td>
                                                         <td>
                                                             <input  type="text"

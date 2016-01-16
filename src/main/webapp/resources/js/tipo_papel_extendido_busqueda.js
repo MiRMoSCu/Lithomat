@@ -48,7 +48,8 @@ function busca() {
 	
 	if( correcto
 			&& document.tipo_trabajo_detalle.chkbx_busca_por_ancho.checked
-			&& document.tipo_trabajo_detalle.ancho.value == "" ) {
+			&& document.tipo_trabajo_detalle.ancho.value == ""
+			&& isNaN(document.tipo_trabajo_detalle.ancho.valu) ) {
 		correcto = false;
 		alert("Favor de informar ancho de papel.");
 		document.tipo_trabajo_detalle.ancho.focus();
@@ -56,7 +57,8 @@ function busca() {
 	
 	if( correcto
 			&& document.tipo_trabajo_detalle.chkbx_busca_por_alto.checked
-			&& document.tipo_trabajo_detalle.alto.value == "" ) {
+			&& document.tipo_trabajo_detalle.alto.value == ""
+			&& isNaN(document.tipo_trabajo_detalle.alto.value) ) {
 		correcto = false;
 		alert("Favor de informar alto de papel.");
 		document.tipo_trabajo_detalle.alto.focus();
@@ -64,7 +66,8 @@ function busca() {
 	
 	if( correcto
 			&& document.tipo_trabajo_detalle.chkbx_busca_por_gramaje.checked
-			&& document.tipo_trabajo_detalle.gramaje.value == "" ) {
+			&& document.tipo_trabajo_detalle.gramaje.value == ""
+			&& isNaN(document.tipo_trabajo_detalle.gramaje.value) ) {
 		correcto = false;
 		alert("Favor de informar gramaje de papel.");
 		document.tipo_trabajo_detalle.gramaje.focus();
@@ -72,7 +75,8 @@ function busca() {
 	
 	if( correcto
 			&& document.tipo_trabajo_detalle.chkbx_busca_por_kilogramos.checked
-			&& document.tipo_trabajo_detalle.kilogramos.value == "" ) {
+			&& document.tipo_trabajo_detalle.kilogramos.value == ""
+			&& isNaN(document.tipo_trabajo_detalle.kilogramos.value) ) {
 		correcto = false;
 		alert("Favor de informar kilogramos de papel.");
 		document.tipo_trabajo_detalle.kilogramos.focus();
