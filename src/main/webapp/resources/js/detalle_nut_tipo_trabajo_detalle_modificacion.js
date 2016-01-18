@@ -468,85 +468,185 @@ function aceptaModificarTTD() {
         }   
     }
     
- 	// valida en frente si la tinta especial es mayor a cero, exista obligatoriamente una descripcion.
-    
+    // valida que informacion de frente num tinta especial
     if ( correcto 
-    		&& frente_num_tinta_especial == "" ) {
+    		&& document.tipo_trabajo_detalle.frente_num_tinta_especial.value == "" ) {
     	correcto = false;
     	alert("El numero de frente tinta especial debe ser cero");
     	document.tipo_trabajo_detalle.frente_num_tinta_especial.focus();
     }
     if ( correcto 
-    		&& frente_num_tinta_especial != ""
-    		&& isNaN( frente_num_tinta_especial ) ) {
+    		&& document.tipo_trabajo_detalle.frente_num_tinta_especial.value != ""
+    		&& isNaN( document.tipo_trabajo_detalle.frente_num_tinta_especial.value ) ) {
     	correcto = false;
     	alert("El dato de frente tinta especial debe ser un numero");
     	document.tipo_trabajo_detalle.frente_num_tinta_especial.focus();
     }
     if ( correcto 
-    		&& parseInt( frente_num_tinta_especial ) > 0 
-    		&& frente_descripcion_tinta_especial == "" ) {
+    		&& parseInt( document.tipo_trabajo_detalle.frente_num_tinta_especial.value ) > 0 
+    		&& document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.value == "" ) {
     	correcto = false;
     	alert("El numero de frente tinta especial es mayor a cero; debe especificar la descripcion de frente tinta especial");
     	document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.focus();
     }
     if ( correcto
-    		&& frente_descripcion_tinta_especial != "" 
-    		&& ( parseInt( frente_num_tinta_especial ) == 0 || parseInt( frente_num_tinta_especial ) < 0 ) ) {
+    		&& document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.value != "" 
+    		&& ( parseInt( document.tipo_trabajo_detalle.frente_num_tinta_especial.value ) == 0 
+    				|| parseInt( document.tipo_trabajo_detalle.frente_num_tinta_especial.value ) < 0 ) ) {
     	correcto = false;
     	alert("Tiene especificada una descripcion de frente tinta especial; debe especificar que frente tinta especial es al menos 1");
     	document.tipo_trabajo_detalle.frente_num_tinta_especial.focus();
     }
     
-	
+ // valida que informacion de vuelta num tinta especial
+    if ( correcto 
+    		&& document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value == "" ) {
+    	correcto = false;
+    	alert("El numero de vuelta tinta especial debe ser cero");
+    	document.tipo_trabajo_detalle.vuelta_num_tinta_especial.focus();
+    }
+    if ( correcto 
+    		&& document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value != ""
+    		&& isNaN( document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value ) ) {
+    	correcto = false;
+    	alert("El dato de vuelta tinta especial debe ser un numero");
+    	document.tipo_trabajo_detalle.vuelta_num_tinta_especial.focus();
+    }
+    if ( correcto 
+    		&& parseInt( document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value ) > 0 
+    		&& document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.value == "" ) {
+    	correcto = false;
+    	alert("El numero de vuelta tinta especial es mayor a cero; debe especificar la descripcion de vuelta tinta especial");
+    	document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.focus();
+    }
+    if ( correcto
+    		&& document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.value != "" 
+    		&& ( parseInt( document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value ) == 0 
+    				|| parseInt( document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value ) < 0 ) ) {
+    	correcto = false;
+    	alert("Tiene especificada una descripcion de vuelta tinta especial; debe especificar que vuelta tinta especial es al menos 1");
+    	document.tipo_trabajo_detalle.vuelta_num_tinta_especial.focus();
+    }
+    
 	if( correcto ) {
 		// realiza ajax
 		document.body.style.cursor = "wait";
 		desactivaCamposFormTipoTrabajoDetalle();
 		desactivaBotonesModificarFormTipoTrabajoDetalle();
 		
-		$.ajax({
-			type:'POST',
-			url:urlActualizaTipoTrabajoDetalle,
-			data:$("[name=tipo_trabajo_detalle]").serialize(),
-			success:function(response) {
-				
-				console.log(response);
-				
-				document.body.style.cursor = "default";
-				switch(response.estatusOperacion) {
-					case 0: // error
-						cancelaModificarTTD();
-						alert("No fue posible actualizar la informacion.");
-						break;
-					default: // exito
-						// guarda informacion de pliegos
-						obj_ttd.listaIdPliegoEliminado = response.textoJson;
-						// guarda html ista de pliegos anterior
-						obj_ttd.htmlListaPliegos = document.getElementById("div_tabla_lista_pliegos").innerHTML;
-						// abre ventana creacion de pliegos para nueva informacion 
-						Shadowbox.open({
-	                        content:urlCalculaPliego + "?id_tipo_trabajo_detalle=" + document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value,
-	                        player:"iframe",
-	                        width:861,
-	                        height:704,
-	                        options:{ 
-	                        	modal: true,
-	                            overlayOpacity: 0.75,
-	                            onClose: revisaCierreSegundaVentanaModal
-	                        }
-	                    });
-						break;
+		var modificarPliegos = false;
+		
+		if ( document.tipo_trabajo_detalle.repeticiones_x_pliego.value != obj_ttd.repeticiones_x_pliego
+				|| document.tipo_trabajo_detalle.numero_paginas_publicacion.value != obj_ttd.numero_paginas_publicacion
+				|| document.tipo_trabajo_detalle.tamanio_pubicacion.value != obj_ttd.tamanio_publicacion ) 
+			modificarPliegos = true;
+		
+		if ( modificarPliegos ) {
+			// es necesario modificar la cantidad de pliegos y papel porque:
+			// a) modifico el numero de repeticiones que caben en cada papel
+			// b) modifico el numero de hojas de la publicacion
+			// c) modifico el tamaño de la publicacion
+			$.ajax({
+				type:'POST',
+				url:urlActualizaTipoTrabajoDetalleConPliegos,
+				data:$("[name=tipo_trabajo_detalle]").serialize(),
+				success:function(response) {
+					//console.log(response);
+					document.body.style.cursor = "default";
+					switch(response.estatusOperacion) {
+						case 0: // error
+							cancelaModificarTTD();
+							alert("No fue posible actualizar la informacion.");
+							break;
+						default: // exito
+							// guarda informacion de pliegos
+							obj_ttd.listaIdPliegoEliminado = response.textoJson;
+							// guarda html ista de pliegos anterior
+							obj_ttd.htmlListaPliegos = document.getElementById("div_tabla_lista_pliegos").innerHTML;
+							// abre ventana creacion de pliegos para nueva informacion 
+							Shadowbox.open({
+		                        content:urlCalculaPliego + "?id_tipo_trabajo_detalle=" + document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value,
+		                        player:"iframe",
+		                        width:861,
+		                        height:704,
+		                        options:{ 
+		                        	modal: true,
+		                            overlayOpacity: 0.75,
+		                            onClose: revisaCierreSegundaVentanaModal
+		                        }
+		                    });
+							break;
+					}
+					muestraBotonesModificarPorSeccion();
+				},
+				error: function() {
+					document.body.style.cursor = "default";
+					cancelaModificarTTD()
+					alert("No fue posible actualizar la informaci\u00F3n.");
+					muestraBotonesModificarPorSeccion();
 				}
-				muestraBotonesModificarPorSeccion();
-			},
-			error: function() {
-				document.body.style.cursor = "default";
-				cancelaModificarTTD()
-				alert("No fue posible actualizar la informaci\u00F3n.");
-				muestraBotonesModificarPorSeccion();
-			}
-		});
+			});
+		} else {
+			// no es necesario modificar informacion respecto a cantidad de pliegos
+			// no es necesario modificar informacion respecto a cantidad de papel
+			$.ajax({
+				type:'POST',
+				url:urlActualizaTipoTrabajoDetalle,
+				data:$("[name=tipo_trabajo_detalle]").serialize(),
+				success:function(response) {
+					//console.log(response);
+					document.body.style.cursor = "default";
+					switch(response.estatusOperacion) {
+						case 0: // error
+							cancelaModificarTTD();
+							alert("No fue posible actualizar la informacion.");
+							break;
+						default: // exito
+							document.body.style.cursor = "default";
+							// obtiene el precio neto
+							$.ajax({
+								type:"POST",
+								url:urlObtienePrecioNeto,
+								data:{
+									id_orden_produccion:document.tipo_trabajo_detalle.id_orden_produccion.value,
+									nut:document.tipo_trabajo_detalle.nut.value
+								},
+								success:function(response){
+									// actualiza html
+									var repeticiones_x_pliego 	= "td_" + document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value + "_repeticiones_x_pliego";
+									var numero_paginas 			= "td_" + document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value + "_numero_paginas_publicacion";
+									var tamanio_publicacion 	= "td_" + document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value + "_tamanio_publicacion";
+									var nombre_maquina 			= "td_" + document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value + "_nombre_maquina";
+									document.getElementById(repeticiones_x_pliego).innerHTML 	= document.tipo_trabajo_detalle.repeticiones_x_pliego.value==""?"0":document.tipo_trabajo_detalle.repeticiones_x_pliego.value;
+									document.getElementById(numero_paginas).innerHTML 			= document.tipo_trabajo_detalle.numero_paginas_publicacion.value==""?"0":document.tipo_trabajo_detalle.numero_paginas_publicacion.value;
+									document.getElementById(tamanio_publicacion).innerHTML 		= document.tipo_trabajo_detalle.tamanio_pubicacion.value==""?"null":document.tipo_trabajo_detalle.tamanio_pubicacion.value;
+									document.getElementById(nombre_maquina).innerHTML 			= document.tipo_trabajo_detalle.maquina.value;
+									delete repeticiones_x_pliego;
+									delete numero_paginas;
+									delete tamanio_publicacion;
+									delete nombre_maquina;
+									// actualiza precio
+									//alert("regreso bien del segundo ajax en revisaCierreSegundaVentanaModal");
+									document.precio.precio_neto.value = "$ " + (response.precioNeto).formatMoney(2);
+									muestraBotonesModificarPorSeccion();
+								},
+								error:function(e){
+									alert("No fue posible obtener precio neto");
+									muestraBotonesModificarPorSeccion();
+								}
+							});
+							break;
+					}
+					muestraBotonesModificarPorSeccion();
+				},
+				error: function() {
+					document.body.style.cursor = "default";
+					cancelaModificarTTD()
+					alert("No fue posible actualizar la informaci\u00F3n.");
+					muestraBotonesModificarPorSeccion();
+				}
+			});
+		}
 	}
 	delete correcto;
 } // aceptaModificarTTDEncabezado

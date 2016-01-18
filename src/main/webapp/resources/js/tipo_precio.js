@@ -21,19 +21,29 @@ function setCampos(id_tipo_precio, nombre, descripcion, factor_divisor) {
     
 }
 
+function validaForm() {
+	var correcto = true;
+	if ( document.forms[0].nombre.value == "" 
+			|| document.forms[0].factor_divisor.value == "" ){
+		correcto = false;
+		alert("Los campos nombre y factor divisor son obligatorios, favor de informarlos.");
+	}
+	if ( isNaN(document.forms[0].factor_divisor.value) ) {
+		correcto = false;
+		alert("El campo factor divisor debe ser un numero valido, favor de informarlos.");
+	}
+	return correcto;
+}
+
 function crear() {
-    if (document.forms[0].nombre.value == "" || document.forms[0].factor_divisor.value == "")
-        alert("Los campos nombre y factor_divisor son obligatorios, favor de informarlos.");
-    else {
+    if ( validaForm() ) {
         document.forms[0].action = urlAlta;
         document.forms[0].submit();
     }
 }
 
 function modifica() {
-    if (document.forms[0].nombre.value == "" || document.forms[0].factor_divisor.value == "")
-        alert("Los campos nombre y factor_divisor son obligatorios, favor de informarlos.");
-    else {
+    if ( validaForm() ) {
         document.forms[0].action = urlModifica;
         document.forms[0].submit();
     }

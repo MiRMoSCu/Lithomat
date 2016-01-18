@@ -49,6 +49,7 @@
         <link rel="stylesheet" href="<c:url value="/resources/css/menu.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/catalogo.css"/>" type="text/css"></link>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/utilidades.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/proceso_disenio.js"/>"></script>
         <script type="text/javascript">
         	var urlMenu		= "${urlMenu}";
@@ -176,7 +177,7 @@
                                                             <td width="1%">Precio:</td>
                                                             <td>
                                                                 <input type="text" class="input" name="precio" value=""
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+                                                                       onkeydown="revisaNumero(true, this.value, event, null, null)"/>
                                                             </td>
                                                         </tr>
                                                     </table>

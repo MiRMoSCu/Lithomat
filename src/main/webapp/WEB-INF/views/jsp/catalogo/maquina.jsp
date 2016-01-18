@@ -47,6 +47,7 @@
         <link rel="stylesheet" href="<c:url value="/resources/css/menu.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/catalogo.css"/>" type="text/css"></link>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/utilidades.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/maquina.js"/>"></script>
         <script type="text/javascript">
         	var urlMenu		= "${urlMenu}";
@@ -180,7 +181,7 @@
                                                             <td>
                                                                 <input type="text" class="input" name="num_colores"
                                                                        value="" 
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
+                                                                       onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -188,11 +189,11 @@
                                                 <div class="mitad_columna_derecha">
                                                     <table>
                                                         <tr>
-                                                            <td width="43%">Ancho placa:</td>
+                                                            <td width="35%">Alto placa:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="ancho_placa"
+                                                                <input type="text" class="input" name="alto_placa"
                                                                        value="" 
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+                                                                       onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -202,11 +203,11 @@
                                                 <div class="mitad_columna_izquierda">
                                                     <table>
                                                         <tr>
-                                                            <td width="35%">Alto placa:</td>
+                                                            <td width="43%">Ancho placa:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="alto_placa"
+                                                                <input type="text" class="input" name="ancho_placa"
                                                                        value="" 
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+                                                                       onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -217,14 +218,14 @@
                                     <div class="linea">
                                         <div class="casilla">
                                             <div class="columna_izquierda">
-                                                <div class="mitad_columna_izquierda">
+                                            	<div class="mitad_columna_izquierda">
                                                     <table>
                                                         <tr>
-                                                            <td width="59%">Ancho max papel:</td>
+                                                            <td width="49%">Alto min papel:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="ancho_max_papel"
+                                                                <input type="text" class="input" name="alto_min_papel"
                                                                        value="" 
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+                                                                       onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -232,11 +233,11 @@
                                                 <div class="mitad_columna_derecha">
                                                     <table>
                                                         <tr>
-                                                            <td width="51%">Alto max papel:</td>
+                                                            <td width="57%">Ancho min papel:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="alto_max_papel"
+                                                                <input type="text" class="input" name="ancho_min_papel"
                                                                        value="" 
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+                                                                       onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -246,11 +247,11 @@
                                                 <div class="mitad_columna_izquierda">
                                                     <table>
                                                         <tr>
-                                                            <td width="57%">Ancho min papel:</td>
+                                                            <td width="51%">Alto max papel:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="ancho_min_papel"
+                                                                <input type="text" class="input" name="alto_max_papel"
                                                                        value="" 
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+                                                                       onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -258,11 +259,11 @@
                                                 <div class="mitad_columna_derecha">
                                                     <table>
                                                         <tr>
-                                                            <td width="49%">Alto min papel:</td>
+                                                            <td width="59%">Ancho max papel:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="alto_min_papel"
+                                                                <input type="text" class="input" name="ancho_max_papel"
                                                                        value="" 
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+                                                                       onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
                                                         </tr>
                                                     </table>

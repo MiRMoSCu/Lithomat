@@ -637,14 +637,14 @@
                                 			<div id="div_opcion_tipo_vuelta" class="boton_dinamico" onclick="menu('tipo_vuelta');">
                                 				<span class="texto_boton">Tipo vuelta</span>
                                 			</div>
-                                			<div id="div_opcion_turno_laboral" class="boton_dinamico" onclick="menu('turno_laboral');">
-                                				<span class="texto_boton">Turno laboral</span>
-                                			</div>
                                 			<div id="div_opcion_tipo_precio" class="boton_dinamico" onclick="menu('tipo_precio');">
                                 				<span class="texto_boton">Tipo precio</span>
                                 			</div>
                                 			<div id="div_opcion_tipo_trabajo" class="boton_dinamico" onclick="menu('tipo_trabajo');">
                                 				<span class="texto_boton">Tipo trabajo</span>
+                                			</div>
+                                			<div id="div_opcion_turno_laboral" class="boton_dinamico" onclick="menu('turno_laboral');">
+                                				<span class="texto_boton">Turno laboral</span>
                                 			</div>
                                 		</div>
                                 		<div id="div_pestania_seguridad" style="display:none; background-color: transparent;">

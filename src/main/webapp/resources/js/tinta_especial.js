@@ -17,7 +17,7 @@ function setCampos( id_tinta_especial, precio, nombre_precio ) {
     var index_precio = 0;
     for (i = 0;i < select.length;i++) {
         //alert( select.options[i].innerText + " " + nombre_tipo_precio );
-        if (select.options[i].innerText == nombre_precio) {
+        if (select.options[i].text == nombre_precio) {
             index_precio = i;
             break;
         }
@@ -26,6 +26,16 @@ function setCampos( id_tinta_especial, precio, nombre_precio ) {
     document.forms[0].id_tinta_especial.value       = id_tinta_especial;
     document.forms[0].precio.value                  = precio;
     document.forms[0].id_tipo_precio.selectedIndex  = index_precio;
+}
+
+function validaForm() {
+	var correcto = true;
+	if ( document.forms[0].precio.value == ""
+		|| isNaN(document.forms[0].precio.value) ) {
+		correcto = false;
+		alert("El campo precio es obligatorio, favor de informarlo.");
+	}
+	return correcto;
 }
 
 /*
@@ -40,9 +50,7 @@ function crear() {
 */
 
 function modifica() {
-    if (document.forms[0].precio.value == "")
-        alert("El campo precio es obligatorio, favor de informarlo.");
-    else {
+    if ( validaForm() ) {
         document.forms[0].action = urlModifica;
         document.forms[0].submit();
     }

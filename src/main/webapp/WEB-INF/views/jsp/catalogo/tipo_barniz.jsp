@@ -49,6 +49,7 @@
         <link rel="stylesheet" href="<c:url value="/resources/css/menu.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/catalogo.css"/>" type="text/css"></link>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/utilidades.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/tipo_barniz.js"/>"></script>
         <script type="text/javascript">
         	var urlMenu		= "${urlMenu}";
@@ -163,7 +164,7 @@
                                                             <td>
                                                                 <input  type="text" class="input" name="num_entradas_maquina" 
                                                                         value="" 
-                                                                        onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
+                                                                        onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -175,7 +176,7 @@
                                                             <td>
                                                                 <input type="text" class="input" name="num_placas"
                                                                        value="" 
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
+                                                                       onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -188,7 +189,7 @@
                                                             <td width="1%">Precio:</td>
                                                             <td>
                                                                 <input type="text" class="input" name="precio" value=""
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+                                                                       onkeydown="revisaNumero(true, this.value, event, null, null)"/>
                                                             </td>
                                                         </tr>
                                                     </table>

@@ -19,27 +19,34 @@ function setCampos(id_tamanio_publicacion, nombre, tamanio_fraccion, numero_pagi
     document.forms[0].numero_doblez.value           = numero_doblez;
 }
 
+function validaForm() {
+	var correcto = true;
+	if ( document.forms[0].nombre.value == "" 
+	     || document.forms[0].tamanio_fraccion.value == ""
+	     || document.forms[0].numero_paginas.value == ""
+	     || document.forms[0].numero_decimal.value == ""
+	     || document.forms[0].numero_doblez.value == "" ) {
+		correcto = false;
+		alert("Todos los campos son obligatorios, favor de informarlos.");
+	}
+	if ( isNaN(document.forms[0].numero_paginas.value
+			|| isNaN(document.forms[0].numero_decimal.value) 
+			|| isNaN(document.forms[0].numero_doblez.value) ) ) {
+		correcto = false;
+		alert("Los campos numero de paginas, numero decimal y numero de doblez deben ser numeros validos, favor de informarlos.");
+	}
+	return correcto;
+}
+
 function crear() {
-    if (document.forms[0].nombre.value == "" 
-     || document.forms[0].tamanio_fraccion.value == ""
-     || document.forms[0].numero_paginas.value == ""
-     || document.forms[0].numero_decimal.value == ""
-     || document.forms[0].numero_doblez.value == "" )
-        alert("Todos los campos son obligatorios, favor de informarlos.");
-    else {
+    if ( validaForm() ) {
         document.forms[0].action = urlAlta;
         document.forms[0].submit();
     }
 }
 
 function modifica() {
-    if (document.forms[0].nombre.value == "" 
-     || document.forms[0].tamanio_fraccion.value == ""
-     || document.forms[0].numero_paginas.value == ""
-     || document.forms[0].numero_decimal.value == ""
-     || document.forms[0].numero_doblez.value == "" )
-        alert("Todos los campos son obligatorios, favor de informarlos.");
-    else {
+    if ( validaForm() ) {
         document.forms[0].action = urlModifica;
         document.forms[0].submit();
     }

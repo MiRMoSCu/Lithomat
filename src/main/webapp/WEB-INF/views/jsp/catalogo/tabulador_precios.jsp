@@ -49,6 +49,7 @@
         <link rel="stylesheet" href="<c:url value="/resources/css/menu.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/catalogo.css"/>" type="text/css"></link>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/utilidades.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/tabulador_precios.js"/>"></script>
         <script type="text/javascript">
         	var urlMenu		= "${urlMenu}";
@@ -188,9 +189,10 @@
                                                 <div class="mitad_columna_izquierda">
                                                     <table>
                                                         <tr>
-                                                            <td width="26%">Inicio:</td>
+                                                            <td width="1%">Inicio:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="inicio_tabulador" value=""/>
+                                                                <input type="text" class="input" name="inicio_tabulador" value=""
+                                                                onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -198,9 +200,10 @@
                                                 <div class="mitad_columna_derecha">
                                                     <table>
                                                         <tr>
-                                                            <td width="26%">Fin:</td>
+                                                            <td width="1%">Fin:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="fin_tabulador" value=""/>
+                                                                <input type="text" class="input" name="fin_tabulador" value=""
+                                                                onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -231,7 +234,7 @@
                                                             <td width="1%">Precio:</td>
                                                             <td>
                                                                 <input type="text" class="input" name="precio" value=""
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"/>
+                                                                       onkeydown="revisaNumero(true, this.value, event, null, null)"/>
                                                             </td>
                                                         </tr>
                                                     </table>

@@ -17,7 +17,7 @@ function setCampos(id_tipo_placa, nombre_maquina, descripcion, precio, nombre_pr
     var index_maquina = 0;
     for (i = 0;i < select_maquina.length;i++) {
         //alert( select.options[i].innerText + " " + nombre_precio );
-        if (select_maquina.options[i].innerText == nombre_maquina) {
+        if (select_maquina.options[i].text == nombre_maquina) {
             index_maquina = i;
             break;
         }
@@ -28,7 +28,7 @@ function setCampos(id_tipo_placa, nombre_maquina, descripcion, precio, nombre_pr
     var index_precio = 0;
     for (i = 0;i < select_precio.length;i++) {
         //alert( select.options[i].innerText + " " + nombre_precio );
-        if (select_precio.options[i].innerText == nombre_precio) {
+        if (select_precio.options[i].text == nombre_precio) {
             index_precio = i;
             break;
         }
@@ -41,19 +41,29 @@ function setCampos(id_tipo_placa, nombre_maquina, descripcion, precio, nombre_pr
     document.forms[0].id_tipo_precio.selectedIndex  = index_precio;
 }
 
+function validaForm() {
+	var correcto = true;
+	if ( document.forms[0].descripcion.value == "" 
+			|| document.forms[0].precio.value == "" ) {
+		correcto = false;
+		alert("Los campos descripcion y precio son obligatorios, favor de informarlos.");
+	}
+	if ( isNaN(document.forms[0].precio.value) ) {
+		correcto = false;
+		alert("El campos precio debe ser un numero valido, favor de informarlo.");
+	}
+	return correcto;
+}
+
 function crear() {
-    if (document.forms[0].descripcion.value == "" || document.forms[0].precio.value == "")
-        alert("Los campos descripcion y precio son obligatorios, favor de informarlos.");
-    else {
+    if ( validaForm() ) {
         document.forms[0].action = urlAlta;
         document.forms[0].submit();
     }
 }
 
 function modifica() {
-    if (document.forms[0].descripcion.value == "" || document.forms[0].precio.value == "")
-        alert("Los campos descripcion y precio son obligatorios, favor de informarlos.");
-    else {
+    if ( validaForm() ) {
         document.forms[0].action = urlModifica;
         document.forms[0].submit();
     }

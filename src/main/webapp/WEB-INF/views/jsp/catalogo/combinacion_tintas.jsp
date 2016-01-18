@@ -47,6 +47,7 @@
         <link rel="stylesheet" href="<c:url value="/resources/css/menu.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/catalogo.css"/>" type="text/css"></link>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/utilidades.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/combinacion_tintas.js"/>"></script>
         <script type="text/javascript">
         	var urlMenu		= "${urlMenu}";
@@ -93,7 +94,7 @@
                             </div>
                         </div>
                         <div id="div_contenido">
-                            <form:form action="${urlAlta}" method="post" modelAttribute="combinacionTintas" acceptCharset="ISO-8859-1">
+                            <form action="${urlAlta}" method="post">
                                 <div id="div_combinacion_tintas">
                                     <div class="titulo">
                                         <img alt="" src="<c:url value="/resources/image/titulo_combinacion_tintas.png"/>"/>
@@ -144,7 +145,7 @@
                                                             <td>
                                                                 <input type="text" class="input" name="num_tintas"
                                                                        value="" 
-                                                                       onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
+                                                                       onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -181,7 +182,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </form:form>
+                            </form>
                         </div>
                     </div>
                     <div id="div_pie"></div>

@@ -12,6 +12,7 @@
 <c:url value="/orden_produccion/actualiza"    				var="urlActualizaOrdenProduccion"/>
 <c:url value="/partida/actualiza"    						var="urlActualizaPartida"/>
 <c:url value="/tipo_trabajo_detalle/actualiza"  			var="urlActualizaTipoTrabajoDetalle"/>
+<c:url value="/tipo_trabajo_detalle/actualiza_con_pliegos"  var="urlActualizaTipoTrabajoDetalleConPliegos"/>
 <c:url value="/pliego/calcula"              				var="urlCalculaPliego"/>
 <c:url value="/pliego/activa_lista"            				var="urlActivaListaPliegos"/>
 <c:url value="/costo_extra_detalle/ventana" 				var="urlCostoExtraDetalle"/>
@@ -85,42 +86,43 @@
             });
         </script>
         <script type="text/javascript">
-        	var urlBuscaTipoPlaca						= "${urlBuscaTipoPlaca}";
-        	var urlCambiaEstatusPartida					= "${urlCambiaEstatusPartida}";
-            var urlObtienePartida        				= "${urlObtienePartida}";
-            var urlObtieneTipoTrabajoDetalle    		= "${urlObtieneTipoTrabajoDetalle}";
-            var urlObtienePrecioDetalle					= "${urlObtienePrecioDetalle}";
-            var urlObtienePrecioNeto					= "${urlObtienePrecioNeto}";
-            var urlActualizaOrdenProduccion				= "${urlActualizaOrdenProduccion}";
-            var urlActualizaPartida						= "${urlActualizaPartida}";
-            var urlActualizaTipoTrabajoDetalle			= "${urlActualizaTipoTrabajoDetalle}";
-            var urlCalculaPliego            			= "${urlCalculaPliego}";
-            var urlActivaListaPliegos					= "${urlActivaListaPliegos}";
-            var urlCostoExtraDetalle					= "${urlCostoExtraDetalle}";
-            var urlBuscaUnidadMedidaCostoExtra			= "${urlBuscaUnidadMedidaCostoExtra}";
-            var urlAgregaCostoExtraDetalleOlvidado		= "${urlAgregaCostoExtraDetalleOlvidado}";
-            var urlActualizaCostoExtraDetalle			= "${urlActualizaCostoExtraDetalle}";
-            var urlEliminaCostoExtraDetalle				= "${urlEliminaCostoExtraDetalle}";
-            var urlModificaDisenio						= "${urlModificaDisenio}";
-            var urlAgregaDisenioDetalleOlvidado			= "${urlAgregaDisenioDetalleOlvidado}";
-            var urlActualizaDisenioDetalle				= "${urlActualizaDisenioDetalle}";
-            var urlEliminaDisenioDetalle				= "${urlEliminaDisenioDetalle}";
-            var urlModificaPreprensa					= "${urlModificaPreprensa}";
-            var urlAgregaPreprensaDetalleOlvidado		= "${urlAgregaPreprensaDetalleOlvidado}";
-            var urlActualizaPreprensaDetalle			= "${urlActualizaPreprensaDetalle}";
-            var urlEliminaPreprensaDetalle				= "${urlEliminaPreprensaDetalle}";
-            var urlModificaTransporte					= "${urlModificaTransporte}";
-            var urlAgregaTransporteDetalleOlvidado		= "${urlAgregaTransporteDetalleOlvidado}";
-            var urlActualizaTransporteDetalle			= "${urlActualizaTransporteDetalle}";
-            var urlEliminaTransporteDetalle				= "${urlEliminaTransporteDetalle}";
-            var urlModificaAcabado						= "${urlModificaAcabado}";
-            var urlAgregaAcabadoDetalleOlvidado			= "${urlAgregaAcabadoDetalleOlvidado}";
-            var urlActualizaAcabadoDetalle				= "${urlActualizaAcabadoDetalle}";
-            var urlEliminaAcabadoDetalle				= "${urlEliminaAcabadoDetalle}";
-            var urlModificaOffset						= "${urlModificaOffset}";
-            var urlAgregaMaterialAyudaXPartidaOlvidado	= "${urlAgregaMaterialAyudaXPartidaOlvidado}";
-            var urlActualizaMaterialAyudaXPartida		= "${urlActualizaMaterialAyudaXPartida}";
-            var urlEliminaMaterialAyudaXPartida			= "${urlEliminaMaterialAyudaXPartida}";
+        	var urlBuscaTipoPlaca							= "${urlBuscaTipoPlaca}";
+        	var urlCambiaEstatusPartida						= "${urlCambiaEstatusPartida}";
+            var urlObtienePartida        					= "${urlObtienePartida}";
+            var urlObtieneTipoTrabajoDetalle    			= "${urlObtieneTipoTrabajoDetalle}";
+            var urlObtienePrecioDetalle						= "${urlObtienePrecioDetalle}";
+            var urlObtienePrecioNeto						= "${urlObtienePrecioNeto}";
+            var urlActualizaOrdenProduccion					= "${urlActualizaOrdenProduccion}";
+            var urlActualizaPartida							= "${urlActualizaPartida}";
+            var urlActualizaTipoTrabajoDetalle				= "${urlActualizaTipoTrabajoDetalle}";
+            var urlActualizaTipoTrabajoDetalleConPliegos	= "${urlActualizaTipoTrabajoDetalleConPliegos}";
+            var urlCalculaPliego            				= "${urlCalculaPliego}";
+            var urlActivaListaPliegos						= "${urlActivaListaPliegos}";
+            var urlCostoExtraDetalle						= "${urlCostoExtraDetalle}";
+            var urlBuscaUnidadMedidaCostoExtra				= "${urlBuscaUnidadMedidaCostoExtra}";
+            var urlAgregaCostoExtraDetalleOlvidado			= "${urlAgregaCostoExtraDetalleOlvidado}";
+            var urlActualizaCostoExtraDetalle				= "${urlActualizaCostoExtraDetalle}";
+            var urlEliminaCostoExtraDetalle					= "${urlEliminaCostoExtraDetalle}";
+            var urlModificaDisenio							= "${urlModificaDisenio}";
+            var urlAgregaDisenioDetalleOlvidado				= "${urlAgregaDisenioDetalleOlvidado}";
+            var urlActualizaDisenioDetalle					= "${urlActualizaDisenioDetalle}";
+            var urlEliminaDisenioDetalle					= "${urlEliminaDisenioDetalle}";
+            var urlModificaPreprensa						= "${urlModificaPreprensa}";
+            var urlAgregaPreprensaDetalleOlvidado			= "${urlAgregaPreprensaDetalleOlvidado}";
+            var urlActualizaPreprensaDetalle				= "${urlActualizaPreprensaDetalle}";
+            var urlEliminaPreprensaDetalle					= "${urlEliminaPreprensaDetalle}";
+            var urlModificaTransporte						= "${urlModificaTransporte}";
+            var urlAgregaTransporteDetalleOlvidado			= "${urlAgregaTransporteDetalleOlvidado}";
+            var urlActualizaTransporteDetalle				= "${urlActualizaTransporteDetalle}";
+            var urlEliminaTransporteDetalle					= "${urlEliminaTransporteDetalle}";
+            var urlModificaAcabado							= "${urlModificaAcabado}";
+            var urlAgregaAcabadoDetalleOlvidado				= "${urlAgregaAcabadoDetalleOlvidado}";
+            var urlActualizaAcabadoDetalle					= "${urlActualizaAcabadoDetalle}";
+            var urlEliminaAcabadoDetalle					= "${urlEliminaAcabadoDetalle}";
+            var urlModificaOffset							= "${urlModificaOffset}";
+            var urlAgregaMaterialAyudaXPartidaOlvidado		= "${urlAgregaMaterialAyudaXPartidaOlvidado}";
+            var urlActualizaMaterialAyudaXPartida			= "${urlActualizaMaterialAyudaXPartida}";
+            var urlEliminaMaterialAyudaXPartida				= "${urlEliminaMaterialAyudaXPartida}";
         </script>
         <script type="text/javascript">
         	var strJsonListaCostoExtra			= '${jsonListaCostoExtra}';

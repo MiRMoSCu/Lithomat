@@ -17,7 +17,7 @@ function setCampos(id_proceso_transporte, nombre_proceso, descripcion, precio, n
     var index_precio = 0;
     for (i = 0;i < select_precio.length;i++) {
         //alert( select.options[i].innerText + " " + nombre_tipo_precio );
-        if (select_precio.options[i].innerText == nombre_precio) {
+        if (select_precio.options[i].text == nombre_precio) {
             index_precio = i;
             break;
         }
@@ -30,19 +30,29 @@ function setCampos(id_proceso_transporte, nombre_proceso, descripcion, precio, n
     document.forms[0].id_tipo_precio.selectedIndex  = index_precio;
 }
 
+function validaForm() {
+	var correcto = true;
+	if ( document.forms[0].nombre_proceso.value == "" 
+		|| document.forms[0].precio.value == "" ) {
+		correcto = false;
+		alert("Los campos nombre proceso y precio son obligatorios, favor de informarlos.");
+	}
+	if ( isNaN(document.forms[0].precio.value) ) {
+		correcto = false;
+		alert("El campo precio debe ser un numero valido, favor de informarlo.");
+	}
+	return correcto;
+}
+
 function crear() {
-    if (document.forms[0].nombre_proceso.value == "" || document.forms[0].precio.value == "")
-        alert("Los campos nombre proceso y precio son obligatorios, favor de informarlos.");
-    else {
+    if ( validaForm() ) {
         document.forms[0].action = urlAlta;
         document.forms[0].submit();
     }
 }
 
 function modifica() {
-    if (document.forms[0].nombre_proceso.value == "" || document.forms[0].precio.value == "")
-        alert("Los campos nombre proceso y precio son obligatorios, favor de informarlos.");
-    else {
+    if ( validaForm() ) {
         document.forms[0].action = urlModifica;
         document.forms[0].submit();
     }

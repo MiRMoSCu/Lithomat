@@ -18,7 +18,7 @@ function setCampos( id_cliente, clave, nombre_moral, nombre_representante, puest
     var index = 0;
     for (var i = 0;i < select.length;i++) {
         //alert( select.options[i].innerText + " " + nombre_tipo_precio );
-        if (select.options[i].innerText == clave) {
+        if (select.options[i].text == clave) {
             index = i;
             break;
         }

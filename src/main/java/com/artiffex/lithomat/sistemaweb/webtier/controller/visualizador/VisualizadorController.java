@@ -478,8 +478,6 @@ public class VisualizadorController {
 
 		jsonResponse.setTextoJson(sb.toString());
 		
-		System.out.println(sb.toString());
-
 		tipoTrabajoDetalle = null;
 		gson = null;
 		sb = null;

@@ -23,21 +23,41 @@ function setCampos(id_maquina, nombre, descripcion, num_colores, ancho_placa, al
     document.forms[0].alto_min_papel.value      = alto_min_papel;
 }
 
+function validaForm() {
+	var correcto = true;
+	if ( document.forms[0].nombre.value == "" 
+			|| document.forms[0].num_colores.value == ""
+			|| document.forms[0].alto_placa.value == ""
+			|| document.forms[0].ancho_placa.value == "" 
+			|| document.forms[0].alto_max_papel.value == "" 
+			|| document.forms[0].ancho_max_papel.value == ""
+			|| document.forms[0].alto_min_papel.value == "" 
+			|| document.forms[0].ancho_min_papel.value == "" ) {
+		correcto = false;
+		alert("Todos los campos son obligatorios, favor de informarlos.");
+	}
+	if ( isNaN(document.forms[0].num_colores.value)
+			|| isNaN(document.forms[0].alto_placa.value)
+			|| isNaN(document.forms[0].ancho_placa.value)
+			|| isNaN(document.forms[0].alto_max_papel.value)
+			|| isNaN(document.forms[0].ancho_max_papel.value)
+			|| isNaN(document.forms[0].alto_min_papel.value)
+			|| isNaN(document.forms[0].ancho_min_papel.value) ) {
+		correcto = false;
+		alert("Los campos numero de colores, alto y ancho de placa, alto y ancho maximo y minimo de papel son obligatorios, favor de informarlos.");
+	}
+	return correcto;
+}
+
 function crear() {
-    if (document.forms[0].nombre.value == "" || document.forms[0].num_colores.value == "" 
-        || document.forms[0].ancho_placa.value == "" || document.forms[0].alto_placa.value == "")
-        alert("Los campos nombre, numero de colores, ancho de placa y alto de placa son obligatorios, favor de informarlos.");
-    else {
+    if ( validaForm() ) {
         document.forms[0].action = urlAlta;
         document.forms[0].submit();
     }
 }
 
 function modifica() {
-    if (document.forms[0].nombre.value == "" || document.forms[0].num_colores.value == "" 
-        || document.forms[0].ancho_placa.value == "" || document.forms[0].alto_placa.value == "")
-        alert("Los campos nombre, numero de colores, ancho de placa y alto de placa son obligatorios, favor de informarlos.");
-    else {
+    if ( validaForm() ) {
         document.forms[0].action = urlModifica;
         document.forms[0].submit();
     }

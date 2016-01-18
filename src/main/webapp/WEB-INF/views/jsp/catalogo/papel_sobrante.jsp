@@ -49,6 +49,7 @@
         <link rel="stylesheet" href="<c:url value="/resources/css/menu.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/catalogo.css"/>" type="text/css"></link>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/utilidades.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/papel_sobrante.js"/>"></script>
         <script type="text/javascript">
         	var urlMenu		= "${urlMenu}";
@@ -154,7 +155,7 @@
                                                                         class="input"
                                                                         name="inicio_tabulador"
                                                                         value=""
-                                                                        onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
+                                                                        onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -168,7 +169,7 @@
                                                                         class="input"
                                                                         name="fin_tabulador"
                                                                         value=""
-                                                                        onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
+                                                                        onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -184,7 +185,7 @@
                                                                         class="input"
                                                                         name="num_tinta_frente"
                                                                         value=""
-                                                                        onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
+                                                                        onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -198,7 +199,7 @@
                                                                         class="input"
                                                                         name="num_tinta_vuelta"
                                                                         value=""
-                                                                        onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
+                                                                        onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -244,7 +245,7 @@
                                                                         class="input"
                                                                         name="hojas_sobrante"
                                                                         value=""
-                                                                        onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"/>
+                                                                        onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
                                                         </tr>
                                                     </table>

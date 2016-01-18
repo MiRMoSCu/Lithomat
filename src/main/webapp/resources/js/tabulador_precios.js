@@ -16,7 +16,7 @@ function setCampos(id_tabulador_precios, nombre_maquina, nombre_insumo, descripc
     var select_complejidad = document.forms[0].id_tipo_complejidad;
     var index_complejidad = 0;
     for (i = 0;i < select_complejidad.length;i++) {
-        if (select_complejidad.options[i].innerText == tipo_complejidad) {
+        if (select_complejidad.options[i].text == tipo_complejidad) {
         	document.forms[0].id_tipo_complejidad.selectedIndex = i;
             break;
         }
@@ -29,7 +29,7 @@ function setCampos(id_tabulador_precios, nombre_maquina, nombre_insumo, descripc
     var index_precio = 0;
     for (i = 0;i < select_precio.length;i++) {
         //alert( select.options[i].innerText + " " + nombre_tipo_precio );
-        if (select_precio.options[i].innerText == nombre_precio) {
+        if (select_precio.options[i].text == nombre_precio) {
         	document.forms[0].id_tipo_precio.selectedIndex = i;
             break;
         }
@@ -42,7 +42,7 @@ function setCampos(id_tabulador_precios, nombre_maquina, nombre_insumo, descripc
     var index_maquina = 0;
     for (i = 0;i < select_maquina.length;i++) {
         //alert( select.options[i].innerText + " " + nombre_tipo_precio );
-        if (select_maquina.options[i].innerText == nombre_maquina) {
+        if (select_maquina.options[i].text == nombre_maquina) {
         	document.forms[0].id_maquina.selectedIndex = i;
             break;
         }
@@ -58,25 +58,33 @@ function setCampos(id_tabulador_precios, nombre_maquina, nombre_insumo, descripc
     document.forms[0].precio.value						= precio;    
 }
 
+function validaForm() {
+	var correcto = true;
+	if ( document.forms[0].nombre_insumo.value == "" 
+	     || document.forms[0].inicio_tabulador.value == "" 
+	     || document.forms[0].fin_tabulador.value == "" 
+	     || document.forms[0].precio.value == "" ) {
+		correcto = false;
+		alert("Los campos nombre, tabulador y precio son obligatorios, favor de informarlos.");
+	}
+	if ( isNaN(document.forms[0].inicio_tabulador.value)
+			|| isNaN(document.forms[0].fin_tabulador.value)
+			|| isNaN(document.forms[0].precio.value) ) {
+		correcto = false;
+		alert("Los campos tabulador inicio y fin, y precio deben ser numeros validos, favor de informarlos.");
+	}
+	return correcto;
+}
+
 function crear() {
-    if (document.forms[0].nombre_insumo.value == "" 
-     || document.forms[0].inicio_tabulador.value == "" 
-     || document.forms[0].fin_tabulador.value == "" 
-     || document.forms[0].precio.value == "" )
-        alert("Los campos nombre, tabulador y precio son obligatorios, favor de informarlos.");
-    else {
+    if ( validaForm() )  {
         document.forms[0].action = urlAlta;
         document.forms[0].submit();
     }
 }
 
 function modifica() {
-    if (document.forms[0].nombre_insumo.value == "" 
-     || document.forms[0].inicio_tabulador.value == "" 
-     || document.forms[0].fin_tabulador.value == "" 
-	 || document.forms[0].precio.value == "" )
-        alert("Los campos nombre, tabulador y precio son obligatorios, favor de informarlos.");
-    else {
+    if ( validaForm() )  {
         document.forms[0].action = urlModifica;
         document.forms[0].submit();
     }

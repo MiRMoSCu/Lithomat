@@ -188,7 +188,8 @@
 		                                							<span style="cursor:pointer;" onclick="document.busqueda_cliente.chkbx_busca_por_nombre_moral.click()">Nombre:</span>
 		                                						</td>
 		                                						<td>
-		                                							<input type="text" class="input" name="nombre_moral" value=""/>
+		                                							<input type="text" class="input" name="nombre_moral" value=""
+		                                									onkeydown="aceptaIntro(event,'nueva_busqueda',null)"/>
 		                                						</td>
 		                                					</tr>
 		                                				</table>
@@ -203,7 +204,8 @@
 		                                							<span style="cursor:pointer;" onclick="document.busqueda_cliente.chkbx_busca_por_rfc.click()">RFC:</span>
 		                                						</td>
 		                                						<td>
-		                                							<input type="text" class="input" name="rfc" value=""/>
+		                                							<input type="text" class="input" name="rfc" value=""
+		                                									onkeydown="aceptaIntro(event,'nueva_busqueda',null)"/>
 		                                						</td>
 		                                					</tr>
 		                                				</table>
@@ -239,7 +241,8 @@
 		                                							<span style="cursor:pointer;" onclick="document.busqueda_cliente.chkbx_busca_por_nombre_representante.click()">Representante:</span>
 	                                							</td>
 	                                							<td>
-	                                								<input type="text" class="input" name="nombre_representante" value=""/>
+	                                								<input type="text" class="input" name="nombre_representante" value=""
+	                                										onkeydown="aceptaIntro(event,'nueva_busqueda',null)"/>
 	                                							</td>
 	                                						</tr>
 	                                					</table>
@@ -254,7 +257,8 @@
 		                                							<span style="cursor:pointer;" onclick="document.busqueda_cliente.chkbx_busca_por_codigo_postal.click()">C.P.:</span>
 	                                							</td>
 	                                							<td>
-	                                								<input type="text" class="input" name="codigo_postal" value=""/>
+	                                								<input type="text" class="input" name="codigo_postal" value=""
+	                                										onkeydown="aceptaIntro(event,'nueva_busqueda',null)"/>
 	                                							</td>
 	                                						</tr>
 	                                					</table>

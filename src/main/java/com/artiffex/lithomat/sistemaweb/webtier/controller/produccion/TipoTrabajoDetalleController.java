@@ -179,6 +179,7 @@ public class TipoTrabajoDetalleController {
 		return jsonResponse;
 	} // buscaTipoTrabajoDetalle
 	
+	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/actualiza", method = RequestMethod.POST)
 	@ResponseBody
@@ -243,8 +244,75 @@ public class TipoTrabajoDetalleController {
 		JsonResponse jsonResponse = new JsonResponse();
 		jsonResponse.setEstatusOperacion(1);
 		
+		return null;
+	}
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
+	@RequestMapping(value = "/actualiza_con_pliegos", method = RequestMethod.POST)
+	@ResponseBody
+	public JsonResponse actualizaTipoTrabajoDetalleConPliegos(
+			@RequestParam(value = "id_orden_produccion", 				required = false) Integer idOrdenProduccion,
+			@RequestParam(value = "nut", 								required = false) String nut,
+			@RequestParam(value = "id_partida", 						required = false) Integer idPartida,
+			@RequestParam(value = "id_tipo_trabajo_detalle", 			required = false) Integer idTipoTrabajoDetalle,
+			@RequestParam(value = "ancho", 								required = false) float ancho,
+			@RequestParam(value = "alto", 								required = false) float alto,
+			@RequestParam(value = "ancho_extendido", 					required = false) float anchoExtendido,
+			@RequestParam(value = "alto_extendido", 					required = false) float altoExtendido,
+			@RequestParam(value = "cliente_proporciona_papel", 			required = false) boolean clienteProporcionaPapel,
+			@RequestParam(value = "cliente_proporciona_tinta_especial", required = false) boolean clienteProporcionaTintaEspecial,
+			@RequestParam(value = "cliente_proporciona_barniz", 		required = false) boolean clienteProporcionaBarniz,
+			@RequestParam(value = "cliente_proporciona_placas", 		required = false) boolean clienteProporcionaPlacas,
+			@RequestParam(value = "id_tipo_papel_extendido", 			required = false) Integer idTipoPapelExtendido,
+			@RequestParam(value = "repeticiones_x_pliego", 				required = false) Integer repeticionesXPliego,
+			@RequestParam(value = "numero_paginas_publicacion", 		required = false) Integer numeroPaginasPublicacion,
+			@RequestParam(value = "id_tamanio_publicacion", 			required = false) Integer idTamanioPublicacion,
+			@RequestParam(value = "frente_id_combinacion_tintas", 		required = false) Integer frenteIdCombinacionTintas,
+			@RequestParam(value = "frente_num_tinta_especial", 			required = false) Integer frenteNumTintaEspecial,
+			@RequestParam(value = "frente_descripcion_tinta_especial", 	required = false) String frenteDescripcionTintaEspecial,
+			@RequestParam(value = "frente_id_tipo_barniz", 				required = false) Integer frenteIdTipoBarniz,
+			@RequestParam(value = "vuelta_id_combinacion_tintas", 		required = false) Integer vueltaIdCombinacionTintas,
+			@RequestParam(value = "vuelta_num_tinta_especial", 			required = false) Integer vueltaNumTintaEspecial,
+			@RequestParam(value = "vuelta_descripcion_tinta_especial", 	required = false) String vueltaDescripcionTintaEspecial,
+			@RequestParam(value = "vuelta_id_tipo_barniz", 				required = false) Integer vueltaIdTipoBarniz,
+			@RequestParam(value = "id_maquina", 						required = false) Integer idMaquina,
+			@RequestParam(value = "id_tipo_placa", 						required = false) Integer idTipoPlaca,
+			@RequestParam(value = "id_tipo_complejidad", 				required = false) Integer idTipoComplejidad
+		) {
+		log.info("/actualiza_tipo_trabajo_detalle_con_pliegos");
+		
+		TipoTrabajoDetalle tipoTrabajoDetalle = tipoTrabajoDetalleService.buscaTipoTrabajoDetalle(idTipoTrabajoDetalle);
+		tipoTrabajoDetalle.setAncho(anchoExtendido);
+		tipoTrabajoDetalle.setAlto(altoExtendido);
+		tipoTrabajoDetalle.setAnchoExtendido(anchoExtendido);
+		tipoTrabajoDetalle.setAltoExtendido(altoExtendido);
+		tipoTrabajoDetalle.setClienteProporcionaPapel(clienteProporcionaPapel);
+		tipoTrabajoDetalle.setClienteProporcionaTintaEspecial(clienteProporcionaTintaEspecial);
+		tipoTrabajoDetalle.setClienteProporcionaBarniz(clienteProporcionaBarniz);
+		tipoTrabajoDetalle.setClienteProporcionaPlacas(clienteProporcionaPlacas);
+		tipoTrabajoDetalle.getTipoPapelExtendido().setIdTipoPapelExtendido(idTipoPapelExtendido);
+		tipoTrabajoDetalle.setRepeticionesXPliego(repeticionesXPliego);
+		tipoTrabajoDetalle.setNumeroPaginasPublicacion(numeroPaginasPublicacion);
+		tipoTrabajoDetalle.getTamanioPublicacion().setIdTamanioPublicacion(idTamanioPublicacion);
+		tipoTrabajoDetalle.getFrenteCombinacionTintas().setIdCombinacionTintas(frenteIdCombinacionTintas);
+		tipoTrabajoDetalle.setFrenteNumTintaEspecial(frenteNumTintaEspecial);
+		tipoTrabajoDetalle.setFrenteDescripcionTintaEspecial(frenteDescripcionTintaEspecial);
+		tipoTrabajoDetalle.getFrenteTipoBarniz().setIdTipoBarniz(frenteIdTipoBarniz);
+		tipoTrabajoDetalle.getVueltaCombinacionTintas().setIdCombinacionTintas(vueltaIdCombinacionTintas);
+		tipoTrabajoDetalle.setVueltaNumTintaEspecial(vueltaNumTintaEspecial);
+		tipoTrabajoDetalle.setVueltaDescripcionTintaEspecial(vueltaDescripcionTintaEspecial);
+		tipoTrabajoDetalle.getVueltaTipoBarniz().setIdTipoBarniz(vueltaIdTipoBarniz);
+		tipoTrabajoDetalle.getMaquina().setIdMaquina(idMaquina);
+		tipoTrabajoDetalle.getTipoPlaca().setIdTipoPlaca(idTipoPlaca);
+		tipoTrabajoDetalle.getTipoComplejidad().setIdTipoComplejidad(idTipoComplejidad);
+		
+		tipoTrabajoDetalleService.modificaTipoTrabajoDetalle(tipoTrabajoDetalle);
+		
+		JsonResponse jsonResponse = new JsonResponse();
+		jsonResponse.setEstatusOperacion(1);
+		
 		// INSTRUCCIONES:
-		// elimina los pliegos ya existentes porque hay nueva informacion y debe calculrse  nuevos pliegos
+		// elimina los pliegos ya existentes porque hay nueva informacion y debe calcularse  nuevos pliegos
 		// y se elimina logicamente la calificacion de esos pliegos ya existentes.
 		// POR TANTO, SI ACEPTA LOS NUEVOS PLIEGOS:
 		// 1) se debe saber cuales son los pliegos eliminados

@@ -23,46 +23,48 @@ function setCampos( id_papel_sobrante, inicio_tabulador, fin_tabulador, num_tint
         document.forms[0].tinta_especial[0].checked = true;
     else
         document.forms[0].tinta_especial[1].checked = true;
-    
+}
+
+function validaForm() {
+	var correcto = true;
+	if ( document.forms[0].inicio_tabulador.value == "" 
+			|| document.forms[0].fin_tabulador.value == "" 
+			|| document.forms[0].num_tinta_frente.value == "" 
+			|| document.forms[0].num_tinta_vuelta.value == "" 
+			|| document.forms[0].hojas_sobrante.value == "" ) {
+		correcto = false;
+		alert("Los campos Tabulador inicio, Tabulador fin, No. tinta frente, No. tinta vuelta, Hojas sobrante son obligatorios, favor de informarlos");
+	}
+	if ( isNaN(document.forms[0].inicio_tabulador.value)
+			|| isNaN(document.forms[0].fin_tabulador.value)
+			|| isNaN(document.forms[0].num_tinta_frente.value)
+			|| isNaN(document.forms[0].num_tinta_vuelta.value)
+			|| isNaN(document.forms[0].hojas_sobrante.value) ) {
+		correcto = false;
+		alert("Los campos Tabulador inicio, Tabulador fin, No. tinta frente, No. tinta vuelta y Hojas sobrante deben ser numeros validos.");
+	}
+	return correcto;
 }
 
 function crear() {
-
-    if( document.forms[0].inicio_tabulador.value    == "" &&
-        document.forms[0].fin_tabulador.value       == "" &&
-        document.forms[0].num_tinta_frente.value    == "" &&
-        document.forms[0].num_tinta_vuelta.value    == "" &&
-        document.forms[0].hojas_sobrante.value      == "" ) {
-        alert("Los campos Tabulador inicio, Tabulador fin, No. tinta frente, No. tinta vuelta, Hojas sobrante son obligatorios, favor de informarlos");
-    } else {
+    if( validaForm() ) {
         document.forms[0].action = urlAlta;
         document.forms[0].submit();
     }
-
 }
 
 function modifica() {
-
-    if( document.forms[0].inicio_tabulador.value    == "" &&
-        document.forms[0].fin_tabulador.value       == "" &&
-        document.forms[0].num_tinta_frente.value    == "" &&
-        document.forms[0].num_tinta_vuelta.value    == "" &&
-        document.forms[0].hojas_sobrante.value      == "" ) {
-        alert("Los campos Tabulador inicio, Tabulador fin, No. tinta frente, No. tinta vuelta, Hojas sobrante son obligatorios, favor de informarlos");
-    } else {
+    if( validaForm() ) {
         document.forms[0].action = urlModifica;
         document.forms[0].submit();
     }
-    
 }
 
 function elimina() {
- 
     if (confirm(String.fromCharCode(191) + "Realmente desea eliminar este registro?")) {
         document.forms[0].action = urlElimina;
         document.forms[0].submit();
     }
-    
 }
 
 function limpia() {
