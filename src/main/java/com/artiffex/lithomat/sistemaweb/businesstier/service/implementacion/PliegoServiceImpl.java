@@ -545,6 +545,215 @@ public class PliegoServiceImpl implements PliegoService {
 		
 		return html.toString();
 	}
+	
+	public String listaHTMLModificacion(int idTipoTrabajoDetalle) {
+		// lista de pliegos
+				DecimalFormat formato = new DecimalFormat("#,###");
+				List<Pliego> lista = pliegoDAO.listaPorTipoTrabajoDetalle(idTipoTrabajoDetalle);
+
+				StringBuilder html = new StringBuilder();
+				html.append("<table id=\'tabla_lista_pliegos\'>");
+
+				html.append("<tr>");
+				html.append("<th>No. Pgo</th>");
+				html.append("<th>Rebase (mm.)</th>");
+				html.append("<th>Medianiles (mm.)</th>");
+				html.append("<th>Pinzas (cm.)</th>");
+				html.append("<th>H. Requeridas</th>");
+				html.append("<th>H. Sobrantes</th>");
+				html.append("<th>H. Totales</th>");
+				html.append("<th width=\'20%\'>Observaciones</th>");
+				html.append("<th>Frente Ent. M&aacute;quina</th>");
+				html.append("<th>Frente No. Placas</th>");
+				html.append("<th>Vuelta Ent. M&aacute;quina</th>");
+				html.append("<th>Vuelta No. Placas</th>");
+				html.append("</tr>");
+
+				int cont 					= 0;
+				int totalHojasRequeridas 	= 0;
+				int totalHojasSobrantes 	= 0;
+				int totalHojasTotales 		= 0;
+				int totalEntradasFrente 	= 0;
+				int totalEntradasVuelta 	= 0;
+				int totalPlacasFrente 		= 0;
+				int totalPlacasVuelta 		= 0;
+
+				if (lista.size() > 0) {
+					for (Pliego pliego : lista) {
+						html.append("<tr class=\'");
+						if (cont % 2 == 0)
+							html.append("l1");
+						else
+							html.append("l2");
+						html.append("\' ");
+						html.append("onclick=\'setCamposPliego("
+								+ "&#39;" + pliego.getIdPliego() + "&#39;,"
+								+ "&#39;" + (cont + 1) + "&#39;,"
+								+ "&#39;" + pliego.getRebaseEnMilimetros() + "&#39;,"
+								+ "&#39;" + pliego.getMedianilesEnMilimetros() + "&#39;,"
+								+ "&#39;" + pliego.getPinzasEnCentimetros() + "&#39;,"
+								+ "&#39;" + pliego.getHojasSobrantes() + "&#39;,"
+								+ "&#39;" + pliego.getObservaciones() + "&#39;"
+								+ ")\'");
+						html.append(">");
+
+						html.append("<td>");
+						html.append(cont + 1);
+						html.append("</td>");
+
+						html.append("<td>");
+						html.append(pliego.getRebaseEnMilimetros());
+						html.append("</td>");
+
+						html.append("<td>");
+						html.append(pliego.getMedianilesEnMilimetros());
+						html.append("</td>");
+
+						html.append("<td>");
+						html.append(pliego.getPinzasEnCentimetros());
+						html.append("</td>");
+
+						html.append("<td>");
+						html.append(formato.format(pliego.getHojasRequeridas()));
+						html.append("</td>");
+
+						totalHojasRequeridas += pliego.getHojasRequeridas();
+
+						html.append("<td>");
+						html.append(formato.format(pliego.getHojasSobrantes()));
+						html.append("</td>");
+
+						totalHojasSobrantes += pliego.getHojasSobrantes();
+
+						html.append("<td>");
+						html.append(formato.format(pliego.getHojasTotales()));
+						html.append("</td>");
+
+						totalHojasTotales += pliego.getHojasTotales();
+
+						html.append("<td>");
+						html.append(pliego.getObservaciones());
+						html.append("</td>");
+
+						html.append("<td>");
+						html.append(pliego.getFrenteNumEntradasMaquinaTinta() + pliego.getFrenteNumEntradasMaquinaTintaEspecial() + pliego.getFrenteNumEntradasMaquinaBarniz());
+						html.append("</td>");
+
+						totalEntradasFrente += pliego.getFrenteNumEntradasMaquinaTinta() + pliego.getFrenteNumEntradasMaquinaTintaEspecial() + pliego.getFrenteNumEntradasMaquinaBarniz();
+
+						html.append("<td>");
+						html.append(pliego.getFrenteNumTotalPlacas());
+						html.append("</td>");
+
+						totalPlacasFrente += pliego.getFrenteNumTotalPlacas();
+
+						html.append("<td>");
+						html.append(pliego.getVueltaNumEntradasMaquinaTinta() + pliego.getVueltaNumEntradasMaquinaTintaEspecial() + pliego.getVueltaNumEntradasMaquinaBarniz());
+						html.append("</td>");
+
+						totalEntradasVuelta += pliego.getVueltaNumEntradasMaquinaTinta() + pliego.getVueltaNumEntradasMaquinaTintaEspecial() + pliego.getVueltaNumEntradasMaquinaBarniz();
+
+						html.append("<td>");
+						html.append(pliego.getVueltaNumTotalPlacas());
+						html.append("</td>");
+
+						totalPlacasVuelta += pliego.getVueltaNumTotalPlacas();
+
+						html.append("</tr>");
+
+						cont++;
+					}
+				} else {
+					html.append("<tr class=\'");
+					html.append("l1");
+					html.append("\'>");
+
+					html.append("<td>");
+					html.append("&nbsp;");
+					html.append("</td>");
+
+					html.append("<td>");
+					html.append("&nbsp;");
+					html.append("</td>");
+
+					html.append("<td>");
+					html.append("&nbsp;");
+					html.append("</td>");
+
+					html.append("<td>");
+					html.append("&nbsp;");
+					html.append("</td>");
+
+					html.append("<td>");
+					html.append("&nbsp;");
+					html.append("</td>");
+
+					html.append("<td>");
+					html.append("&nbsp;");
+					html.append("</td>");
+
+					html.append("<td>");
+					html.append("&nbsp;");
+					html.append("</td>");
+
+					html.append("<td>");
+					html.append("&nbsp;");
+					html.append("</td>");
+
+					html.append("<td>");
+					html.append("&nbsp;");
+					html.append("</td>");
+
+					html.append("<td>");
+					html.append("&nbsp;");
+					html.append("</td>");
+
+					html.append("<td>");
+					html.append("&nbsp;");
+					html.append("</td>");
+
+					html.append("<td>");
+					html.append("&nbsp;");
+					html.append("</td>");
+
+					html.append("</tr>");
+				}
+
+				html.append("<tr>");
+				html.append("<td><i>TOTAL</i></td>");
+				html.append("<td></td>");
+				html.append("<td></td>");
+				html.append("<td></td>");
+				html.append("<td><i>");
+				html.append(formato.format(totalHojasRequeridas));
+				html.append("</i></td>");
+				html.append("<td><i>");
+				html.append(formato.format(totalHojasSobrantes));
+				html.append("</i></td>");
+				html.append("<td><i>");
+				html.append(formato.format(totalHojasTotales));
+				html.append("</i></td>");
+				html.append("<td></td>");
+				html.append("<td><i>");
+				html.append(formato.format(totalEntradasFrente));
+				html.append("</i></td>");
+				html.append("<td><i>");
+				html.append(formato.format(totalPlacasFrente));
+				html.append("</i></td>");
+				html.append("<td><i>");
+				html.append(formato.format(totalEntradasVuelta));
+				html.append("</i></td>");
+				html.append("<td><i>");
+				html.append(formato.format(totalPlacasVuelta));
+				html.append("</i></td>");
+				html.append("</tr>");
+				html.append("</table>");
+
+				lista = null;
+				formato = null;
+				
+				return html.toString();
+	}
 
 	public List<Integer> eliminaPliegoPorTipoTrabajoDetalle(int idTipoTrabajoDetalle) {
 		List<Integer> listaIdPliegoEliminado = new ArrayList<Integer>();

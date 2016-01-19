@@ -20,6 +20,8 @@ public interface PliegoService {
 	
 	public String buscaHTML(int idTipoTrabajoDetalle);
 	
+	public String listaHTMLModificacion(int idTipoTrabajoDetalle);
+	
 	public List<Integer> eliminaPliegoPorTipoTrabajoDetalle(int idTipoTrabajoDetalle);
 	
 	public void activaPliego(int idPliego);

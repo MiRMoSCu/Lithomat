@@ -285,7 +285,8 @@ function buscaTrabajoDetalle( id_tipo_trabajo_detalle ) {
         success:function( response ) {
         	//console.log(response);
         	// set id_tipo_trabajo_detalle
-        	document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value 	= id_tipo_trabajo_detalle;
+        	document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value = id_tipo_trabajo_detalle;
+        	document.visualizador_pliegos.id_tipo_trabajo_detalle.value	= id_tipo_trabajo_detalle;
         	document.costo_extra_detalle.id_tipo_trabajo_detalle.value 	= id_tipo_trabajo_detalle;
         	
             var detallePartidaJson = JSON.parse( response.textoJson );

@@ -53,6 +53,8 @@ function ocultaBotonesModificarPorSeccion() {
 		document.getElementById("div_btn_actualizar_partida").style.display 			= "none";
 	if ( document.getElementById("div_btn_actualizar_ttd_encabezado") )
 		document.getElementById("div_btn_actualizar_ttd_encabezado").style.display 		= "none";
+	if ( document.getElementById("div_btn_actualizar_pliego") )
+		document.getElementById("div_btn_actualizar_pliego").style.display 				= "none";
 	if ( document.getElementById("div_btn_actualizar_costo_extra_detalle") )
 		document.getElementById("div_btn_actualizar_costo_extra_detalle").style.display = "none";
 	if ( document.getElementById("div_btn_agregar_costo_extra_detalle") )
@@ -96,6 +98,8 @@ function muestraBotonesModificarPorSeccion() {
 		document.getElementById("div_btn_actualizar_partida").style.display 			= "inline";
 	if ( document.getElementById("div_btn_actualizar_ttd_encabezado") )
 		document.getElementById("div_btn_actualizar_ttd_encabezado").style.display 		= "inline";
+	if ( document.getElementById("div_btn_actualizar_pliego") )
+		document.getElementById("div_btn_actualizar_pliego").style.display 				= "inline";
 	if ( document.getElementById("div_btn_actualizar_costo_extra_detalle") )
 		document.getElementById("div_btn_actualizar_costo_extra_detalle").style.display = "inline";
 	if ( document.getElementById("div_btn_agregar_costo_extra_detalle") )

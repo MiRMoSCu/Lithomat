@@ -46,6 +46,7 @@
                                                                     class="input"
                                                                     name="rebase_en_milimetros"
                                                                     value="5"
+                                                                    maxlength="2"
                                                                     onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                         </td>
                                                     </tr>
@@ -62,6 +63,7 @@
                                                                     class="input"
                                                                     name="medianiles_en_milimetros"
                                                                     value="5"
+                                                                    maxlength="2"
                                                                     onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                         </td>
                                                     </tr>
@@ -78,6 +80,7 @@
                                                                     class="input"
                                                                     name="pinzas_en_centimetros"
                                                                     value="1"
+                                                                    maxlength="2"
                                                                     onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                         </td>
                                                     </tr>

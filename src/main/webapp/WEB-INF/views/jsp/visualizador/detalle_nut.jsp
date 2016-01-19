@@ -15,6 +15,7 @@
 <c:url value="/tipo_trabajo_detalle/actualiza_con_pliegos"  var="urlActualizaTipoTrabajoDetalleConPliegos"/>
 <c:url value="/pliego/calcula"              				var="urlCalculaPliego"/>
 <c:url value="/pliego/activa_lista"            				var="urlActivaListaPliegos"/>
+<c:url value="/pliego/actualiza"            				var="urlActualizaPliego"/>
 <c:url value="/costo_extra_detalle/ventana" 				var="urlCostoExtraDetalle"/>
 <c:url value="/costo_extra_detalle/busca_unidad_medida" 	var="urlBuscaUnidadMedidaCostoExtra"/>
 <c:url value="/costo_extra_detalle/agrega_olvidado" 		var="urlAgregaCostoExtraDetalleOlvidado"/>
@@ -59,6 +60,7 @@
         <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_orden_produccion_modificacion.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_partida_modificacion.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_tipo_trabajo_detalle_modificacion.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_pliego_modificacion.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_costo_extra_detalle_agrega.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_costo_extra_detalle_modificacion.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_disenio_modificacion.js"/>"></script>
@@ -98,6 +100,7 @@
             var urlActualizaTipoTrabajoDetalleConPliegos	= "${urlActualizaTipoTrabajoDetalleConPliegos}";
             var urlCalculaPliego            				= "${urlCalculaPliego}";
             var urlActivaListaPliegos						= "${urlActivaListaPliegos}";
+            var urlActualizaPliego							= "${urlActualizaPliego}";
             var urlCostoExtraDetalle						= "${urlCostoExtraDetalle}";
             var urlBuscaUnidadMedidaCostoExtra				= "${urlBuscaUnidadMedidaCostoExtra}";
             var urlAgregaCostoExtraDetalleOlvidado			= "${urlAgregaCostoExtraDetalleOlvidado}";
@@ -1499,9 +1502,15 @@
                                         </c:if>
                                     </form>
                                 </div>
+                                
+                                
+                                
 							<!-- div_visualizador_pliegos -->
                                 <div id="div_visualizador_pliegos" style="display:none;">
                                     <form name="visualizador_pliegos" action="" accept-charset="ISO-8859-1">
+                                    	<input type="hidden" name="id_orden_produccion" value="${ordenProduccion.idOrdenProduccion}"/>
+                                    	<input type="hidden" name="id_tipo_trabajo_detalle" value=""/>
+                                    	<input type="hidden" name="id_pliego" value=""/>
                                         <div class="div_separador_mediano">
                                             <img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
                                         </div>                                
@@ -1571,6 +1580,143 @@
                                                     </table>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <c:if test="${historialEstatus.estatusOrden.idEstatusOrden != estatus_finalizado}">
+                                        	<div style="width:800px; margin-left: auto; margin-right: auto; overflow-x: scroll;">
+                                        		<div class="linea" style="padding-top: 5px;">
+                                        			<div class="casilla" style="text-align: right;">
+                                        				<div id="div_btn_actualizar_pliego">
+                                        					<img id="imgBtnModificarPliego" alt="" style="cursor:pointer;" onclick="modificaTablaPliego();" src="<c:url value="/resources/image/boton_modificar.jpg"/>">
+                                        					
+                                        					<span id="imgBtnCancelaModificarPliego" style="cursor:pointer; display:none;" onclick="cancelaModificarPliego();">
+			                                    				<font color="gray">CANCELAR</font>
+			                                    			</span>
+			                                    			<span id="imgBtnAceptaModificarPliego" style="cursor:pointer; display:none;" onclick="aceptaModificarPliego();">
+			                                    				<font color="blue">ACEPTAR</font>
+			                                    			</span>
+                                        				</div>
+                                        			</div>
+                                        		</div>
+                                        	</div>
+                                        </c:if>
+                                        <div style="width: 100%;">
+                                        	<div class="linea">
+                                        		<div class="casilla">
+                                        			<div class="columna_izquierda">
+                                        				<div class="mitad_columna_izquierda">
+                                        					<div class="columna_completa">
+                                        						<table>
+                                        							<tr>
+                                        								<td width="1%">Pliego:</td>
+                                        								<td>
+                                        									<input 	type="text"
+                                        											class="input"
+                                        											name="numero_pliego"
+                                        											value=""
+                                        											readonly/>
+                                        								</td>
+                                        							</tr>
+                                        						</table>
+                                        					</div>
+                                        				</div>
+                                        				<div class="mitad_columna_derecha">
+                                        					<div class="columna_completa">
+                                        						<table>
+                                        							<tr>
+                                        								<td width="1%">Rebases:</td>
+                                        								<td>
+                                        									<input 	type="text"
+                                        											class="input"
+                                        											name="rebases"
+                                        											value=""
+                                        											maxlength="2"
+                                        											onkeydown="revisaNumero(false, this.value, event, null, null)"
+                                        											readonly/>
+                                        								</td>
+                                        							</tr>
+                                        						</table>
+                                        					</div>
+                                        				</div>
+                                        			</div>
+                                        			<div class="columna_derecha">
+                                        				<div class="mitad_columna_izquierda">
+                                        					<div class="columna_completa">
+                                        						<table>
+                                        							<tr>
+                                        								<td width="1%">Medianiles:</td>
+                                        								<td>
+                                        									<input 	type="text"
+                                        											class="input"
+                                        											name="medianiles"
+                                        											value=""
+                                        											maxlength="2"
+                                        											onkeydown="revisaNumero(false, this.value, event, null, null)"
+                                        											readonly/>
+                                        								</td>
+                                        							</tr>
+                                        						</table>
+                                        					</div>
+                                        				</div>
+                                        				<div class="mitad_columna_derecha">
+                                        					<div class="columna_completa">
+                                        						<table>
+                                        							<tr>
+                                        								<td width="1%">Pinzas:</td>
+                                        								<td>
+                                        									<input 	type="text"
+                                        											class="input"
+                                        											name="pinzas"
+                                        											value=""
+                                        											maxlength="2"
+                                        											onkeydown="revisaNumero(false, this.value, event, null, null)"
+                                        											readonly/>
+                                        								</td>
+                                        							</tr>
+                                        						</table>
+                                        					</div>
+                                        				</div>
+                                        			</div>
+                                        		</div>
+                                        	</div>
+                                        	<div class="linea">
+                                        		<div class="casilla">
+                                        			<div class="columna_izquierda">
+                                        				<div class="mitad_columna_derecha">
+                                        					<div class="columna_completa">
+                                        						<table>
+                                        							<tr>
+                                        								<td width="25%">H. Sob:</td>
+                                        								<td>
+                                        									<input 	type="text"
+                                        											class="input"
+                                        											name="hojas_sobrantes"
+                                        											value=""
+                                        											onkeydown="revisaNumero(false, this.value, event, null, null)"
+                                        											readonly/>
+                                        								</td>
+                                        							</tr>
+                                        						</table>
+                                        					</div>
+                                        				</div>
+                                        			</div>
+                                        			<div class="columna_derecha">
+                                        				<div class="columna_completa">
+                                        					<table>
+                                        						<tr>
+                                        							<td width="1%">Observaciones:</td>
+                                        							<td>
+                                        								<input 	type="text"
+                                       											class="input"
+                                       											name="observaciones"
+                                       											value=""
+                                       											readonly/>
+                                        							</td>
+                                        						</tr>
+                                        					</table>
+                                        				</div>
+                                        			</div>
+                                        		</div>
+                                        	</div>
                                         </div>
                                     </form>
                                 </div>
@@ -1681,9 +1827,7 @@
 			                                									style="display:inline;"
 			                                									value=""
 			                                									readonly/>
-			                                							<select name="select_costo_extra" id="select_costo_extra" style="display:none;" onchange="ajaxUnidadCostoExtra()" disabled>
-
-			                                							</select>
+			                                							<select name="select_costo_extra" id="select_costo_extra" style="display:none;" onchange="ajaxUnidadCostoExtra()" disabled></select>
 			                                						</td>
 			                                					</tr>
 			                                				</table>

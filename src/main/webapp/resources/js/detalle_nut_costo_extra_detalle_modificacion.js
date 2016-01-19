@@ -14,8 +14,6 @@ function desactivaBotonesModificarFormCostoExtraDetalle() {
 	document.getElementById("imgBtnAceptaModificarCostoExtraDetalle").style.display 	= "none";
 }
 
-
-
 function setCamposCostoExtraDetalle( id_costo_extra_detalle, id_responsable_insumo, id_costo_extra, nombre_costo_extra, nombre_responsable, cantidad, especificacion, unidad_medida ) {
 	if( modificaCostoExtraDetalle ) {
 		document.costo_extra_detalle.id_costo_extra_detalle.value 			= id_costo_extra_detalle;

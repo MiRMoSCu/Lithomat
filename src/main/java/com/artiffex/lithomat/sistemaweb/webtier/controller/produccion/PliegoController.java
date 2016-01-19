@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionOrdenProduccion;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.JsonResponse;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Pliego;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajoDetalle;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CalificacionService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PliegoService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoVueltaService;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
@@ -32,6 +34,8 @@ public class PliegoController {
 	private PliegoService pliegoService;
 	@Resource
 	private TipoVueltaService tipoVueltaService;
+	@Resource
+	private CalificacionService calificacionService;
 	
 
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
@@ -111,5 +115,44 @@ public class PliegoController {
 		}
 		return jsonResponse;
 	} // activaListaPliegos
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
+	@RequestMapping(value="/actualiza", method = RequestMethod.POST)
+	@ResponseBody
+	public JsonResponse actualiza(
+			@RequestParam(value = "id_orden_produccion", 		required = false) Integer idOrdenProduccion,
+			@RequestParam(value = "id_tipo_trabajo_detalle", 	required = false) Integer idTipoTrabajoDetalle,
+			@RequestParam(value = "id_pliego", 					required = false) Integer idPliego,
+			@RequestParam(value = "rebases", 					required = false) Integer rebaseEnMilimetros,
+			@RequestParam(value = "medianiles", 				required = false) Integer medianilesEnMilimetros,
+			@RequestParam(value = "pinzas", 					required = false) Integer pinzasEnCentimetros,
+			@RequestParam(value = "hojas_sobrantes", 			required = false) Integer hojasSobrantes,
+			@RequestParam(value = "observaciones", 				required = false) String observaciones
+		) {
+		
+		Pliego pliego = pliegoService.buscaPliego(idPliego);
+		int hojasTotales = pliego.getHojasRequeridas() + hojasSobrantes;
+		pliego.setRebaseEnMilimetros(rebaseEnMilimetros);
+		pliego.setMedianilesEnMilimetros(medianilesEnMilimetros);
+		pliego.setPinzasEnCentimetros(pinzasEnCentimetros);
+		pliego.setObservaciones(observaciones);
+		pliego.setHojasSobrantes(hojasSobrantes);
+		pliego.setHojasTotales(hojasTotales);
+		pliegoService.modificaPliego(pliego);
+		pliego = null;
+		
+		// actualiza el precio
+		calificacionService.actualizaPartida(idOrdenProduccion);
+		// busca precio neto
+		CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionService.buscaCalificacionOrdenProduccion(idOrdenProduccion);
+		// genera respuesta
+		JsonResponse jsonResponse = new JsonResponse();
+		jsonResponse.setTextoHTML(pliegoService.listaHTMLModificacion(idTipoTrabajoDetalle));
+		jsonResponse.setPrecioNeto(calificacionOrdenProduccion.getPrecioNeto());
+		
+		calificacionOrdenProduccion = null;
+		
+		return jsonResponse;
+	}
 	
 }

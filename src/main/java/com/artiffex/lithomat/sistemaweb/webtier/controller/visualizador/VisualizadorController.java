@@ -470,7 +470,7 @@ public class VisualizadorController {
 		sb.append(gson.toJson(tipoTrabajoDetalle));
 		sb.append(",");
 		sb.append("\"lista_pliegos\":");
-		sb.append("\"" + pliegoService.buscaHTML(idTipoTrabajoDetalle) + "\"");
+		sb.append("\"" + pliegoService.listaHTMLModificacion(idTipoTrabajoDetalle) + "\"");
 		sb.append(",");
 		sb.append("\"lista_costo_extra_detalle\":");
 		sb.append("\"" + costoExtraDetalleService.listaHTMLModificacion(idTipoTrabajoDetalle) + "\"");
