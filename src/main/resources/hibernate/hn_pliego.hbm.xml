@@ -20,8 +20,8 @@
 			<column name="medianiles_en_milimetros"/>
 			<type name="integer"/>
 		</property>
-		<property name="pinzasEnCentimetros">
-			<column name="pinzas_en_centimetros"/>
+		<property name="pinzasEnMilimetros">
+			<column name="pinzas_en_milimetros"/>
 			<type name="integer"/>
 		</property>
 		<property name="observaciones">

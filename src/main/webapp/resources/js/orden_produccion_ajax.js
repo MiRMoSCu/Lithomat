@@ -162,6 +162,12 @@ function ajaxAgregaOrdenProduccion() {
         alert("Campos Nombre y Descripcion de la orden de procducci\u00f3n no pueden estar vac\u00edos. Favor de informarlos.");
     }
     
+    if ( correcto
+    		&& document.orden_produccion.fecha_prometida_entrega.value == "" ) {
+    	correcto = false;
+    	alert("Campo Fecha de Entrega no puede estar vac\u00EDo. Favor de informarlo");
+    }
+    
     if( correcto ) {
         document.body.style.cursor = "wait";
         // form cliente desactiva campos
@@ -266,6 +272,7 @@ function ajaxAgregaPartida() {
         
         // para enviar file input con ajax se usa formData
         var formData = new FormData( document.forms["partida"] ); 
+        //console.log(formData);
         $.ajax({
             type:"POST",
             url:urlAgregaPartida,
@@ -369,8 +376,8 @@ function ajaxAgregaTipoTrabajoDetalle() {
     
     var id_tipo_trabajo                     = document.forms["partida"].elements["id_tipo_trabajo"].value;
     var descripcion_partida_detalle         = document.forms["tipo_trabajo_detalle"].elements["descripcion_partida_detalle"].value;
-    var ancho                               = document.forms["tipo_trabajo_detalle"].elements["ancho"].value;
-    var alto                                = document.forms["tipo_trabajo_detalle"].elements["alto"].value;
+    var alto_final                          = document.forms["tipo_trabajo_detalle"].elements["alto_final"].value;
+    var ancho_final                         = document.forms["tipo_trabajo_detalle"].elements["ancho_final"].value;
     var repeticiones_x_pliego               = document.forms["tipo_trabajo_detalle"].elements["repeticiones_x_pliego"].value;
     var numero_paginas_publicacion          = document.forms["tipo_trabajo_detalle"].elements["numero_paginas_publicacion"].value;
     var descripcion_tipo_papel_extendido	= document.forms["tipo_trabajo_detalle"].elements["tipo_papel_extendido"].value;
@@ -391,18 +398,18 @@ function ajaxAgregaTipoTrabajoDetalle() {
         alert("El campo descripci\u00f3n no puede estar vac\u00edo. Favor de informarlos.");
     }
     if ( correcto 
-    		&& isNaN(alto) ) {
+    		&& isNaN(alto_final) ) {
     	 correcto = false;
-    	 alert("El campo alto debe ser num\u00E9rico");
-    	 document.forms["tipo_trabajo_detalle"].elements["alto"].value = "";
-    	 document.forms["tipo_trabajo_detalle"].elements["alto"].focus();
+    	 alert("El campo alto final debe ser num\u00E9rico");
+    	 document.forms["tipo_trabajo_detalle"].elements["alto_final"].value = "";
+    	 document.forms["tipo_trabajo_detalle"].elements["alto_final"].focus();
     }
     if ( correcto 
-    		&& isNaN(ancho) ) {
+    		&& isNaN(ancho_final) ) {
     	 correcto = false;
-    	 alert("El campo ancho debe ser num\u00E9rico");
-    	 document.forms["tipo_trabajo_detalle"].elements["ancho"].value = "";
-    	 document.forms["tipo_trabajo_detalle"].elements["ancho"].focus();
+    	 alert("El campo ancho final debe ser num\u00E9rico");
+    	 document.forms["tipo_trabajo_detalle"].elements["ancho_final"].value = "";
+    	 document.forms["tipo_trabajo_detalle"].elements["ancho_final"].focus();
     }
     if ( correcto 
     		&& isNaN(document.forms["tipo_trabajo_detalle"].elements["alto_extendido"].value)) {
@@ -596,8 +603,8 @@ function ajaxAgregaTipoTrabajoDetalle() {
     } // if correcto
     
     delete descripcion_partida_detalle;
-    delete ancho;
-    delete alto;
+    delete alto_final;
+    delete ancho_final;
     delete id_tipo_trabajo;
     delete repeticiones_x_pliego;
     delete numero_paginas_publicacion;

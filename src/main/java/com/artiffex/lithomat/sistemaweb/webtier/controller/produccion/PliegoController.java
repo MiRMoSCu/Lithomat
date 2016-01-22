@@ -67,7 +67,7 @@ public class PliegoController {
 			@RequestParam(value = "id_tipo_trabajo_detalle", 	required = false) Integer idTipoTrabajoDetalle,
 			@RequestParam(value = "rebase_en_milimetros", 		required = false) Integer rebaseEnMilimetros,
 			@RequestParam(value = "medianiles_en_milimetros", 	required = false) Integer medianilesEnMilimetros,
-			@RequestParam(value = "pinzas_en_centimetros", 		required = false) Integer pinzasEnCentimetros,
+			@RequestParam(value = "pinzas_en_milimetros", 		required = false) Integer pinzasEnMilimetros,
 			@RequestParam(value = "json", 						required = false) String json
 		) {
 		log.info("/agrega_pliego");
@@ -78,7 +78,7 @@ public class PliegoController {
 		pliego.setTipoTrabajoDetalle(tipoTrabajoDetalle);
 		pliego.setRebaseEnMilimetros(rebaseEnMilimetros);
 		pliego.setMedianilesEnMilimetros(medianilesEnMilimetros);
-		pliego.setPinzasEnCentimetros(pinzasEnCentimetros);
+		pliego.setPinzasEnMilimetros(pinzasEnMilimetros);
 		pliego.setActivo(true);
 		
 		pliegoService.creaPliego(pliego, json);	
@@ -125,7 +125,7 @@ public class PliegoController {
 			@RequestParam(value = "id_pliego", 					required = false) Integer idPliego,
 			@RequestParam(value = "rebases", 					required = false) Integer rebaseEnMilimetros,
 			@RequestParam(value = "medianiles", 				required = false) Integer medianilesEnMilimetros,
-			@RequestParam(value = "pinzas", 					required = false) Integer pinzasEnCentimetros,
+			@RequestParam(value = "pinzas", 					required = false) Integer pinzasEnMilimetros,
 			@RequestParam(value = "hojas_sobrantes", 			required = false) Integer hojasSobrantes,
 			@RequestParam(value = "observaciones", 				required = false) String observaciones
 		) {
@@ -134,7 +134,7 @@ public class PliegoController {
 		int hojasTotales = pliego.getHojasRequeridas() + hojasSobrantes;
 		pliego.setRebaseEnMilimetros(rebaseEnMilimetros);
 		pliego.setMedianilesEnMilimetros(medianilesEnMilimetros);
-		pliego.setPinzasEnCentimetros(pinzasEnCentimetros);
+		pliego.setPinzasEnMilimetros(pinzasEnMilimetros);
 		pliego.setObservaciones(observaciones);
 		pliego.setHojasSobrantes(hojasSobrantes);
 		pliego.setHojasTotales(hojasTotales);

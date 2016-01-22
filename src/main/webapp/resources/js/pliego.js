@@ -1,7 +1,7 @@
 function limpiaRebase() {
     document.forms[0].rebase_en_milimetros.value        = "0";
     document.forms[0].medianiles_en_milimetros.value    = "0";
-    document.forms[0].pinzas_en_centimetros.value       = "0";
+    document.forms[0].pinzas_en_milimetros.value       = "0";
 }
 
 
@@ -29,7 +29,7 @@ function setCampos( numero_pliego, hojas_requeridas, hojas_sobrantes, hojas_tota
         document.forms[0].mismas_placas.checked = false;
     }
     for( var i = 0; i < document.forms[0].tipo_vuelta.length; i++ ) {
-        if( document.forms[0].tipo_vuelta.options[i].innerText == descripcion_tipo_vuelta ) {
+        if( document.forms[0].tipo_vuelta.options[i].text == descripcion_tipo_vuelta ) {
             document.forms[0].tipo_vuelta.selectedIndex = i;
             break;
         }
@@ -161,6 +161,8 @@ function agregaRegistro() {
         pliego.observaciones        = tableDOM.rows[i].cells[4].innerHTML;
         pliego.vuelta_mismas_placas = tableDOM.rows[i].cells[5].innerHTML.trim() == "Si" ? true : false ;
         for( var j=0; j<document.forms[0].tipo_vuelta.length; j++ ) {
+        	console.log( tableDOM.rows[i].cells[6].innerHTML );
+        	console.log( document.forms[0].tipo_vuelta.options[j].text );
             if( tableDOM.rows[i].cells[6].innerHTML == document.forms[0].tipo_vuelta.options[j].text ) {
                 pliego.id_tipo_vuelta = document.forms[0].tipo_vuelta.options[j].value;
                 break;

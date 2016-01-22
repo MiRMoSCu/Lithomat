@@ -74,12 +74,12 @@
                                             <div class="columna_completa">
                                                 <table>
                                                     <tr>
-                                                        <td width="62%">Pinzas (cm):</td>
+                                                        <td width="63%">Pinzas (mm):</td>
                                                         <td>
                                                             <input  type="text"
                                                                     class="input"
-                                                                    name="pinzas_en_centimetros"
-                                                                    value="1"
+                                                                    name="pinzas_en_milimetros"
+                                                                    value="10"
                                                                     maxlength="2"
                                                                     onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                         </td>
@@ -101,14 +101,14 @@
                                     <div id="div_tabla_pliego">
                                         <table id="tabla_hojas_pliego">
                                             <tr>
-                                                <th>Pgo.</th>
+                                                <th>No. Pgo.</th>
                                                 <th>H. Req.</th>
                                                 <th>H. Sobr.</th>
                                                 <th>H. Tot.</th>
                                                 <th>Observaciones.</th>
                                                 <th>¿Vuelta mismas placas?</th>
                                                 <th width="20%">Tipo vuelta</th>
-                                                <th>Dec.</th>
+                                                <th>Pgo.</th>
                                             </tr>
                                         <c:forEach var="pliego" items="${listaPliego}" varStatus="i">
                                             <tr class='${i.count%2==0?"l1":"l2"}'

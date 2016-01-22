@@ -13,6 +13,7 @@ public class OrdenTrabajoPliego implements Serializable {
 	private Integer hojasTotales;
 	private String frenteEntMaq;
 	private String vueltaEntMaq;
+	private String tipoVuelta;
 	private Integer rebases;
 	private Integer medianiles;
 	private Integer pinzas;
@@ -59,6 +60,12 @@ public class OrdenTrabajoPliego implements Serializable {
 	}
 	public void setVueltaEntMaq(String vueltaEntMaq) {
 		this.vueltaEntMaq = vueltaEntMaq;
+	}
+	public String getTipoVuelta() {
+		return tipoVuelta;
+	}
+	public void setTipoVuelta(String tipoVuelta) {
+		this.tipoVuelta = tipoVuelta;
 	}
 	public Integer getRebases() {
 		return rebases;

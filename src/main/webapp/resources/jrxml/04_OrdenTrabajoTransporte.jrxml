@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2016-01-02T00:30:23 -->
+<!-- 2016-01-21T02:37:06 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdenTrabajoTransporte" pageWidth="570" pageHeight="185" columnWidth="570" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e9a0b461-b3b4-4723-bb1a-3c6d12992121">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<parameter name="SUBREPORT_TRANSPORTE_DETALLE" class="java.lang.String"/>
@@ -65,11 +65,11 @@
 				<text><![CDATA[Transporte]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="145" y="0" width="415" height="20" isRemoveLineWhenBlank="true" forecolor="#871BB5" uuid="c3809cda-b066-4bbf-a809-ff29805aed14">
+				<reportElement positionType="Float" x="140" y="0" width="420" height="20" isRemoveLineWhenBlank="true" forecolor="#871BB5" uuid="c3809cda-b066-4bbf-a809-ff29805aed14">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<text><![CDATA[Fecha entrada: __________________. Fecha salida: __________________.]]></text>
+				<text><![CDATA[Fecha entrada: ______________. Fecha salida: ______________. Firma: ______________.]]></text>
 			</staticText>
 		</band>
 		<band height="55" splitType="Stretch">

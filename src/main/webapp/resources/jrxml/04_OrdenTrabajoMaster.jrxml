@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2016-01-02T00:50:59 -->
+<!-- 2016-01-21T17:02:51 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdenProduccion" pageWidth="590" pageHeight="842" columnWidth="580" leftMargin="5" rightMargin="5" topMargin="5" bottomMargin="5" uuid="f0b5206b-deb3-40ee-a30a-3afb64785693">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<parameter name="SUBREPORT_PARTIDA" class="java.lang.String"/>
@@ -16,6 +16,7 @@
 	<parameter name="SUBREPORT_MATERIAL_AYUDA" class="java.lang.String"/>
 	<parameter name="SUBREPORT_TIPO_TRABAJO_DETALLE" class="java.lang.String"/>
 	<parameter name="SUBREPORT_PLIEGO" class="java.lang.String"/>
+	<parameter name="SUBREPORT_PLIEGO_RESUMEN" class="java.lang.String"/>
 	<field name="nombreCliente" class="java.lang.String"/>
 	<field name="nombreRepresentante" class="java.lang.String"/>
 	<field name="telefonoParticular" class="java.lang.String"/>
@@ -210,7 +211,7 @@
 		</band>
 	</title>
 	<detail>
-		<band height="70" splitType="Stretch">
+		<band height="57" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<subreport>
 				<reportElement x="0" y="7" width="580" height="50" uuid="73563f31-da0c-4ac4-b8ec-7aa054302847">
@@ -253,6 +254,9 @@
 				</subreportParameter>
 				<subreportParameter name="SUBREPORT_PLIEGO">
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_PLIEGO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_PLIEGO_RESUMEN">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_PLIEGO_RESUMEN}]]></subreportParameterExpression>
 				</subreportParameter>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaOrdenTrabajoPartida})]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_PARTIDA}]]></subreportExpression>

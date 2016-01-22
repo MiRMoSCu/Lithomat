@@ -214,7 +214,7 @@ public class PliegoServiceImpl implements PliegoService {
 				pliegoInsert.setTipoTrabajoDetalle(tipoTrabajoDetalle);
 				pliegoInsert.setRebaseEnMilimetros(pliego.getRebaseEnMilimetros());
 				pliegoInsert.setMedianilesEnMilimetros(pliego.getMedianilesEnMilimetros());
-				pliegoInsert.setPinzasEnCentimetros(pliego.getPinzasEnCentimetros());
+				pliegoInsert.setPinzasEnMilimetros(pliego.getPinzasEnMilimetros());
 
 				pliegoInsert.setObservaciones(jsonObject_2.get("observaciones").toString());
 				pliegoInsert.setHojasRequeridas(Integer.parseInt(jsonObject_2.get("hojas_requeridas").toString()));
@@ -359,7 +359,7 @@ public class PliegoServiceImpl implements PliegoService {
 		html.append("<th>No. Pgo</th>");
 		html.append("<th>Rebase (mm.)</th>");
 		html.append("<th>Medianiles (mm.)</th>");
-		html.append("<th>Pinzas (cm.)</th>");
+		html.append("<th>Pinzas (mm.)</th>");
 		html.append("<th>H. Requeridas</th>");
 		html.append("<th>H. Sobrantes</th>");
 		html.append("<th>H. Totales</th>");
@@ -401,7 +401,7 @@ public class PliegoServiceImpl implements PliegoService {
 				html.append("</td>");
 
 				html.append("<td>");
-				html.append(pliego.getPinzasEnCentimetros());
+				html.append(pliego.getPinzasEnMilimetros());
 				html.append("</td>");
 
 				html.append("<td>");
@@ -558,7 +558,7 @@ public class PliegoServiceImpl implements PliegoService {
 				html.append("<th>No. Pgo</th>");
 				html.append("<th>Rebase (mm.)</th>");
 				html.append("<th>Medianiles (mm.)</th>");
-				html.append("<th>Pinzas (cm.)</th>");
+				html.append("<th>Pinzas (mm.)</th>");
 				html.append("<th>H. Requeridas</th>");
 				html.append("<th>H. Sobrantes</th>");
 				html.append("<th>H. Totales</th>");
@@ -591,7 +591,7 @@ public class PliegoServiceImpl implements PliegoService {
 								+ "&#39;" + (cont + 1) + "&#39;,"
 								+ "&#39;" + pliego.getRebaseEnMilimetros() + "&#39;,"
 								+ "&#39;" + pliego.getMedianilesEnMilimetros() + "&#39;,"
-								+ "&#39;" + pliego.getPinzasEnCentimetros() + "&#39;,"
+								+ "&#39;" + pliego.getPinzasEnMilimetros() + "&#39;,"
 								+ "&#39;" + pliego.getHojasSobrantes() + "&#39;,"
 								+ "&#39;" + pliego.getObservaciones() + "&#39;"
 								+ ")\'");
@@ -610,7 +610,7 @@ public class PliegoServiceImpl implements PliegoService {
 						html.append("</td>");
 
 						html.append("<td>");
-						html.append(pliego.getPinzasEnCentimetros());
+						html.append(pliego.getPinzasEnMilimetros());
 						html.append("</td>");
 
 						html.append("<td>");

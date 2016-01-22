@@ -164,10 +164,10 @@ function desactivaBtnPartida() {
 function limpiaCamposFormTipoTrabajoDetalle() {
     // limpia campos externos
     document.forms["tipo_trabajo_detalle"].elements["descripcion_partida_detalle"].value                = "";
-    document.forms["tipo_trabajo_detalle"].elements["ancho"].value                                      = "";
-    document.forms["tipo_trabajo_detalle"].elements["alto"].value                                       = "";
-    document.forms["tipo_trabajo_detalle"].elements["ancho_extendido"].value                            = "";
+    document.forms["tipo_trabajo_detalle"].elements["alto_final"].value                                 = "";
+    document.forms["tipo_trabajo_detalle"].elements["ancho_final"].value                                = "";
     document.forms["tipo_trabajo_detalle"].elements["alto_extendido"].value                             = "";
+    document.forms["tipo_trabajo_detalle"].elements["ancho_extendido"].value                            = "";
     document.forms["tipo_trabajo_detalle"].elements["proporciona_papel"].checked                        = false;
     document.forms["tipo_trabajo_detalle"].elements["proporciona_tinta_especial"].checked               = false;
     document.forms["tipo_trabajo_detalle"].elements["proporciona_barniz"].checked                       = false;
@@ -192,7 +192,7 @@ function limpiaCamposFormTipoTrabajoDetalle() {
 
 
 function limpiaFormTipoTrabajoDetalle() {
-    // limpia datos internos
+    // limpia campos ocultos
     document.forms["tipo_trabajo_detalle"].elements["id_partida"].value                         = "";
     document.forms["tipo_trabajo_detalle"].elements["cliente_proporciona_papel"].value          = "";
     document.forms["tipo_trabajo_detalle"].elements["cliente_proporciona_tinta"].value          = "";
@@ -216,10 +216,10 @@ function limpiaFormTipoTrabajoDetalle() {
 
 function activaCamposTipoTrabajoDetalle() {
     document.forms["tipo_trabajo_detalle"].elements["descripcion_partida_detalle"].readOnly         = false;
-    document.forms["tipo_trabajo_detalle"].elements["ancho"].readOnly                               = false;
-    document.forms["tipo_trabajo_detalle"].elements["alto"].readOnly                                = false;
-    document.forms["tipo_trabajo_detalle"].elements["ancho_extendido"].readOnly                     = false;
+    document.forms["tipo_trabajo_detalle"].elements["alto_final"].readOnly                          = false;
+    document.forms["tipo_trabajo_detalle"].elements["ancho_final"].readOnly                         = false;
     document.forms["tipo_trabajo_detalle"].elements["alto_extendido"].readOnly                      = false;
+    document.forms["tipo_trabajo_detalle"].elements["ancho_extendido"].readOnly                     = false;
     document.forms["tipo_trabajo_detalle"].elements["proporciona_papel"].disabled                   = false;
     document.forms["tipo_trabajo_detalle"].elements["proporciona_tinta_especial"].disabled          = false;
     document.forms["tipo_trabajo_detalle"].elements["proporciona_barniz"].disabled                  = false;
@@ -243,10 +243,10 @@ function activaCamposTipoTrabajoDetalle() {
 
 function desactivaCamposTipoTrabajoDetalle() {
     document.forms["tipo_trabajo_detalle"].elements["descripcion_partida_detalle"].readOnly         = true;
-    document.forms["tipo_trabajo_detalle"].elements["ancho"].readOnly                               = true;
-    document.forms["tipo_trabajo_detalle"].elements["alto"].readOnly                                = true;
-    document.forms["tipo_trabajo_detalle"].elements["ancho_extendido"].readOnly                     = true;
+    document.forms["tipo_trabajo_detalle"].elements["alto_final"].readOnly                          = true;
+    document.forms["tipo_trabajo_detalle"].elements["ancho_final"].readOnly                         = true;
     document.forms["tipo_trabajo_detalle"].elements["alto_extendido"].readOnly                      = true;
+    document.forms["tipo_trabajo_detalle"].elements["ancho_extendido"].readOnly                     = true;
     document.forms["tipo_trabajo_detalle"].elements["proporciona_papel"].disabled                   = true;
     document.forms["tipo_trabajo_detalle"].elements["proporciona_tinta_especial"].disabled          = true;
     document.forms["tipo_trabajo_detalle"].elements["proporciona_barniz"].disabled                  = true;
@@ -291,11 +291,11 @@ function desactivaBtnTipoTrabajoDetalle() {
 //costo_extra_detalle
 
 function limpiaCamposCostoExtraDetalle() {
-	document.forms["costo_extra_detalle"].elements["select_costo_extra"].selectedIndex 		= 0;
-	document.forms["costo_extra_detalle"].elements["select_responsable_insumo"].selectedIndex = 0;
+	document.forms["costo_extra_detalle"].elements["select_costo_extra"].selectedIndex 			= 0;
+	document.forms["costo_extra_detalle"].elements["select_responsable_insumo"].selectedIndex 	= 0;
 	document.forms["costo_extra_detalle"].elements["cantidad"].value 							= "";
 	document.forms["costo_extra_detalle"].elements["nombre_unidad_medida"].value 				= "";
-	document.forms["costo_extra_detalle"].elements["especificacion"].value 					= "";
+	document.forms["costo_extra_detalle"].elements["especificacion"].value 						= "";
 	ajaxUnidadCostoExtra();
 } // limpiaCamposCostoExtraDetalle
 
@@ -312,17 +312,17 @@ function limpiaFormCostoExtraDetalle() {
 
 
 function activaCamposCostoExtraDetalle() {
-	document.forms["costo_extra_detalle"].elements["select_costo_extra"].disabled 		= false;
+	document.forms["costo_extra_detalle"].elements["select_costo_extra"].disabled 			= false;
 	document.forms["costo_extra_detalle"].elements["select_responsable_insumo"].disabled 	= false;
 	document.forms["costo_extra_detalle"].elements["cantidad"].readOnly 					= false;
-	document.forms["costo_extra_detalle"].elements["especificacion"].readOnly 			= false;
+	document.forms["costo_extra_detalle"].elements["especificacion"].readOnly 				= false;
 } // activaCamposCostoExtraDetalle
 
 function desactivaCamposCostoExtraDetalle() {
-	document.forms["costo_extra_detalle"].elements["select_costo_extra"].disabled 		= true;
+	document.forms["costo_extra_detalle"].elements["select_costo_extra"].disabled 			= true;
 	document.forms["costo_extra_detalle"].elements["select_responsable_insumo"].disabled 	= true;
 	document.forms["costo_extra_detalle"].elements["cantidad"].readOnly 					= true;
-	document.forms["costo_extra_detalle"].elements["especificacion"].readOnly 			= true;
+	document.forms["costo_extra_detalle"].elements["especificacion"].readOnly 				= true;
 } // desactivaCamposCostoExtraDetalle
 
 function activaBtnCostoExtraDetalle() {

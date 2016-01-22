@@ -12,7 +12,7 @@ public class Pliego implements Serializable {
 	private TipoTrabajoDetalle tipoTrabajoDetalle;
 	private int rebaseEnMilimetros;
 	private int medianilesEnMilimetros;
-	private int pinzasEnCentimetros;
+	private int pinzasEnMilimetros;
 	private String observaciones;
 	private float numeroDecimal;
 	private int hojasRequeridas;
@@ -60,11 +60,11 @@ public class Pliego implements Serializable {
 	public void setMedianilesEnMilimetros(int medianilesEnMilimetros) {
 		this.medianilesEnMilimetros = medianilesEnMilimetros;
 	}
-	public int getPinzasEnCentimetros() {
-		return pinzasEnCentimetros;
+	public int getPinzasEnMilimetros() {
+		return pinzasEnMilimetros;
 	}
-	public void setPinzasEnCentimetros(int pinzasEnCentimetros) {
-		this.pinzasEnCentimetros = pinzasEnCentimetros;
+	public void setPinzasEnMilimetros(int pinzasEnMilimetros) {
+		this.pinzasEnMilimetros = pinzasEnMilimetros;
 	}
 	public String getObservaciones() {
 		return observaciones;

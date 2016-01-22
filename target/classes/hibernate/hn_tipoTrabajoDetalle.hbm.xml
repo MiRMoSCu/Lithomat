@@ -16,20 +16,20 @@
 			<column name="descripcion" length="350"/>
 			<type name="string"/>
 		</property>
-		<property name="ancho">
-			<column name="ancho"/>
+		<property name="altoFinal">
+			<column name="alto_final"/>
 			<type name="float"/>
 		</property>
-		<property name="alto">
-			<column name="alto"/>
-			<type name="float"/>
-		</property>
-		<property name="anchoExtendido">
-			<column name="ancho_extendido"/>
+		<property name="anchoFinal">
+			<column name="ancho_final"/>
 			<type name="float"/>
 		</property>
 		<property name="altoExtendido">
 			<column name="alto_extendido"/>
+			<type name="float"/>
+		</property>
+		<property name="anchoExtendido">
+			<column name="ancho_extendido"/>
 			<type name="float"/>
 		</property>
 		<property name="clienteProporcionaPapel">
@@ -55,6 +55,14 @@
 		<many-to-one name="tipoPapelExtendido" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPapelExtendido" fetch="select">
 			<column name="id_tipo_papel_extendido"/>
 		</many-to-one>
+		<property name="altoCorteInicial">
+			<column name="alto_corte_inicial"/>
+			<type name="float"/>
+		</property>
+		<property name="anchoCorteInicial">
+			<column name="ancho_corte_inicial"/>
+			<type name="float"/>
+		</property>
 		<property name="repeticionesXPliego">
 			<column name="repeticiones_x_pliego"/>
 			<type name="integer"/>

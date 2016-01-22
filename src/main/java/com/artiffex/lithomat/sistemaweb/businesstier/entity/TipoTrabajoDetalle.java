@@ -12,16 +12,18 @@ public class TipoTrabajoDetalle implements Serializable {
 	private int idTipoTrabajoDetalle;
 	private Partida partida;
 	private String descripcion;
-	private float ancho;
-	private float alto;
-	private float anchoExtendido;
+	private float altoFinal;
+	private float anchoFinal;
 	private float altoExtendido;
+	private float anchoExtendido;
 	private boolean clienteProporcionaPapel;
 	private boolean clienteProporcionaTinta;
 	private boolean clienteProporcionaTintaEspecial;
 	private boolean clienteProporcionaBarniz;
 	private boolean clienteProporcionaPlacas;
 	private TipoPapelExtendido tipoPapelExtendido;
+	private float altoCorteInicial;
+	private float anchoCorteInicial;
 	private int repeticionesXPliego;
 	private int numeroPaginasPublicacion;
 	private TamanioPublicacion tamanioPublicacion;
@@ -63,29 +65,29 @@ public class TipoTrabajoDetalle implements Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public float getAncho() {
-		return ancho;
+	public float getAltoFinal() {
+		return altoFinal;
 	}
-	public void setAncho(float ancho) {
-		this.ancho = ancho;
+	public void setAltoFinal(float altoFinal) {
+		this.altoFinal = altoFinal;
 	}
-	public float getAlto() {
-		return alto;
+	public float getAnchoFinal() {
+		return anchoFinal;
 	}
-	public void setAlto(float alto) {
-		this.alto = alto;
-	}
-	public float getAnchoExtendido() {
-		return anchoExtendido;
-	}
-	public void setAnchoExtendido(float anchoExtendido) {
-		this.anchoExtendido = anchoExtendido;
+	public void setAnchoFinal(float anchoFinal) {
+		this.anchoFinal = anchoFinal;
 	}
 	public float getAltoExtendido() {
 		return altoExtendido;
 	}
 	public void setAltoExtendido(float altoExtendido) {
 		this.altoExtendido = altoExtendido;
+	}
+	public float getAnchoExtendido() {
+		return anchoExtendido;
+	}
+	public void setAnchoExtendido(float anchoExtendido) {
+		this.anchoExtendido = anchoExtendido;
 	}
 	public boolean isClienteProporcionaPapel() {
 		return clienteProporcionaPapel;
@@ -123,6 +125,18 @@ public class TipoTrabajoDetalle implements Serializable {
 	}
 	public void setTipoPapelExtendido(TipoPapelExtendido tipoPapelExtendido) {
 		this.tipoPapelExtendido = tipoPapelExtendido;
+	}
+	public float getAltoCorteInicial() {
+		return altoCorteInicial;
+	}
+	public void setAltoCorteInicial(float altoCorteInicial) {
+		this.altoCorteInicial = altoCorteInicial;
+	}
+	public float getAnchoCorteInicial() {
+		return anchoCorteInicial;
+	}
+	public void setAnchoCorteInicial(float anchoCorteInicial) {
+		this.anchoCorteInicial = anchoCorteInicial;
 	}
 	public int getRepeticionesXPliego() {
 		return repeticionesXPliego;

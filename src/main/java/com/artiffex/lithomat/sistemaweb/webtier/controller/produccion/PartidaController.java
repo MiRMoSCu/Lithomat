@@ -209,6 +209,7 @@ public class PartidaController {
 			@RequestParam(value = "id_orden_produccion", 		required = false) Integer idOrdenProduccion,
 			@RequestParam(value = "nut", 						required = false) String nut,
 			@RequestParam(value = "id_partida", 				required = false) Integer idPartida,
+			@RequestParam(value = "nombre_partida", 			required = false) String nombrePartida,
 			@RequestParam(value = "cantidad", 					required = false) Integer cantidad,
 			@RequestParam(value = "id_tipo_forma_trabajo", 		required = false) Integer idTipoFormaTrabajo,
 			@RequestParam(value = "descripcion_partida", 		required = false) String descripcionPartida,
@@ -218,6 +219,7 @@ public class PartidaController {
 		log.info("/actualiza_partida");
 		
 		Partida partida = partidaService.buscaPartida(idPartida);
+		partida.setNombrePartida(nombrePartida);
 		partida.setCantidad(cantidad);
 		partida.getTipoFormaTrabajo().setIdTipoFormaTrabajo(idTipoFormaTrabajo);
 		partida.setDescripcionPartida(descripcionPartida);

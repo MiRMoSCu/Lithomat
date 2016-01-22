@@ -40,10 +40,10 @@ public class TipoTrabajoDetalleServiceImpl implements TipoTrabajoDetalleService 
 		TipoTrabajoDetalleDTO tipoTrabajoDetalleDTO = new TipoTrabajoDetalleDTO();
 		tipoTrabajoDetalleDTO.setIdTipoTrabajoDetalle(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());
 		tipoTrabajoDetalleDTO.setDescripcion(tipoTrabajoDetalle.getDescripcion());
-		tipoTrabajoDetalleDTO.setAncho(tipoTrabajoDetalle.getAncho());
-		tipoTrabajoDetalleDTO.setAlto(tipoTrabajoDetalle.getAlto());
-		tipoTrabajoDetalleDTO.setAnchoExtendido(tipoTrabajoDetalle.getAnchoExtendido());
+		tipoTrabajoDetalleDTO.setAltoFinal(tipoTrabajoDetalle.getAltoFinal());
+		tipoTrabajoDetalleDTO.setAnchoFinal(tipoTrabajoDetalle.getAnchoFinal());
 		tipoTrabajoDetalleDTO.setAltoExtendido(tipoTrabajoDetalle.getAltoExtendido());
+		tipoTrabajoDetalleDTO.setAnchoExtendido(tipoTrabajoDetalle.getAnchoExtendido());
 		tipoTrabajoDetalleDTO.setClienteProporcionaPapel(tipoTrabajoDetalle.isClienteProporcionaPapel());
 		tipoTrabajoDetalleDTO.setClienteProporcionaTinta(tipoTrabajoDetalle.isClienteProporcionaTinta());
 		tipoTrabajoDetalleDTO.setClienteProporcionaTintaEspecial(tipoTrabajoDetalle.isClienteProporcionaTintaEspecial());
@@ -162,7 +162,7 @@ public class TipoTrabajoDetalleServiceImpl implements TipoTrabajoDetalleService 
 				html.append(cont + 1);
 				html.append("</td>");
 
-				html.append("<td>");
+				html.append("<td id=\'td_" + tipoTrabajoDetalle.getIdTipoTrabajoDetalle() + "_descripcion\'>");
 				html.append(tipoTrabajoDetalle.getDescripcion());
 				html.append("</td>");
 

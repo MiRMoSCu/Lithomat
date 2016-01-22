@@ -1,5 +1,6 @@
 
 var obj_partida = {
+	nombre						: "",
 	cantidad					: "",
 	forma_trabajo 				: "",
 	descripcion_partida 		: "",
@@ -7,6 +8,7 @@ var obj_partida = {
 	observaciones_aprobacion 	: "",
 	
 	setObjPartida : function() {
+		this.nombre						= document.partida.nombre_partida.value;
 		this.cantidad 					= document.partida.cantidad.value;
 		this.forma_trabajo 				= document.partida.forma_trabajo.value;
 		this.descripcion_partida		= document.partida.descripcion_partida.value;
@@ -15,6 +17,7 @@ var obj_partida = {
 	}, // setObjPartida
 	
 	setFormPartida : function() {
+		document.partida.nombre_partida.value			= this.nombre;
 		document.partida.cantidad.value 				= this.cantidad;
 		document.partida.forma_trabajo.value  			= this.forma_trabajo;
 		document.partida.descripcion_partida.value		= this.descripcion_partida;
@@ -44,6 +47,7 @@ function activaCamposFormPartida() {
 	delete select;
 	
 	// quita opcion readonly
+	document.partida.nombre_partida.readOnly 			= false;
 	document.partida.cantidad.readOnly 					= false;
 	document.partida.descripcion_partida.readOnly 		= false;
 	document.partida.observaciones_generales.readOnly 	= false;
@@ -52,6 +56,7 @@ function activaCamposFormPartida() {
 	document.partida.observaciones_aprobacion.disabled 	= false;
 	
 	// cambia el color
+	document.partida.nombre_partida.style.background 			= "#fff";
 	document.partida.cantidad.style.background 					= "#fff";
 	document.partida.descripcion_partida.style.background 		= "#fff";
 	document.partida.observaciones_generales.style.background 	= "#fff";
@@ -61,6 +66,7 @@ function activaCamposFormPartida() {
 
 function desactivaCamposFormPartida() {
 	
+	document.partida.nombre_partida.readOnly 			= true;
 	document.partida.cantidad.readOnly 					= true;
 	document.partida.descripcion_partida.readOnly 		= true;
 	document.partida.observaciones_generales.readOnly 	= true;
@@ -70,6 +76,7 @@ function desactivaCamposFormPartida() {
 	document.partida.select_forma_trabajo.style.display = "none";
 	document.partida.forma_trabajo.style.display 		= "inline";
 	
+	document.partida.nombre_partida.style.background 			= "transparent";
 	document.partida.cantidad.style.background 					= "transparent";
 	document.partida.descripcion_partida.style.background 		= "transparent";
 	document.partida.observaciones_generales.style.background 	= "transparent";
@@ -105,6 +112,11 @@ function aceptaModificarPartida() {
 	
 	var correcto = true;
 	
+	if ( document.partida.nombre_partida.value == "" ) {
+		correcto = false;
+		alert("Favor de informar el campo nombre");
+	}
+	
 	if( document.partida.cantidad.value == ""
 		|| isNaN(document.partida.cantidad.value)) {
 		correcto = false;
@@ -138,10 +150,13 @@ function aceptaModificarPartida() {
 						break;
 					default: // exito
 						// actualiza cantidad y descripcion partida en la tabla resumen
+						var nombre					= "td_" + document.partida.id_partida.value + "_nombre_partida";
 						var id_cantidad				= "td_" + document.partida.id_partida.value + "_cantidad";
 						var id_descripcion_partida	= "td_" + document.partida.id_partida.value + "_descripcion_partida";
+						document.getElementById(nombre).innerHTML 					= document.partida.nombre_partida.value;
 						document.getElementById(id_cantidad).innerHTML 				= document.partida.cantidad.value;
 						document.getElementById(id_descripcion_partida).innerHTML 	= document.partida.descripcion_partida.value;
+						delete nombre;
 						delete id_cantidad;
 						delete id_descripcion_partida;
 						// actualiza precio

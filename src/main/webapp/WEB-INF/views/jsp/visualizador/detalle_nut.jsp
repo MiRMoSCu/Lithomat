@@ -620,7 +620,7 @@
                                         <img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
                                     </div>
                                     <div class="titulo">
-                                        <font size="5">LISTA DE PARTIDAS</font>
+                                        <font size="5">LISTA DE TRABAJOS</font>
                                     </div>
                                     <div style="width:800px; height:150px; margin-left:auto; margin-right:auto;">
                                         <div class="columna_completa">
@@ -658,7 +658,8 @@
                                             <img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
                                         </div>    
                                         <div class="titulo">
-                                            <img alt="" src="<c:url value="/resources/image/titulo_descripcion_partida.png"/>"/>
+                                            <!--  <img alt="" src="<c:url value="/resources/image/titulo_descripcion_partida.png"/>"/> -->
+                                            <font size="5">DESCRIPCI&Oacute;N DE TRABAJO</font>
                                         </div>
                                         <div class="linea">
                                             <table border="0">
@@ -874,7 +875,7 @@
                                     	<img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
                                     </div>
                                     <div class="titulo">
-                                        <font size="5">LISTA DE DETALLE DE PARTIDA ACTUAL</font>
+                                        <font size="5">LISTA DE DETALLE DE IMPRESI&Oacute;N</font>
                                     </div>
                                     <div style="width:800px; height:150px; margin-left:auto; margin-right:auto;">
                                         <div class="columna_completa">
@@ -926,7 +927,8 @@
                                             <img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
                                         </div>
                                         <div class="titulo">
-                                            <img alt="" src="<c:url value="/resources/image/titulo_detalle_partida.png"/>"/>
+                                            <!--  <img alt="" src="<c:url value="/resources/image/titulo_detalle_partida.png"/>"/> -->
+                                            <font size="5">DETALLE DE IMPRESI&Oacute;N</font>
                                         </div>
                                         <div class="linea">
                                             <div class="casilla">
@@ -953,11 +955,11 @@
                                                         <div class="columna_completa">
                                                             <table>
                                                                 <tr>
-                                                                    <td width="32%">Alto (cm):</td>
+                                                                    <td width="49%">Alto Final (cm):</td>
                                                                     <td>
                                                                         <input  type="text" 
                                                                                 class="input" 
-                                                                                name="alto" 
+                                                                                name="alto_final" 
                                                                                 value=""
                                                                                 onkeydown="revisaNumero(true, this.value, event, null, null)"
                                                                                 onkeyup="document.getElementsByName('alto_extendido')[0].value=value;"
@@ -971,11 +973,11 @@
                                                         <div class="columna_completa">
                                                         	<table>
                                                                 <tr>
-                                                                    <td width="40%">Ancho (cm):</td>
+                                                                    <td width="58%">Ancho Final (cm):</td>
                                                                     <td>
                                                                         <input  type="text" 
                                                                                 class="input" 
-                                                                                name="ancho" 
+                                                                                name="ancho_final" 
                                                                                 value=""
                                                                                 onkeydown="revisaNumero(true, this.value, event, null, null)"
                                                                                 onkeyup="document.getElementsByName('ancho_extendido')[0].value=value;"
@@ -1525,7 +1527,7 @@
                                                             <th>No. Pgo</th>
                                                             <th>Rebase (mm.)</th>
                                                             <th>Medianiles (mm.)</th>
-                                                            <th>Pinzas (cm.)</th>
+                                                            <th>Pinzas (mm.)</th>
                                                             <th>H. Requeridas</th>
                                                             <th>H. Sobrantes</th>
                                                             <th>H. Totales</th>
@@ -1730,7 +1732,7 @@
 	                                    <img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
 	                                </div>
 	                                <div class="titulo">
-	                                    <font size="5">LISTA COSTO EXTRA POR DETALLE PARTIDA</font>
+	                                    <font size="5">LISTA COSTO EXTRA POR DETALLE DE IMPRESI&Oacute;N</font>
 	                                </div>
 	                                <div style="width:800px; height:100px; margin-left:auto; margin-right:auto; overflow-x:scroll;">
 	                                	<div class="columna_completa">
@@ -1941,7 +1943,7 @@
                                         <img alt="" src="<c:url value="/resources/image/separador_grande.png"/>"/>
                                     </div>
                                     <div class="titulo">
-                                        <font size="5">DETALLE DE &Aacute;REAS POR PARTIDA</font>
+                                        <font size="5">DETALLE DE &Aacute;REAS POR TRABAJO</font>
                                     </div>
                                     <div id="div_pestania_menu">
                                         <div id="div_pestania_menu_disenio" onclick="menu(this);" style="cursor:pointer; background:#7FAADC;">

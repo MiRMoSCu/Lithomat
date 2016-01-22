@@ -1183,9 +1183,10 @@ public class CalificacionServiceImpl implements CalificacionService {
 							descripcionEntMaq.append(" + B");
 					otpl.setVueltaEntMaq(descripcionEntMaq.toString());
 						descripcionEntMaq = null;
+					otpl.setTipoVuelta(pliego.getTipoVuelta().getNombre());
 					otpl.setRebases(pliego.getRebaseEnMilimetros());
 					otpl.setMedianiles(pliego.getMedianilesEnMilimetros());
-					otpl.setPinzas(pliego.getPinzasEnCentimetros());
+					otpl.setPinzas(pliego.getPinzasEnMilimetros());
 					listaOrdenTrabajoPliego.add(otpl);
 					otpl	 = null;
 					pliego	 = null;
@@ -1193,8 +1194,8 @@ public class CalificacionServiceImpl implements CalificacionService {
 				otttd.setMaquina(tipoTrabajoDetalle.getMaquina().getNombre());
 				otttd.setTipoPlaca(tipoTrabajoDetalle.getTipoPlaca().getDescripcion());
 				otttd.setDescripcion(tipoTrabajoDetalle.getDescripcion());
-				otttd.setAncho(tipoTrabajoDetalle.getAncho());
-				otttd.setAlto(tipoTrabajoDetalle.getAlto());
+				otttd.setAnchoFinal(tipoTrabajoDetalle.getAnchoFinal());
+				otttd.setAltoFinal(tipoTrabajoDetalle.getAltoFinal());
 				otttd.setAnchoExtendido(tipoTrabajoDetalle.getAnchoExtendido());
 				otttd.setAltoExtendido(tipoTrabajoDetalle.getAltoExtendido());
 				otttd.setTipoPapel(tipoTrabajoDetalleService.obtienePapelDescripcionBasica(tipoTrabajoDetalle.getIdTipoTrabajoDetalle()));

@@ -46,10 +46,10 @@ public class TipoTrabajoDetalleController {
 	public JsonResponse agregaTipoTrabajoDetalle(
 			@RequestParam(value = "id_partida", 						required = false) Integer idPartida,
 			@RequestParam(value = "descripcion_partida_detalle", 		required = false) String descripcion,
-			@RequestParam(value = "ancho", 								required = false) float ancho,
-			@RequestParam(value = "alto", 								required = false) float alto,
-			@RequestParam(value = "ancho_extendido", 					required = false) float anchoExtendido,
+			@RequestParam(value = "alto_final", 						required = false) float altoFinal,
+			@RequestParam(value = "ancho_final", 						required = false) float anchoFinal,
 			@RequestParam(value = "alto_extendido", 					required = false) float altoExtendido,
+			@RequestParam(value = "ancho_extendido", 					required = false) float anchoExtendido,
 			@RequestParam(value = "cliente_proporciona_papel", 			required = false) boolean clienteProporcionaPapel,
 			@RequestParam(value = "cliente_proporciona_tinta_especial", required = false) boolean clienteProporcionaTintaEspecial,
 			@RequestParam(value = "cliente_proporciona_barniz", 		required = false) boolean clienteProporcionaBarniz,
@@ -79,10 +79,10 @@ public class TipoTrabajoDetalleController {
 			partida.setIdPartida(idPartida);
 		tipoTrabajoDetalle.setPartida(partida);
 		tipoTrabajoDetalle.setDescripcion(descripcion);
-		tipoTrabajoDetalle.setAncho(ancho);
-		tipoTrabajoDetalle.setAlto(alto);
-		tipoTrabajoDetalle.setAnchoExtendido(anchoExtendido);
+		tipoTrabajoDetalle.setAltoFinal(altoFinal);
+		tipoTrabajoDetalle.setAnchoFinal(anchoFinal);
 		tipoTrabajoDetalle.setAltoExtendido(altoExtendido);
+		tipoTrabajoDetalle.setAnchoExtendido(anchoExtendido);
 		tipoTrabajoDetalle.setClienteProporcionaPapel(clienteProporcionaPapel);
 		tipoTrabajoDetalle.setClienteProporcionaTinta(false);
 		tipoTrabajoDetalle.setClienteProporcionaTintaEspecial(clienteProporcionaTintaEspecial);
@@ -188,10 +188,11 @@ public class TipoTrabajoDetalleController {
 			@RequestParam(value = "nut", 								required = false) String nut,
 			@RequestParam(value = "id_partida", 						required = false) Integer idPartida,
 			@RequestParam(value = "id_tipo_trabajo_detalle", 			required = false) Integer idTipoTrabajoDetalle,
-			@RequestParam(value = "ancho", 								required = false) float ancho,
-			@RequestParam(value = "alto", 								required = false) float alto,
-			@RequestParam(value = "ancho_extendido", 					required = false) float anchoExtendido,
+			@RequestParam(value = "descripcion_partida_detalle", 		required = false) String descripcion,
+			@RequestParam(value = "alto_final", 						required = false) float altoFinal,
+			@RequestParam(value = "ancho_final", 						required = false) float anchoFinal,
 			@RequestParam(value = "alto_extendido", 					required = false) float altoExtendido,
+			@RequestParam(value = "ancho_extendido", 					required = false) float anchoExtendido,
 			@RequestParam(value = "cliente_proporciona_papel", 			required = false) boolean clienteProporcionaPapel,
 			@RequestParam(value = "cliente_proporciona_tinta_especial", required = false) boolean clienteProporcionaTintaEspecial,
 			@RequestParam(value = "cliente_proporciona_barniz", 		required = false) boolean clienteProporcionaBarniz,
@@ -215,10 +216,11 @@ public class TipoTrabajoDetalleController {
 		log.info("/actualiza_tipo_trabajo_detalle");
 		
 		TipoTrabajoDetalle tipoTrabajoDetalle = tipoTrabajoDetalleService.buscaTipoTrabajoDetalle(idTipoTrabajoDetalle);
-		tipoTrabajoDetalle.setAncho(anchoExtendido);
-		tipoTrabajoDetalle.setAlto(altoExtendido);
-		tipoTrabajoDetalle.setAnchoExtendido(anchoExtendido);
+		tipoTrabajoDetalle.setDescripcion(descripcion);
+		tipoTrabajoDetalle.setAltoFinal(altoFinal);
+		tipoTrabajoDetalle.setAnchoFinal(anchoFinal);
 		tipoTrabajoDetalle.setAltoExtendido(altoExtendido);
+		tipoTrabajoDetalle.setAnchoExtendido(anchoExtendido);
 		tipoTrabajoDetalle.setClienteProporcionaPapel(clienteProporcionaPapel);
 		tipoTrabajoDetalle.setClienteProporcionaTintaEspecial(clienteProporcionaTintaEspecial);
 		tipoTrabajoDetalle.setClienteProporcionaBarniz(clienteProporcionaBarniz);
@@ -255,10 +257,11 @@ public class TipoTrabajoDetalleController {
 			@RequestParam(value = "nut", 								required = false) String nut,
 			@RequestParam(value = "id_partida", 						required = false) Integer idPartida,
 			@RequestParam(value = "id_tipo_trabajo_detalle", 			required = false) Integer idTipoTrabajoDetalle,
-			@RequestParam(value = "ancho", 								required = false) float ancho,
-			@RequestParam(value = "alto", 								required = false) float alto,
-			@RequestParam(value = "ancho_extendido", 					required = false) float anchoExtendido,
+			@RequestParam(value = "descripcion_partida_detalle", 		required = false) String descripcion,
+			@RequestParam(value = "alto_final", 						required = false) float altoFinal,
+			@RequestParam(value = "ancho_final", 						required = false) float anchoFinal,
 			@RequestParam(value = "alto_extendido", 					required = false) float altoExtendido,
+			@RequestParam(value = "ancho_extendido", 					required = false) float anchoExtendido,
 			@RequestParam(value = "cliente_proporciona_papel", 			required = false) boolean clienteProporcionaPapel,
 			@RequestParam(value = "cliente_proporciona_tinta_especial", required = false) boolean clienteProporcionaTintaEspecial,
 			@RequestParam(value = "cliente_proporciona_barniz", 		required = false) boolean clienteProporcionaBarniz,
@@ -282,10 +285,11 @@ public class TipoTrabajoDetalleController {
 		log.info("/actualiza_tipo_trabajo_detalle_con_pliegos");
 		
 		TipoTrabajoDetalle tipoTrabajoDetalle = tipoTrabajoDetalleService.buscaTipoTrabajoDetalle(idTipoTrabajoDetalle);
-		tipoTrabajoDetalle.setAncho(anchoExtendido);
-		tipoTrabajoDetalle.setAlto(altoExtendido);
-		tipoTrabajoDetalle.setAnchoExtendido(anchoExtendido);
+		tipoTrabajoDetalle.setDescripcion(descripcion);
+		tipoTrabajoDetalle.setAltoFinal(altoFinal);
+		tipoTrabajoDetalle.setAnchoFinal(anchoFinal);
 		tipoTrabajoDetalle.setAltoExtendido(altoExtendido);
+		tipoTrabajoDetalle.setAnchoExtendido(anchoExtendido);
 		tipoTrabajoDetalle.setClienteProporcionaPapel(clienteProporcionaPapel);
 		tipoTrabajoDetalle.setClienteProporcionaTintaEspecial(clienteProporcionaTintaEspecial);
 		tipoTrabajoDetalle.setClienteProporcionaBarniz(clienteProporcionaBarniz);

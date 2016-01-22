@@ -3,10 +3,11 @@ var cerradoOKVentanaListaPliegos = false;
 
 var obj_ttd = {
 	
-	ancho 								: "",
-	alto 								: "",
-	ancho_extendido 					: "",
+	descripcion							: "",
+	alto_final 							: "",
+	ancho_final 						: "",
 	alto_extendido 						: "",
+	ancho_extendido 					: "",
 	proporciona_papel 					: "",
 	proporciona_placas 					: "",
 	proporciona_tinta_especial 			: "",
@@ -30,10 +31,11 @@ var obj_ttd = {
 	htmlListaPliegos					: "",
 		
 	setObjTTD : function() {
-		this.ancho 								= document.tipo_trabajo_detalle.ancho.value;
-		this.alto 								= document.tipo_trabajo_detalle.alto.value;
-		this.ancho_extendido 					= document.tipo_trabajo_detalle.ancho_extendido.value;
+		this.descripcion						= document.tipo_trabajo_detalle.descripcion_partida_detalle.value;
+		this.alto_final 						= document.tipo_trabajo_detalle.alto_final.value;
+		this.ancho_final 						= document.tipo_trabajo_detalle.ancho_final.value;
 		this.alto_extendido 					= document.tipo_trabajo_detalle.alto_extendido.value;
+		this.ancho_extendido 					= document.tipo_trabajo_detalle.ancho_extendido.value;
 		this.proporciona_papel 					= document.tipo_trabajo_detalle.proporciona_papel.value;
 		this.proporciona_placas 				= document.tipo_trabajo_detalle.proporciona_placas.value;
 		this.proporciona_tinta_especial 		= document.tipo_trabajo_detalle.proporciona_tinta_especial.value;
@@ -56,10 +58,11 @@ var obj_ttd = {
 	}, // setObjTTD
 	
 	setFormTTD : function() {
-		document.tipo_trabajo_detalle.ancho.value 								= this.ancho;
-		document.tipo_trabajo_detalle.alto.value								= this.alto;
-		document.tipo_trabajo_detalle.ancho_extendido.value 					= this.ancho_extendido;
+		document.tipo_trabajo_detalle.descripcion_partida_detalle.value			= this.descripcion_partida_detalle;
+		document.tipo_trabajo_detalle.alto_final.value							= this.alto_final;
+		document.tipo_trabajo_detalle.ancho_final.value 						= this.ancho_final;
 		document.tipo_trabajo_detalle.alto_extendido.value 						= this.alto_extendido;
+		document.tipo_trabajo_detalle.ancho_extendido.value 					= this.ancho_extendido;
 		document.tipo_trabajo_detalle.proporciona_papel.value 					= this.proporciona_papel;
 		document.tipo_trabajo_detalle.proporciona_placas.value 					= this.proporciona_placas;
 		document.tipo_trabajo_detalle.proporciona_tinta_especial.value 			= this.proporciona_tinta_especial;
@@ -252,10 +255,11 @@ function activaCamposFormTipoTrabajoDetalle() {
 	document.tipo_trabajo_detalle.select_tipo_complejidad.style.display 			= "inline";
 	
 	// desactiva readOnly
-	document.tipo_trabajo_detalle.ancho.readOnly 								= false;
-	document.tipo_trabajo_detalle.alto.readOnly 								= false;
-	document.tipo_trabajo_detalle.ancho_extendido.readOnly 						= false;
+	document.tipo_trabajo_detalle.descripcion_partida_detalle.readOnly 			= false;
+	document.tipo_trabajo_detalle.alto_final.readOnly 							= false;
+	document.tipo_trabajo_detalle.ancho_final.readOnly 							= false;
 	document.tipo_trabajo_detalle.alto_extendido.readOnly 						= false;
+	document.tipo_trabajo_detalle.ancho_extendido.readOnly 						= false;
 	document.tipo_trabajo_detalle.repeticiones_x_pliego.readOnly 				= false;
 	document.tipo_trabajo_detalle.numero_paginas_publicacion.readOnly 			= false;
 	document.tipo_trabajo_detalle.frente_num_tinta_especial.readOnly 			= false;
@@ -264,10 +268,11 @@ function activaCamposFormTipoTrabajoDetalle() {
 	document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.readOnly 	= false;
 	
 	// cambia el color campos text
-	document.tipo_trabajo_detalle.ancho.style.background 								= "#fff";
-	document.tipo_trabajo_detalle.alto.style.background 								= "#fff";
-	document.tipo_trabajo_detalle.ancho_extendido.style.background 						= "#fff";
+	document.tipo_trabajo_detalle.descripcion_partida_detalle.style.background 			= "#fff";
+	document.tipo_trabajo_detalle.alto_final.style.background 							= "#fff";
+	document.tipo_trabajo_detalle.ancho_final.style.background 							= "#fff";
 	document.tipo_trabajo_detalle.alto_extendido.style.background 						= "#fff";
+	document.tipo_trabajo_detalle.ancho_extendido.style.background 						= "#fff";
 	document.tipo_trabajo_detalle.repeticiones_x_pliego.style.background 				= "#fff";
 	document.tipo_trabajo_detalle.numero_paginas_publicacion.style.background 			= "#fff";
 	document.tipo_trabajo_detalle.frente_num_tinta_especial.style.background 			= "#fff";
@@ -308,10 +313,11 @@ function desactivaCamposFormTipoTrabajoDetalle() {
 	document.tipo_trabajo_detalle.tipo_complejidad.style.display 					= "inline";
 	
 	// activa readOnly
-	document.tipo_trabajo_detalle.ancho.readOnly 								= true;
-	document.tipo_trabajo_detalle.alto.readOnly 								= true;
-	document.tipo_trabajo_detalle.ancho_extendido.readOnly 						= true;
+	document.tipo_trabajo_detalle.descripcion_partida_detalle.readOnly 			= true;
+	document.tipo_trabajo_detalle.alto_final.readOnly 							= true;
+	document.tipo_trabajo_detalle.ancho_final.readOnly 							= true;
 	document.tipo_trabajo_detalle.alto_extendido.readOnly 						= true;
+	document.tipo_trabajo_detalle.ancho_extendido.readOnly 						= true;
 	document.tipo_trabajo_detalle.repeticiones_x_pliego.readOnly 				= true;
 	document.tipo_trabajo_detalle.numero_paginas_publicacion.readOnly 			= true;
 	document.tipo_trabajo_detalle.frente_num_tinta_especial.readOnly 			= true;
@@ -320,10 +326,11 @@ function desactivaCamposFormTipoTrabajoDetalle() {
 	document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.readOnly 	= true;
 	
 	// cambio el color de campos text
-	document.tipo_trabajo_detalle.ancho.style.background 								= "transparent";
-	document.tipo_trabajo_detalle.alto.style.background 								= "transparent";
-	document.tipo_trabajo_detalle.ancho_extendido.style.background 						= "transparent";
+	document.tipo_trabajo_detalle.descripcion_partida_detalle.style.background 			= "transparent";
+	document.tipo_trabajo_detalle.alto_final.style.background 							= "transparent";
+	document.tipo_trabajo_detalle.ancho_final.style.background 							= "transparent";
 	document.tipo_trabajo_detalle.alto_extendido.style.background 						= "transparent";
+	document.tipo_trabajo_detalle.ancho_extendido.style.background 						= "transparent";
 	document.tipo_trabajo_detalle.repeticiones_x_pliego.style.background 				= "transparent";
 	document.tipo_trabajo_detalle.numero_paginas_publicacion.style.background 			= "transparent";
 	document.tipo_trabajo_detalle.frente_num_tinta_especial.style.background 			= "transparent";
@@ -391,18 +398,22 @@ function aceptaModificarTTD() {
 	
 	var correcto = true;
 	
+	if ( document.tipo_trabajo_detalle.descripcion_partida_detalle.value == "" ) {
+		correcto = false;
+		alert("El campo descripcion no puede estar vacio. Favor de informarlo");
+	}
 	// Revisa que ancho y alto no este vacios
 	if( correcto 
-			&& isNaN(document.tipo_trabajo_detalle.alto.value) ) {
+			&& isNaN(document.tipo_trabajo_detalle.alto_final.value) ) {
 		correcto = false;
 		alert("El campo alto debe ser un numero. Favor de informarlo");
-		document.tipo_trabajo_detalle.alto.value.focus();
+		document.tipo_trabajo_detalle.alto_final.value.focus();
 	}
 	if ( correcto
-			&& isNaN(document.tipo_trabajo_detalle.ancho.value ) ) {
+			&& isNaN(document.tipo_trabajo_detalle.ancho_final.value ) ) {
 		correcto = false;
 		alert("El campo ancho debe ser un numero. Favor de informarlo");
-		document.tipo_trabajo_detalle.ancho.focus(); 
+		document.tipo_trabajo_detalle.ancho_final.focus(); 
 	}
 	if ( correcto
 			&& isNaN(document.tipo_trabajo_detalle.alto_extendido.value) ) {
@@ -613,14 +624,17 @@ function aceptaModificarTTD() {
 								},
 								success:function(response){
 									// actualiza html
+									var descripcion				= "td_" + document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value + "_descripcion";
 									var repeticiones_x_pliego 	= "td_" + document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value + "_repeticiones_x_pliego";
 									var numero_paginas 			= "td_" + document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value + "_numero_paginas_publicacion";
 									var tamanio_publicacion 	= "td_" + document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value + "_tamanio_publicacion";
 									var nombre_maquina 			= "td_" + document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value + "_nombre_maquina";
+									document.getElementById(descripcion).innerHTML 				= document.tipo_trabajo_detalle.descripcion_partida_detalle.value;
 									document.getElementById(repeticiones_x_pliego).innerHTML 	= document.tipo_trabajo_detalle.repeticiones_x_pliego.value==""?"0":document.tipo_trabajo_detalle.repeticiones_x_pliego.value;
 									document.getElementById(numero_paginas).innerHTML 			= document.tipo_trabajo_detalle.numero_paginas_publicacion.value==""?"0":document.tipo_trabajo_detalle.numero_paginas_publicacion.value;
 									document.getElementById(tamanio_publicacion).innerHTML 		= document.tipo_trabajo_detalle.tamanio_pubicacion.value==""?"null":document.tipo_trabajo_detalle.tamanio_pubicacion.value;
 									document.getElementById(nombre_maquina).innerHTML 			= document.tipo_trabajo_detalle.maquina.value;
+									delete descripcion;
 									delete repeticiones_x_pliego;
 									delete numero_paginas;
 									delete tamanio_publicacion;
@@ -674,14 +688,17 @@ function revisaCierreSegundaVentanaModal() {
 			},
 			success:function(response){
 				// actualiza html
+				var descripcion				= "td_" + document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value + "_descripcion";
 				var repeticiones_x_pliego 	= "td_" + document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value + "_repeticiones_x_pliego";
 				var numero_paginas 			= "td_" + document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value + "_numero_paginas_publicacion";
 				var tamanio_publicacion 	= "td_" + document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value + "_tamanio_publicacion";
 				var nombre_maquina 			= "td_" + document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value + "_nombre_maquina";
+				document.getElementById(descripcion).innerHTML 				= document.tipo_trabajo_detalle.descripcion_partida_detalle.value;
 				document.getElementById(repeticiones_x_pliego).innerHTML 	= document.tipo_trabajo_detalle.repeticiones_x_pliego.value==""?"0":document.tipo_trabajo_detalle.repeticiones_x_pliego.value;
 				document.getElementById(numero_paginas).innerHTML 			= document.tipo_trabajo_detalle.numero_paginas_publicacion.value==""?"0":document.tipo_trabajo_detalle.numero_paginas_publicacion.value;
 				document.getElementById(tamanio_publicacion).innerHTML 		= document.tipo_trabajo_detalle.tamanio_pubicacion.value==""?"null":document.tipo_trabajo_detalle.tamanio_pubicacion.value;
 				document.getElementById(nombre_maquina).innerHTML 			= document.tipo_trabajo_detalle.maquina.value;
+				delete descripcion;
 				delete repeticiones_x_pliego;
 				delete numero_paginas;
 				delete tamanio_publicacion;

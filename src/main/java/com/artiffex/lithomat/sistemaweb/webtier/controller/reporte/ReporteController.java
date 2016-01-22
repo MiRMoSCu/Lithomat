@@ -152,6 +152,7 @@ public class ReporteController {
 		parameterMap.put("SUBREPORT_MATERIAL_AYUDA",		path + DIRECTORIO_ORIGEN + "04_OrdenTrabajoMaterialAyuda.jasper");
 		parameterMap.put("SUBREPORT_TIPO_TRABAJO_DETALLE",	path + DIRECTORIO_ORIGEN + "04_OrdenTrabajoTipoTrabajoDetalle.jasper");
 		parameterMap.put("SUBREPORT_PLIEGO",				path + DIRECTORIO_ORIGEN + "04_OrdenTrabajoPliego.jasper");
+		parameterMap.put("SUBREPORT_PLIEGO_RESUMEN",		path + DIRECTORIO_ORIGEN + "04_OrdenTrabajoPliegoResumen.jasper");
 		try {
 			OutputStream outputStream 				= response.getOutputStream();
 			InputStream reportStream 				= context.getResourceAsStream(DIRECTORIO_ORIGEN + "04_OrdenTrabajoMaster.jasper");			

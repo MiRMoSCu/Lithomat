@@ -42,6 +42,7 @@ $(document).ready(function () {
         }
     });
 
+    /*
     // listener recomendación ancho y alto 
     $("input[name='ancho_final']").focus(function () {
         $("#notificacion_tipo_growl").fadeIn(1500);
@@ -61,7 +62,7 @@ $(document).ready(function () {
         $("#notificacion_tipo_growl").fadeOut(1500);
         //alert("hola");
     });
-
+	*/
 });
 
 /*************************************************************/
