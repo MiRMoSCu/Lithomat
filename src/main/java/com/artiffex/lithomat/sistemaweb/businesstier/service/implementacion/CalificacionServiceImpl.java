@@ -1202,6 +1202,8 @@ public class CalificacionServiceImpl implements CalificacionService {
 				otttd.setNumeroPaginas(tipoTrabajoDetalle.getNumeroPaginasPublicacion());
 				otttd.setTamanioPublicacion(tipoTrabajoDetalle.getTamanioPublicacion().getNombre());
 				otttd.setRepeticionesPorPliego(tipoTrabajoDetalle.getRepeticionesXPliego());
+				otttd.setAltoCorteInicial(tipoTrabajoDetalle.getAltoCorteInicial());
+				otttd.setAnchoCorteInicial(tipoTrabajoDetalle.getAnchoCorteInicial());
 				otttd.setFrenteCombinacionTintas(tipoTrabajoDetalle.getFrenteCombinacionTintas().getDescripcion());
 				if( tipoTrabajoDetalle.getFrenteNumTintaEspecial() > 0 ) 
 					otttd.setFrenteTintaEspecial(tipoTrabajoDetalle.getFrenteNumTintaEspecial() + " : " + tipoTrabajoDetalle.getFrenteDescripcionTintaEspecial());

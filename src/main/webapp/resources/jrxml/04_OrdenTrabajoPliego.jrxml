@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2016-01-21T02:12:56 -->
+<!-- 2016-01-22T01:14:10 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdenTrabajoPliego" pageWidth="560" pageHeight="100" columnWidth="560" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e6400fcf-1f18-40a8-9298-143f61c09b00">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
@@ -35,7 +35,7 @@
 		<band height="20">
 			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<staticText>
-				<reportElement x="10" y="3" width="120" height="17" forecolor="#073A6E" uuid="7b22ff5f-fc36-4d6d-a146-e297f10716c6">
+				<reportElement x="15" y="3" width="120" height="17" forecolor="#073A6E" uuid="7b22ff5f-fc36-4d6d-a146-e297f10716c6">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -169,10 +169,9 @@
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Tipo 
-vuelta]]></text>
+				<text><![CDATA[Vuelta mismas placas]]></text>
 			</staticText>
 		</band>
 	</pageHeader>

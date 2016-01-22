@@ -58,6 +58,8 @@ public class TipoTrabajoDetalleController {
 			@RequestParam(value = "repeticiones_x_pliego", 				required = false) Integer repeticionesXPliego,
 			@RequestParam(value = "numero_paginas_publicacion", 		required = false) Integer numeroPaginasPublicacion,
 			@RequestParam(value = "id_tamanio_publicacion", 			required = false) Integer idTamanioPublicacion,
+			@RequestParam(value = "alto_corte_inicial", 				required = false) float altoCorteInicial,
+			@RequestParam(value = "ancho_corte_inicial", 				required = false) float anchoCorteInicial,
 			@RequestParam(value = "frente_id_combinacion_tintas", 		required = false) Integer frenteIdCombinacionTintas,
 			@RequestParam(value = "frente_num_tinta_especial", 			required = false) Integer frenteNumTintaEspecial,
 			@RequestParam(value = "frente_descripcion_tinta_especial", 	required = false) String frenteDescripcionTintaEspecial,
@@ -96,6 +98,8 @@ public class TipoTrabajoDetalleController {
 			TamanioPublicacion tamanioPublicacion = new TamanioPublicacion();
 			tamanioPublicacion.setIdTamanioPublicacion(idTamanioPublicacion);
 		tipoTrabajoDetalle.setTamanioPublicacion(tamanioPublicacion);
+		tipoTrabajoDetalle.setAltoCorteInicial(altoCorteInicial);
+		tipoTrabajoDetalle.setAnchoCorteInicial(anchoCorteInicial);
 			CombinacionTintas frenteCombinacionTintas = new CombinacionTintas();
 			frenteCombinacionTintas.setIdCombinacionTintas(frenteIdCombinacionTintas);
 		tipoTrabajoDetalle.setFrenteCombinacionTintas(frenteCombinacionTintas);
@@ -201,6 +205,8 @@ public class TipoTrabajoDetalleController {
 			@RequestParam(value = "repeticiones_x_pliego", 				required = false) Integer repeticionesXPliego,
 			@RequestParam(value = "numero_paginas_publicacion", 		required = false) Integer numeroPaginasPublicacion,
 			@RequestParam(value = "id_tamanio_publicacion", 			required = false) Integer idTamanioPublicacion,
+			@RequestParam(value = "alto_corte_inicial", 				required = false) float altoCorteInicial,
+			@RequestParam(value = "ancho_corte_inicial", 				required = false) float anchoCorteInicial,
 			@RequestParam(value = "frente_id_combinacion_tintas", 		required = false) Integer frenteIdCombinacionTintas,
 			@RequestParam(value = "frente_num_tinta_especial", 			required = false) Integer frenteNumTintaEspecial,
 			@RequestParam(value = "frente_descripcion_tinta_especial", 	required = false) String frenteDescripcionTintaEspecial,
@@ -229,6 +235,8 @@ public class TipoTrabajoDetalleController {
 		tipoTrabajoDetalle.setRepeticionesXPliego(repeticionesXPliego);
 		tipoTrabajoDetalle.setNumeroPaginasPublicacion(numeroPaginasPublicacion);
 		tipoTrabajoDetalle.getTamanioPublicacion().setIdTamanioPublicacion(idTamanioPublicacion);
+		tipoTrabajoDetalle.setAltoCorteInicial(altoCorteInicial);
+		tipoTrabajoDetalle.setAnchoCorteInicial(anchoCorteInicial);
 		tipoTrabajoDetalle.getFrenteCombinacionTintas().setIdCombinacionTintas(frenteIdCombinacionTintas);
 		tipoTrabajoDetalle.setFrenteNumTintaEspecial(frenteNumTintaEspecial);
 		tipoTrabajoDetalle.setFrenteDescripcionTintaEspecial(frenteDescripcionTintaEspecial);
@@ -270,6 +278,8 @@ public class TipoTrabajoDetalleController {
 			@RequestParam(value = "repeticiones_x_pliego", 				required = false) Integer repeticionesXPliego,
 			@RequestParam(value = "numero_paginas_publicacion", 		required = false) Integer numeroPaginasPublicacion,
 			@RequestParam(value = "id_tamanio_publicacion", 			required = false) Integer idTamanioPublicacion,
+			@RequestParam(value = "alto_corte_inicial", 				required = false) float altoCorteInicial,
+			@RequestParam(value = "ancho_corte_inicial", 				required = false) float anchoCorteInicial,
 			@RequestParam(value = "frente_id_combinacion_tintas", 		required = false) Integer frenteIdCombinacionTintas,
 			@RequestParam(value = "frente_num_tinta_especial", 			required = false) Integer frenteNumTintaEspecial,
 			@RequestParam(value = "frente_descripcion_tinta_especial", 	required = false) String frenteDescripcionTintaEspecial,
@@ -298,6 +308,8 @@ public class TipoTrabajoDetalleController {
 		tipoTrabajoDetalle.setRepeticionesXPliego(repeticionesXPliego);
 		tipoTrabajoDetalle.setNumeroPaginasPublicacion(numeroPaginasPublicacion);
 		tipoTrabajoDetalle.getTamanioPublicacion().setIdTamanioPublicacion(idTamanioPublicacion);
+		tipoTrabajoDetalle.setAltoCorteInicial(altoCorteInicial);
+		tipoTrabajoDetalle.setAnchoCorteInicial(anchoCorteInicial);
 		tipoTrabajoDetalle.getFrenteCombinacionTintas().setIdCombinacionTintas(frenteIdCombinacionTintas);
 		tipoTrabajoDetalle.setFrenteNumTintaEspecial(frenteNumTintaEspecial);
 		tipoTrabajoDetalle.setFrenteDescripcionTintaEspecial(frenteDescripcionTintaEspecial);

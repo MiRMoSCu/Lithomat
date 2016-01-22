@@ -69,6 +69,8 @@ public class TipoTrabajoDetalleServiceImpl implements TipoTrabajoDetalleService 
 		tipoTrabajoDetalleDTO.setRepeticionesXPliego(tipoTrabajoDetalle.getRepeticionesXPliego());
 		tipoTrabajoDetalleDTO.setNumeroPaginasPublicacion(tipoTrabajoDetalle.getNumeroPaginasPublicacion());
 		tipoTrabajoDetalleDTO.setDescripcionTamanioPublicacion(tipoTrabajoDetalle.getTamanioPublicacion().getNombre());
+		tipoTrabajoDetalleDTO.setAltoCorteInicial(tipoTrabajoDetalle.getAltoCorteInicial());
+		tipoTrabajoDetalleDTO.setAnchoCorteInicial(tipoTrabajoDetalle.getAnchoCorteInicial());
 		tipoTrabajoDetalleDTO.setFrenteDescripcionNumTintas(tipoTrabajoDetalle.getFrenteCombinacionTintas().getDescripcion());
 		tipoTrabajoDetalleDTO.setFrenteNumTintaEspecial(tipoTrabajoDetalle.getFrenteNumTintaEspecial());
 		tipoTrabajoDetalleDTO.setFrenteDescripcionTintaEspecial(tipoTrabajoDetalle.getFrenteDescripcionTintaEspecial());

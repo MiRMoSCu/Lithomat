@@ -16,6 +16,8 @@ var obj_ttd = {
 	repeticiones_x_pliego 				: "",
 	numero_paginas_publicacion 			: "",
 	tamanio_publicacion 				: "",
+	alto_corte_inicial					: "",
+	ancho_corte_inicial					: "",
 	frente_combinacion_tintas 			: "",
 	frente_num_tinta_especial 			: "",
 	frente_descripcion_tinta_especial 	: "",
@@ -44,6 +46,8 @@ var obj_ttd = {
 		this.repeticiones_x_pliego 				= document.tipo_trabajo_detalle.repeticiones_x_pliego.value;
 		this.numero_paginas_publicacion 		= document.tipo_trabajo_detalle.numero_paginas_publicacion.value;
 		this.tamanio_publicacion 				= document.tipo_trabajo_detalle.tamanio_pubicacion.value;
+		this.alto_corte_inicial					= document.tipo_trabajo_detalle.alto_corte_inicial.value;
+		this.ancho_corte_inicial				= document.tipo_trabajo_detalle.ancho_corte_inicial.value;
 		this.frente_combinacion_tintas 			= document.tipo_trabajo_detalle.frente_combinacion_tintas.value;
 		this.frente_num_tinta_especial 			= document.tipo_trabajo_detalle.frente_num_tinta_especial.value;
 		this.frente_descripcion_tinta_especial 	= document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.value;
@@ -71,6 +75,8 @@ var obj_ttd = {
 		document.tipo_trabajo_detalle.repeticiones_x_pliego.value 				= this.repeticiones_x_pliego;
 		document.tipo_trabajo_detalle.numero_paginas_publicacion.value 			= this.numero_paginas_publicacion;
 		document.tipo_trabajo_detalle.tamanio_pubicacion.value 					= this.tamanio_publicacion;
+		document.tipo_trabajo_detalle.alto_corte_inicial.value 					= this.alto_corte_inicial;
+		document.tipo_trabajo_detalle.ancho_corte_inicial.value 				= this.ancho_corte_inicial;
 		document.tipo_trabajo_detalle.frente_combinacion_tintas.value 			= this.frente_combinacion_tintas;
 		document.tipo_trabajo_detalle.frente_num_tinta_especial.value 			= this.frente_num_tinta_especial;
 		document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.value 	= this.frente_descripcion_tinta_especial;
@@ -262,6 +268,8 @@ function activaCamposFormTipoTrabajoDetalle() {
 	document.tipo_trabajo_detalle.ancho_extendido.readOnly 						= false;
 	document.tipo_trabajo_detalle.repeticiones_x_pliego.readOnly 				= false;
 	document.tipo_trabajo_detalle.numero_paginas_publicacion.readOnly 			= false;
+	document.tipo_trabajo_detalle.alto_corte_inicial.readOnly					= false;
+	document.tipo_trabajo_detalle.ancho_corte_inicial.readOnly					= false;
 	document.tipo_trabajo_detalle.frente_num_tinta_especial.readOnly 			= false;
 	document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.readOnly 	= false;
 	document.tipo_trabajo_detalle.vuelta_num_tinta_especial.readOnly 			= false;
@@ -275,6 +283,8 @@ function activaCamposFormTipoTrabajoDetalle() {
 	document.tipo_trabajo_detalle.ancho_extendido.style.background 						= "#fff";
 	document.tipo_trabajo_detalle.repeticiones_x_pliego.style.background 				= "#fff";
 	document.tipo_trabajo_detalle.numero_paginas_publicacion.style.background 			= "#fff";
+	document.tipo_trabajo_detalle.alto_corte_inicial.style.background					= "#fff";
+	document.tipo_trabajo_detalle.ancho_corte_inicial.style.background					= "#fff";
 	document.tipo_trabajo_detalle.frente_num_tinta_especial.style.background 			= "#fff";
 	document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.style.background 	= "#fff";
 	document.tipo_trabajo_detalle.vuelta_num_tinta_especial.style.background 			= "#fff";
@@ -320,6 +330,8 @@ function desactivaCamposFormTipoTrabajoDetalle() {
 	document.tipo_trabajo_detalle.ancho_extendido.readOnly 						= true;
 	document.tipo_trabajo_detalle.repeticiones_x_pliego.readOnly 				= true;
 	document.tipo_trabajo_detalle.numero_paginas_publicacion.readOnly 			= true;
+	document.tipo_trabajo_detalle.alto_corte_inicial.readOnly					= true;
+	document.tipo_trabajo_detalle.ancho_corte_inicial.readOnly					= true;
 	document.tipo_trabajo_detalle.frente_num_tinta_especial.readOnly 			= true;
 	document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.readOnly 	= true;
 	document.tipo_trabajo_detalle.vuelta_num_tinta_especial.readOnly 			= true;
@@ -333,6 +345,8 @@ function desactivaCamposFormTipoTrabajoDetalle() {
 	document.tipo_trabajo_detalle.ancho_extendido.style.background 						= "transparent";
 	document.tipo_trabajo_detalle.repeticiones_x_pliego.style.background 				= "transparent";
 	document.tipo_trabajo_detalle.numero_paginas_publicacion.style.background 			= "transparent";
+	document.tipo_trabajo_detalle.alto_corte_inicial.style.background					= "transparent";
+	document.tipo_trabajo_detalle.ancho_corte_inicial.style.background					= "transparent";
 	document.tipo_trabajo_detalle.frente_num_tinta_especial.style.background 			= "transparent";
 	document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.style.background 	= "transparent";
 	document.tipo_trabajo_detalle.vuelta_num_tinta_especial.style.background 			= "transparent";
@@ -426,6 +440,21 @@ function aceptaModificarTTD() {
 		correcto = false;
 		alert("El campo ancho extendido debe ser un numero. Favor de informarlo");
 		document.tipo_trabajo_detalle.ancho_extendido.focus(); 
+	}
+	
+	if ( correcto
+			&& (document.tipo_trabajo_detalle.alto_corte_inicial.value == ""
+					|| isNaN(document.tipo_trabajo_detalle.alto_corte_inicial.value) )  ) {
+		correcto = false;
+		alert("El campo Alto Corte Inicial debe ser un numero valido. Favor de informarlo");
+		document.tipo_trabajo_detalle.alto_corte_inicial.focus();
+	}
+	if ( correcto
+			&& (document.tipo_trabajo_detalle.ancho_corte_inicial.value == ""
+					|| isNaN(document.tipo_trabajo_detalle.ancho_corte_inicial.value) )  ) {
+		correcto = false;
+		alert("El campo Ancho Corte Inicial debe ser un numero valido. Favor de informarlo");
+		document.tipo_trabajo_detalle.ancho_corte_inicial.focus();
 	}
 	
     switch( parseInt( document.partida.tipo_trabajo.value ) ) {

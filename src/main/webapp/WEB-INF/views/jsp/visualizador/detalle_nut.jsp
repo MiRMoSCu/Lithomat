@@ -1210,6 +1210,46 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="linea">
+                                        	<div class="casilla">
+                                        		<div class="columna_izquierda">
+                                        			<div class="mitad_columna_izquierda">
+                                        				<div class="columna_completa">
+                                        					<table>
+                                        						<tr>
+                                        							<td width="62%">Alto Corte Inic.(cm)</td>
+                                        							<td>
+                                        								<input	type="text"
+	                                    										class="input"
+	                                    										name="alto_corte_inicial"
+	                                    										maxlength="4"
+	                                    										onkeydown="revisaNumero(true, this.value, event, null, null)"
+	                                    										readonly/>
+                                        							</td>
+                                        						</tr>
+                                        					</table>
+                                        				</div>
+                                        			</div>
+                                        			<div class="mitad_columna_derecha">
+                                        				<div class="columna_completa">
+                                        					<table>
+                                        						<tr>
+                                        							<td width="73%">Ancho Corte Inic. (cm)</td>
+                                        							<td>
+                                        								<input 	type="text"
+	                                    										class="input"
+	                                    										name="ancho_corte_inicial"
+	                                    										maxlength="4"
+	                                    										onkeydown="revisaNumero(true, this.value, event, null, null)"
+	                                    										readonly/>
+                                        							</td>
+                                        						</tr>
+                                        					</table>
+                                        				</div>
+                                        			</div>
+                                        		</div>
+                                        	</div>
+                                        </div>
                                         <div class="div_separador_chico">
                                             <img alt="" src="<c:url value="/resources/image/separador_chico.jpg"/>"/>
                                         </div>

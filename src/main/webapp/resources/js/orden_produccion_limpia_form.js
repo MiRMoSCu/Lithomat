@@ -175,6 +175,8 @@ function limpiaCamposFormTipoTrabajoDetalle() {
     document.forms["tipo_trabajo_detalle"].elements["tipo_papel_extendido"].value                      	= "";
     document.forms["tipo_trabajo_detalle"].elements["repeticiones_x_pliego"].value                      = "";
     document.forms["tipo_trabajo_detalle"].elements["numero_paginas_publicacion"].value                 = 0;
+    document.forms["tipo_trabajo_detalle"].elements["alto_corte_inicial"].value                 		= 0;
+    document.forms["tipo_trabajo_detalle"].elements["ancho_corte_inicial"].value                 		= 0;
     document.forms["tipo_trabajo_detalle"].elements["select_tamanio_publicacion"].selectedIndex         = 0;
     document.forms["tipo_trabajo_detalle"].elements["select_frente_combinacion_tintas"].selectedIndex   = 0;
     document.forms["tipo_trabajo_detalle"].elements["frente_num_tinta_especial"].value                  = 0;
@@ -226,6 +228,8 @@ function activaCamposTipoTrabajoDetalle() {
     document.forms["tipo_trabajo_detalle"].elements["proporciona_placas"].disabled                  = false;
     document.forms["tipo_trabajo_detalle"].elements["repeticiones_x_pliego"].readOnly               = false;
     document.forms["tipo_trabajo_detalle"].elements["numero_paginas_publicacion"].readOnly          = false;
+    document.forms["tipo_trabajo_detalle"].elements["alto_corte_inicial"].readOnly          		= false;
+    document.forms["tipo_trabajo_detalle"].elements["ancho_corte_inicial"].readOnly          		= false;
     document.forms["tipo_trabajo_detalle"].elements["select_tamanio_publicacion"].disabled          = false;
     document.forms["tipo_trabajo_detalle"].elements["select_frente_combinacion_tintas"].disabled    = false;
     document.forms["tipo_trabajo_detalle"].elements["frente_num_tinta_especial"].readOnly           = false;
@@ -253,6 +257,8 @@ function desactivaCamposTipoTrabajoDetalle() {
     document.forms["tipo_trabajo_detalle"].elements["proporciona_placas"].disabled                  = true;
     document.forms["tipo_trabajo_detalle"].elements["repeticiones_x_pliego"].readOnly               = true;
     document.forms["tipo_trabajo_detalle"].elements["numero_paginas_publicacion"].readOnly          = true;
+    document.forms["tipo_trabajo_detalle"].elements["alto_corte_inicial"].readOnly          		= true;
+    document.forms["tipo_trabajo_detalle"].elements["ancho_corte_inicial"].readOnly          		= true;
     document.forms["tipo_trabajo_detalle"].elements["select_tamanio_publicacion"].disabled          = true;
     document.forms["tipo_trabajo_detalle"].elements["select_frente_combinacion_tintas"].disabled    = true;
     document.forms["tipo_trabajo_detalle"].elements["frente_num_tinta_especial"].readOnly           = true;

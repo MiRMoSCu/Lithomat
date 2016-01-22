@@ -1237,6 +1237,46 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="linea">
+                                    	<div class="casilla">
+                                    		<div class="columna_izquierda">
+                                    			<div class="mitad_columna_izquierda">
+                                    				<div class="columna_completa">
+                                    					<table>
+                                    						<tr>
+                                    							<td width="62%">Alto Corte Inic.(cm)</td>
+                                    							<td>
+                                    								<input	type="text"
+                                    										class="input"
+                                    										name="alto_corte_inicial"
+                                    										value="0"
+                                    										maxlength="4"
+                                    										onkeydown="revisaNumero(true, this.value, event, null, null)"/>
+                                    							</td>
+                                    						</tr>
+                                    					</table>
+                                    				</div>
+                                    			</div>
+                                    			<div class="mitad_columna_derecha">
+                                    				<div class="columna_completa">
+                                    					<table>
+                                    						<tr>
+                                    							<td width="73%">Ancho Corte Inic. (cm)</td>
+                                    							<td>
+                                    								<input 	type="text"
+                                    										class="input"
+                                    										name="ancho_corte_inicial"
+                                    										value="0"
+                                    										maxlength="4"
+                                    										onkeydown="revisaNumero(true, this.value, event, null, null)"/>
+                                    							</td>
+                                    						</tr>
+                                    					</table>
+                                    				</div>
+                                    			</div>
+                                    		</div>
+                                    	</div>
+                                    </div>
                                     
                                     <div id="div_especificaciones_papel">
                                         

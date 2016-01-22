@@ -426,6 +426,22 @@ function ajaxAgregaTipoTrabajoDetalle() {
     	 document.forms["tipo_trabajo_detalle"].elements["ancho_extendido"].focus();
     }
     
+    // corte inicial
+    if ( correcto
+    		&& ( document.tipo_trabajo_detalle.alto_corte_inicial.value == "" 
+    				|| isNaN(document.tipo_trabajo_detalle.alto_corte_inicial.value) ) ) {
+    	correcto = false;
+    	alert("El campo Alto Corte Inicial debe ser num\u00E9rico");
+    	document.tipo_trabajo_detalle.alto_corte_inicial.focus();
+    }
+    if ( correcto
+    		&& ( document.tipo_trabajo_detalle.ancho_corte_inicial.value == ""
+    				|| isNaN(document.tipo_trabajo_detalle.ancho_corte_inicial.value) ) ) {
+    	correcto = false;
+    	alert("El campo Ancho Corte Inicial debe ser num\u00E9rico");
+    	document.tipo_trabajo_detalle.ancho_corte_inicial.focus();
+    }
+    
     // Valida que el numero de repeticiones por flyer o paginas de revista sea mayor que cero
     switch( parseInt( id_tipo_trabajo ) ) {
         case 1:

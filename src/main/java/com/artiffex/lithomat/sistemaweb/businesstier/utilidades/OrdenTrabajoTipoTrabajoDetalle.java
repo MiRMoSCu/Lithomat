@@ -18,6 +18,8 @@ public class OrdenTrabajoTipoTrabajoDetalle implements Serializable {
 	private Integer numeroPaginas;
 	private String tamanioPublicacion;
 	private Integer repeticionesPorPliego;
+	private float altoCorteInicial;
+	private float anchoCorteInicial;
 	private String frenteCombinacionTintas;
 	private String frenteTintaEspecial;
 	private String frenteTipoBarniz;
@@ -92,6 +94,18 @@ public class OrdenTrabajoTipoTrabajoDetalle implements Serializable {
 	}
 	public void setRepeticionesPorPliego(Integer repeticionesPorPliego) {
 		this.repeticionesPorPliego = repeticionesPorPliego;
+	}
+	public float getAltoCorteInicial() {
+		return altoCorteInicial;
+	}
+	public void setAltoCorteInicial(float altoCorteInicial) {
+		this.altoCorteInicial = altoCorteInicial;
+	}
+	public float getAnchoCorteInicial() {
+		return anchoCorteInicial;
+	}
+	public void setAnchoCorteInicial(float anchoCorteInicial) {
+		this.anchoCorteInicial = anchoCorteInicial;
 	}
 	public String getFrenteCombinacionTintas() {
 		return frenteCombinacionTintas;

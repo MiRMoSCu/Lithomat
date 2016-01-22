@@ -2,7 +2,7 @@
 
 #div_area {
     width: 1010px;
-    height: 3874px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ 
+    height: 3909px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ 
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -27,7 +27,7 @@
 
 #div_contenido {
     width: 961px;
-    height: 3845px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_area - 29 */
+    height: 3880px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_area - 29 */
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -55,7 +55,7 @@
 
 #div_fondo_der {
     width: 29px;
-    height: 3814px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_hoja - 31 (div_fondo_esq_sup) */
+    height: 3849px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_hoja - 31 (div_fondo_esq_sup) */
     background-image: url('../image/s_der.png');
     background-repeat: repeat-y;
 }

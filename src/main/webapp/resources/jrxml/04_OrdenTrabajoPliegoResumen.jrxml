@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2016-01-21T17:20:26 -->
+<!-- 2016-01-22T00:58:27 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="04_OrdenTrabajoPliegoResumen" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ae5d9ab7-3a47-475b-86d7-e7a96fdb8fac">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
@@ -19,10 +19,9 @@
 	<title>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement x="10" y="3" width="190" height="17" forecolor="#073A6E" uuid="8094d2d8-b4a6-4ad6-8d44-afc0509a3bbc">
+				<reportElement x="15" y="3" width="190" height="17" forecolor="#073A6E" uuid="8094d2d8-b4a6-4ad6-8d44-afc0509a3bbc">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
 					<font size="14" isBold="true" isItalic="false" isUnderline="false"/>

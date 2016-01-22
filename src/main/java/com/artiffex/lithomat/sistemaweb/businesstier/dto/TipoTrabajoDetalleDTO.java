@@ -21,6 +21,8 @@ public class TipoTrabajoDetalleDTO implements Serializable {
 	private int repeticionesXPliego;
 	private int numeroPaginasPublicacion;
 	private String descripcionTamanioPublicacion;
+	private float altoCorteInicial;
+	private float anchoCorteInicial;
 	private String frenteDescripcionNumTintas;
 	private int frenteNumTintaEspecial;
 	private String frenteDescripcionTintaEspecial;
@@ -126,6 +128,18 @@ public class TipoTrabajoDetalleDTO implements Serializable {
 	public void setDescripcionTamanioPublicacion(
 			String descripcionTamanioPublicacion) {
 		this.descripcionTamanioPublicacion = descripcionTamanioPublicacion;
+	}
+	public float getAltoCorteInicial() {
+		return altoCorteInicial;
+	}
+	public void setAltoCorteInicial(float altoCorteInicial) {
+		this.altoCorteInicial = altoCorteInicial;
+	}
+	public float getAnchoCorteInicial() {
+		return anchoCorteInicial;
+	}
+	public void setAnchoCorteInicial(float anchoCorteInicial) {
+		this.anchoCorteInicial = anchoCorteInicial;
 	}
 	public String getFrenteDescripcionNumTintas() {
 		return frenteDescripcionNumTintas;
