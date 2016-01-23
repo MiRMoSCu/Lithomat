@@ -1,4 +1,4 @@
-package com.artiffex.lithomat.sistemaweb.webtier.controller.orden;
+package com.artiffex.lithomat.sistemaweb.webtier.controller.produccion.orden;
 
 import java.util.List;
 

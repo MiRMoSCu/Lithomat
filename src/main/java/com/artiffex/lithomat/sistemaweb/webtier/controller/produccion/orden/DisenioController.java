@@ -1,4 +1,4 @@
-package com.artiffex.lithomat.sistemaweb.webtier.controller.orden;
+package com.artiffex.lithomat.sistemaweb.webtier.controller.produccion.orden;
 
 import javax.annotation.Resource;
 
@@ -10,45 +10,45 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.Disenio;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.JsonResponse;
-import com.artiffex.lithomat.sistemaweb.businesstier.entity.Preprensa;
-import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PreprensaService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.DisenioService;
 
 @Controller
-@RequestMapping("/preprensa")
-public class PreprensaController {
+@RequestMapping("/disenio")
+public class DisenioController {
 	
-	private static final Logger log = Logger.getLogger(PreprensaController.class);
+	private static final Logger log = Logger.getLogger(DisenioController.class);
 	
 	@Resource
-	private PreprensaService preprensaService;
+	private DisenioService disenioService;
 	
 
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/modifica", method = RequestMethod.POST, headers = "Accept=application/json")
 	@ResponseBody
-	public JsonResponse modificaPreprensa(
-			@RequestParam(value = "id_preprensa", 				required = false) Integer idPreprensa,
+	public JsonResponse modificaDisenio(
+			@RequestParam(value = "id_disenio", 				required = false) Integer idDisenio,
 			@RequestParam(value = "indicacion_tarea_realizar", 	required = false) String indicacionTareaRealizar,
 			@RequestParam(value = "materiales_recibe", 			required = false) String materialesRecibe,
 			@RequestParam(value = "observaciones", 				required = false) String observaciones
 		) {
-		log.info("/modifica_preprensa");
-
-		Preprensa preprensa = preprensaService.buscaPreprensa(idPreprensa);
-		preprensa.setIndicacionTareaRealizar(indicacionTareaRealizar);
-		preprensa.setMaterialesRecibe(materialesRecibe);
-		preprensa.setObservaciones(observaciones);
-
-		preprensaService.modificaPreprensa(preprensa);
+		log.info("/modifica_disenio");
+		
+		Disenio disenio = disenioService.buscaDisenio(idDisenio);
+		disenio.setIndicacionTareaRealizar(indicacionTareaRealizar);
+		disenio.setMaterialesRecibe(materialesRecibe);
+		disenio.setObservaciones(observaciones);
+		
+		disenioService.modificaDisenio(disenio);
 
 		JsonResponse jsonResponse = new JsonResponse();
 		jsonResponse.setEstatusOperacion(1);
-		jsonResponse.setIdPreprensa(idPreprensa);
+		jsonResponse.setIdDisenio(idDisenio);
 
-		preprensa 	= null;
+		disenio = null;
 		
 		return jsonResponse;
-	} // modificaPreprensa
+	} // modificaDisenio
 	
 }

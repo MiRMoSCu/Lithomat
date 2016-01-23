@@ -1,4 +1,4 @@
-package com.artiffex.lithomat.sistemaweb.webtier.controller.orden;
+package com.artiffex.lithomat.sistemaweb.webtier.controller.produccion.orden;
 
 import javax.annotation.Resource;
 
@@ -11,44 +11,43 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.JsonResponse;
-import com.artiffex.lithomat.sistemaweb.businesstier.entity.Transporte;
-import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TransporteService;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.Offset;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.OffsetService;
 
 @Controller
-@RequestMapping("/transporte")
-public class TransporteController {
+@RequestMapping("/offset")
+public class OffsetController {
 	
-	private static final Logger log = Logger.getLogger(TransporteController.class);
+	private static final Logger log = Logger.getLogger(OffsetController.class);
 	
 	@Resource
-	private TransporteService transporteService;
-	
+	private OffsetService offsetService;
+
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/modifica", method = RequestMethod.POST, headers = "Accept=application/json")
 	@ResponseBody
-	public JsonResponse modificaTransporte(
-			@RequestParam(value = "id_transporte", 				required = false) Integer idTransporte,
+	public JsonResponse modificaOffset(
+			@RequestParam(value = "id_offset", 					required = false) Integer idOffset,
 			@RequestParam(value = "indicacion_tarea_realizar", 	required = false) String indicacionTareaRealizar,
 			@RequestParam(value = "materiales_recibe", 			required = false) String materialesRecibe,
 			@RequestParam(value = "observaciones", 				required = false) String observaciones
 		) {
-		log.info("/modifica_transporte");
+		log.info("/modifica_offset");
 
-		Transporte transporte = transporteService.buscaTransporte(idTransporte);
-		transporte.setIndicacionTareaRealizar(indicacionTareaRealizar);
-		transporte.setMaterialesRecibe(materialesRecibe);
-		transporte.setObservaciones(observaciones);
+		Offset offset = offsetService.buscaOffset(idOffset);
+		offset.setIndicacionTareaRealizar(indicacionTareaRealizar);
+		offset.setMaterialesRecibe(materialesRecibe);
+		offset.setObservaciones(observaciones);
 
-		transporteService.modificaTransporte(transporte);
+		offsetService.modificaOffset(offset);
 
 		JsonResponse jsonResponse = new JsonResponse();
 		jsonResponse.setEstatusOperacion(1);
-		jsonResponse.setIdTransporte(idTransporte);
 
-		transporte 	= null;
+		offset 	= null;
 		
 		return jsonResponse;
-	} // modificaTransporte
-
+	} // modificaOffset
+	
 }

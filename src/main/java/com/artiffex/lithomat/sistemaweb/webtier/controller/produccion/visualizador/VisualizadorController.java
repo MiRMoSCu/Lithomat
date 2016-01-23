@@ -1,4 +1,4 @@
-package com.artiffex.lithomat.sistemaweb.webtier.controller.visualizador;
+package com.artiffex.lithomat.sistemaweb.webtier.controller.produccion.visualizador;
 
 import java.util.List;
 
