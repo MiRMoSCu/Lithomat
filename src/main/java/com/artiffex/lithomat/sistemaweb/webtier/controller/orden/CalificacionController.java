@@ -1,4 +1,4 @@
-package com.artiffex.lithomat.sistemaweb.webtier.controller.produccion;
+package com.artiffex.lithomat.sistemaweb.webtier.controller.orden;
 
 import javax.annotation.Resource;
 
@@ -103,7 +103,7 @@ public class CalificacionController {
 			jsonArbol					= null;
 		}
 		
-		return "produccion/calificacion";
+		return "produccion/orden/calificacion";
 	} // calificacionOrdenProduccion
 	
 

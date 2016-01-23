@@ -1,4 +1,4 @@
-package com.artiffex.lithomat.sistemaweb.webtier.controller.produccion;
+package com.artiffex.lithomat.sistemaweb.webtier.controller.orden;
 
 import java.util.List;
 
@@ -57,7 +57,7 @@ public class PliegoController {
 		listaTipoVuelta = null;
 		listaPliego 	= null;
 		
-		return "produccion/pliego";
+		return "produccion/orden/pliego";
 	} // calculaPliego
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})

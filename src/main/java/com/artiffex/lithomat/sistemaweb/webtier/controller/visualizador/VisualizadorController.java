@@ -201,7 +201,7 @@ public class VisualizadorController {
 		model.addAttribute("listaOrdenesProduccion", listaOrdenesProduccion);
 		listaOrdenesProduccion = null;
 
-		return "visualizador/visualizador";
+		return "produccion/visualizador/visualizador";
 	} // visualizador
 	
 	/*
@@ -367,7 +367,7 @@ public class VisualizadorController {
 		
 		ordenProduccion 			= null;
 
-		return "visualizador/detalle_nut";
+		return "produccion/visualizador/detalle_nut";
 	} // obtieneDetalleNut
 	
 	/*
@@ -514,7 +514,7 @@ public class VisualizadorController {
 		cop			= null;
 		jsonArbol	= null;
 		
-		return "visualizador/detalle_precio";
+		return "produccion/visualizador/detalle_precio";
 	} // obtienePrecioDetalle
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})

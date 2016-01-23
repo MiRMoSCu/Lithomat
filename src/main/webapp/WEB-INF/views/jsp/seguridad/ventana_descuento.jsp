@@ -26,6 +26,7 @@
 			}
         </style>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/utilidades.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/ventana_descuento.js"/>"></script>
         <script type="text/javascript">
 	     	// inicializacion jquery
@@ -60,7 +61,7 @@
 	                        								class="input"
 	                        								name="nut"
 	                        								maxlength="10"
-	                        								onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}"
+	                        								onkeydown="revisaNumero(false, this.value, event, null, null)"
 	                        								value=""/>
 	                        					</td>
 	                        				</tr>
@@ -245,7 +246,7 @@
 	                        							<input 	type="text"
 	                        									class="input"
 	                        									name="porcentaje_descuento_modificado_porcentaje"
-	                        									onkeypress="if(isNaN(String.fromCharCode(event.keyCode))){if(event.keyCode==46){return true;}return false;}" 
+	                        									onkeydown="revisaNumero(false, this.value, event, null, null)" 
 	                        									title="Numeros enteros unicamente"
 	                        									onblur="calculaDescuento()"
 	                        									readonly/>

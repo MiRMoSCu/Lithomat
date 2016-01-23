@@ -1,4 +1,4 @@
-package com.artiffex.lithomat.sistemaweb.webtier.controller.produccion;
+package com.artiffex.lithomat.sistemaweb.webtier.controller.orden;
 
 import javax.annotation.Resource;
 
@@ -11,44 +11,44 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.JsonResponse;
-import com.artiffex.lithomat.sistemaweb.businesstier.entity.Preprensa;
-import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PreprensaService;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.Transporte;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TransporteService;
 
 @Controller
-@RequestMapping("/preprensa")
-public class PreprensaController {
+@RequestMapping("/transporte")
+public class TransporteController {
 	
-	private static final Logger log = Logger.getLogger(PreprensaController.class);
+	private static final Logger log = Logger.getLogger(TransporteController.class);
 	
 	@Resource
-	private PreprensaService preprensaService;
+	private TransporteService transporteService;
 	
-
+	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/modifica", method = RequestMethod.POST, headers = "Accept=application/json")
 	@ResponseBody
-	public JsonResponse modificaPreprensa(
-			@RequestParam(value = "id_preprensa", 				required = false) Integer idPreprensa,
+	public JsonResponse modificaTransporte(
+			@RequestParam(value = "id_transporte", 				required = false) Integer idTransporte,
 			@RequestParam(value = "indicacion_tarea_realizar", 	required = false) String indicacionTareaRealizar,
 			@RequestParam(value = "materiales_recibe", 			required = false) String materialesRecibe,
 			@RequestParam(value = "observaciones", 				required = false) String observaciones
 		) {
-		log.info("/modifica_preprensa");
+		log.info("/modifica_transporte");
 
-		Preprensa preprensa = preprensaService.buscaPreprensa(idPreprensa);
-		preprensa.setIndicacionTareaRealizar(indicacionTareaRealizar);
-		preprensa.setMaterialesRecibe(materialesRecibe);
-		preprensa.setObservaciones(observaciones);
+		Transporte transporte = transporteService.buscaTransporte(idTransporte);
+		transporte.setIndicacionTareaRealizar(indicacionTareaRealizar);
+		transporte.setMaterialesRecibe(materialesRecibe);
+		transporte.setObservaciones(observaciones);
 
-		preprensaService.modificaPreprensa(preprensa);
+		transporteService.modificaTransporte(transporte);
 
 		JsonResponse jsonResponse = new JsonResponse();
 		jsonResponse.setEstatusOperacion(1);
-		jsonResponse.setIdPreprensa(idPreprensa);
+		jsonResponse.setIdTransporte(idTransporte);
 
-		preprensa 	= null;
+		transporte 	= null;
 		
 		return jsonResponse;
-	} // modificaPreprensa
-	
+	} // modificaTransporte
+
 }

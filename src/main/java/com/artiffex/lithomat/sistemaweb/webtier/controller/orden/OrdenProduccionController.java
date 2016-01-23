@@ -1,4 +1,4 @@
-package com.artiffex.lithomat.sistemaweb.webtier.controller.produccion;
+package com.artiffex.lithomat.sistemaweb.webtier.controller.orden;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
@@ -179,7 +179,7 @@ public class OrdenProduccionController {
 
 		gson = null;
 
-		return "produccion/orden_produccion";
+		return "produccion/orden/orden_produccion";
 	} // ordenProduccion
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})

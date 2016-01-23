@@ -662,7 +662,7 @@ public class ReporteController {
 		model.addAttribute("listaTipoFormatoImpresion", listaTipoFormatoImpresion);
 		listaTipoFormatoImpresion = null;
 		model.addAttribute("condicionesProduccion", calificacionService.obtieneCondicionesProduccion(nut));
-		return "visualizador/condiciones_produccion";
+		return "produccion/visualizador/condiciones_produccion";
 	}
 	
 	

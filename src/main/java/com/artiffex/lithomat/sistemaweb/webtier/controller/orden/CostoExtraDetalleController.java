@@ -1,4 +1,4 @@
-package com.artiffex.lithomat.sistemaweb.webtier.controller.produccion;
+package com.artiffex.lithomat.sistemaweb.webtier.controller.orden;
 
 import java.io.IOException;
 import java.util.List;
@@ -252,7 +252,7 @@ public class CostoExtraDetalleController {
 		jsonArbol 		= null;
 		ordenProduccion = null;
 		
-		return "visualizador/costo_extra_detalle";
+		return "produccion/visualizador/costo_extra_detalle";
 	}
 	
 	
@@ -320,7 +320,7 @@ public class CostoExtraDetalleController {
 		jsonArbol 		= null;
 		ordenProduccion = null;
 		
-		return "visualizador/costo_extra_detalle";
+		return "produccion/visualizador/costo_extra_detalle";
 	}
 	
 	
@@ -379,7 +379,7 @@ public class CostoExtraDetalleController {
 		jsonArbol 		= null;
 		ordenProduccion = null;
 		
-		return "visualizador/costo_extra_detalle";
+		return "produccion/visualizador/costo_extra_detalle";
 	}
 	
 	
@@ -430,7 +430,7 @@ public class CostoExtraDetalleController {
 		jsonArbol 		= null;
 		ordenProduccion = null;
 		
-		return "visualizador/costo_extra_detalle";
+		return "produccion/visualizador/costo_extra_detalle";
 	}
 	
 }
