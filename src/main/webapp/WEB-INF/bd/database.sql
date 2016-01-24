@@ -750,8 +750,14 @@ CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`fecha_prensista_maquina` (
   `id_pliego` INT UNSIGNED NOT NULL,
   `fecha` DATE NULL,
   `id_prensista_ayudante` INT NULL,
-  `numero_millar_impreso` INT NULL,
-  `numero_cambio_placas` INT NULL,
+  `hojas_buenas` INT NULL,
+  `hojas_malas` INT NULL,
+  `hojas_limpias` INT NULL,
+  `hojas_adicionales` INT NULL,
+  `cambio_placas` INT NULL,
+  `laminas_extras` INT NULL,
+  `frente_kilos_tinta` FLOAT NULL,
+  `vuelta_kilos_tinta` VARCHAR(45) NULL,
   `activo` TINYINT(1) NULL,
   PRIMARY KEY (`id_fecha_prensista_maquina`),
   INDEX `fk_fecha_prensista_maquina_prensista1_idx` (`id_prensista` ASC),
@@ -827,30 +833,6 @@ CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`_offset` (
   CONSTRAINT `fk__offset_partida1`
     FOREIGN KEY (`id_partida`)
     REFERENCES `lithomat_artiffex`.`partida` (`id_partida`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `lithomat_artiffex`.`offset_detalle`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`offset_detalle` (
-  `id_offset_detalle` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_pliego` INT UNSIGNED NOT NULL,
-  `hojas_buenas` INT NULL,
-  `hojas_malas` INT NULL,
-  `hojas_limpias` INT NULL,
-  `hojas_adicionales` INT NULL,
-  `laminas_extras` INT NULL,
-  `kilos_tinta_frente` INT NULL,
-  `kilos_tinta_vuelta` INT NULL,
-  `activo` TINYINT(1) NULL,
-  PRIMARY KEY (`id_offset_detalle`),
-  INDEX `fk_offset_detalle_pliego1_idx` (`id_pliego` ASC),
-  CONSTRAINT `fk_offset_detalle_pliego1`
-    FOREIGN KEY (`id_pliego`)
-    REFERENCES `lithomat_artiffex`.`pliego` (`id_pliego`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

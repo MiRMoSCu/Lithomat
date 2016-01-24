@@ -100,12 +100,6 @@
 			</key>
 			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.CalendarioOrdenProduccion"/>
 		</set>
-		<set name="offsetDetalle" table="offset_detalle" inverse="true" lazy="true" fetch="select">
-			<key>
-				<column name="id_pliego" not-null="true"/>
-			</key>
-			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.OffsetDetalle"/>
-		</set>
 		<set name="calificacionPliego" table="calificacion_pliego" inverse="true" lazy="true" fetch="select">
 			<key>
 				<column name="id_pliego" not-null="true"/>

@@ -5,6 +5,7 @@
 <!-- PRODUCCION -->
 <c:url value="/orden_produccion/" 						var="urlOrdenProduccion" />
 <c:url value="/visualizador/" 							var="urlVisualizador" />
+<c:url value="/cruce_informacion/" 						var="urlCruceInformacion" />
 <!-- REPORTES -->
 <c:url value="/reporte/ventana_orden_produccion" 		var="urlVentanaOrdenProduccion" />
 <c:url value="/reporte/ventana_cotizacion" 				var="urlVentanaCotizacion" />
@@ -67,6 +68,7 @@
        	// *** Produccion
         	var urlOrdenProduccion 				= '${urlOrdenProduccion}';	
         	var urlVisualizador					= '${urlVisualizador}';
+        	var urlCruceInformacion				= '${urlCruceInformacion}';
         // *** Reportes
         	var urlVentanaOrdenProduccion		= '${urlVentanaOrdenProduccion}';
         	var urlVentanaCotizacion			= '${urlVentanaCotizacion}';
@@ -118,6 +120,7 @@
 		// *** Produccion
         	var urlOrdenProduccion 				= '${urlOrdenProduccion}';	
         	var urlVisualizador					= '${urlVisualizador}';
+        	var urlCruceInformacion				= '${urlCruceInformacion}';
         // *** Reportes
         	var urlVentanaOrdenProduccion		= '${urlVentanaOrdenProduccion}';
         	var urlVentanaCotizacion			= '${urlVentanaCotizacion}';
@@ -210,16 +213,21 @@
             
             function menu( opcion ) {
                 switch( opcion ) {
-	                case 'visualizador':
-	                	document.forms["opcion_menu"].action = urlVisualizador;
-	                	document.forms["opcion_menu"].method = "post";
-	                	document.forms[0].submit();
-	                	break;
                     case 'orden_produccion':
                         document.forms["opcion_menu"].action = urlOrdenProduccion;
                         document.forms["opcion_menu"].method = "post";
                         document.forms[0].submit();
                         break;
+                    case 'visualizador':
+	                	document.forms["opcion_menu"].action = urlVisualizador;
+	                	document.forms["opcion_menu"].method = "post";
+	                	document.forms[0].submit();
+	                	break;
+                    case 'cruce_informacion':
+                		document.forms["opcion_menu"].action = urlCruceInformacion;
+                        document.forms["opcion_menu"].method = "post";
+                        document.forms[0].submit();
+                		break;
                 // *******************
                     case 'ventana_reporte_orden_produccion':
                     	Shadowbox.open({
@@ -537,6 +545,9 @@
 	                               			<div id="div_opcion_visualizador" class="boton_dinamico" onclick="menu('visualizador');">
 	                               				<span class="texto_boton">Visualizador</span>
 	                               			</div>
+	                               			<div id="div_opcion_cruce_informacion" class="boton_dinamico" onclick="menu('cruce_informacion');">
+	                               				<span class="texto_boton">Cruce Informaci&oacute;n</span>
+	                               			</div>
 	                               		</div>
 	                               		<div id="div_pestania_reportes" style="display:none; background-color: transparent;">
 	                                		<div class="titulo_menu">
@@ -681,6 +692,9 @@
                                 			<div id="div_opcion_visualizador" class="boton_dinamico" onclick="menu('visualizador');">
                                 				<span class="texto_boton">Visualizador</span>
                                 			</div>
+                                			<div id="div_opcion_cruce_informacion" class="boton_dinamico" onclick="menu('cruce_informacion');">
+	                               				<span class="texto_boton">Cruce Informaci&oacute;n</span>
+	                               			</div>
                                 		</div>
                                 		<div id="div_pestania_reportes" style="display:none; background-color: transparent;">
 	                                		<div class="titulo_menu">REPORTES</div>

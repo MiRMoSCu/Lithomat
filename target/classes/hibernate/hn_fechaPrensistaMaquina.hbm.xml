@@ -29,13 +29,37 @@
 			<column name="id_prensista_ayudante"/>
 			<type name="integer"/>
 		</property>
-		<property name="numeroMillarImpreso">
-			<column name="numero_millar_impreso"/>
+		<property name="hojasBuenas">
+			<column name="hojas_buenas"/>
 			<type name="integer"/>
 		</property>
-		<property name="numeroCambioPlacas">
-			<column name="numero_cambio_placas"/>
+		<property name="hojasMalas">
+			<column name="hojas_malas"/>
 			<type name="integer"/>
+		</property>
+		<property name="hojasLimpias">
+			<column name="hojas_limpias"/>
+			<type name="integer"/>
+		</property>
+		<property name="hojasAdicionales">
+			<column name="hojas_adicionales"/>
+			<type name="integer"/>
+		</property>
+		<property name="cambioPlacas">
+			<column name="cambio_placas"/>
+			<type name="integer"/>
+		</property>
+		<property name="laminasExtras">
+			<column name="laminas_extras"/>
+			<type name="integer"/>
+		</property>
+		<property name="frenteKilosTinta">
+			<column name="frente_kilos_tinta"/>
+			<type name="float"/>
+		</property>
+		<property name="vueltaKilosTinta">
+			<column name="vuelta_kilos_tinta"/>
+			<type name="float"/>
 		</property>
 		<property name="activo">
 			<column name="activo"/>

@@ -60,7 +60,6 @@
 		<mapping resource="hibernate/hn_materialAyuda.hbm.xml"/>
 		<mapping resource="hibernate/hn_materialAyudaXPartida.hbm.xml"/>
 		<mapping resource="hibernate/hn_offset.hbm.xml"/>
-		<mapping resource="hibernate/hn_offsetDetalle.hbm.xml"/>
 		<mapping resource="hibernate/hn_ordenProduccion.hbm.xml"/>
 		<mapping resource="hibernate/hn_papelSobrante.hbm.xml"/>
 		<mapping resource="hibernate/hn_parametrosConfig.hbm.xml"/>

@@ -14,8 +14,14 @@ public class FechaPrensistaMaquina implements Serializable {
 	private Pliego pliego;
 	private Date fecha;
 	private int idPrensistaAyudante;
-	private int numeroMillarImpreso;
-	private int numeroCambioPlacas;
+	private int hojasBuenas;
+	private int hojasMalas;
+	private int hojasLimpias;
+	private int hojasAdicionales;
+	private int cambioPlacas;
+	private int laminasExtras;
+	private float frenteKilosTinta;
+	private float vueltaKilosTinta;
 	private boolean activo;
 	
 	
@@ -61,17 +67,53 @@ public class FechaPrensistaMaquina implements Serializable {
 	public void setIdPrensistaAyudante(int idPrensistaAyudante) {
 		this.idPrensistaAyudante = idPrensistaAyudante;
 	}
-	public int getNumeroMillarImpreso() {
-		return numeroMillarImpreso;
+	public int getHojasBuenas() {
+		return hojasBuenas;
 	}
-	public void setNumeroMillarImpreso(int numeroMillarImpreso) {
-		this.numeroMillarImpreso = numeroMillarImpreso;
+	public void setHojasBuenas(int hojasBuenas) {
+		this.hojasBuenas = hojasBuenas;
 	}
-	public int getNumeroCambioPlacas() {
-		return numeroCambioPlacas;
+	public int getHojasMalas() {
+		return hojasMalas;
 	}
-	public void setNumeroCambioPlacas(int numeroCambioPlacas) {
-		this.numeroCambioPlacas = numeroCambioPlacas;
+	public void setHojasMalas(int hojasMalas) {
+		this.hojasMalas = hojasMalas;
+	}
+	public int getHojasLimpias() {
+		return hojasLimpias;
+	}
+	public void setHojasLimpias(int hojasLimpias) {
+		this.hojasLimpias = hojasLimpias;
+	}
+	public int getHojasAdicionales() {
+		return hojasAdicionales;
+	}
+	public void setHojasAdicionales(int hojasAdicionales) {
+		this.hojasAdicionales = hojasAdicionales;
+	}
+	public int getCambioPlacas() {
+		return cambioPlacas;
+	}
+	public void setCambioPlacas(int cambioPlacas) {
+		this.cambioPlacas = cambioPlacas;
+	}
+	public int getLaminasExtras() {
+		return laminasExtras;
+	}
+	public void setLaminasExtras(int laminasExtras) {
+		this.laminasExtras = laminasExtras;
+	}
+	public float getFrenteKilosTinta() {
+		return frenteKilosTinta;
+	}
+	public void setFrenteKilosTinta(float frenteKilosTinta) {
+		this.frenteKilosTinta = frenteKilosTinta;
+	}
+	public float getVueltaKilosTinta() {
+		return vueltaKilosTinta;
+	}
+	public void setVueltaKilosTinta(float vueltaKilosTinta) {
+		this.vueltaKilosTinta = vueltaKilosTinta;
 	}
 	public boolean isActivo() {
 		return activo;
@@ -79,5 +121,4 @@ public class FechaPrensistaMaquina implements Serializable {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	
 }
