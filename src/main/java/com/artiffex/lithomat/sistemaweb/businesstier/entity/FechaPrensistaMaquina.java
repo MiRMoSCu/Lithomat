@@ -1,6 +1,7 @@
 package com.artiffex.lithomat.sistemaweb.businesstier.entity;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class FechaPrensistaMaquina implements Serializable {
@@ -12,7 +13,7 @@ public class FechaPrensistaMaquina implements Serializable {
 	private TurnoLaboral turnoLaboral;
 	private Maquina maquina;
 	private Pliego pliego;
-	private Date fecha;
+	private Date fechaImpresion;
 	private int idPrensistaAyudante;
 	private int hojasBuenas;
 	private int hojasMalas;
@@ -22,6 +23,8 @@ public class FechaPrensistaMaquina implements Serializable {
 	private int laminasExtras;
 	private float frenteKilosTinta;
 	private float vueltaKilosTinta;
+	private String usuario;
+	private Timestamp fechaGeneracion;
 	private boolean activo;
 	
 	
@@ -55,11 +58,11 @@ public class FechaPrensistaMaquina implements Serializable {
 	public void setPliego(Pliego pliego) {
 		this.pliego = pliego;
 	}
-	public Date getFecha() {
-		return fecha;
+	public Date getFechaImpresion() {
+		return fechaImpresion;
 	}
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+	public void setFechaImpresion(Date fechaImpresion) {
+		this.fechaImpresion = fechaImpresion;
 	}
 	public int getIdPrensistaAyudante() {
 		return idPrensistaAyudante;
@@ -114,6 +117,18 @@ public class FechaPrensistaMaquina implements Serializable {
 	}
 	public void setVueltaKilosTinta(float vueltaKilosTinta) {
 		this.vueltaKilosTinta = vueltaKilosTinta;
+	}
+	public String getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+	public Timestamp getFechaGeneracion() {
+		return fechaGeneracion;
+	}
+	public void setFechaGeneracion(Timestamp fechaGeneracion) {
+		this.fechaGeneracion = fechaGeneracion;
 	}
 	public boolean isActivo() {
 		return activo;

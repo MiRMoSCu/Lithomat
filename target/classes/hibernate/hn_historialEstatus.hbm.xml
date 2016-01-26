@@ -20,6 +20,10 @@
 			<column name="fecha"/>
 			<type name="timestamp"/>
 		</property>
+		<property name="usuario">
+			<column name="usuario" length="45"/>
+			<type name="string"/>
+		</property>
 		<property name="observaciones">
 			<column name="observaciones" length="250"/>
 			<type name="string"/>

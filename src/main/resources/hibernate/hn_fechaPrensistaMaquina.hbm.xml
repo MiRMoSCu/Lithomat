@@ -21,8 +21,8 @@
 		<many-to-one name="pliego" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Pliego" fetch="select">
 			<column name="id_pliego"/>
 		</many-to-one>
-		<property name="fecha">
-			<column name="fecha"/>
+		<property name="fechaImpresion">
+			<column name="fecha_impresion"/>
 			<type name="date"/>
 		</property>
 		<property name="idPrensistaAyudante">
@@ -60,6 +60,14 @@
 		<property name="vueltaKilosTinta">
 			<column name="vuelta_kilos_tinta"/>
 			<type name="float"/>
+		</property>
+		<property name="usuario">
+			<column name="usuario" length="45"/>
+			<type name="string"/>
+		</property>
+		<property name="fechaGeneracion">
+			<column name="fecha_generacion"/>
+			<type name="timestamp"/>
 		</property>
 		<property name="activo">
 			<column name="activo"/>

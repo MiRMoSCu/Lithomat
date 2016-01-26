@@ -5,15 +5,13 @@ import java.sql.Timestamp;
 
 public class HistorialEstatus implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1908614976969295736L;
 	
 	private int idHistorialEstatus;
 	private OrdenProduccion ordenProduccion;
 	private EstatusOrden estatusOrden;
 	private Timestamp fecha;
+	private String usuario;
 	private String observaciones;
 	private boolean activo;
 	
@@ -41,6 +39,12 @@ public class HistorialEstatus implements Serializable {
 	}
 	public void setFecha(Timestamp fecha) {
 		this.fecha = fecha;
+	}
+	public String getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 	public String getObservaciones() {
 		return observaciones;

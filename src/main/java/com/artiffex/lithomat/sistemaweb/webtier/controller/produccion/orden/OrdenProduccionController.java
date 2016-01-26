@@ -9,6 +9,8 @@ import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -269,6 +271,12 @@ public class OrdenProduccionController {
 		){
 		log.info("/cambia_estatus_orden_produccion");
 		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String usuario = principal.toString();
+		if ( principal instanceof UserDetails ) {
+			usuario = ((UserDetails)principal).getUsername();
+		}
+		
 		HistorialEstatus historialEstatus = new HistorialEstatus();
 			OrdenProduccion ordenProduccion = new OrdenProduccion();
 			ordenProduccion.setIdOrdenProduccion(idOrdenProduccion);
@@ -277,6 +285,7 @@ public class OrdenProduccionController {
 			estatusOrden.setIdEstatusOrden(idEstatusOrden);
 		historialEstatus.setEstatusOrden(estatusOrden);
 		historialEstatus.setFecha(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+		historialEstatus.setUsuario(usuario);
 		historialEstatus.setObservaciones("");
 		historialEstatus.setActivo(true);
 		
@@ -293,6 +302,7 @@ public class OrdenProduccionController {
 		estatusOrden		= null;
 		historialEstatus 	= null;
 		listaEstatusOrden	= null;
+		principal 			= null;
 		
 		return jsonResponse;
 	} // cambiaEstatusOrdenProduccion

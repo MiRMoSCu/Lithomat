@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.EstatusOrden;
@@ -97,11 +99,19 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
 	public int creaOrdenProduccion(OrdenProduccion ordenProduccion) {
 		int idOrdenProduccion = ordenProduccionDAO.crea(ordenProduccion);
 		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String usuario = principal.toString();
+		if ( principal instanceof UserDetails ) {
+			usuario = ((UserDetails)principal).getUsername();
+		}
+		principal = null;
+		
 		HistorialEstatus historialEstatus = new HistorialEstatus();
 		historialEstatus.setOrdenProduccion(ordenProduccion);
 			EstatusOrden estatusOrden = new EstatusOrden();
 			estatusOrden.setIdEstatusOrden(ESTATUS_COTIZACION);
 		historialEstatus.setEstatusOrden(estatusOrden);
+		historialEstatus.setUsuario(usuario);
 		historialEstatus.setFecha(ordenProduccion.getFechaGeneracion());
 		historialEstatus.setActivo(true);
 		historialEstatusService.creaHistorialEstatus(historialEstatus);

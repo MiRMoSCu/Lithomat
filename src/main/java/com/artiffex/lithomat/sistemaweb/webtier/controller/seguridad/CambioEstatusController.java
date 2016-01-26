@@ -9,6 +9,8 @@ import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,6 +64,13 @@ public class CambioEstatusController {
 		
 		Timestamp fechaGeneracion = new Timestamp(Calendar.getInstance().getTimeInMillis());
 		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String usuario = principal.toString();
+		if ( principal instanceof UserDetails ) {
+			usuario = ((UserDetails)principal).getUsername();
+		}
+		
+		
 		HistorialEstatus historialEstatus = new HistorialEstatus();
 			OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
 		historialEstatus.setOrdenProduccion(ordenProduccion);
@@ -69,6 +78,7 @@ public class CambioEstatusController {
 			estatusOrden.setIdEstatusOrden(idEstatusOrden);
 		historialEstatus.setEstatusOrden(estatusOrden);
 		historialEstatus.setFecha(fechaGeneracion);
+		historialEstatus.setUsuario(usuario);
 		historialEstatus.setObservaciones(observaciones);
 		historialEstatus.setActivo(true);
 		
@@ -77,6 +87,7 @@ public class CambioEstatusController {
 		estatusOrden		= null;
 		ordenProduccion 	= null;
 		historialEstatus 	= null;
+		principal 			= null;
 		fechaGeneracion		= null;
 
 		return true;
