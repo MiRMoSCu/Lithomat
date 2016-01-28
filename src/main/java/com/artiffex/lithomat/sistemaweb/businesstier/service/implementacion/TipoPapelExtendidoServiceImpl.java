@@ -48,7 +48,7 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 		return tipoPapelExtendidoDAO.lista();
 	}
 	
-	public int obtieneNumeroTipoPapelExtendidoPorParematros(
+	public int obtieneNumeroTipoPapelExtendidoPorParametros(
 			boolean busquedaPorNombre, 
 			boolean busquedaPorGramaje,
 			boolean busquedaPorKilogramos, 

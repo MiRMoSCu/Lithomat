@@ -1,11 +1,10 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page contentType="text/html;charset=ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 <!-- PRODUCCION -->
 <c:url value="/orden_produccion/" 						var="urlOrdenProduccion" />
 <c:url value="/visualizador/" 							var="urlVisualizador" />
-<c:url value="/cruce_informacion/" 						var="urlCruceInformacion" />
+<c:url value="/cruce_informacion/creacion/lista" 		var="urlCruceInformacion" />
 <!-- REPORTES -->
 <c:url value="/reporte/ventana_orden_produccion" 		var="urlVentanaOrdenProduccion" />
 <c:url value="/reporte/ventana_cotizacion" 				var="urlVentanaCotizacion" />
@@ -50,6 +49,7 @@
 <c:url value="/usuario/catalogo/lista" 					var="urlUsuario" />
 <!-- CERRAR SESION -->
 <c:url value="/j_spring_security_logout" 				var="urlSalir" />
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>

@@ -137,7 +137,7 @@ public class TipoPapelExtendidoController {
 		model.addAttribute("numeroPagina", numeroPagina);
 		
 		// numero total de registros
-		int numeroTotalRegistros = tipoPapelExtendidoService.obtieneNumeroTipoPapelExtendidoPorParematros(false, false, false, false, false, false, null, null, null, null, null, null);
+		int numeroTotalRegistros = tipoPapelExtendidoService.obtieneNumeroTipoPapelExtendidoPorParametros(false, false, false, false, false, false, null, null, null, null, null, null);
 		model.addAttribute("numeroTotalRegistros", numeroTotalRegistros);
 		
 		// lista de registros // BUSQUEDA DEFAULT
@@ -172,7 +172,7 @@ public class TipoPapelExtendidoController {
 		StringBuilder sb = new StringBuilder();
 		Gson gson = new Gson();
 		
-		int numeroTotalRegistros = tipoPapelExtendidoService.obtieneNumeroTipoPapelExtendidoPorParematros(
+		int numeroTotalRegistros = tipoPapelExtendidoService.obtieneNumeroTipoPapelExtendidoPorParametros(
 				busquedaPorNombre, 
 				busquedaPorGramaje, 
 				busquedaPorKilogramos, 
@@ -263,7 +263,7 @@ public class TipoPapelExtendidoController {
 		model.addAttribute("numeroPagina", numeroPagina);
 		
 		// numero total de registros
-		int numeroTotalRegistros = tipoPapelExtendidoService.obtieneNumeroTipoPapelExtendidoPorParematros(false, false, false, false, false, false, null, null, null, null, null, null);
+		int numeroTotalRegistros = tipoPapelExtendidoService.obtieneNumeroTipoPapelExtendidoPorParametros(false, false, false, false, false, false, null, null, null, null, null, null);
 		model.addAttribute("numeroTotalRegistros", numeroTotalRegistros);
 		
 		// lista de registros // BUSQUEDA DEFAULT
@@ -325,7 +325,7 @@ public class TipoPapelExtendidoController {
 		model.addAttribute("numeroPagina", numeroPagina);
 		
 		// numero total de registros
-		int numeroTotalRegistros = tipoPapelExtendidoService.obtieneNumeroTipoPapelExtendidoPorParematros(false, false, false, false, false, false, null, null, null, null, null, null);
+		int numeroTotalRegistros = tipoPapelExtendidoService.obtieneNumeroTipoPapelExtendidoPorParametros(false, false, false, false, false, false, null, null, null, null, null, null);
 		model.addAttribute("numeroTotalRegistros", numeroTotalRegistros);
 		
 		// lista de registros // BUSQUEDA DEFAULT
@@ -370,7 +370,7 @@ public class TipoPapelExtendidoController {
 		model.addAttribute("numeroPagina", numeroPagina);
 		
 		// numero total de registros
-		int numeroTotalRegistros = tipoPapelExtendidoService.obtieneNumeroTipoPapelExtendidoPorParematros(false, false, false, false, false, false, null, null, null, null, null, null);
+		int numeroTotalRegistros = tipoPapelExtendidoService.obtieneNumeroTipoPapelExtendidoPorParametros(false, false, false, false, false, false, null, null, null, null, null, null);
 		model.addAttribute("numeroTotalRegistros", numeroTotalRegistros);
 		
 		// lista de registros // BUSQUEDA DEFAULT

@@ -9,10 +9,10 @@ public class FechaPrensistaMaquina implements Serializable {
 	private static final long serialVersionUID = 7898226661242722956L;
 
 	private int idFechaPrensistaMaquina;
+	private Pliego pliego;
 	private Prensista prensista;
 	private TurnoLaboral turnoLaboral;
 	private Maquina maquina;
-	private Pliego pliego;
 	private Date fechaImpresion;
 	private int idPrensistaAyudante;
 	private int hojasBuenas;
@@ -34,6 +34,12 @@ public class FechaPrensistaMaquina implements Serializable {
 	public void setIdFechaPrensistaMaquina(int idFechaPrensistaMaquina) {
 		this.idFechaPrensistaMaquina = idFechaPrensistaMaquina;
 	}
+	public Pliego getPliego() {
+		return pliego;
+	}
+	public void setPliego(Pliego pliego) {
+		this.pliego = pliego;
+	}
 	public Prensista getPrensista() {
 		return prensista;
 	}
@@ -51,12 +57,6 @@ public class FechaPrensistaMaquina implements Serializable {
 	}
 	public void setMaquina(Maquina maquina) {
 		this.maquina = maquina;
-	}
-	public Pliego getPliego() {
-		return pliego;
-	}
-	public void setPliego(Pliego pliego) {
-		this.pliego = pliego;
 	}
 	public Date getFechaImpresion() {
 		return fechaImpresion;

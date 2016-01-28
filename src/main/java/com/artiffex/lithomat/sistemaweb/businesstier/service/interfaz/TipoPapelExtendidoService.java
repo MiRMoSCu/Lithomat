@@ -17,7 +17,7 @@ public interface TipoPapelExtendidoService {
 
 	public List<TipoPapelExtendido> listaTipoPapelExtendido();
 	
-	public int obtieneNumeroTipoPapelExtendidoPorParematros(
+	public int obtieneNumeroTipoPapelExtendidoPorParametros(
 			boolean busquedaPorNombre,
 			boolean busquedaPorGramaje,
 			boolean busquedaPorKilogramos,

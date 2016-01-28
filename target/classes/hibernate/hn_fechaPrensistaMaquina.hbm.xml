@@ -9,6 +9,9 @@
 			<type name="integer"/>
 			<generator class="increment"/>
 		</id>
+		<many-to-one name="pliego" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Pliego" fetch="select">
+			<column name="id_pliego"/>
+		</many-to-one>
 		<many-to-one name="prensista" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Prensista" fetch="select">
 			<column name="id_prensista"/>
 		</many-to-one>
@@ -17,9 +20,6 @@
 		</many-to-one>
 		<many-to-one name="maquina" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Maquina" fetch="select">
 			<column name="id_maquina"/>
-		</many-to-one>
-		<many-to-one name="pliego" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Pliego" fetch="select">
-			<column name="id_pliego"/>
 		</many-to-one>
 		<property name="fechaImpresion">
 			<column name="fecha_impresion"/>
