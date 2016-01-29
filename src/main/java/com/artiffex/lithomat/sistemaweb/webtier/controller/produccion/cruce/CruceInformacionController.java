@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.FechaPrensistaMaquinaDTOGrid;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.FechaPrensistaMaquinaService;
@@ -17,6 +19,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.MaquinaSer
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PrensistaService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TurnoLaboralService;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
+import com.google.gson.Gson;
 
 @Controller
 @RequestMapping("/cruce_informacion")
@@ -34,7 +37,7 @@ public class CruceInformacionController {
 	private MaquinaService maquinaService;
 
 	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
-	@RequestMapping(value = "/creacion/lista", method = RequestMethod.POST)
+	@RequestMapping(value = "/grid/lista", method = RequestMethod.POST)
 	public String ventanaCruceInformacion( Model model ) {
 		log.info("/ventana_cruce_informacion");
 		
@@ -65,11 +68,43 @@ public class CruceInformacionController {
 		model.addAttribute("numeroTotalRegistros", numeroTotalRegistros);
 		
 		// Lista de registros DTO
-		List<FechaPrensistaMaquinaDTOGrid> listaFechaPrensistaMaquina = fechaPrensistaMaquinaService.listaFechaPrensistaMaquinaPorParametrosEnDTO(false, null, numeroPagina, numeroRegistrosPorPagina);
-		model.addAttribute("listaFechaPrensistaMaquina",listaFechaPrensistaMaquina);
-		listaFechaPrensistaMaquina = null;
+		List<FechaPrensistaMaquinaDTOGrid> listaGridPliegos = fechaPrensistaMaquinaService.listaFechaPrensistaMaquinaPorParametrosEnDTO(false, null, numeroPagina, numeroRegistrosPorPagina);
+		model.addAttribute("listaGridPliegos",listaGridPliegos);
+		listaGridPliegos = null;
 		
 		return "produccion/cruce/cruce_informacion";
+	}
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
+	@RequestMapping(value = "/grid/lista_por_pagina_por_parametros", method = RequestMethod.POST)
+	@ResponseBody
+	public String buscaRegistrosGridPorParametros(
+			@RequestParam(value = "numero_pagina", 					required = false) Integer numeroPagina,
+			@RequestParam(value = "numero_registros_por_pagina", 	required = false) Integer numeroRegistrosPorPagina,
+			@RequestParam(value = "chkbx_busca_por_nut", 			required = false) boolean busquedaPorNut,
+			@RequestParam(value = "nut", 							required = false) String nut
+		) {
+		log.info("/ventana_cruce_informacion");
+		
+		StringBuilder sb = new StringBuilder();
+		Gson gson = new Gson();
+		
+		int numeroTotalRegistros = fechaPrensistaMaquinaService.obtieneNumeroFechaPrensistaMaquinaPorParametros(busquedaPorNut, nut);
+		
+		List<FechaPrensistaMaquinaDTOGrid> listaGridPliegos = fechaPrensistaMaquinaService.listaFechaPrensistaMaquinaPorParametrosEnDTO(busquedaPorNut, nut, numeroPagina, numeroRegistrosPorPagina);
+		
+		sb.append("{");
+		sb.append("\"numeroTotalRegistros\":");
+		sb.append(numeroTotalRegistros);
+		sb.append(",");
+		sb.append("\"listaGridPliegos\":");
+		sb.append(gson.toJson(listaGridPliegos));
+		sb.append("}");
+		
+		listaGridPliegos 	= null;
+		gson 				= null;
+		
+		return sb.toString();
 	}
 	
 }

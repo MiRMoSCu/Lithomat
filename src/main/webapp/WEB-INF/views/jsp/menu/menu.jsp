@@ -4,7 +4,7 @@
 <!-- PRODUCCION -->
 <c:url value="/orden_produccion/" 						var="urlOrdenProduccion" />
 <c:url value="/visualizador/" 							var="urlVisualizador" />
-<c:url value="/cruce_informacion/creacion/lista" 		var="urlCruceInformacion" />
+<c:url value="/cruce_informacion/grid/lista" 			var="urlCruceInformacion" />
 <!-- REPORTES -->
 <c:url value="/reporte/ventana_orden_produccion" 		var="urlVentanaOrdenProduccion" />
 <c:url value="/reporte/ventana_cotizacion" 				var="urlVentanaCotizacion" />

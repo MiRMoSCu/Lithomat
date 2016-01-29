@@ -276,7 +276,7 @@
                                                                 <table>
                                                                     <tr>
                                                                         <td>
-                                                                            <input  type="date"
+                                                                            <input  type="text"
                                                                                     class="input"
                                                                                     name="fecha_cotizacion_inicio"
                                                                                     value=""
@@ -284,7 +284,7 @@
                                                                         </td>
                                                                         <td width="1%">a:</td>
                                                                         <td>
-                                                                            <input  type="date"
+                                                                            <input  type="text"
                                                                                     class="input"
                                                                                     name="fecha_cotizacion_fin"
                                                                                     value=""

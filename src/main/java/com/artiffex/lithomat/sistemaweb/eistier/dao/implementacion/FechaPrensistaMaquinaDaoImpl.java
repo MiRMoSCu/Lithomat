@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
 
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.FechaPrensistaMaquinaDTOGrid;
@@ -66,7 +67,7 @@ public class FechaPrensistaMaquinaDaoImpl implements FechaPrensistaMaquinaDAO {
 			sesion = HibernateUtil.getInstance().getCurrentSession();
 			sesion.beginTransaction();
 			SQLQuery query = sesion.createSQLQuery(strQuery);
-			query.addEntity(FechaPrensistaMaquinaDTOGrid.class);
+			query.setResultTransformer(Transformers.aliasToBean(FechaPrensistaMaquinaDTOGrid.class));
 			lista = query.list();
 			sesion.getTransaction().commit();
 		} catch( Exception e ) {

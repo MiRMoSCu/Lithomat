@@ -464,7 +464,7 @@ function nueva_busqueda() {
 function limpia_form_busqueda_tipo_papel_sobrante() {
 	// limpia form modificar registro
 	limpia_form_tipo_papel_extendido();
-	// limpia selects
+	// limpia check
 	document.busqueda_tipo_papel_extendido.chkbx_busca_por_nombre.checked 		= false;
 	document.busqueda_tipo_papel_extendido.chkbx_busca_por_gramaje.checked 		= false;
 	document.busqueda_tipo_papel_extendido.chkbx_busca_por_kilogramos.checked 	= false;

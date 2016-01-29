@@ -3,7 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<c:url value="/?opc=produccion"	var="urlMenu"/>
+<c:url value="/?opc=produccion"											var="urlMenu"/>
+<c:url value="/cruce_informacion/grid/lista_por_pagina_por_parametros"	var="urlBuscaListaPorParametros"/>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -25,19 +26,27 @@
             // inicializacion jquery
             $(document).ready(function (){});
             // inicializacion shadowbox
-            Shadowbox.init({
-                //modal: true,
-                //overlayOpacity: 0.75
-            });
+            Shadowbox.init({});
             // iniciacion datepicker
             $(function() {
-				$("#datepicker").datepicker({
+				$("[name=fecha_impresion]").datepicker({
 					dateFormat:'yy-mm-dd',
 				});
 			});
         </script>
         <script type="text/javascript">
-        	var urlMenu	= "${urlMenu}";
+            var numero_total_registros	        = ${numeroTotalRegistros};
+            var numero_registros_por_pagina		= ${numeroRegistrosPorPagina};
+            var tamanio_maximo_arreglo	        = ${tamanioMaximoArreglo};	// DEBE SER MAYOR A 2
+            var numero_pagina		        	= 1;						// NO DEBE MODIFICARSE
+            
+            var tamanio_arreglo		        	= 0; 	// se inicializan en carga_datos()
+            var numero_pagina_total	        	= 0; 	// se inicializan en carga_datos()
+            var mitad_tamanio_arreglo	        = 0;	// se inicializan en carga_datos()
+        </script>
+        <script type="text/javascript">
+        	var urlMenu						= "${urlMenu}";
+        	var urlBuscaListaPorParametros	= "${urlBuscaListaPorParametros}";
         </script>
         <script type="text/javascript">
 	        function regresa_menu() {
@@ -45,7 +54,7 @@
 	        }
         </script>
 	</head>
-	<body>
+	<body onload="carga_datos()">
 		<div id="div_area">
             <div id="div_ancho">
                 <div id="div_hoja">
@@ -182,7 +191,6 @@
                        					<div id="div_tabla_registros">
                        						<table id="tabla_registros">
                     							<tr>
-                    							 	<th>No.</th>
                     							 	<th>NUT</th>
                     							 	<th>Nom. Ord.Prod.</th>
                     							 	<th>Nom. Trabajo</th>
@@ -190,66 +198,17 @@
                     							 	<th>No. Pgo</th>
                     							 	<th>H. Req</th>
                     							</tr>
-                   							<c:forEach var="fechaPrensistaMaquina" items="${listaFechaPrensistaMaquina}" varStatus="i">
+                   							<c:forEach var="pliego" items="${listaGridPliegos}" varStatus="i">
                    								<tr class='${i.count%2==0?"l2":"l1"}'
                    									onclick="setCampos()">
-                   									<td>${i.count}</td>
-                   									<td>${fechaPrensistaMaquina.nut}</td>
-                   									<td>${fechaPrensistaMaquina.nombreOrdenProduccion}</td>
-                   									<td>${fechaPrensistaMaquina.nombrePartida}</td>
-                   									<td>${fechaPrensistaMaquina.descripcionTipoTrabajoDetalle}</td>
+                   									<td>${pliego.nut}</td>
+                   									<td>${pliego.nombreOrdenProduccion}</td>
+                   									<td>${pliego.nombrePartida}</td>
+                   									<td>${pliego.descripcionTipoTrabajoDetalle}</td>
                    									<td>0</td>
-                   									<td>${fechaPrensistaMaquina.hojasRequeridas}</td>
+                   									<td>${pliego.hojasRequeridas}</td>
                    								</tr>                   							
                    							</c:forEach>
-                       							 
-                       							 <!-- 
-                       							 <tr class="l1">
-                       							 	<td>1</td>
-                       							 	<td>1602500018</td>
-                       							 	<td>revista</td>
-                       							 	<td>revista</td>
-                       							 	<td>contenido interior</td>
-                       							 	<td>1</td>
-                       							 	<td>1000</td>
-                       							 </tr>
-                       							 <tr class="l2">
-                       							 	<td>2</td>
-                       							 	<td>1602500018</td>
-                       							 	<td>revista</td>
-                       							 	<td>revista</td>
-                       							 	<td>contenido interior</td>
-                       							 	<td>2</td>
-                       							 	<td>1000</td>
-                       							 </tr>
-                       							 <tr class="l1">
-                       							 	<td>3</td>
-                       							 	<td>1602500018</td>
-                       							 	<td>revista</td>
-                       							 	<td>revista</td>
-                       							 	<td>contenido interior</td>
-                       							 	<td>3</td>
-                       							 	<td>1000</td>
-                       							 </tr>
-                       							 <tr class="l2">
-                       							 	<td>4</td>
-                       							 	<td>1602500018</td>
-                       							 	<td>revista</td>
-                       							 	<td>revista</td>
-                       							 	<td>portadillas</td>
-                       							 	<td>1</td>
-                       							 	<td>250</td>
-                       							 </tr>
-                       							 <tr class="l1">
-                       							 	<td>5</td>
-                       							 	<td>1602500007</td>
-                       							 	<td>usuario</td>
-                       							 	<td>usuario</td>
-                       							 	<td>usuario</td>
-                       							 	<td>1</td>
-                       							 	<td>1000</td>
-                       							 </tr>
-                       							 -->
                        						</table>
                        					</div>
                        				</div>
@@ -285,7 +244,7 @@
                                							<table>
                                 							<tr>
                                 								<td width="14%">
-                                									<input type="checkbox" name="chkbx_busca_por_nut" checked/>
+                                									<input type="checkbox" name="chkbx_busca_por_nut"/>
                                 									<span style="cursor:pointer;" onclick="document.busqueda_registro_grid.chkbx_busca_por_nut.click()">NUT:</span>
                                 								</td>
                                 								<td>
@@ -360,17 +319,36 @@
                                 					</div>
                                 				</div>
                                 				<div class="columna_derecha">
+                               						<div class="columna_completa">
+                               							<table>
+                               								<tr>
+                               									<td width="1%">M&aacute;quina:</td>
+                               									<td>
+                               										<select name="id_maquina">
+                               											<c:forEach var="maquina" items="${listaMaquina}">
+                               												<option value="${maquina.value}">${maquina.text}</option>
+                               											</c:forEach>
+                               										</select>
+                               									</td>
+                               								</tr>
+                               							</table>
+                               						</div>
+                                				</div>
+                                			</div>
+                                		</div>
+                                		<div class="linea">
+                                			<div class="casilla">
+                                				<div class="columna_izquierda">
                                 					<div class="mitad_columna_izquierda">
                                 						<div class="columna_completa">
                                 							<table>
                                 								<tr>
-                                									<td width="1%">M&aacute;quina:</td>
+                                									<td width="57%">Fecha impresi&oacute;n:</td>
                                 									<td>
-                                										<select name="id_maquina">
-                                											<c:forEach var="maquina" items="${listaMaquina}">
-                                												<option value="${maquina.value}">${maquina.text}</option>
-                                											</c:forEach>
-                                										</select>
+                                										<input 	type="text"
+                                												class="input"
+                                												name="fecha_impresion"
+                                												value=""/>
                                 									</td>
                                 								</tr>
                                 							</table>
@@ -380,8 +358,14 @@
                                 						<div class="columna_completa">
                                 							<table>
                                 								<tr>
-                                									<td width="57%">Fecha impresi&oacute;n:</td>
-                                									<td></td>
+                                									<td width="1%">Ayudante:</td>
+                                									<td>
+                                										<select name="id_prensista_ayudante">
+                                											<c:forEach var="prensista" items="${listaPrensista}">
+                                												<option value="${prensista.value}">${prensista.text}</option>
+                                											</c:forEach>
+                                										</select>
+                                									</td>
                                 								</tr>
                                 							</table>
                                 						</div>
@@ -396,8 +380,14 @@
                                 						<div class="columna_completa">
                                 							<table>
                                 								<tr>
-                                									<td width="1%">Ayudante:</td>
-                                									<td></td>
+                                									<td width="37%">H. Buenas:</td>
+                                									<td>
+                                										<input 	type="text"
+                                												class="input"
+                                												name="hojas_buenas"
+                                												value=""
+                                												onkeydown="revisaNumero(false, this.value, event, null, null)"/>
+                                									</td>
                                 								</tr>
                                 							</table>
                                 						</div>
@@ -406,8 +396,14 @@
                                 						<div class="columna_completa">
                                 							<table>
                                 								<tr>
-                                									<td width="37%">H. Buenas:</td>
-                                									<td></td>
+                                									<td width="32%">H. Malas:</td>
+                                									<td>
+                                										<input	type="text"
+                                												class="input"
+                                												name="hojas_malas"
+                                												value=""
+                                												onkeydown="revisaNumero(false, this.value, event, null, null)"/>
+                                									</td>
                                 								</tr>
                                 							</table>
                                 						</div>
@@ -418,21 +414,17 @@
                                 						<div class="columna_completa">
                                 							<table>
                                 								<tr>
-                                									<td width="32%">H. Malas:</td>
-                                									<td></td>
-                                								</tr>
-                                							</table>
-                                						</div>
-                                					</div>
-                                					<div class="mitad_columna_derecha">
-                                						<div class="columna_completa">
-                                							<table>
-                                								<tr>
                                 									<td width="38%">H. Limpias:</td>
-                                									<td></td>
+                                									<td>
+                                										<input	type="text"
+                                												class="input"
+                                												name="hojas_limpias"
+                                												value=""
+                                												onkeydown="revisaNumero(false, this.value, event, null, null)"/>
+                                									</td>
                                 								</tr>
                                 							</table>
-                                						</div>
+                                						</div>                                					
                                 					</div>
                                 				</div>
                                 			</div>
@@ -446,7 +438,14 @@
                                 							<table>
                                 								<tr>
                                 									<td width="64%">No. Cambio Placas:</td>
-                                									<td></td>
+                                									<td>
+                                										<input	type="text"
+                                												class="input"
+                                												name="cambio_placas"
+                                												value=""
+                                												maxlength="3"
+                                												onkeydown="revisaNumero(false, this.value, event, null, null)"/>
+                                									</td>
                                 								</tr>
                                 							</table>
                                 						</div>
@@ -456,7 +455,14 @@
                                 							<table>
                                 								<tr>
                                 									<td width="67%">No. L&aacute;minas Extras:</td>
-                                									<td></td>
+                                									<td>
+                                										<input	type="text"
+                                												class="input"
+                                												name="laminas_extras"
+                                												value=""
+                                												maxlength="3"
+                                												onkeydown="revisaNumero(false, this.value, event, null, null)"/>
+                                									</td>
                                 								</tr>
                                 							</table>
                                 						</div>
@@ -468,7 +474,14 @@
                                 							<table>
                                 								<tr>
                                 									<td width="59%">Frente Kilos Tinta:</td>
-                                									<td></td>
+                                									<td>
+                                										<input	type="text"
+                                												class="input"
+                                												name="frente_kilos_tinta"
+                                												value=""
+                                												maxlength="3"
+                                												onkeydown="revisaNumero(false, this.value, event, null, null)"/>
+                                									</td>
                                 								</tr>
                                 							</table>
                                 						</div>
@@ -478,7 +491,14 @@
                                 							<table>
                                 								<tr>
                                 									<td width="58%">Vuelta Kilos Tinta:</td>
-                                									<td></td>
+                                									<td>
+                                										<input	type="text"
+                                												class="input"
+                                												name="vuelta_kilos_tinta"
+                                												value=""
+                                												maxlength="3"
+                                												onkeydown="revisaNumero(false, this.value, event, null, null)"/>
+                                									</td>
                                 								</tr>
                                 							</table>
                                 						</div>
