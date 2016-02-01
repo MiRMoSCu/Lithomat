@@ -205,7 +205,7 @@
                    									<td>${pliego.nombreOrdenProduccion}</td>
                    									<td>${pliego.nombrePartida}</td>
                    									<td>${pliego.descripcionTipoTrabajoDetalle}</td>
-                   									<td>0</td>
+                   									<td>${pliego.noPliego}</td>
                    									<td>${pliego.hojasRequeridas}</td>
                    								</tr>                   							
                    							</c:forEach>

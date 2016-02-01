@@ -101,6 +101,7 @@ public class FechaPrensistaMaquinaServiceImpl implements FechaPrensistaMaquinaSe
 		query.append("    par.nombre_partida nombrePartida, ");
 		query.append("    ttd.descripcion descripcionTipoTrabajoDetalle, ");
 		query.append("    p.id_pliego idPliego, ");
+		query.append("    p.numero_pliego noPliego, ");
 		query.append("    p.hojas_requeridas hojasRequeridas ");
 		query.append("FROM ");
 		query.append("    orden_produccion op_dos, ");

@@ -705,6 +705,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`pliego` (
   `id_pliego` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_tipo_trabajo_detalle` INT UNSIGNED NOT NULL,
+  `numero_pliego` INT NULL,
   `rebase_en_milimetros` INT NULL,
   `medianiles_en_milimetros` INT NULL,
   `pinzas_en_milimetros` INT NULL,
@@ -745,10 +746,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`fecha_prensista_maquina` (
   `id_fecha_prensista_maquina` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_pliego` INT UNSIGNED NOT NULL,
   `id_prensista` INT UNSIGNED NOT NULL,
   `id_turno_laboral` INT UNSIGNED NOT NULL,
   `id_maquina` INT UNSIGNED NOT NULL,
-  `id_pliego` INT UNSIGNED NOT NULL,
   `fecha_impresion` DATE NULL,
   `id_prensista_ayudante` INT NULL,
   `hojas_buenas` INT NULL,

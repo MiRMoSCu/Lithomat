@@ -194,6 +194,7 @@ public class PliegoServiceImpl implements PliegoService {
 			JSONArray arreglo 			= (JSONArray) jsonObject.get("pliegos");
 			@SuppressWarnings("unchecked")
 			Iterator<Object> iterator 	= arreglo.iterator();
+			int contadorNumeroPliego	= 0;
 
 			while (iterator.hasNext()) {
 
@@ -212,6 +213,7 @@ public class PliegoServiceImpl implements PliegoService {
 
 				Pliego pliegoInsert = new Pliego();
 				pliegoInsert.setTipoTrabajoDetalle(tipoTrabajoDetalle);
+				pliegoInsert.setNumeroPliego(++contadorNumeroPliego);
 				pliegoInsert.setRebaseEnMilimetros(pliego.getRebaseEnMilimetros());
 				pliegoInsert.setMedianilesEnMilimetros(pliego.getMedianilesEnMilimetros());
 				pliegoInsert.setPinzasEnMilimetros(pliego.getPinzasEnMilimetros());

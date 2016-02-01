@@ -12,6 +12,10 @@
 		<many-to-one name="tipoTrabajoDetalle" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajoDetalle" fetch="select">
 			<column name="id_tipo_trabajo_detalle"/>
 		</many-to-one>
+		<property name="numeroPliego">
+			<column name="numero_pliego"/>
+			<type name="integer"/>
+		</property>
 		<property name="rebaseEnMilimetros">
 			<column name="rebase_en_milimetros"/>
 			<type name="integer"/>

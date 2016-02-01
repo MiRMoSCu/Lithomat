@@ -10,6 +10,7 @@ public class Pliego implements Serializable {
 
 	private int idPliego;
 	private TipoTrabajoDetalle tipoTrabajoDetalle;
+	private int numeroPliego;
 	private int rebaseEnMilimetros;
 	private int medianilesEnMilimetros;
 	private int pinzasEnMilimetros;
@@ -46,6 +47,12 @@ public class Pliego implements Serializable {
 	}
 	public void setTipoTrabajoDetalle(TipoTrabajoDetalle tipoTrabajoDetalle) {
 		this.tipoTrabajoDetalle = tipoTrabajoDetalle;
+	}
+	public int getNumeroPliego() {
+		return numeroPliego;
+	}
+	public void setNumeroPliego(int numeroPliego) {
+		this.numeroPliego = numeroPliego;
 	}
 	public int getRebaseEnMilimetros() {
 		return rebaseEnMilimetros;

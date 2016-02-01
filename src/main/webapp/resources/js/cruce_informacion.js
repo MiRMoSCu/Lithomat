@@ -86,7 +86,7 @@ function genera_tabla_dom( jsonListaGridPliegos ) {
             tr.appendChild( td );
             
             td = document.createElement("td");
-            td.innerHTML = 0;
+            td.innerHTML = item.noPliego;
             tr.appendChild( td );
             
             td = document.createElement("td");
