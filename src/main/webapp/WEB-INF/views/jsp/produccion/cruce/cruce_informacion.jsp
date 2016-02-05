@@ -115,60 +115,6 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <!--
-                                <div class="div_menu_item">
-                                    <img alt="" src="resources/image/boton_menu_reportes.png"/>
-                                    <ul id="menu_reportes">
-                                        <li>
-                                            <a href="#">Plantilla</a>
-                                        </li>
-                                         
-                                        <li>
-                                            <a href="#">Clasificaci&oacute;n</a>
-                                        </li>
-                                         
-                                        <li>
-                                            <a href="#">Resultados</a>
-                                        </li>
-                                         
-                                        <li>
-                                            <a href="#">Calendario</a>
-                                        </li>
-                                         
-                                        <li>
-                                            <a href="#">Calendario</a>
-                                        </li>
-                                         
-                                        <li>
-                                            <a href="#">Calendario</a>
-                                        </li>
-                                         
-                                        <li>
-                                            <a href="#">Calendario</a>
-                                        </li>
-                                         
-                                        <li>
-                                            <a href="#">Calendario</a>
-                                        </li>
-                                         
-                                        <li>
-                                            <a href="#">Calendario</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="div_menu_item">
-                                    <img alt="" src="resources/image/boton_menu_seguridad.png"/>
-                                    <ul id="menu_seguridad">
-                                        <li>
-                                            <a href="#">T.V.</a>
-                                        </li>
-                                         
-                                        <li>
-                                            <a href="#">Radio</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                -->
                                 <div id="div_cerrar_sesion">
                                     <span style="cursor:pointer;" onclick="regresa_menu();">
                                     	<img alt="" src="<c:url value="/resources/image/boton_regresar_menu.jpg"/>"/>
@@ -199,8 +145,9 @@
                     							 	<th>H. Req</th>
                     							</tr>
                    							<c:forEach var="pliego" items="${listaGridPliegos}" varStatus="i">
-                   								<tr class='${i.count%2==0?"l2":"l1"}'
-                   									onclick="setCampos()">
+                   								<tr id="registro:${pliego.idPliego}"
+                   									class='${i.count%2==0?"l2":"l1"}'
+                   									onclick="setCampos('${pliego.idPliego}','${pliego.nut}','${pliego.nombreOrdenProduccion}','${pliego.nombrePartida}','${pliego.descripcionTipoTrabajoDetalle}','${pliego.noPliego}','${pliego.hojasRequeridas}')">
                    									<td>${pliego.nut}</td>
                    									<td>${pliego.nombreOrdenProduccion}</td>
                    									<td>${pliego.nombrePartida}</td>
@@ -276,10 +223,132 @@
                                 <div class="div_separador_mediano">
                                 	<img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
                                 </div>
-                                <div class="titulo">
-                                    <img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"/>
+                                <div id="div_registro_cruce_informacion">
+                                	<form name="registro">
+	                                	<div class="titulo">
+		                                    <img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"/>
+		                                </div>
+		                                <div class="linea">
+		                                	<div class="casilla">
+		                                		<div class="columna_izquierda">
+		                                			<div class="mitad_columna_izquierda">
+		                                				<div class="columna_completa">
+		                                					<table>
+		                                						<tr>
+		                                							<td width="1%">NUT:</td>
+		                                							<td>
+		                                								<input	type="text"
+		                                										class="input"
+		                                										name="nut"
+		                                										value=""
+		                                										readonly/>
+		                                							</td>
+		                                						</tr>
+		                                					</table>
+		                                				</div>
+		                                			</div>
+		                                		</div>
+		                                	</div>
+		                                </div>
+		                                <div class="linea">
+		                                	<div class="casilla">
+		                                		<div class="columna_izquierda">
+		                                			<div class="columna_completa">
+		                                				<table>
+		                                					<tr>
+		                                						<td width="27%">Ord. Producci&oacute;n:</td>
+		                                						<td>
+		                                							<input	type="text"
+	                                										class="input"
+	                                										name="nombre_orden_produccion"
+	                                										value=""
+	                                										readonly/>
+		                                						</td>
+		                                					</tr>
+		                                				</table>
+		                                			</div>
+		                                		</div>
+		                                		<div class="columna_derecha">
+		                                		 	<div class="columna_completa">
+		                                		 		<table>
+		                                		 			<tr>
+		                                		 				<td width="22%">Nom. Trabajo:</td>
+		                                		 				<td>
+		                                		 					<input	type="text"
+	                                										class="input"
+	                                										name="nombre_partida"
+	                                										value=""
+	                                										readonly/>
+		                                		 				</td>
+		                                		 			</tr>
+		                                		 		</table>
+		                                		 	</div>
+		                                		 </div>
+		                                	</div>
+		                                </div>
+	                                	<div class="linea">
+		                                	<div class="casilla">
+		                                		<div class="columna_izquierda">
+	                                				<div class="columna_completa">
+	                                					<table>
+	                                						<tr>
+	                                							<td width="26%">Nom. Impresi&oacute;n:</td>
+	                                							<td>
+	                                								<input	type="text"
+	                                										class="input"
+	                                										name="nombre_tipo_trabajo_detalle"
+	                                										value=""
+	                                										readonly/>
+	                                							</td>
+	                                						</tr>
+	                                					</table>
+	                                				</div>
+		                                		</div>
+		                                		<div class="columna_derecha">
+		                                			<div class="mitad_columna_izquierda">
+		                                				<div class="columna_completa">
+		                                					<table>
+		                                						<tr>
+		                                							<td width="36%">No. Pliego:</td>
+		                                							<td>
+			                                							<input	type="text"
+	                                											class="input"
+	                                											name="numero_pliego"
+	                                											value=""
+	                                											readonly/>
+		                                							</td>
+		                                						</tr>
+		                                					</table>
+		                                				</div>
+		                                			</div>
+		                                			<div class="mitad_columna_derecha">
+		                                				<div class="columna_completa">
+		                                					<table>
+		                                						<tr>
+		                                							<td width="49%">H. Requeridas:</td>
+		                                							<td>
+		                                								<input	type="text"
+		                                										class="input"
+		                                										name="hojas_requeridas"
+		                                										value=""
+		                                										readonly/>
+		                                							</td>
+		                                						</tr>
+		                                					</table>
+		                                				</div>
+		                                			</div>
+		                                		</div>
+		                                	</div>
+		                                </div>
+	                                </form>
+                                </div>
+                                <div class="div_separador_chico">
+                                	<img alt="" src="<c:url value="/resources/image/separador_chico.jpg"/>"/>
                                 </div>
                                 <div id="div_fecha_prensista_maquina">
+                                	<div class="titulo">
+	                                	<font size="5">RESUMEN</font>
+	                                </div>
                                 	<form name="fecha_prensista_maquina" action="" method="post" accept-charset="ISO-8859-1">
                                 		<input type="hidden" name="id_pliego" value=""/>
                                 		<div class="linea">
@@ -512,7 +581,7 @@
                                 				<img alt="" style="cursor:pointer;" onclick="limpia_form_fecha_prensista_maquina()"
                                             	 	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
 	                                            
-	                                            <img alt="" style="cursor:pointer;" onclick="crear();"
+	                                            <img alt="" style="cursor:pointer;" onclick="crea_registro();"
 	                                            	 src="<c:url value="/resources/image/boton_agregar.jpg"/>"/>
                                 			</div>
                                 		</div>

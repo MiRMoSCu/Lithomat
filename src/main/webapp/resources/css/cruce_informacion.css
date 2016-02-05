@@ -147,9 +147,15 @@ table#tabla_registros {
     height: 100%;
 }
 
-table#tabla_registros tr:hover td  {
+table#tabla_registros tr:hover {
     cursor: pointer;
     color: #000;
     background-color: #99CCFF;
+}
+
+table#tabla_registros tr.seleccionado {
+	cursor: auto;
+	color: #898989;
+	background-color: #d3d3d3;
 }
 
