@@ -134,7 +134,7 @@
                         		</div>
                        			<div id="div_contenedor_tabla_lista_registros">
                        				<div class="columna_completa">
-                       					<div id="div_tabla_lista_registros" style="overflow:scroll;">
+                       					<div id="div_tabla_lista_registros">
                        						<table id="tabla_lista_registros">
                     							<tr>
                     								<th>Id.</th>
@@ -541,7 +541,7 @@
                                 						<div class="columna_completa">
                                 							<table>
                                 								<tr>
-                                									<td width="67%">No. L&aacute;minas Extras:</td>
+                                									<td width="62%">No. L&aacute;minas Extra:</td>
                                 									<td>
                                 										<input	type="text"
                                 												class="input"
@@ -608,21 +608,56 @@
                                 		</div>
                                 		<div id="div_contenedor_tabla_fecha_prensista_maquina">
                                 			<div class="columna_completa">
-                                			
-                                			
-                                			
-                                			
-                                			
+                                				<div id="div_tabla_fecha_prensista_maquina">
+                                					<table id="tabla_fecha_prensista_maquina">
+                                						<tr>
+                                							<th>Id.</th>
+                                							<th>Prensista</th>
+                                							<th>T.Laboral</th>
+                                							<th>M&aacute;quina</th>
+                                							<th>F.Impresi&oacute;n</th>
+                                							<th>Ayudante</th>
+                                							<th>H.Buenas</th>
+                                							<th>H.Malas</th>
+                                							<th>H.Limpias</th>
+                                							<th>No.CambioPlacas</th>
+                                							<th>No.L&aacute;minasExtra</th>
+                                							<th>FrenteK.Tinta</th>
+                                							<th>VueltaK.Tinta</th>
+                                						</tr>
+                                						<tr class="l1">
+                                							<td>1</td>
+                                							<td>Ruben Hern&aacute;ndez L&oacute;pez</td>
+                                							<td>Matutino</td>
+                                							<td>Heidelberg Speed Master 10</td>
+                                							<td>01/01/2016</td>
+                                							<td>Ruben Hern&aacute;ndez L&oacute;pez</td>
+                                							<td>1105</td>
+                                							<td>200</td>
+                                							<td>300</td>
+                                							<td>4</td>
+                                							<td>0</td>
+                                							<td>2</td>
+                                							<td>2</td>
+                                						</tr>
+                                						<tr class="l2">
+                                							<td>2</td>
+                                							<td>Ruben Hern&aacute;ndez L&oacute;pez</td>
+                                							<td>Matutino</td>
+                                							<td>Heidelberg Speed Master 10</td>
+                                							<td>01/01/2016</td>
+                                							<td>Ruben Hern&aacute;ndez L&oacute;pez</td>
+                                							<td>1105</td>
+                                							<td>200</td>
+                                							<td>300</td>
+                                							<td>4</td>
+                                							<td>0</td>
+                                							<td>2</td>
+                                							<td>2</td>
+                                						</tr>
+                                					</table>
+                                				</div>
                                 			</div>
-                                		</div>
-                                		<div>
-                                			<table border="1">
-                                				<tr>
-                                					<td>1</td>
-                                					<td>2</td>
-                                					<td style="display: none;">3</td>
-                                				</tr>
-                                			</table>
                                 		</div>
                                 	</form>
                                 </div>

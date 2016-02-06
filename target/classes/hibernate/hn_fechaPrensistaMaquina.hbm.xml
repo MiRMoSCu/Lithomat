@@ -49,8 +49,8 @@
 			<column name="cambio_placas"/>
 			<type name="integer"/>
 		</property>
-		<property name="laminasExtras">
-			<column name="laminas_extras"/>
+		<property name="laminasExtra">
+			<column name="laminas_extra"/>
 			<type name="integer"/>
 		</property>
 		<property name="frenteKilosTinta">

@@ -20,7 +20,7 @@ public class FechaPrensistaMaquina implements Serializable {
 	private int hojasLimpias;
 	private int hojasAdicionales;
 	private int cambioPlacas;
-	private int laminasExtras;
+	private int laminasExtra;
 	private float frenteKilosTinta;
 	private float vueltaKilosTinta;
 	private String usuario;
@@ -100,11 +100,11 @@ public class FechaPrensistaMaquina implements Serializable {
 	public void setCambioPlacas(int cambioPlacas) {
 		this.cambioPlacas = cambioPlacas;
 	}
-	public int getLaminasExtras() {
-		return laminasExtras;
+	public int getLaminasExtra() {
+		return laminasExtra;
 	}
-	public void setLaminasExtras(int laminasExtras) {
-		this.laminasExtras = laminasExtras;
+	public void setLaminasExtra(int laminasExtra) {
+		this.laminasExtra = laminasExtra;
 	}
 	public float getFrenteKilosTinta() {
 		return frenteKilosTinta;
