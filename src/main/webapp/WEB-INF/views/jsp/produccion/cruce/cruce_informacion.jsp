@@ -129,14 +129,15 @@
                         		</div>
                         		<div class="linea">
                         			<div class="casilla">
-                        				<div id="div_paginacion_resultados" style="float:right;">100 registros encontrados. Mostrando del 1 al 10.</div>
+                        				<div id="div_paginacion_resultados" style="float:right;"></div>
                         			</div>
                         		</div>
-                       			<div id="div_contenedor_tabla">
+                       			<div id="div_contenedor_tabla_lista_registros">
                        				<div class="columna_completa">
-                       					<div id="div_tabla_registros">
-                       						<table id="tabla_registros">
+                       					<div id="div_tabla_lista_registros" style="overflow:scroll;">
+                       						<table id="tabla_lista_registros">
                     							<tr>
+                    								<th>Id.</th>
                     							 	<th>NUT</th>
                     							 	<th>Nom. Ord.Prod.</th>
                     							 	<th>Nom. Trabajo</th>
@@ -147,7 +148,8 @@
                    							<c:forEach var="pliego" items="${listaGridPliegos}" varStatus="i">
                    								<tr id="registro:${pliego.idPliego}"
                    									class='${i.count%2==0?"l2":"l1"}'
-                   									onclick="setCampos('${pliego.idPliego}','${pliego.nut}','${pliego.nombreOrdenProduccion}','${pliego.nombrePartida}','${pliego.descripcionTipoTrabajoDetalle}','${pliego.noPliego}','${pliego.hojasRequeridas}')">
+                   									onclick="setCampos('${pliego.idPliego}','${i.count}','${pliego.nut}','${pliego.nombreOrdenProduccion}','${pliego.nombrePartida}','${pliego.descripcionTipoTrabajoDetalle}','${pliego.noPliego}','${pliego.hojasRequeridas}')">
+                   									<td>${i.count}</td>
                    									<td>${pliego.nut}</td>
                    									<td>${pliego.nombreOrdenProduccion}</td>
                    									<td>${pliego.nombrePartida}</td>
@@ -225,13 +227,29 @@
                                 </div>
                                 <div id="div_registro_cruce_informacion">
                                 	<form name="registro">
-	                                	<div class="titulo">
-		                                    <img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"/>
+                                		<div class="titulo">
+		                                	<font size="5">REGISTRO</font>
 		                                </div>
 		                                <div class="linea">
 		                                	<div class="casilla">
 		                                		<div class="columna_izquierda">
 		                                			<div class="mitad_columna_izquierda">
+		                                				<div class="columna_completa">
+		                                					<table>
+		                                						<tr>
+		                                							<td width="1%">Id:</td>
+		                                							<td>
+		                                								<input	type="text"
+		                                										class="input"
+		                                										name="contador"
+		                                										value=""
+		                                										readonly/>
+		                                							</td>
+		                                						</tr>
+		                                					</table>
+		                                				</div>
+		                                			</div>
+		                                			<div class="mitad_columna_derecha">
 		                                				<div class="columna_completa">
 		                                					<table>
 		                                						<tr>
@@ -248,11 +266,7 @@
 		                                				</div>
 		                                			</div>
 		                                		</div>
-		                                	</div>
-		                                </div>
-		                                <div class="linea">
-		                                	<div class="casilla">
-		                                		<div class="columna_izquierda">
+		                                		<div class="columna_derecha">
 		                                			<div class="columna_completa">
 		                                				<table>
 		                                					<tr>
@@ -268,8 +282,12 @@
 		                                				</table>
 		                                			</div>
 		                                		</div>
-		                                		<div class="columna_derecha">
-		                                		 	<div class="columna_completa">
+		                                	</div>
+		                                </div>
+		                                <div class="linea">
+		                                	<div class="casilla">
+		                                		<div class="columna_izquierda">
+		                                			<div class="columna_completa">
 		                                		 		<table>
 		                                		 			<tr>
 		                                		 				<td width="22%">Nom. Trabajo:</td>
@@ -283,13 +301,9 @@
 		                                		 			</tr>
 		                                		 		</table>
 		                                		 	</div>
-		                                		 </div>
-		                                	</div>
-		                                </div>
-	                                	<div class="linea">
-		                                	<div class="casilla">
-		                                		<div class="columna_izquierda">
-	                                				<div class="columna_completa">
+		                                		</div>
+		                                		<div class="columna_derecha">
+		                                		 	<div class="columna_completa">
 	                                					<table>
 	                                						<tr>
 	                                							<td width="26%">Nom. Impresi&oacute;n:</td>
@@ -304,8 +318,12 @@
 	                                					</table>
 	                                				</div>
 		                                		</div>
-		                                		<div class="columna_derecha">
-		                                			<div class="mitad_columna_izquierda">
+		                                	</div>
+		                                </div>
+	                                	<div class="linea">
+		                                	<div class="casilla">
+		                                		<div class="columna_izquierda">
+	                                				<div class="mitad_columna_izquierda">
 		                                				<div class="columna_completa">
 		                                					<table>
 		                                						<tr>
@@ -347,7 +365,7 @@
                                 </div>
                                 <div id="div_fecha_prensista_maquina">
                                 	<div class="titulo">
-	                                	<font size="5">RESUMEN</font>
+	                                    <img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"/>
 	                                </div>
                                 	<form name="fecha_prensista_maquina" action="" method="post" accept-charset="ISO-8859-1">
                                 		<input type="hidden" name="id_pliego" value=""/>
@@ -588,7 +606,24 @@
                                 		<div class="div_separador_chico">
                                 			<img alt="" src="<c:url value="/resources/image/separador_chico.jpg"/>"/>
                                 		</div>
-                                		
+                                		<div id="div_contenedor_tabla_fecha_prensista_maquina">
+                                			<div class="columna_completa">
+                                			
+                                			
+                                			
+                                			
+                                			
+                                			</div>
+                                		</div>
+                                		<div>
+                                			<table border="1">
+                                				<tr>
+                                					<td>1</td>
+                                					<td>2</td>
+                                					<td style="display: none;">3</td>
+                                				</tr>
+                                			</table>
+                                		</div>
                                 	</form>
                                 </div>
                         	</div>

@@ -1,7 +1,8 @@
 
-function setCampos(idPliego, nut, nombreOrdenProduccion, nombrePartida, descripcionTipoTrabajoDetalle, noPliego, hojasRequeridas) {
-	if (document.getElementById("registro:" + idPliego).className != "seleccionado") {
+function setCampos(idPliego, contador, nut, nombreOrdenProduccion, nombrePartida, descripcionTipoTrabajoDetalle, noPliego, hojasRequeridas) {
+	if (document.getElementById("registro:" + idPliego).className != "agregado") {
 		document.fecha_prensista_maquina.id_pliego.value 	= idPliego;
+		document.registro.contador.value 					= contador;
 		document.registro.nut.value 						= nut;
 		document.registro.nombre_orden_produccion.value 	= nombreOrdenProduccion;
 		document.registro.nombre_partida.value 				= nombrePartida;
@@ -10,6 +11,7 @@ function setCampos(idPliego, nut, nombreOrdenProduccion, nombrePartida, descripc
 		document.registro.hojas_requeridas.value 			= hojasRequeridas;
 	} else {
 		document.fecha_prensista_maquina.id_pliego.value 	= "";
+		document.registro.contador.value 					= "";
 		document.registro.nut.value 						= "";
 		document.registro.nombre_orden_produccion.value 	= "";
 		document.registro.nombre_partida.value 				= "";
@@ -21,6 +23,7 @@ function setCampos(idPliego, nut, nombreOrdenProduccion, nombrePartida, descripc
 
 function limpia_form_fecha_prensista_maquina() {
 	// limpia form registro
+	document.registro.contador.value 					= "";
 	document.registro.nut.value 						= "";
 	document.registro.nombre_orden_produccion.value 	= "";
 	document.registro.nombre_partida.value 				= "";
@@ -29,6 +32,7 @@ function limpia_form_fecha_prensista_maquina() {
 	document.registro.hojas_requeridas.value 			= "";
 	
 	// limpia form fecha_prensista_maquina
+	document.fecha_prensista_maquina.id_pliego.value 						= 0;
 	document.fecha_prensista_maquina.id_prensista.selectedIndex 			= 0;
 	document.fecha_prensista_maquina.id_turno_laboral.selectedIndex 		= 0;
 	document.fecha_prensista_maquina.id_maquina.selectedIndex 				= 0;
@@ -51,9 +55,14 @@ function genera_tabla_dom( jsonListaGridPliegos ) {
 	//console.log( jsonListaGridPliegos );
 	
 	var table = document.createElement("table");
-    table.setAttribute("id","tabla_registros");
+    table.setAttribute("id","tabla_lista_registros");
     var tr = document.createElement("tr");
     var td = document.createElement("th");
+    td.innerHTML = "Id.";
+    //td.setAttribute("width","1%");
+    tr.appendChild( td );
+    
+    td = document.createElement("th");
     td.innerHTML = "NUT";
     //td.setAttribute("width","1%");
     tr.appendChild( td );
@@ -88,15 +97,22 @@ function genera_tabla_dom( jsonListaGridPliegos ) {
     //console.log( jsonListaClientes );
     if( jsonListaGridPliegos.length > 0 ) {
     	//console.log("entro");
+    	var cont = 0;
     	$.each( jsonListaGridPliegos, function(i, item){
+    		var id = ( ( (numero_pagina - 1 ) * numero_registros_por_pagina ) + 1 ) + cont++;
+    		
             tr = document.createElement("tr");
             
             tr.setAttribute("id","registro:" + item.idPliego);
-            tr.setAttribute("onclick","setCampos('" + item.idPliego + "','" + item.nut + "','" + item.nombreOrdenProduccion + "','" + item.nombrePartida + "','" + item.descripcionTipoTrabajoDetalle + "','" + item.noPliego + "','" + item.hojasRequeridas + "');")
+            tr.setAttribute("onclick","setCampos('" + item.idPliego + "','" + id + "','" + item.nut + "','" + item.nombreOrdenProduccion + "','" + item.nombrePartida + "','" + item.descripcionTipoTrabajoDetalle + "','" + item.noPliego + "','" + item.hojasRequeridas + "');")
             if( i%2 == 0 )
                 tr.setAttribute("class","l1");
             else
                 tr.setAttribute("class","l2");
+            
+            td = document.createElement("td");
+            td.innerHTML = id 
+            tr.appendChild( td );
             
             td = document.createElement("td");
             td.innerHTML = item.nut;
@@ -153,13 +169,18 @@ function genera_tabla_dom( jsonListaGridPliegos ) {
         td.innerHTML = "&nbsp;";
         tr.appendChild( td );
         
+        td = document.createElement("td");
+        td.innerHTML = "&nbsp;";
+        tr.appendChild( td );
+        
         table.appendChild( tr );
     }
-    document.getElementById("div_tabla_registros").innerHTML = table.outerHTML;
+    document.getElementById("div_tabla_lista_registros").innerHTML = table.outerHTML;
     delete td;
     delete tr;
     delete table;
-	
+    delete cont;
+    delete id;
 }
 
 function realiza_consulta_paginador() {
@@ -323,7 +344,8 @@ function crea_registro() {
 	if ( tabla_registro_td ) {
 		limpia_form_fecha_prensista_maquina();
 		//tabla_registro_td.removeAttribute("onclick");
-		tabla_registro_td.setAttribute("class","seleccionado");
+		tabla_registro_td.setAttribute("class","agregado");
 		//alert(tabla_registro_td.className);
-	}
+	} else 
+		alert("no existe");
 }

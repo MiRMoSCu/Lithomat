@@ -1561,7 +1561,7 @@
                                         </div>
                                         <div style="width:800px; height:150px; margin-left:auto; margin-right:auto;">
                                             <div class="columna_completa">
-                                                <div id="div_tabla_lista_pliegos" style="overflow-x:scroll;">
+                                                <div id="div_tabla_lista_pliegos" style="overflow:scroll;">
                                                     <table id="tabla_lista_pliegos">
                                                         <tr>
                                                             <th>No. Pgo</th>

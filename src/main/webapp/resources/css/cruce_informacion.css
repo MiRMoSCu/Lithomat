@@ -125,12 +125,13 @@
 	display: block;
 }
 
-#div_contenedor_tabla {
+#div_contenedor_tabla_lista_registros, 
+#div_contenedor_tabla_fecha_prensista_maquina {
     width: 100%;
     height: 350px;
 }
 
-#div_tabla_registros {
+#div_tabla_lista_registros {
     width: 865px;
     height: 100%;
     margin-left: auto;
@@ -142,18 +143,18 @@
     overflow-x: scroll;
 }
 
-table#tabla_registros {
+table#tabla_lista_registros {
     width: 100%;
     height: 100%;
 }
 
-table#tabla_registros tr:hover {
+table#tabla_lista_registros tr:hover {
     cursor: pointer;
     color: #000;
     background-color: #99CCFF;
 }
 
-table#tabla_registros tr.seleccionado {
+table#tabla_lista_registros tr.agregado {
 	cursor: auto;
 	color: #898989;
 	background-color: #d3d3d3;

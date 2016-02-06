@@ -1149,11 +1149,10 @@ public class CalificacionServiceImpl implements CalificacionService {
 				OrdenTrabajoTipoTrabajoDetalle otttd = new OrdenTrabajoTipoTrabajoDetalle();
 				List<OrdenTrabajoPliego> listaOrdenTrabajoPliego = new ArrayList<OrdenTrabajoPliego>();
 				List<Pliego> listaPliegos = pliegoService.listaPliegoPorTipoTrabajoDetalle(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());
-				int cont = 1;
 				for (Pliego pliego : listaPliegos) {
 					//System.out.println("PLIEGO: " + pliego.getIdPliego());
 					OrdenTrabajoPliego otpl = new OrdenTrabajoPliego();
-					otpl.setId(cont++);
+					otpl.setId(pliego.getNumeroPliego());
 					otpl.setPapel(tipoTrabajoDetalleService.obtienePapelDescripcionBasica(tipoTrabajoDetalle.getIdTipoTrabajoDetalle()));
 					otpl.setHojasRequeridas(pliego.getHojasRequeridas());
 					otpl.setHojasSobrantes(pliego.getHojasSobrantes());
