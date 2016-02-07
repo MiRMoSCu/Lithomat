@@ -145,19 +145,34 @@
                     							 	<th>No. Pgo</th>
                     							 	<th>H. Req</th>
                     							</tr>
-                   							<c:forEach var="pliego" items="${listaGridPliegos}" varStatus="i">
-                   								<tr id="registro:${pliego.idPliego}"
-                   									class='${i.count%2==0?"l2":"l1"}'
-                   									onclick="setCampos('${pliego.idPliego}','${i.count}','${pliego.nut}','${pliego.nombreOrdenProduccion}','${pliego.nombrePartida}','${pliego.descripcionTipoTrabajoDetalle}','${pliego.noPliego}','${pliego.hojasRequeridas}')">
-                   									<td>${i.count}</td>
-                   									<td>${pliego.nut}</td>
-                   									<td>${pliego.nombreOrdenProduccion}</td>
-                   									<td>${pliego.nombrePartida}</td>
-                   									<td>${pliego.descripcionTipoTrabajoDetalle}</td>
-                   									<td>${pliego.noPliego}</td>
-                   									<td>${pliego.hojasRequeridas}</td>
-                   								</tr>                   							
-                   							</c:forEach>
+	                    					<c:choose>
+	                    						<c:when test="${fn:length(listaGridPliegos) gt 0}">
+	                    							<c:forEach var="pliego" items="${listaGridPliegos}" varStatus="i">
+		                   								<tr id="registro:${pliego.idPliego}"
+		                   									class='${i.count%2==0?"l2":"l1"}'
+		                   									onclick="setCampos('${pliego.idPliego}','${i.count}','${pliego.nut}','${pliego.nombreOrdenProduccion}','${pliego.nombrePartida}','${pliego.descripcionTipoTrabajoDetalle}','${pliego.noPliego}','${pliego.hojasRequeridas}')">
+		                   									<td>${i.count}</td>
+		                   									<td>${pliego.nut}</td>
+		                   									<td>${pliego.nombreOrdenProduccion}</td>
+		                   									<td>${pliego.nombrePartida}</td>
+		                   									<td>${pliego.descripcionTipoTrabajoDetalle}</td>
+		                   									<td>${pliego.noPliego}</td>
+		                   									<td>${pliego.hojasRequeridas}</td>
+		                   								</tr>                   							
+		                   							</c:forEach>
+	                    						</c:when>
+	                    						<c:otherwise>
+		                    						<tr class="l1">
+		                    							<td>&nbsp;</td>
+		                    							<td>&nbsp;</td>
+		                    							<td>&nbsp;</td>
+		                    							<td>&nbsp;</td>
+		                    							<td>&nbsp;</td>
+		                    							<td>&nbsp;</td>
+		                    							<td>&nbsp;</td>
+		                    						</tr>
+		                    					</c:otherwise>
+	                    					</c:choose>
                        						</table>
                        					</div>
                        				</div>
@@ -593,74 +608,122 @@
                                 				</div>
                                 			</div>
                                 		</div>
-                                		<div class="linea"></div>
-                                		<div class="linea">
-                                			<div class="casilla" style="text-align: right;">
-                                				<img alt="" style="cursor:pointer;" onclick="limpia_form_fecha_prensista_maquina()"
-                                            	 	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
-	                                            
-	                                            <img alt="" style="cursor:pointer;" onclick="crea_registro();"
-	                                            	 src="<c:url value="/resources/image/boton_agregar.jpg"/>"/>
-                                			</div>
-                                		</div>
-                                		<div class="div_separador_chico">
-                                			<img alt="" src="<c:url value="/resources/image/separador_chico.jpg"/>"/>
-                                		</div>
-                                		<div id="div_contenedor_tabla_fecha_prensista_maquina">
-                                			<div class="columna_completa">
-                                				<div id="div_tabla_fecha_prensista_maquina">
-                                					<table id="tabla_fecha_prensista_maquina">
-                                						<tr>
-                                							<th>Id.</th>
-                                							<th>Prensista</th>
-                                							<th>T.Laboral</th>
-                                							<th>M&aacute;quina</th>
-                                							<th>F.Impresi&oacute;n</th>
-                                							<th>Ayudante</th>
-                                							<th>H.Buenas</th>
-                                							<th>H.Malas</th>
-                                							<th>H.Limpias</th>
-                                							<th>No.CambioPlacas</th>
-                                							<th>No.L&aacute;minasExtra</th>
-                                							<th>FrenteK.Tinta</th>
-                                							<th>VueltaK.Tinta</th>
-                                						</tr>
-                                						<tr class="l1">
-                                							<td>1</td>
-                                							<td>Ruben Hern&aacute;ndez L&oacute;pez</td>
-                                							<td>Matutino</td>
-                                							<td>Heidelberg Speed Master 10</td>
-                                							<td>01/01/2016</td>
-                                							<td>Ruben Hern&aacute;ndez L&oacute;pez</td>
-                                							<td>1105</td>
-                                							<td>200</td>
-                                							<td>300</td>
-                                							<td>4</td>
-                                							<td>0</td>
-                                							<td>2</td>
-                                							<td>2</td>
-                                						</tr>
-                                						<tr class="l2">
-                                							<td>2</td>
-                                							<td>Ruben Hern&aacute;ndez L&oacute;pez</td>
-                                							<td>Matutino</td>
-                                							<td>Heidelberg Speed Master 10</td>
-                                							<td>01/01/2016</td>
-                                							<td>Ruben Hern&aacute;ndez L&oacute;pez</td>
-                                							<td>1105</td>
-                                							<td>200</td>
-                                							<td>300</td>
-                                							<td>4</td>
-                                							<td>0</td>
-                                							<td>2</td>
-                                							<td>2</td>
-                                						</tr>
-                                					</table>
-                                				</div>
-                                			</div>
-                                		</div>
                                 	</form>
                                 </div>
+                                <div class="linea"></div>
+                           		<div class="linea">
+                           			<div class="casilla" style="text-align: right;">
+                           				<img alt="" style="cursor:pointer;" onclick="limpia_form_fecha_prensista_maquina()"
+                                       	 	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
+                                        
+                                        <img alt="" style="cursor:pointer;" onclick="crea_registro();"
+                                        	 src="<c:url value="/resources/image/boton_agregar.jpg"/>"/>
+                           			</div>
+                           		</div>
+                           		<div class="div_separador_chico">
+                           			<img alt="" src="<c:url value="/resources/image/separador_chico.jpg"/>"/>
+                           		</div>
+                           		<div id="div_contenedor_tabla_fecha_prensista_maquina">
+                           			<div class="columna_completa">
+                           				<div id="div_tabla_fecha_prensista_maquina">
+                           					<table id="tabla_fecha_prensista_maquina">
+                           						<tr>
+                           							<th>Id.</th>
+                           							<th>Prensista</th>
+                           							<th>T.Laboral</th>
+                           							<th>M&aacute;quina</th>
+                           							<th>F.Impresi&oacute;n</th>
+                           							<th>Ayudante</th>
+                           							<th>H.Buenas</th>
+                           							<th>H.Malas</th>
+                           							<th>H.Limpias</th>
+                           							<th>No.CambioPlacas</th>
+                           							<th>No.L&aacute;minasExtra</th>
+                           							<th>FrenteK.Tinta</th>
+                           							<th>VueltaK.Tinta</th>
+                           							<th>Eliminar</th>
+                           						</tr>
+                           						<tr>
+                           							<td></td>
+                           							<td></td>
+                           							<td></td>
+                           							<td></td>
+                           							<td></td>
+                           							<td></td>
+                           							<td></td>
+                           							<td></td>
+                           							<td></td>
+                           							<td></td>
+                           							<td></td>
+                           							<td></td>
+                           							<td></td>
+                           							<td></td>
+                           						</tr>
+                           						<!--
+                           						<tr class="l1">
+                           							<td>1</td>
+                           							<td>Ruben Hern&aacute;ndez L&oacute;pez</td>
+                           							<td>Matutino</td>
+                           							<td>Heidelberg Speed Master 10</td>
+                           							<td>01/01/2016</td>
+                           							<td>Ruben Hern&aacute;ndez L&oacute;pez</td>
+                           							<td>1105</td>
+                           							<td>200</td>
+                           							<td>300</td>
+                           							<td>4</td>
+                           							<td>0</td>
+                           							<td>2</td>
+                           							<td>2</td>
+                           							<td>
+                           								<img alt="" 
+                           									src="<c:url value="/resources/image/boton_chico_eliminar.png"/>" 
+                           									style="cursor: pointer;"
+                           									onclick="alert('eliminar')">
+                           							</td>
+                           						</tr>
+                           						<tr class="l2">
+                           							<td>2</td>
+                           							<td>Ruben Hern&aacute;ndez L&oacute;pez</td>
+                           							<td>Matutino</td>
+                           							<td>Heidelberg Speed Master 10</td>
+                           							<td>01/01/2016</td>
+                           							<td>Ruben Hern&aacute;ndez L&oacute;pez</td>
+                           							<td>1105</td>
+                           							<td>200</td>
+                           							<td>300</td>
+                           							<td>4</td>
+                           							<td>0</td>
+                           							<td>2</td>
+                           							<td>2</td>
+                           							<td>
+                           								<img alt="" 
+                           									src="<c:url 
+                           									value="/resources/image/boton_chico_eliminar.png"/>" 
+                           									style="cursor: pointer;"
+                           									onclick="alert('eliminar')">
+                           							</td>
+                           						</tr>
+                           						-->
+                           					</table>
+                           				</div>
+                           			</div>
+                           		</div>
+                           		<br/>
+                           		<div id="div_envia_informacion">
+                           			<form name="envia_json" action="" method="post" accept-charset="ISO-8859-1">
+                           				<input type="hidden" name="json" value=""/>
+                           				<div class="div_separador_grande">
+                           					<img alt="" src="<c:url value="/resources/image/separador_grande.png"/>"/>
+                           				</div>
+                        			<div class="titulo">
+                                        <font size="5">¿DESEA ENVIAR INFORMACI&Oacute;N?</font>
+                                    </div>
+                                    <div id="div_area_boton_enviar" style="text-align: right;">
+                                        <img alt="" style="cursor:pointer;" onclick="envia_informacion();"
+                                        	 src="<c:url value="/resources/image/boton_enviar.jpg"/>"/>
+                                    </div>
+                           			</form>
+                           		</div>
                         	</div>
                         </div>
                     </div>

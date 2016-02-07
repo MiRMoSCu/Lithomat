@@ -757,7 +757,7 @@ CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`fecha_prensista_maquina` (
   `hojas_limpias` INT NULL,
   `hojas_adicionales` INT NULL,
   `cambio_placas` INT NULL,
-  `laminas_extras` INT NULL,
+  `laminas_extra` INT NULL,
   `frente_kilos_tinta` FLOAT NULL,
   `vuelta_kilos_tinta` VARCHAR(45) NULL,
   `usuario` VARCHAR(45) NULL,

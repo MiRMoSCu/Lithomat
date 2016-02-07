@@ -136,7 +136,6 @@
                                                 			<td>&nbsp;</td>
                                                 		</tr>
                                                 	</c:otherwise>
-                                                
                                                 </c:choose>
                                                 </table>
                                             </div>

@@ -108,7 +108,7 @@
                                                 <th>Observaciones.</th>
                                                 <th>¿Vuelta mismas placas?</th>
                                                 <th width="20%">Tipo vuelta</th>
-                                                <th>Pgo.</th>
+                                                <th>%Pgo.</th>
                                             </tr>
                                         <c:forEach var="pliego" items="${listaPliego}" varStatus="i">
                                             <tr class='${i.count%2==0?"l1":"l2"}'
