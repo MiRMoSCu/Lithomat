@@ -1,6 +1,6 @@
 
 function setCampos(idPliego, contador, nut, nombreOrdenProduccion, nombrePartida, descripcionTipoTrabajoDetalle, noPliego, hojasRequeridas) {
-	if (document.getElementById("registro:" + idPliego).className != "agregado") {
+	if (document.getElementById("pliego:" + idPliego).className != "agregado") {
 		document.fecha_prensista_maquina.id_pliego.value 	= idPliego;
 		document.registro.contador.value 					= contador;
 		document.registro.nut.value 						= nut;
@@ -103,7 +103,7 @@ function genera_tabla_dom( jsonListaGridPliegos ) {
     		
             tr = document.createElement("tr");
             
-            tr.setAttribute("id","registro:" + item.idPliego);
+            tr.setAttribute("id","pliego:" + item.idPliego);
             tr.setAttribute("onclick","setCampos('" + item.idPliego + "','" + id + "','" + item.nut + "','" + item.nombreOrdenProduccion + "','" + item.nombrePartida + "','" + item.descripcionTipoTrabajoDetalle + "','" + item.noPliego + "','" + item.hojasRequeridas + "');")
             if( i%2 == 0 )
                 tr.setAttribute("class","l1");
@@ -339,13 +339,65 @@ function limpia_form_busqueda_registro_grid() {
 /*************************************************************/
 // FUNCIONES PARA CREAR REGISTRO
 
-function crea_registro() {
-	var tabla_registro_td = document.getElementById("registro:" + document.fecha_prensista_maquina.id_pliego.value);
-	if ( tabla_registro_td ) {
-		limpia_form_fecha_prensista_maquina();
-		//tabla_registro_td.removeAttribute("onclick");
-		tabla_registro_td.setAttribute("class","agregado");
-		//alert(tabla_registro_td.className);
-	} else 
-		alert("no existe");
+function elimina_registro_fpm(obj) {
+	console.log(obj);
+	console.log(obj.rowIndex);
+}
+
+function crea_registro_fpm() {
+	// validaciones
+	var correcto = true;
+	
+	if ( correcto ) {
+		
+		var tabla_pliego_td = document.getElementById("pliego:" + document.fecha_prensista_maquina.id_pliego.value);
+		if ( tabla_pliego_td ) {
+			// crea registro en la tabla fecha_prensista_maquina
+			var table_fecha_prensista_maquina = document.getElementById("tabla_fecha_prensista_maquina");
+			//console.log( table_fecha_prensista_maquina );
+			// obtiene el numero registros en la tabla
+			var count = table_fecha_prensista_maquina.rows.length;
+			//console.log(count);
+			// si el contados == 2 && existe el registro vacio
+			if ( count == 2 && document.getElementById("fpm:null") ) { // existe registro vacio
+				table_fecha_prensista_maquina.deleteRow(--count);
+			}
+			// crea el nuevo registro
+			var row = table_fecha_prensista_maquina.insertRow(count);
+			row.id = "fpm:" + document.fecha_prensista_maquina.id_pliego.value;
+			if ( count%2 == 0 )
+				row.className = "l2";
+			else
+				row.className = "l1";
+			// oculta el nuevo registro
+			row.style.display = "none";
+			// crea las celdas del registro
+			var cell = null;
+			for ( var i=0; i<14; i++ ) {
+				cell = row.insertCell(i);
+				if ( i == 13 ) {
+					cell.innerHTML = "<img alt='' src='" + urlBotonEliminarRegistro + "' style='cursor:pointer;' onclick='elimina_registro_fpm(this.parentElement.parentElement)' )' />"
+				} else 
+					cell.innerHTML = i;
+				
+			}
+			// muestra el registro
+			row.style.display = "";
+				
+			
+			
+			
+			
+			
+			
+			
+			// limpia los campos del form
+			limpia_form_fecha_prensista_maquina();
+			// modifica visualizacion de la tabla pliego
+			tabla_pliego_td.setAttribute("class","agregado");
+			//tabla_registro_td.removeAttribute("onclick");
+			//alert(tabla_registro_td.className);
+		}
+	}
+	delete correcto;
 }

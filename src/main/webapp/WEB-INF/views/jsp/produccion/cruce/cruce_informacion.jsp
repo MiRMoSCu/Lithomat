@@ -49,6 +49,9 @@
         	var urlBuscaListaPorParametros	= "${urlBuscaListaPorParametros}";
         </script>
         <script type="text/javascript">
+        	var urlBotonEliminarRegistro = '<c:url value="/resources/image/boton_chico_eliminar.png"/>';
+        </script>
+        <script type="text/javascript">
 	        function regresa_menu() {
 	        	location.replace(urlMenu);
 	        }
@@ -148,7 +151,7 @@
 	                    					<c:choose>
 	                    						<c:when test="${fn:length(listaGridPliegos) gt 0}">
 	                    							<c:forEach var="pliego" items="${listaGridPliegos}" varStatus="i">
-		                   								<tr id="registro:${pliego.idPliego}"
+		                   								<tr id="pliego:${pliego.idPliego}"
 		                   									class='${i.count%2==0?"l2":"l1"}'
 		                   									onclick="setCampos('${pliego.idPliego}','${i.count}','${pliego.nut}','${pliego.nombreOrdenProduccion}','${pliego.nombrePartida}','${pliego.descripcionTipoTrabajoDetalle}','${pliego.noPliego}','${pliego.hojasRequeridas}')">
 		                   									<td>${i.count}</td>
@@ -616,7 +619,7 @@
                            				<img alt="" style="cursor:pointer;" onclick="limpia_form_fecha_prensista_maquina()"
                                        	 	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
                                         
-                                        <img alt="" style="cursor:pointer;" onclick="crea_registro();"
+                                        <img alt="" style="cursor:pointer;" onclick="crea_registro_fpm();"
                                         	 src="<c:url value="/resources/image/boton_agregar.jpg"/>"/>
                            			</div>
                            		</div>
@@ -643,21 +646,21 @@
                            							<th>VueltaK.Tinta</th>
                            							<th>Eliminar</th>
                            						</tr>
-                           						<tr>
-                           							<td></td>
-                           							<td></td>
-                           							<td></td>
-                           							<td></td>
-                           							<td></td>
-                           							<td></td>
-                           							<td></td>
-                           							<td></td>
-                           							<td></td>
-                           							<td></td>
-                           							<td></td>
-                           							<td></td>
-                           							<td></td>
-                           							<td></td>
+                           						<tr id="fpm:null" class="l1">
+                           							<td>&nbsp;</td>
+                           							<td>&nbsp;</td>
+                           							<td>&nbsp;</td>
+                           							<td>&nbsp;</td>
+                           							<td>&nbsp;</td>
+                           							<td>&nbsp;</td>
+                           							<td>&nbsp;</td>
+                           							<td>&nbsp;</td>
+                           							<td>&nbsp;</td>
+                           							<td>&nbsp;</td>
+                           							<td>&nbsp;</td>
+                           							<td>&nbsp;</td>
+                           							<td>&nbsp;</td>
+                           							<td>&nbsp;</td>
                            						</tr>
                            						<!--
                            						<tr class="l1">
