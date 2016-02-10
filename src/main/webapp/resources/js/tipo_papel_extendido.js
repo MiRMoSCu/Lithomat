@@ -181,10 +181,7 @@ function genera_tabla_dom( jsonListaTipoPapelExtendido ) {
             tr = document.createElement("tr");
             
             tr.setAttribute("onclick","setCampos('" + item.idTipoPapelExtendido + "','"  + item.razonSocial + "','"  + item.nombre + "','"  + item.gramaje + "','"  + item.kilogramos.toFixed(1) + "','" + item.alto + "','" + item.ancho + "','" + item.descripcion + "','"  + item.precio.toFixed(1) + "','"  + item.nombrePrecio + "');")
-            if( i%2 == 0 )
-                tr.setAttribute("class","l1");
-            else
-                tr.setAttribute("class","l2");
+            tr.setAttribute("class",i%2==0?"l1":"l2");
             
             td = document.createElement("td");
             td.innerHTML = item.idTipoPapelExtendido;

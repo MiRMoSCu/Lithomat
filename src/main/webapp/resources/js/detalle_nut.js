@@ -304,10 +304,8 @@ function buscaTrabajoDetalle( id_tipo_trabajo_detalle ) {
             document.forms["tipo_trabajo_detalle"].elements["repeticiones_x_pliego"].value              = detallePartidaJson.tipo_trabajo_detalle.repeticionesXPliego;
             document.forms["tipo_trabajo_detalle"].elements["numero_paginas_publicacion"].value         = detallePartidaJson.tipo_trabajo_detalle.numeroPaginasPublicacion;
             document.forms["tipo_trabajo_detalle"].elements["tamanio_pubicacion"].value                 = detallePartidaJson.tipo_trabajo_detalle.descripcionTamanioPublicacion;
-            
             document.forms["tipo_trabajo_detalle"].elements["alto_corte_inicial"].value                 = detallePartidaJson.tipo_trabajo_detalle.altoCorteInicial;
             document.forms["tipo_trabajo_detalle"].elements["ancho_corte_inicial"].value                = detallePartidaJson.tipo_trabajo_detalle.anchoCorteInicial;
-            
             document.forms["tipo_trabajo_detalle"].elements["frente_combinacion_tintas"].value          = detallePartidaJson.tipo_trabajo_detalle.frenteDescripcionNumTintas;
             document.forms["tipo_trabajo_detalle"].elements["frente_num_tinta_especial"].value          = detallePartidaJson.tipo_trabajo_detalle.frenteNumTintaEspecial;
             document.forms["tipo_trabajo_detalle"].elements["frente_descripcion_tinta_especial"].value  = detallePartidaJson.tipo_trabajo_detalle.frenteDescripcionTintaEspecial;
@@ -320,9 +318,8 @@ function buscaTrabajoDetalle( id_tipo_trabajo_detalle ) {
             document.forms["tipo_trabajo_detalle"].elements["tipo_placa"].value                         = detallePartidaJson.tipo_trabajo_detalle.descripcionPlaca;
             document.forms["tipo_trabajo_detalle"].elements["tipo_complejidad"].value                   = detallePartidaJson.tipo_trabajo_detalle.descripcionComplejidad;
             
-            document.getElementById("div_tabla_lista_pliegos").innerHTML                                = detallePartidaJson.lista_pliegos;
-            document.getElementById("div_tabla_costo_extra_tipo_trabajo").innerHTML                   	= detallePartidaJson.lista_costo_extra_detalle;
-            
+            document.getElementById("div_tabla_lista_pliegos").innerHTML                    = detallePartidaJson.lista_pliegos;
+            document.getElementById("div_tabla_costo_extra_tipo_trabajo").innerHTML         = detallePartidaJson.lista_costo_extra_detalle;
             document.getElementById("div_tipo_trabajo_detalle").style.display 				= "block";
             document.getElementById("div_visualizador_pliegos").style.display				= "block";
             document.getElementById("div_visualizador_costo_extra_detalle").style.display	= "block";

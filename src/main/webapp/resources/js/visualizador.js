@@ -75,10 +75,8 @@ function genera_tabla_dom( jsonOrdenesProduccion ) {
             tr = document.createElement("tr");
             
             tr.setAttribute("onclick","muestra_detalle_nut('" + item.nut + "');")
-            if( i%2 == 0 )
-                tr.setAttribute("class","l1");
-            else
-                tr.setAttribute("class","l2");
+            tr.setAttribute("class",i%2==0?"l1":"l2");
+            
             td = document.createElement("td");
             td.innerHTML = item.nut;
             tr.appendChild( td );

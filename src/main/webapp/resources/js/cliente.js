@@ -198,10 +198,7 @@ function genera_tabla_dom( jsonListaClientes ) {
             tr = document.createElement("tr");
             
             tr.setAttribute("onclick","setCampos('" + item.idCliente + "','"  + item.clave + "','"  + item.nombreMoral + "','"  + item.nombreRepresentante + "','"  + item.puesto + "','"  + item.calle + "','"  + item.numExterior + "','"  + item.numInterior + "','"  + item.colonia + "','"  + item.delegacionMunicipio + "','"  + item.estado + "','"  + item.codigoPostal + "','"  + item.pais + "','"  + item.rfc + "','"  + item.telefonoParticular + "','"  + item.telefonoMovil + "','"  + item.email + "','" + item.observaciones + "');")
-            if( i%2 == 0 )
-                tr.setAttribute("class","l1");
-            else
-                tr.setAttribute("class","l2");
+            tr.setAttribute("class",i%2==0?"l1":"l2");
             
             td = document.createElement("td");
             td.innerHTML = item.idCliente;

@@ -15,7 +15,7 @@ function setCampos(id_proceso_disenio, nombre_proceso, descripcion, precio, nomb
     // busqueda de nombre_tipo_precio
     var select = document.forms[0].id_tipo_precio;
     var index_precio = 0;
-    for (i = 0;i < select.length;i++) {
+    for (i=0; i<select.length; i++) {
         //alert( select.options[i].innerText + " " + nombre_tipo_precio );
         if (select.options[i].text == nombre_tipo_precio) {
             index_precio = i;

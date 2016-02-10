@@ -1,7 +1,7 @@
 function limpiaRebase() {
     document.forms[0].rebase_en_milimetros.value        = "0";
     document.forms[0].medianiles_en_milimetros.value    = "0";
-    document.forms[0].pinzas_en_milimetros.value       = "0";
+    document.forms[0].pinzas_en_milimetros.value       	= "0";
 }
 
 
@@ -23,12 +23,8 @@ function setCampos( numero_pliego, hojas_requeridas, hojas_sobrantes, hojas_tota
     document.forms[0].hojas_sobrantes.value     = hojas_sobrantes;
     document.forms[0].hojas_totales.value       = hojas_totales;
     document.forms[0].observaciones.value       = observaciones;
-    if( vuelta_mismas_placas == "true" ) {
-        document.forms[0].mismas_placas.checked = true;
-    } else {
-        document.forms[0].mismas_placas.checked = false;
-    }
-    for( var i = 0; i < document.forms[0].tipo_vuelta.length; i++ ) {
+    document.forms[0].mismas_placas.checked 	= vuelta_mismas_placas=="true"?true:false;
+    for( var i=0; i<document.forms[0].tipo_vuelta.length; i++ ) {
         if( document.forms[0].tipo_vuelta.options[i].text == descripcion_tipo_vuelta ) {
             document.forms[0].tipo_vuelta.selectedIndex = i;
             break;

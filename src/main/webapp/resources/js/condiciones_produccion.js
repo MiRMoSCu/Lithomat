@@ -18,6 +18,6 @@ function enviarFormulario() {
 	// copia de valoes
 	document.condiciones_produccion.id_tipo_reporte.value 			= $("[name=select_tipo_reporte]").val();
 	document.condiciones_produccion.id_tipo_formato_impresion.value	= $("[name=select_tipo_formato_impresion]").val();
-	document.condiciones_produccion.action = urlSeleccionReporte;
+	document.condiciones_produccion.action 							= urlSeleccionReporte;
 	document.condiciones_produccion.submit();
 }

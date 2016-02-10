@@ -21,11 +21,11 @@ function carga_datos() {
 
 function setCampos( identificador, id_costo_extra_detalle, nombre_ttd, nombre_costo_extra, nombre_responsable, cantidad, especificacion  ) {
 	// input
-	document.costo_extra_detalle.id.value = identificador;
-	document.costo_extra_detalle.id_costo_extra_detalle.value = id_costo_extra_detalle;
-	document.costo_extra_detalle.tipo_trabajo_detalle.value = nombre_ttd;
-	document.costo_extra_detalle.cantidad.value = cantidad;
-	document.costo_extra_detalle.especificacion.value = especificacion;
+	document.costo_extra_detalle.id.value 						= identificador;
+	document.costo_extra_detalle.id_costo_extra_detalle.value 	= id_costo_extra_detalle;
+	document.costo_extra_detalle.tipo_trabajo_detalle.value 	= nombre_ttd;
+	document.costo_extra_detalle.cantidad.value 				= cantidad;
+	document.costo_extra_detalle.especificacion.value 			= especificacion;
 
 	// select
 	var select_responsable = document.costo_extra_detalle.select_responsable_insumo;
@@ -68,16 +68,16 @@ function ajaxUnidadCostoExtra() {
 
 
 function limpiaFormCostoExtra() {
-	document.costo_extra_detalle.id.value 								= "";
-	document.costo_extra_detalle.id_costo_extra_detalle.value 			= "";
-	document.costo_extra_detalle.id_tipo_trabajo_detalle.value 			= "";
+	document.costo_extra_detalle.id.value 									= "";
+	document.costo_extra_detalle.id_costo_extra_detalle.value 				= "";
+	document.costo_extra_detalle.id_tipo_trabajo_detalle.value 				= "";
 	document.costo_extra_detalle.tipo_trabajo_detalle.value 				= "";
 	document.costo_extra_detalle.id_responsable_insumo.value 				= "";
 	document.costo_extra_detalle.select_responsable_insumo.selectedIndex 	= 0;
-	document.costo_extra_detalle.id_costo_extra.value 					= "";
-	document.costo_extra_detalle.select_costo_extra.selectedIndex 		= 0;
+	document.costo_extra_detalle.id_costo_extra.value 						= "";
+	document.costo_extra_detalle.select_costo_extra.selectedIndex 			= 0;
 	document.costo_extra_detalle.cantidad.value 							= "";
-	document.costo_extra_detalle.especificacion.value 					= "";
+	document.costo_extra_detalle.especificacion.value 						= "";
 }
 
 
@@ -113,9 +113,9 @@ function modificaCostoExtra() {
 	}
 	
 	if( correcto ) {
-		document.costo_extra_detalle.id_costo_extra.value 		= $("[name=select_costo_extra]").val();
+		document.costo_extra_detalle.id_costo_extra.value 			= $("[name=select_costo_extra]").val();
 		document.costo_extra_detalle.id_responsable_insumo.value 	= $("[name=select_responsable_insumo]").val();
-		document.forms[0].action = urlModifica;
+		document.forms[0].action 									= urlModifica;
         document.forms[0].submit();
 	}
 }

@@ -106,26 +106,10 @@ function desactivaBotonesModificarFormTipoTrabajoDetalle() {
 function activaCamposFormTipoTrabajoDetalle() {
 	// activa los checkbox segun resultado
 	//alert( document.tipo_trabajo_detalle.proporciona_papel.value );
-	if( document.tipo_trabajo_detalle.proporciona_papel.value == "Si" )
-		document.tipo_trabajo_detalle.checkbox_proporciona_papel.checked = true;
-	else 
-		document.tipo_trabajo_detalle.checkbox_proporciona_papel.checked = false;
-	
-	if( document.tipo_trabajo_detalle.proporciona_placas.value == "Si" )
-		document.tipo_trabajo_detalle.checkbox_proporciona_placas.checked = true;
-	else
-		document.tipo_trabajo_detalle.checkbox_proporciona_placas.checked = false;
-	
-	if( document.tipo_trabajo_detalle.proporciona_tinta_especial.value == "Si" )
-		document.tipo_trabajo_detalle.checkbox_proporciona_tinta_especial.checked = true;
-	else
-		document.tipo_trabajo_detalle.checkbox_proporciona_tinta_especial.checked = false;
-		
-	if( document.tipo_trabajo_detalle.proporciona_barniz.value == "Si" )
-		document.tipo_trabajo_detalle.checkbox_proporciona_barniz.checked = true;
-	else
-		document.tipo_trabajo_detalle.checkbox_proporciona_barniz.checked = false;
-	
+	document.tipo_trabajo_detalle.checkbox_proporciona_papel.checked 			= document.tipo_trabajo_detalle.proporciona_papel.value=="Si"?true:false;
+	document.tipo_trabajo_detalle.checkbox_proporciona_placas.checked 			= document.tipo_trabajo_detalle.proporciona_placas.value=="Si"?true:false;
+	document.tipo_trabajo_detalle.checkbox_proporciona_tinta_especial.checked 	= document.tipo_trabajo_detalle.proporciona_tinta_especial.value=="Si"?true:false;
+	document.tipo_trabajo_detalle.checkbox_proporciona_barniz.checked 			= document.tipo_trabajo_detalle.proporciona_barniz.value=="Si"?true:false;
 	
 	// coloca los select en la opcion indicada.
 	// select tipo_papel
@@ -379,25 +363,10 @@ function aceptaModificarTTD() {
 	document.tipo_trabajo_detalle.id_tipo_complejidad.value					= document.tipo_trabajo_detalle.select_tipo_complejidad.value;
 	
 	// genera la informacion de los input checkbox
-	if( document.tipo_trabajo_detalle.checkbox_proporciona_papel.checked )
-		document.tipo_trabajo_detalle.proporciona_papel.value = "Si";
-	else
-		document.tipo_trabajo_detalle.proporciona_papel.value = "No";
-	
-	if( document.tipo_trabajo_detalle.checkbox_proporciona_placas.checked )
-		document.tipo_trabajo_detalle.proporciona_placas.value 	= "Si";
-	else
-		document.tipo_trabajo_detalle.proporciona_placas.value 	= "No";
-		
-	if( document.tipo_trabajo_detalle.checkbox_proporciona_tinta_especial.checked )
-		document.tipo_trabajo_detalle.proporciona_tinta_especial.value 	= "Si";
-	else
-		document.tipo_trabajo_detalle.proporciona_tinta_especial.value 	= "No";
-	
-	if( document.tipo_trabajo_detalle.checkbox_proporciona_barniz.checked )
-		document.tipo_trabajo_detalle.proporciona_barniz.value 	= "Si";
-	else
-		document.tipo_trabajo_detalle.proporciona_barniz.value 	= "No";
+	document.tipo_trabajo_detalle.proporciona_papel.value 			= document.tipo_trabajo_detalle.checkbox_proporciona_papel.checked?"Si":"No";
+	document.tipo_trabajo_detalle.proporciona_placas.value 			= document.tipo_trabajo_detalle.checkbox_proporciona_placas.checked?"Si":"No";
+	document.tipo_trabajo_detalle.proporciona_tinta_especial.value 	= document.tipo_trabajo_detalle.checkbox_proporciona_tinta_especial.checked?"Si":"No";
+	document.tipo_trabajo_detalle.proporciona_barniz.value 			= document.tipo_trabajo_detalle.checkbox_proporciona_barniz.checked?"Si":"No";
 	
 	// guarda la informacion de los select en los input correspondientes
 	document.tipo_trabajo_detalle.tipo_papel.value 					= document.tipo_trabajo_detalle.select_tipo_papel_extendido.options[document.tipo_trabajo_detalle.select_tipo_papel_extendido.selectedIndex].text;
@@ -771,25 +740,10 @@ function revisaCierreSegundaVentanaModal() {
 		document.tipo_trabajo_detalle.id_tipo_placa.value						= document.tipo_trabajo_detalle.select_tipo_placa.value;
 		
 		// genera la informacion de los input checkbox
-		if( document.tipo_trabajo_detalle.checkbox_proporciona_papel.checked )
-			document.tipo_trabajo_detalle.proporciona_papel.value = "Si";
-		else
-			document.tipo_trabajo_detalle.proporciona_papel.value = "No";
-		
-		if( document.tipo_trabajo_detalle.checkbox_proporciona_placas.checked )
-			document.tipo_trabajo_detalle.proporciona_placas.value 	= "Si";
-		else
-			document.tipo_trabajo_detalle.proporciona_placas.value 	= "No";
-			
-		if( document.tipo_trabajo_detalle.checkbox_proporciona_tinta_especial.checked )
-			document.tipo_trabajo_detalle.proporciona_tinta_especial.value 	= "Si";
-		else
-			document.tipo_trabajo_detalle.proporciona_tinta_especial.value 	= "No";
-		
-		if( document.tipo_trabajo_detalle.checkbox_proporciona_barniz.checked )
-			document.tipo_trabajo_detalle.proporciona_barniz.value 	= "Si";
-		else
-			document.tipo_trabajo_detalle.proporciona_barniz.value 	= "No";
+		document.tipo_trabajo_detalle.proporciona_papel.value 			= document.tipo_trabajo_detalle.checkbox_proporciona_papel.checked?"Si":"No";
+		document.tipo_trabajo_detalle.proporciona_placas.value 			= document.tipo_trabajo_detalle.checkbox_proporciona_placas.checked?"Si":"No";
+		document.tipo_trabajo_detalle.proporciona_tinta_especial.value 	= document.tipo_trabajo_detalle.checkbox_proporciona_tinta_especial.checked?"Si":"No";
+		document.tipo_trabajo_detalle.proporciona_barniz.value 			= document.tipo_trabajo_detalle.checkbox_proporciona_barniz.checked?"Si":"No";
 		
 		// guarda la informacion de los select en los input correspondientes
 		document.tipo_trabajo_detalle.tipo_papel.value 					= document.tipo_trabajo_detalle.select_tipo_papel_extendido.options[document.tipo_trabajo_detalle.select_tipo_papel_extendido.selectedIndex].text;

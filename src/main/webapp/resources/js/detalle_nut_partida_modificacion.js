@@ -162,12 +162,12 @@ function aceptaModificarPartida() {
 						// actualiza precio
 						document.precio.precio_neto.value = "$ " + (response.precioNeto).formatMoney(2);
 						// oculta divs
-						document.getElementById("div_tipo_trabajo_detalle").style.display = "none";
-						document.getElementById("div_visualizador_pliegos").style.display = "none";
-						document.getElementById("div_visualizador_costo_extra_detalle").style.display = "none";
-						document.getElementById("div_costo_extra_detalle").style.display = "none";
-						document.getElementById("div_pestania").style.display = "none";
-						document.getElementById("div_material_ayuda").style.display = "none";
+						document.getElementById("div_tipo_trabajo_detalle").style.display 				= "none";
+						document.getElementById("div_visualizador_pliegos").style.display 				= "none";
+						document.getElementById("div_visualizador_costo_extra_detalle").style.display 	= "none";
+						document.getElementById("div_costo_extra_detalle").style.display 				= "none";
+						document.getElementById("div_pestania").style.display 							= "none";
+						document.getElementById("div_material_ayuda").style.display 					= "none";
 						break;
 				}
 				// muestra botones de modificar

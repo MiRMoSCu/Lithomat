@@ -662,51 +662,6 @@
                            							<td>&nbsp;</td>
                            							<td>&nbsp;</td>
                            						</tr>
-                           						<!--
-                           						<tr class="l1">
-                           							<td>1</td>
-                           							<td>Ruben Hern&aacute;ndez L&oacute;pez</td>
-                           							<td>Matutino</td>
-                           							<td>Heidelberg Speed Master 10</td>
-                           							<td>01/01/2016</td>
-                           							<td>Ruben Hern&aacute;ndez L&oacute;pez</td>
-                           							<td>1105</td>
-                           							<td>200</td>
-                           							<td>300</td>
-                           							<td>4</td>
-                           							<td>0</td>
-                           							<td>2</td>
-                           							<td>2</td>
-                           							<td>
-                           								<img alt="" 
-                           									src="<c:url value="/resources/image/boton_chico_eliminar.png"/>" 
-                           									style="cursor: pointer;"
-                           									onclick="alert('eliminar')">
-                           							</td>
-                           						</tr>
-                           						<tr class="l2">
-                           							<td>2</td>
-                           							<td>Ruben Hern&aacute;ndez L&oacute;pez</td>
-                           							<td>Matutino</td>
-                           							<td>Heidelberg Speed Master 10</td>
-                           							<td>01/01/2016</td>
-                           							<td>Ruben Hern&aacute;ndez L&oacute;pez</td>
-                           							<td>1105</td>
-                           							<td>200</td>
-                           							<td>300</td>
-                           							<td>4</td>
-                           							<td>0</td>
-                           							<td>2</td>
-                           							<td>2</td>
-                           							<td>
-                           								<img alt="" 
-                           									src="<c:url 
-                           									value="/resources/image/boton_chico_eliminar.png"/>" 
-                           									style="cursor: pointer;"
-                           									onclick="alert('eliminar')">
-                           							</td>
-                           						</tr>
-                           						-->
                            					</table>
                            				</div>
                            			</div>
@@ -714,17 +669,17 @@
                            		<br/>
                            		<div id="div_envia_informacion">
                            			<form name="envia_json" action="" method="post" accept-charset="ISO-8859-1">
-                           				<input type="hidden" name="json" value=""/>
-                           				<div class="div_separador_grande">
-                           					<img alt="" src="<c:url value="/resources/image/separador_grande.png"/>"/>
-                           				</div>
-                        			<div class="titulo">
-                                        <font size="5">¿DESEA ENVIAR INFORMACI&Oacute;N?</font>
-                                    </div>
-                                    <div id="div_area_boton_enviar" style="text-align: right;">
-                                        <img alt="" style="cursor:pointer;" onclick="envia_informacion();"
-                                        	 src="<c:url value="/resources/image/boton_enviar.jpg"/>"/>
-                                    </div>
+                        				<input type="hidden" name="json" value=""/>
+                        				<div class="div_separador_grande">
+                        					<img alt="" src="<c:url value="/resources/image/separador_grande.png"/>"/>
+                        				</div>
+	                        			<div class="titulo">
+	                                        <font size="5">¿DESEA ENVIAR CRUCE DE INFORMACI&Oacute;N?</font>
+	                                    </div>
+	                                    <div id="div_area_boton_enviar" style="text-align: right;">
+	                                        <img alt="" style="cursor:pointer;" onclick="envia_informacion();"
+	                                        	 src="<c:url value="/resources/image/boton_enviar.jpg"/>"/>
+	                                    </div>
                            			</form>
                            		</div>
                         	</div>

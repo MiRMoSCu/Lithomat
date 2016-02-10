@@ -49,5 +49,5 @@ function elimina() {
 function limpia() {
     document.forms[0].id_perfil_x_usuario.value = "";
     document.forms[0].id_usuario.selectedIndex 	= 0;
-    document.forms[0].id_perfil.selectedIndex		= 0;
+    document.forms[0].id_perfil.selectedIndex	= 0;
 }

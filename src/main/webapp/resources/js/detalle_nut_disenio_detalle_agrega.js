@@ -35,14 +35,14 @@ function desactivaCamposFormDisenioDetalle() {
 } // desactivaCamposFormDisenioDetalle
 
 function activaBotonesAgregarFormDisenioDetalle() {
-	document.getElementById("imgBtnAgregarDisenioDetalle").style.display 			= "none";
+	document.getElementById("imgBtnAgregarDisenioDetalle").style.display 		= "none";
 	document.getElementById("imgBtnAgregarDisenioDetalle").style.display 		= "none";
 	document.getElementById("imgBtnAceptaAgregarDisenioDetalle").style.display 	= "inline";
 	document.getElementById("imgBtnCancelaAgregarDisenioDetalle").style.display = "inline";
 } // activaBotonesModificarFormDisenioDetalle
 	
 function desactivaBotonesAgregarFormDisenioDetalle() {
-	document.getElementById("imgBtnAgregarDisenioDetalle").style.display 			= "inline";
+	document.getElementById("imgBtnAgregarDisenioDetalle").style.display 		= "inline";
 	document.getElementById("imgBtnAgregarDisenioDetalle").style.display 		= "inline";
 	document.getElementById("imgBtnAceptaAgregarDisenioDetalle").style.display 	= "none";
 	document.getElementById("imgBtnCancelaAgregarDisenioDetalle").style.display = "none";
