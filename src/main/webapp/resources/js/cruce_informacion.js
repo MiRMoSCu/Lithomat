@@ -42,7 +42,7 @@ function limpia_form_fecha_prensista_maquina() {
 	document.fecha_prensista_maquina.hojas_malas.value 						= "";
 	document.fecha_prensista_maquina.hojas_limpias.value 					= "";
 	document.fecha_prensista_maquina.cambio_placas.value 					= "";
-	document.fecha_prensista_maquina.laminas_extras.value 					= "";
+	document.fecha_prensista_maquina.laminas_extra.value 					= "";
 	document.fecha_prensista_maquina.frente_kilos_tinta.value 				= "";
 	document.fecha_prensista_maquina.vuelta_kilos_tinta.value 				= "";
 }
@@ -287,14 +287,14 @@ function nueva_busqueda() {
 	
 	var correcto = true;
 	
-	if (correcto 
+	if ( correcto 
 			&& document.busqueda_registro_grid.chkbx_busca_por_nut.checked 
 			&& document.busqueda_registro_grid.nut.value == "" ) {
 		correcto = false;
 		alert("El campo de b\u00FAsqueda NUT no puede estar vac\u00EDo. Favor de reportarlo.");
 	}
 	
-	if (correcto) {
+	if ( correcto ) {
 		numero_pagina = 1;
 		document.busqueda_registro_grid.numero_pagina.value 			  = numero_pagina;
 		document.busqueda_registro_grid.numero_registros_por_pagina.value = numero_registros_por_pagina;
@@ -362,10 +362,69 @@ function elimina_registro_fpm(obj) {
 function crea_registro_fpm() {
 	var correcto = true;
 	
-	// validaciones
+	// realiza validaciones
+	if ( correcto 
+			&& document.fecha_prensista_maquina.fecha_impresion.value == "" ) {
+		correcto = false;
+		alert("El campo Fecha Impresion no puede estar vacio. Favor de informarlo.");
+		document.fecha_prensista_maquina.fecha_impresion.focus();
+	}
 	
+	if ( correcto
+			&& ( document.fecha_prensista_maquina.hojas_buenas.value == ""
+				|| isNaN( document.fecha_prensista_maquina.hojas_buenas.value ) ) ) {
+		correcto = false;
+		alert("El campo Hojas Buenas debe ser un numero valido. Favor de informarlo.");
+		document.fecha_prensista_maquina.hojas_buenas.focus();
+	}
 	
+	if ( correcto
+			&& ( document.fecha_prensista_maquina.hojas_malas.value == ""
+				|| isNaN( document.fecha_prensista_maquina.hojas_malas.value ) )  ) {
+		correcto = false;
+		alert("El campo Hojas Malas debe ser un numero valido. Favor de informarlo.");
+		document.fecha_prensista_maquina.hojas_malas.focus();
+	}
 	
+	if ( correcto 
+			&& ( document.fecha_prensista_maquina.hojas_limpias.value == ""
+				|| isNaN( document.fecha_prensista_maquina.hojas_limpias.value ) ) ) {
+		correcto = false;
+		alert("El campo Hojas Limpias debe ser un numero valido. Favor de informarlo.");
+		document.fecha_prensista_maquina.hojas_limpias.focus();
+	}
+	
+	if ( correcto 
+			&& ( document.fecha_prensista_maquina.cambio_placas.value == ""
+				|| isNaN( document.fecha_prensista_maquina.cambio_placas.value ) ) ) {
+		correcto = false;
+		alert("El campo No. Cambio de Placas debe ser un numero valido. Favor de informarlo.");
+		document.fecha_prensista_maquina.cambio_placas.focus();
+	}
+	
+	if ( correcto
+			&& ( document.fecha_prensista_maquina.laminas_extra.value == ""
+				|| isNaN( document.fecha_prensista_maquina.laminas_extra.value ) ) ) {
+		correcto = false;
+		alert("El campo No. Laminas Extras debe ser un numero valido. Favor de informarlo.");
+		document.fecha_prensista_maquina.laminas_extras.focus();
+	}
+	
+	if ( correcto
+			&& ( document.fecha_prensista_maquina.frente_kilos_tinta.value == ""
+				|| isNaN( document.fecha_prensista_maquina.frente_kilos_tinta.value ) ) ) {
+		correcto = false;
+		alert("El campo Frente Kilos Tinta debe ser un numero valido. Favor de informarlo.");
+		document.fecha_prensista_maquina.frente_kilos_tinta.focus();
+	}
+	
+	if ( correcto
+			&& ( document.fecha_prensista_maquina.vuelta_kilos_tinta.value == ""
+				|| isNaN( document.fecha_prensista_maquina.vuelta_kilos_tinta.value ) ) ) {
+		correcto = false;
+		alert("El campo Vuelta Kilos Tinta debe ser un numero valido. Favor de informarlo.");
+		document.fecha_prensista_maquina.vuelta_kilos_tinta.focus();
+	}
 	
 	if ( correcto ) {
 		// si existe registro en la tabla de pliegos
@@ -385,34 +444,56 @@ function crea_registro_fpm() {
 			row.className = count%2==0?"l2":"l1";
 			// oculta el nuevo registro
 			row.style.display = "none";
-			// crea las celdas del registro
+			// crea las celdas del registro:
+				// id
 			var cell = null;
-			
-			
-			for ( var i=0; i<14; i++ ) {
-				cell = row.insertCell(i);
-				if ( i == 13 ) {
-					cell.innerHTML = "<img alt='' src='" + urlBotonEliminarRegistro + "' style='cursor:pointer;' onclick='elimina_registro_fpm(this.parentElement.parentElement)' )' />"
-				} else 
-					cell.innerHTML = i;
-				
-			}
+			cell = row.insertCell(0);
+			cell.innerHTML = document.registro.contador.value;
+				// prensista
+			cell = row.insertCell(1);
+			cell.innerHTML = $("[name=id_prensista] option:selected").text();
+				// turno laboral
+			cell = row.insertCell(2);
+			cell.innerHTML = $("[name=id_turno_laboral] option:selected").text();
+				// maquina
+			cell = row.insertCell(3);
+			cell.innerHTML = $("[name=id_maquina] option:selected").text();
+				// fecha impresion
+			cell = row.insertCell(4);
+			cell.innerHTML = $("[name=fecha_impresion]").val();
+				// ayudante
+			cell = row.insertCell(5);
+			cell.innerHTML = $("[name=id_prensista_ayudante] option:selected").text();
+				// hojas buenas
+			cell = row.insertCell(6);
+			cell.innerHTML = $("[name=hojas_buenas]").val();
+				// hojas malas
+			cell = row.insertCell(7);
+			cell.innerHTML = $("[name=hojas_malas]").val();
+				// hojas limpias
+			cell = row.insertCell(8);
+			cell.innerHTML = $("[name=hojas_limpias]").val();
+				// numero cambio placas
+			cell = row.insertCell(9);
+			cell.innerHTML = $("[name=cambio_placas]").val();
+				// numero laminas extra
+			cell = row.insertCell(10);
+			cell.innerHTML = $("[name=laminas_extra]").val();
+				// frente kilos tinta
+			cell = row.insertCell(11);
+			cell.innerHTML = $("[name=frente_kilos_tinta]").val();
+				// vuelta kilos tinta
+			cell = row.insertCell(12);
+			cell.innerHTML = $("[name=vuelta_kilos_tinta]").val();
+				// eliminar
+			cell = row.insertCell(13);
+			cell.innerHTML = "<img alt='' src='" + urlBotonEliminarRegistro + "' style='cursor:pointer;' onclick='elimina_registro_fpm(this.parentElement.parentElement)' )' />";
 			// muestra el registro
 			row.style.display = "";
-				
-			
-			
-			
-			
-			
-			
-			
 			// limpia los campos del form
 			limpia_form_fecha_prensista_maquina();
 			// modifica visualizacion de la tabla pliego
 			tabla_pliego_td.setAttribute("class","agregado");
-			//tabla_registro_td.removeAttribute("onclick");
-			//alert(tabla_registro_td.className);
 			
 			delete cell;
 			delete row;

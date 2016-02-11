@@ -563,7 +563,7 @@
                                 									<td>
                                 										<input	type="text"
                                 												class="input"
-                                												name="laminas_extras"
+                                												name="laminas_extra"
                                 												value=""
                                 												maxlength="3"
                                 												onkeydown="revisaNumero(false, this.value, event, null, null)"/>
