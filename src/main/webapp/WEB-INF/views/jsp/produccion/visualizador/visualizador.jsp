@@ -279,7 +279,7 @@
                                                                                     class="input"
                                                                                     name="fecha_cotizacion_inicio"
                                                                                     value=""
-                                                                                    onkeypress=""/>
+                                                                                    readonly/>
                                                                         </td>
                                                                         <td width="1%">a:</td>
                                                                         <td>
@@ -287,7 +287,7 @@
                                                                                     class="input"
                                                                                     name="fecha_cotizacion_fin"
                                                                                     value=""
-                                                                                    onkeypress=""/>
+                                                                                    readonly/>
                                                                         </td>
                                                                     </tr>
                                                                 </table>

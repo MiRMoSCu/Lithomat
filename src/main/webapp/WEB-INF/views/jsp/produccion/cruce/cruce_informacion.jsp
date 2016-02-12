@@ -140,7 +140,7 @@
                        					<div id="div_tabla_lista_registros">
                        						<table id="tabla_lista_registros">
                     							<tr>
-                    								<th>Id.</th>
+                    								<th>No.</th>
                     							 	<th>NUT</th>
                     							 	<th>Nom. Ord.Prod.</th>
                     							 	<th>Nom. Trabajo</th>
@@ -453,7 +453,8 @@
                                 										<input 	type="text"
                                 												class="input"
                                 												name="fecha_impresion"
-                                												value=""/>
+                                												value=""
+                                												readonly/>
                                 									</td>
                                 								</tr>
                                 							</table>
@@ -530,6 +531,22 @@
                                 								</tr>
                                 							</table>
                                 						</div>                                					
+                                					</div>
+                                					<div class="mitad_columna_derecha">
+                                						<div class="columna_completa">
+                                							<table>
+                                								<tr>
+                                									<td width="48%">H. Adicionales</td>
+                                									<td>
+                                										<input 	type="text"
+                                												class="input"
+                                												name="hojas_adicionales"
+                                												value=""
+                                												onkeydown="revisaNumero(false, this.value, event, null, null)"/>
+                                									</td>
+                                								</tr>
+                                							</table>
+                                						</div>
                                 					</div>
                                 				</div>
                                 			</div>
@@ -631,7 +648,7 @@
                            				<div id="div_tabla_fecha_prensista_maquina">
                            					<table id="tabla_fecha_prensista_maquina">
                            						<tr>
-                           							<th>Id.</th>
+                           							<th>No.</th>
                            							<th>Prensista</th>
                            							<th>T.Laboral</th>
                            							<th>M&aacute;quina</th>
@@ -639,6 +656,7 @@
                            							<th>Ayudante</th>
                            							<th>H.Buenas</th>
                            							<th>H.Malas</th>
+                           							<th>H.Adicionales</th>
                            							<th>H.Limpias</th>
                            							<th>No.CambioPlacas</th>
                            							<th>No.L&aacute;minasExtra</th>
@@ -647,6 +665,7 @@
                            							<th>Eliminar</th>
                            						</tr>
                            						<tr id="fpm:null" class="l1">
+                           							<td>&nbsp;</td>
                            							<td>&nbsp;</td>
                            							<td>&nbsp;</td>
                            							<td>&nbsp;</td>
@@ -677,7 +696,7 @@
 	                                        <font size="5">¿DESEA ENVIAR CRUCE DE INFORMACI&Oacute;N?</font>
 	                                    </div>
 	                                    <div id="div_area_boton_enviar" style="text-align: right;">
-	                                        <img alt="" style="cursor:pointer;" onclick="envia_informacion();"
+	                                        <img alt="" style="cursor:pointer;" onclick="envia_cruce_informacion()"
 	                                        	 src="<c:url value="/resources/image/boton_enviar.jpg"/>"/>
 	                                    </div>
                            			</form>

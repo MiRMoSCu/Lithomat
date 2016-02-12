@@ -638,7 +638,8 @@
                                                             	<input 	type="text"
                                                             			class="input"
                                                             			id="datepicker"
-                                                            			name="fecha_prometida_entrega"/>
+                                                            			name="fecha_prometida_entrega"
+                                                            			readonly/>
                                                             	<!-- 
                                                                 <input  type="date" 
                                                                         class="input" 
