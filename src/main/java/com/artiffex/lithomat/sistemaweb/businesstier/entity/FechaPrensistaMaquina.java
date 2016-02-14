@@ -14,7 +14,7 @@ public class FechaPrensistaMaquina implements Serializable {
 	private TurnoLaboral turnoLaboral;
 	private Maquina maquina;
 	private Date fechaImpresion;
-	private int idPrensistaAyudante;
+	private Prensista prensistaAyudante;
 	private int hojasBuenas;
 	private int hojasMalas;
 	private int hojasLimpias;
@@ -64,11 +64,11 @@ public class FechaPrensistaMaquina implements Serializable {
 	public void setFechaImpresion(Date fechaImpresion) {
 		this.fechaImpresion = fechaImpresion;
 	}
-	public int getIdPrensistaAyudante() {
-		return idPrensistaAyudante;
+	public Prensista getPrensistaAyudante() {
+		return prensistaAyudante;
 	}
-	public void setIdPrensistaAyudante(int idPrensistaAyudante) {
-		this.idPrensistaAyudante = idPrensistaAyudante;
+	public void setPrensistaAyudante(Prensista prensistaAyudante) {
+		this.prensistaAyudante = prensistaAyudante;
 	}
 	public int getHojasBuenas() {
 		return hojasBuenas;

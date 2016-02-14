@@ -25,10 +25,9 @@
 			<column name="fecha_impresion"/>
 			<type name="date"/>
 		</property>
-		<property name="idPrensistaAyudante">
+		<many-to-one name="prensistaAyudante" class="com.artiffex.lithomat.sistemaweb.businesstier.entity.Prensista" fetch="select">
 			<column name="id_prensista_ayudante"/>
-			<type name="integer"/>
-		</property>
+		</many-to-one>
 		<property name="hojasBuenas">
 			<column name="hojas_buenas"/>
 			<type name="integer"/>

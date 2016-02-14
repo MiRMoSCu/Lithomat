@@ -6,6 +6,8 @@ import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +38,7 @@ public class CruceInformacionController {
 	@Resource
 	private MaquinaService maquinaService;
 
+	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/grid/lista", method = RequestMethod.POST)
 	public String ventanaCruceInformacion( Model model ) {
@@ -105,6 +108,29 @@ public class CruceInformacionController {
 		gson 				= null;
 		
 		return sb.toString();
+	}
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
+	@RequestMapping(value = "/grid/agrega_cruce_informacion", method = RequestMethod.POST)
+	@ResponseBody
+	public int agregaCruceInformacion(
+			@RequestParam(value = "json", required = false) String jsonFechaPrensistaMaquina
+		) {
+		log.info("/agrega_cruce_informacion");
+		
+		// agrega registros fecha_prensista_maquina
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String usuario = principal.toString();
+		if ( principal instanceof UserDetails ) {
+			usuario = ((UserDetails)principal).getUsername();
+		}
+		principal = null;
+		
+		System.out.println("ENTRO CON EXITO");
+		System.out.println(jsonFechaPrensistaMaquina);
+		fechaPrensistaMaquinaService.creaFechaPrensistaMaquina(jsonFechaPrensistaMaquina, usuario);
+		
+		return 1;
 	}
 	
 }

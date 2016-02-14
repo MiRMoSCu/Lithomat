@@ -7,11 +7,11 @@ import com.artiffex.lithomat.sistemaweb.businesstier.entity.FechaPrensistaMaquin
 
 public interface FechaPrensistaMaquinaService {
 	
-	public int creaFechaPrensistaMaquina(FechaPrensistaMaquina fechaPrensistaMaquina);
+	public int creaFechaPrensistaMaquina(String jsonFechaPrensistaMaquina, String usuario);
 	
-	public int modificaFechaPrensistaMaquina(FechaPrensistaMaquina fechaPrensistaMaquina);
+	//public void modificaFechaPrensistaMaquina(FechaPrensistaMaquina fechaPrensistaMaquina);
 	
-	public int eliminaFechaPrensistaMaquina(int idFechaPrensistaMaquina);
+	//public void eliminaFechaPrensistaMaquina(int idFechaPrensistaMaquina);
 	
 	public List<FechaPrensistaMaquina> listaFechaPrensistaMaquina();
 	

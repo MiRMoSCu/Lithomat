@@ -1,13 +1,23 @@
 package com.artiffex.lithomat.sistemaweb.businesstier.service.implementacion;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
 
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.FechaPrensistaMaquinaDTOGrid;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.FechaPrensistaMaquina;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.Maquina;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.Pliego;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.Prensista;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.TurnoLaboral;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.FechaPrensistaMaquinaService;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.FechaPrensistaMaquinaDAO;
 
@@ -16,17 +26,71 @@ public class FechaPrensistaMaquinaServiceImpl implements FechaPrensistaMaquinaSe
 	
 	@Resource
 	private FechaPrensistaMaquinaDAO fechaPrensistaMaquinaDAO;
-
-	public int creaFechaPrensistaMaquina(FechaPrensistaMaquina fechaPrensistaMaquina) {
-		return fechaPrensistaMaquinaDAO.crea(fechaPrensistaMaquina);
-	}
-
-	public int modificaFechaPrensistaMaquina(FechaPrensistaMaquina fechaPrensistaMaquina) {
-		return fechaPrensistaMaquinaDAO.modifica(fechaPrensistaMaquina);
-	}
-
-	public int eliminaFechaPrensistaMaquina(int idFechaPrensistaMaquina) {
-		return fechaPrensistaMaquinaDAO.elimina(idFechaPrensistaMaquina);
+	
+	
+	public int creaFechaPrensistaMaquina(String jsonFechaPrensistaMaquina, String usuario) {
+		JSONParser parser = new JSONParser();
+		try {
+			Object obj 					= parser.parse(jsonFechaPrensistaMaquina);
+			JSONObject jsonObject 		= (JSONObject) obj;
+			//System.out.println( "jsonObject:" + jsonObject );
+			JSONArray arreglo 			= (JSONArray) jsonObject.get("registrosFPM");
+			@SuppressWarnings("unchecked")
+			Iterator<Object> iterator 	= arreglo.iterator();
+			while ( iterator.hasNext() ) {
+				JSONObject jsonObject2 = (JSONObject) iterator.next();
+				//System.out.println("jsonObject2:" + jsonObject2);
+				FechaPrensistaMaquina fpm = new FechaPrensistaMaquina();
+					Pliego pliego = new Pliego();
+					pliego.setIdPliego( Integer.valueOf( jsonObject2.get("id_pliego").toString() ) );
+				fpm.setPliego(pliego);
+					Prensista prensista = new Prensista();
+					prensista.setIdPrensista( Integer.valueOf( jsonObject2.get("id_prensista").toString() ) );
+				fpm.setPrensista(prensista);
+					TurnoLaboral turnoLaboral = new TurnoLaboral();
+					turnoLaboral.setIdTurnoLaboral( Integer.valueOf( jsonObject2.get("id_turno_laboral").toString() ) );
+				fpm.setTurnoLaboral(turnoLaboral);
+					Maquina maquina = new Maquina();
+					maquina.setIdMaquina( Integer.valueOf( jsonObject2.get("id_turno_laboral").toString() ) );
+				fpm.setMaquina(maquina);
+				fpm.setFechaImpresion( Timestamp.valueOf(jsonObject2.get("fecha_impresion").toString() + " 00:00:00") );
+					Prensista prensistaAyudante = new Prensista();
+					prensistaAyudante.setIdPrensista( Integer.valueOf( jsonObject2.get("id_prensista_ayudante").toString() ) );
+				fpm.setPrensistaAyudante(prensistaAyudante);
+				fpm.setHojasBuenas( Integer.valueOf( jsonObject2.get("hojas_buenas").toString() ) );
+				fpm.setHojasMalas( Integer.valueOf( jsonObject2.get("hojas_malas").toString() ) );
+				fpm.setHojasLimpias( Integer.valueOf( jsonObject2.get("hojas_limpias").toString() ) );
+				fpm.setHojasAdicionales( Integer.valueOf( jsonObject2.get("hojas_adicionales").toString() ) );
+				fpm.setCambioPlacas( Integer.valueOf( jsonObject2.get("cambio_placas").toString() ) );
+				fpm.setLaminasExtra( Integer.valueOf( jsonObject2.get("laminas_extra").toString() ) );
+				fpm.setFrenteKilosTinta( Integer.valueOf( jsonObject2.get("frente_kilos_tinta").toString() ) );
+				fpm.setVueltaKilosTinta( Integer.valueOf( jsonObject2.get("vuelta_kilos_tinta").toString() ) );
+				fpm.setUsuario( usuario );
+					Timestamp fechaGeneracion = new Timestamp(Calendar.getInstance().getTimeInMillis());
+				fpm.setFechaGeneracion( fechaGeneracion );
+				fpm.setActivo( true );
+				
+				fechaPrensistaMaquinaDAO.crea(fpm);
+				
+				pliego 				= null;
+				prensista 			= null;
+				turnoLaboral 		= null;
+				maquina 			= null;
+				prensistaAyudante	= null;
+				fechaGeneracion		= null;
+				fpm 				= null;
+				jsonObject2			= null;
+			}
+			iterator 	= null;
+			arreglo 	= null;
+			jsonObject 	= null;
+			obj 		= null;
+		} catch ( Exception e ) {
+			e.printStackTrace();
+		} 
+		parser = null;
+		
+		return 1;
 	}
 
 	public List<FechaPrensistaMaquina> listaFechaPrensistaMaquina() {

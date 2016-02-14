@@ -25,8 +25,17 @@ public class FechaPrensistaMaquinaDaoImpl implements FechaPrensistaMaquinaDAO {
 	public FechaPrensistaMaquinaDaoImpl() { }
 
 	public int crea(FechaPrensistaMaquina fechaPrensistaMaquina) {
-		// TODO Auto-generated method stub
-		return 0;
+		int id = 0;
+		try {
+			sesion = HibernateUtil.getInstance().getCurrentSession();
+			sesion.beginTransaction();
+			id = (Integer)sesion.save(fechaPrensistaMaquina);
+			sesion.getTransaction().commit();
+		} catch ( Exception e ) {
+			log.error(e.getMessage());
+			sesion.getTransaction().rollback();
+		}
+		return id;
 	}
 
 	public int modifica(FechaPrensistaMaquina fechaPrensistaMaquina) {

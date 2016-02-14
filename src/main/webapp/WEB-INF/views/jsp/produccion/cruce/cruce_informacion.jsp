@@ -5,6 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:url value="/?opc=produccion"											var="urlMenu"/>
 <c:url value="/cruce_informacion/grid/lista_por_pagina_por_parametros"	var="urlBuscaListaPorParametros"/>
+<c:url value="/cruce_informacion//grid/agrega_cruce_informacion"		var="urlAgregaCruceInformacion"/>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -47,6 +48,7 @@
         <script type="text/javascript">
         	var urlMenu						= "${urlMenu}";
         	var urlBuscaListaPorParametros	= "${urlBuscaListaPorParametros}";
+        	var urlAgregaCruceInformacion	= "${urlAgregaCruceInformacion}";
         </script>
         <script type="text/javascript">
         	var urlBotonEliminarRegistro = '<c:url value="/resources/image/boton_chico_eliminar.png"/>';

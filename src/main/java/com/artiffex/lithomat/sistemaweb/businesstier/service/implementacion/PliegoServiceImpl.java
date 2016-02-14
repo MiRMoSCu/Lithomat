@@ -190,7 +190,7 @@ public class PliegoServiceImpl implements PliegoService {
 		try {
 			Object obj 					= parser.parse(json);
 			JSONObject jsonObject 		= (JSONObject) obj;
-			System.out.println("jsonObject: " + jsonObject);
+			//System.out.println("jsonObject: " + jsonObject);
 			JSONArray arreglo 			= (JSONArray) jsonObject.get("pliegos");
 			@SuppressWarnings("unchecked")
 			Iterator<Object> iterator 	= arreglo.iterator();
@@ -320,10 +320,10 @@ public class PliegoServiceImpl implements PliegoService {
 				pliegoInsert 		= null;
 				jsonObject_2 		= null;
 			}
-			iterator = null;
-			arreglo = null;
-			jsonObject = null;
-			obj = null;
+			iterator 	= null;
+			arreglo 	= null;
+			jsonObject 	= null;
+			obj 		= null;
 
 		} catch (Exception e) {
 			e.printStackTrace();

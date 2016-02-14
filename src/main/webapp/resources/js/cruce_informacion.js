@@ -538,7 +538,7 @@ function envia_cruce_informacion() {
 	
 	// definiciones de objetos
 	function ListaObject() {
-		this.registros = new Array();
+		this.registrosFPM = new Array();
 	}
 	
 	function FechaPrensistaMaquina() {
@@ -613,11 +613,28 @@ function envia_cruce_informacion() {
 			// vuelta_kilos_tinta
 			fpm.vuelta_kilos_tinta = tableDOM.rows[i].cells[13].innerHTML;
 			// GUARDA REGISTRO EN ARREGLO
-			listaObject.registros.push( fpm );
+			listaObject.registrosFPM.push( fpm );
 			delete fpm;
 		}
-		// envia informacion con ajax
+		// envia informacion fpm con ajax
+		document.body.style.cursor = "wait";
 		console.log( listaObject );
+		console.log( JSON.stringify( listaObject ) );
+		$.ajax({
+			type:"POST",
+			url:urlAgregaCruceInformacion,
+			data:{json:JSON.stringify( listaObject )},
+			success:function( response ) {
+				console.log(response);
+				// nueva busqueda, con los registros ya actualizados
+				nueva_busqueda();
+			},
+			error:function( e ) {
+				console.log(e);
+				alert("No fue posible agregar la informacion");
+				document.body.style.cursor = "default";
+			}
+		});
 	}
 	delete i;
 	delete tableDOM;
