@@ -15,10 +15,17 @@ import org.springframework.stereotype.Service;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.FechaPrensistaMaquinaDTOGrid;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.FechaPrensistaMaquina;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Maquina;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.OrdenProduccion;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.Partida;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Pliego;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Prensista;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajoDetalle;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TurnoLaboral;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.FechaPrensistaMaquinaService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.OrdenProduccionService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PartidaService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PliegoService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoTrabajoDetalleService;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.FechaPrensistaMaquinaDAO;
 
 @Service("fechaPrensistaMaquinaService")
@@ -26,6 +33,14 @@ public class FechaPrensistaMaquinaServiceImpl implements FechaPrensistaMaquinaSe
 	
 	@Resource
 	private FechaPrensistaMaquinaDAO fechaPrensistaMaquinaDAO;
+	@Resource
+	private OrdenProduccionService ordenProduccionService;
+	@Resource
+	private PartidaService partidaService;
+	@Resource
+	private TipoTrabajoDetalleService tipoTrabajoDetalleService;
+	@Resource
+	private PliegoService pliegoService;
 	
 	
 	public int creaFechaPrensistaMaquina(String jsonFechaPrensistaMaquina, String usuario) {
@@ -91,6 +106,27 @@ public class FechaPrensistaMaquinaServiceImpl implements FechaPrensistaMaquinaSe
 		parser = null;
 		
 		return 1;
+	}
+	
+	public void eliminaFechaPrensistaMaquinaPorNut(String nut) {
+		OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
+		List<Partida> listaPartida = partidaService.listaPartidaPorOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
+		for (Partida partida : listaPartida) {
+			List<TipoTrabajoDetalle> listaTipoTrabajoDetalle = tipoTrabajoDetalleService.listaTipoTrabajoDetallePorPartida(partida.getIdPartida());
+			for (TipoTrabajoDetalle tipoTrabajoDetalle : listaTipoTrabajoDetalle) {
+				List<Pliego> listaPliego = pliegoService.listaPliegoPorTipoTrabajoDetalle(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());
+				for (Pliego pliego : listaPliego) {
+					fechaPrensistaMaquinaDAO.eliminaPorIdPliego(pliego.getIdPliego());
+					pliego = null;
+				}
+				listaPliego = null;
+				tipoTrabajoDetalle = null;
+			}
+			listaTipoTrabajoDetalle = null;
+			partida = null;
+		}
+		listaPartida = null;
+		ordenProduccion = null;
 	}
 
 	public List<FechaPrensistaMaquina> listaFechaPrensistaMaquina() {
@@ -221,6 +257,5 @@ public class FechaPrensistaMaquinaServiceImpl implements FechaPrensistaMaquinaSe
 		
 		return lista;
 	}
-
 	
 }

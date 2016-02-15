@@ -22,6 +22,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.entity.EstatusOrden;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.HistorialEstatus;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.OrdenProduccion;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.EstatusOrdenService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.FechaPrensistaMaquinaService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.HistorialEstatusService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.OrdenProduccionService;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
@@ -38,6 +39,8 @@ public class CambioEstatusController {
 	private OrdenProduccionService ordenProduccionService;
 	@Resource
 	private HistorialEstatusService historialEstatusService;
+	@Resource
+	private FechaPrensistaMaquinaService fechaPrensistaMaquinaService;
 	
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
@@ -70,7 +73,10 @@ public class CambioEstatusController {
 			usuario = ((UserDetails)principal).getUsername();
 		}
 		
+		// intenta eliminar cruce de informacion: fecha_prensista_maquina
+		fechaPrensistaMaquinaService.eliminaFechaPrensistaMaquinaPorNut(nut);
 		
+		// crea historial de estatus
 		HistorialEstatus historialEstatus = new HistorialEstatus();
 			OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
 		historialEstatus.setOrdenProduccion(ordenProduccion);

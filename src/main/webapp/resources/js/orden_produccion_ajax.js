@@ -238,10 +238,9 @@ function ajaxAgregaOrdenProduccion() {
     delete descripcion;
 } // ajaxAgregaOrdenProduccion()
 
-
 function ajaxAgregaPartida() {
     //alert('si entro a la funcion ajax');
-    document.forms["partida"].elements["id_tipo_trabajo"].value         = document.forms["partida"].elements["tipo_trabajo"].value;
+    document.forms["partida"].elements["id_tipo_trabajo"].value         = $("input:radio[name=tipo_trabajo]:checked").val(); 
     document.forms["partida"].elements["id_tipo_forma_trabajo"].value   = document.forms["partida"].elements["select_forma_trabajo"].value;
     
     var nombre_partida  = document.forms["partida"].elements["nombre_partida"].value;
@@ -264,15 +263,16 @@ function ajaxAgregaPartida() {
     	alert("El campo cantidad deber ser un n\u00FAmero.");
     }
     
-    if( correcto ) {
+    if( correcto && ( window.FormData !== undefined ) ) { // puede utiliza FormData
+    	console.log("entro aqui, al existente form data");
+    	
         document.body.style.cursor = "wait";
         // desactiva campos y botones
         desactivaCamposPartida();
         desactivaBtnPartida();
         
         // para enviar file input con ajax se usa formData
-        var formData = new FormData( document.forms["partida"] ); 
-        //console.log(formData);
+        var formData = new FormData( document.forms["partida"] );
         $.ajax({
             type:"POST",
             url:urlAgregaPartida,
@@ -326,7 +326,10 @@ function ajaxAgregaPartida() {
             }
         });
         delete formData;
-    } // if correcto
+    } else if( correcto ) { // no puede usar FormData
+    	alert("Por favor actualice su navegador.");
+    }
+    	
     
     delete nombre_partida;
     delete cantidad;

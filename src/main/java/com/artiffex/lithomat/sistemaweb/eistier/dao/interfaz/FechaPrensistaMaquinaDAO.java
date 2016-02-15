@@ -11,7 +11,7 @@ public interface FechaPrensistaMaquinaDAO {
 	
 	public int modifica(FechaPrensistaMaquina fechaPrensistaMaquina);
 	
-	public int elimina(int idFechaPrensistaMaquina);
+	public void eliminaPorIdPliego(int idPliego);
 	
 	public List<FechaPrensistaMaquina> lista();
 	

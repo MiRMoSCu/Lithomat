@@ -133,7 +133,7 @@
 	                        			<div class="columna_completa">
 	                        				<table>
 	                        					<tr>
-	                        						<td width="40%">Precio bruto:</td>
+	                        						<td width="41%">Precio bruto:</td>
 	                        						<td>
 	                        							<input	type="text"
 	                        									class="input"
@@ -149,7 +149,7 @@
 	                        			<div class="columna_completa">
 	                        				<table>
 	                        					<tr>
-	                        						<td width="44%">Precio cliente:</td>
+	                        						<td width="45%">Precio cliente:</td>
 	                        						<td>
 	                        							<input	type="text"
 	                        									class="input"
@@ -219,7 +219,7 @@
 	                        			<div class="columna_completa">
 	                        				<table>
 	                        					<tr>
-	                        						<td width="38%">Precio neto:</td>
+	                        						<td width="39%">Precio neto:</td>
 	                        						<td>
 	                        							<input	type="text"
 	                        									class="input"
@@ -293,7 +293,7 @@
 	                        			<div class="columna_completa">
 	                        				<table>
 	                        					<tr>
-	                        						<td width="38%">Precio neto:</td>
+	                        						<td width="39%">Precio neto:</td>
 	                        						<td>
 	                        							<input 	type="text"
 	                        									class="input"

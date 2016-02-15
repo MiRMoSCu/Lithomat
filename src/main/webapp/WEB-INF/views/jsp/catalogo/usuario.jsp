@@ -163,7 +163,7 @@
                                                 <div class="mitad_columna_derecha">
                                                     <table>
                                                         <tr>
-                                                            <td width="42%">Ap. Materno:</td>
+                                                            <td width="43%">Ap. Materno:</td>
                                                             <td>
                                                                 <input type="text" class="input" name="ap_materno" value=""/>
                                                             </td>

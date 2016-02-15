@@ -310,7 +310,7 @@
 		                                			<div class="columna_completa">
 		                                		 		<table>
 		                                		 			<tr>
-		                                		 				<td width="22%">Nom. Trabajo:</td>
+		                                		 				<td width="23%">Nom. Trabajo:</td>
 		                                		 				<td>
 		                                		 					<input	type="text"
 	                                										class="input"
@@ -412,7 +412,7 @@
                                 						<div class="columna_completa">
                                 							<table>
                                 								<tr>
-                                									<td width="48%">Turno Laboral:</td>
+                                									<td width="49%">Turno Laboral:</td>
                                 									<td>
                                 										<select name="id_turno_laboral">
                                 											<c:forEach var="turnoLaboral" items="${listaTurnoLaboral}">
@@ -597,7 +597,7 @@
                                 						<div class="columna_completa">
                                 							<table>
                                 								<tr>
-                                									<td width="59%">Frente Kilos Tinta:</td>
+                                									<td width="60%">Frente Kilos Tinta:</td>
                                 									<td>
                                 										<input	type="text"
                                 												class="input"
@@ -614,7 +614,7 @@
                                 						<div class="columna_completa">
                                 							<table>
                                 								<tr>
-                                									<td width="58%">Vuelta Kilos Tinta:</td>
+                                									<td width="59%">Vuelta Kilos Tinta:</td>
                                 									<td>
                                 										<input	type="text"
                                 												class="input"

@@ -200,7 +200,7 @@
 	                                                    <div class="columna_completa">
 	                                                        <table>
 	                                                            <tr>
-	                                                                <td width="50%">Precio maquila:</td>
+	                                                                <td width="51%">Precio maquila:</td>
 	                                                                <td>
 	                                                                    <input  type="text"
 	                                                                            class="input"
@@ -238,7 +238,7 @@
 	                                                	<div class="columna_completa">
 	                                                		<table>
 	                                                			<tr>
-	                                                				<td width="50%">Descuento (%):</td>
+	                                                				<td width="51%">Descuento (%):</td>
 	                                                				<td>
 	                                                					<input	type="text"
 	                                                							class="input"
@@ -550,7 +550,7 @@
 		                                                		<div class="columna_completa">
 		                                                			<table>
 		                                            					<tr>
-		                                            						<td width="57%">No. Repeticiones:</td>
+		                                            						<td width="58%">No. Repeticiones:</td>
 		                                            						<td>
 		                                            							<input	type="text"
 		                                            									class="input"
@@ -846,7 +846,7 @@
 		                                   						<div class="columna_completa">
 			                                   						<table>
 			                                   							<tr>
-			                                   								<td width="46%">Cantidad req.:</td>
+			                                   								<td width="47%">Cantidad req.:</td>
 			                                   								<td>
 			                                   									<input	type="text"
 			                                   											class="input"
@@ -930,7 +930,7 @@
 		                                   						<div class="columna_completa">
 		                                   							<table>
 		                                   								<tr>
-		                                   									<td width="61%">Entradas m&aacute;quina:</td>
+		                                   									<td width="62%">Entradas m&aacute;quina:</td>
 		                                   									<td>
 		                                   										<input	type="text"
 			                                   											class="input"
@@ -1014,7 +1014,7 @@
 		                                   						<div class="columna_completa">
 		                                   							<table>
 		                                   								<tr>
-		                                   									<td width="61%">Entradas m&aacute;quina:</td>
+		                                   									<td width="62%">Entradas m&aacute;quina:</td>
 		                                   									<td>
 		                                   										<input	type="text"
 			                                   											class="input"

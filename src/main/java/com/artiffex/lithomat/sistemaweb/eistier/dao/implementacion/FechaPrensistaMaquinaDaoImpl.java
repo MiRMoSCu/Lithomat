@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.transform.Transformers;
@@ -43,9 +44,19 @@ public class FechaPrensistaMaquinaDaoImpl implements FechaPrensistaMaquinaDAO {
 		return 0;
 	}
 
-	public int elimina(int idFechaPrensistaMaquina) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void eliminaPorIdPliego(int idPliego) {
+		try {
+			sesion = HibernateUtil.getInstance().getCurrentSession();
+			sesion.beginTransaction();
+			Query query = sesion.createQuery("from FechaPrensistaMaquina fpm where fpm.activo = true and fpm.pliego.idPliego = :idPliego");
+			query.setParameter("idPliego", idPliego);
+			sesion.delete( (FechaPrensistaMaquina)query.uniqueResult() );
+			sesion.getTransaction().commit();
+			query = null;
+		} catch ( Exception e ) {
+			log.error(e.getMessage());
+			sesion.getTransaction().rollback();
+		}
 	}
 
 	public List<FechaPrensistaMaquina> lista() {

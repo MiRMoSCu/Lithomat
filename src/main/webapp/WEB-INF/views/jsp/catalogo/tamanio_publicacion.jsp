@@ -189,7 +189,7 @@
                                                 <div class="mitad_columna_derecha">
                                                     <table>
                                                         <tr>
-                                                            <td width="61%">N&uacute;mero de doblez:</td>
+                                                            <td width="62%">N&uacute;mero de doblez:</td>
                                                             <td>
                                                                 <input type="text" class="input" name="numero_doblez"
                                                                        value="" 

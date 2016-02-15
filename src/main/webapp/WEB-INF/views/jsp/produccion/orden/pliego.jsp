@@ -74,7 +74,7 @@
                                             <div class="columna_completa">
                                                 <table>
                                                     <tr>
-                                                        <td width="63%">Pinzas (mm):</td>
+                                                        <td width="64%">Pinzas (mm):</td>
                                                         <td>
                                                             <input  type="text"
                                                                     class="input"

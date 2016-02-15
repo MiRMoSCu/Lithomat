@@ -58,7 +58,7 @@
 	                        		<div class="columna_completa">
 	                        			<table>
 	                        				<tr>
-	                        					<td width="26%">Opci&oacute;n impresi&oacute;n:</td>
+	                        					<td width="27%">Opci&oacute;n impresi&oacute;n:</td>
 	                        					<td>
 	                        						<select name="select_tipo_formato_impresion">
 	                        							<c:forEach var="c" items="${listaTipoFormatoImpresion}">

@@ -93,7 +93,7 @@
 										<div class="columna_completa">
 											<table>
 												<tr>
-													<td width="15%">Papel seleccionado:</td>
+													<td width="16%">Papel seleccionado:</td>
 													<td>
 														<input 	type="text"
 																class="input"

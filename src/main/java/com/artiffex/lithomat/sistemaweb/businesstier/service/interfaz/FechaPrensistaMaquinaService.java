@@ -13,6 +13,8 @@ public interface FechaPrensistaMaquinaService {
 	
 	//public void eliminaFechaPrensistaMaquina(int idFechaPrensistaMaquina);
 	
+	public void eliminaFechaPrensistaMaquinaPorNut(String nut);
+	
 	public List<FechaPrensistaMaquina> listaFechaPrensistaMaquina();
 	
 	public int obtieneNumeroFechaPrensistaMaquinaPorParametros(boolean busquedaPorNut, String nut);

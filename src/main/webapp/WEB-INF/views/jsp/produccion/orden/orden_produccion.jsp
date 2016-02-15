@@ -1019,7 +1019,7 @@
                                                     <div class="columna_completa">
                                                         <table>
                                                             <tr>
-                                                                <td width="49%">Alto Final (cm):</td>
+                                                                <td width="50%">Alto Final (cm):</td>
                                                                 <td>
                                                                     <input  type="text" 
                                                                             class="input" 
@@ -1245,7 +1245,7 @@
                                     				<div class="columna_completa">
                                     					<table>
                                     						<tr>
-                                    							<td width="62%">Alto Corte Inic.(cm)</td>
+                                    							<td width="63%">Alto Corte Inic.(cm)</td>
                                     							<td>
                                     								<input	type="text"
                                     										class="input"
@@ -1498,7 +1498,7 @@
                                     			<div class="columna_completa">
                                     				<table>
                                     					<tr>
-                                    						<td width="32%">Tipo de Complejidad</td>
+                                    						<td width="33%">Tipo de Complejidad</td>
                                     						<td>
                                     							<select name="select_tipo_complejidad">
                                     								<c:forEach var="x" items="${listaTipoComplejidad}">
