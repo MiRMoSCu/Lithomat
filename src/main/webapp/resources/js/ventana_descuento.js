@@ -88,7 +88,9 @@ function enviarFormulario() {
 	// validaciones 
 	var correcto = true;
 	
-	if ( document.descuento.nut.value == "" ) {
+	if ( correcto
+			&& ( document.descuento.nut.value == ""
+				|| isNaN(document.descuento.nut.value) ) ) {
 		correcto = false;
 		alert("Favor de informar el NUT");
 		document.descuento.nut.focus();

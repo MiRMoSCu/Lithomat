@@ -4,7 +4,9 @@
 
 function buscaCondicionesProduccion() {
 	var correcto = true;
-	if( document.reporte_cotizacion.nut.value == "" ) {
+	if( correcto
+			&& ( document.reporte_cotizacion.nut.value == ""
+				|| isNaN( document.reporte_cotizacion.nut.value ) ) ) {
 		correcto = false;
 		alert("Favor de especificar el NUT");
 		document.reporte_orden_produccion.nut.focus();
@@ -53,7 +55,9 @@ function enviarFormulario() {
 	document.reporte_cotizacion.id_tipo_formato_impresion.value = $("[name=select_tipo_formato_impresion]").val();
 	// validacion
 	var correcto = true;
-	if( document.reporte_cotizacion.nut.value == "" ) {
+	if( correcto
+			&& ( document.reporte_cotizacion.nut.value == "" 
+				|| isNaN( document.reporte_cotizacion.nut.value ) ) ) {
 		correcto = false;
 		alert("Favor de especificar el NUT");
 		document.reporte_cotizacion.nut.focus();

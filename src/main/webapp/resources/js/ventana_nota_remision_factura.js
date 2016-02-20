@@ -17,7 +17,9 @@ function enviarFormulario() {
 	document.reporte_remision_factura.id_tipo_formato_impresion.value = $("[name=select_tipo_formato_impresion]").val();
 	// validacion
 	var correcto = true;
-	if( document.reporte_remision_factura.nut.value == "" ) {
+	if( correcto 
+			&& ( document.reporte_remision_factura.nut.value == ""
+				|| isNaN( document.reporte_remision_factura.nut.value ) ) ) {
 		correcto = false;
 		alert("Favor de especificar el NUT");
 		document.reporte_remision_factura.nut.focus();

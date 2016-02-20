@@ -229,47 +229,11 @@ function genera_tabla_dom( jsonListaTipoPapelExtendido ) {
     	//console.log("no entro");
     	tr = document.createElement("tr");
         tr.setAttribute("class","l1");
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
+        for (var i=0; i<10; i++) {
+        	td = document.createElement("td");
+            td.innerHTML = "&nbsp;";
+            tr.appendChild( td );
+        }
         table.appendChild( tr );
     }
     //console.log( table );

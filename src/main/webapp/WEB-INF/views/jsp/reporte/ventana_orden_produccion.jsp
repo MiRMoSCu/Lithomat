@@ -19,8 +19,8 @@
 			$(document).ready(function (){});
         </script>
         <script type="text/javascript">
-        	var urlExisteNut						= '${urlExisteNut}';
-        	var urlExportaReporteOrdenProduccion	= '${urlExportaReporteOrdenProduccion}';
+        	var urlExisteNut						= "${urlExisteNut}";
+        	var urlExportaReporteOrdenProduccion	= "${urlExportaReporteOrdenProduccion}";
         </script>
 	</head>
 	<body>

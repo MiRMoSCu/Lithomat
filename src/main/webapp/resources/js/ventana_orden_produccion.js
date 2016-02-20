@@ -17,7 +17,9 @@ function enviarFormulario() {
 	document.reporte_orden_produccion.id_tipo_formato_impresion.value = $("[name=select_tipo_formato_impresion]").val();
 	// validacion
 	var correcto = true;
-	if( document.reporte_orden_produccion.nut.value == "" ) {
+	if( correcto 
+			&& ( document.reporte_orden_produccion.nut.value == "" 
+				|| isNaN(document.reporte_orden_produccion.nut.value ) ) ) {
 		correcto = false;
 		alert("Favor de especificar el NUT");
 		document.reporte_orden_produccion.nut.focus();

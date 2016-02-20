@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:url value="/reporte/existe_nut"				var="urlExisteNut"/>
+<c:url value="/fecha_prensista_maquina/lista"	var="urlListaFechaPrensistaMaquina"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -16,6 +18,10 @@
         <script type="text/javascript">
 	    	//inicializacion jquery
 	        $(document).ready(function (){});
+        </script>
+        <script type="text/javascript">
+        	var urlExisteNut 					= "${urlExisteNut}";
+        	var urlListaFechaPrensistaMaquina	= "${urlListaFechaPrensistaMaquina}";
         </script>
 	</head>
 	<body>
@@ -76,7 +82,7 @@
 									<div class="titulo">
 										<font size="5">RESUMEN FECHA - PRENSISTA - M&Aacute;QUINA POR NUT</font>
 									</div>
-									<form name="busqueda_Fecha_prensista_maquina" action="" method="post" accept-charset="ISO-8859-1">
+									<form name="busqueda_fecha_prensista_maquina" action="" method="post" accept-charset="ISO-8859-1">
 										<div class="linea">
 											<div class="casilla">
 												<div class="columna_izquierda">
@@ -97,6 +103,9 @@
 													</div>
 												</div>
 											</div>
+										</div>
+										<div style="display: none;">
+											<input type="text" value="" name="bug"/>
 										</div>
 										<div class="linea">
 											<div class="casilla">
