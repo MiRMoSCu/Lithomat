@@ -156,14 +156,20 @@ function agregaRegistro() {
         pliego.hojas_totales        = tableDOM.rows[i].cells[3].innerHTML;
         pliego.observaciones        = tableDOM.rows[i].cells[4].innerHTML;
         pliego.vuelta_mismas_placas = tableDOM.rows[i].cells[5].innerHTML.trim() == "Si" ? true : false ;
+        $(document.getElementsByName("tipo_vuelta")[0].options).each( function(index, value){
+			if ( tableDOM.rows[i].cells[6].innerHTML == $(this).text() ) {
+				pliego.id_tipo_vuelta = $(this).val();
+				return false;
+			}
+		} );
+        /*// CUIDADO: NO FUNCIONA EN BROWSER ANTIGUOS
         for( var j=0; j<document.forms[0].tipo_vuelta.length; j++ ) {
-        	//console.log( tableDOM.rows[i].cells[6].innerHTML );
-        	//console.log( document.forms[0].tipo_vuelta.options[j].text );
             if( tableDOM.rows[i].cells[6].innerHTML == document.forms[0].tipo_vuelta.options[j].text ) {
                 pliego.id_tipo_vuelta = document.forms[0].tipo_vuelta.options[j].value;
                 break;
             }
         }
+        */
         pliego.numero_decimal		= tableDOM.rows[i].cells[7].innerHTML;
         listaObject.pliegos.push( pliego );
         delete pliego;

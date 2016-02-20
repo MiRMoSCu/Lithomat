@@ -14,7 +14,7 @@ $(document).ready(function () {
 function setCampos( id_cliente, clave, nombre_moral, nombre_representante, puesto, calle, num_exterior, num_interior, colonia, delegacion_municipio, estado, codigo_postal, pais, rfc, telefono_particular, telefono_movil, email, observaciones ) {
 
     // busqueda de nombre_tipo_precio
-    var select = document.forms["cliente"].id_tipo_cliente;
+    var select = document.cliente.id_tipo_cliente;
     var index = 0;
     for (var i = 0;i < select.length;i++) {
         //alert( select.options[i].innerText + " " + nombre_tipo_precio );
@@ -24,70 +24,70 @@ function setCampos( id_cliente, clave, nombre_moral, nombre_representante, puest
         }
     }
     
-    document.forms["cliente"].id_cliente.value              = id_cliente;
-    document.forms["cliente"].id_tipo_cliente.selectedIndex = index;
-    document.forms["cliente"].nombre_moral.value            = nombre_moral;
-    document.forms["cliente"].nombre_representante.value    = nombre_representante;
-    document.forms["cliente"].puesto.value                  = puesto;
-    document.forms["cliente"].calle.value                   = calle;
-    document.forms["cliente"].num_exterior.value            = num_exterior;
-    document.forms["cliente"].num_interior.value            = num_interior;
-    document.forms["cliente"].colonia.value                 = colonia;
-    document.forms["cliente"].delegacion_municipio.value    = delegacion_municipio;
-    document.forms["cliente"].estado.value                  = estado;
-    document.forms["cliente"].codigo_postal.value           = codigo_postal;
-    document.forms["cliente"].pais.value                    = pais;
-    document.forms["cliente"].rfc.value                     = rfc;
-    document.forms["cliente"].telefono_particular.value     = telefono_particular;
-    document.forms["cliente"].telefono_movil.value          = telefono_movil;
-    document.forms["cliente"].email.value                   = email;
-    document.forms["cliente"].observaciones.value           = observaciones;
+    document.cliente.id_cliente.value              = id_cliente;
+    document.cliente.id_tipo_cliente.selectedIndex = index;
+    document.cliente.nombre_moral.value            = nombre_moral;
+    document.cliente.nombre_representante.value    = nombre_representante;
+    document.cliente.puesto.value                  = puesto;
+    document.cliente.calle.value                   = calle;
+    document.cliente.num_exterior.value            = num_exterior;
+    document.cliente.num_interior.value            = num_interior;
+    document.cliente.colonia.value                 = colonia;
+    document.cliente.delegacion_municipio.value    = delegacion_municipio;
+    document.cliente.estado.value                  = estado;
+    document.cliente.codigo_postal.value           = codigo_postal;
+    document.cliente.pais.value                    = pais;
+    document.cliente.rfc.value                     = rfc;
+    document.cliente.telefono_particular.value     = telefono_particular;
+    document.cliente.telefono_movil.value          = telefono_movil;
+    document.cliente.email.value                   = email;
+    document.cliente.observaciones.value           = observaciones;
 }
 
 function crear() {
-    if (document.forms["cliente"].nombre_moral.value == "")
+    if (document.cliente.nombre_moral.value == "")
         alert("El campo nombre es obligatorio, favor de informarlo.");
     else {
-        document.forms["cliente"].action = urlAlta;
-        document.forms["cliente"].submit();
+        document.cliente.action = urlAlta;
+        document.cliente.submit();
     }
 }
 
 function modifica() {
-    if (document.forms["cliente"].nombre_moral.value == "")
+    if (document.cliente.nombre_moral.value == "")
         alert("El campo nombre es obligatorio, favor de informarlo.");
     else {
-        document.forms["cliente"].action = urlModifica;
-        document.forms["cliente"].submit();
+        document.cliente.action = urlModifica;
+        document.cliente.submit();
     }
 }
 
 function elimina() {
     if (confirm(String.fromCharCode(191) + "Realmente desea eliminar este registro?")) {
-        document.forms["cliente"].action = urlElimina;
-        document.forms["cliente"].submit();
+        document.cliente.action = urlElimina;
+        document.cliente.submit();
     }
 }
 
 function limpia_form_cliente() {
-    document.forms["cliente"].id_cliente.value              = "";
-    document.forms["cliente"].id_tipo_cliente.selectedIndex = 0;
-    document.forms["cliente"].nombre_moral.value            = "";
-    document.forms["cliente"].nombre_representante.value    = "";
-    document.forms["cliente"].puesto.value                  = "";
-    document.forms["cliente"].calle.value                   = "";
-    document.forms["cliente"].num_exterior.value            = "";
-    document.forms["cliente"].num_interior.value            = "";
-    document.forms["cliente"].colonia.value                 = "";
-    document.forms["cliente"].delegacion_municipio.value    = "";
-    document.forms["cliente"].estado.value                  = "";
-    document.forms["cliente"].codigo_postal.value           = "";
-    document.forms["cliente"].pais.value                    = "";
-    document.forms["cliente"].rfc.value                     = "";
-    document.forms["cliente"].telefono_particular.value     = "";
-    document.forms["cliente"].telefono_movil.value          = "";
-    document.forms["cliente"].email.value                   = "";
-    document.forms["cliente"].observaciones.value           = "";
+    document.cliente.id_cliente.value              = "";
+    document.cliente.id_tipo_cliente.selectedIndex = 0;
+    document.cliente.nombre_moral.value            = "";
+    document.cliente.nombre_representante.value    = "";
+    document.cliente.puesto.value                  = "";
+    document.cliente.calle.value                   = "";
+    document.cliente.num_exterior.value            = "";
+    document.cliente.num_interior.value            = "";
+    document.cliente.colonia.value                 = "";
+    document.cliente.delegacion_municipio.value    = "";
+    document.cliente.estado.value                  = "";
+    document.cliente.codigo_postal.value           = "";
+    document.cliente.pais.value                    = "";
+    document.cliente.rfc.value                     = "";
+    document.cliente.telefono_particular.value     = "";
+    document.cliente.telefono_movil.value          = "";
+    document.cliente.email.value                   = "";
+    document.cliente.observaciones.value           = "";
 }
 
 /*************************************************************/
@@ -278,79 +278,11 @@ function genera_tabla_dom( jsonListaClientes ) {
     	//console.log("no entro");
     	tr = document.createElement("tr");
         tr.setAttribute("class","l1");
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
+        for (var i=0; i<18; i++) {
+        	td = document.createElement("td");
+            td.innerHTML = "&nbsp;";
+            tr.appendChild( td );
+        }
         table.appendChild( tr );
     }
     //console.log( table );

@@ -133,7 +133,11 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="linea"></div>
+                                <div class="linea">
+                                	<div class="casilla" style="text-align: right;">
+                                		<img alt="" style="cursor:pointer;" onclick="agregaRegistro();" src="<c:url value="/resources/image/boton_agregar.jpg"/>"/>
+                                	</div>
+                                </div>
                                 <div class="linea">
                                     <div class="casilla">
                                         <div class="columna_pliego_izquierda">
@@ -281,7 +285,6 @@
                                     <div class="casilla" style="text-align: right;">
                                         <img alt="" style="cursor:pointer;" onclick="limpiaPliego();" src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
                                         <img alt="" style="cursor:pointer;" onclick="modificaRegistro();" src="<c:url value="/resources/image/boton_modificar.jpg"/>"/>
-                                        <img alt="" style="cursor:pointer;" onclick="agregaRegistro();" src="<c:url value="/resources/image/boton_agregar.jpg"/>"/>
                                     </div>
                                 </div>
                             </div>

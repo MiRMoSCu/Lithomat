@@ -308,18 +308,18 @@ public class PartidaServiceImpl implements PartidaService {
 					List<Pliego> listaPliego = pliegoService.listaPliegoPorTipoTrabajoDetalle(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());
 					for (Pliego pliego : listaPliego) {
 					
-						System.out.println("cantidad:" + cantidad);
+						//System.out.println("cantidad:" + cantidad);
 						
 						float numeroDecimal = pliego.getNumeroDecimal();
 						hojasRequeridas = (int) Math.ceil(numeroDecimal * cantidad);
-						System.out.println("hojasRequeridas:" + hojasRequeridas);
+						//System.out.println("hojasRequeridas:" + hojasRequeridas);
 							papelSobrante.setInicioTabulador(hojasRequeridas + 1);
 							papelSobrante.setFinTabulador(hojasRequeridas - 1);
 							papelSobrante.setFrenteNumTinta(tipoTrabajoDetalle.getFrenteCombinacionTintas().getNumTintas());
 							papelSobrante.setVueltaNumTinta(tipoTrabajoDetalle.getVueltaCombinacionTintas().getNumTintas());
 							papelSobrante.setTintaEspecial(tipoTrabajoDetalle.getFrenteNumTintaEspecial() > 0 || tipoTrabajoDetalle.getVueltaNumTintaEspecial() > 0 ? true : false);
 						hojasSobrantes = papelSobranteService.buscaHojasSobrante(papelSobrante);
-						System.out.println("hojasSobrantes:" + hojasSobrantes);
+						//System.out.println("hojasSobrantes:" + hojasSobrantes);
 						hojasTotales = hojasRequeridas + hojasSobrantes;
 					
 						pliego.setHojasRequeridas(hojasRequeridas);

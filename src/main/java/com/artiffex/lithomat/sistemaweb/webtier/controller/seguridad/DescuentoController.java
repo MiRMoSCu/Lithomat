@@ -36,14 +36,14 @@ public class DescuentoController {
 	private CalificacionService calificacionService;
 	
 	
-	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
+	@Secured("ROLE_ROOT")
 	@RequestMapping(value = "/ventana", method = RequestMethod.GET)
 	public String ventanaDescuento( Model model ) throws IOException {
 		log.info("/ventana_descuento");
 		return "seguridad/ventana_descuento";
 	}
 	
-	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
+	@Secured("ROLE_ROOT")
 	@RequestMapping(value = "/busca", method = RequestMethod.POST)
 	@ResponseBody
 	public String buscaPrecios( 
@@ -77,7 +77,7 @@ public class DescuentoController {
 		return json;
 	}
 	
-	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
+	@Secured("ROLE_ROOT")
 	@RequestMapping(value = "/acepta", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean generaDescuento(

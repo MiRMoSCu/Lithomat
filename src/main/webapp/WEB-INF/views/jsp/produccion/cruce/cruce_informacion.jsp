@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:url value="/?opc=produccion"											var="urlMenu"/>
+<c:url value="/reporte/existe_nut"										var="urlExisteNut"/>
 <c:url value="/cruce_informacion/grid/lista_por_pagina_por_parametros"	var="urlBuscaListaPorParametros"/>
 <c:url value="/cruce_informacion//grid/agrega_cruce_informacion"		var="urlAgregaCruceInformacion"/>
 <html>
@@ -47,6 +48,7 @@
         </script>
         <script type="text/javascript">
         	var urlMenu						= "${urlMenu}";
+        	var urlExisteNut				= "${urlExisteNut}";
         	var urlBuscaListaPorParametros	= "${urlBuscaListaPorParametros}";
         	var urlAgregaCruceInformacion	= "${urlAgregaCruceInformacion}";
         </script>
@@ -204,43 +206,40 @@
                                 </div>
                                 <div id="div_formulario_busqueda_fecha_prensista_maquina">
                                 	<form name="busqueda_registro_grid" action="" method="post" accept-charset="ISO-8859-1">
-                                		<input type="hidden" name="numero_pagina" value=""/>
-                                		<input type="hidden" name="numero_registros_por_pagina" value=""/>
-                                		<div class="linea">
-                                			<div class="casilla">
-                                				<div class="columna_izquierda">
-                               						<div class="columna_completa">
-                               							<table>
-                                							<tr>
-                                								<td width="14%">
-                                									<input type="checkbox" name="chkbx_busca_por_nut"/>
-                                									<span style="cursor:pointer;" onclick="document.busqueda_registro_grid.chkbx_busca_por_nut.click()">NUT:</span>
-                                								</td>
-                                								<td>
-                                									<input type="text" class="input" name="nut" value="" maxlength="10" onkeydown="revisaNumero(false, this.value, event, 'nueva_busqueda', null)"/>
-                                								</td>
-                                							</tr>
-                                						</table>
-                               						</div>
-                                				</div>
-                                				<div class="columna_derecha">
-                                					<div class="mitad_columna_derecha">
-                                						<input type="text" class="input" name="BUG" value="Why does forms with single input field submit upon pressing enter key in input?" style="display: none;">
-                                					</div>
-                                				</div>
-                                			</div>
-                                		</div>
-                                		<br/>
-                                		<div class="linea">
-                                			<div class="casilla" style="text-align: right;">
-                                				<img alt="" style="cursor:pointer;" onclick="limpia_form_busqueda_registro_grid()" 
-                                					 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
-                                				<span style="cursor:pointer;" onclick="nueva_busqueda()">
-													&nbsp;Buscar&nbsp;
-												</span>
-                                			</div>
-                                		</div>
-                                	</form>
+                               			<input type="hidden" name="numero_pagina" value=""/>
+                               			<input type="hidden" name="numero_registros_por_pagina" value=""/>
+	                                	<div class="linea">
+	                                		<div class="casilla">
+	                                			<div class="columna_izquierda">
+	                                				<div class="columna_completa">
+	                                					<table>
+	                               							<tr>
+	                               								<td width="14%">
+	                               									<input type="checkbox" name="chkbx_busca_por_nut"/>
+	                               									<span style="cursor:pointer;" onclick="document.busqueda_registro_grid.chkbx_busca_por_nut.click()">NUT:</span>
+	                               								</td>
+	                               								<td>
+	                               									<input type="text" class="input" name="nut" value="" maxlength="10" onkeydown="revisaNumero(false, this.value, event, 'nueva_busqueda', null)"/>
+	                               								</td>
+	                               							</tr>
+	                               						</table>
+	                                				</div>
+	                                			</div>
+	                                			<div class="columna_derecha">
+	                                				<input type="text" class="input" name="BUG" value="Why does forms with single input field submit upon pressing enter key in input?" style="display: none;">
+	                                			</div>
+	                                		</div>
+	                                	</div>
+	                                	<div class="linea">
+	                                		<div class="casilla">
+	                                			<div class="columna_izquierda" style="text-align: right;">
+	                                				<img alt="" style="cursor:pointer;" onclick="limpia_form_busqueda_registro_grid()" 
+	                                					 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
+	                                				<span style="cursor:pointer;" onclick="nueva_busqueda()">&nbsp;Buscar&nbsp;</span>
+	                                			</div>
+	                                		</div>
+	                                	</div>
+	                                </form>
                                 </div>
                                 <div class="div_separador_mediano">
                                 	<img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>

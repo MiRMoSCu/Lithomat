@@ -126,8 +126,7 @@ public class CruceInformacionController {
 		}
 		principal = null;
 		
-		System.out.println("ENTRO CON EXITO");
-		System.out.println(jsonFechaPrensistaMaquina);
+		//System.out.println(jsonFechaPrensistaMaquina);
 		fechaPrensistaMaquinaService.creaFechaPrensistaMaquina(jsonFechaPrensistaMaquina, usuario);
 		
 		return 1;

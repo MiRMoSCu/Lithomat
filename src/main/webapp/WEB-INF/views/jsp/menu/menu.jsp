@@ -10,6 +10,7 @@
 <c:url value="/reporte/ventana_cotizacion" 				var="urlVentanaCotizacion" />
 <c:url value="/reporte/ventana_nota_remision_factura" 	var="urlVentanaNotaRemisionFactura" />
 <c:url value="/reporte/ventana_cola_impresion" 			var="urlVentanaColaImpresion" />
+<c:url value="/fecha_prensista_maquina/" 				var="urlFechaPrensistaMaquina" />
 <!-- CATALOGOS -->
 <c:url value="/cliente/catalogo/lista" 					var="urlCliente" />
 <c:url value="/combinacion_tintas/catalogo/lista" 		var="urlCombinacionTintas" />
@@ -66,115 +67,117 @@
 	<security:authorize access="hasRole('ROLE_ROOT')">
        	<script type="text/javascript">
        	// *** Produccion
-        	var urlOrdenProduccion 				= '${urlOrdenProduccion}';	
-        	var urlVisualizador					= '${urlVisualizador}';
-        	var urlCruceInformacion				= '${urlCruceInformacion}';
+        	var urlOrdenProduccion 				= "${urlOrdenProduccion}";	
+        	var urlVisualizador					= "${urlVisualizador}";
+        	var urlCruceInformacion				= "${urlCruceInformacion}";
         // *** Reportes
-        	var urlVentanaOrdenProduccion		= '${urlVentanaOrdenProduccion}';
-        	var urlVentanaCotizacion			= '${urlVentanaCotizacion}';
-        	var urlVentanaNotaRemisionFactura	= '${urlVentanaNotaRemisionFactura}';
-        	var urlVentanaColaImpresion			= '${urlVentanaColaImpresion}';
+        	var urlVentanaOrdenProduccion		= "${urlVentanaOrdenProduccion}";
+        	var urlVentanaCotizacion			= "${urlVentanaCotizacion}";
+        	var urlVentanaNotaRemisionFactura	= "${urlVentanaNotaRemisionFactura}";
+        	var urlVentanaColaImpresion			= "${urlVentanaColaImpresion}";
+        	var urlFechaPrensistaMaquina		= "${urlFechaPrensistaMaquina}";
         // *** Catalogos
-            var urlCliente						= '${urlCliente}';
-            var urlCombinacionTintas			= '${urlCombinacionTintas}';
-            var urlCostoExtra					= '${urlCostoExtra}';
-            var urlEstatusOrden					= '${urlEstatusOrden}';
-            var urlMaquina						= '${urlMaquina}';
-            var urlMaterialAyuda				= '${urlMaterialAyuda}';
-            var urlPapelSobrante				= '${urlPapelSobrante}';
-            var urlPrensista					= '${urlPrensista}';
-            var urlProcesoDisenio				= '${urlProcesoDisenio}';
-            var urlProcesoExterno				= '${urlProcesoExterno}';
-            var urlProcesoPreprensa				= '${urlProcesoPreprensa}';
-            var urlProcesoTransporte			= '${urlProcesoTransporte}';
-            var urlProveedorExterno				= '${urlProveedorExterno}';
-            var urlProveedorPapel				= '${urlProveedorPapel}';
-            var urlResponsableInsumo			= '${urlResponsableInsumo}';
-            var urlTabuladorPrecios				= '${urlTabuladorPrecios}';
-            var urlTamanioPublicacion			= '${urlTamanioPublicacion}';
-            var urlTintaEspecial				= '${urlTintaEspecial}';
-            var urlTipoBarniz					= '${urlTipoBarniz}';
-            var urlTipoCliente					= '${urlTipoCliente}';
-            var urlTipoComplejidad				= '${urlTipoComplejidad}';
-            var urlTipoComprobanteFiscal		= '${urlTipoComprobanteFiscal}';
-            var urlTipoFormaTrabajo				= '${urlTipoFormaTrabajo}';
-            var urlTipoPapelExtendido			= '${urlTipoPapelExtendido}';
-            var urlTipoPlaca					= '${urlTipoPlaca}';
-            var urlTipoPrecio					= '${urlTipoPrecio}';
-            var urlTipoTrabajo					= '${urlTipoTrabajo}';
-            var urlTipoVuelta					= '${urlTipoVuelta}';
-            var urlTurnoLaboral					= '${urlTurnoLaboral}';
+            var urlCliente						= "${urlCliente}";
+            var urlCombinacionTintas			= "${urlCombinacionTintas}";
+            var urlCostoExtra					= "${urlCostoExtra}";
+            var urlEstatusOrden					= "${urlEstatusOrden}";
+            var urlMaquina						= "${urlMaquina}";
+            var urlMaterialAyuda				= "${urlMaterialAyuda}";
+            var urlPapelSobrante				= "${urlPapelSobrante}";
+            var urlPrensista					= "${urlPrensista}";
+            var urlProcesoDisenio				= "${urlProcesoDisenio}";
+            var urlProcesoExterno				= "${urlProcesoExterno}";
+            var urlProcesoPreprensa				= "${urlProcesoPreprensa}";
+            var urlProcesoTransporte			= "${urlProcesoTransporte}";
+            var urlProveedorExterno				= "${urlProveedorExterno}";
+            var urlProveedorPapel				= "${urlProveedorPapel}";
+            var urlResponsableInsumo			= "${urlResponsableInsumo}";
+            var urlTabuladorPrecios				= "${urlTabuladorPrecios}";
+            var urlTamanioPublicacion			= "${urlTamanioPublicacion}";
+            var urlTintaEspecial				= "${urlTintaEspecial}";
+            var urlTipoBarniz					= "${urlTipoBarniz}";
+            var urlTipoCliente					= "${urlTipoCliente}";
+            var urlTipoComplejidad				= "${urlTipoComplejidad}";
+            var urlTipoComprobanteFiscal		= "${urlTipoComprobanteFiscal}";
+            var urlTipoFormaTrabajo				= "${urlTipoFormaTrabajo}";
+            var urlTipoPapelExtendido			= "${urlTipoPapelExtendido}";
+            var urlTipoPlaca					= "${urlTipoPlaca}";
+            var urlTipoPrecio					= "${urlTipoPrecio}";
+            var urlTipoTrabajo					= "${urlTipoTrabajo}";
+            var urlTipoVuelta					= "${urlTipoVuelta}";
+            var urlTurnoLaboral					= "${urlTurnoLaboral}";
          // *** Seguridad
-         	var urlVentanaCambioEstatus			= '${urlVentanaCambioEstatus}';
-         	var urlVentanaCambioContrasenia		= '${urlVentanaCambioContrasenia}';
-         	var urlVentanaDescuento				= '${urlVentanaDescuento}';
-            var urlPerfil						= '${urlPerfil}';
-            var urlPerfilXUsuario				= '${urlPerfilXUsuario}';
-            var urlUsuario						= '${urlUsuario}';
+         	var urlVentanaCambioEstatus			= "${urlVentanaCambioEstatus}";
+         	var urlVentanaCambioContrasenia		= "${urlVentanaCambioContrasenia}";
+         	var urlVentanaDescuento				= "${urlVentanaDescuento}";
+            var urlPerfil						= "${urlPerfil}";
+            var urlPerfilXUsuario				= "${urlPerfilXUsuario}";
+            var urlUsuario						= "${urlUsuario}";
          // ***
-            var urlSalir						= '${urlSalir}';
+            var urlSalir						= "${urlSalir}";
        	</script>
 	</security:authorize>
 	<security:authorize access="hasRole('ROLE_ADMIN')">
 		<script type="text/javascript">
 		// *** Produccion
-        	var urlOrdenProduccion 				= '${urlOrdenProduccion}';	
-        	var urlVisualizador					= '${urlVisualizador}';
-        	var urlCruceInformacion				= '${urlCruceInformacion}';
+        	var urlOrdenProduccion 				= "${urlOrdenProduccion}";	
+        	var urlVisualizador					= "${urlVisualizador}";
+        	var urlCruceInformacion				= "${urlCruceInformacion}";
         // *** Reportes
-        	var urlVentanaOrdenProduccion		= '${urlVentanaOrdenProduccion}';
-        	var urlVentanaCotizacion			= '${urlVentanaCotizacion}';
-        	var urlVentanaNotaRemisionFactura	= '${urlVentanaNotaRemisionFactura}';
-        	var urlVentanaColaImpresion			= '${urlVentanaColaImpresion}';
+        	var urlVentanaOrdenProduccion		= "${urlVentanaOrdenProduccion}";
+        	var urlVentanaCotizacion			= "${urlVentanaCotizacion}";
+        	var urlVentanaNotaRemisionFactura	= "${urlVentanaNotaRemisionFactura}";
+        	var urlVentanaColaImpresion			= "${urlVentanaColaImpresion}";
+        	var urlFechaPrensistaMaquina		= "${urlFechaPrensistaMaquina}";
         // *** Catalogos
-            var urlCliente						= '${urlCliente}';
-            var urlCombinacionTintas			= '${urlCombinacionTintas}';
-            var urlCostoExtra					= '${urlCostoExtra}';
-            var urlMaquina						= '${urlMaquina}';
-            var urlMaterialAyuda				= '${urlMaterialAyuda}';
-            var urlPapelSobrante				= '${urlPapelSobrante}';
-            var urlPrensista					= '${urlPrensista}';
-            var urlProcesoDisenio				= '${urlProcesoDisenio}';
-            var urlProcesoExterno				= '${urlProcesoExterno}';
-            var urlProcesoPreprensa				= '${urlProcesoPreprensa}';
-            var urlProcesoTransporte			= '${urlProcesoTransporte}';
-            var urlProveedorExterno				= '${urlProveedorExterno}';
-            var urlProveedorPapel				= '${urlProveedorPapel}';
-            var urlResponsableInsumo			= '${urlResponsableInsumo}';
-            var urlTabuladorPrecios				= '${urlTabuladorPrecios}';
-            var urlTamanioPublicacion			= '${urlTamanioPublicacion}';
-            var urlTintaEspecial				= '${urlTintaEspecial}';
-            var urlTipoBarniz					= '${urlTipoBarniz}';
-            var urlTipoCliente					= '${urlTipoCliente}';
-            var urlTipoComprobanteFiscal		= '${urlTipoComprobanteFiscal}';
-            var urlTipoFormaTrabajo				= '${urlTipoFormaTrabajo}';
-            var urlTipoPapelExtendido			= '${urlTipoPapelExtendido}';
-            var urlTipoPlaca					= '${urlTipoPlaca}';
-            var urlTipoVuelta					= '${urlTipoVuelta}';
-            var urlTurnoLaboral					= '${urlTurnoLaboral}';
+            var urlCliente						= "${urlCliente}";
+            var urlCombinacionTintas			= "${urlCombinacionTintas}";
+            var urlCostoExtra					= "${urlCostoExtra}";
+            var urlMaquina						= "${urlMaquina}";
+            var urlMaterialAyuda				= "${urlMaterialAyuda}";
+            var urlPapelSobrante				= "${urlPapelSobrante}";
+            var urlPrensista					= "${urlPrensista}";
+            var urlProcesoDisenio				= "${urlProcesoDisenio}";
+            var urlProcesoExterno				= "${urlProcesoExterno}";
+            var urlProcesoPreprensa				= "${urlProcesoPreprensa}";
+            var urlProcesoTransporte			= "${urlProcesoTransporte}";
+            var urlProveedorExterno				= "${urlProveedorExterno}";
+            var urlProveedorPapel				= "${urlProveedorPapel}";
+            var urlResponsableInsumo			= "${urlResponsableInsumo}";
+            var urlTabuladorPrecios				= "${urlTabuladorPrecios}";
+            var urlTamanioPublicacion			= "${urlTamanioPublicacion}";
+            var urlTintaEspecial				= "${urlTintaEspecial}";
+            var urlTipoBarniz					= "${urlTipoBarniz}";
+            var urlTipoCliente					= "${urlTipoCliente}";
+            var urlTipoComprobanteFiscal		= "${urlTipoComprobanteFiscal}";
+            var urlTipoFormaTrabajo				= "${urlTipoFormaTrabajo}";
+            var urlTipoPapelExtendido			= "${urlTipoPapelExtendido}";
+            var urlTipoPlaca					= "${urlTipoPlaca}";
+            var urlTipoVuelta					= "${urlTipoVuelta}";
+            var urlTurnoLaboral					= "${urlTurnoLaboral}";
          // *** Seguridad
-         	var urlVentanaCambioEstatus			= '${urlVentanaCambioEstatus}';
-         	var urlVentanaCambioContrasenia		= '${urlVentanaCambioContrasenia}';
+         	var urlVentanaCambioEstatus			= "${urlVentanaCambioEstatus}";
+         	var urlVentanaCambioContrasenia		= "${urlVentanaCambioContrasenia}";
          // ***
-            var urlSalir						= '${urlSalir}';
+            var urlSalir						= "${urlSalir}";
        	</script>
 	</security:authorize>
 	<security:authorize access="hasRole('ROLE_COTIZADOR')">
 		<script type="text/javascript">
 		// *** Produccion
-        	var urlOrdenProduccion 				= '${urlOrdenProduccion}';	
-        	var urlVisualizador					= '${urlVisualizador}';
+        	var urlOrdenProduccion 				= "${urlOrdenProduccion}";	
+        	var urlVisualizador					= "${urlVisualizador}";
         // *** Reportes
-        	var urlVentanaOrdenProduccion		= '${urlVentanaOrdenProduccion}';
-        	var urlVentanaCotizacion			= '${urlVentanaCotizacion}';
-        	var urlVentanaNotaRemisionFactura	= '${urlVentanaNotaRemisionFactura}';
+        	var urlVentanaOrdenProduccion		= "${urlVentanaOrdenProduccion}";
+        	var urlVentanaCotizacion			= "${urlVentanaCotizacion}";
+        	var urlVentanaNotaRemisionFactura	= "${urlVentanaNotaRemisionFactura}";
         // *** Catalogos
-            var urlCliente						= '${urlCliente}';
-            var urlTipoPapelExtendido			= '${urlTipoPapelExtendido}';
+            var urlCliente						= "${urlCliente}";
+            var urlTipoPapelExtendido			= "${urlTipoPapelExtendido}";
          // *** Seguridad
-         	var urlVentanaCambioContrasenia		= '${urlVentanaCambioContrasenia}';
+         	var urlVentanaCambioContrasenia		= "${urlVentanaCambioContrasenia}";
          // ***
-            var urlSalir						= '${urlSalir}';
+            var urlSalir						= "${urlSalir}";
        	</script>
 	</security:authorize>
         <script type="text/javascript">
@@ -271,6 +274,18 @@
                     		player:'iframe',
                     		width:600,
                     		height:280,
+                    		options:{
+                    			modal:true,
+                    			overlayOpacity:0.75
+                    		}
+                    	});
+                    	break;
+                    case 'fecha_prensista_maquina':
+                    	Shadowbox.open({
+                    		content:urlFechaPrensistaMaquina,
+                    		player:'iframe',
+                    		width:1278,
+                    		height:804,
                     		options:{
                     			modal:true,
                     			overlayOpacity:0.75
@@ -565,6 +580,9 @@
                                 			<div id="div_opcion_reporte_cola_impresion" class="boton_dinamico" onclick="menu('ventana_reporte_cola_impresion');">
                                					<span class="texto_boton">Cola Impresi&oacute;n</span>
                                 			</div>
+                                			<div id="div_opcion_fecha_prensista_maquina" class="boton_dinamico" onclick="menu('fecha_prensista_maquina');">
+                               					<span class="texto_boton">Fecha - Prensista - M&aacute;quina</span>
+                                			</div>
                                 		</div>
                                 		<div id="div_pestania_catalogos" style="display:none; background-color: transparent;">
 	                                		<div class="titulo_menu">
@@ -709,6 +727,9 @@
                                 			</div>
                                 			<div id="div_opcion_reporte_cola_impresion" class="boton_dinamico" onclick="menu('ventana_reporte_cola_impresion');">
                                					<span class="texto_boton">Cola Impresi&oacute;n</span>
+                                			</div>
+                                			<div id="div_opcion_fecha_prensista_maquina" class="boton_dinamico" onclick="menu('fecha_prensista_maquina');">
+                               					<span class="texto_boton">Fecha - Prensista - M&aacute;quina</span>
                                 			</div>
                                 		</div>
                                 		<div id="div_pestania_catalogos" style="display:none; background-color: transparent;">

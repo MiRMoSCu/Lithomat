@@ -261,7 +261,7 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 		query.append(numeroRegistrosPorPagina);
 		query.append(";");
 		
-		System.out.println(query.toString());
+		//System.out.println(query.toString());
 		
 		List<TipoPapelExtendido> lista = tipoPapelExtendidoDAO.listaPorRango( query.toString() );
 		

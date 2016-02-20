@@ -435,8 +435,8 @@ public class TipoPapelExtendidoController {
 				    if (item.isFormField()) {
 				    	String name	 = item.getFieldName();
 				        String value = item.getString();
-				        System.out.println("name:" + name);
-				        System.out.println("value:" + value);
+				        //System.out.println("name:" + name);
+				        //System.out.println("value:" + value);
 				    } else {
 				    	String fieldName 	= item.getFieldName();
 				        String fileName 	= item.getName();
@@ -444,11 +444,11 @@ public class TipoPapelExtendidoController {
 				        boolean isInMemory 	= item.isInMemory();
 				        long sizeInBytes 	= item.getSize();
 				        
-				        System.out.println("fieldName:" 	+ fieldName);
-				        System.out.println("fileName:" 		+ fileName);
-				        System.out.println("contentType:" 	+ contentType);
-				        System.out.println("isInMemory:" 	+ isInMemory);
-				        System.out.println("sizeInBytes:" 	+ sizeInBytes);
+				        //System.out.println("fieldName:" 	+ fieldName);
+				        //System.out.println("fileName:" 		+ fileName);
+				        //System.out.println("contentType:" 	+ contentType);
+				        //System.out.println("isInMemory:" 	+ isInMemory);
+				        //System.out.println("sizeInBytes:" 	+ sizeInBytes);
 				        
 				        if( contentType.equals("application/vnd.ms-excel") ) {
 				        	boolean writeToFile = true;

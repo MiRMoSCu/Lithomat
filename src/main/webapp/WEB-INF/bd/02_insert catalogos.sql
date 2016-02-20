@@ -95,7 +95,13 @@ INSERT INTO material_ayuda (id_material_ayuda, nombre, descripcion, activo) VALU
 
 
 
-INSERT INTO prensista (id_prensista, nombre, ap_paterno, ap_materno, activo) VALUES (1,'Ruben','Hernández','Lopez',true);
+INSERT INTO prensista (id_prensista, nombre, ap_paterno, ap_materno, activo) VALUES (1,'Angel','Rodríguez','Morales',true);
+INSERT INTO prensista (id_prensista, nombre, ap_paterno, ap_materno, activo) VALUES (2,'Antonio','Jimenez','Martínez',true);
+INSERT INTO prensista (id_prensista, nombre, ap_paterno, ap_materno, activo) VALUES (3,'Gerardo','Cortes','Duran',true);
+INSERT INTO prensista (id_prensista, nombre, ap_paterno, ap_materno, activo) VALUES (4,'Lázaro','Muñoz','García',true);
+INSERT INTO prensista (id_prensista, nombre, ap_paterno, ap_materno, activo) VALUES (5,'Mario','Arteaga','Lucas',true);
+INSERT INTO prensista (id_prensista, nombre, ap_paterno, ap_materno, activo) VALUES (6,'Javier','Ramírez',' ',true);
+INSERT INTO prensista (id_prensista, nombre, ap_paterno, ap_materno, activo) VALUES (7,'Jorge','Ruíz','Altamirano',true);
 
 
 

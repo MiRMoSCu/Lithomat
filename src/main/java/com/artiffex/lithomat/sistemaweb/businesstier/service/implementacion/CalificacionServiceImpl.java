@@ -64,7 +64,7 @@ import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CalificacionTrabajo
 
 @Service("resumenCalificacionService")
 public class CalificacionServiceImpl implements CalificacionService {
-
+	
 	// DAO
 	@Resource
 	private CalificacionOrdenProduccionDAO calificacionOrdenProduccionDAO;
@@ -392,7 +392,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 	/********* ACTUALIZACION *********/
 	
 	public void actualizaOrdenProduccion(int idOrdenProduccion) {
-		System.out.println("CalificacionService.actualizaOrdenProduccion");
+		//System.out.println("CalificacionService.actualizaOrdenProduccion");
 		
 		// UNICAMENTE se ha modificado datos en la tabla orden_produccion.
 		// no es necesario hacer el calculo de toda la informacion en las tablas:
@@ -843,7 +843,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 		CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionOrdenProduccionDAO.buscaPorOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
 		
 		// modificacion de informacion
-		System.out.println(porcentajeDescuento);
+		//System.out.println(porcentajeDescuento);
 		calificacionOrdenProduccion.setPorcentajeDescuento(porcentajeDescuento);
 			// calculo de precio_cliente_con_descuento
 			float precioCliente = (float)calificacionOrdenProduccion.getPrecioCliente();
@@ -858,7 +858,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 			float porcentajeTipoComprobante = ordenProduccion.getTipoComprobanteFiscal().getPrecio() / ordenProduccion.getTipoComprobanteFiscal().getTipoPrecio().getFactorDivisor();
 			float porcentajeComprobante = precioClienteConDescuento * (1 + porcentajeTipoComprobante);
 			float precioNeto = porcentajeTipoComprobante == 0 ? precioClienteConDescuento : porcentajeComprobante;
-			System.out.println(precioNeto);
+			//System.out.println(precioNeto);
 		calificacionOrdenProduccion.setPrecioNeto(precioNeto);
 		
 		calificacionOrdenProduccionDAO.modifica(calificacionOrdenProduccion); // UPDATE

@@ -114,9 +114,9 @@ public class PerfilXUsuarioController {
 		log.info("/modifica_perfil_x_usuario");
 		
 		PerfilXUsuario perfilXUsuario = perfilXUsuarioService.buscaPerfilXUsuario(idPerfilXUsuario);
-		System.out.println("idPerfilXUsuario:" + idPerfilXUsuario);
-		System.out.println("idUsuario:" + idUsuario);
-		System.out.println("idPerfil:" + idPerfil);
+		//System.out.println("idPerfilXUsuario:" + idPerfilXUsuario);
+		//System.out.println("idUsuario:" + idUsuario);
+		//System.out.println("idPerfil:" + idPerfil);
 		perfilXUsuario.getPerfil().setIdPerfil(idPerfil);
 		
 		perfilXUsuarioService.modificaPerfilXUsuario(perfilXUsuario);

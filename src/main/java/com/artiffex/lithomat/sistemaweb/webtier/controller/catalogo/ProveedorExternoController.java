@@ -32,7 +32,7 @@ public class ProveedorExternoController {
 	public String listaProveedorExterno( Locale locale, Model model ) throws IOException {
 		log.info("/lista_proveedor_externo");
 
-		System.out.println("lista proveedor externo");
+		//System.out.println("lista proveedor externo");
 		List<ProveedorExterno> listaProveedorExterno = proveedorExternoService.listaProveedorExterno();
 		model.addAttribute("listaProveedorExterno", listaProveedorExterno);
 

@@ -136,7 +136,7 @@
             var strJsonListaMaterialAyuda       = '${jsonListaMaterialAyuda}';
         </script>
     </head>
-    <body onload="javascript:inicializa();">
+    <body onload="inicializa()">
     	<fmt:setLocale value="en_US" scope="session" />
 		<c:set var="estatus_cotizacion" value="1"/>
 		<c:set var="estatus_finalizado" value="10"/>
@@ -1623,7 +1623,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <c:if test="${historialEstatus.estatusOrden.idEstatusOrden != estatus_finalizado}">
+                                        <c:if test="${historialEstatus.estatusOrden.idEstatusOrden == estatus_cotizacion}">
                                         	<div style="width:800px; margin-left: auto; margin-right: auto; overflow-x: scroll;">
                                         		<div class="linea" style="padding-top: 5px;">
                                         			<div class="casilla" style="text-align: right;">
@@ -1641,6 +1641,7 @@
                                         		</div>
                                         	</div>
                                         </c:if>
+                                        <br/>
                                         <div style="width: 100%;">
                                         	<div class="linea">
                                         		<div class="casilla">

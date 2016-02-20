@@ -142,40 +142,16 @@ function genera_tabla_dom( jsonListaGridPliegos ) {
     	//console.log("no entro");
     	tr = document.createElement("tr");
         tr.setAttribute("class","l1");
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        
+        for (var i=0; i<8; i++) {
+        	td = document.createElement("td");
+            td.innerHTML = "&nbsp;";
+            tr.appendChild( td );
+        }
         table.appendChild( tr );
     }
     document.getElementById("div_tabla_lista_registros").innerHTML = table.outerHTML;
     delete td;
-    delete tr;
+    delete tr; 
     delete table;
     delete cont;
     delete id;
@@ -229,7 +205,6 @@ function carga_datos() {
     objLi.setAttribute("class","activo bold");
     objLi.innerHTML = "Primero";
     objUl.appendChild( objLi );
-    delete objLi;
     
     // crea boton anterior
     objLi = document.createElement("li");
@@ -237,7 +212,6 @@ function carga_datos() {
     objLi.setAttribute("class","activo bold");
     objLi.innerHTML = "Anterior";
     objUl.appendChild( objLi );
-    delete objLi;
     
     // crea botones
     for( var i = 0; i < tamanio_arreglo; i++ ) {
@@ -251,7 +225,6 @@ function carga_datos() {
             objLi.setAttribute("class","activo");
         }
         objUl.appendChild( objLi );
-        delete objLi;
     }
     
     // crea boton siguiente
@@ -260,7 +233,6 @@ function carga_datos() {
     objLi.setAttribute("class","activo bold");
     objLi.innerHTML = "Siguiente";
     objUl.appendChild( objLi );
-    delete objLi;
     
     // crea boton ultimo
     objLi = document.createElement("li");
@@ -268,13 +240,13 @@ function carga_datos() {
     objLi.setAttribute("class","activo bold");
     objLi.innerHTML = "Ultimo";
     objUl.appendChild( objLi );
-    delete objLi;
     
     // agrega ul a div
     objDiv.appendChild( objUl );
     
     // elimina objetos
-    delete objUl;
+    delete objLi;
+    delete objUl; 
     delete objDiv;
 }
 
@@ -306,10 +278,7 @@ function nueva_busqueda() {
 				cell 			= row.insertCell(i);
 				cell.innerHTML 	= "&nbsp";
 			}
-			delete i;
-			delete row;
-			delete tabla_fecha_prensista_maquina;
-			delete contador_registros_tabla;
+			delete i, row, tabla_fecha_prensista_maquina, contador_registros_tabla;
 		}
 		// inicializa paginador
 		numero_pagina = 1;

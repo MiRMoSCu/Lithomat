@@ -125,7 +125,7 @@ function cancelaModificarTransporteDetalle() {
 	// desactiva bandera
 	modificaTransporteDetalle = false;
 	// elimina estilos
-	document.getElementsByTagName("style")[0].remove();
+	$($("style").get(0)).remove();
 	//limpia campos
 	limpiaCamposFormTransporteDetalle();
 	// desactiva botones

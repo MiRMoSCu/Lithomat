@@ -113,7 +113,6 @@ public class OrdenProduccionDaoImpl implements OrdenProduccionDAO {
 			log.error(e.getMessage());
 			sesion.getTransaction().rollback();
 		}
-		System.out.println("\n\n\n");
 		return contador;
 	}
 

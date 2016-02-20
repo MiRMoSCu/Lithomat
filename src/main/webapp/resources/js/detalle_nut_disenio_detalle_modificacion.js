@@ -131,7 +131,7 @@ function cancelaModificarDisenioDetalle() {
 	// desactiva bandera
 	modificaDisenioDetalle = false;
 	// elimina estilos
-	document.getElementsByTagName("style")[0].remove();
+	$($("style").get(0)).remove();
 	//limpia campos
 	limpiaCamposFormDisenioDetalle();
 	// desactiva botones

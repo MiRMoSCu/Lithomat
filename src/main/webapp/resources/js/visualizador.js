@@ -101,26 +101,12 @@ function genera_tabla_dom( jsonOrdenesProduccion ) {
         });
     } else {
     	tr = document.createElement("tr");
-        
-        tr.setAttribute("class","l1");
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
-        td = document.createElement("td");
-        td.innerHTML = "&nbsp;";
-        tr.appendChild( td );
+    	tr.setAttribute("class","l1");
+    	for (var i=0; i<6; i++) {
+    		td = document.createElement("td");
+            td.innerHTML = "&nbsp;";
+            tr.appendChild( td );
+    	}
         table.appendChild( tr );
     }
     //console.log( table );

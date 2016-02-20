@@ -130,7 +130,7 @@ function cancelaModificarMaterialAyuda() {
 	// desactiva bandera
 	modificaMaterialAyuda = false;
 	// elimina estilos
-	document.getElementsByTagName("style")[0].remove();
+	$($("style").get(0)).remove();
 	//limpia campos
 	limpiaCamposFormMaterialAyuda();
 	// desactiva botones

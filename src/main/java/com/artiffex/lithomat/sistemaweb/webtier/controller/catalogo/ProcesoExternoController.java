@@ -111,7 +111,7 @@ public class ProcesoExternoController {
 		) throws IOException {
 		log.info("/modifica_proceso_externo");
 
-		System.out.println("entro a modifica_proceso_externo");
+		//System.out.println("entro a modifica_proceso_externo");
 
 		ProcesoExterno procesoExterno = procesoExternoService.buscaProcesoExterno(idProcesoExterno);
 		procesoExterno.getProveedorExterno().setIdProveedorExterno(idProveedorExterno);

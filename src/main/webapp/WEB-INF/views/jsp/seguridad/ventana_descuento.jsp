@@ -61,13 +61,16 @@
 	                        								class="input"
 	                        								name="nut"
 	                        								maxlength="10"
-	                        								onkeydown="revisaNumero(false, this.value, event, null, null)"
+	                        								onkeydown="revisaNumero(false, this.value, event, 'buscarNut', null)"
 	                        								value=""/>
 	                        					</td>
 	                        				</tr>
 	                        			</table>
 	                        		</div>
 	                        	</div>
+	                        </div>
+	                        <div style="display: none;">
+	                        	<input type="text" value="" name="bug"/>
 	                        </div>
 	                        <div class="linea">
 	                        	<div class="casilla" style="text-align:right;">
@@ -246,9 +249,8 @@
 	                        							<input 	type="text"
 	                        									class="input"
 	                        									name="porcentaje_descuento_modificado_porcentaje"
-	                        									onkeydown="revisaNumero(false, this.value, event, null, null)" 
+	                        									onkeydown="revisaNumero(false, this.value, event, 'calculaDescuento', null)" 
 	                        									title="Numeros enteros unicamente"
-	                        									onblur="calculaDescuento()"
 	                        									readonly/>
 	                        						</td>
 	                        					</tr>

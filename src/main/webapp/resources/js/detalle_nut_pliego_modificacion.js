@@ -139,7 +139,7 @@ function cancelaModificarPliego() {
 	// desactiva bandera
 	modificaPliego = false;
 	// elimina estilos
-	document.getElementsByTagName("style")[0].remove();
+	$($("style").get(0)).remove();
 	// limpia campos
 	limpiaCamposFormPliego();
 	// desactiva botones

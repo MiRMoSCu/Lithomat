@@ -1509,7 +1509,7 @@
                                 <div class="linea">
                                     <div class="casilla" style="text-align:right;">
                                         <img id="imgBtnLimpiaFormulariosActivo"  alt="" style="cursor:pointer;" onclick="limpiaCampos();" src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
-                                        <span style="cursor:pointer;" onclick="condicionesProduccion()">Impresi&oacute;n</span>
+                                        <span style="cursor:pointer;" onclick="condicionesProduccion()">&nbsp;Impresi&oacute;n&nbsp;</span>
                                         <!-- <span style="cursor:pointer;" onclick="alert('email')">&nbsp;Email&nbsp;</span> -->
                                     </div>
                                 </div>

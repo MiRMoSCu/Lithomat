@@ -45,7 +45,7 @@
 	                        								class="input"
 	                        								name="nut"
 	                        								maxlength="10"
-	                        								onkeydown="revisaNumero(false, this.value, event, 'ajaxBuscaCliente', null)"
+	                        								onkeydown="revisaNumero(false, this.value, event, 'enviarFormulario', null)"
 	                        								value=""/>
 	                        					</td>
 	                        				</tr>
@@ -70,6 +70,9 @@
 	                        			</table>
 	                        		</div>
 	                        	</div>
+	                        </div>
+	                        <div style="display: none;">
+	                        	<input type="text" value="" name="bug"/>
 	                        </div>
 	                        <div class="linea">
 	                        	<div class="casilla" style="text-align:right;">

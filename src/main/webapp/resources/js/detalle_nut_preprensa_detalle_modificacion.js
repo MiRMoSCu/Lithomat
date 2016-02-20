@@ -125,7 +125,7 @@ function cancelaModificarPreprensaDetalle() {
 	// desactiva bandera
 	modificaPreprensaDetalle = false;
 	// elimina estilos
-	document.getElementsByTagName("style")[0].remove();
+	$($("style").get(0)).remove();
 	//limpia campos
 	limpiaCamposFormPreprensaDetalle();
 	// desactiva botones

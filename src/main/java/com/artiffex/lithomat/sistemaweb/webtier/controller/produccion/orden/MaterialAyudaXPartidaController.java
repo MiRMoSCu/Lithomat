@@ -73,8 +73,6 @@ public class MaterialAyudaXPartidaController {
 		) {
 		log.info("/agrega_material_ayuda_x_partida_olvidado");
 		
-		System.out.println("\nentro a agregaMaterialAyudaOlvidado");
-		
 		MaterialAyudaXPartida materialAyudaXPartida = new MaterialAyudaXPartida();
 			Partida partida = new Partida();
 			partida.setIdPartida(idPartida);

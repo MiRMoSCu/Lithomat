@@ -56,7 +56,7 @@ function aceptaModificarCostoExtraDetalle() {
 	var correcto = true;
 	
 	if( document.costo_extra_detalle.cantidad.value == ""
-		|| isNaN(document.costo_extra_detalle.cantidad)) {
+		|| isNaN(document.costo_extra_detalle.cantidad.value)) {
 		correcto = false;
 		alert("Favor de indicar la cantidad");
 		document.costo_extra_detalle.cantidad.focus();
@@ -137,7 +137,7 @@ function cancelaModificarCostoExtraDetalle() {
 	// desactiva bandera
 	modificaCostoExtraDetalle = false;
 	// elimina estilos
-	document.getElementsByTagName("style")[0].remove();
+	$($("style").get(0)).remove();
 	// limpia campos
 	limpiaCamposFormCostoExtraDetalle();
 	// desactiva botones
