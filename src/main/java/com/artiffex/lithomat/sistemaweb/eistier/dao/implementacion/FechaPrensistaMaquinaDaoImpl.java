@@ -63,6 +63,23 @@ public class FechaPrensistaMaquinaDaoImpl implements FechaPrensistaMaquinaDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public FechaPrensistaMaquina buscaFechaPrensistaMaquinaPorPliego(int idPliego) {
+		FechaPrensistaMaquina fechaPrensistaMaquina = null;
+		try {
+			sesion = HibernateUtil.getInstance().getCurrentSession();
+			sesion.beginTransaction();
+			Query query = sesion.createQuery("from FechaPrensistaMaquina fpm where fpm.pliego.idPliego = :idPliego");
+			query.setParameter("idPliego", idPliego);
+			fechaPrensistaMaquina = (FechaPrensistaMaquina)query.uniqueResult();
+			sesion.getTransaction().commit();
+			query = null;
+		} catch ( Exception e ) {
+			log.error(e.getMessage());
+			sesion.getTransaction().rollback();
+		}
+		return fechaPrensistaMaquina;
+	}
 
 	public int numeroRegistrosFechaPrensistaMaquina(String strQuery) {
 		int numeroRegistros = 0;

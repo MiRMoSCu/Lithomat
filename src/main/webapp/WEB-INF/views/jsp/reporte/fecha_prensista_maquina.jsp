@@ -69,7 +69,7 @@
 													<font color="gray">&nbsp;LIMPIAR&nbsp;</font>
 												</span>
 												<span style="cursor:pointer;" onclick="generaExcel()">
-													<font color="gray">&nbsp;BUSCAR&nbsp;</font>
+													<font color="blue">&nbsp;ACEPTAR&nbsp;</font>
 												</span>
 											</div>
 										</div>
@@ -134,6 +134,7 @@
 													<th>M&aacute;quina</th>
 													<th>F.Impresi&oacute;n</th>
 													<th>Ayudante</th>
+													<th>H.Requeridas</th>
 													<th>H.Buenas</th>
 													<th>H.Malas</th>
 													<th>H.Adicionales</th>
@@ -144,6 +145,7 @@
 													<th>VueltaK.Tinta</th>
 												</tr>
 												<tr class="l1">
+													<td>&nbsp;</td>
 													<td>&nbsp;</td>
 													<td>&nbsp;</td>
 													<td>&nbsp;</td>

@@ -2,8 +2,8 @@ package com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz;
 
 import java.util.List;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.FechaPrensistaMaquinaDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.FechaPrensistaMaquinaDTOGrid;
-import com.artiffex.lithomat.sistemaweb.businesstier.entity.FechaPrensistaMaquina;
 
 public interface FechaPrensistaMaquinaService {
 	
@@ -15,7 +15,7 @@ public interface FechaPrensistaMaquinaService {
 	
 	public void eliminaFechaPrensistaMaquinaPorNut(String nut);
 	
-	public List<FechaPrensistaMaquina> listaFechaPrensistaMaquina();
+	public List<FechaPrensistaMaquinaDTO> listaFechaPrensistaMaquinaPorNut(String nut);
 	
 	public int obtieneNumeroFechaPrensistaMaquinaPorParametros(boolean busquedaPorNut, String nut);
 	

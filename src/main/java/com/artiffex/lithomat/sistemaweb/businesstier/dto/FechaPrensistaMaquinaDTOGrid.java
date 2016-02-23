@@ -10,9 +10,11 @@ public class FechaPrensistaMaquinaDTOGrid implements Serializable {
 	private String nombreOrdenProduccion;
 	private String nombrePartida;
 	private String descripcionTipoTrabajoDetalle;
-	private Integer idPliego;
-	private Integer noPliego;
-	private Integer hojasRequeridas;
+	private int idPliego;
+	private int noPliego;
+	private int hojasRequeridas;
+	private int hojasSobrantes;
+	private int hojasTotales;
 	
 	
 	public String getNut() {
@@ -40,22 +42,34 @@ public class FechaPrensistaMaquinaDTOGrid implements Serializable {
 			String descripcionTipoTrabajoDetalle) {
 		this.descripcionTipoTrabajoDetalle = descripcionTipoTrabajoDetalle;
 	}
-	public Integer getIdPliego() {
+	public int getIdPliego() {
 		return idPliego;
 	}
-	public void setIdPliego(Integer idPliego) {
+	public void setIdPliego(int idPliego) {
 		this.idPliego = idPliego;
 	}
-	public Integer getNoPliego() {
+	public int getNoPliego() {
 		return noPliego;
 	}
-	public void setNoPliego(Integer noPliego) {
+	public void setNoPliego(int noPliego) {
 		this.noPliego = noPliego;
 	}
-	public Integer getHojasRequeridas() {
+	public int getHojasRequeridas() {
 		return hojasRequeridas;
 	}
-	public void setHojasRequeridas(Integer hojasRequeridas) {
+	public void setHojasRequeridas(int hojasRequeridas) {
 		this.hojasRequeridas = hojasRequeridas;
+	}
+	public int getHojasSobrantes() {
+		return hojasSobrantes;
+	}
+	public void setHojasSobrantes(int hojasSobrantes) {
+		this.hojasSobrantes = hojasSobrantes;
+	}
+	public int getHojasTotales() {
+		return hojasTotales;
+	}
+	public void setHojasTotales(int hojasTotales) {
+		this.hojasTotales = hojasTotales;
 	}
 }

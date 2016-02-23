@@ -1,5 +1,5 @@
 
-function setCampos(idPliego, contador, nut, nombreOrdenProduccion, nombrePartida, descripcionTipoTrabajoDetalle, noPliego, hojasRequeridas) {
+function setCampos(idPliego, contador, nut, nombreOrdenProduccion, nombrePartida, descripcionTipoTrabajoDetalle, noPliego, hojasRequeridas, hojasSobrantes, hojasTotales) {
 	if (document.getElementById("pliego:" + idPliego).className != "agregado") {
 		document.fecha_prensista_maquina.id_pliego.value 	= idPliego;
 		document.registro.contador.value 					= contador;
@@ -9,6 +9,8 @@ function setCampos(idPliego, contador, nut, nombreOrdenProduccion, nombrePartida
 		document.registro.nombre_tipo_trabajo_detalle.value = descripcionTipoTrabajoDetalle;
 		document.registro.numero_pliego.value 				= noPliego;
 		document.registro.hojas_requeridas.value 			= hojasRequeridas;
+		document.registro.hojas_sobrantes.value 			= hojasSobrantes;
+		document.registro.hojas_totales.value 				= hojasTotales;
 	} else {
 		document.fecha_prensista_maquina.id_pliego.value 	= "";
 		document.registro.contador.value 					= "";
@@ -18,6 +20,8 @@ function setCampos(idPliego, contador, nut, nombreOrdenProduccion, nombrePartida
 		document.registro.nombre_tipo_trabajo_detalle.value = "";
 		document.registro.numero_pliego.value 				= "";
 		document.registro.hojas_requeridas.value 			= "";
+		document.registro.hojas_sobrantes.value 			= "";
+		document.registro.hojas_totales.value 				= "";
 	}
 }
 
@@ -30,6 +34,8 @@ function limpia_form_fecha_prensista_maquina() {
 	document.registro.nombre_tipo_trabajo_detalle.value = "";
 	document.registro.numero_pliego.value 				= "";
 	document.registro.hojas_requeridas.value 			= "";
+	document.registro.hojas_sobrantes.value 			= "";
+	document.registro.hojas_totales.value 				= "";
 	
 	// limpia form fecha_prensista_maquina
 	document.fecha_prensista_maquina.id_pliego.value 						= 0;
@@ -92,6 +98,16 @@ function genera_tabla_dom( jsonListaGridPliegos ) {
     td.innerHTML = "H. Req";
     //td.setAttribute("width","15%");
     tr.appendChild( td );
+    
+    td = document.createElement("th");
+    td.innerHTML = "H. Sob";
+    //td.setAttribute("width","15%");
+    tr.appendChild( td );
+    
+    td = document.createElement("th");
+    td.innerHTML = "H. Tot";
+    //td.setAttribute("width","15%");
+    tr.appendChild( td );
         
     table.appendChild( tr );
     
@@ -105,7 +121,7 @@ function genera_tabla_dom( jsonListaGridPliegos ) {
             tr = document.createElement("tr");
             
             tr.setAttribute("id","pliego:" + item.idPliego);
-            tr.setAttribute("onclick","setCampos('" + item.idPliego + "','" + id + "','" + item.nut + "','" + item.nombreOrdenProduccion + "','" + item.nombrePartida + "','" + item.descripcionTipoTrabajoDetalle + "','" + item.noPliego + "','" + item.hojasRequeridas + "');")
+            tr.setAttribute("onclick","setCampos('" + item.idPliego + "','" + id + "','" + item.nut + "','" + item.nombreOrdenProduccion + "','" + item.nombrePartida + "','" + item.descripcionTipoTrabajoDetalle + "','" + item.noPliego + "','" + item.hojasRequeridas + "','" + item.hojasSobrantes + "','" + item.hojasTotales + "');")
             tr.setAttribute("class",document.getElementById("fpm:"+item.idPliego)?"agregado":i%2==0?"l1":"l2");
             
             td = document.createElement("td");
@@ -136,13 +152,21 @@ function genera_tabla_dom( jsonListaGridPliegos ) {
             td.innerHTML = item.hojasRequeridas;
             tr.appendChild( td );
             
+            td = document.createElement("td");
+            td.innerHTML = item.hojasSobrantes;
+            tr.appendChild( td );
+            
+            td = document.createElement("td");
+            td.innerHTML = item.hojasTotales;
+            tr.appendChild( td );
+            
             table.appendChild( tr );
         });
     } else {
     	//console.log("no entro");
     	tr = document.createElement("tr");
         tr.setAttribute("class","l1");
-        for (var i=0; i<8; i++) {
+        for (var i=0; i<9; i++) {
         	td = document.createElement("td");
             td.innerHTML = "&nbsp;";
             tr.appendChild( td );

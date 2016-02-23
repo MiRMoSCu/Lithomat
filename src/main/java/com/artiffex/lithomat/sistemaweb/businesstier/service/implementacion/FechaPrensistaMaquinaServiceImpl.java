@@ -1,6 +1,7 @@
 package com.artiffex.lithomat.sistemaweb.businesstier.service.implementacion;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
@@ -12,6 +13,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.FechaPrensistaMaquinaDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.FechaPrensistaMaquinaDTOGrid;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.FechaPrensistaMaquina;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Maquina;
@@ -78,8 +80,8 @@ public class FechaPrensistaMaquinaServiceImpl implements FechaPrensistaMaquinaSe
 				fpm.setHojasAdicionales( Integer.valueOf( jsonObject2.get("hojas_adicionales").toString() ) );
 				fpm.setCambioPlacas( Integer.valueOf( jsonObject2.get("cambio_placas").toString() ) );
 				fpm.setLaminasExtra( Integer.valueOf( jsonObject2.get("laminas_extra").toString() ) );
-				fpm.setFrenteKilosTinta( Integer.valueOf( jsonObject2.get("frente_kilos_tinta").toString() ) );
-				fpm.setVueltaKilosTinta( Integer.valueOf( jsonObject2.get("vuelta_kilos_tinta").toString() ) );
+				fpm.setFrenteKilosTinta( Float.valueOf( jsonObject2.get("frente_kilos_tinta").toString() ) );
+				fpm.setVueltaKilosTinta( Float.valueOf( jsonObject2.get("vuelta_kilos_tinta").toString() ) );
 				fpm.setUsuario( usuario );
 					Timestamp fechaGeneracion = new Timestamp(Calendar.getInstance().getTimeInMillis());
 				fpm.setFechaGeneracion( fechaGeneracion );
@@ -129,8 +131,46 @@ public class FechaPrensistaMaquinaServiceImpl implements FechaPrensistaMaquinaSe
 		ordenProduccion = null;
 	}
 
-	public List<FechaPrensistaMaquina> listaFechaPrensistaMaquina() {
-		return fechaPrensistaMaquinaDAO.lista();
+	public List<FechaPrensistaMaquinaDTO> listaFechaPrensistaMaquinaPorNut(String nut) {
+		List<FechaPrensistaMaquinaDTO> lista = new ArrayList<FechaPrensistaMaquinaDTO>();
+		OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
+		List<Partida> listaPartida = partidaService.listaPartidaPorOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
+		for (Partida partida : listaPartida) {
+			List<TipoTrabajoDetalle> listaTipoTrabajoDetalle =tipoTrabajoDetalleService.listaTipoTrabajoDetallePorPartida(partida.getIdPartida());
+			for (TipoTrabajoDetalle tipoTrabajoDetalle : listaTipoTrabajoDetalle) {
+				List<Pliego> listaPliego = pliegoService.listaPliegoPorTipoTrabajoDetalle(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());
+				for (Pliego pliego : listaPliego) {
+					FechaPrensistaMaquina fpm = fechaPrensistaMaquinaDAO.buscaFechaPrensistaMaquinaPorPliego(pliego.getIdPliego());
+					if ( fpm != null ) {
+						FechaPrensistaMaquinaDTO fpmDTO = new FechaPrensistaMaquinaDTO();
+						fpmDTO.setPrensista( fpm.getPrensista().getNombre() + " " + fpm.getPrensista().getApPaterno() + " " + fpm.getPrensista().getApMaterno() );
+						fpmDTO.setTurnoLaboral( fpm.getTurnoLaboral().getDescripcion() );
+						fpmDTO.setMaquina( fpm.getMaquina().getNombre() );
+						fpmDTO.setFechaImpresion( fpm.getFechaImpresion() );
+						fpmDTO.setPrensistaAyudante( fpm.getPrensistaAyudante().getNombre() + " " + fpm.getPrensistaAyudante().getApPaterno() + " " + fpm.getPrensistaAyudante().getApMaterno() );
+						fpmDTO.setHojasRequeridas( pliego.getHojasRequeridas() );
+						fpmDTO.setHojasBuenas( fpm.getHojasBuenas() );
+						fpmDTO.setHojasMalas( fpm.getHojasMalas() );
+						fpmDTO.setHojasAdicionales( fpm.getHojasAdicionales() );
+						fpmDTO.setCambioPlacas( fpm.getCambioPlacas() );
+						fpmDTO.setLaminasExtra( fpm.getLaminasExtra() );
+						fpmDTO.setFrenteKilosTinta( fpm.getFrenteKilosTinta() );
+						fpmDTO.setVueltaKilosTinta( fpm.getVueltaKilosTinta() );
+						lista.add(fpmDTO);
+						fpmDTO = null;
+						fpm = null;
+					}
+					pliego = null;
+				}
+				listaPliego = null;
+				tipoTrabajoDetalle = null;
+			}
+			listaTipoTrabajoDetalle = null;
+			partida = null;
+		}
+		listaPartida = null;
+		ordenProduccion = null;
+		return lista;
 	}
 
 	public int obtieneNumeroFechaPrensistaMaquinaPorParametros(boolean busquedaPorNut, String nut) {
@@ -202,7 +242,9 @@ public class FechaPrensistaMaquinaServiceImpl implements FechaPrensistaMaquinaSe
 		query.append("    ttd.descripcion descripcionTipoTrabajoDetalle, ");
 		query.append("    p.id_pliego idPliego, ");
 		query.append("    p.numero_pliego noPliego, ");
-		query.append("    p.hojas_requeridas hojasRequeridas ");
+		query.append("    p.hojas_requeridas hojasRequeridas, ");
+		query.append("    p.hojas_sobrantes hojasSobrantes, ");
+		query.append("    p.hojas_totales hojasTotales ");
 		query.append("FROM ");
 		query.append("    orden_produccion op_dos, ");
 		query.append("    partida par, ");

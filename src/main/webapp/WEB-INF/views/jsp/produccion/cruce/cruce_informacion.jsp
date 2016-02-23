@@ -151,13 +151,15 @@
                     							 	<th>Nom. Impr.</th>
                     							 	<th>No. Pgo</th>
                     							 	<th>H. Req</th>
+                    							 	<th>H. Sob</th>
+                    							 	<th>H. Tot</th>
                     							</tr>
 	                    					<c:choose>
 	                    						<c:when test="${fn:length(listaGridPliegos) gt 0}">
 	                    							<c:forEach var="pliego" items="${listaGridPliegos}" varStatus="i">
 		                   								<tr id="pliego:${pliego.idPliego}"
 		                   									class='${i.count%2==0?"l2":"l1"}'
-		                   									onclick="setCampos('${pliego.idPliego}','${i.count}','${pliego.nut}','${pliego.nombreOrdenProduccion}','${pliego.nombrePartida}','${pliego.descripcionTipoTrabajoDetalle}','${pliego.noPliego}','${pliego.hojasRequeridas}')">
+		                   									onclick="setCampos('${pliego.idPliego}','${i.count}','${pliego.nut}','${pliego.nombreOrdenProduccion}','${pliego.nombrePartida}','${pliego.descripcionTipoTrabajoDetalle}','${pliego.noPliego}','${pliego.hojasRequeridas}','${pliego.hojasSobrantes}','${pliego.hojasTotales}')">
 		                   									<td>${i.count}</td>
 		                   									<td>${pliego.nut}</td>
 		                   									<td>${pliego.nombreOrdenProduccion}</td>
@@ -165,11 +167,15 @@
 		                   									<td>${pliego.descripcionTipoTrabajoDetalle}</td>
 		                   									<td>${pliego.noPliego}</td>
 		                   									<td>${pliego.hojasRequeridas}</td>
+		                   									<td>${pliego.hojasSobrantes}</td>
+		                   									<td>${pliego.hojasTotales}</td>
 		                   								</tr>                   							
 		                   							</c:forEach>
 	                    						</c:when>
 	                    						<c:otherwise>
 		                    						<tr class="l1">
+		                    							<td>&nbsp;</td>
+		                    							<td>&nbsp;</td>
 		                    							<td>&nbsp;</td>
 		                    							<td>&nbsp;</td>
 		                    							<td>&nbsp;</td>
@@ -367,6 +373,40 @@
 		                                								<input	type="text"
 		                                										class="input"
 		                                										name="hojas_requeridas"
+		                                										value=""
+		                                										readonly/>
+		                                							</td>
+		                                						</tr>
+		                                					</table>
+		                                				</div>
+		                                			</div>
+		                                		</div>
+		                                		<div class="columna_derecha">
+		                                			<div class="mitad_columna_izquierda">
+		                                				<div class="columna_completa">
+		                                					<table>
+		                                						<tr>
+		                                							<td width="44%">H. Sobrantes</td>
+		                                							<td>
+		                                								<input 	type="text"
+		                                										class="input"
+		                                										name="hojas_sobrantes"
+		                                										value=""
+		                                										readonly/>
+		                                							</td>
+		                                						</tr>
+		                                					</table>
+		                                				</div>
+		                                			</div>
+		                                			<div class="mitad_columna_derecha">
+		                                				<div class="columna_completa">
+		                                					<table>
+		                                						<tr>
+		                                							<td width="36%">H. Totales</td>
+		                                							<td>
+		                                								<input 	type="text"
+		                                										class="input"
+		                                										name="hojas_totales"
 		                                										value=""
 		                                										readonly/>
 		                                							</td>
@@ -603,7 +643,7 @@
                                 												name="frente_kilos_tinta"
                                 												value=""
                                 												maxlength="3"
-                                												onkeydown="revisaNumero(false, this.value, event, null, null)"/>
+                                												onkeydown="revisaNumero(true, this.value, event, null, null)"/>
                                 									</td>
                                 								</tr>
                                 							</table>
@@ -620,7 +660,7 @@
                                 												name="vuelta_kilos_tinta"
                                 												value=""
                                 												maxlength="3"
-                                												onkeydown="revisaNumero(false, this.value, event, null, null)"/>
+                                												onkeydown="revisaNumero(true, this.value, event, null, null)"/>
                                 									</td>
                                 								</tr>
                                 							</table>

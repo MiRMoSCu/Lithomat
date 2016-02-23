@@ -15,6 +15,8 @@ public interface FechaPrensistaMaquinaDAO {
 	
 	public List<FechaPrensistaMaquina> lista();
 	
+	public FechaPrensistaMaquina buscaFechaPrensistaMaquinaPorPliego(int idPliego); 
+	
 	public int numeroRegistrosFechaPrensistaMaquina(String strQuery);
 	
 	public List<FechaPrensistaMaquinaDTOGrid> listaPorRango(String strQuery);
