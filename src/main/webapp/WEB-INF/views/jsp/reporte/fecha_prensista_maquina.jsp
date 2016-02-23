@@ -89,7 +89,10 @@
 													<div class="columna_completa">
 														<table>
 															<tr>
-																<td width="1%">NUT:</td>
+																<td width="15%">
+																	<input type="checkbox" name="chkbx_busca_por_nut"/>
+																	<span style="cursor: pointer;" onclick="document.busqueda_fecha_prensista_maquina.chkbx_busca_por_nut.click()">NUT:</span>
+																</td>
 																<td>
 																	<input 	type="text"
 																			class="input"
@@ -102,6 +105,59 @@
 														</table>
 													</div>
 												</div>
+												<div class="columna_derecha">
+													<div class="columna_completa">
+														<table>
+															<tr>
+																<td width="18%">
+																	<input type="checkbox" name="chkbx_busca_por_fecha"/>
+																	<span style="cursor: pointer;" onclick="document.busqueda_fecha_prensista_maquina.chkbx_busca_por_fecha.click()">Fecha:</span>
+																</td>
+																<td>
+																	
+																</td>
+															</tr>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="linea">
+											<div class="casilla">
+												<div class="columna_izquierda">
+													<div class="columna_completa">
+														<table>
+															<tr>
+																<td width="22%">
+																	<input type="checkbox" name="chkbx_busca_por_prensista"/>
+																	<span style="cursor: pointer;" onclick="document.busqueda_fecha_prensista_maquina.chkbx_busca_por_prensista.click()">Prensista:</span>
+																</td>
+																<td>
+																	<select>
+																	
+																	</select>
+																</td>
+															</tr>
+														</table>
+													</div>
+												</div>
+												<div class="columna_derecha">
+													<div class="columna_completa">
+														<table>
+															<tr>
+																<td width="21%">
+																	<input type="checkbox" name="chkbx_busca_por_maquina"/>
+																	<span style="cursor: pointer;" onclick="document.busqueda_fecha_prensista_maquina.chkbx_busca_por_maquina.click()">M&aacute;quina:</span>
+																</td>
+																<td>
+																	<select>
+																	
+																	</select>
+																</td>
+															</tr>
+														</table>
+													</div>
+												</div>
 											</div>
 										</div>
 										<div style="display: none;">
@@ -109,7 +165,10 @@
 										</div>
 										<div class="linea">
 											<div class="casilla">
-												<div class="columna_izquierda" style="text-align: right;">
+												<div class="columna_derecha" style="text-align: right;">
+													<span style="cursor:pointer;" onclick="limpiaCriteriosBusqueda()">
+														<font color="gray">&nbsp;LIMPIAR&nbsp;</font>
+													</span>
 													<span style="cursor:pointer;" onclick="buscaRegistros()">
 														<font color="gray">&nbsp;BUSCAR&nbsp;</font>
 													</span>
@@ -168,9 +227,6 @@
 								<br/>
 								<div class="linea">
 									<div class="casilla" style="text-align: right;">
-										<span style="cursor: pointer;" onclick="limpiaTabla()">
-											<font color="gray">&nbsp;LIMPIAR&nbsp;</font>
-										</span>
 										<span style="cursor: pointer;" onclick="window.parent.Shadowbox.close()">
 											<font color="gray">&nbsp;CANCELAR&nbsp;</font>
 										</span>

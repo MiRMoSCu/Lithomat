@@ -350,7 +350,7 @@ function elimina_registro_fpm(obj) {
 	var rowNumber = obj.rowIndex
 	// activa registro en la tabla tabla_lista_registros si es que esta mostrado actualmente
 	if ( document.getElementById("pliego:" + obj.id.split(":")[1]) )
-		document.getElementById("pliego:" + obj.id.split(":")[1]).className = obj.id.split(":")[1]%2 == 0?"l2":"l1";
+		document.getElementById("pliego:" + obj.id.split(":")[1]).className = obj.id.split(":")[1]%2 == 0?"l1":"l2";
 	var table = document.getElementById("tabla_fecha_prensista_maquina");
 	table.deleteRow(obj.rowIndex);
 	if ( table.rows.length > 1 ) 

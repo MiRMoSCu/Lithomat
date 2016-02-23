@@ -79,7 +79,7 @@ function generaTablaDOM( jsonFechaPrensistaMaquina ) {
 		if ( jsonFechaPrensistaMaquina.length > 0 ) {
 			$.each( jsonFechaPrensistaMaquina, function(i,item){
 				tr = document.createElement("tr");
-				tr.setAttribute("class","l1");
+				tr.setAttribute("class",i%2==0?"l1":"l2");
 				
 				// no.
 				td = document.createElement("td");
@@ -216,7 +216,7 @@ function buscaRegistros() {
 	delete correcto;
 }
 
-function limpiaTabla() {
+function limpiaCriteriosBusqueda() {
 	document.busqueda_fecha_prensista_maquina.nut.value = "";
 	generaTablaDOM(null);
 }

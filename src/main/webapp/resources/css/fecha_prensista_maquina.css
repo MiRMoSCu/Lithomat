@@ -1,6 +1,6 @@
 #div_area {
     width: 1010px;
-    height: 714px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ 
+    height: 749px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ 
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -20,28 +20,27 @@
 
 #div_cuerpo {
     width: 981px;
-    background: transparent; /*orange*/
+    background: transparent;
 }
 
 #div_contenido {
     width: 961px;
-    height: 685px;  /* div_area - 29 */
+    height: 720px;  /* div_area - 29 */
     margin-left: auto;
     margin-right: auto;
     position: relative;
-    background: transparent; /*orange*/
+    background: transparent;
 }
 
 #div_pie {
     width: 981px;
     height: 50px;
-    background: transparent; /*green*/
+    background: transparent;
 }
 
 #div_derecha3d {
     width: 29px;
     float: left;
-    /*background: purple;*/
 }
 
 #div_fondo_esq_sup {
@@ -53,7 +52,7 @@
 
 #div_fondo_der {
     width: 29px;
-    height: 654px;  /* div_contenido - 31 (div_fondo_esq_sup) */
+    height: 689px;  /* div_contenido - 31 (div_fondo_esq_sup) */
     background-image: url('../image/s_der.png');
     background-repeat: repeat-y;
 }
