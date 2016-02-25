@@ -557,8 +557,9 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 				row.createCell(7).setCellValue( tipoPapelExtendido.getPrecio() );
 				row.createCell(8).setCellValue( tipoPapelExtendido.getTipoPrecio().getNombre() );
 				cont++;
+				tipoPapelExtendido = null;
 			}
-			
+			listaPapelExcel = null;
 			wb.close();
 		} catch( Exception e ) {
 			System.out.println("obtieneExcelListaTipoPapelExtendido:Error al generar el archivo de excel");

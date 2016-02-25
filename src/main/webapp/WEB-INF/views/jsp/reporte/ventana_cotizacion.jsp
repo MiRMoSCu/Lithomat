@@ -31,7 +31,7 @@
                 <div id="div_hoja">
                     <div id="div_contenido">
                     	<br/>
-                    	<form name="reporte_cotizacion" method="post" target="_blank">
+                    	<form name="reporte_cotizacion" method="post" target="_blank" accept-charset="ISO-8859-1">
                     		<input type="hidden" name="id_tipo_formato_impresion" value="" />
 	                        <div class="titulo">
 	                        	<font size=5>REPORTE COTIZACI&Oacute;N</font>

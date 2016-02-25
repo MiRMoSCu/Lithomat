@@ -79,29 +79,12 @@
             var urlModifica 				= "${urlModifica}";
             var urlElimina  				= "${urlElimina}";
             var urlExporta					= "${urlExporta}";
+            var urlImporta					= "${urlVentanaModal}";
         </script>
         <script type="text/javascript">
 	        function regresa_menu() {
 	        	location.replace(urlMenu);
 	        }
-        </script>
-        <script type="text/javascript">
-        	
-        	function exportarPrecios() {
-        		location.href = urlExporta;
-        	}
-        	
-        	function importarPrecios() {
-        		//alert("");
-        		var url = "${urlVentanaModal}"; 
-        		Shadowbox.open({
-        			content:url,
-        			player:"iframe",
-        			width:630, 
-        			height:305
-        		});
-        	}
-        
         </script>
     </head>
     <body onload="carga_datos()">
@@ -127,358 +110,355 @@
                             </div>
                         </div>
                         <div id="div_contenido">
-                            
-                                <div id="div_tipo_papel_extendido">
-                                    <div class="titulo">
-                                        <img alt="" src="<c:url value="/resources/image/titulo_tipo_papel_extendido.png"/>"/>
-                                    </div>
-                                    <div class="linea">
-                                    	<div class="casilla">
-                                    		<div id="div_paginacion_resultados" style="float:right;"></div>
-                                    	</div>
-                                    </div>
-                                    <div id="div_contenedor_tabla">
-                                        <div class="columna_completa">
-                                            <div id="div_tabla_tipo_papel_extendido">
-                                                <table id="tabla_tipo_papel_extendido">
-                                                    <tr>
-                                                        <th>Id.</th>
-                                                        <th>Proveedor</th>
-                                                        <th>Nombre</th>
-                                                        <th>Gramaje</th>
-                                                        <th>Kilogramos</th>
-                                                        <th>Alto</th>
-                                                        <th>Ancho</th>
-                                                        <th>Descripci&oacute;n</th>
-                                                        <th>Precio</th>
-                                                        <th>Unidad</th>
-                                                    </tr>
-                                                <c:forEach var="tipoPapelExtendido" items="${listaTipoPapelExtendido}" varStatus="i">
-													<fmt:formatNumber var="formatAncho" value="${tipoPapelExtendido.ancho}" maxFractionDigits="0" />
-													<fmt:formatNumber var="formatAlto" value="${tipoPapelExtendido.alto}" maxFractionDigits="0" />
-													<tr class='${i.count%2==0?"l2":"l1"}'
-                                                        onclick="setCampos('${tipoPapelExtendido.idTipoPapelExtendido}', '${tipoPapelExtendido.proveedorPapel.razonSocial}', '${tipoPapelExtendido.nombre}', '${tipoPapelExtendido.gramaje}', '${tipoPapelExtendido.kilogramos}','${formatAlto}', '${formatAncho}', '${tipoPapelExtendido.descripcion}', '${tipoPapelExtendido.precio}', '${tipoPapelExtendido.tipoPrecio.nombre}');">
-                                                        <td>${tipoPapelExtendido.idTipoPapelExtendido}</td>
-                                                        <td>${tipoPapelExtendido.proveedorPapel.razonSocial}</td>
-                                                        <td>${tipoPapelExtendido.nombre}</td>
-                                                        <td>${tipoPapelExtendido.gramaje}</td>
-                                                        <td>${tipoPapelExtendido.kilogramos}</td>
-                                                        <td>${formatAlto}</td>
-                                                        <td>${formatAncho}</td>
-                                                        <td>${tipoPapelExtendido.descripcion}</td>
-                                                        <td><fmt:formatNumber pattern="#,##0.00" value="${tipoPapelExtendido.precio}"/></td>
-                                                        <td>${tipoPapelExtendido.tipoPrecio.nombre}</td>
-                                                    </tr>
-                                                </c:forEach>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br/>
-                                    <div class="linea">
-	                                	<div class="casilla">
-	                                		<div id="div_paginador">
-	                                			<ul id="paginacion"></ul>
-	                                		</div>
-	                                	</div>
-	                                </div>
-	                                <div class="div_separador_mediano">
-	                                	<img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
-	                                </div>
-	                                <div class="titulo">
-	                                	<font size="5">CRITERIOS DE B&Uacute;SQUEDA</font>
-	                                </div>
-	                                <div id="div_formulario_busqueda_cliente">
-	                                	<form name="busqueda_tipo_papel_extendido" action="" method="post" accept-charset="ISO-8859-1">
-	                                		<!-- campos para uso del paginador -->
-		                                	<input type="hidden" name="numero_pagina"               value=""/>
-		                                	<input type="hidden" name="numero_registros_por_pagina" value=""/>
-		                                	<div class="linea">
-		                                		<div class="casilla">
-		                                			<div class="columna_izquierda">
-		                                				<div class="columna_completa">
-		                                					<table>
-		                                						<tr>
-		                                							<td width="20%">
-		                                								<input type="checkbox" name="chkbx_busca_por_nombre"/>
-		                                								<span style="cursor:pointer;" onclick="document.busqueda_tipo_papel_extendido.chkbx_busca_por_nombre.click()">Nombre:</span>
-		                                							</td>
-		                                							<td>
-		                                								<input type="text" class="input" name="nombre" value=""
-		                                										onkeydown="aceptaIntro(event, 'nueva_busqueda', null)"/>
-		                                							</td>
-		                                						</tr>
-		                                					</table>
-		                                				</div>
-		                                			</div>
-		                                			<div class="columna_derecha">
-		                                				<div class="mitad_columna_izquierda">
-		                                					<table>
-		                                						<tr>
-		                                							<td width="45%">
-		                                								<input type="checkbox" name="chkbx_busca_por_gramaje"/>
-		                                								<span style="cursor:pointer;" onclick="document.busqueda_tipo_papel_extendido.chkbx_busca_por_gramaje.click()">Gramaje:</span>
-		                                							</td>
-		                                							<td>
-		                                								<input type="text" class="input" name="gramaje" value=""
-		                                										onkeydown="revisaNumero(false, this.value, event, 'nueva_busqueda', null)"/>
-		                                							</td>
-		                                						</tr>
-		                                					</table>	
-		                                				</div>
-		                                				<div class="mitad_columna_derecha">
-		                                					<table>
-		                                						<tr>
-		                                							<td width="51%">
-		                                								<input type="checkbox" name="chkbx_busca_por_kilogramos"/>
-		                                								<span style="cursor:pointer;" onclick="document.busqueda_tipo_papel_extendido.chkbx_busca_por_kilogramos.click()">Kilogramos:</span>
-		                                							</td>
-		                                							<td>
-		                                								<input type="text" class="input" name="kilogramos" value=""
-		                                										onkeydown="revisaNumero(true, this.value, event, 'nueva_busqueda', null)"/>
-		                                							</td>
-		                                						</tr>
-		                                					</table>
-		                                				</div>
-		                                			</div>
-		                                		</div>
-		                                	</div>
-	                                		<div class="linea">
-	                                			<div class="casilla">
-	                                				<div class="columna_izquierda">
-	                                					<div class="mitad_columna_izquierda">
-	                                						<table>
-	                                							<tr>
-	                                								<td width="28%">
-	                                									<input type="checkbox" name="chkbx_busca_por_alto"/>
-	                                									<span style="cursor:pointer;" onclick="document.busqueda_tipo_papel_extendido.chkbx_busca_por_alto.click()">Alto:</span>
-	                                								</td>
-	                                								<td>
-	                                									<input type="text" class="input" name="alto" 
-	                                									onkeydown="revisaNumero(true, this.value, event, 'nueva_busqueda', null)"/>
-	                                								</td>
-	                                							</tr>
-	                                						</table>
-	                                					</div>
-	                                					<div class="mitad_columna_derecha">
-	                                						<table>
-	                                							<tr>
-	                                								<td width="35%">
-	                                									<input type="checkbox" name="chkbx_busca_por_ancho"/>
-	                                									<span style="cursor:pointer;" onclick="document.busqueda_tipo_papel_extendido.chkbx_busca_por_ancho.click()">Ancho:</span>
-	                                								</td>
-	                                								<td>
-	                                									<input type="text" class="input" name="ancho" 
-	                                									onkeydown="revisaNumero(true, this.value, event, 'nueva_busqueda', null)"/>
-	                                								</td>
-	                                							</tr>
-	                                						</table>
-	                                					</div>
-	                                				</div>
-	                                				<div class="columna_derecha">
-	                                					<div class="mitad_columna_izquierda">
-	                                						<!-- proveedor -->
-	                                						<table>
-	                                							<tr>
-	                                								<td width="50%">
-	                                									<input type="checkbox" name="chkbx_busca_por_proveedor"/>
-	                                									<span style="cursor:pointer;" onclick="document.busqueda_tipo_papel_extendido.chkbx_busca_por_proveedor.click()">Proveedor:</span>
-	                                								</td>
-	                                								<td>
-	                                									<select name="id_proveedor_papel" onchange="">
-		                                                                    <c:forEach var="proveedorPapel" items="${listaProveedorPapel}">
-		                                                                        <option value="${proveedorPapel.value}">${proveedorPapel.text}</option>
-		                                                                    </c:forEach>
-		                                                                </select>
-	                                								</td>
-	                                							</tr>
-	                                						</table>
-	                                					</div>
-	                                				</div>
-	                                			</div>
-	                                		</div>
-	                                		<br/>
-	                                		<div class="linea">
-	                                			<div class="casilla" style="text-align:right;">
-	                                				<img alt="" style="cursor:pointer;" onclick="limpia_form_busqueda_tipo_papel_sobrante()" 
-	                                					 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
-	                                				<span style="cursor:pointer;" onclick="nueva_busqueda()">
-														&nbsp;Buscar&nbsp;
-													</span>
-	                                			</div>
-	                                		</div>
-	                                	</form>
-	                                </div>
-	                                <div class="div_separador_mediano">
-	                                	<img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
-	                                </div>
-	                                <form name="tipo_papel_extendido" method="post" accept-charset="ISO-8859-1">
-	                                    <div class="titulo">
-	                                        <img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"/>
+	                        <div id="div_tipo_papel_extendido">
+	                            <div class="titulo">
+	                                <img alt="" src="<c:url value="/resources/image/titulo_tipo_papel_extendido.png"/>"/>
+	                            </div>
+	                            <div class="linea">
+	                            	<div class="casilla">
+	                            		<div id="div_paginacion_resultados" style="float:right;"></div>
+	                            	</div>
+	                            </div>
+	                            <div id="div_contenedor_tabla">
+	                                <div class="columna_completa">
+	                                    <div id="div_tabla_tipo_papel_extendido">
+	                                        <table id="tabla_tipo_papel_extendido">
+	                                            <tr>
+	                                                <th>Id.</th>
+	                                                <th>Proveedor</th>
+	                                                <th>Nombre</th>
+	                                                <th>Gramaje</th>
+	                                                <th>Kilogramos</th>
+	                                                <th>Alto</th>
+	                                                <th>Ancho</th>
+	                                                <th>Descripci&oacute;n</th>
+	                                                <th>Precio</th>
+	                                                <th>Unidad</th>
+	                                            </tr>
+	                                        <c:forEach var="tipoPapelExtendido" items="${listaTipoPapelExtendido}" varStatus="i">
+						<fmt:formatNumber var="formatAncho" value="${tipoPapelExtendido.ancho}" maxFractionDigits="0" />
+						<fmt:formatNumber var="formatAlto" value="${tipoPapelExtendido.alto}" maxFractionDigits="0" />
+						<tr class='${i.count%2==0?"l2":"l1"}'
+	                                                onclick="setCampos('${tipoPapelExtendido.idTipoPapelExtendido}', '${tipoPapelExtendido.proveedorPapel.razonSocial}', '${tipoPapelExtendido.nombre}', '${tipoPapelExtendido.gramaje}', '${tipoPapelExtendido.kilogramos}','${formatAlto}', '${formatAncho}', '${tipoPapelExtendido.descripcion}', '${tipoPapelExtendido.precio}', '${tipoPapelExtendido.tipoPrecio.nombre}');">
+	                                                <td>${tipoPapelExtendido.idTipoPapelExtendido}</td>
+	                                                <td>${tipoPapelExtendido.proveedorPapel.razonSocial}</td>
+	                                                <td>${tipoPapelExtendido.nombre}</td>
+	                                                <td>${tipoPapelExtendido.gramaje}</td>
+	                                                <td>${tipoPapelExtendido.kilogramos}</td>
+	                                                <td>${formatAlto}</td>
+	                                                <td>${formatAncho}</td>
+	                                                <td>${tipoPapelExtendido.descripcion}</td>
+	                                                <td><fmt:formatNumber pattern="#,##0.00" value="${tipoPapelExtendido.precio}"/></td>
+	                                                <td>${tipoPapelExtendido.tipoPrecio.nombre}</td>
+	                                            </tr>
+	                                        </c:forEach>
+	                                        </table>
 	                                    </div>
-	                                    <div class="linea">
-	                                        <div class="casilla">
-	                                            <div class="columna_izquierda">
-	                                                <div class="mitad_columna_izquierda">
-	                                                    <table>
-	                                                        <tr>
-	                                                            <td width="40%">Identificador:</td>
-	                                                            <td>
-	                                                                <input type="text" class="input"
-	                                                                       name="id_tipo_papel_extendido" value=""
-	                                                                       readonly="readonly"></input>
-	                                                            </td>
-	                                                        </tr>
-	                                                    </table>
-	                                                </div>
-	                                                <div class="mitad_columna_derecha">
-	                                                    <table>
-	                                                        <tr>
-	                                                            <td width="1%">Proveedor:</td>
-	                                                            <td>
-	                                                                <select name="id_proveedor_papel" onchange="">
-	                                                                    <c:forEach var="proveedorPapel" items="${listaProveedorPapel}">
-	                                                                        <option value="${proveedorPapel.value}">${proveedorPapel.text}</option>
-	                                                                    </c:forEach>
-	                                                                </select>
-	                                                            </td>
-	                                                        </tr>
-	                                                    </table>
-	                                                </div>
-	                                            </div>
-	                                            <div class="columna_derecha">
-	                                                <div class="mitad_columna_izquierda">
-	                                                    <table>
-	                                                        <tr>
-	                                                            <td width="1%">Nombre:</td>
-	                                                            <td>
-	                                                                <input type="text" class="input" name="nombre" value=""/>
-	                                                            </td>
-	                                                        </tr>
-	                                                    </table>
-	                                                </div>
-	                                                <div class="mitad_columna_derecha">
-	                                                    <table>
-	                                                        <tr>
-	                                                            <td width="1%">Gramaje:</td>
-	                                                            <td>
-	                                                                <input type="text" class="input" name="gramaje" value=""
-	                                                                       onkeydown="revisaNumero(false, this.value, event, null, null)"/>
-	                                                            </td>
-	                                                        </tr>
-	                                                    </table>
-	                                                </div>
-	                                            </div>
-	                                        </div>
-	                                    </div>
-	                                    <div class="linea">
-	                                        <div class="casilla">
-	                                            <div class="columna_izquierda">
-	                                                <div class="mitad_columna_izquierda">
-	                                                    <table>
-	                                                        <tr>
-	                                                            <td width="1%">Kilogramos:</td>
-	                                                            <td>
-	                                                                <input type="text" class="input" name="kilogramos"
-	                                                                       value="" onkeydown="revisaNumero(true, this.value, event, null, null)"/>
-	                                                            </td>
-	                                                        </tr>
-	                                                    </table>
-	                                                </div>
-	                                                <div class="mitad_columna_derecha">
-	                                                	<table>
-	                                                    	<tr>
-	                                                            <td width="1%">Alto:</td>
-	                                                            <td>
-	                                                                <input type="text" class="input" name="alto" value="" 
-																			onkeydown="revisaNumero(true, this.value, event, null, null)"/>
-	                                                            </td>
-	                                                        </tr>
-	                                                    </table>
-	                                                </div>
-	                                            </div>
-	                                            <div class="columna_derecha">
-	                                                <div class="mitad_columna_izquierda">
-	                                                    <table>
-	                                                        <tr>
-	                                                            <td width="1%">Ancho:</td>
-	                                                            <td>
-	                                                                <input type="text" class="input" name="ancho" value="" 
-	                                                                		onkeydown="revisaNumero(true, this.value, event, null, null)"/>
-	                                                            </td>
-	                                                        </tr>
-	                                                    </table>
-	                                                </div>
-	                                                <div class="mitad_columna_derecha">
-	                                                    <table>
-	                                                        <tr>
-	                                                            <td width="35%">Descripci&oacute;n:</td>
-	                                                            <td>
-	                                                                <input type="text" class="input" name="descripcion" value=""/></input>
-	                                                            </td>
-	                                                        </tr>
-	                                                    </table>
-	                                                </div>
-	                                            </div>
-	                                        </div>
-	                                    </div>
-	                                    <div class="linea">
-	                                        <div class="casilla">
-	                                            <div class="columna_izquierda">
-	                                                <div class="mitad_columna_izquierda">
-	                                                    <table>
-	                                                        <tr>
-	                                                            <td width="1%">Precio:</td>
-	                                                            <td>
-	                                                                <input type="text" class="input" name="precio" value="" 
-	                                                                		onkeydown="revisaNumero(true, this.value, event, null, null)"/>
-	                                                            </td>
-	                                                        </tr>
-	                                                    </table>
-	                                                </div>
-	                                                <div class="mitad_columna_derecha">
-	                                                    <table>
-	                                                        <tr>
-	                                                            <td width="1%">Unidad:</td>
-	                                                            <td>
-	                                                                <select name="id_tipo_precio" onchange="">
-	                                                                    <c:forEach var="precio" items="${listaTipoPrecio}">
-	                                                                        <option value="${precio.value}">${precio.text}</option>
-	                                                                    </c:forEach>
-	                                                                </select>
-	                                                            </td>
-	                                                        </tr>
-	                                                    </table>
-	                                                </div>
-	                                            </div>
-	                                        </div>
-	                                    </div>
-                                   	</form>
-                                    <div class="linea"></div>
-                                    <div class="linea">
-                                        <div class="casilla" style="text-align:right;">
-                                        	<span id="imgBtnExportarPrecios" style="cursor:pointer;" onclick="exportarPrecios()">
-                                        		<font color="blue">EXPORTAR PRECIOS</font>
-                                        	</span>
-                                        	&nbsp;
-                                        	<span id="imgBtnImportarPrecios" style="cursor:pointer;" onclick="importarPrecios()">
-                                        		<font color="blue">IMPORTAR PRECIOS</font>
-                                        	</span>
-                                        	&nbsp;
-                                            <img alt="" style="cursor:pointer;" onclick="limpia_form_tipo_papel_extendido();"
-                                            	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
-                                             
-                                            <img alt="" style="cursor:pointer;" onclick="elimina();"
-                                            	 src="<c:url value="/resources/image/boton_eliminar.jpg"/>"/>
-                                             
-                                            <img alt="" style="cursor:pointer;" onclick="modifica();"
-                                            	 src="<c:url value="/resources/image/boton_modificar.jpg"/>"/>
-                                             
-                                            <img alt="" style="cursor:pointer;" onclick="crear();"
-                                            	 src="<c:url value="/resources/image/boton_agregar.jpg"/>"/>
-                                        </div>
-                                    </div>
-                                </div>
+	                                </div>
+	                            </div>
+	                            <br/>
+	                            <div class="linea">
+	                         	<div class="casilla">
+	                         		<div id="div_paginador">
+	                         			<ul id="paginacion"></ul>
+	                         		</div>
+	                         	</div>
+	                         </div>
+	                         <div class="div_separador_mediano">
+	                         	<img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
+	                         </div>
+	                         <div class="titulo">
+	                         	<font size="5">CRITERIOS DE B&Uacute;SQUEDA</font>
+	                         </div>
+	                         <div id="div_formulario_busqueda_cliente">
+	                         	<form name="busqueda_tipo_papel_extendido" action="" method="post" accept-charset="ISO-8859-1">
+	                         		<!-- campos para uso del paginador -->
+	                          	<input type="hidden" name="numero_pagina"               value=""/>
+	                          	<input type="hidden" name="numero_registros_por_pagina" value=""/>
+	                          	<div class="linea">
+	                          		<div class="casilla">
+	                          			<div class="columna_izquierda">
+	                          				<div class="columna_completa">
+	                          					<table>
+	                          						<tr>
+	                          							<td width="20%">
+	                          								<input type="checkbox" name="chkbx_busca_por_nombre"/>
+	                          								<span style="cursor:pointer;" onclick="document.busqueda_tipo_papel_extendido.chkbx_busca_por_nombre.click()">Nombre:</span>
+	                          							</td>
+	                          							<td>
+	                          								<input type="text" class="input" name="nombre" value=""
+	                          										onkeydown="aceptaIntro(event, 'nueva_busqueda', null)"/>
+	                          							</td>
+	                          						</tr>
+	                          					</table>
+	                          				</div>
+	                          			</div>
+	                          			<div class="columna_derecha">
+	                          				<div class="mitad_columna_izquierda">
+	                          					<table>
+	                          						<tr>
+	                          							<td width="45%">
+	                          								<input type="checkbox" name="chkbx_busca_por_gramaje"/>
+	                          								<span style="cursor:pointer;" onclick="document.busqueda_tipo_papel_extendido.chkbx_busca_por_gramaje.click()">Gramaje:</span>
+	                          							</td>
+	                          							<td>
+	                          								<input type="text" class="input" name="gramaje" value=""
+	                          										onkeydown="revisaNumero(false, this.value, event, 'nueva_busqueda', null)"/>
+	                          							</td>
+	                          						</tr>
+	                          					</table>	
+	                          				</div>
+	                          				<div class="mitad_columna_derecha">
+	                          					<table>
+	                          						<tr>
+	                          							<td width="51%">
+	                          								<input type="checkbox" name="chkbx_busca_por_kilogramos"/>
+	                          								<span style="cursor:pointer;" onclick="document.busqueda_tipo_papel_extendido.chkbx_busca_por_kilogramos.click()">Kilogramos:</span>
+	                          							</td>
+	                          							<td>
+	                          								<input type="text" class="input" name="kilogramos" value=""
+	                          										onkeydown="revisaNumero(true, this.value, event, 'nueva_busqueda', null)"/>
+	                          							</td>
+	                          						</tr>
+	                          					</table>
+	                          				</div>
+	                          			</div>
+	                          		</div>
+	                          	</div>
+	                         		<div class="linea">
+	                         			<div class="casilla">
+	                         				<div class="columna_izquierda">
+	                         					<div class="mitad_columna_izquierda">
+	                         						<table>
+	                         							<tr>
+	                         								<td width="28%">
+	                         									<input type="checkbox" name="chkbx_busca_por_alto"/>
+	                         									<span style="cursor:pointer;" onclick="document.busqueda_tipo_papel_extendido.chkbx_busca_por_alto.click()">Alto:</span>
+	                         								</td>
+	                         								<td>
+	                         									<input type="text" class="input" name="alto" 
+	                         									onkeydown="revisaNumero(true, this.value, event, 'nueva_busqueda', null)"/>
+	                         								</td>
+	                         							</tr>
+	                         						</table>
+	                         					</div>
+	                         					<div class="mitad_columna_derecha">
+	                         						<table>
+	                         							<tr>
+	                         								<td width="35%">
+	                         									<input type="checkbox" name="chkbx_busca_por_ancho"/>
+	                         									<span style="cursor:pointer;" onclick="document.busqueda_tipo_papel_extendido.chkbx_busca_por_ancho.click()">Ancho:</span>
+	                         								</td>
+	                         								<td>
+	                         									<input type="text" class="input" name="ancho" 
+	                         									onkeydown="revisaNumero(true, this.value, event, 'nueva_busqueda', null)"/>
+	                         								</td>
+	                         							</tr>
+	                         						</table>
+	                         					</div>
+	                         				</div>
+	                         				<div class="columna_derecha">
+	                         					<div class="mitad_columna_izquierda">
+	                         						<!-- proveedor -->
+	                         						<table>
+	                         							<tr>
+	                         								<td width="50%">
+	                         									<input type="checkbox" name="chkbx_busca_por_proveedor"/>
+	                         									<span style="cursor:pointer;" onclick="document.busqueda_tipo_papel_extendido.chkbx_busca_por_proveedor.click()">Proveedor:</span>
+	                         								</td>
+	                         								<td>
+	                         									<select name="id_proveedor_papel" onchange="">
+	                                                              <c:forEach var="proveedorPapel" items="${listaProveedorPapel}">
+	                                                                  <option value="${proveedorPapel.value}">${proveedorPapel.text}</option>
+	                                                              </c:forEach>
+	                                                          </select>
+	                         								</td>
+	                         							</tr>
+	                         						</table>
+	                         					</div>
+	                         				</div>
+	                         			</div>
+	                         		</div>
+	                         		<br/>
+	                         		<div class="linea">
+	                         			<div class="casilla" style="text-align:right;">
+	                         				<img alt="" style="cursor:pointer;" onclick="limpia_form_busqueda_tipo_papel_sobrante()" 
+	                         					 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
+	                         				<span style="cursor:pointer;" onclick="nueva_busqueda()">&nbsp;Buscar&nbsp;</span>
+	                         			</div>
+	                         		</div>
+	                         	</form>
+	                         </div>
+	                         <div class="div_separador_mediano">
+	                         	<img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
+	                         </div>
+	                         <form name="tipo_papel_extendido" method="post" accept-charset="ISO-8859-1">
+	                             <div class="titulo">
+	                                 <img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"/>
+	                             </div>
+	                             <div class="linea">
+	                                 <div class="casilla">
+	                                     <div class="columna_izquierda">
+	                                         <div class="mitad_columna_izquierda">
+	                                             <table>
+	                                                 <tr>
+	                                                     <td width="40%">Identificador:</td>
+	                                                     <td>
+	                                                         <input type="text" class="input"
+	                                                                name="id_tipo_papel_extendido" value=""
+	                                                                readonly="readonly"></input>
+	                                                     </td>
+	                                                 </tr>
+	                                             </table>
+	                                         </div>
+	                                         <div class="mitad_columna_derecha">
+	                                             <table>
+	                                                 <tr>
+	                                                     <td width="1%">Proveedor:</td>
+	                                                     <td>
+	                                                         <select name="id_proveedor_papel" onchange="">
+	                                                             <c:forEach var="proveedorPapel" items="${listaProveedorPapel}">
+	                                                                 <option value="${proveedorPapel.value}">${proveedorPapel.text}</option>
+	                                                             </c:forEach>
+	                                                         </select>
+	                                                     </td>
+	                                                 </tr>
+	                                             </table>
+	                                         </div>
+	                                     </div>
+	                                     <div class="columna_derecha">
+	                                         <div class="mitad_columna_izquierda">
+	                                             <table>
+	                                                 <tr>
+	                                                     <td width="1%">Nombre:</td>
+	                                                     <td>
+	                                                         <input type="text" class="input" name="nombre" value=""/>
+	                                                     </td>
+	                                                 </tr>
+	                                             </table>
+	                                         </div>
+	                                         <div class="mitad_columna_derecha">
+	                                             <table>
+	                                                 <tr>
+	                                                     <td width="1%">Gramaje:</td>
+	                                                     <td>
+	                                                         <input type="text" class="input" name="gramaje" value=""
+	                                                                onkeydown="revisaNumero(false, this.value, event, null, null)"/>
+	                                                     </td>
+	                                                 </tr>
+	                                             </table>
+	                                         </div>
+	                                     </div>
+	                                 </div>
+	                             </div>
+	                             <div class="linea">
+	                                 <div class="casilla">
+	                                     <div class="columna_izquierda">
+	                                         <div class="mitad_columna_izquierda">
+	                                             <table>
+	                                                 <tr>
+	                                                     <td width="1%">Kilogramos:</td>
+	                                                     <td>
+	                                                         <input type="text" class="input" name="kilogramos"
+	                                                                value="" onkeydown="revisaNumero(true, this.value, event, null, null)"/>
+	                                                     </td>
+	                                                 </tr>
+	                                             </table>
+	                                         </div>
+	                                         <div class="mitad_columna_derecha">
+	                                         	<table>
+	                                             	<tr>
+	                                                     <td width="1%">Alto:</td>
+	                                                     <td>
+	                                                         <input type="text" class="input" name="alto" value="" 
+												onkeydown="revisaNumero(true, this.value, event, null, null)"/>
+	                                                     </td>
+	                                                 </tr>
+	                                             </table>
+	                                         </div>
+	                                     </div>
+	                                     <div class="columna_derecha">
+	                                         <div class="mitad_columna_izquierda">
+	                                             <table>
+	                                                 <tr>
+	                                                     <td width="1%">Ancho:</td>
+	                                                     <td>
+	                                                         <input type="text" class="input" name="ancho" value="" 
+	                                                         		onkeydown="revisaNumero(true, this.value, event, null, null)"/>
+	                                                     </td>
+	                                                 </tr>
+	                                             </table>
+	                                         </div>
+	                                         <div class="mitad_columna_derecha">
+	                                             <table>
+	                                                 <tr>
+	                                                     <td width="35%">Descripci&oacute;n:</td>
+	                                                     <td>
+	                                                         <input type="text" class="input" name="descripcion" value=""/></input>
+	                                                     </td>
+	                                                 </tr>
+	                                             </table>
+	                                         </div>
+	                                     </div>
+	                                 </div>
+	                             </div>
+	                             <div class="linea">
+	                                 <div class="casilla">
+	                                     <div class="columna_izquierda">
+	                                         <div class="mitad_columna_izquierda">
+	                                             <table>
+	                                                 <tr>
+	                                                     <td width="1%">Precio:</td>
+	                                                     <td>
+	                                                         <input type="text" class="input" name="precio" value="" 
+	                                                         		onkeydown="revisaNumero(true, this.value, event, null, null)"/>
+	                                                     </td>
+	                                                 </tr>
+	                                             </table>
+	                                         </div>
+	                                         <div class="mitad_columna_derecha">
+	                                             <table>
+	                                                 <tr>
+	                                                     <td width="1%">Unidad:</td>
+	                                                     <td>
+	                                                         <select name="id_tipo_precio" onchange="">
+	                                                             <c:forEach var="precio" items="${listaTipoPrecio}">
+	                                                                 <option value="${precio.value}">${precio.text}</option>
+	                                                             </c:forEach>
+	                                                         </select>
+	                                                     </td>
+	                                                 </tr>
+	                                             </table>
+	                                         </div>
+	                                     </div>
+	                                 </div>
+	                             </div>
+	                           	</form>
+	                            <div class="linea"></div>
+	                            <div class="linea">
+	                                <div class="casilla" style="text-align:right;">
+	                                	<span id="imgBtnExportarPrecios" style="cursor:pointer;" onclick="exportarPrecios()">
+	                                		<font color="blue">EXPORTAR PRECIOS</font>
+	                                	</span>
+	                                	&nbsp;
+	                                	<span id="imgBtnImportarPrecios" style="cursor:pointer;" onclick="importarPrecios()">
+	                                		<font color="blue">IMPORTAR PRECIOS</font>
+	                                	</span>
+	                                	&nbsp;
+	                                    <img alt="" style="cursor:pointer;" onclick="limpia_form_tipo_papel_extendido();"
+	                                    	 src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
+	                                     
+	                                    <img alt="" style="cursor:pointer;" onclick="elimina();"
+	                                    	 src="<c:url value="/resources/image/boton_eliminar.jpg"/>"/>
+	                                     
+	                                    <img alt="" style="cursor:pointer;" onclick="modifica();"
+	                                    	 src="<c:url value="/resources/image/boton_modificar.jpg"/>"/>
+	                                     
+	                                    <img alt="" style="cursor:pointer;" onclick="crear();"
+	                                    	 src="<c:url value="/resources/image/boton_agregar.jpg"/>"/>
+	                                </div>
+	                            </div>
+	                        </div>
                         </div>
                     </div>
                     <div id="div_pie"></div>

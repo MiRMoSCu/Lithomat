@@ -89,6 +89,7 @@ public class AcabadoDetalleDaoImpl implements AcabadoDetalleDAO {
 			query.setParameter("idAcabado", idAcabado); 
 			lista = query.list();
 			sesion.getTransaction().commit();
+			query = null;
 		} catch(Exception e) {
 			log.error(e.getMessage());
 			sesion.getTransaction().rollback();

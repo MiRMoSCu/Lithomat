@@ -1,5 +1,6 @@
 package com.artiffex.lithomat.sistemaweb.businesstier.service.implementacion;
 
+import java.io.ByteArrayOutputStream;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -7,6 +8,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -27,6 +32,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.OrdenProdu
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PartidaService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PliegoService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoTrabajoDetalleService;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.FechaPrensistaMaquinaConcentrado;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ParametrosBusquedaFechaPrensistaMaquina;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.FechaPrensistaMaquinaDAO;
 
@@ -135,6 +141,103 @@ public class FechaPrensistaMaquinaServiceImpl implements FechaPrensistaMaquinaSe
 		}
 		listaPartida = null;
 		ordenProduccion = null;
+	}
+	
+	public byte[] obtieneExcelReporteConcentrado(String fechaBusquedaInicio, String fechaBusquedaFin) {
+		StringBuilder query = new StringBuilder();
+		
+		query.append(" SELECT ");
+		query.append("    fpm.fecha_impresion fechaImpresion,");
+		query.append("    CONCAT(p.nombre,");
+		query.append("            ' ',");
+		query.append("            p.ap_paterno,");
+		query.append("            ' ',");
+		query.append("            p.ap_materno) prensista,");
+		query.append("    CONCAT(p_ayudante.nombre,");
+		query.append("            ' ',");
+		query.append("            p_ayudante.ap_paterno,");
+		query.append("            ' ',");
+		query.append("            p_ayudante.ap_materno) prensistaAyudante,");
+		query.append("    m.nombre maquina,");
+		query.append("    SUM(hojas_buenas) hojasBuenas,");
+		query.append("    SUM(cambio_placas) cambioPlacas ");
+		query.append(" FROM");
+		query.append("    fecha_prensista_maquina fpm,");
+		query.append("    prensista p,");
+		query.append("    prensista p_ayudante,");
+		query.append("    maquina m ");
+		query.append(" WHERE");
+		query.append("    fpm.id_prensista = p.id_prensista");
+		query.append("        AND fpm.id_prensista_ayudante = p_ayudante.id_prensista");
+		query.append("        AND fpm.id_maquina = m.id_maquina");
+		query.append("        AND fpm.fecha_impresion BETWEEN '");
+		query.append(fechaBusquedaInicio);
+		query.append("' AND '");
+		query.append(fechaBusquedaFin);
+		query.append("' ");
+		query.append("        AND fpm.activo = TRUE ");
+		query.append(" GROUP BY fpm.fecha_impresion , fpm.id_prensista , fpm.id_prensista_ayudante , fpm.id_maquina ");
+		query.append(" ORDER BY fpm.fecha_impresion ASC , fpm.id_prensista ASC , fpm.id_prensista_ayudante ASC , fpm.id_maquina ASC;");
+		
+		// generacion del excel
+		HSSFWorkbook wb = new HSSFWorkbook();
+		try {
+			// creacion de la hoja
+			HSSFSheet sheet = wb.createSheet("FPM Concentrado");
+			// creacion de la fila 1
+			HSSFRow row = sheet.createRow(0);
+			// creacion de celdas fila 1
+				// celda A (0)
+			HSSFCell cell_fecha_imprension = row.createCell(0);
+			cell_fecha_imprension.setCellValue("FECHA IMPRESION");
+				// celda B (1)
+			HSSFCell cell_prensista = row.createCell(1);
+			cell_prensista.setCellValue("PRENSISTA");
+				// celda C (2)
+			HSSFCell cell_prensista_ayudante = row.createCell(2);
+			cell_prensista_ayudante.setCellValue("PRENSISTA AYUDANTE");
+				// celda D (3)
+			HSSFCell cell_maquina = row.createCell(3);
+			cell_maquina.setCellValue("MAQUINA");
+				// celda E (4)
+			HSSFCell cell_hojas_buenas = row.createCell(4);
+			cell_hojas_buenas.setCellValue("HOJAS BUENAS");
+				// celda F (5)
+			HSSFCell cell_cambio_placas = row.createCell(5);
+			cell_cambio_placas.setCellValue("CAMBIO PLACAS");
+			
+			// obtencion de los registros
+			int cont = 1;
+			List<FechaPrensistaMaquinaConcentrado> fpmConcentrado = fechaPrensistaMaquinaDAO.buscaFechaPrensistaMaquinaConcentrado(query.toString());
+			for (FechaPrensistaMaquinaConcentrado fechaPrensistaMaquinaConcentrado : fpmConcentrado) {
+				row = sheet.createRow(cont);
+				row.createCell(0).setCellValue( fechaPrensistaMaquinaConcentrado.getFechaImpresion().toString() );
+				row.createCell(1).setCellValue( fechaPrensistaMaquinaConcentrado.getPrensista() );
+				row.createCell(2).setCellValue( fechaPrensistaMaquinaConcentrado.getPrensistaAyudante() );
+				row.createCell(3).setCellValue( fechaPrensistaMaquinaConcentrado.getMaquina() );
+				row.createCell(4).setCellValue( fechaPrensistaMaquinaConcentrado.getHojasBuenas().intValue() );
+				row.createCell(5).setCellValue( fechaPrensistaMaquinaConcentrado.getCambioPlacas().intValue() );
+				cont++;
+				fechaPrensistaMaquinaConcentrado = null;
+			}
+			fpmConcentrado = null;
+			wb.close();
+		} catch ( Exception e ) {
+			System.out.println("obtieneExcelReporteConcentrado: Error al generar excel");
+		}
+		query = null;
+		
+		// creacion del stream
+		ByteArrayOutputStream os;
+		try {
+			os = new ByteArrayOutputStream();
+			wb.write(os);
+			return os.toByteArray();
+		} catch( Exception e ) {
+			System.out.println("obtieneExcelListaTipoPapelExtendido:Error al convertir a stream");
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public List<FechaPrensistaMaquinaDTO> listaFechaPrensistaMaquinaPorConsulta(ParametrosBusquedaFechaPrensistaMaquina parametros) {
@@ -363,5 +466,7 @@ public class FechaPrensistaMaquinaServiceImpl implements FechaPrensistaMaquinaSe
 		
 		return lista;
 	}
+
+	
 	
 }

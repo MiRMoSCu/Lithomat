@@ -127,38 +127,48 @@ function nueva_busqueda() {
     
     var correcto = true;
     
-    if( document.getElementById("radio_nut").checked == true
-        && document.forms["visualizador"].elements["nut"].value == "" ) {
+    if ( correcto
+    		&& document.getElementById("radio_nut").checked == true
+    		&& document.forms["visualizador"].elements["nut"].value == "" ) {
             correcto = false;
             alert("El campo de b\u00fasqueda NUT no puede estar vac\u00edo. Favor de reportarlo.");
-        }
+    }
         
-    if( document.getElementById("radio_nombre_op").checked == true
-        && document.forms["visualizador"].elements["nombre"] == "" ) {
+    if ( correcto 
+    		&& document.getElementById("radio_nombre_op").checked == true
+    		&& document.forms["visualizador"].elements["nombre"].value == "" ) {
             correcto = false;
             alert("El campo de b\u00fasqueda NOMBRE no puede estar vac\u00edo. Favor de reportarlo.");
-        }
+    }
         
-    if( document.getElementById("radio_descripcion_op").checked == true
-        && document.forms["visualizador"].elements["descripcion"] == "" ) {
+    if ( correcto
+    		&& document.getElementById("radio_descripcion_op").checked == true
+    		&& document.forms["visualizador"].elements["descripcion"].value == "" ) {
             correcto = false;
             alert("El campo de b\u00fasqueda DESCRIPCI\u00d3N no puede estar vac\u00edo. Favor de reportarlo.");
-        }
+    }
         
-    if( document.getElementById("radio_fecha_cotizacion").checked == true
-        && ( document.forms["visualizador"].elements["fecha_cotizacion_inicio"] == "" 
-             || document.forms["visualizador"].elements["fecha_cotizacion_fin"] == "") ) {
-            correcto = false;
+    if ( correcto && document.getElementById("radio_fecha_cotizacion").checked == true ) {
+    	if ( document.forms["visualizador"].elements["fecha_cotizacion_inicio"].value == "" 
+    		|| document.forms["visualizador"].elements["fecha_cotizacion_fin"].value == "") {
+			correcto = false;
             alert("Los campoa de b\u00fasqueda FECHA COITIZACI\u00d3N no pueden estar vac\u00edos. Favor de reportarlos.");
-        }
-        
-    if( document.getElementById("radio_cliente").checked == true
-        && document.forms["visualizador"].elements["cliente"] == "" ) {
+		} else if ( new Date(document.forms["visualizador"].elements["fecha_cotizacion_fin"].value) < new Date(document.forms["visualizador"].elements["fecha_cotizacion_inicio"].value) ) {
+			correcto = false;
+			alert("Los campoa de b\u00fasqueda FECHA COITIZACI\u00d3N inicial deber ser menor al final. Favor de reportarlos.");
+			document.forms["visualizador"].elements["fecha_cotizacion_inicio"].value = "";
+			document.forms["visualizador"].elements["fecha_cotizacion_fin"].value = "";
+		}
+    }
+    
+    if ( correcto 
+    		&& document.getElementById("radio_cliente").checked == true
+    		&& document.forms["visualizador"].elements["cliente"].value == "" ) {
             correcto = false;
             alert("El campo de b\u00fasqueda CLIENTE no puede estar vac\u00edo. Favor de reportarlo.");
     }
     
-    if( correcto ) {
+    if ( correcto ) {
         // realiza ajax; como es una nueva busqueda, se debe inicializar el paginador a 1 = numero de pagina
         numero_pagina = 1;
         document.forms["visualizador"].elements["numero_pagina"].value                  = numero_pagina;

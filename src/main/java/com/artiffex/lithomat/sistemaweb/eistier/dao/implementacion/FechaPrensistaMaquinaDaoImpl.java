@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.FechaPrensistaMaquinaDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.FechaPrensistaMaquinaDTOGrid;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.FechaPrensistaMaquina;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.FechaPrensistaMaquinaConcentrado;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.FechaPrensistaMaquinaDAO;
 import com.artiffex.lithomat.sistemaweb.eistier.hibernate.HibernateUtil;
 
@@ -63,6 +64,24 @@ public class FechaPrensistaMaquinaDaoImpl implements FechaPrensistaMaquinaDAO {
 	public List<FechaPrensistaMaquina> lista() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<FechaPrensistaMaquinaConcentrado> buscaFechaPrensistaMaquinaConcentrado(String strQuery) {
+		List<FechaPrensistaMaquinaConcentrado> lista = new ArrayList<FechaPrensistaMaquinaConcentrado>();
+		try {
+			sesion = HibernateUtil.getInstance().getCurrentSession();
+			sesion.beginTransaction();
+			SQLQuery query = sesion.createSQLQuery(strQuery);
+			query.setResultTransformer(Transformers.aliasToBean(FechaPrensistaMaquinaConcentrado.class));
+			lista = query.list();
+			sesion.getTransaction().commit();
+			query = null;
+		} catch ( Exception e ) {
+			log.error(e.getMessage());
+			sesion.getTransaction().rollback();
+		}
+		return lista;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -116,5 +135,7 @@ public class FechaPrensistaMaquinaDaoImpl implements FechaPrensistaMaquinaDAO {
 		}
 		return lista;
 	}
+
+	
 	
 }

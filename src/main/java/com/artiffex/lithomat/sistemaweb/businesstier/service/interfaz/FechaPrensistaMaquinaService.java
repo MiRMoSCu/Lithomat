@@ -16,6 +16,8 @@ public interface FechaPrensistaMaquinaService {
 	
 	public void eliminaFechaPrensistaMaquinaPorNut(String nut);
 	
+	public byte[] obtieneExcelReporteConcentrado(String fechaBusquedaInicio, String fechaBusquedaFin);
+	
 	public List<FechaPrensistaMaquinaDTO> listaFechaPrensistaMaquinaPorConsulta(ParametrosBusquedaFechaPrensistaMaquina parametros);
 	
 	public int obtieneNumeroFechaPrensistaMaquinaPorParametros(boolean busquedaPorNut, String nut);

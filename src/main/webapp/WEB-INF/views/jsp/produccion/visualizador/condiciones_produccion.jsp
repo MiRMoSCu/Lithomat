@@ -28,7 +28,7 @@
 					<div id="div_cuerpo">
 						<div id="div_contenido">
 							<br>
-							<form name="condiciones_produccion" method="post" target="_blank">
+							<form name="condiciones_produccion" method="post" target="_blank" accept-charset="ISO-8859-1">
 								<input type="hidden" name="nut" 						value="${nut}"/>
 								<input type="hidden" name="id_tipo_reporte" 			value=""/>
 								<input type="hidden" name="id_tipo_formato_impresion" 	value=""/>

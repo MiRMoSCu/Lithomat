@@ -1,8 +1,10 @@
 package com.artiffex.lithomat.sistemaweb.webtier.controller.reporte;
 
+import java.io.OutputStream;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.security.access.annotation.Secured;
@@ -51,6 +53,32 @@ public class FechaPrensistaMaquinaController {
 		
 		return "reporte/fecha_prensista_maquina";
 	}
+	
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
+	@RequestMapping(value = "/exporta_reporte_concentrado", method = RequestMethod.GET)
+	public void exportaReporteConcentrado( 
+			@RequestParam(value = "fecha_excel_inicio", required = false) String fechaBusquedaInicio,
+			@RequestParam(value = "fecha_excel_fin", 	required = false) String fechaBusquedaFin,
+			HttpServletResponse response
+		) {
+		log.info("/exporte_reporte_concentrado_fpm");
+		
+		// enviar archivo al cliente
+		byte[] documento = fechaPrensistaMaquinaService.obtieneExcelReporteConcentrado(fechaBusquedaInicio, fechaBusquedaFin);
+		try {
+			OutputStream os = response.getOutputStream();
+			response.setHeader("Content-Disposition","attachment; filename=reporte_concentrado_fecha_prensista_maquina.xls");
+			response.setContentType("application/vnd.ms-excel");
+			response.setContentLength( documento.length );
+			os.write( documento );
+			os.flush();
+		} catch ( Exception e ) {
+			log.error("Error al enviar el archivo de excel");
+			e.printStackTrace();
+		}
+	}
+	
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/lista", method = RequestMethod.POST)

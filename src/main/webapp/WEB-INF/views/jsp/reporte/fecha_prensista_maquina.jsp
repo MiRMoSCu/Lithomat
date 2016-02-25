@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:url value="/reporte/existe_nut"				var="urlExisteNut"/>
-<c:url value="/fecha_prensista_maquina/lista"	var="urlListaFechaPrensistaMaquina"/>
+<c:url value="/fecha_prensista_maquina/exporta_reporte_concentrado"	var="urlExportaReporte"/>
+<c:url value="/reporte/existe_nut"									var="urlExisteNut"/>
+<c:url value="/fecha_prensista_maquina/lista"						var="urlListaFechaPrensistaMaquina"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -21,7 +22,6 @@
 	    	//inicializacion jquery
 	        $(document).ready(function (){});
 	    	// inicializacion input fecha
-	    	/*
 	    	$(function() {
 				$("[name=fecha_excel_inicio]").datepicker({
 					dateFormat:'yy-mm-dd',
@@ -32,7 +32,6 @@
 					dateFormat:'yy-mm-dd',
 				});
 			});
-            */
 	    	$(function() {
 				$("[name=fecha_busqueda_inicio]").datepicker({
 					dateFormat:'yy-mm-dd',
@@ -45,6 +44,7 @@
 			});
         </script>
         <script type="text/javascript">
+        	var urlExportaReporte				= "${urlExportaReporte}";
         	var urlExisteNut 					= "${urlExisteNut}";
         	var urlListaFechaPrensistaMaquina	= "${urlListaFechaPrensistaMaquina}";
         </script>
@@ -58,17 +58,17 @@
 							<div id="div_fecha_prensista_maquina">
 								<br/>
 								<div id="div_reporte_consolidado_excel_fecha_prensista_maquina">
-									<div class="titulo">
-										<font size="5">REPORTE CONSOLIDADO FECHA - PRENSISTA - M&Aacute;QUINA</font>
-									</div>
-									<div class="linea">
-										<div class="casilla">
-											<div class="columna_izquierda">
-												<div class="mitad_columna_izquierda">
+									<form name="busqueda_concentrado_excel" action="" method="post" accept-charset="ISO-8859-1">
+										<div class="titulo">
+											<font size="5">REPORTE CONCENTRADO FECHA - PRENSISTA - M&Aacute;QUINA</font>
+										</div>
+										<div class="linea">
+											<div class="casilla">
+												<div class="columna_izquierda">
 													<div class="columna_completa">
 														<table>
 															<tr>
-																<td width="44%">Fecha Inicial:</td>
+																<td width="22%">Fecha Inicial:</td>
 																<td>
 																	<input 	type="text"
 																			class="input"
@@ -76,15 +76,7 @@
 																			value=""
 																			readonly/>
 																</td>
-															</tr>
-														</table>
-													</div>
-												</div>
-												<div class="mitad_columna_derecha">
-													<div class="columna_completa">
-														<table>
-															<tr>
-																<td width="43%">Fecha Final:</td>
+																<td width="1%">a:</td>
 																<td>
 																	<input	type="text"
 																			class="input"
@@ -98,28 +90,28 @@
 												</div>
 											</div>
 										</div>
-									</div>
-									<div class="linea">
-										<div class="casilla">
-											<div class="columna_izquierda" style="text-align: right;">
-												<span style="cursor:pointer;" onclick="limpiaFechasExcel()">
-													<font color="gray">&nbsp;LIMPIAR&nbsp;</font>
-												</span>
-												<span style="cursor:pointer;" onclick="generaExcel()">
-													<font color="blue">&nbsp;ACEPTAR&nbsp;</font>
-												</span>
+										<div class="linea">
+											<div class="casilla">
+												<div class="columna_izquierda" style="text-align: right;">
+													<span style="cursor:pointer;" onclick="limpiaFechasExcel()">
+														<font color="gray">&nbsp;LIMPIAR&nbsp;</font>
+													</span>
+													<span style="cursor:pointer;" onclick="generaExcel()">
+														<font color="blue">&nbsp;ACEPTAR&nbsp;</font>
+													</span>
+												</div>
 											</div>
 										</div>
-									</div>
+									</form>
 								</div>
 								<div class="div_separador_mediano" style="clear: both;">
 									<img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
 								</div>
 								<div id="div_reporte_visual_fecha_prensista_maquina">
-									<div class="titulo">
-										<font size="5">RESUMEN FECHA - PRENSISTA - M&Aacute;QUINA POR NUT</font>
-									</div>
 									<form name="busqueda_fecha_prensista_maquina" action="" method="post" accept-charset="ISO-8859-1">
+										<div class="titulo">
+											<font size="5">RESUMEN FECHA - PRENSISTA - M&Aacute;QUINA POR NUT</font>
+										</div>
 										<div class="linea">
 											<div class="casilla">
 												<div class="columna_izquierda">

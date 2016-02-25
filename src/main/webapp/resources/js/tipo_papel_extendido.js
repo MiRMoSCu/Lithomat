@@ -22,6 +22,23 @@ Number.prototype.formatMoney = function(c, d, t) {
 
 
 /* funciones */
+
+function exportarPrecios() {
+	location.href = urlExporta;
+}
+
+
+function importarPrecios() {
+	//alert("");
+	Shadowbox.open({
+		content:urlImporta,
+		player:"iframe",
+		width:630, 
+		height:305
+	});
+}
+
+
 function setCampos( id_tipo_papel_extendido, razon_social, nombre, gramaje, kilogramos, alto, ancho, descripcion, precio, nombre_precio ) {
 
     //Busqueda de proveedor_papel

@@ -5,6 +5,7 @@ import java.util.List;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.FechaPrensistaMaquinaDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.FechaPrensistaMaquinaDTOGrid;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.FechaPrensistaMaquina;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.FechaPrensistaMaquinaConcentrado;
 
 public interface FechaPrensistaMaquinaDAO {
 	
@@ -16,7 +17,9 @@ public interface FechaPrensistaMaquinaDAO {
 	
 	public List<FechaPrensistaMaquina> lista();
 	
-	public List<FechaPrensistaMaquinaDTO> buscaFechaPrensistaMaquinaDTO(String query); 
+	public List<FechaPrensistaMaquinaConcentrado> buscaFechaPrensistaMaquinaConcentrado(String strQuery);
+	
+	public List<FechaPrensistaMaquinaDTO> buscaFechaPrensistaMaquinaDTO(String strQuery); 
 	
 	public int numeroRegistrosFechaPrensistaMaquina(String strQuery);
 	

@@ -1,11 +1,38 @@
 
 function limpiaFechasExcel() {
-	
-	
+	document.busqueda_concentrado_excel.fecha_excel_inicio.value 	= "";
+	document.busqueda_concentrado_excel.fecha_excel_fin.value 		= "";
 }
 
 function generaExcel() {
+	var correcto = true;
 	
+	if  ( correcto
+			&& ( document.busqueda_concentrado_excel.fecha_excel_inicio.value == "" 
+				|| document.busqueda_concentrado_excel.fecha_excel_fin.value == "" ) ) {
+		correcto = false;
+		alert("Favor de especificar las fechas correctamente");
+		if ( document.busqueda_concentrado_excel.fecha_excel_inicio.value == "" 
+			&& document.busqueda_concentrado_excel.fecha_excel_fin.value == "" )
+			document.busqueda_concentrado_excel.fecha_excel_inicio.focus();
+		else if ( document.busqueda_concentrado_excel.fecha_excel_inicio.value == "" )
+			document.busqueda_concentrado_excel.fecha_excel_inicio.focus();
+		else
+			document.busqueda_concentrado_excel.fecha_excel_fin.focus();
+	}
+	
+	if ( correcto
+			&& (new Date(document.busqueda_concentrado_excel.fecha_excel_fin.value) < new Date(document.busqueda_concentrado_excel.fecha_excel_inicio.value) ) ) {
+		correcto = false;
+		alert("La fecha de busqueda inicial deber ser menor a la fecha de busqueda final");
+		limpiaFechasExcel();
+		document.busqueda_concentrado_excel.fecha_excel_inicio.focus();
+	}
+	
+	if ( correcto )
+		location.href = urlExportaReporte 
+						+ "?fecha_excel_inicio=" + document.busqueda_concentrado_excel.fecha_excel_inicio.value 
+						+ "&fecha_excel_fin=" + document.busqueda_concentrado_excel.fecha_excel_fin.value;
 }
 
 function generaTablaDOM( jsonFechaPrensistaMaquina ) {
