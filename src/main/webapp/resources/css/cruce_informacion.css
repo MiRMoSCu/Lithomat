@@ -17,7 +17,7 @@
 
 #div_hoja {
     width: 1278px;
-    height: 2020px; /* aqui se modifica alto */
+    height: 2070px; /* aqui se modifica alto */
     background: #FFF;
     float: left;
 }
@@ -76,7 +76,7 @@
 
 #div_fondo_der {
     width: 29px;
-    height: 1989px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_hoja - 31 (div_fondo_esq_sup) */
+    height: 2039px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_hoja - 31 (div_fondo_esq_sup) */
     background-image: url('../image/s_der.png');
     background-repeat: repeat-y;
 }

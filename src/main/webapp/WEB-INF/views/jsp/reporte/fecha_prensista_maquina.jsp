@@ -7,17 +7,42 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Fecha Prensista M&aacute;quina</title>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 		<link rel="stylesheet" href="<c:url value="/resources/css/master.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/font.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/menu.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/fecha_prensista_maquina.css"/>" type="text/css"></link>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
+        <script type="text/javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/utilidades.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/master.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/fecha_prensista_maquina.js"/>"></script>
         <script type="text/javascript">
 	    	//inicializacion jquery
 	        $(document).ready(function (){});
+	    	// inicializacion input fecha
+	    	/*
+	    	$(function() {
+				$("[name=fecha_excel_inicio]").datepicker({
+					dateFormat:'yy-mm-dd',
+				});
+			});
+            $(function() {
+				$("[name=fecha_excel_fin]").datepicker({
+					dateFormat:'yy-mm-dd',
+				});
+			});
+            */
+	    	$(function() {
+				$("[name=fecha_busqueda_inicio]").datepicker({
+					dateFormat:'yy-mm-dd',
+				});
+			});
+            $(function() {
+				$("[name=fecha_busqueda_fin]").datepicker({
+					dateFormat:'yy-mm-dd',
+				});
+			});
         </script>
         <script type="text/javascript">
         	var urlExisteNut 					= "${urlExisteNut}";
@@ -44,7 +69,13 @@
 														<table>
 															<tr>
 																<td width="44%">Fecha Inicial:</td>
-																<td></td>
+																<td>
+																	<input 	type="text"
+																			class="input"
+																			name="fecha_excel_inicio"
+																			value=""
+																			readonly/>
+																</td>
 															</tr>
 														</table>
 													</div>
@@ -54,7 +85,13 @@
 														<table>
 															<tr>
 																<td width="43%">Fecha Final:</td>
-																<td></td>
+																<td>
+																	<input	type="text"
+																			class="input"
+																			name="fecha_excel_fin"
+																			value=""
+																			readonly/>
+																</td>
 															</tr>
 														</table>
 													</div>
@@ -65,7 +102,7 @@
 									<div class="linea">
 										<div class="casilla">
 											<div class="columna_izquierda" style="text-align: right;">
-												<span style="cursor:pointer;" onclick="limpiaFechas()">
+												<span style="cursor:pointer;" onclick="limpiaFechasExcel()">
 													<font color="gray">&nbsp;LIMPIAR&nbsp;</font>
 												</span>
 												<span style="cursor:pointer;" onclick="generaExcel()">
@@ -99,7 +136,7 @@
 																			name="nut"
 																			value=""
 																			maxlength="10"
-																			onkeydown="revisaNumero(false, this.value, event, 'buscaRegistros', null)"/>
+																			onkeydown="revisaNumero(false, this.value, event, null, null)"/>
 																</td>
 															</tr>
 														</table>
@@ -114,7 +151,19 @@
 																	<span style="cursor: pointer;" onclick="document.busqueda_fecha_prensista_maquina.chkbx_busca_por_fecha.click()">Fecha:</span>
 																</td>
 																<td>
-																	
+																	<input 	type="text"
+																			class="input"
+																			name="fecha_busqueda_inicio"
+																			value=""
+																			readonly/>
+																</td>
+																<td width="1%">a:</td>
+																<td>
+																	<input 	type="text"
+																			class="input"
+																			name="fecha_busqueda_fin"
+																			value=""
+																			readonly/>
 																</td>
 															</tr>
 														</table>
@@ -133,8 +182,10 @@
 																	<span style="cursor: pointer;" onclick="document.busqueda_fecha_prensista_maquina.chkbx_busca_por_prensista.click()">Prensista:</span>
 																</td>
 																<td>
-																	<select>
-																	
+																	<select name="id_prensista">
+																		<c:forEach items="${listaPrensista}" var="prensista">
+																			<option value="${prensista.value}">${prensista.text}</option>
+																		</c:forEach>
 																	</select>
 																</td>
 															</tr>
@@ -150,8 +201,10 @@
 																	<span style="cursor: pointer;" onclick="document.busqueda_fecha_prensista_maquina.chkbx_busca_por_maquina.click()">M&aacute;quina:</span>
 																</td>
 																<td>
-																	<select>
-																	
+																	<select name="id_maquina">
+																		<c:forEach items="${listaMaquina}" var="maquina">
+																			<option value="${maquina.value}">${maquina.text}</option>
+																		</c:forEach>
 																	</select>
 																</td>
 															</tr>
@@ -159,9 +212,6 @@
 													</div>
 												</div>
 											</div>
-										</div>
-										<div style="display: none;">
-											<input type="text" value="" name="bug"/>
 										</div>
 										<div class="linea">
 											<div class="casilla">
@@ -200,10 +250,22 @@
 													<th>H.Limpias</th>
 													<th>No.CambioPlacas</th>
 													<th>No.L&aacute;minasExtra</th>
-													<th>FrenteK.Tinta</th>
-													<th>VueltaK.Tinta</th>
+													<th>FrenteK.TintaCyan</th>
+													<th>FrenteK.TintaMagenta</th>
+													<th>FrenteK.TintaYellow</th>
+													<th>FrenteK.TintaBlack</th>
+													<th>VueltaK.TintaCyan</th>
+													<th>VueltaK.TintaMagenta</th>
+													<th>VueltaK.TintaYellow</th>
+													<th>VueltaK.TintaBlack</th>
 												</tr>
 												<tr class="l1">
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
 													<td>&nbsp;</td>
 													<td>&nbsp;</td>
 													<td>&nbsp;</td>

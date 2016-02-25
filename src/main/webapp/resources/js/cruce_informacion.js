@@ -50,8 +50,14 @@ function limpia_form_fecha_prensista_maquina() {
 	document.fecha_prensista_maquina.hojas_adicionales.value 				= "";
 	document.fecha_prensista_maquina.cambio_placas.value 					= "";
 	document.fecha_prensista_maquina.laminas_extra.value 					= "";
-	document.fecha_prensista_maquina.frente_kilos_tinta.value 				= "";
-	document.fecha_prensista_maquina.vuelta_kilos_tinta.value 				= "";
+	document.fecha_prensista_maquina.frente_kilos_tinta_cyan.value 			= "";
+	document.fecha_prensista_maquina.frente_kilos_tinta_magenta.value 		= "";
+	document.fecha_prensista_maquina.frente_kilos_tinta_yellow.value 		= "";
+	document.fecha_prensista_maquina.frente_kilos_tinta_black.value 		= "";
+	document.fecha_prensista_maquina.vuelta_kilos_tinta_cyan.value 			= "";
+	document.fecha_prensista_maquina.vuelta_kilos_tinta_magenta.value 		= "";
+	document.fecha_prensista_maquina.vuelta_kilos_tinta_yellow.value 		= "";
+	document.fecha_prensista_maquina.vuelta_kilos_tinta_black.value 		= "";
 }
 
 /*************************************************************/
@@ -277,6 +283,18 @@ function carga_datos() {
 /*************************************************************/
 //FUNCIONES PARA LA BUSQUEDA ESPECIALIZADA
 
+function insertaRegistroLimpioFPM( tabla ) { // en la tabla que se le envia
+	var row = tabla.insertRow(1);
+	row.id			= "fpm:null";
+	row.className 	= "l1";
+	// ciclo para limpiar todos los td
+	for ( var i=0; i<21; i++ ) {
+		cell 			= row.insertCell(i);
+		cell.innerHTML 	= "&nbsp";
+	}
+}
+
+
 function nueva_busqueda() {
 	// bandera
 	var correcto = true;
@@ -290,19 +308,15 @@ function nueva_busqueda() {
 	
 	if ( correcto ) {
 		// limpia tabla fecha_prensista_maquina
-		if ( document.getElementById("fpm:null") == null ) { // es porque NO EXISTE, porque existe al menos un registro en fecha_prensista_maquina
+		if ( document.getElementById("fpm:null") == null ) { // es porque NO EXISTE class=fpm:null, porque existe al menos un registro en fecha_prensista_maquina
+			// limpia la tabla
 			var tabla_fecha_prensista_maquina 		= document.getElementById("tabla_fecha_prensista_maquina");
 			var contador_registros_tabla 			= tabla_fecha_prensista_maquina.rows.length;
 			for ( var i=contador_registros_tabla-1; i>0; i--) 
 				tabla_fecha_prensista_maquina.deleteRow(i);
-			var row = tabla_fecha_prensista_maquina.insertRow(1);
-			row.id			= "fpm:null";
-			row.className 	= "l1";
-			for ( var i=0; i<15; i++ ) {
-				cell 			= row.insertCell(i);
-				cell.innerHTML 	= "&nbsp";
-			}
-			delete i, row, tabla_fecha_prensista_maquina, contador_registros_tabla;
+			// inserta registro limpio tabla fecha_prensista_maquina
+			insertaRegistroLimpioFPM( tabla_fecha_prensista_maquina );
+			delete tabla_fecha_prensista_maquina, contador_registros_tabla;
 		}
 		// inicializa paginador
 		numero_pagina = 1;
@@ -349,23 +363,16 @@ function limpia_form_busqueda_registro_grid() {
 function elimina_registro_fpm(obj) {
 	var rowNumber = obj.rowIndex
 	// activa registro en la tabla tabla_lista_registros si es que esta mostrado actualmente
-	if ( document.getElementById("pliego:" + obj.id.split(":")[1]) )
-		document.getElementById("pliego:" + obj.id.split(":")[1]).className = obj.id.split(":")[1]%2 == 0?"l1":"l2";
+	if ( document.getElementById("pliego:" + obj.id.split(":")[1]) ) 
+		document.getElementById("pliego:" + obj.id.split(":")[1]).className = document.getElementById("pliego:" + obj.id.split(":")[1]).rowIndex%2!=0?"l1":"l2";
 	var table = document.getElementById("tabla_fecha_prensista_maquina");
 	table.deleteRow(obj.rowIndex);
 	if ( table.rows.length > 1 ) 
 		for (var i=rowNumber; i<table.rows.length; i++)
 			table.rows[i].className = table.rows[i].className=="l1"?"l2":"l1";
-	else {
-		var row = table.insertRow(1);
-		row.id			= "fpm:null";
-		row.className 	= "l1";
-		for ( var i=0; i<15; i++ ) {
-			cell 			= row.insertCell(i);
-			cell.innerHTML 	= "&nbsp";
-		}
-	}
-	delete i;
+	else 
+		insertaRegistroLimpioFPM( table );
+	delete table;
 	delete rowNumber;
 	delete obj;
 }
@@ -430,19 +437,67 @@ function crea_registro_fpm() {
 	}
 	
 	if ( correcto
-			&& ( document.fecha_prensista_maquina.frente_kilos_tinta.value == ""
-				|| isNaN( document.fecha_prensista_maquina.frente_kilos_tinta.value ) ) ) {
+			&& ( document.fecha_prensista_maquina.frente_kilos_tinta_cyan.value == ""
+				|| isNaN( document.fecha_prensista_maquina.frente_kilos_tinta_cyan.value ) ) ) {
 		correcto = false;
-		alert("El campo Frente Kilos Tinta debe ser un numero valido. Favor de informarlo.");
-		document.fecha_prensista_maquina.frente_kilos_tinta.focus();
+		alert("El campo Frente Kilos Tinta Cyan debe ser un numero valido. Favor de informarlo.");
+		document.fecha_prensista_maquina.frente_kilos_tinta_cyan.focus();
 	}
 	
 	if ( correcto
-			&& ( document.fecha_prensista_maquina.vuelta_kilos_tinta.value == ""
-				|| isNaN( document.fecha_prensista_maquina.vuelta_kilos_tinta.value ) ) ) {
+			&& ( document.fecha_prensista_maquina.frente_kilos_tinta_magenta.value == ""
+				|| isNaN( document.fecha_prensista_maquina.frente_kilos_tinta_magenta.value ) ) ) {
 		correcto = false;
-		alert("El campo Vuelta Kilos Tinta debe ser un numero valido. Favor de informarlo.");
-		document.fecha_prensista_maquina.vuelta_kilos_tinta.focus();
+		alert("El campo Frente Kilos Tinta Magenta debe ser un numero valido. Favor de informarlo.");
+		document.fecha_prensista_maquina.frente_kilos_tinta_magenta.focus();
+	}
+	
+	if ( correcto
+			&& ( document.fecha_prensista_maquina.frente_kilos_tinta_yellow.value == ""
+				|| isNaN( document.fecha_prensista_maquina.frente_kilos_tinta_yellow.value ) ) ) {
+		correcto = false;
+		alert("El campo Frente Kilos Tinta Yellow debe ser un numero valido. Favor de informarlo.");
+		document.fecha_prensista_maquina.frente_kilos_tinta_yellow.focus();
+	}
+	
+	if ( correcto
+			&& ( document.fecha_prensista_maquina.frente_kilos_tinta_black.value == ""
+				|| isNaN( document.fecha_prensista_maquina.frente_kilos_tinta_black.value ) ) ) {
+		correcto = false;
+		alert("El campo Frente Kilos Tinta Black debe ser un numero valido. Favor de informarlo.");
+		document.fecha_prensista_maquina.frente_kilos_tinta_black.focus();
+	}
+	
+	if ( correcto
+			&& ( document.fecha_prensista_maquina.vuelta_kilos_tinta_cyan.value == ""
+				|| isNaN( document.fecha_prensista_maquina.vuelta_kilos_tinta_cyan.value ) ) ) {
+		correcto = false;
+		alert("El campo Vuelta Kilos Tinta Cyan debe ser un numero valido. Favor de informarlo.");
+		document.fecha_prensista_maquina.vuelta_kilos_tinta_cyan.focus();
+	}
+	
+	if ( correcto
+			&& ( document.fecha_prensista_maquina.vuelta_kilos_tinta_magenta.value == ""
+				|| isNaN( document.fecha_prensista_maquina.vuelta_kilos_tinta_magenta.value ) ) ) {
+		correcto = false;
+		alert("El campo Vuelta Kilos Tinta Magenta debe ser un numero valido. Favor de informarlo.");
+		document.fecha_prensista_maquina.vuelta_kilos_tinta_magenta.focus();
+	}
+	
+	if ( correcto
+			&& ( document.fecha_prensista_maquina.vuelta_kilos_tinta_yellow.value == ""
+				|| isNaN( document.fecha_prensista_maquina.vuelta_kilos_tinta_yellow.value ) ) ) {
+		correcto = false;
+		alert("El campo Vuelta Kilos Tinta Yellow debe ser un numero valido. Favor de informarlo.");
+		document.fecha_prensista_maquina.vuelta_kilos_tinta_yellow.focus();
+	}
+	
+	if ( correcto
+			&& ( document.fecha_prensista_maquina.vuelta_kilos_tinta_black.value == ""
+				|| isNaN( document.fecha_prensista_maquina.vuelta_kilos_tinta_black.value ) ) ) {
+		correcto = false;
+		alert("El campo Vuelta Kilos Tinta Black debe ser un numero valido. Favor de informarlo.");
+		document.fecha_prensista_maquina.vuelta_kilos_tinta_black.focus();
 	}
 	
 	if ( correcto ) {
@@ -501,14 +556,32 @@ function crea_registro_fpm() {
 				// numero laminas extra
 			cell = row.insertCell(11);
 			cell.innerHTML = $("[name=laminas_extra]").val();
-				// frente kilos tinta
+				// frente kilos tinta cyan
 			cell = row.insertCell(12);
-			cell.innerHTML = $("[name=frente_kilos_tinta]").val();
-				// vuelta kilos tinta
+			cell.innerHTML = $("[name=frente_kilos_tinta_cyan]").val();
+				// frente kilos tinta magenta
 			cell = row.insertCell(13);
-			cell.innerHTML = $("[name=vuelta_kilos_tinta]").val();
-				// eliminar
+			cell.innerHTML = $("[name=frente_kilos_tinta_magenta]").val();
+				// frente kilos tinta yellow
 			cell = row.insertCell(14);
+			cell.innerHTML = $("[name=frente_kilos_tinta_yellow]").val();
+				// frente kilos tinta black
+			cell = row.insertCell(15);
+			cell.innerHTML = $("[name=frente_kilos_tinta_black]").val();
+				// vuelta kilos tinta cyan
+			cell = row.insertCell(16);
+			cell.innerHTML = $("[name=vuelta_kilos_tinta_cyan]").val();
+				// vuelta kilos tinta magenta
+			cell = row.insertCell(17);
+			cell.innerHTML = $("[name=vuelta_kilos_tinta_magenta]").val();
+				// vuelta kilos tinta yellow
+			cell = row.insertCell(18);
+			cell.innerHTML = $("[name=vuelta_kilos_tinta_yellow]").val();
+				// vuelta kilos tinta black
+			cell = row.insertCell(19);
+			cell.innerHTML = $("[name=vuelta_kilos_tinta_black]").val();
+				// eliminar
+			cell = row.insertCell(20);
 			cell.innerHTML = "<img alt='' src='" + urlBotonEliminarRegistro + "' style='cursor:pointer;' onclick='elimina_registro_fpm(this.parentElement.parentElement)' )' />";
 			// muestra el registro
 			row.style.display = "";
@@ -535,20 +608,26 @@ function envia_cruce_informacion() {
 	}
 	
 	function FechaPrensistaMaquina() {
-		this.id_pliego 				= "";
-		this.id_prensista 			= "";
-		this.id_turno_laboral 		= "";
-		this.id_maquina 			= "";
-		this.fecha_impresion 		= "";
-		this.id_prensista_ayudante 	= "";
-		this.hojas_buenas 			= "";
-		this.hojas_malas 			= "";
-		this,hojas_limpias 			= "";
-		this.hojas_adicionales 		= "";
-		this.cambio_placas 			= "";
-		this.laminas_extra 			= "";
-		this.frente_kilos_tinta 	= "";
-		this.vuelta_kilos_tinta 	= "";			
+		this.id_pliego 					= "";
+		this.id_prensista 				= "";
+		this.id_turno_laboral 			= "";
+		this.id_maquina 				= "";
+		this.fecha_impresion 			= "";
+		this.id_prensista_ayudante 		= "";
+		this.hojas_buenas 				= "";
+		this.hojas_malas 				= "";
+		this,hojas_limpias 				= "";
+		this.hojas_adicionales 			= "";
+		this.cambio_placas 				= "";
+		this.laminas_extra 				= "";
+		this.frente_kilos_tinta_cyan 	= "";
+		this.frente_kilos_tinta_magenta = "";
+		this.frente_kilos_tinta_yellow 	= "";
+		this.frente_kilos_tinta_black 	= "";
+		this.vuelta_kilos_tinta_cyan 	= "";			
+		this.vuelta_kilos_tinta_magenta = "";
+		this.vuelta_kilos_tinta_yellow 	= "";
+		this.vuelta_kilos_tinta_black 	= "";
 	}
 	
 	var listaObject = new ListaObject();
@@ -601,24 +680,36 @@ function envia_cruce_informacion() {
 			fpm.cambio_placas = tableDOM.rows[i].cells[10].innerHTML;
 			// laminas_extra
 			fpm.laminas_extra = tableDOM.rows[i].cells[11].innerHTML;
-			// frente_kilos_tinta
-			fpm.frente_kilos_tinta = tableDOM.rows[i].cells[12].innerHTML;
-			// vuelta_kilos_tinta
-			fpm.vuelta_kilos_tinta = tableDOM.rows[i].cells[13].innerHTML;
+			// frente_kilos_tinta_cyan
+			fpm.frente_kilos_tinta_cyan = tableDOM.rows[i].cells[12].innerHTML;
+			// frente_kilos_tinta_magenta
+			fpm.frente_kilos_tinta_magenta = tableDOM.rows[i].cells[13].innerHTML;
+			// frente_kilos_tinta_yellow
+			fpm.frente_kilos_tinta_yellow = tableDOM.rows[i].cells[14].innerHTML;
+			// frente_kilos_tinta_black
+			fpm.frente_kilos_tinta_black = tableDOM.rows[i].cells[15].innerHTML;
+			// vuelta_kilos_tinta_cyan
+			fpm.vuelta_kilos_tinta_cyan = tableDOM.rows[i].cells[16].innerHTML;
+			// vuelta_kilos_tinta_magente
+			fpm.vuelta_kilos_tinta_magenta = tableDOM.rows[i].cells[17].innerHTML;
+			// vuelta_kilos_tinta_yellow
+			fpm.vuelta_kilos_tinta_yellow = tableDOM.rows[i].cells[18].innerHTML;
+			// vuelta_kilos_tinta_black
+			fpm.vuelta_kilos_tinta_black = tableDOM.rows[i].cells[19].innerHTML;
 			// GUARDA REGISTRO EN ARREGLO
 			listaObject.registrosFPM.push( fpm );
 			delete fpm;
 		}
 		// envia informacion fpm con ajax
 		document.body.style.cursor = "wait";
-		console.log( listaObject );
-		console.log( JSON.stringify( listaObject ) );
+		//console.log( listaObject );
+		//console.log( JSON.stringify( listaObject ) );
 		$.ajax({
 			type:"POST",
 			url:urlAgregaCruceInformacion,
 			data:{json:JSON.stringify( listaObject )},
 			success:function( response ) {
-				console.log(response);
+				//console.log(response);
 				// nueva busqueda, con los registros ya actualizados
 				nueva_busqueda();
 			},

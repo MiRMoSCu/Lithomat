@@ -39,14 +39,14 @@ function busca() {
 	// validacion
 	var correcto = true;
 	
-	if( document.tipo_trabajo_detalle.chkbx_busca_por_nombre.checked
+	if ( document.tipo_trabajo_detalle.chkbx_busca_por_nombre.checked
 			&& document.tipo_trabajo_detalle.nombre.value == "" ) {
 		correcto = false;
 		alert("Favor de informar nombre.");
 		document.tipo_trabajo_detalle.nombre.focus();
 	}
 	
-	if( correcto
+	if ( correcto
 			&& document.tipo_trabajo_detalle.chkbx_busca_por_ancho.checked
 			&& document.tipo_trabajo_detalle.ancho.value == ""
 			&& isNaN(document.tipo_trabajo_detalle.ancho.valu) ) {
@@ -55,7 +55,7 @@ function busca() {
 		document.tipo_trabajo_detalle.ancho.focus();
 	}
 	
-	if( correcto
+	if ( correcto
 			&& document.tipo_trabajo_detalle.chkbx_busca_por_alto.checked
 			&& document.tipo_trabajo_detalle.alto.value == ""
 			&& isNaN(document.tipo_trabajo_detalle.alto.value) ) {
@@ -64,7 +64,7 @@ function busca() {
 		document.tipo_trabajo_detalle.alto.focus();
 	}
 	
-	if( correcto
+	if ( correcto
 			&& document.tipo_trabajo_detalle.chkbx_busca_por_gramaje.checked
 			&& document.tipo_trabajo_detalle.gramaje.value == ""
 			&& isNaN(document.tipo_trabajo_detalle.gramaje.value) ) {
@@ -73,7 +73,7 @@ function busca() {
 		document.tipo_trabajo_detalle.gramaje.focus();
 	}
 	
-	if( correcto
+	if ( correcto
 			&& document.tipo_trabajo_detalle.chkbx_busca_por_kilogramos.checked
 			&& document.tipo_trabajo_detalle.kilogramos.value == ""
 			&& isNaN(document.tipo_trabajo_detalle.kilogramos.value) ) {
@@ -82,7 +82,7 @@ function busca() {
 		document.tipo_trabajo_detalle.kilogramos.focus();
 	}
 	
-	if(correcto){
+	if ( correcto ){
 		
 		document.body.style.cursor = "wait";
 		$.ajax({

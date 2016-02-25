@@ -98,25 +98,25 @@
                                                         <th>Nombre</th>
                                                         <th>Descripci&oacute;n</th>
                                                         <th>Numero colores</th>
-                                                        <th>Ancho placa</th>
                                                         <th>Alto placa</th>
-                                                        <th>Ancho max papel</th>
-                                                        <th>Alto max papel</th>
-                                                        <th>Ancho min papel</th>
+                                                        <th>Ancho placa</th>
                                                         <th>Alto min papel</th>
+                                                        <th>Ancho min papel</th>
+                                                        <th>Alto max papel</th>
+                                                        <th>Ancho max papel</th>
                                                     </tr>
                                                 <c:forEach var="maquina" items="${listaMaquina}" varStatus="i">
-                                                    <tr class='${i.count%2==0?"l2":"l1"}' onclick="setCampos('${maquina.idMaquina}','${maquina.nombre}', '${maquina.descripcion}', '${maquina.numColores}', '${maquina.anchoPlaca}', '${maquina.altoPlaca}', '${maquina.anchoMaxPapel}', '${maquina.altoMaxPapel}', '${maquina.anchoMinPapel}', '${maquina.altoMinPapel}');">
+                                                    <tr class='${i.count%2==0?"l2":"l1"}' onclick="setCampos('${maquina.idMaquina}','${maquina.nombre}', '${maquina.descripcion}', '${maquina.numColores}', '${maquina.altoPlaca}', '${maquina.anchoPlaca}', '${maquina.altoMinPapel}', '${maquina.anchoMinPapel}', '${maquina.altoMaxPapel}', '${maquina.anchoMaxPapel}');">
                                                         <td>${maquina.idMaquina}</td>
                                                         <td>${maquina.nombre}</td>
                                                         <td>${maquina.descripcion}</td>
                                                         <td>${maquina.numColores}</td>
-                                                        <td>${maquina.anchoPlaca}</td>
                                                         <td>${maquina.altoPlaca}</td>
-                                                        <td>${maquina.anchoMaxPapel}</td>
-                                                        <td>${maquina.altoMaxPapel}</td>
-                                                        <td>${maquina.anchoMinPapel}</td>
+                                                        <td>${maquina.anchoPlaca}</td>
                                                         <td>${maquina.altoMinPapel}</td>
+                                                        <td>${maquina.anchoMinPapel}</td>
+                                                        <td>${maquina.altoMaxPapel}</td>
+                                                        <td>${maquina.anchoMaxPapel}</td>
                                                     </tr>
                                                 </c:forEach>
                                                 </table>

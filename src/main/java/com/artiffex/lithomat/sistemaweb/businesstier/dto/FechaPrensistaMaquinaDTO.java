@@ -19,8 +19,14 @@ public class FechaPrensistaMaquinaDTO implements Serializable {
 	private int hojasAdicionales;
 	private int cambioPlacas;
 	private int laminasExtra;
-	private float frenteKilosTinta;
-	private float vueltaKilosTinta;
+	private float frenteKilosTintaCyan;
+	private float frenteKilosTintaMagenta;
+	private float frenteKilosTintaYellow;
+	private float frenteKilosTintaBlack;
+	private float vueltaKilosTintaCyan;
+	private float vueltaKilosTintaMagenta;
+	private float vueltaKilosTintaYellow;
+	private float vueltaKilosTintaBlack;
 	
 	
 	public String getPrensista() {
@@ -95,16 +101,52 @@ public class FechaPrensistaMaquinaDTO implements Serializable {
 	public void setLaminasExtra(int laminasExtra) {
 		this.laminasExtra = laminasExtra;
 	}
-	public float getFrenteKilosTinta() {
-		return frenteKilosTinta;
+	public float getFrenteKilosTintaCyan() {
+		return frenteKilosTintaCyan;
 	}
-	public void setFrenteKilosTinta(float frenteKilosTinta) {
-		this.frenteKilosTinta = frenteKilosTinta;
+	public void setFrenteKilosTintaCyan(float frenteKilosTintaCyan) {
+		this.frenteKilosTintaCyan = frenteKilosTintaCyan;
 	}
-	public float getVueltaKilosTinta() {
-		return vueltaKilosTinta;
+	public float getFrenteKilosTintaMagenta() {
+		return frenteKilosTintaMagenta;
 	}
-	public void setVueltaKilosTinta(float vueltaKilosTinta) {
-		this.vueltaKilosTinta = vueltaKilosTinta;
+	public void setFrenteKilosTintaMagenta(float frenteKilosTintaMagenta) {
+		this.frenteKilosTintaMagenta = frenteKilosTintaMagenta;
+	}
+	public float getFrenteKilosTintaYellow() {
+		return frenteKilosTintaYellow;
+	}
+	public void setFrenteKilosTintaYellow(float frenteKilosTintaYellow) {
+		this.frenteKilosTintaYellow = frenteKilosTintaYellow;
+	}
+	public float getFrenteKilosTintaBlack() {
+		return frenteKilosTintaBlack;
+	}
+	public void setFrenteKilosTintaBlack(float frenteKilosTintaBlack) {
+		this.frenteKilosTintaBlack = frenteKilosTintaBlack;
+	}
+	public float getVueltaKilosTintaCyan() {
+		return vueltaKilosTintaCyan;
+	}
+	public void setVueltaKilosTintaCyan(float vueltaKilosTintaCyan) {
+		this.vueltaKilosTintaCyan = vueltaKilosTintaCyan;
+	}
+	public float getVueltaKilosTintaMagenta() {
+		return vueltaKilosTintaMagenta;
+	}
+	public void setVueltaKilosTintaMagenta(float vueltaKilosTintaMagenta) {
+		this.vueltaKilosTintaMagenta = vueltaKilosTintaMagenta;
+	}
+	public float getVueltaKilosTintaYellow() {
+		return vueltaKilosTintaYellow;
+	}
+	public void setVueltaKilosTintaYellow(float vueltaKilosTintaYellow) {
+		this.vueltaKilosTintaYellow = vueltaKilosTintaYellow;
+	}
+	public float getVueltaKilosTintaBlack() {
+		return vueltaKilosTintaBlack;
+	}
+	public void setVueltaKilosTintaBlack(float vueltaKilosTintaBlack) {
+		this.vueltaKilosTintaBlack = vueltaKilosTintaBlack;
 	}
 }

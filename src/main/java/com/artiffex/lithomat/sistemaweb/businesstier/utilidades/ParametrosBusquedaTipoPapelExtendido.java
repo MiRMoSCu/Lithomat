@@ -6,18 +6,18 @@ public class ParametrosBusquedaTipoPapelExtendido implements Serializable {
 
 	private static final long serialVersionUID = 1212106463187065222L;
 	
-	public boolean busquedaPorNombre;
-	public boolean busquedaPorAncho;
-	public boolean busquedaPorAlto;
-	public boolean busquedaPorGramaje;
-	public boolean busquedaPorKilogramos;
-	public boolean busquedaPorProveedor;
-	public String nombrePapel;
-	public Float ancho;
-	public Float alto;
-	public Integer gramaje;
-	public Float kilogramos;
-	public Integer idProveedorPapel;
+	private boolean busquedaPorNombre;
+	private boolean busquedaPorAncho;
+	private boolean busquedaPorAlto;
+	private boolean busquedaPorGramaje;
+	private boolean busquedaPorKilogramos;
+	private boolean busquedaPorProveedor;
+	private String nombrePapel;
+	private Float ancho;
+	private Float alto;
+	private Integer gramaje;
+	private Float kilogramos;
+	private Integer idProveedorPapel;
 	
 	
 	public boolean isBusquedaPorNombre() {

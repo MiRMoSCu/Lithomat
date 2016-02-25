@@ -52,12 +52,36 @@
 			<column name="laminas_extra"/>
 			<type name="integer"/>
 		</property>
-		<property name="frenteKilosTinta">
-			<column name="frente_kilos_tinta"/>
+		<property name="frenteKilosTintaCyan">
+			<column name="frente_kilos_tinta_cyan"/>
 			<type name="float"/>
 		</property>
-		<property name="vueltaKilosTinta">
-			<column name="vuelta_kilos_tinta"/>
+		<property name="frenteKilosTintaMagenta">
+			<column name="frente_kilos_tinta_magenta"/>
+			<type name="float"/>
+		</property>
+		<property name="frenteKilosTintaYellow">
+			<column name="frente_kilos_tinta_yellow"/>
+			<type name="float"/>
+		</property>
+		<property name="frenteKilosTintaBlack">
+			<column name="frente_kilos_tinta_black"/>
+			<type name="float"/>
+		</property>
+		<property name="vueltaKilosTintaCyan">
+			<column name="vuelta_kilos_tinta_cyan"/>
+			<type name="float"/>
+		</property>
+		<property name="vueltaKilosTintaMagenta">
+			<column name="vuelta_kilos_tinta_magenta"/>
+			<type name="float"/>
+		</property>
+		<property name="vueltaKilosTintaYellow">
+			<column name="vuelta_kilos_tinta_yellow"/>
+			<type name="float"/>
+		</property>
+		<property name="vueltaKilosTintaBlack">
+			<column name="vuelta_kilos_tinta_black"/>
 			<type name="float"/>
 		</property>
 		<property name="usuario">

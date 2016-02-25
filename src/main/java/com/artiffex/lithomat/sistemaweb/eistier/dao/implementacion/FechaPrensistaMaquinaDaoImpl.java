@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.FechaPrensistaMaquinaDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.FechaPrensistaMaquinaDTOGrid;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.FechaPrensistaMaquina;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.FechaPrensistaMaquinaDAO;
@@ -64,21 +65,22 @@ public class FechaPrensistaMaquinaDaoImpl implements FechaPrensistaMaquinaDAO {
 		return null;
 	}
 	
-	public FechaPrensistaMaquina buscaFechaPrensistaMaquinaPorPliego(int idPliego) {
-		FechaPrensistaMaquina fechaPrensistaMaquina = null;
+	@SuppressWarnings("unchecked")
+	public List<FechaPrensistaMaquinaDTO> buscaFechaPrensistaMaquinaDTO(String strQuery) {
+		List<FechaPrensistaMaquinaDTO> lista = new ArrayList<FechaPrensistaMaquinaDTO>();
 		try {
 			sesion = HibernateUtil.getInstance().getCurrentSession();
 			sesion.beginTransaction();
-			Query query = sesion.createQuery("from FechaPrensistaMaquina fpm where fpm.pliego.idPliego = :idPliego");
-			query.setParameter("idPliego", idPliego);
-			fechaPrensistaMaquina = (FechaPrensistaMaquina)query.uniqueResult();
+			SQLQuery query = sesion.createSQLQuery(strQuery);
+			query.setResultTransformer(Transformers.aliasToBean(FechaPrensistaMaquinaDTO.class));
+			lista = query.list();
 			sesion.getTransaction().commit();
 			query = null;
 		} catch ( Exception e ) {
 			log.error(e.getMessage());
 			sesion.getTransaction().rollback();
 		}
-		return fechaPrensistaMaquina;
+		return lista;
 	}
 
 	public int numeroRegistrosFechaPrensistaMaquina(String strQuery) {
@@ -107,6 +109,7 @@ public class FechaPrensistaMaquinaDaoImpl implements FechaPrensistaMaquinaDAO {
 			query.setResultTransformer(Transformers.aliasToBean(FechaPrensistaMaquinaDTOGrid.class));
 			lista = query.list();
 			sesion.getTransaction().commit();
+			query = null;
 		} catch( Exception e ) {
 			log.error(e.getMessage());
 			sesion.getTransaction().rollback();

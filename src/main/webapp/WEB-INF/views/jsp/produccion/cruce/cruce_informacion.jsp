@@ -631,16 +631,20 @@
                                 						</div>
                                 					</div>
                                 				</div>
-                                				<div class="columna_derecha">
+                                			</div>
+                                		</div>
+                                		<div class="linea">
+                                			<div class="casilla">
+                                				<div class="columna_izquierda">
                                 					<div class="mitad_columna_izquierda">
                                 						<div class="columna_completa">
                                 							<table>
                                 								<tr>
-                                									<td width="60%">Frente Kilos Tinta:</td>
+                                									<td width="60%">Frente Kilos Cyan:</td>
                                 									<td>
                                 										<input	type="text"
                                 												class="input"
-                                												name="frente_kilos_tinta"
+                                												name="frente_kilos_tinta_cyan"
                                 												value=""
                                 												maxlength="3"
                                 												onkeydown="revisaNumero(true, this.value, event, null, null)"/>
@@ -653,11 +657,123 @@
                                 						<div class="columna_completa">
                                 							<table>
                                 								<tr>
-                                									<td width="59%">Vuelta Kilos Tinta:</td>
+                                									<td width="71%">Frente Kilos Magenta:</td>
                                 									<td>
                                 										<input	type="text"
                                 												class="input"
-                                												name="vuelta_kilos_tinta"
+                                												name="frente_kilos_tinta_magenta"
+                                												value=""
+                                												maxlength="3"
+                                												onkeydown="revisaNumero(true, this.value, event, null, null)"/>
+                                									</td>
+                                								</tr>
+                                							</table>
+                                						</div>
+                                					</div>
+                                				</div>
+                                				<div class="columna_derecha">
+                                					<div class="mitad_columna_izquierda">
+                                						<div class="columna_completa">
+                                							<table>
+                                								<tr>
+                                									<td width="65%">Frente Kilos Yellow:</td>
+                                									<td>
+                                										<input	type="text"
+                                												class="input"
+                                												name="frente_kilos_tinta_yellow"
+                                												value=""
+                                												maxlength="3"
+                                												onkeydown="revisaNumero(true, this.value, event, null, null)"/>
+                                									</td>
+                                								</tr>
+                                							</table>
+                                						</div>
+                                					</div>
+                                					<div class="mitad_columna_derecha">
+                                						<div class="columna_completa">
+                                							<table>
+                                								<tr>
+                                									<td width="61%">Frente Kilos Black:</td>
+                                									<td>
+                                										<input	type="text"
+                                												class="input"
+                                												name="frente_kilos_tinta_black"
+                                												value=""
+                                												maxlength="3"
+                                												onkeydown="revisaNumero(true, this.value, event, null, null)"/>
+                                									</td>
+                                								</tr>
+                                							</table>
+                                						</div>
+                                					</div>
+                                				</div>
+                                			</div>
+                                		</div>
+                                		<div class="linea">
+                                			<div class="casilla">
+                                				<div class="columna_izquierda">
+                                					<div class="mitad_columna_izquierda">
+                                						<div class="columna_completa">
+                                							<table>
+                                								<tr>
+                                									<td width="60%">Vuelta Kilos Cyan:</td>
+                                									<td>
+                                										<input	type="text"
+                                												class="input"
+                                												name="vuelta_kilos_tinta_cyan"
+                                												value=""
+                                												maxlength="3"
+                                												onkeydown="revisaNumero(true, this.value, event, null, null)"/>
+                                									</td>
+                                								</tr>
+                                							</table>
+                                						</div>
+                                					</div>
+                                					<div class="mitad_columna_derecha">
+                                						<div class="columna_completa">
+                                							<table>
+                                								<tr>
+                                									<td width="71%">Vuelta Kilos Magenta:</td>
+                                									<td>
+                                										<input	type="text"
+                                												class="input"
+                                												name="vuelta_kilos_tinta_magenta"
+                                												value=""
+                                												maxlength="3"
+                                												onkeydown="revisaNumero(true, this.value, event, null, null)"/>
+                                									</td>
+                                								</tr>
+                                							</table>
+                                						</div>
+                                					</div>
+                                				</div>
+                                				<div class="columna_derecha">
+                                					<div class="mitad_columna_izquierda">
+                                						<div class="columna_completa">
+                                							<table>
+                                								<tr>
+                                									<td width="65%">Vuelta Kilos Yellow:</td>
+                                									<td>
+                                										<input	type="text"
+                                												class="input"
+                                												name="vuelta_kilos_tinta_yellow"
+                                												value=""
+                                												maxlength="3"
+                                												onkeydown="revisaNumero(true, this.value, event, null, null)"/>
+                                									</td>
+                                								</tr>
+                                							</table>
+                                						</div>
+                                					</div>
+                                					<div class="mitad_columna_derecha">
+                                						<div class="columna_completa">
+                                							<table>
+                                								<tr>
+                                									<td width="61%">Vuelta Kilos Black:</td>
+                                									<td>
+                                										<input	type="text"
+                                												class="input"
+                                												name="vuelta_kilos_tinta_black"
                                 												value=""
                                 												maxlength="3"
                                 												onkeydown="revisaNumero(true, this.value, event, null, null)"/>
@@ -701,11 +817,23 @@
                            							<th>H.Limpias</th>
                            							<th>No.CambioPlacas</th>
                            							<th>No.L&aacute;minasExtra</th>
-                           							<th>FrenteK.Tinta</th>
-                           							<th>VueltaK.Tinta</th>
+                           							<th>FrenteK.TintaCyan</th>
+                           							<th>FrenteK.TintaMagenta</th>
+                           							<th>FrenteK.TintaYellow</th>
+                           							<th>FrenteK.TintaBlack</th>
+                           							<th>VueltaK.TintaCyan</th>
+                           							<th>VueltaK.TintaMagenta</th>
+                           							<th>VueltaK.TintaYellow</th>
+                           							<th>VueltaK.TintaBlack</th>
                            							<th>Eliminar</th>
                            						</tr>
                            						<tr id="fpm:null" class="l1">
+                           							<td>&nbsp;</td>
+                           							<td>&nbsp;</td>
+                           							<td>&nbsp;</td>
+                           							<td>&nbsp;</td>
+                           							<td>&nbsp;</td>
+                           							<td>&nbsp;</td>
                            							<td>&nbsp;</td>
                            							<td>&nbsp;</td>
                            							<td>&nbsp;</td>

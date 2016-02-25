@@ -1,5 +1,6 @@
 
-function limpiaFechas() {
+function limpiaFechasExcel() {
+	
 	
 }
 
@@ -8,7 +9,7 @@ function generaExcel() {
 }
 
 function generaTablaDOM( jsonFechaPrensistaMaquina ) {
-	console.log( jsonFechaPrensistaMaquina );
+	//console.log( jsonFechaPrensistaMaquina );
 	var table = document.createElement("table");
 	table.setAttribute("id","tabla_fecha_prensista_maquina");
 	var tr = document.createElement("tr");
@@ -65,11 +66,35 @@ function generaTablaDOM( jsonFechaPrensistaMaquina ) {
 	tr.appendChild(td);
 	
 	td = document.createElement("th");
-	td.innerHTML = "FrenteK.Tinta";
+	td.innerHTML = "FrenteK.TintaCyan";
 	tr.appendChild(td);
 	
 	td = document.createElement("th");
-	td.innerHTML = "VueltaK.Tinta";
+	td.innerHTML = "FrenteK.TintaMagenta";
+	tr.appendChild(td);
+	
+	td = document.createElement("th");
+	td.innerHTML = "FrenteK.TintaYellow";
+	tr.appendChild(td);
+	
+	td = document.createElement("th");
+	td.innerHTML = "FrenteK.TintaBlack";
+	tr.appendChild(td);
+	
+	td = document.createElement("th");
+	td.innerHTML = "VueltaK.TintaCyan";
+	tr.appendChild(td);
+	
+	td = document.createElement("th");
+	td.innerHTML = "VueltaK.TintaMagenta";
+	tr.appendChild(td);
+	
+	td = document.createElement("th");
+	td.innerHTML = "VueltaK.TintaYellow";
+	tr.appendChild(td);
+	
+	td = document.createElement("th");
+	td.innerHTML = "VueltaK.TintaBlack";
 	tr.appendChild(td);
 	
 	table.appendChild(tr);
@@ -133,13 +158,37 @@ function generaTablaDOM( jsonFechaPrensistaMaquina ) {
 	            td = document.createElement("td");
 	            td.innerHTML = item.laminasExtra;
 	            tr.appendChild( td );
-				// frente kilos tinta
+				// frente kilos tinta cyan
 	            td = document.createElement("td");
-	            td.innerHTML = item.frenteKilosTinta;
+	            td.innerHTML = item.frenteKilosTintaCyan;
 	            tr.appendChild( td );
-				// vuelta kilos tinta
+	            // frente kilos tinta magenta
 	            td = document.createElement("td");
-	            td.innerHTML = item.vueltaKilosTinta;
+	            td.innerHTML = item.frenteKilosTintaMagenta;
+	            tr.appendChild( td );
+	            // frente kilos tinta yellow
+	            td = document.createElement("td");
+	            td.innerHTML = item.frenteKilosTintaYellow;
+	            tr.appendChild( td );
+	            // frente kilos tinta black
+	            td = document.createElement("td");
+	            td.innerHTML = item.frenteKilosTintaBlack;
+	            tr.appendChild( td );
+				// vuelta kilos tinta cyan
+	            td = document.createElement("td");
+	            td.innerHTML = item.vueltaKilosTintaCyan;
+	            tr.appendChild( td );
+	            // vuelta kilos tinta magenta
+	            td = document.createElement("td");
+	            td.innerHTML = item.vueltaKilosTintaMagenta;
+	            tr.appendChild( td );
+	            // vuelta kilos tinta yellow
+	            td = document.createElement("td");
+	            td.innerHTML = item.vueltaKilosTintaYellow;
+	            tr.appendChild( td );
+	            // vuelta kilos tinta black
+	            td = document.createElement("td");
+	            td.innerHTML = item.vueltaKilosTintaBlack;
 	            tr.appendChild( td );
 	            
 	            table.appendChild( tr );
@@ -152,7 +201,7 @@ function generaTablaDOM( jsonFechaPrensistaMaquina ) {
 	if ( generaRegistroVacio ) {
 		tr = document.createElement("tr");
 		tr.setAttribute("class","l1");
-		for ( var i=0; i<15; i++ ) {
+		for ( var i=0; i<21; i++ ) {
 			td = document.createElement("td");
 			td.innerHTML = "&nbsp;";
 			tr.appendChild(td);
@@ -167,56 +216,93 @@ function generaTablaDOM( jsonFechaPrensistaMaquina ) {
 	delete i;
 }
 
+function busquedaFechaPrensistaMaquina(){
+	$.ajax({
+		type:"POST",
+		url:urlListaFechaPrensistaMaquina,
+		data:$("[name='busqueda_fecha_prensista_maquina']").serialize(),
+		success:function(response){
+			var jsonResponse = JSON.parse(response);
+			//console.log(jsonResponse);
+			generaTablaDOM( jsonResponse.listaFechaPrensistaMaquina );
+			document.body.style.cursor = "default";
+		},
+		error:function(e){
+			console.log(e);
+			alert("No fue posible realizar la consulta");
+			document.body.style.cursor = "default";
+		}
+	});
+}
+
+
 function buscaRegistros() {
 	var correcto = true;
-	if ( correcto 
+	
+	// valida nut
+	if ( correcto
+			&& document.busqueda_fecha_prensista_maquina.chkbx_busca_por_nut.checked
 			&& ( document.busqueda_fecha_prensista_maquina.nut.value == "" 
 				|| isNaN( document.busqueda_fecha_prensista_maquina.nut.value ) ) ) {
 		correcto = false;
 		alert("Favor de especificar el NUT");
 		document.busqueda_fecha_prensista_maquina.nut.focus();
 	}
+	
+	// valida fecha
+	if ( correcto 
+			&& document.busqueda_fecha_prensista_maquina.chkbx_busca_por_fecha.checked
+			&& ( document.busqueda_fecha_prensista_maquina.fecha_busqueda_inicio.value == ""
+				|| document.busqueda_fecha_prensista_maquina.fecha_busqueda_fin.value == "" ) ) {
+		correcto = false;
+		alert("Favor de especificar correctamente ambas fechas");
+		if ( document.busqueda_fecha_prensista_maquina.fecha_busqueda_inicio.value == "" 
+			&& document.busqueda_fecha_prensista_maquina.fecha_busqueda_fin.value == "" )
+			document.busqueda_fecha_prensista_maquina.fecha_busqueda_inicio.focus();
+		else if ( document.busqueda_fecha_prensista_maquina.fecha_busqueda_inicio.value == "" )
+			document.busqueda_fecha_prensista_maquina.fecha_busqueda_inicio.focus();
+		else
+			document.busqueda_fecha_prensista_maquina.fecha_busqueda_fin.focus();
+	}
+	
 	if ( correcto ) {
 		// verifica que exista NUT
 		document.body.style.cursor = "wait";
-		$.ajax({
-			type:'POST',
-			url:urlExisteNut,
-			data:{nut:document.busqueda_fecha_prensista_maquina.nut.value},
-			success:function(response) {
-				if ( response ) {
-					// obtiene la lista de registros
-					$.ajax({
-						type:'POST',
-						url:urlListaFechaPrensistaMaquina,
-						data:{nut:document.busqueda_fecha_prensista_maquina.nut.value},
-						success:function(response) {
-							var jsonResponse = JSON.parse(response);
-							console.log(jsonResponse);
-							generaTablaDOM( jsonResponse.listaFechaPrensistaMaquina );
-							document.body.style.cursor = "default";
-						},
-						error:function(e) {
-							document.body.style.cursor = "default";
-							alert("Problemas de conexión con el servidor.");
-						}
-					});
-				} else {
+		if ( document.busqueda_fecha_prensista_maquina.chkbx_busca_por_nut.checked ) { // busca por nut
+			$.ajax({
+				type:'POST',
+				url:urlExisteNut,
+				data:{nut:document.busqueda_fecha_prensista_maquina.nut.value},
+				success:function(response){
+					if ( response ) {
+						busquedaFechaPrensistaMaquina();
+					}
+				},
+				error:function(e){
 					document.body.style.cursor = "default";
 					alert("NUT no encontrado; favor de verificarlo.");
 					document.busqueda_fecha_prensista_maquina.nut.focus();
 				}
-			},
-			error:function(e) {
-				
-			}
-		});
+			});
+		} else  // busca por otros campos que no sean nut //console.log( $("[name='busqueda_fecha_prensista_maquina']").serialize() );
+			busquedaFechaPrensistaMaquina();
 	}
 	
 	delete correcto;
 }
 
 function limpiaCriteriosBusqueda() {
-	document.busqueda_fecha_prensista_maquina.nut.value = "";
+	// limpia checkbox
+	document.busqueda_fecha_prensista_maquina.chkbx_busca_por_nut.checked 		= false;
+	document.busqueda_fecha_prensista_maquina.chkbx_busca_por_fecha.checked 	= false;
+	document.busqueda_fecha_prensista_maquina.chkbx_busca_por_prensista.checked = false;
+	document.busqueda_fecha_prensista_maquina.chkbx_busca_por_maquina.checked 	= false;
+	// limpia input
+	document.busqueda_fecha_prensista_maquina.nut.value 					= "";
+	document.busqueda_fecha_prensista_maquina.fecha_busqueda_inicio.value 	= "";
+	document.busqueda_fecha_prensista_maquina.fecha_busqueda_fin.value 		= "";
+	document.busqueda_fecha_prensista_maquina.id_prensista.selectedIndex 	= 0;
+	document.busqueda_fecha_prensista_maquina.id_maquina.selectedIndex 		= 0;
+	
 	generaTablaDOM(null);
 }
