@@ -102,8 +102,87 @@ function paginador( obj ) {
         }	
     }
     
+    // la definicion de esta funcion esta en el archivo principal que usa el servicio del paginador
     realiza_consulta_paginador();
     
-}
+} // paginador
+
+
+function carga_datos() {
+	// define el tamaño del arreglo que se muestra en el paginador
+    if( numero_total_registros < tamanio_maximo_arreglo * numero_registros_por_pagina ) {
+        tamanio_arreglo = Math.ceil( numero_total_registros / numero_registros_por_pagina );
+    } else {
+        tamanio_arreglo = tamanio_maximo_arreglo;
+    }
+    
+    // actualiza variables: define el numero de paginas que dependen del numero de registros encontrados
+    actualiza_variables();
+    
+    // limpia div
+    $("#div_paginador").empty();
+    
+    // Obtiene elemento div_paginador
+    var objDiv 	= document.getElementById("div_paginador");
+    
+    // crea objeto ul
+    var objUl 	= document.createElement("ul");
+    objUl.setAttribute("id","paginacion");
+    document.getElementById("div_paginacion_resultados").innerHTML = string_elementos_encontrados();
+    
+    // crea boton primero
+    var objLi = document.createElement("li");
+    objLi.setAttribute("onclick","paginador( this );");
+    objLi.setAttribute("class","activo bold");
+    objLi.innerHTML = "Primero";
+    objUl.appendChild( objLi );
+    delete objLi;
+    
+    // crea boton anterior
+    objLi = document.createElement("li");
+    objLi.setAttribute("onclick","paginador( this );");
+    objLi.setAttribute("class","activo bold");
+    objLi.innerHTML = "Anterior";
+    objUl.appendChild( objLi );
+    delete objLi;
+    
+    // crea botones
+    for( var i = 0; i < tamanio_arreglo; i++ ) {
+        objLi = document.createElement("li");
+        objLi.setAttribute("onclick","paginador( this );");
+        objLi.setAttribute("name","arreglo");
+        objLi.innerHTML = parseInt(i + 1);
+        if( i == 0 ) {
+            objLi.setAttribute("class","seleccionado");
+        } else {
+            objLi.setAttribute("class","activo");
+        }
+        objUl.appendChild( objLi );
+        delete objLi;
+    }
+    
+    // crea boton siguiente
+    objLi = document.createElement("li");
+    objLi.setAttribute("onclick","paginador( this );");
+    objLi.setAttribute("class","activo bold");
+    objLi.innerHTML = "Siguiente";
+    objUl.appendChild( objLi );
+    delete objLi;
+    
+    // crea boton ultimo
+    objLi = document.createElement("li");
+    objLi.setAttribute("onclick","paginador( this );");
+    objLi.setAttribute("class","activo bold");
+    objLi.innerHTML = "Ultimo";
+    objUl.appendChild( objLi );
+    delete objLi;
+    
+    // agrega ul a div
+    objDiv.appendChild( objUl );
+    
+    // elimina objetos
+    delete objUl;
+    delete objDiv;
+} // carga_datos
 
 
