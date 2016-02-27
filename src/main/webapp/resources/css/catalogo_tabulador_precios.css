@@ -2,7 +2,7 @@
 
 #div_area {
 	width: 1307px;
-	height: 1379px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ 
+	height: 1429px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /*1881*/
 	margin-left: auto;
 	margin-right: auto;
 	position: relative;
@@ -12,7 +12,7 @@
 
 #div_hoja {
 	width: 1278px;
-	height: 1329px; /* div_area - 29 */ 
+	height: 1400px; /* div_area - 29 */ 
 	background: #fff;
 	float: left;
 }
@@ -71,7 +71,7 @@
 
 #div_fondo_der {
 	width: 29px;
-	height: 1300px; /* div_hoja - 29 */
+	height: 1371px;  /* div_hoja - 29 */
 	background-image: url('../image/s_der.png');
 	background-repeat: repeat-y;
 }

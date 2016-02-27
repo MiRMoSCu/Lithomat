@@ -389,13 +389,13 @@ function nueva_busqueda() {
 function limpia_form_busqueda_cliente() {
 	// limpia form modificar registro
 	limpia_form_cliente();
-	// limpia selects
+	// limpia checkbox
 	document.busqueda_cliente.chkbx_busca_por_nombre_moral.checked 			= false;
 	document.busqueda_cliente.chkbx_busca_por_rfc.checked 					= false;
 	document.busqueda_cliente.chkbx_busca_por_clave.checked 				= false;
 	document.busqueda_cliente.chkbx_busca_por_nombre_representante.checked 	= false;
 	document.busqueda_cliente.chkbx_busca_por_codigo_postal.checked 		= false;
-	// limpia input text
+	// limpia input text y selects
 	document.busqueda_cliente.nombre_moral.value 			= "";
 	document.busqueda_cliente.rfc.value 					= "";
 	document.busqueda_cliente.nombre_representante.value 	= "";

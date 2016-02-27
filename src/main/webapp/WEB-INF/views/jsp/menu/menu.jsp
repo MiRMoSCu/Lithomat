@@ -565,9 +565,7 @@
 	                               			</div>
 	                               		</div>
 	                               		<div id="div_pestania_reportes" style="display:none; background-color: transparent;">
-	                                		<div class="titulo_menu">
-                                				REPORTES
-                                			</div>
+	                                		<div class="titulo_menu">REPORTES</div>
                                 			<div id="div_opcion_reporte_orden_produccion" class="boton_dinamico" onclick="menu('ventana_reporte_orden_produccion');">
                                					<span class="texto_boton">Orden Producci&oacute;n</span>
                                 			</div>
@@ -585,9 +583,7 @@
                                 			</div>
                                 		</div>
                                 		<div id="div_pestania_catalogos" style="display:none; background-color: transparent;">
-	                                		<div class="titulo_menu">
-                                				CAT&Aacute;LOGOS
-                                			</div>
+	                                		<div class="titulo_menu">CAT&Aacute;LOGOS</div>
                                 			<div id="div_opcion_cliente" class="boton_dinamico" onclick="menu('cliente');">
                                 				<span class="texto_boton">Cliente</span>
                                 			</div>
@@ -615,14 +611,14 @@
                                 			<div id="div_opcion_proceso_disenio" class="boton_dinamico" onclick="menu('proceso_disenio');">
                                 				<span class="texto_boton">Proceso dise&ntilde;o</span>
                                 			</div>
+                                			<div id="div_opcion_proceso_externo" class="boton_dinamico" onclick="menu('proceso_externo');">
+                                				<span class="texto_boton">Proceso externo</span>
+                                			</div>
                                 			<div id="div_opcion_proceso_preprensa" class="boton_dinamico" onclick="menu('proceso_preprensa');">
                                 				<span class="texto_boton">Proceso preprensa</span>
                                 			</div>
                                 			<div id="div_opcion_proceso_transporte" class="boton_dinamico" onclick="menu('proceso_transporte');">
                                 				<span class="texto_boton">Proceso transporte</span>
-                                			</div>
-                                			<div id="div_opcion_proceso_externo" class="boton_dinamico" onclick="menu('proceso_externo');">
-                                				<span class="texto_boton">Proceso externo</span>
                                 			</div>
                                 			<div id="div_opcion_proveedor_externo" class="boton_dinamico" onclick="menu('proveedor_externo');">
                                 				<span class="texto_boton">Proveedor externo</span>
@@ -677,9 +673,7 @@
                                 			</div>
                                 		</div>
                                 		<div id="div_pestania_seguridad" style="display:none; background-color: transparent;">
-	                                		<div class="titulo_menu">
-                                				SEGURIDAD
-                                			</div>
+	                                		<div class="titulo_menu">SEGURIDAD</div>
                                 			<div id="div_opcion_cambio_estatus" class="boton_dinamico" onclick="menu('ventana_cambio_estatus');">
                                 				<span class="texto_boton">Cambio estatus</span>
                                 			</div>
@@ -758,14 +752,14 @@
                                 			<div id="div_opcion_proceso_disenio" class="boton_dinamico" onclick="menu('proceso_disenio');">
                                 				<span class="texto_boton">Proceso dise&ntilde;o</span>
                                 			</div>
+                                			<div id="div_opcion_proceso_externo" class="boton_dinamico" onclick="menu('proceso_externo');">
+                                				<span class="texto_boton">Proceso externo</span>
+                                			</div>
                                 			<div id="div_opcion_proceso_preprensa" class="boton_dinamico" onclick="menu('proceso_preprensa');">
                                 				<span class="texto_boton">Proceso preprensa</span>
                                 			</div>
                                 			<div id="div_opcion_proceso_transporte" class="boton_dinamico" onclick="menu('proceso_transporte');">
                                 				<span class="texto_boton">Proceso transporte</span>
-                                			</div>
-                                			<div id="div_opcion_proceso_externo" class="boton_dinamico" onclick="menu('proceso_externo');">
-                                				<span class="texto_boton">Proceso externo</span>
                                 			</div>
                                 			<div id="div_opcion_proveedor_externo" class="boton_dinamico" onclick="menu('proveedor_externo');">
                                 				<span class="texto_boton">Proveedor externo</span>

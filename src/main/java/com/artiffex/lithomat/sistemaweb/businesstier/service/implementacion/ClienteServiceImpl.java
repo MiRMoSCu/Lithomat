@@ -98,10 +98,8 @@ public class ClienteServiceImpl implements ClienteService {
 		query.append(" ");
 		
 		if( busquedaPorNombreMoral ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
+			if( existeParametro ) 
+				query.append(" AND ");
 			query.append("c.nombre_moral LIKE '%");
 			query.append(nombreMoral);
 			query.append("%'");
@@ -110,10 +108,8 @@ public class ClienteServiceImpl implements ClienteService {
 		}
 		
 		if( busquedaPorRFC ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
+			if( existeParametro ) 
+				query.append(" AND ");
 			query.append("c.rfc LIKE '%");
 			query.append(rfc);
 			query.append("%'");
@@ -122,10 +118,8 @@ public class ClienteServiceImpl implements ClienteService {
 		}
 		
 		if( busquedaPorClave ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
+			if( existeParametro ) 
+				query.append(" AND ");
 			query.append("c.id_tipo_cliente = ");
 			query.append(idTipoCliente);
 			query.append(" ");
@@ -133,10 +127,8 @@ public class ClienteServiceImpl implements ClienteService {
 		}
 		
 		if( busquedaPorNombreRepresentante ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
+			if( existeParametro ) 
+				query.append(" AND ");
 			query.append("c.nombre_representante LIKE '%");
 			query.append(nombreRepresentante);
 			query.append("%'");
@@ -145,10 +137,8 @@ public class ClienteServiceImpl implements ClienteService {
 		}
 		
 		if( busquedaPorCodigoPostal ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
+			if( existeParametro ) 
+				query.append(" AND ");
 			query.append("c.codigo_postal LIKE '%");
 			query.append(codigoPostal);
 			query.append("%'");

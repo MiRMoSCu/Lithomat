@@ -33,7 +33,7 @@
             
             #div_contenedor_tabla {
                 width: 100%;
-                height: 210px; /*210px*/
+                height: 300px; /*210px*/
             }
             
             #div_tabla_cliente {
@@ -568,6 +568,7 @@
                                         </div>
                                     </div>
                                 </form>
+                                <br/>
                                 <div class="linea">
                                     <div class="casilla" style="text-align:right;">
                                         <img alt="" style="cursor:pointer;" onclick="limpia_form_cliente()"

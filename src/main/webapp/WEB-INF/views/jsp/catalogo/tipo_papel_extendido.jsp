@@ -37,7 +37,7 @@
             
             #div_contenedor_tabla {
                 width: 100%;
-                height: 220px;
+                height: 240px;
             }
             
             #div_tabla_tipo_papel_extendido {

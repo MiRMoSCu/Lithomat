@@ -1,6 +1,7 @@
 package com.artiffex.lithomat.sistemaweb.eistier.dao.implementacion;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +9,10 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.TabuladorPreciosDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TabuladorPrecios;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.TabuladorPreciosDAO;
 import com.artiffex.lithomat.sistemaweb.eistier.hibernate.HibernateUtil;
@@ -91,6 +94,40 @@ public class TabuladorPreciosDaoImpl implements TabuladorPreciosDAO {
 			lista = sesion.createQuery("from TabuladorPrecios tp where tp.activo = true order by tp.maquina.idMaquina asc, tp.tipoComplejidad asc, tp.inicioTabulador asc").list();
 			sesion.getTransaction().commit();
 		} catch(Exception e) {
+			log.error(e.getMessage());
+			sesion.getTransaction().rollback();
+		}
+		return lista;
+	}
+
+	public int numeroRegistros(String strQuery) {
+		int numeroRegistros = 0;
+		try {
+			sesion = HibernateUtil.getInstance().getCurrentSession();
+			sesion.beginTransaction();
+			SQLQuery query = sesion.createSQLQuery(strQuery);
+			numeroRegistros = ((BigInteger)query.uniqueResult()).intValue();
+			sesion.getTransaction().commit();
+			query = null;
+		} catch ( Exception e ) {
+			log.error(e.getMessage());
+			sesion.getTransaction().rollback();
+		}
+		return numeroRegistros;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<TabuladorPreciosDTO> listaPorCriteriosBusqueda(String strQuery) {
+		List<TabuladorPreciosDTO> lista = new ArrayList<TabuladorPreciosDTO>();
+		try {
+			sesion = HibernateUtil.getInstance().getCurrentSession();
+			sesion.beginTransaction();
+			SQLQuery query = sesion.createSQLQuery(strQuery);
+			query.setResultTransformer(Transformers.aliasToBean(TabuladorPreciosDTO.class));
+			lista = query.list();
+			sesion.getTransaction().commit();
+			query = null;
+		} catch ( Exception e ) {
 			log.error(e.getMessage());
 			sesion.getTransaction().rollback();
 		}

@@ -13,7 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.TabuladorPreciosDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Maquina;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TabuladorPrecios;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoComplejidad;
@@ -23,6 +25,8 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TabuladorP
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoComplejidadService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoPrecioService;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ParametrosBusquedaTabuladorPrecios;
+import com.google.gson.Gson;
 
 @Controller
 @RequestMapping("/tabulador_precios")
@@ -45,23 +49,92 @@ public class TabuladorPreciosController {
 	public String listaTabuladorPrecios( Locale locale, Model model ) throws IOException {
 		log.info("/lista_tabulador_precios");
 
-		List<TabuladorPrecios> listaTabuladorPrecios = tabuladorPreciosService.listaTabuladorPrecios();
+		// configuracion de controles de la pagina (select)
 		List<ComboSelect> listaMaquina = maquinaService.listaComboSelect();
-		List<ComboSelect> listaTipoComplejidad = tipoComplejidadService.listaComboSelect();
-		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();
-		
-		model.addAttribute("listaTabuladorPrecios", listaTabuladorPrecios);
 		model.addAttribute("listaMaquina", listaMaquina);
-		model.addAttribute("listaTipoComplejidad", listaTipoComplejidad);
-		model.addAttribute("listaTipoPrecio", listaTipoPrecio);
-
-		listaTabuladorPrecios 	= null;
 		listaMaquina 			= null;
+		
+		List<ComboSelect> listaTipoComplejidad = tipoComplejidadService.listaComboSelect();
+		model.addAttribute("listaTipoComplejidad", listaTipoComplejidad);
 		listaTipoComplejidad	= null;
+		
+		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();
+		model.addAttribute("listaTipoPrecio", listaTipoPrecio);
 		listaTipoPrecio 		= null;
+		
+		// variables de configuracion del paginador
+		int numeroRegistrosPorPagina 	= 10;
+		int tamanioMaximoArreglo 		= 7;
+		int numeroPagina 				= 1;
+
+		model.addAttribute("numeroRegistrosPorPagina", numeroRegistrosPorPagina);
+		model.addAttribute("tamanioMaximoArreglo", tamanioMaximoArreglo);
+		model.addAttribute("numeroPagina", numeroPagina);
+		
+		// parametros de busqueda
+		ParametrosBusquedaTabuladorPrecios parametros = new ParametrosBusquedaTabuladorPrecios();
+		parametros.setBusquedaPorMaquina(false);
+		parametros.setBusquedaPorComplejidad(false);
+		parametros.setIdMaquina(0);
+		parametros.setIdTipoComplejidad(0);
+		
+		// numero total de registros // BUSQUEDA DEFAULT
+		int numeroTotalRegistros = tabuladorPreciosService.numeroRegistrosPorCriterioBusqueda( parametros );
+		model.addAttribute("numeroTotalRegistros", numeroTotalRegistros);
+		
+		// lista de registros // BUSQUEDA DEFAULT
+		List<TabuladorPreciosDTO> listaTabuladorPrecios = tabuladorPreciosService.listaPorCriterioBusquedaPorNumeroPagina(parametros, numeroPagina, numeroRegistrosPorPagina);
+		model.addAttribute("listaTabuladorPrecios", listaTabuladorPrecios);
+		listaTabuladorPrecios 	= null;
+		
+		parametros = null;
 		
 		return "catalogo/tabulador_precios";
 	}// lista_tabulador_precios
+	
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
+	@RequestMapping(value = "/catalogo/lista_por_pagina_por_parametros", method = RequestMethod.POST)
+	@ResponseBody
+	public String buscaTabuladorPreciosPorParametros(
+			@RequestParam(value = "numero_pagina", 					required = false) Integer numeroPagina,
+			@RequestParam(value = "numero_registros_por_pagina", 	required = false) Integer numeroRegistrosPorPagina,
+			@RequestParam(value = "chkbx_busca_por_maquina", 		required = false) boolean busquedaPorMaquina,
+			@RequestParam(value = "chkbx_busca_por_complejidad", 	required = false) boolean busquedaPorComplejidad,
+			@RequestParam(value = "id_maquina", 					required = false) Integer idMaquina,
+			@RequestParam(value = "id_tipo_complejidad", 			required = false) Integer idTipoComplejidad
+		) {
+		
+		ParametrosBusquedaTabuladorPrecios parametros = new ParametrosBusquedaTabuladorPrecios();
+		parametros.setBusquedaPorMaquina(busquedaPorMaquina);
+		parametros.setBusquedaPorComplejidad(busquedaPorComplejidad);
+		parametros.setIdMaquina(idMaquina);
+		parametros.setIdTipoComplejidad(idTipoComplejidad);
+		
+		// numero total de registros // BUSQUEDA DEFAULT
+		int numeroTotalRegistros = tabuladorPreciosService.numeroRegistrosPorCriterioBusqueda( parametros );
+		
+		// lista de registros // BUSQUEDA DEFAULT
+		List<TabuladorPreciosDTO> listaTabuladorPrecios = tabuladorPreciosService.listaPorCriterioBusquedaPorNumeroPagina(parametros, numeroPagina, numeroRegistrosPorPagina);
+
+		StringBuilder sb = new StringBuilder();
+		Gson gson = new Gson();
+		
+		sb.append("{");
+		sb.append("\"numeroTotalRegistros\":");
+		sb.append(numeroTotalRegistros);
+		sb.append(",");
+		sb.append("\"listaTabuladorPrecios\":");
+		sb.append(gson.toJson(listaTabuladorPrecios));
+		sb.append("}");
+		
+		listaTabuladorPrecios 	= null;
+		gson 					= null;
+		parametros 				= null;
+		
+		return sb.toString();
+	}
+	
 
 	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/alta", method = RequestMethod.POST)
@@ -96,31 +169,61 @@ public class TabuladorPreciosController {
 		tabuladorPrecios.setActivo(true);
 
 		tabuladorPreciosService.creaTabuladorPrecios(tabuladorPrecios);
-
-		List<TabuladorPrecios> listaTabuladorPrecios = tabuladorPreciosService.listaTabuladorPrecios();
-		List<ComboSelect> listaMaquina = maquinaService.listaComboSelect();
-		List<ComboSelect> listaTipoComplejidad = tipoComplejidadService.listaComboSelect();
-		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();
 		
-		model.addAttribute("listaTabuladorPrecios", listaTabuladorPrecios);
-		model.addAttribute("listaMaquina", listaMaquina);
-		model.addAttribute("listaTipoComplejidad", listaTipoComplejidad);
-		model.addAttribute("listaTipoPrecio", listaTipoPrecio);
-
-		tabuladorPrecios 		= null;
 		maquina 				= null;
+		tipoComplejidad			= null;
 		tipoPrecio 				= null;
-		listaTabuladorPrecios 	= null;
+		tabuladorPrecios 		= null;
+		
+		// configuracion de controles de la pagina (select)
+		List<ComboSelect> listaMaquina = maquinaService.listaComboSelect();
+		model.addAttribute("listaMaquina", listaMaquina);
 		listaMaquina 			= null;
-		listaTipoComplejidad 	= null;
+		
+		List<ComboSelect> listaTipoComplejidad = tipoComplejidadService.listaComboSelect();
+		model.addAttribute("listaTipoComplejidad", listaTipoComplejidad);
+		listaTipoComplejidad	= null;
+		
+		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();
+		model.addAttribute("listaTipoPrecio", listaTipoPrecio);
 		listaTipoPrecio 		= null;
 		
+		// variables de configuracion del paginador
+		int numeroRegistrosPorPagina 	= 10;
+		int tamanioMaximoArreglo 		= 7;
+		int numeroPagina 				= 1;
+
+		model.addAttribute("numeroRegistrosPorPagina", numeroRegistrosPorPagina);
+		model.addAttribute("tamanioMaximoArreglo", tamanioMaximoArreglo);
+		model.addAttribute("numeroPagina", numeroPagina);
+		
+		// parametros de busqueda
+		ParametrosBusquedaTabuladorPrecios parametros = new ParametrosBusquedaTabuladorPrecios();
+		parametros.setBusquedaPorMaquina(false);
+		parametros.setBusquedaPorComplejidad(false);
+		parametros.setIdMaquina(0);
+		parametros.setIdTipoComplejidad(0);
+		
+		// numero total de registros // BUSQUEDA DEFAULT
+		int numeroTotalRegistros = tabuladorPreciosService.numeroRegistrosPorCriterioBusqueda( parametros );
+		model.addAttribute("numeroTotalRegistros", numeroTotalRegistros);
+		
+		// lista de registros // BUSQUEDA DEFAULT
+		List<TabuladorPreciosDTO> listaTabuladorPrecios = tabuladorPreciosService.listaPorCriterioBusquedaPorNumeroPagina(parametros, numeroPagina, numeroRegistrosPorPagina);
+		model.addAttribute("listaTabuladorPrecios", listaTabuladorPrecios);
+		listaTabuladorPrecios 	= null;
+		
+		parametros = null;
+		
 		return "catalogo/tabulador_precios";
+
 	}// alta_tabulador_precios
 
+	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
-	public String modificaTabuladorPrecios(
+	@ResponseBody
+	public void modificaTabuladorPrecios(
 			@RequestParam(value = "id_tabulador_precios", 			required = false) Integer idTabuladorPrecios,
 			@RequestParam(value = "id_maquina", 					required = false) Integer idMaquina,
 			@RequestParam(value = "nombre_insumo", 					required = false) String nombreInsumo,
@@ -133,7 +236,6 @@ public class TabuladorPreciosController {
 			Model model
 		) throws IOException {
 		log.info("/modifica_tabulador_precios");
-
 		TabuladorPrecios tabuladorPrecios = tabuladorPreciosService.buscaTabuladorPrecios(idTabuladorPrecios);
 		tabuladorPrecios.getMaquina().setIdMaquina(idMaquina);
 		tabuladorPrecios.setNombreInsumo(nombreInsumo);
@@ -143,57 +245,23 @@ public class TabuladorPreciosController {
 		tabuladorPrecios.getTipoComplejidad().setIdTipoComplejidad(idTipoComplejidad);
 		tabuladorPrecios.setPrecio(precio);
 		tabuladorPrecios.getTipoPrecio().setIdTipoPrecio(idTipoPrecio);
-		
 		tabuladorPreciosService.modificaTabuladorPrecios(tabuladorPrecios);
-
-		List<TabuladorPrecios> listaTabuladorPrecios = tabuladorPreciosService.listaTabuladorPrecios();
-		List<ComboSelect> listaMaquina = maquinaService.listaComboSelect();
-		List<ComboSelect> listaTipoComplejidad = tipoComplejidadService.listaComboSelect();
-		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();
-		
-		model.addAttribute("listaTabuladorPrecios", listaTabuladorPrecios);
-		model.addAttribute("listaMaquina", listaMaquina);
-		model.addAttribute("listaTipoComplejidad", listaTipoComplejidad);
-		model.addAttribute("listaTipoPrecio", listaTipoPrecio);
-
 		tabuladorPrecios 		= null;
-		listaTabuladorPrecios 	= null;
-		listaMaquina 			= null;
-		listaTipoComplejidad 	= null;
-		listaTipoPrecio 		= null;
-		
-		return "catalogo/tabulador_precios";
 	}// modifica_tabulador_precios
 
+	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/elimina", method = RequestMethod.POST)
-	public String eliminaTabuladorPrecios(
+	@ResponseBody
+	public void eliminaTabuladorPrecios(
 			@RequestParam(value = "id_tabulador_precios", required = false) Integer idTabuladorPrecios,
 			Model model
 		) throws IOException {
 		log.info("/elimina_tabulador_precios");
-		
 		TabuladorPrecios tabuladorPrecios = tabuladorPreciosService.buscaTabuladorPrecios(idTabuladorPrecios);
 		tabuladorPrecios.setActivo(false);
-
 		tabuladorPreciosService.modificaTabuladorPrecios(tabuladorPrecios);
-
-		List<TabuladorPrecios> listaTabuladorPrecios = tabuladorPreciosService.listaTabuladorPrecios();
-		List<ComboSelect> listaMaquina = maquinaService.listaComboSelect();
-		List<ComboSelect> listaTipoComplejidad = tipoComplejidadService.listaComboSelect();
-		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();
-		
-		model.addAttribute("listaTabuladorPrecios", listaTabuladorPrecios);
-		model.addAttribute("listaMaquina", listaMaquina);
-		model.addAttribute("listaTipoComplejidad", listaTipoComplejidad);
-		model.addAttribute("listaTipoPrecio", listaTipoPrecio);
-
-		listaTabuladorPrecios 	= null;
-		listaMaquina 			= null;
-		listaTipoComplejidad	= null;
-		listaTipoPrecio 		= null;
-		
-		return "catalogo/tabulador_precios";
+		tabuladorPrecios = null;
 	}// elimina_tabulador_precios
 	
 }
