@@ -105,7 +105,7 @@ function ajaxBuscaCliente() {
                 //console.log(response);
                 //var JSONObject = { "id_cliente":"1","id_tipo_cliente":"8","clave_cliente":"ME","nombre_representante":"Gerardo Nieto Lopez" };
                 document.forms["cliente"].elements["nombre_moral"].value           = response.nombreMoral;
-                document.forms["cliente"].elements["clave"].value                  = response.clave;
+                document.forms["cliente"].elements["clave"].value                  = response.tipoCliente;
                 document.forms["cliente"].elements["nombre_representante"].value   = response.nombreRepresentante;
                 document.forms["cliente"].elements["calle"].value                  = response.calle;
                 document.forms["cliente"].elements["num_exterior"].value           = response.numExterior;

@@ -2,6 +2,7 @@ package com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz;
 
 import java.util.List;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.ClienteDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Cliente;
 
 public interface ClienteDAO {
@@ -16,8 +17,8 @@ public interface ClienteDAO {
 	
 	public List<Cliente> buscaPorNombre(String nombreMoral);
 	
-	public int numeroClientes(String strQuery);
+	public int numeroRegistros(String strQuery);
 	
-	public List<Cliente> listaPorRango(String strQuery);
+	public List<ClienteDTO> listaPorCriteriosBusqueda(String strQuery);
 		
 }

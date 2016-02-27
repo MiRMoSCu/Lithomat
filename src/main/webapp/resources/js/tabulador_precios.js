@@ -106,6 +106,8 @@ function elimina() {
     		data:$("[name=tabulador_precios]").serialize(),
     		success:function( response ) {
     			realiza_consulta_paginador();
+    			--numero_total_registros;
+    			document.getElementById("div_paginacion_resultados").innerHTML = string_elementos_encontrados();
     		},
     		error:function( e ) {
     			alert("Problemas con el servidor. ¡Es momento de renunciar!");

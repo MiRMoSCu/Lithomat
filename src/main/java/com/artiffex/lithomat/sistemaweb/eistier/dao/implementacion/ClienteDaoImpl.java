@@ -10,8 +10,10 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.ClienteDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Cliente;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.ClienteDAO;
 import com.artiffex.lithomat.sistemaweb.eistier.hibernate.HibernateUtil;
@@ -103,7 +105,7 @@ public class ClienteDaoImpl implements ClienteDAO {
 		return lista;
 	}
 
-	public int numeroClientes(String strQuery) {
+	public int numeroRegistros(String strQuery) {
 		int numeroClientes = 0;
 		try {
 			sesion = HibernateUtil.getInstance().getCurrentSession();
@@ -120,13 +122,13 @@ public class ClienteDaoImpl implements ClienteDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Cliente> listaPorRango(String strQuery) {
-		List<Cliente> lista = new ArrayList<Cliente>();
+	public List<ClienteDTO> listaPorCriteriosBusqueda(String strQuery) {
+		List<ClienteDTO> lista = new ArrayList<ClienteDTO>();
 		try {
 			sesion = HibernateUtil.getInstance().getCurrentSession();
 			sesion.beginTransaction();
 			SQLQuery query = sesion.createSQLQuery(strQuery);
-			query.addEntity(Cliente.class);
+			query.setResultTransformer(Transformers.aliasToBean(ClienteDTO.class));
 			lista = query.list();
 			sesion.getTransaction().commit();
 		} catch( Exception e ) {

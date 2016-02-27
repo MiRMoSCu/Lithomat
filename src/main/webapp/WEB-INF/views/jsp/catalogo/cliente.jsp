@@ -133,9 +133,9 @@
                                                 </tr>
                                             <c:forEach var="cliente" items="${listaCliente}" varStatus="i">
                                                 <tr class='${i.count%2==0?"l2":"l1"}' 
-                                                    onclick="setCampos('${cliente.idCliente}','${cliente.tipoCliente.clave}','${cliente.nombreMoral}','${cliente.nombreRepresentante}','${cliente.puesto}','${cliente.calle}','${cliente.numExterior}','${cliente.numInterior}','${cliente.colonia}','${cliente.delegacionMunicipio}','${cliente.estado}','${cliente.codigoPostal}','${cliente.pais}','${cliente.rfc}','${cliente.telefonoParticular}','${cliente.telefonoMovil}','${cliente.email}','${cliente.observaciones}');">
+                                                    onclick="setCampos('${cliente.idCliente}','${cliente.tipoCliente}','${cliente.nombreMoral}','${cliente.nombreRepresentante}','${cliente.puesto}','${cliente.calle}','${cliente.numExterior}','${cliente.numInterior}','${cliente.colonia}','${cliente.delegacionMunicipio}','${cliente.estado}','${cliente.codigoPostal}','${cliente.pais}','${cliente.rfc}','${cliente.telefonoParticular}','${cliente.telefonoMovil}','${cliente.email}','${cliente.observaciones}');">
                                                     <td>${cliente.idCliente}</td>
-                                                    <td>${cliente.tipoCliente.clave}</td>
+                                                    <td>${cliente.tipoCliente}</td>
                                                     <td>${cliente.nombreMoral}</td>
                                                     <td>${cliente.nombreRepresentante}</td>
                                                     <td>${cliente.puesto}</td>
@@ -214,7 +214,7 @@
 		                                				<table>
 		                                					<tr>
 		                                						<td width="33%">
-		                                							<input type="checkbox" name="chkbx_busca_por_clave"/>
+		                                							<input type="checkbox" name="chkbx_busca_por_tipo_cliente"/>
 		                                							<span style="cursor:pointer;" onclick="document.busqueda_cliente.chkbx_busca_por_clave.click()">Clave:</span>
 		                                						</td>
 		                                						<td>

@@ -65,6 +65,7 @@ public class TipoPapelExtendidoController {
 		return "catalogo/tipo_papel_extendido_busqueda";
 	}
 	
+	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/ventana/busca", method = RequestMethod.POST)
 	@ResponseBody
@@ -148,6 +149,7 @@ public class TipoPapelExtendidoController {
 		return "catalogo/tipo_papel_extendido";
 	}// lista_tipo_papel_extendido
 	
+	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/catalogo/lista_por_pagina_por_parametros", method = RequestMethod.POST)
 	@ResponseBody
@@ -203,7 +205,6 @@ public class TipoPapelExtendidoController {
 		
 		return sb.toString();
 	}
-	
 	
 
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
@@ -274,9 +275,11 @@ public class TipoPapelExtendidoController {
 		return "catalogo/tipo_papel_extendido";
 	}// alta_tipo_papel_extendido
 
+	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
-	public String modificaTipoPapelExtendido(
+	@ResponseBody
+	public void modificaTipoPapelExtendido(
 			@RequestParam(value = "id_tipo_papel_extendido", 	required = false) Integer idTipoPapelExtendido,
 			@RequestParam(value = "id_proveedor_papel", 		required = false) Integer idProveedorPapel,
 			@RequestParam(value = "nombre", 					required = false) String nombre,
@@ -290,7 +293,6 @@ public class TipoPapelExtendidoController {
 			Model model
 		) throws IOException {
 		log.info("/modifica_tipo_papel_extendido");
-
 		TipoPapelExtendido tipoPapelExtendido = tipoPapelExtendidoService.buscaTipoPapelExtendido(idTipoPapelExtendido);
 		tipoPapelExtendido.getProveedorPapel().setIdProveedorPapel(idProveedorPapel);
 		tipoPapelExtendido.setNombre(nombre);
@@ -301,85 +303,25 @@ public class TipoPapelExtendidoController {
 		tipoPapelExtendido.setDescripcion(descripcion);
 		tipoPapelExtendido.setPrecio(precio);
 		tipoPapelExtendido.getTipoPrecio().setIdTipoPrecio(idTipoPrecio);
-		
 		tipoPapelExtendidoService.modificaTipoPapelExtendido(tipoPapelExtendido);
-
 		tipoPapelExtendido 	= null;
-		
-		// configuracion de controles de la pagina (select)
-		List<ComboSelect> listaProveedorPapel = proveedorPapelService.listaComboSelect();
-		model.addAttribute("listaProveedorPapel", listaProveedorPapel);
-		listaProveedorPapel = null;
-		
-		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();
-		model.addAttribute("listaTipoPrecio", listaTipoPrecio);
-		listaTipoPrecio = null;
-		
-		// variables de configuracion del paginador
-		int numeroRegistrosPorPagina 	= 10;
-		int tamanioMaximoArreglo 		= 7;
-		int numeroPagina 				= 1;
-
-		model.addAttribute("numeroRegistrosPorPagina", numeroRegistrosPorPagina);
-		model.addAttribute("tamanioMaximoArreglo", tamanioMaximoArreglo);
-		model.addAttribute("numeroPagina", numeroPagina);
-		
-		// numero total de registros
-		int numeroTotalRegistros = tipoPapelExtendidoService.obtieneNumeroTipoPapelExtendidoPorParametros(false, false, false, false, false, false, null, null, null, null, null, null);
-		model.addAttribute("numeroTotalRegistros", numeroTotalRegistros);
-		
-		// lista de registros // BUSQUEDA DEFAULT
-		List<TipoPapelExtendido> listaTipoPapelExtendido = tipoPapelExtendidoService.listaTipoPapelExtendidoPorParametrosPorNumeroPagina(false, false, false, false, false, false, null, null, null, null, null, null, numeroPagina, numeroRegistrosPorPagina);
-		model.addAttribute("listaTipoPapelExtendido", listaTipoPapelExtendido);
-		listaTipoPapelExtendido = null;
-		
-		return "catalogo/tipo_papel_extendido";
 	}// modifica_tipo_papel_extendido
 
+	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/catalogo/elimina", method = RequestMethod.POST)
-	public String eliminaTipoPapelExtendido(
+	@ResponseBody
+	public void eliminaTipoPapelExtendido(
 			@RequestParam(value = "id_tipo_papel_extendido", required = false) Integer idTipoPapelExtendido,
 			Model model
 		) throws IOException {
 		log.info("/elimina_tipo_papel_extendido");
-		
 		TipoPapelExtendido tipoPapelExtendido = tipoPapelExtendidoService.buscaTipoPapelExtendido(idTipoPapelExtendido);
 		tipoPapelExtendido.setActivo(false);
-
 		tipoPapelExtendidoService.modificaTipoPapelExtendido(tipoPapelExtendido);
-
 		tipoPapelExtendido 	= null;
-		
-		// configuracion de controles de la pagina (select)
-		List<ComboSelect> listaProveedorPapel = proveedorPapelService.listaComboSelect();
-		model.addAttribute("listaProveedorPapel", listaProveedorPapel);
-		listaProveedorPapel = null;
-		
-		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect();
-		model.addAttribute("listaTipoPrecio", listaTipoPrecio);
-		listaTipoPrecio = null;
-		
-		// variables de configuracion del paginador
-		int numeroRegistrosPorPagina 	= 10;
-		int tamanioMaximoArreglo 		= 7;
-		int numeroPagina 				= 1;
-
-		model.addAttribute("numeroRegistrosPorPagina", numeroRegistrosPorPagina);
-		model.addAttribute("tamanioMaximoArreglo", tamanioMaximoArreglo);
-		model.addAttribute("numeroPagina", numeroPagina);
-		
-		// numero total de registros
-		int numeroTotalRegistros = tipoPapelExtendidoService.obtieneNumeroTipoPapelExtendidoPorParametros(false, false, false, false, false, false, null, null, null, null, null, null);
-		model.addAttribute("numeroTotalRegistros", numeroTotalRegistros);
-		
-		// lista de registros // BUSQUEDA DEFAULT
-		List<TipoPapelExtendido> listaTipoPapelExtendido = tipoPapelExtendidoService.listaTipoPapelExtendidoPorParametrosPorNumeroPagina(false, false, false, false, false, false, null, null, null, null, null, null, numeroPagina, numeroRegistrosPorPagina);
-		model.addAttribute("listaTipoPapelExtendido", listaTipoPapelExtendido);
-		listaTipoPapelExtendido = null;
-		
-		return "catalogo/tipo_papel_extendido";
 	}// elimina_tipo_papel_extendido
+	
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/catalogo/exporta", method = RequestMethod.GET)
@@ -401,12 +343,14 @@ public class TipoPapelExtendidoController {
 		documento = null;
 	} // exporta_tipo_papel_extendido
 	
+	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/catalogo/ventana", method = RequestMethod.GET )
 	public String ventanaModalSubirArchivoPapel() {
 		log.info("/ventana_modal_subir_archivo_papel");
 		return "catalogo/tipo_papel_extendido_sube_archivo";
 	} // ventanaModalSubirArchivoPapel
+	
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/catalogo/importa", method = RequestMethod.POST)

@@ -44,28 +44,55 @@ function setCampos( id_cliente, clave, nombre_moral, nombre_representante, puest
     document.cliente.observaciones.value           = observaciones;
 }
 
+function validaForm() {
+	var correcto = true;
+	if ( correcto
+			&& document.cliente.nombre_moral.value == "" ) {
+		correcto = false;
+		alert("El campo Nombre es obligatorio, favor de informarlo.");
+		document.cliente.nombre_moral.focus();
+	}
+	return correcto;
+} 
+
 function crear() {
-    if (document.cliente.nombre_moral.value == "")
-        alert("El campo nombre es obligatorio, favor de informarlo.");
-    else {
-        document.cliente.action = urlAlta;
+    if ( validaForm() ) {
+    	document.cliente.action = urlAlta;
         document.cliente.submit();
     }
 }
 
 function modifica() {
-    if (document.cliente.nombre_moral.value == "")
-        alert("El campo nombre es obligatorio, favor de informarlo.");
-    else {
-        document.cliente.action = urlModifica;
-        document.cliente.submit();
+    if ( validaForm() ) {
+    	$.ajax({
+    		type:'POST',
+    		url:urlModifica,
+    		data:$("[name=cliente]").serialize(),
+    		success:function( response ){
+    			realiza_consulta_paginador();
+    		},
+    		error:function( e ){
+    			alert("Problemas con el servidor. ¡Es momento de renunciar!");
+    		}
+    	});
     }
 }
 
 function elimina() {
     if (confirm(String.fromCharCode(191) + "Realmente desea eliminar este registro?")) {
-        document.cliente.action = urlElimina;
-        document.cliente.submit();
+    	$.ajax({
+    		type:'POST',
+    		url:urlElimina,
+    		data:$("[name=cliente]").serialize(),
+    		success:function( response ){
+    			realiza_consulta_paginador();
+    			--numero_total_registros;
+    			document.getElementById("div_paginacion_resultados").innerHTML = string_elementos_encontrados();
+    		},
+    		error:function( e ){
+    			alert("Problemas con el servidor. ¡Es momento de renunciar!");
+    		}
+    	});
     }
 }
 
@@ -197,7 +224,7 @@ function genera_tabla_dom( jsonListaClientes ) {
     	$.each( jsonListaClientes, function(i, item){
             tr = document.createElement("tr");
             
-            tr.setAttribute("onclick","setCampos('" + item.idCliente + "','"  + item.clave + "','"  + item.nombreMoral + "','"  + item.nombreRepresentante + "','"  + item.puesto + "','"  + item.calle + "','"  + item.numExterior + "','"  + item.numInterior + "','"  + item.colonia + "','"  + item.delegacionMunicipio + "','"  + item.estado + "','"  + item.codigoPostal + "','"  + item.pais + "','"  + item.rfc + "','"  + item.telefonoParticular + "','"  + item.telefonoMovil + "','"  + item.email + "','" + item.observaciones + "');")
+            tr.setAttribute("onclick","setCampos('" + item.idCliente + "','"  + item.tipoCliente + "','"  + item.nombreMoral + "','"  + item.nombreRepresentante + "','"  + item.puesto + "','"  + item.calle + "','"  + item.numExterior + "','"  + item.numInterior + "','"  + item.colonia + "','"  + item.delegacionMunicipio + "','"  + item.estado + "','"  + item.codigoPostal + "','"  + item.pais + "','"  + item.rfc + "','"  + item.telefonoParticular + "','"  + item.telefonoMovil + "','"  + item.email + "','" + item.observaciones + "');")
             tr.setAttribute("class",i%2==0?"l1":"l2");
             
             td = document.createElement("td");
@@ -205,7 +232,7 @@ function genera_tabla_dom( jsonListaClientes ) {
             tr.appendChild( td );
             
             td = document.createElement("td");
-            td.innerHTML = item.clave;
+            td.innerHTML = item.tipoCliente;
             tr.appendChild( td );
             
             td = document.createElement("td");
@@ -392,7 +419,7 @@ function limpia_form_busqueda_cliente() {
 	// limpia checkbox
 	document.busqueda_cliente.chkbx_busca_por_nombre_moral.checked 			= false;
 	document.busqueda_cliente.chkbx_busca_por_rfc.checked 					= false;
-	document.busqueda_cliente.chkbx_busca_por_clave.checked 				= false;
+	document.busqueda_cliente.chkbx_busca_por_tipo_cliente.checked 			= false;
 	document.busqueda_cliente.chkbx_busca_por_nombre_representante.checked 	= false;
 	document.busqueda_cliente.chkbx_busca_por_codigo_postal.checked 		= false;
 	// limpia input text y selects

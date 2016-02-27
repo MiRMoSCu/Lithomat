@@ -7,8 +7,8 @@ public class ClienteDTO implements Serializable {
 	private static final long serialVersionUID = 8893018683802657555L;
 	
 	private int idCliente;
+	private String tipoCliente;
 	private String nombreMoral;
-	private String clave;
 	private String nombreRepresentante;
 	private String puesto;
 	private String calle;
@@ -33,17 +33,17 @@ public class ClienteDTO implements Serializable {
 	public void setIdCliente(int idCliente) {
 		this.idCliente = idCliente;
 	}
+	public String getTipoCliente() {
+		return tipoCliente;
+	}
+	public void setTipoCliente(String tipoCliente) {
+		this.tipoCliente = tipoCliente;
+	}
 	public String getNombreMoral() {
 		return nombreMoral;
 	}
 	public void setNombreMoral(String nombreMoral) {
 		this.nombreMoral = nombreMoral;
-	}
-	public String getClave() {
-		return clave;
-	}
-	public void setClave(String clave) {
-		this.clave = clave;
 	}
 	public String getNombreRepresentante() {
 		return nombreRepresentante;
@@ -141,5 +141,4 @@ public class ClienteDTO implements Serializable {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	
 }

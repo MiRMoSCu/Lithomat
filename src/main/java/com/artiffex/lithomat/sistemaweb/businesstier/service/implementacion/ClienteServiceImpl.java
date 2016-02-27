@@ -11,6 +11,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.dto.ClienteDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Cliente;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.ClienteService;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ParametrosBusquedaCliente;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.ClienteDAO;
 
 @Service("clienteService")
@@ -27,7 +28,7 @@ public class ClienteServiceImpl implements ClienteService {
 		ClienteDTO clienteDTO = new ClienteDTO();
 		Cliente cliente = clienteDAO.busca(idCliente);
 		clienteDTO.setIdCliente(cliente.getIdCliente());
-		clienteDTO.setClave(cliente.getTipoCliente().getClave());
+		clienteDTO.setTipoCliente(cliente.getTipoCliente().getClave());
 		clienteDTO.setNombreMoral(cliente.getNombreMoral());
 		clienteDTO.setNombreRepresentante(cliente.getNombreRepresentante());
 		clienteDTO.setCalle(cliente.getCalle());
@@ -74,240 +75,163 @@ public class ClienteServiceImpl implements ClienteService {
 		return listaComboSelect;
 	}
 
-	public int obtieneNumeroClientesPorParamatros(
-			boolean busquedaPorNombreMoral, 
-			boolean busquedaPorRFC,
-			boolean busquedaPorClave, 
-			boolean busquedaPorNombreRepresentante,
-			boolean busquedaPorCodigoPostal, 
-			String nombreMoral, 
-			String rfc,
-			Integer idTipoCliente, 
-			String nombreRepresentante,
-			String codigoPostal) {
-		
+	public int numeroRegistrosPorCriterioBusqueda(ParametrosBusquedaCliente parametros) {
 		boolean existeParametro = false;
 		
 		StringBuilder query = new StringBuilder();
+		query.append(" SELECT ");
+		query.append("    COUNT(*)");
+		query.append(" FROM");
+		query.append("    cliente c");
+		query.append(" WHERE");
 		
-		query.append("SELECT COUNT(*)");
-		query.append(" ");
-		query.append("FROM cliente c");
-		query.append(" ");
-		query.append("WHERE");
-		query.append(" ");
-		
-		if( busquedaPorNombreMoral ) {
-			if( existeParametro ) 
+		if ( parametros.isBusquedaPorNombreMoral() ) {
+			if ( existeParametro ) 
 				query.append(" AND ");
-			query.append("c.nombre_moral LIKE '%");
-			query.append(nombreMoral);
+			query.append("    c.nombre_moral LIKE '%");
+			query.append(parametros.getNombreMoral());
 			query.append("%'");
-			query.append(" ");
 			existeParametro = true;
 		}
 		
-		if( busquedaPorRFC ) {
-			if( existeParametro ) 
+		if ( parametros.isBusquedaPorRfc() ) {
+			if ( existeParametro ) 
 				query.append(" AND ");
-			query.append("c.rfc LIKE '%");
-			query.append(rfc);
+			query.append("        c.rfc LIKE '%");
+			query.append(parametros.getRfc());
 			query.append("%'");
-			query.append(" ");
 			existeParametro = true;
 		}
 		
-		if( busquedaPorClave ) {
-			if( existeParametro ) 
+		if ( parametros.isBusquedaPorTipoCliente() ) {
+			if ( existeParametro ) 
 				query.append(" AND ");
-			query.append("c.id_tipo_cliente = ");
-			query.append(idTipoCliente);
-			query.append(" ");
+			query.append("        c.id_tipo_cliente = ");
+			query.append(parametros.getIdTipoCliente());
 			existeParametro = true;
 		}
 		
-		if( busquedaPorNombreRepresentante ) {
-			if( existeParametro ) 
+		if ( parametros.isBusquedaPorNombreRepresentante() ) {
+			if ( existeParametro ) 
 				query.append(" AND ");
-			query.append("c.nombre_representante LIKE '%");
-			query.append(nombreRepresentante);
+			query.append("        c.nombre_representante LIKE '%");
+			query.append(parametros.getNombreRepresentante());
 			query.append("%'");
-			query.append(" ");
 			existeParametro = true;
 		}
 		
-		if( busquedaPorCodigoPostal ) {
-			if( existeParametro ) 
+		if ( parametros.isBusquedaPorCodigoPostal() ) {
+			if ( existeParametro ) 
 				query.append(" AND ");
-			query.append("c.codigo_postal LIKE '%");
-			query.append(codigoPostal);
+			query.append("        c.codigo_postal LIKE '%");
+			query.append(parametros.getCodigoPostal());
 			query.append("%'");
-			query.append(" ");
 			existeParametro = true;
 		}
-	
-		if( existeParametro )
-			query.append("AND c.activo = TRUE; ");
-		else
-			query.append("c.activo = TRUE; ");
 		
-		int numRegistros = clienteDAO.numeroClientes( query.toString() );
+		if ( existeParametro )
+			query.append(" AND ");
+		
+		query.append("        c.activo = TRUE; ");
+		
+		int numRegistros = clienteDAO.numeroRegistros( query.toString() );
 		
 		query = null;
 		
 		return numRegistros;
 	}
-
-	public List<Cliente> listaClientePorParametrosPorNumeroPagina(
-			boolean busquedaPorNombreMoral, 
-			boolean busquedaPorRFC,
-			boolean busquedaPorClave, 
-			boolean busquedaPorNombreRepresentante,
-			boolean busquedaPorCodigoPostal, 
-			String nombreMoral, 
-			String rfc,
-			Integer idTipoCliente, 
-			String nombreRepresentante,
-			String codigoPostal, 
-			int numeroPagina, 
-			int numeroRegistrosPorPagina ) {
+	
+	public List<ClienteDTO> listaPorCriterioBusquedaPorNumeroPagina(ParametrosBusquedaCliente parametros, int numeroPagina, int numeroRegistrosPorPagina ) {
 		
 		boolean existeParametro = false;
 		
 		StringBuilder query = new StringBuilder();
+		query.append(" SELECT ");
+		query.append("    c.id_cliente idCliente,");
+		query.append("    tc.clave tipoCliente,");
+		query.append("    c.nombre_moral nombreMoral,");
+		query.append("    c.nombre_representante nombreRepresentante,");
+		query.append("    c.puesto puesto,");
+		query.append("    c.calle calle,");
+		query.append("    c.num_exterior numExterior,");
+		query.append("    c.num_interior numInterior,");
+		query.append("    c.colonia colonia,");
+		query.append("    c.delegacion_municipio delegacionMunicipio,");
+		query.append("    c.estado estado,");
+		query.append("    c.codigo_postal codigoPostal,");
+		query.append("    c.pais pais,");
+		query.append("    c.rfc rfc,");
+		query.append("    c.telefono_particular telefonoParticular,");
+		query.append("    c.telefono_movil telefonoMovil,");
+		query.append("    c.email email,");
+		query.append("    c.observaciones observaciones,");
+		query.append("    c.activo activo");
+		query.append(" FROM");
+		query.append("    cliente c,");
+		query.append("    tipo_cliente tc");
+		query.append(" WHERE");
 		
-		query.append("SELECT *");
-		query.append(" ");
-		query.append("FROM cliente c");
-		query.append(" ");
-		query.append("WHERE");
-		query.append(" ");
-		
-		if( busquedaPorNombreMoral ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
-			query.append("c.nombre_moral LIKE '%");
-			query.append(nombreMoral);
+		if ( parametros.isBusquedaPorNombreMoral() ) {
+			if ( existeParametro ) 
+				query.append(" AND ");
+			query.append("    c.nombre_moral LIKE '%");
+			query.append(parametros.getNombreMoral());
 			query.append("%'");
-			query.append(" ");
 			existeParametro = true;
 		}
 		
-		if( busquedaPorRFC ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
-			query.append("c.rfc LIKE '%");
-			query.append(rfc);
+		if ( parametros.isBusquedaPorRfc() ) {
+			if ( existeParametro ) 
+				query.append(" AND ");
+			query.append("        c.rfc LIKE '%");
+			query.append(parametros.getRfc());
 			query.append("%'");
-			query.append(" ");
 			existeParametro = true;
 		}
 		
-		if( busquedaPorClave ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
-			query.append("c.id_tipo_cliente = ");
-			query.append(idTipoCliente);
-			query.append(" ");
+		if ( parametros.isBusquedaPorTipoCliente() ) {
+			if ( existeParametro ) 
+				query.append(" AND ");
+			query.append("        c.id_tipo_cliente = ");
+			query.append(parametros.getIdTipoCliente());
 			existeParametro = true;
 		}
 		
-		if( busquedaPorNombreRepresentante ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
-			query.append("c.nombre_representante LIKE '%");
-			query.append(nombreRepresentante);
+		if ( parametros.isBusquedaPorNombreRepresentante() ) {
+			if ( existeParametro ) 
+				query.append(" AND ");
+			query.append("        c.nombre_representante LIKE '%");
+			query.append(parametros.getNombreRepresentante());
 			query.append("%'");
-			query.append(" ");
 			existeParametro = true;
 		}
 		
-		if( busquedaPorCodigoPostal ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
-			query.append("c.codigo_postal LIKE '%");
-			query.append(codigoPostal);
+		if ( parametros.isBusquedaPorCodigoPostal() ) {
+			if ( existeParametro ) 
+				query.append(" AND ");
+			query.append("        c.codigo_postal LIKE '%");
+			query.append(parametros.getCodigoPostal());
 			query.append("%'");
-			query.append(" ");
 			existeParametro = true;
 		}
-	
-		if( existeParametro )
-			query.append("AND c.activo = TRUE");
-		else
-			query.append("c.activo = TRUE");
 		
-		query.append(" ");
-		query.append("ORDER BY c.id_cliente ASC");
-		query.append(" ");
-		query.append("LIMIT");
-		query.append(" ");
+		if ( existeParametro )
+			query.append(" AND ");
+		
+		query.append("        c.activo = TRUE ");
+		query.append("        AND tc.id_tipo_cliente = c.id_tipo_cliente");
+		query.append(" ORDER BY c.id_cliente ASC");
+		query.append(" LIMIT ");
 		query.append(numeroRegistrosPorPagina * (numeroPagina - 1));
 		query.append(" , ");
 		query.append(numeroRegistrosPorPagina);
 		query.append(";");
 		
-		List<Cliente> lista = clienteDAO.listaPorRango( query.toString() );
+		List<ClienteDTO> lista = clienteDAO.listaPorCriteriosBusqueda(query.toString());
 		
 		query = null;
 		
 		return lista;
-	}
-	
-	public List<ClienteDTO> listaClientePorParametrosPorNumeroPaginaEnDTO(
-			boolean busquedaPorNombreMoral, 
-			boolean busquedaPorRFC,
-			boolean busquedaPorClave, 
-			boolean busquedaPorNombreRepresentante,
-			boolean busquedaPorCodigoPostal, 
-			String nombreMoral, 
-			String rfc,
-			Integer idTipoCliente, 
-			String nombreRepresentante,
-			String codigoPostal, 
-			int numeroPagina, 
-			int numeroRegistrosPorPagina ) {
-		
-		List<Cliente> listaCliente = listaClientePorParametrosPorNumeroPagina(busquedaPorNombreMoral, busquedaPorRFC, busquedaPorClave, busquedaPorNombreRepresentante, busquedaPorCodigoPostal, nombreMoral, rfc, idTipoCliente, nombreRepresentante, codigoPostal, numeroPagina, numeroRegistrosPorPagina);
-		
-		List<ClienteDTO> listaClienteDTO = new ArrayList<ClienteDTO>();
-		for (Cliente cliente : listaCliente) {
-			ClienteDTO clienteDTO = new ClienteDTO();
-			clienteDTO.setIdCliente(cliente.getIdCliente());
-			clienteDTO.setClave(cliente.getTipoCliente().getClave());
-			clienteDTO.setNombreMoral(cliente.getNombreMoral());
-			clienteDTO.setNombreRepresentante(cliente.getNombreRepresentante());
-			clienteDTO.setPuesto(cliente.getPuesto());
-			clienteDTO.setCalle(cliente.getCalle());
-			clienteDTO.setNumExterior(cliente.getNumExterior());
-			clienteDTO.setNumInterior(cliente.getNumInterior());
-			clienteDTO.setColonia(cliente.getColonia());
-			clienteDTO.setDelegacionMunicipio(cliente.getDelegacionMunicipio());
-			clienteDTO.setEstado(cliente.getEstado());
-			clienteDTO.setCodigoPostal(cliente.getCodigoPostal());
-			clienteDTO.setPais(cliente.getPais());
-			clienteDTO.setRfc(cliente.getRfc());
-			clienteDTO.setTelefonoParticular(cliente.getTelefonoParticular());
-			clienteDTO.setTelefonoMovil(cliente.getTelefonoMovil());
-			clienteDTO.setEmail(cliente.getEmail());
-			clienteDTO.setObservaciones(cliente.getObservaciones());
-			clienteDTO.setActivo(cliente.isActivo());
-			listaClienteDTO.add(clienteDTO);
-			clienteDTO 	= null;
-			cliente 	= null;
-		}
-		listaCliente = null;
-		return listaClienteDTO;
 	}
 	
 }

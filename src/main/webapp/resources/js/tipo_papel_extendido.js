@@ -105,15 +105,35 @@ function crear() {
 
 function modifica() {
     if ( validaForm() ) {
-        document.forms["tipo_papel_extendido"].action = urlModifica;
-        document.forms["tipo_papel_extendido"].submit();
+    	$.ajax({
+    		type:'POST',
+    		url:urlModifica,
+    		data:$("[name=tipo_papel_extendido]").serialize(),
+    		success:function( response ) {
+    			realiza_consulta_paginador();
+    		},
+    		error: function( e ) {
+    			alert("Problemas de conexion con el servidor.");
+    		}
+    	});
     }
 }
 
 function elimina() {
     if (confirm(String.fromCharCode(191) + "Realmente desea eliminar este registro?")) {
-        document.forms["tipo_papel_extendido"].action = urlElimina;
-        document.forms["tipo_papel_extendido"].submit();
+    	$.ajax({
+    		type:'POST',
+    		url:urlElimina,
+    		data:$("[name=tipo_papel_extendido]").serialize(),
+    		success:function( response ) {
+    			realiza_consulta_paginador();
+    			--numero_total_registros;
+    			document.getElementById("div_paginacion_resultados").innerHTML = string_elementos_encontrados();
+    		},
+    		error: function( e ) {
+    			alert("Problemas de conexion con el servidor.");
+    		}
+    	});
     }
 }
 

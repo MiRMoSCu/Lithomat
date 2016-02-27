@@ -5,6 +5,7 @@ import java.util.List;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.ClienteDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Cliente;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ParametrosBusquedaCliente;
 
 public interface ClienteService {
 
@@ -20,45 +21,8 @@ public interface ClienteService {
 	
 	public List<ComboSelect> buscaClientePorNombre(String nombreMoral);
 	
-	public int obtieneNumeroClientesPorParamatros(
-			boolean busquedaPorNombreMoral,
-			boolean busquedaPorRFC,
-			boolean busquedaPorClave,
-			boolean busquedaPorNombreRepresentante,
-			boolean busquedaPorCodigoPostal,
-			String nombreMoral,
-			String rfc,
-			Integer idTipoCliente,
-			String nombreRepresentante,
-			String codigoPostal
-		);
+	public int numeroRegistrosPorCriterioBusqueda(ParametrosBusquedaCliente parametros);
 	
-	public List<Cliente> listaClientePorParametrosPorNumeroPagina(
-			boolean busquedaPorNombreMoral,
-			boolean busquedaPorRFC,
-			boolean busquedaPorClave,
-			boolean busquedaPorNombreRepresentante,
-			boolean busquedaPorCodigoPostal,
-			String nombreMoral,
-			String rfc,
-			Integer idTipoCliente,
-			String nombreRepresentante,
-			String codigoPostal,
-			int numeroPagina, 
-			int numeroRegistrosPorPagina);
-	
-	public List<ClienteDTO> listaClientePorParametrosPorNumeroPaginaEnDTO(
-			boolean busquedaPorNombreMoral,
-			boolean busquedaPorRFC,
-			boolean busquedaPorClave,
-			boolean busquedaPorNombreRepresentante,
-			boolean busquedaPorCodigoPostal,
-			String nombreMoral,
-			String rfc,
-			Integer idTipoCliente,
-			String nombreRepresentante,
-			String codigoPostal,
-			int numeroPagina, 
-			int numeroRegistrosPorPagina);
+	public List<ClienteDTO> listaPorCriterioBusquedaPorNumeroPagina(ParametrosBusquedaCliente parametros, int numeroPagina, int numeroRegistrosPorPagina);
 		
 }
