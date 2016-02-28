@@ -167,4 +167,17 @@ public class TabuladorPreciosServiceImpl implements TabuladorPreciosService {
 		return precioUnitario;
 	}
 
+	public void borradoLogicoPorMaquina(int idMaquina) {
+		StringBuilder query = new StringBuilder();
+		query.append(" UPDATE tabulador_precios tp ");
+		query.append(" SET ");
+		query.append("    tp.activo = FALSE");
+		query.append(" WHERE");
+		query.append("    tp.id_maquina = ");
+		query.append(idMaquina);
+		query.append(";");
+		tabuladorPreciosDAO.borradoLogico(query.toString());
+		query = null;
+	}
+
 }

@@ -51,17 +51,17 @@
 													<fmt:parseNumber var="formatAncho" type="number" integerOnly="true" value="${tipoPapelExtendido.ancho}" />
 													<fmt:parseNumber var="formatAlto" type="number" integerOnly="true" value="${tipoPapelExtendido.alto}" />
 													<tr class='${i.count%2==0?"l2":"l1"}'
-														onclick="setCampos('${tipoPapelExtendido.idTipoPapelExtendido}', '${tipoPapelExtendido.proveedorPapel.razonSocial}', '${tipoPapelExtendido.nombre}', '${tipoPapelExtendido.gramaje}', '${tipoPapelExtendido.kilogramos}', '${tipoPapelExtendido.alto}', '${tipoPapelExtendido.ancho}', '${tipoPapelExtendido.descripcion}', '${tipoPapelExtendido.precio}', '${tipoPapelExtendido.tipoPrecio.nombre}');"
+														onclick="setCampos('${tipoPapelExtendido.idTipoPapelExtendido}', '${tipoPapelExtendido.razonSocial}', '${tipoPapelExtendido.nombre}', '${tipoPapelExtendido.gramaje}', '${tipoPapelExtendido.kilogramos}', '${tipoPapelExtendido.alto}', '${tipoPapelExtendido.ancho}', '${tipoPapelExtendido.descripcion}', '${tipoPapelExtendido.precio}', '${tipoPapelExtendido.nombrePrecio}');"
 														ondblclick="this.click(); window.parent.Shadowbox.close();">
 														<td>${tipoPapelExtendido.idTipoPapelExtendido}</td>
-														<td>${tipoPapelExtendido.proveedorPapel.razonSocial}</td>
+														<td>${tipoPapelExtendido.razonSocial}</td>
 														<td>${tipoPapelExtendido.nombre}</td>
 														<td>${tipoPapelExtendido.gramaje}</td>
 														<td>${tipoPapelExtendido.kilogramos}</td>
 														<td>${formatAlto}</td>
 														<td>${formatAncho}</td>
 														<td>${tipoPapelExtendido.precio}</td>
-														<td>${tipoPapelExtendido.tipoPrecio.nombre}</td>
+														<td>${tipoPapelExtendido.nombrePrecio}</td>
 													</tr>
 												</c:forEach>
 											</c:when>

@@ -22,4 +22,6 @@ public interface TabuladorPreciosService {
 	
 	public float obtienePrecioUnitarioTabulador(int idTipoComplejidad, int idMaquina, int cantidad);
 	
+	public void borradoLogicoPorMaquina(int idMaquina);
+	
 }

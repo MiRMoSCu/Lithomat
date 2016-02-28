@@ -139,9 +139,9 @@
 						<fmt:formatNumber var="formatAncho" value="${tipoPapelExtendido.ancho}" maxFractionDigits="0" />
 						<fmt:formatNumber var="formatAlto" value="${tipoPapelExtendido.alto}" maxFractionDigits="0" />
 						<tr class='${i.count%2==0?"l2":"l1"}'
-	                                                onclick="setCampos('${tipoPapelExtendido.idTipoPapelExtendido}', '${tipoPapelExtendido.proveedorPapel.razonSocial}', '${tipoPapelExtendido.nombre}', '${tipoPapelExtendido.gramaje}', '${tipoPapelExtendido.kilogramos}','${formatAlto}', '${formatAncho}', '${tipoPapelExtendido.descripcion}', '${tipoPapelExtendido.precio}', '${tipoPapelExtendido.tipoPrecio.nombre}');">
+	                                                onclick="setCampos('${tipoPapelExtendido.idTipoPapelExtendido}', '${tipoPapelExtendido.razonSocial}', '${tipoPapelExtendido.nombre}', '${tipoPapelExtendido.gramaje}', '${tipoPapelExtendido.kilogramos}','${formatAlto}', '${formatAncho}', '${tipoPapelExtendido.descripcion}', '${tipoPapelExtendido.precio}', '${tipoPapelExtendido.nombrePrecio}');">
 	                                                <td>${tipoPapelExtendido.idTipoPapelExtendido}</td>
-	                                                <td>${tipoPapelExtendido.proveedorPapel.razonSocial}</td>
+	                                                <td>${tipoPapelExtendido.razonSocial}</td>
 	                                                <td>${tipoPapelExtendido.nombre}</td>
 	                                                <td>${tipoPapelExtendido.gramaje}</td>
 	                                                <td>${tipoPapelExtendido.kilogramos}</td>
@@ -149,7 +149,7 @@
 	                                                <td>${formatAncho}</td>
 	                                                <td>${tipoPapelExtendido.descripcion}</td>
 	                                                <td><fmt:formatNumber pattern="#,##0.00" value="${tipoPapelExtendido.precio}"/></td>
-	                                                <td>${tipoPapelExtendido.tipoPrecio.nombre}</td>
+	                                                <td>${tipoPapelExtendido.nombrePrecio}</td>
 	                                            </tr>
 	                                        </c:forEach>
 	                                        </table>

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.ProveedorPapel;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.ProveedorPapelService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoPapelExtendidoService;
 
 @Controller
 @RequestMapping("/proveedor_papel")
@@ -25,6 +26,8 @@ public class ProveedorPapelController {
 	
 	@Resource
 	private ProveedorPapelService proveedorPapelService;
+	@Resource
+	private TipoPapelExtendidoService tipoPapelExtendidoService;
 
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
@@ -83,7 +86,7 @@ public class ProveedorPapelController {
 
 	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
 	@RequestMapping(value = "/catalogo/modifica", method = RequestMethod.POST)
-	public String modificaPProveedorPapel(
+	public String modificaProveedorPapel(
 			@RequestParam(value = "id_proveedor_papel", required = false) Integer idProveedorPapel,
 			@RequestParam(value = "razon_social", 		required = false) String razonSocial,
 			@RequestParam(value = "calle", 				required = false) String calle,
@@ -130,9 +133,11 @@ public class ProveedorPapelController {
 		) throws IOException {
 		log.info("/elimina_proveedor_papel");
 		
+		// borrado logico de las tablas donde proveedor de papel es mandatorio
+		tipoPapelExtendidoService.borradoLogicoPorProveedorPapel(idProveedorPapel);
+		// borrado logico de la maquina
 		ProveedorPapel proveedorPapel = proveedorPapelService.buscaProveedorPapel(idProveedorPapel);
 		proveedorPapel.setActivo(false);
-
 		proveedorPapelService.modificaProveedorPapel(proveedorPapel);
 
 		List<ProveedorPapel> listaProveedorPapel = proveedorPapelService.listaProveedorPapel();

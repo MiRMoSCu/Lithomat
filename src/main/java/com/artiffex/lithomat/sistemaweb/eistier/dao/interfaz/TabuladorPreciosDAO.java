@@ -21,4 +21,6 @@ public interface TabuladorPreciosDAO {
 	
 	public List<TabuladorPreciosDTO> listaPorCriteriosBusqueda(String strQuery);
 	
+	public void borradoLogico(String strQuery);
+	
 }

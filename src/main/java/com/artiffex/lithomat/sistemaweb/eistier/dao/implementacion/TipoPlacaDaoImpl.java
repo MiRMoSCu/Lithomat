@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
@@ -94,6 +95,19 @@ public class TipoPlacaDaoImpl implements TipoPlacaDAO {
 			sesion.getTransaction().rollback();
 		}
 		return lista;
+	}
+
+	public void borradoLogico(String strQuery) {
+		try {
+			sesion = HibernateUtil.getInstance().getCurrentSession();
+			sesion.beginTransaction();
+			SQLQuery query = sesion.createSQLQuery(strQuery);
+			query.executeUpdate();
+			sesion.getTransaction().commit();
+		} catch ( Exception e ) {
+			log.error(e.getMessage());
+			sesion.getTransaction().rollback();
+		}
 	}
 	
 }

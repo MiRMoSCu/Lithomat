@@ -15,5 +15,7 @@ public interface TipoPlacaDAO {
 	public List<TipoPlaca> lista();
 	
 	public List<TipoPlaca> lista(int idMaquina);
+	
+	public void borradoLogico(String strQuery);
 
 }

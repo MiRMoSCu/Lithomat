@@ -16,4 +16,6 @@ public interface TipoPlacaService {
 
 	public String jsonListaTipoPlaca(int idMaquina);
 	
+	public void borradoLogicoPorMaquina(int idMaquina);
+	
 }

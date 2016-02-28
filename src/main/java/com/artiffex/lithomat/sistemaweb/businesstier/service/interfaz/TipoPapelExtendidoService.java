@@ -17,54 +17,9 @@ public interface TipoPapelExtendidoService {
 
 	public List<TipoPapelExtendido> listaTipoPapelExtendido();
 	
-	public int obtieneNumeroTipoPapelExtendidoPorParametros(
-			boolean busquedaPorNombre,
-			boolean busquedaPorGramaje,
-			boolean busquedaPorKilogramos,
-			boolean busquedaPorAncho,
-			boolean busquedaPorAlto,
-			boolean busquedaPorProveedor,
-			String nombre,
-			Integer gramaje,
-			Float kilogramos,
-			Float ancho,
-			Float alto,
-			Integer idProveedorPapel
-		);
+	public int numeroRegistrosPorCriterioBusqueda(ParametrosBusquedaTipoPapelExtendido parametros);
 	
-	public List<TipoPapelExtendido> listaTipoPapelExtendidoPorParametrosPorNumeroPagina(
-			boolean busquedaPorNombre,
-			boolean busquedaPorGramaje,
-			boolean busquedaPorKilogramos,
-			boolean busquedaPorAncho,
-			boolean busquedaPorAlto,
-			boolean busquedaPorProveedor,
-			String nombre,
-			Integer gramaje,
-			Float kilogramos,
-			Float ancho,
-			Float alto,
-			Integer idProveedorPapel,
-			int numeroPagina, 
-			int numeroRegistrosPorPagina
-		);
-	
-	public List<TipoPapelExtendidoDTO> listaTipoPapelExtendidoPorParametrosPorNumeroPaginaEnDTO(
-			boolean busquedaPorNombre,
-			boolean busquedaPorGramaje,
-			boolean busquedaPorKilogramos,
-			boolean busquedaPorAncho,
-			boolean busquedaPorAlto,
-			boolean busquedaPorProveedor,
-			String nombre,
-			Integer gramaje,
-			Float kilogramos,
-			Float ancho,
-			Float alto,
-			Integer idProveedorPapel,
-			int numeroPagina, 
-			int numeroRegistrosPorPagina
-		);
+	public List<TipoPapelExtendidoDTO> listaPorCriterioBusquedaPorNumeroPagina(ParametrosBusquedaTipoPapelExtendido parametros, int numeroPagina, int numeroRegistrosPorPagina);
 	
 	public String listaHTMLTipoPapelExtendidoPorConsulta(ParametrosBusquedaTipoPapelExtendido parametros);
 
@@ -73,5 +28,7 @@ public interface TipoPapelExtendidoService {
 	public byte[] obtieneExcelListaTipoPapelExtendido();
 	
 	public void cargaExcel(String path);
+	
+	public void borradoLogicoPorProveedorPapel(int idProveedorPapel);
 	
 }

@@ -48,214 +48,154 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 		return tipoPapelExtendidoDAO.lista();
 	}
 	
-	public int obtieneNumeroTipoPapelExtendidoPorParametros(
-			boolean busquedaPorNombre, 
-			boolean busquedaPorGramaje,
-			boolean busquedaPorKilogramos, 
-			boolean busquedaPorAncho,
-			boolean busquedaPorAlto, 
-			boolean busquedaPorProveedor,
-			String nombre, 
-			Integer gramaje, 
-			Float kilogramos, 
-			Float ancho,
-			Float alto, 
-			Integer idProveedorPapel ) {
+	public int numeroRegistrosPorCriterioBusqueda(ParametrosBusquedaTipoPapelExtendido parametros) {
 		
 		boolean existeParametro = false;
 		
 		StringBuilder query = new StringBuilder();
 		
-		query.append("SELECT COUNT(*)");
-		query.append(" ");
-		query.append("FROM tipo_papel_extendido tpe");
-		query.append(" ");
-		query.append("WHERE");
-		query.append(" ");
+		query.append(" SELECT COUNT(*) ");
+		query.append(" FROM tipo_papel_extendido tpe ");
+		query.append(" WHERE ");
 		
-		if( busquedaPorNombre ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
+		if( parametros.isBusquedaPorNombre() ) {
+			if( existeParametro ) 
+				query.append(" AND ");
 			query.append("tpe.nombre LIKE '%");
-			query.append(nombre);
+			query.append(parametros.getNombrePapel());
 			query.append("%'");
-			query.append(" ");
 			existeParametro = true;
 		}
 		
-		if( busquedaPorGramaje ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
+		if( parametros.isBusquedaPorGramaje() ) {
+			if( existeParametro ) 
+				query.append(" AND ");
 			query.append("tpe.gramaje = ");
-			query.append(gramaje);
-			query.append(" ");
+			query.append(parametros.getGramaje());
 			existeParametro = true;
 		}
 		
-		if( busquedaPorKilogramos ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
+		if( parametros.isBusquedaPorKilogramos() ) {
+			if( existeParametro ) 
+				query.append(" AND ");
 			query.append("tpe.kilogramos = ");
-			query.append(kilogramos);
-			query.append(" ");
+			query.append(parametros.getKilogramos());
 			existeParametro = true;
 		}
 		
-		if( busquedaPorAncho ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
+		if( parametros.isBusquedaPorAncho() ) {
+			if( existeParametro ) 
+				query.append(" AND ");
 			query.append("tpe.ancho = ");
-			query.append(ancho);
-			query.append(" ");
+			query.append(parametros.getAncho());
 			existeParametro = true;
 		}
 		
-		if( busquedaPorAlto ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
+		if( parametros.isBusquedaPorAlto() ) {
+			if( existeParametro ) 
+				query.append(" AND ");
 			query.append("tpe.alto = ");
-			query.append(alto);
-			query.append(" ");
+			query.append(parametros.getAlto());
 			existeParametro = true;
 		}
 		
-		if( busquedaPorProveedor ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
+		if( parametros.isBusquedaPorProveedor() ) {
+			if( existeParametro ) 
+				query.append(" AND ");
 			query.append("id_proveedor_papel = ");
-			query.append(idProveedorPapel);
-			query.append(" ");
+			query.append(parametros.getIdProveedorPapel());
 			existeParametro = true;
 		}
 		
 		if( existeParametro )
-			query.append("AND tpe.activo = TRUE; ");
-		else
-			query.append("tpe.activo = TRUE; ");
-		
-		int numRegistros = tipoPapelExtendidoDAO.numeroTipoPapelExtendido( query.toString() );
+			query.append(" AND ");
+			
+		query.append(" tpe.activo = TRUE; ");
+		int numRegistros = tipoPapelExtendidoDAO.numeroRegistros(query.toString());
 		
 		query = null;
 		
 		return numRegistros;
 	}
 	
-	public List<TipoPapelExtendido> listaTipoPapelExtendidoPorParametrosPorNumeroPagina(
-			boolean busquedaPorNombre, 
-			boolean busquedaPorGramaje,
-			boolean busquedaPorKilogramos, 
-			boolean busquedaPorAncho,
-			boolean busquedaPorAlto, 
-			boolean busquedaPorProveedor,
-			String nombre, 
-			Integer gramaje, 
-			Float kilogramos, 
-			Float ancho,
-			Float alto, 
-			Integer idProveedorPapel, 
-			int numeroPagina,
-			int numeroRegistrosPorPagina ) {
-		
+	public List<TipoPapelExtendidoDTO> listaPorCriterioBusquedaPorNumeroPagina(ParametrosBusquedaTipoPapelExtendido parametros, int numeroPagina, int numeroRegistrosPorPagina ) {
 		boolean existeParametro = false;
 		
 		StringBuilder query = new StringBuilder();
+		query.append(" SELECT ");
+		query.append("    tpe.id_tipo_papel_extendido idTipoPapelExtendido,");
+		query.append("    pp.razon_social razonSocial,");
+		query.append("    tpe.nombre,");
+		query.append("    tpe.gramaje,");
+		query.append("    tpe.kilogramos,");
+		query.append("    tpe.alto,");
+		query.append("    tpe.ancho,");
+		query.append("    tpe.descripcion,");
+		query.append("    tpe.precio,");
+		query.append("    tp.nombre nombrePrecio");
+		query.append(" FROM");
+		query.append("    tipo_papel_extendido tpe,");
+		query.append("    proveedor_papel pp,");
+		query.append("    tipo_precio tp");
+		query.append(" WHERE");
 		
-		query.append("SELECT *");
-		query.append(" ");
-		query.append("FROM tipo_papel_extendido tpe");
-		query.append(" ");
-		query.append("WHERE");
-		query.append(" ");
-		
-		if( busquedaPorNombre ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
-			query.append("tpe.nombre LIKE '%");
-			query.append(nombre);
+		if( parametros.isBusquedaPorNombre() ) {
+			if( existeParametro ) 
+				query.append(" AND ");
+			query.append("    tpe.nombre LIKE '%");
+			query.append(parametros.getNombrePapel());
 			query.append("%'");
-			query.append(" ");
 			existeParametro = true;
 		}
 		
-		if( busquedaPorGramaje ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
-			query.append("tpe.gramaje = ");
-			query.append(gramaje);
-			query.append(" ");
+		if( parametros.isBusquedaPorGramaje() ) {
+			if( existeParametro ) 
+				query.append(" AND ");
+			query.append("        tpe.gramaje = ");
+			query.append(parametros.getGramaje());
 			existeParametro = true;
 		}
 		
-		if( busquedaPorKilogramos ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
-			query.append("tpe.kilogramos = ");
-			query.append(kilogramos);
-			query.append(" ");
+		if( parametros.isBusquedaPorKilogramos() ) {
+			if( existeParametro ) 
+				query.append(" AND ");
+			query.append("        tpe.kilogramos = ");
+			query.append(parametros.getKilogramos());
 			existeParametro = true;
 		}
 		
-		if( busquedaPorAncho ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
-			query.append("tpe.ancho = ");
-			query.append(ancho);
-			query.append(" ");
+		if( parametros.isBusquedaPorAncho() ) {
+			if( existeParametro ) 
+				query.append(" AND ");
+			query.append("        tpe.ancho = ");
+			query.append(parametros.getAncho());
 			existeParametro = true;
 		}
 		
-		if( busquedaPorAlto ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
-			query.append("tpe.alto = ");
-			query.append(alto);
-			query.append(" ");
+		if( parametros.isBusquedaPorAlto() ) {
+			if( existeParametro ) 
+				query.append(" AND ");
+			query.append("        tpe.alto = ");
+			query.append(parametros.getAlto());
 			existeParametro = true;
 		}
 		
-		if( busquedaPorProveedor ) {
-			if( existeParametro ) {
-				query.append("AND");
-				query.append(" ");
-			}
-			query.append("id_proveedor_papel = ");
-			query.append(idProveedorPapel);
-			query.append(" ");
+		if( parametros.isBusquedaPorProveedor() ) {
+			if( existeParametro ) 
+				query.append(" AND ");
+			query.append("        tpe.id_proveedor_papel = ");
+			query.append(parametros.getIdProveedorPapel());
 			existeParametro = true;
 		}
 		
 		if( existeParametro )
-			query.append("AND tpe.activo = TRUE");
-		else
-			query.append("tpe.activo = TRUE");
+			query.append(" AND ");
 		
-		query.append(" ");
-		query.append("ORDER BY id_tipo_papel_extendido ASC");
-		query.append(" ");
-		query.append("LIMIT");
-		query.append(" ");
+		query.append("        tpe.activo = TRUE");
+		query.append("        AND pp.id_proveedor_papel = tpe.id_proveedor_papel");
+		query.append("        AND tp.id_tipo_precio = tpe.id_tipo_precio");
+		query.append(" ORDER BY id_tipo_papel_extendido ASC");
+		query.append(" LIMIT ");
 		query.append(numeroRegistrosPorPagina * (numeroPagina - 1));
 		query.append(" , ");
 		query.append(numeroRegistrosPorPagina);
@@ -263,51 +203,11 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 		
 		//System.out.println(query.toString());
 		
-		List<TipoPapelExtendido> lista = tipoPapelExtendidoDAO.listaPorRango( query.toString() );
+		List<TipoPapelExtendidoDTO> lista = tipoPapelExtendidoDAO.listaPorCriteriosBusqueda( query.toString() );
 		
 		query = null;
 		
 		return lista;
-	}
-	
-	public List<TipoPapelExtendidoDTO> listaTipoPapelExtendidoPorParametrosPorNumeroPaginaEnDTO(
-			boolean busquedaPorNombre, 
-			boolean busquedaPorGramaje,
-			boolean busquedaPorKilogramos, 
-			boolean busquedaPorAncho,
-			boolean busquedaPorAlto, 
-			boolean busquedaPorProveedor,
-			String nombre, 
-			Integer gramaje, 
-			Float kilogramos, 
-			Float ancho,
-			Float alto, 
-			Integer idProveedorPapel, 
-			int numeroPagina,
-			int numeroRegistrosPorPagina ) {
-		
-		List<TipoPapelExtendido> listaTipoPapelExtendido = listaTipoPapelExtendidoPorParametrosPorNumeroPagina(busquedaPorNombre, busquedaPorGramaje, busquedaPorKilogramos, busquedaPorAncho, busquedaPorAlto, busquedaPorProveedor, nombre, gramaje, kilogramos, ancho, alto, idProveedorPapel, numeroPagina, numeroRegistrosPorPagina);
-		
-		List<TipoPapelExtendidoDTO> listaClienteDTO = new ArrayList<TipoPapelExtendidoDTO>();
-		for (TipoPapelExtendido tipoPapelExtendido : listaTipoPapelExtendido) {
-			TipoPapelExtendidoDTO tpeDTO = new TipoPapelExtendidoDTO();
-			tpeDTO.setIdTipoPapelExtendido( tipoPapelExtendido.getIdTipoPapelExtendido() );
-			tpeDTO.setRazonSocial( tipoPapelExtendido.getProveedorPapel().getRazonSocial() );
-			tpeDTO.setNombre( tipoPapelExtendido.getNombre() );
-			tpeDTO.setGramaje( tipoPapelExtendido.getGramaje() );
-			tpeDTO.setKilogramos( tipoPapelExtendido.getKilogramos() );
-			tpeDTO.setAlto( tipoPapelExtendido.getAlto() );
-			tpeDTO.setAncho( tipoPapelExtendido.getAncho() );
-			tpeDTO.setDescripcion( tipoPapelExtendido.getDescripcion()==null?"":tipoPapelExtendido.getDescripcion() );
-			tpeDTO.setPrecio( tipoPapelExtendido.getPrecio() );
-			tpeDTO.setNombrePrecio( tipoPapelExtendido.getTipoPrecio().getNombre() );
-			listaClienteDTO.add(tpeDTO);
-			tpeDTO 				= null;
-			tipoPapelExtendido 	= null;
-		}
-		listaTipoPapelExtendido = null;
-		
-		return listaClienteDTO;
 	}
 	
 	public String listaHTMLTipoPapelExtendidoPorConsulta(ParametrosBusquedaTipoPapelExtendido parametros) {
@@ -644,6 +544,19 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 				//return -1;
 			}
 		}
+	}
+
+	public void borradoLogicoPorProveedorPapel(int idProveedorPapel) {
+		StringBuilder query = new StringBuilder();
+		query.append(" UPDATE tipo_papel_extendido tpe ");
+		query.append(" SET ");
+		query.append("    tpe.activo = FALSE");
+		query.append(" WHERE");
+		query.append("    tpe.id_proveedor_papel = ");
+		query.append(idProveedorPapel);
+		query.append(";");
+		tipoPapelExtendidoDAO.borradoLogico(query.toString());
+		query = null;
 	}
 
 }

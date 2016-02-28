@@ -8,8 +8,10 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.TipoPapelExtendidoDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPapelExtendido;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ParametrosBusquedaTipoPapelExtendido;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.TipoPapelExtendidoDAO;
@@ -97,7 +99,7 @@ public class TipoPapelExtendidoDaoImpl implements TipoPapelExtendidoDAO {
 		return lista;
 	}
 
-	public int numeroTipoPapelExtendido(String strQuery) {
+	public int numeroRegistros(String strQuery) {
 		int numeroRegistros = 0;
 		try {
 			sesion = HibernateUtil.getInstance().getCurrentSession();
@@ -114,13 +116,13 @@ public class TipoPapelExtendidoDaoImpl implements TipoPapelExtendidoDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<TipoPapelExtendido> listaPorRango(String strQuery) {
-		List<TipoPapelExtendido> lista = new ArrayList<TipoPapelExtendido>();
+	public List<TipoPapelExtendidoDTO> listaPorCriteriosBusqueda(String strQuery) {
+		List<TipoPapelExtendidoDTO> lista = new ArrayList<TipoPapelExtendidoDTO>();
 		try {
 			sesion = HibernateUtil.getInstance().getCurrentSession();
 			sesion.beginTransaction();
 			SQLQuery query = sesion.createSQLQuery(strQuery);
-			query.addEntity(TipoPapelExtendido.class);
+			query.setResultTransformer(Transformers.aliasToBean(TipoPapelExtendidoDTO.class));
 			lista = query.list();
 			sesion.getTransaction().commit();
 		} catch( Exception e ) {
@@ -128,6 +130,20 @@ public class TipoPapelExtendidoDaoImpl implements TipoPapelExtendidoDAO {
 			sesion.getTransaction().rollback();
 		}
 		return lista;
+	}
+
+	// BORRADO LOGICO CON QUERY
+	public void borradoLogico(String strQuery) {
+		try {
+			sesion = HibernateUtil.getInstance().getCurrentSession();
+			sesion.beginTransaction();
+			SQLQuery query = sesion.createSQLQuery(strQuery);
+			query.executeUpdate();
+			sesion.getTransaction().commit();
+		} catch ( Exception e ) {
+			log.error(e.getMessage());
+			sesion.getTransaction().rollback();
+		}
 	}
 	
 }

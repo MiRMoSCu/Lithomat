@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Maquina;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.MaquinaService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TabuladorPreciosService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoPlacaService;
 
 @Controller
 @RequestMapping("/maquina")
@@ -25,6 +27,10 @@ public class MaquinaController {
 	
 	@Resource
 	private MaquinaService maquinaService;
+	@Resource
+	private TipoPlacaService tipoPlacaService;
+	@Resource
+	private TabuladorPreciosService tabuladorPreciosService;
 
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN"})
@@ -126,9 +132,12 @@ public class MaquinaController {
 		) throws IOException {
 		log.info("/elimina_maquina");
 		
+		// borrado logico de las tablas donde maquina es mandatorio
+		tipoPlacaService.borradoLogicoPorMaquina(idMaquina);
+		tabuladorPreciosService.borradoLogicoPorMaquina(idMaquina);
+		// borrado logico de la maquina
 		Maquina maquina = maquinaService.buscaMaquina(idMaquina);
 		maquina.setActivo(false);
-
 		maquinaService.modificaMaquina(maquina);
 
 		List<Maquina> listaMaquina = maquinaService.listaMaquina();

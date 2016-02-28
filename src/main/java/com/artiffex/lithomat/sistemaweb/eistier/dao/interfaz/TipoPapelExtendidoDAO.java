@@ -2,6 +2,7 @@ package com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz;
 
 import java.util.List;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.TipoPapelExtendidoDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPapelExtendido;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ParametrosBusquedaTipoPapelExtendido;
 
@@ -17,8 +18,10 @@ public interface TipoPapelExtendidoDAO {
 	
 	public List<TipoPapelExtendido> listaPorQuery(String query, ParametrosBusquedaTipoPapelExtendido parametros);
 	
-	public int numeroTipoPapelExtendido( String strQuery );
+	public int numeroRegistros(String strQuery);
 	
-	public List<TipoPapelExtendido> listaPorRango( String strQuery );
+	public List<TipoPapelExtendidoDTO> listaPorCriteriosBusqueda(String strQuery);
+	
+	public void borradoLogico(String strQuery);
 	
 }

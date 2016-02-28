@@ -59,4 +59,17 @@ public class TipoPlacaServiceImpl implements TipoPlacaService {
 		return str.toString();
 	}
 
+	public void borradoLogicoPorMaquina(int idMaquina) {
+		StringBuilder query = new StringBuilder();
+		query.append(" UPDATE tipo_placa tp ");
+		query.append(" SET ");
+		query.append("    tp.activo = FALSE");
+		query.append(" WHERE");
+		query.append("    tp.id_maquina = ");
+		query.append(idMaquina);
+		query.append(";");
+		tipoPlacaDAO.borradoLogico(query.toString());
+		query = null;
+	}
+
 }

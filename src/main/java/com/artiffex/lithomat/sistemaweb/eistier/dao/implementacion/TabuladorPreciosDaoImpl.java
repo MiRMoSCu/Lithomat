@@ -134,4 +134,17 @@ public class TabuladorPreciosDaoImpl implements TabuladorPreciosDAO {
 		return lista;
 	}
 
+	public void borradoLogico(String strQuery) {
+		try {
+			sesion = HibernateUtil.getInstance().getCurrentSession();
+			sesion.beginTransaction();
+			SQLQuery query = sesion.createSQLQuery(strQuery);
+			query.executeUpdate();
+			sesion.getTransaction().commit();
+		} catch ( Exception e ) {
+			log.error(e.getMessage());
+			sesion.getTransaction().rollback();
+		}
+	}
+
 }

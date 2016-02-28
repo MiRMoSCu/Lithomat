@@ -1,6 +1,7 @@
 package com.artiffex.lithomat.sistemaweb.businesstier.dto;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class TipoPapelExtendidoDTO implements Serializable {
 
@@ -11,8 +12,8 @@ public class TipoPapelExtendidoDTO implements Serializable {
 	private String nombre;
 	private int gramaje;
 	private float kilogramos;
-	private float ancho;
-	private float alto;
+	private BigDecimal ancho;
+	private BigDecimal alto;
 	private String descripcion;
 	private float precio;
 	private String nombrePrecio;
@@ -48,16 +49,16 @@ public class TipoPapelExtendidoDTO implements Serializable {
 	public void setKilogramos(float kilogramos) {
 		this.kilogramos = kilogramos;
 	}
-	public float getAncho() {
+	public BigDecimal getAncho() {
 		return ancho;
 	}
-	public void setAncho(float ancho) {
+	public void setAncho(BigDecimal ancho) {
 		this.ancho = ancho;
 	}
-	public float getAlto() {
+	public BigDecimal getAlto() {
 		return alto;
 	}
-	public void setAlto(float alto) {
+	public void setAlto(BigDecimal alto) {
 		this.alto = alto;
 	}
 	public String getDescripcion() {
@@ -78,5 +79,4 @@ public class TipoPapelExtendidoDTO implements Serializable {
 	public void setNombrePrecio(String nombrePrecio) {
 		this.nombrePrecio = nombrePrecio;
 	}
-	
 }
