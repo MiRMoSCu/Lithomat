@@ -40,7 +40,6 @@ public class VisualizadorServiceImpl implements VisualizadorService {
 						+ "    op.activo = TRUE;";
 	
 				parametrosQuery = null;
-	
 				break;
 	
 			case BUSQUEDA_NUT:
@@ -53,7 +52,6 @@ public class VisualizadorServiceImpl implements VisualizadorService {
 						+ "        AND op.activo = TRUE;";
 	
 				parametrosQuery = new Object[] { parametros.getNut() };
-	
 				break;
 	
 			case BUSQUEDA_ESTATUS:
@@ -76,7 +74,6 @@ public class VisualizadorServiceImpl implements VisualizadorService {
 						+ "        AND op.activo = TRUE;";
 	
 				parametrosQuery = new Object[] { parametros.getIdEstatusOrden() };
-	
 				break;
 	
 			case BUSQUEDA_NOMBRE_OP:
@@ -89,7 +86,6 @@ public class VisualizadorServiceImpl implements VisualizadorService {
 						+ "        AND op.activo = TRUE;";
 	
 				parametrosQuery = new Object[] { "%" + parametros.getNombre() + "%" };
-	
 				break;
 	
 			case BUSQUEDA_DESCRIPCION_OP:
@@ -102,7 +98,6 @@ public class VisualizadorServiceImpl implements VisualizadorService {
 						+ "        AND op.activo = TRUE;";
 	
 				parametrosQuery = new Object[] { "%" + parametros.getDescripcion() + "%" };
-	
 				break;
 	
 			case BUSQUEDA_FECHA_COTIZACION:
@@ -115,7 +110,6 @@ public class VisualizadorServiceImpl implements VisualizadorService {
 						+ "        AND op.activo = TRUE;";
 	
 				parametrosQuery = new Object[] { parametros.getFechaCotizacionInicio(), parametros.getFechaCotizacionFin() };
-	
 				break;
 	
 			case BUSQUEDA_CLIENTE:
@@ -130,7 +124,6 @@ public class VisualizadorServiceImpl implements VisualizadorService {
 						+ "        AND op.activo = TRUE;";
 	
 				parametrosQuery = new Object[] { "%" + parametros.getCliente() + "%" };
-	
 				break;
 	
 			default:
@@ -178,7 +171,6 @@ public class VisualizadorServiceImpl implements VisualizadorService {
 				parametrosQuery = new Object[] {
 						numeroRegistrosPorPagina * (numeroPagina - 1),
 						numeroRegistrosPorPagina };
-	
 				break;
 	
 			case BUSQUEDA_NUT:
@@ -213,7 +205,6 @@ public class VisualizadorServiceImpl implements VisualizadorService {
 				parametrosQuery = new Object[] { parametros.getNut(),
 						numeroRegistrosPorPagina * (numeroPagina - 1),
 						numeroRegistrosPorPagina };
-	
 				break;
 	
 			case BUSQUEDA_ESTATUS:
@@ -248,7 +239,6 @@ public class VisualizadorServiceImpl implements VisualizadorService {
 				parametrosQuery = new Object[] { parametros.getIdEstatusOrden(),
 						numeroRegistrosPorPagina * (numeroPagina - 1),
 						numeroRegistrosPorPagina };
-	
 				break;
 	
 			case BUSQUEDA_NOMBRE_OP:
@@ -283,7 +273,6 @@ public class VisualizadorServiceImpl implements VisualizadorService {
 				parametrosQuery = new Object[] { "%" + parametros.getNombre() + "%",
 						numeroRegistrosPorPagina * (numeroPagina - 1),
 						numeroRegistrosPorPagina };
-	
 				break;
 	
 			case BUSQUEDA_DESCRIPCION_OP:
@@ -318,7 +307,6 @@ public class VisualizadorServiceImpl implements VisualizadorService {
 				parametrosQuery = new Object[] { "%" + parametros.getDescripcion() + "%",
 						numeroRegistrosPorPagina * (numeroPagina - 1),
 						numeroRegistrosPorPagina };
-	
 				break;
 	
 			case BUSQUEDA_FECHA_COTIZACION:
@@ -354,7 +342,6 @@ public class VisualizadorServiceImpl implements VisualizadorService {
 						parametros.getFechaCotizacionFin(),
 						numeroRegistrosPorPagina * (numeroPagina - 1),
 						numeroRegistrosPorPagina };
-	
 				break;
 	
 			case BUSQUEDA_CLIENTE:
@@ -389,7 +376,6 @@ public class VisualizadorServiceImpl implements VisualizadorService {
 				parametrosQuery = new Object[] { "%" + parametros.getCliente() + "%",
 						numeroRegistrosPorPagina * (numeroPagina - 1),
 						numeroRegistrosPorPagina };
-	
 				break;
 	
 			default:
