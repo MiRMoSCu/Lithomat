@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -24,7 +25,11 @@ public class TipoVueltaDaoImpl implements TipoVueltaDAO {
 	public int crea(TipoVuelta tipoVuelta) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(tipoVuelta);
 			sesion.getTransaction().commit();
@@ -38,7 +43,11 @@ public class TipoVueltaDaoImpl implements TipoVueltaDAO {
 	public TipoVuelta busca(int idTipoVuelta) {
 		TipoVuelta tipoVuelta = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from TipoVuelta tv where tv.idTipoVuelta = :idTipoVuelta");
 			query.setParameter("idTipoVuelta", idTipoVuelta);
@@ -54,7 +63,11 @@ public class TipoVueltaDaoImpl implements TipoVueltaDAO {
 
 	public void modifica(TipoVuelta tipoVuelta) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(tipoVuelta);
 			sesion.getTransaction().commit();
@@ -68,7 +81,11 @@ public class TipoVueltaDaoImpl implements TipoVueltaDAO {
 	public List<TipoVuelta> lista() {
 		List<TipoVuelta> lista = new ArrayList<TipoVuelta>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from TipoVuelta tv where tv.activo = true order by tv.idTipoVuelta asc").list();
 			sesion.getTransaction().commit();

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -24,7 +25,11 @@ public class HistorialEstatusDaoImpl implements HistorialEstatusDAO {
 	public int crea(HistorialEstatus historialEstatus) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(historialEstatus);
 			sesion.getTransaction().commit();
@@ -38,7 +43,11 @@ public class HistorialEstatusDaoImpl implements HistorialEstatusDAO {
 	public HistorialEstatus busca(int idHistorialEstatus) {
 		HistorialEstatus historialEstatus = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from HistorialEstatus he where he.idHistorialEstatus = :idHistorialEstatus");
 			query.setParameter("idHistorialEstatus", idHistorialEstatus);
@@ -55,7 +64,11 @@ public class HistorialEstatusDaoImpl implements HistorialEstatusDAO {
 	public HistorialEstatus buscaPorOrdenProduccion(int idOrdenProduccion) {
 		HistorialEstatus historialEstatus = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from HistorialEstatus he where he.ordenProduccion.idOrdenProduccion = :idOrdenProduccion order by he.idHistorialEstatus desc limit 1");
 			query.setParameter("idOrdenProduccion", idOrdenProduccion);
@@ -71,7 +84,11 @@ public class HistorialEstatusDaoImpl implements HistorialEstatusDAO {
 
 	public void modifica(HistorialEstatus historialEstatus) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(historialEstatus);
 			sesion.getTransaction().commit();
@@ -85,7 +102,11 @@ public class HistorialEstatusDaoImpl implements HistorialEstatusDAO {
 	public List<HistorialEstatus> lista(int idOrdenProduccion) {
 		List<HistorialEstatus> lista = new ArrayList<HistorialEstatus>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from HistorialEstatus he where he.activo = true order by he.idHistorialEstatus asc").list();
 			sesion.getTransaction().commit();
@@ -100,7 +121,11 @@ public class HistorialEstatusDaoImpl implements HistorialEstatusDAO {
 	public List<HistorialEstatus> listaPorOrdenProduccion(int idOrdenProduccion) {
 		List<HistorialEstatus> lista = new ArrayList<HistorialEstatus>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from HistorialEstatus he where he.activo = true and he.ordenProduccion.idOrdenProduccion = :idOrdenProduccion order by he.idHistorialEstatus asc"); 
 			query.setParameter("idOrdenProduccion", idOrdenProduccion);

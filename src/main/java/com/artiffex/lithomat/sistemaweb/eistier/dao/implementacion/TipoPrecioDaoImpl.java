@@ -6,6 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -27,7 +28,11 @@ public class TipoPrecioDaoImpl implements TipoPrecioDAO {
 	public int crea(TipoPrecio tipoPrecio) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(tipoPrecio);
 			sesion.getTransaction().commit();
@@ -41,7 +46,11 @@ public class TipoPrecioDaoImpl implements TipoPrecioDAO {
 	public TipoPrecio busca(int idTipoPrecio) {
 		TipoPrecio tipoPrecio = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from TipoPrecio tp where tp.idTipoPrecio = :idTipoPrecio");
 			query.setParameter("idTipoPrecio", idTipoPrecio);
@@ -57,7 +66,11 @@ public class TipoPrecioDaoImpl implements TipoPrecioDAO {
 
 	public void modifica(TipoPrecio tipoPrecio) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(tipoPrecio);
 			sesion.getTransaction().commit();
@@ -71,7 +84,11 @@ public class TipoPrecioDaoImpl implements TipoPrecioDAO {
 	public List<TipoPrecio> lista() {
 		List<TipoPrecio> lista = new ArrayList<TipoPrecio>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from TipoPrecio tp where tp.activo = true").list();
 			sesion.getTransaction().commit();

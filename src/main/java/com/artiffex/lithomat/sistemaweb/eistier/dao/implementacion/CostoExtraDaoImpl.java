@@ -6,6 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -27,7 +28,11 @@ public class CostoExtraDaoImpl implements CostoExtraDAO {
 	public int crea(CostoExtra costoExtra) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(costoExtra);
 			sesion.getTransaction().commit();
@@ -41,7 +46,11 @@ public class CostoExtraDaoImpl implements CostoExtraDAO {
 	public CostoExtra busca(int idCostoExtra) {
 		CostoExtra costosExtras = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from CostoExtra ce where ce.idCostoExtra = :idCostoExtra");
 			query.setParameter("idCostoExtra", idCostoExtra);
@@ -57,7 +66,11 @@ public class CostoExtraDaoImpl implements CostoExtraDAO {
 	
 	public void modifica(CostoExtra costoExtra) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(costoExtra);
 			sesion.getTransaction().commit();
@@ -71,7 +84,11 @@ public class CostoExtraDaoImpl implements CostoExtraDAO {
 	public List<CostoExtra> lista() {
 		List<CostoExtra> lista = new ArrayList<CostoExtra>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from CostoExtra ce where ce.activo = true order by ce.idCostoExtra asc").list();
 			sesion.getTransaction().commit();

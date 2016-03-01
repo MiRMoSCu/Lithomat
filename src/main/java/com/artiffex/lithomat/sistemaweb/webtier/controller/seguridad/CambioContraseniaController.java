@@ -27,7 +27,7 @@ public class CambioContraseniaController {
 	@Resource
 	private UsuarioService usuarioService;
 	
-	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR","ROLE_PRODUCCION","ROLE_DISENIO","ROLE_PREPRENSA","ROLE_TRANSPORTE","ROLE_PROCESO_EXTERNO","ROLE_ACABADO","ROLE_CLIENTE"})
 	@RequestMapping(value = "/ventana", method = RequestMethod.GET)
 	public String ventanaCambioContrasenia( Model model ) throws IOException {
 		log.info("/cambio_contrasenia/ventana_cambio_contrasenia");
@@ -45,7 +45,7 @@ public class CambioContraseniaController {
 		return "seguridad/ventana_cambio_contrasenia";
 	}
 	
-	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR","ROLE_PRODUCCION","ROLE_DISENIO","ROLE_PREPRENSA","ROLE_TRANSPORTE","ROLE_PROCESO_EXTERNO","ROLE_ACABADO","ROLE_CLIENTE"})
 	@RequestMapping(value = "/cambio", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean modificaContrasenia(

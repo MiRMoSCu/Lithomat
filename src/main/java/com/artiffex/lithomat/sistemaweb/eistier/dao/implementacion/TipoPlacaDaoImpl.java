@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -25,7 +26,11 @@ public class TipoPlacaDaoImpl implements TipoPlacaDAO {
 	public int crea(TipoPlaca tipoPlaca) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(tipoPlaca);
 			sesion.getTransaction().commit();
@@ -39,7 +44,11 @@ public class TipoPlacaDaoImpl implements TipoPlacaDAO {
 	public TipoPlaca busca(int idTipoPlaca) {
 		TipoPlaca tipoPlaca = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from TipoPlaca tp where tp.idTipoPlaca = :idTipoPlaca");
 			query.setParameter("idTipoPlaca", idTipoPlaca);
@@ -55,7 +64,11 @@ public class TipoPlacaDaoImpl implements TipoPlacaDAO {
 
 	public void modifica(TipoPlaca tipoPlaca) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(tipoPlaca);
 			sesion.getTransaction().commit();
@@ -69,7 +82,11 @@ public class TipoPlacaDaoImpl implements TipoPlacaDAO {
 	public List<TipoPlaca> lista() {
 		List<TipoPlaca> lista = new ArrayList<TipoPlaca>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from TipoPlaca tp where tp.activo = true order by tp.maquina.idMaquina asc, tp.idTipoPlaca asc").list();
 			sesion.getTransaction().commit();
@@ -84,7 +101,11 @@ public class TipoPlacaDaoImpl implements TipoPlacaDAO {
 	public List<TipoPlaca> lista(int idMaquina) {
 		List<TipoPlaca> lista = new ArrayList<TipoPlaca>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from TipoPlaca tp where tp.activo = true and tp.maquina.idMaquina = :idMaquina");
 			query.setParameter("idMaquina", idMaquina);
@@ -99,7 +120,11 @@ public class TipoPlacaDaoImpl implements TipoPlacaDAO {
 
 	public void borradoLogico(String strQuery) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			SQLQuery query = sesion.createSQLQuery(strQuery);
 			query.executeUpdate();

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -29,7 +30,11 @@ public class TabuladorPreciosDaoImpl implements TabuladorPreciosDAO {
 	public int crea(TabuladorPrecios tabuladorPrecios) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(tabuladorPrecios);
 			sesion.getTransaction().commit();
@@ -43,7 +48,11 @@ public class TabuladorPreciosDaoImpl implements TabuladorPreciosDAO {
 	public TabuladorPrecios busca(int idTabuladorPrecios) {
 		TabuladorPrecios tabuladorPrecios = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from TabuladorPrecios tp where tp.idTabuladorPrecios = :idTabuladorPrecios");
 			query.setParameter("idTabuladorPrecios", idTabuladorPrecios);
@@ -60,7 +69,11 @@ public class TabuladorPreciosDaoImpl implements TabuladorPreciosDAO {
 	public float buscaPrecioTabulador(String sqlQuery) {
 		float precioTabulador = 0f;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			SQLQuery query = sesion.createSQLQuery(sqlQuery);
 			precioTabulador = ((BigDecimal)query.uniqueResult()).floatValue();
@@ -75,7 +88,11 @@ public class TabuladorPreciosDaoImpl implements TabuladorPreciosDAO {
 
 	public void modifica(TabuladorPrecios tabuladorPrecios) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(tabuladorPrecios);
 			sesion.getTransaction().commit();
@@ -89,7 +106,11 @@ public class TabuladorPreciosDaoImpl implements TabuladorPreciosDAO {
 	public List<TabuladorPrecios> lista() {
 		List<TabuladorPrecios> lista = new ArrayList<TabuladorPrecios>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from TabuladorPrecios tp where tp.activo = true order by tp.maquina.idMaquina asc, tp.tipoComplejidad asc, tp.inicioTabulador asc").list();
 			sesion.getTransaction().commit();
@@ -103,7 +124,11 @@ public class TabuladorPreciosDaoImpl implements TabuladorPreciosDAO {
 	public int numeroRegistros(String strQuery) {
 		int numeroRegistros = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			SQLQuery query = sesion.createSQLQuery(strQuery);
 			numeroRegistros = ((BigInteger)query.uniqueResult()).intValue();
@@ -120,7 +145,11 @@ public class TabuladorPreciosDaoImpl implements TabuladorPreciosDAO {
 	public List<TabuladorPreciosDTO> listaPorCriteriosBusqueda(String strQuery) {
 		List<TabuladorPreciosDTO> lista = new ArrayList<TabuladorPreciosDTO>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			SQLQuery query = sesion.createSQLQuery(strQuery);
 			query.setResultTransformer(Transformers.aliasToBean(TabuladorPreciosDTO.class));
@@ -136,7 +165,11 @@ public class TabuladorPreciosDaoImpl implements TabuladorPreciosDAO {
 
 	public void borradoLogico(String strQuery) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			SQLQuery query = sesion.createSQLQuery(strQuery);
 			query.executeUpdate();

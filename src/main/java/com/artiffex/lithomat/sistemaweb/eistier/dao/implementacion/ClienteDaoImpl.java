@@ -7,6 +7,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -31,7 +32,11 @@ public class ClienteDaoImpl implements ClienteDAO {
 	public int crea(Cliente cliente) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(cliente);
 			sesion.getTransaction().commit();
@@ -45,7 +50,11 @@ public class ClienteDaoImpl implements ClienteDAO {
 	public Cliente busca(int idCliente) {
 		Cliente cliente = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			//cliente = (Cliente)sesion.createQuery("from Cliente as cliente where cliente.id_cliente = :idCliente").setParameter("idCliente", idCliente).uniqueResult();
 			Query query = sesion.createQuery("from Cliente c where c.idCliente = :idCliente");
@@ -62,7 +71,11 @@ public class ClienteDaoImpl implements ClienteDAO {
 
 	public void modifica(Cliente cliente) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(cliente);
 			sesion.getTransaction().commit();
@@ -76,7 +89,11 @@ public class ClienteDaoImpl implements ClienteDAO {
 	public List<Cliente> lista() {
 		List<Cliente> lista = new ArrayList<Cliente>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from Cliente c where c.activo = true order by c.idCliente").list();
 			sesion.getTransaction().commit();
@@ -91,7 +108,11 @@ public class ClienteDaoImpl implements ClienteDAO {
 	public List<Cliente> buscaPorNombre(String nombreMoral) {
 		List<Cliente> lista = new ArrayList<Cliente>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from Cliente c where c.activo = true and UCASE(c.nombreMoral) like UCASE(:nombreMoral) order by c.idCliente asc, c.nombreMoral asc");
 			query.setParameter("nombreMoral", "%"+nombreMoral+"%");
@@ -108,7 +129,11 @@ public class ClienteDaoImpl implements ClienteDAO {
 	public int numeroRegistros(String strQuery) {
 		int numeroClientes = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			SQLQuery query = sesion.createSQLQuery(strQuery);
 			numeroClientes = ((BigInteger)query.uniqueResult()).intValue();
@@ -125,7 +150,11 @@ public class ClienteDaoImpl implements ClienteDAO {
 	public List<ClienteDTO> listaPorCriteriosBusqueda(String strQuery) {
 		List<ClienteDTO> lista = new ArrayList<ClienteDTO>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			SQLQuery query = sesion.createSQLQuery(strQuery);
 			query.setResultTransformer(Transformers.aliasToBean(ClienteDTO.class));

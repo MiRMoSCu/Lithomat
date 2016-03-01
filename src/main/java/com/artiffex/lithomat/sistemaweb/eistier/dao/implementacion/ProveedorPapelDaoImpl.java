@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -24,7 +25,11 @@ public class ProveedorPapelDaoImpl implements ProveedorPapelDAO {
 	public int crea(ProveedorPapel proveedorPapel) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(proveedorPapel);
 			sesion.getTransaction().commit();
@@ -38,7 +43,11 @@ public class ProveedorPapelDaoImpl implements ProveedorPapelDAO {
 	public ProveedorPapel busca(int idProveedorPapel) {
 		ProveedorPapel proveedorPapel = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from ProveedorPapel pp where pp.idProveedorPapel = :idProveedorPapel");
 			query.setParameter("idProveedorPapel", idProveedorPapel);
@@ -54,7 +63,11 @@ public class ProveedorPapelDaoImpl implements ProveedorPapelDAO {
 
 	public void modifica(ProveedorPapel proveedorPapel) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(proveedorPapel);
 			sesion.getTransaction().commit();
@@ -68,7 +81,11 @@ public class ProveedorPapelDaoImpl implements ProveedorPapelDAO {
 	public List<ProveedorPapel> lista() {
 		List<ProveedorPapel> lista = new ArrayList<ProveedorPapel>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from ProveedorPapel pp where pp.activo = true order by pp.idProveedorPapel asc").list();
 			sesion.getTransaction().commit();

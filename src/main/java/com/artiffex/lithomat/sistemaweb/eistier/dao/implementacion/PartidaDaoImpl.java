@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -24,7 +25,11 @@ public class PartidaDaoImpl implements PartidaDAO {
 	public int crea(Partida partida) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(partida);
 			sesion.getTransaction().commit();
@@ -38,7 +43,11 @@ public class PartidaDaoImpl implements PartidaDAO {
 	public Partida busca(int idPartida) {
 		Partida partida = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from Partida p where p.idPartida = :idPartida");
 			query.setParameter("idPartida", idPartida);
@@ -54,7 +63,11 @@ public class PartidaDaoImpl implements PartidaDAO {
 
 	public void modifica(Partida partida) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(partida);
 			sesion.getTransaction().commit();
@@ -68,7 +81,11 @@ public class PartidaDaoImpl implements PartidaDAO {
 	public List<Partida> lista() {
 		List<Partida> lista = new ArrayList<Partida>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from Partida p where p.activo = true order by p.idPartida asc").list();
 			sesion.getTransaction().commit();
@@ -83,7 +100,11 @@ public class PartidaDaoImpl implements PartidaDAO {
 	public List<Partida> listaPorOrdenProduccion(int idOrdenProduccion) {
 		List<Partida> lista = new ArrayList<Partida>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from Partida p where p.activo = true and p.ordenProduccion.idOrdenProduccion = :idOrdenProduccion order by p.idPartida asc");
 			query.setParameter("idOrdenProduccion", idOrdenProduccion);

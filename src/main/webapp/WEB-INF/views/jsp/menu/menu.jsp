@@ -4,6 +4,7 @@
 <!-- PRODUCCION -->
 <c:url value="/orden_produccion/" 						var="urlOrdenProduccion" />
 <c:url value="/visualizador/" 							var="urlVisualizador" />
+<c:url value="/semaforo/" 								var="urlSemaforo" />
 <c:url value="/cruce_informacion/grid/lista" 			var="urlCruceInformacion" />
 <!-- REPORTES -->
 <c:url value="/reporte/ventana_orden_produccion" 		var="urlVentanaOrdenProduccion" />
@@ -106,14 +107,14 @@
             var urlTipoTrabajo					= "${urlTipoTrabajo}";
             var urlTipoVuelta					= "${urlTipoVuelta}";
             var urlTurnoLaboral					= "${urlTurnoLaboral}";
-         // *** Seguridad
+        // *** Seguridad
          	var urlVentanaCambioEstatus			= "${urlVentanaCambioEstatus}";
          	var urlVentanaCambioContrasenia		= "${urlVentanaCambioContrasenia}";
          	var urlVentanaDescuento				= "${urlVentanaDescuento}";
             var urlPerfil						= "${urlPerfil}";
             var urlPerfilXUsuario				= "${urlPerfilXUsuario}";
             var urlUsuario						= "${urlUsuario}";
-         // ***
+        // ***
             var urlSalir						= "${urlSalir}";
        	</script>
 	</security:authorize>
@@ -155,10 +156,10 @@
             var urlTipoPlaca					= "${urlTipoPlaca}";
             var urlTipoVuelta					= "${urlTipoVuelta}";
             var urlTurnoLaboral					= "${urlTurnoLaboral}";
-         // *** Seguridad
+        // *** Seguridad
          	var urlVentanaCambioEstatus			= "${urlVentanaCambioEstatus}";
          	var urlVentanaCambioContrasenia		= "${urlVentanaCambioContrasenia}";
-         // ***
+        // ***
             var urlSalir						= "${urlSalir}";
        	</script>
 	</security:authorize>
@@ -174,9 +175,19 @@
         // *** Catalogos
             var urlCliente						= "${urlCliente}";
             var urlTipoPapelExtendido			= "${urlTipoPapelExtendido}";
-         // *** Seguridad
+        // *** Seguridad
          	var urlVentanaCambioContrasenia		= "${urlVentanaCambioContrasenia}";
-         // ***
+        // ***
+            var urlSalir						= "${urlSalir}";
+       	</script>
+	</security:authorize>
+	<security:authorize access="hasAnyRole('ROLE_DISENIO','ROLE_PREPRENSA','ROLE_TRANSPORTE','ROLE_PROCESO_EXTERNO','ROLE_ACABADO','ROLE_CLIENTE')">
+		<script type="text/javascript">
+		// *** Produccion
+        	var urlSemaforo						= "${urlSemaforo}";
+        // *** Seguridad
+         	var urlVentanaCambioContrasenia		= "${urlVentanaCambioContrasenia}";
+        // ***
             var urlSalir						= "${urlSalir}";
        	</script>
 	</security:authorize>
@@ -223,6 +234,11 @@
                         break;
                     case 'visualizador':
 	                	document.forms["opcion_menu"].action = urlVisualizador;
+	                	document.forms["opcion_menu"].method = "post";
+	                	document.forms[0].submit();
+	                	break;
+                    case 'semaforo':
+	                	document.forms["opcion_menu"].action = urlSemaforo;
 	                	document.forms["opcion_menu"].method = "post";
 	                	document.forms[0].submit();
 	                	break;
@@ -849,6 +865,27 @@
                                 		<div id="div_pestania_seguridad" style="display:none; background-color: transparent;">
 	                                		<div class="titulo_menu">SEGURIDAD</div>
 	                                		<div id="div_opcion_cambio_contrasenia" class="boton_dinamico" onclick="menu('ventana_cambio_contrasenia');">
+                                				<span class="texto_boton">Contrase&ntilde;a</span>
+                                			</div>
+                                		</div>
+                                	</security:authorize>
+                                	
+                                	<security:authorize access="hasAnyRole('ROLE_DISENIO','ROLE_PREPRENSA','ROLE_TRANSPORTE','ROLE_PROCESO_EXTERNO','ROLE_ACABADO','ROLE_CLIENTE')">
+                                		<div id="div_pestania_produccion" style="display:block; background-color: transparent;">
+                                			<div class="titulo_menu">PRODUCCI&Oacute;N</div>
+                                			<div id="div_opcion_semaforo" class="boton_dinamico" onclick="menu('semaforo');">
+	                               				<span class="texto_boton">Sem&aacute;foro</span>
+	                               			</div>
+                                		</div>
+                                		<div id="div_pestania_reportes" style="display: none; background-color: transparent;">
+                                			<div class="titulo_menu">REPORTES</div>
+                                		</div>
+                                		<div id="div_pestania_catalogos" style="display: none; background-color: transparent;">
+                                			<div class="titulo_menu">CAT&Aacute;LOGOS</div>
+                                		</div>
+                                		<div id="div_pestania_seguridad" style="display: none; background-color: transparent;">
+                                			<div class="titulo_menu">SEGURIDAD</div>
+                                			<div id="div_opcion_cambio_contrasenia" class="boton_dinamico" onclick="menu('ventana_cambio_contrasenia');">
                                 				<span class="texto_boton">Contrase&ntilde;a</span>
                                 			</div>
                                 		</div>

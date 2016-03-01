@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -24,7 +25,11 @@ public class DisenioDaoImpl implements DisenioDAO {
 	public int crea(Disenio disenio) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(disenio);
 			sesion.getTransaction().commit();
@@ -38,7 +43,11 @@ public class DisenioDaoImpl implements DisenioDAO {
 	public Disenio busca(int idDisenio) {
 		Disenio disenio = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from Disenio d where d.idDisenio = :idDisenio");
 			query.setParameter("idDisenio", idDisenio);
@@ -55,7 +64,11 @@ public class DisenioDaoImpl implements DisenioDAO {
 	public Disenio buscaPorPartida(int idPartida) {
 		Disenio disenio = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from Disenio d where d.activo = true and d.partida.idPartida = :idPartida");
 			query.setParameter("idPartida", idPartida);
@@ -71,7 +84,11 @@ public class DisenioDaoImpl implements DisenioDAO {
 
 	public void modifica(Disenio disenio) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(disenio);
 			sesion.getTransaction().commit();
@@ -85,7 +102,11 @@ public class DisenioDaoImpl implements DisenioDAO {
 	public List<Disenio> lista() {
 		List<Disenio> lista = new ArrayList<Disenio>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from Disenio d where d.activo = true order by d.idDisenio asc").list();
 			sesion.getTransaction().commit();

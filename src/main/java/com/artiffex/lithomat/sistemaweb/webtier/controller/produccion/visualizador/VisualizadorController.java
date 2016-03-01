@@ -63,6 +63,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.Transporte
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TransporteService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.VisualizadorService;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ParametrosBusquedaVisualizador;
 import com.google.gson.Gson;
 
 @Controller
@@ -169,37 +170,28 @@ public class VisualizadorController {
 		model.addAttribute("numeroRegistrosPorPagina", numeroRegistrosPorPagina);
 		model.addAttribute("tamanioMaximoArreglo", tamanioMaximoArreglo);
 		model.addAttribute("numeroPagina", numeroPagina);
+		
+		ParametrosBusquedaVisualizador parametros = new ParametrosBusquedaVisualizador();
+		parametros.setTipoBusqueda(tipoBusqueda);
+		parametros.setNut("");
+		parametros.setDescripcion("");
+		parametros.setFechaCotizacionInicio("");
+		parametros.setFechaCotizacionFin("");
+		parametros.setCliente("");
+		parametros.setIdEstatusOrden(0);
 
 		// numero total de registros
 		int numeroTotalRegistros = 
-				visualizadorService.getNumeroOrdenesProduccion(
-						tipoBusqueda, 	// tipo busqueda
-						null,			// nut
-						null,			// nombre
-						null,			// descripcion
-						null,			// fecha_cotizacion_inicio
-						null,			// fecha_cotizacion_fin
-						null,			// cliente
-						0				// id_estatus_orden
-					);
+				visualizadorService.getNumeroOrdenesProduccion(parametros);
 		model.addAttribute("numeroTotalRegistros", numeroTotalRegistros);
 
 		// realiza busquedas
 		List<VisualizadorDTO> listaOrdenesProduccion = 
-				visualizadorService.getListaOrdenesProduccion(
-						tipoBusqueda,				// tipo_busqueda
-						numeroPagina,				// numeroPagina
-						numeroRegistrosPorPagina,	// numeroRegistrosPorPagina
-						null,						// nut
-						null,						// nombre
-						null,						// descripcion
-						null,						// fecha_cotizacion_inicio
-						null,						// fecha_cotizacion_fin
-						null,						// cliente
-						0							// id_estatus_orden
-					);
+				visualizadorService.getListaOrdenesProduccion(parametros, numeroPagina, numeroRegistrosPorPagina);
 		model.addAttribute("listaOrdenesProduccion", listaOrdenesProduccion);
 		listaOrdenesProduccion = null;
+		
+		parametros = null;
 
 		return "produccion/visualizador/visualizador";
 	} // visualizador
@@ -238,8 +230,18 @@ public class VisualizadorController {
 		// * 		"cliente":"",
 		// * 		"estatus":""}, {"...":"...", ...}, {"":""}. ] }
 		// *
-		int numeroTotalRegistros = visualizadorService.getNumeroOrdenesProduccion(tipoBusqueda, nut, nombre, descripcion, fechaCotizacionInicio, fechaCotizacionFin, cliente, idEstatusOrden);
-		List<VisualizadorDTO> listaOrdenesProduccion = visualizadorService.getListaOrdenesProduccion(tipoBusqueda, numeroPagina, numeroRegistrosPorPagina, nut, nombre, descripcion, fechaCotizacionInicio, fechaCotizacionFin, cliente, idEstatusOrden );
+		
+		ParametrosBusquedaVisualizador parametros = new ParametrosBusquedaVisualizador();
+		parametros.setTipoBusqueda(tipoBusqueda);
+		parametros.setNut(nut);
+		parametros.setDescripcion(descripcion);
+		parametros.setFechaCotizacionInicio(fechaCotizacionInicio);
+		parametros.setFechaCotizacionFin(fechaCotizacionFin);
+		parametros.setCliente(cliente);
+		parametros.setIdEstatusOrden(idEstatusOrden);
+		
+		int numeroTotalRegistros = visualizadorService.getNumeroOrdenesProduccion(parametros);
+		List<VisualizadorDTO> listaOrdenesProduccion = visualizadorService.getListaOrdenesProduccion(parametros, numeroPagina, numeroRegistrosPorPagina);
 
 		sb.append("{");
 		sb.append("\"numeroTotalRegistros\":");
@@ -250,6 +252,7 @@ public class VisualizadorController {
 		sb.append("}");
 		
 		listaOrdenesProduccion	= null;
+		parametros				= null;
 		gson 					= null;
 
 		return sb.toString();

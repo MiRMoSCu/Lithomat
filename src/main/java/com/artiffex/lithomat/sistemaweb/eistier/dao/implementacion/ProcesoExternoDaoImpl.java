@@ -6,6 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -27,7 +28,11 @@ public class ProcesoExternoDaoImpl implements ProcesoExternoDAO {
 	public int crea(ProcesoExterno procesoExterno) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(procesoExterno);
 			sesion.getTransaction().commit();
@@ -41,7 +46,11 @@ public class ProcesoExternoDaoImpl implements ProcesoExternoDAO {
 	public ProcesoExterno busca(int idProcesoExterno) {
 		ProcesoExterno procesoExterno = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from ProcesoExterno pe where pe.idProcesoExterno = :idProcesoExterno");
 			query.setParameter("idProcesoExterno", idProcesoExterno);
@@ -57,7 +66,11 @@ public class ProcesoExternoDaoImpl implements ProcesoExternoDAO {
 
 	public void modifica(ProcesoExterno procesoExterno) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(procesoExterno);
 			sesion.getTransaction().commit();
@@ -71,7 +84,11 @@ public class ProcesoExternoDaoImpl implements ProcesoExternoDAO {
 	public List<ProcesoExterno> lista() {
 		List<ProcesoExterno> lista = new ArrayList<ProcesoExterno>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from ProcesoExterno pe where pe.activo = true order by pe.proveedorExterno.idProveedorExterno asc, pe.idProcesoExterno asc").list();
 			sesion.getTransaction().commit();

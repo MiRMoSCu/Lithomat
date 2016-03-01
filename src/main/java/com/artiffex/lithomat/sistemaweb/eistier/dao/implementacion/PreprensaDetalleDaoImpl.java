@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -24,7 +25,11 @@ public class PreprensaDetalleDaoImpl implements PreprensaDetalleDAO {
 	public int crea(PreprensaDetalle preprensaDetalle) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(preprensaDetalle);
 			sesion.getTransaction().commit();
@@ -38,7 +43,11 @@ public class PreprensaDetalleDaoImpl implements PreprensaDetalleDAO {
 	public PreprensaDetalle busca(int idPreprensaDetalle) {
 		PreprensaDetalle preprensaDetalle = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from PreprensaDetalle pd where pd.idPreprensaDetalle = :idPreprensaDetalle");
 			query.setParameter("idPreprensaDetalle", idPreprensaDetalle);
@@ -54,7 +63,11 @@ public class PreprensaDetalleDaoImpl implements PreprensaDetalleDAO {
 
 	public void modifica(PreprensaDetalle preprensaDetalle) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(preprensaDetalle);
 			sesion.getTransaction().commit();
@@ -68,7 +81,11 @@ public class PreprensaDetalleDaoImpl implements PreprensaDetalleDAO {
 	public List<PreprensaDetalle> lista() {
 		List<PreprensaDetalle> lista = new ArrayList<PreprensaDetalle>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from PreprensaDetalle pd where pd.activo = true order by pd.idPreprensaDetalle asc").list();
 			sesion.getTransaction().commit();
@@ -83,7 +100,11 @@ public class PreprensaDetalleDaoImpl implements PreprensaDetalleDAO {
 	public List<PreprensaDetalle> listaPorPreprensa(int idPreprensa) {
 		List<PreprensaDetalle> lista = new ArrayList<PreprensaDetalle>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from PreprensaDetalle pd where pd.activo = true and pd.preprensa.idPreprensa = :idPreprensa order by pd.idPreprensaDetalle asc");
 			query.setParameter("idPreprensa", idPreprensa); 

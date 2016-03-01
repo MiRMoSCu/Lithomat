@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -26,7 +27,11 @@ public class PliegoDaoImpl implements PliegoDAO {
 	public int crea(Pliego pliego) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(pliego);
 			sesion.getTransaction().commit();
@@ -40,7 +45,11 @@ public class PliegoDaoImpl implements PliegoDAO {
 	public Pliego busca(int idPliego) {
 		Pliego pliego = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from Pliego p where p.idPliego = :idPliego");
 			query.setParameter("idPliego", idPliego);
@@ -56,7 +65,11 @@ public class PliegoDaoImpl implements PliegoDAO {
 
 	public void modifica(Pliego pliego) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(pliego);
 			sesion.getTransaction().commit();
@@ -70,7 +83,11 @@ public class PliegoDaoImpl implements PliegoDAO {
 	public List<Pliego> lista() {
 		List<Pliego> lista = new ArrayList<Pliego>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from Pliego p where p.activo = true order by p.idPliego asc").list();
 			sesion.getTransaction().commit();
@@ -85,7 +102,11 @@ public class PliegoDaoImpl implements PliegoDAO {
 	public List<Pliego> listaPorTipoTrabajoDetalle(int idTipoTrabajoDetalle) {
 		List<Pliego> lista = new ArrayList<Pliego>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from Pliego p where p.activo = true and p.tipoTrabajoDetalle.idTipoTrabajoDetalle = :idTipoTrabajoDetalle order by p.idPliego asc");
 			query.setParameter("idTipoTrabajoDetalle", idTipoTrabajoDetalle);
@@ -101,7 +122,11 @@ public class PliegoDaoImpl implements PliegoDAO {
 	public int numeroPliegosPorTipoTrabajoDetalle(int idTipoTrabajoDetalle) {
 		int contador = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			SQLQuery query = sesion.createSQLQuery("SELECT COUNT(*) FROM pliego p WHERE p.activo = TRUE AND p.id_tipo_trabajo_detalle = :idTipoTrabajoDetalle");
 			query.setParameter("idTipoTrabajoDetalle", idTipoTrabajoDetalle);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -24,7 +25,11 @@ public class MaterialAyudaXPartidaDaoImpl implements MaterialAyudaXPartidaDAO {
 	public int crea(MaterialAyudaXPartida materialAyudaXPartida) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(materialAyudaXPartida);
 			sesion.getTransaction().commit();
@@ -38,7 +43,11 @@ public class MaterialAyudaXPartidaDaoImpl implements MaterialAyudaXPartidaDAO {
 	public MaterialAyudaXPartida busca(int idMaterialAyudaXPartida) {
 		MaterialAyudaXPartida materialAyudaXPartida = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from MaterialAyudaXPartida maxp where maxp.idMaterialAyudaXPartida = :idMaterialAyudaXPartida");
 			query.setParameter("idMaterialAyudaXPartida", idMaterialAyudaXPartida);
@@ -54,7 +63,11 @@ public class MaterialAyudaXPartidaDaoImpl implements MaterialAyudaXPartidaDAO {
 
 	public void modifica(MaterialAyudaXPartida materialAyudaXPartida) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(materialAyudaXPartida);
 			sesion.getTransaction().commit();
@@ -83,7 +96,11 @@ public class MaterialAyudaXPartidaDaoImpl implements MaterialAyudaXPartidaDAO {
 	public List<MaterialAyudaXPartida> lista(int idPartida) {
 		List<MaterialAyudaXPartida> lista = new ArrayList<MaterialAyudaXPartida>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from MaterialAyudaXPartida maxp where maxp.activo = true and maxp.partida.idPartida = :idPartida order by maxp.idMaterialAyudaXPartida asc");
 			query.setParameter("idPartida", idPartida); 

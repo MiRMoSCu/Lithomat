@@ -6,6 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -27,7 +28,11 @@ public class TipoComplejidadDaoImpl implements TipoComplejidadDAO {
 	public int crea(TipoComplejidad tipoComplejidad) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(tipoComplejidad);
 			sesion.getTransaction().commit();
@@ -41,7 +46,11 @@ public class TipoComplejidadDaoImpl implements TipoComplejidadDAO {
 	public TipoComplejidad busca(int idTipoComplejidad) {
 		TipoComplejidad tipoComplejidad = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from TipoComplejidad tc where tc.idTipoComplejidad = :idTipoComplejidad");
 			query.setParameter("idTipoComplejidad", idTipoComplejidad);
@@ -57,7 +66,11 @@ public class TipoComplejidadDaoImpl implements TipoComplejidadDAO {
 
 	public void modifica(TipoComplejidad tipoComplejidad) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(tipoComplejidad);
 			sesion.getTransaction().commit();
@@ -71,7 +84,11 @@ public class TipoComplejidadDaoImpl implements TipoComplejidadDAO {
 	public List<TipoComplejidad> lista() {
 		List<TipoComplejidad> lista = new ArrayList<TipoComplejidad>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from TipoComplejidad tc where tc.activo = true order by tc.idTipoComplejidad asc").list();
 			sesion.getTransaction().commit();

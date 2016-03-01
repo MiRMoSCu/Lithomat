@@ -6,6 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -28,7 +29,11 @@ public class PapelSobranteDaoImpl implements PapelSobranteDAO {
 	public int crea(PapelSobrante papelSobrante) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(papelSobrante);
 			sesion.getTransaction().commit();
@@ -42,7 +47,11 @@ public class PapelSobranteDaoImpl implements PapelSobranteDAO {
 	public PapelSobrante busca(int idPapelSobrante) {
 		PapelSobrante papelSobrante = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from PapelSobrante ps where ps.idPapelSobrante = :idPapelSobrante");
 			query.setParameter("idPapelSobrante", idPapelSobrante);
@@ -58,7 +67,11 @@ public class PapelSobranteDaoImpl implements PapelSobranteDAO {
 
 	public void modifica(PapelSobrante papelSobrante) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(papelSobrante);
 			sesion.getTransaction().commit();
@@ -72,7 +85,11 @@ public class PapelSobranteDaoImpl implements PapelSobranteDAO {
 	public List<PapelSobrante> lista() {
 		List<PapelSobrante> lista = new ArrayList<PapelSobrante>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from PapelSobrante ps where ps.activo = true order by ps.inicioTabulador asc, ps.frenteNumTinta asc, ps.vueltaNumTinta asc, ps.tintaEspecial asc").list();
 			sesion.getTransaction().commit();
@@ -86,7 +103,11 @@ public class PapelSobranteDaoImpl implements PapelSobranteDAO {
 	public int buscaHojasSobrante(PapelSobrante papelSobrante) {
 		int hojasSobrante = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			SQLQuery query = sesion.createSQLQuery(
 					"SELECT \n" + 

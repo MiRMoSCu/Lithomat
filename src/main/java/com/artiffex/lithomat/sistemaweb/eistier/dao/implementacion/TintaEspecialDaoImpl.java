@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +23,11 @@ public class TintaEspecialDaoImpl implements TintaEspecialDAO {
 
 	public void modifica(TintaEspecial tintaEspecial) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(tintaEspecial);
 			sesion.getTransaction().commit();
@@ -36,7 +41,11 @@ public class TintaEspecialDaoImpl implements TintaEspecialDAO {
 	public List<TintaEspecial> lista() {
 		List<TintaEspecial> lista = new ArrayList<TintaEspecial>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from TintaEspecial te where te.activo = true order by te.idTintaEspecial asc").list();
 			sesion.getTransaction().commit();

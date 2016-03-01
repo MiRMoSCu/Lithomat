@@ -6,6 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -27,7 +28,11 @@ public class CombinacionTintasDaoImpl implements CombinacionTintasDAO {
 	public int crea(CombinacionTintas combinacionTintas) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(combinacionTintas);
 			sesion.getTransaction().commit();
@@ -41,7 +46,11 @@ public class CombinacionTintasDaoImpl implements CombinacionTintasDAO {
 	public CombinacionTintas busca(int idCombinacionTintas) {
 		CombinacionTintas combinacionTintas = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from CombinacionTintas ct where ct.idCombinacionTintas = :idCombinacionTintas");
 			query.setParameter("idCombinacionTintas", idCombinacionTintas);
@@ -57,7 +66,11 @@ public class CombinacionTintasDaoImpl implements CombinacionTintasDAO {
 
 	public void modifica(CombinacionTintas combinacionTintas) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(combinacionTintas);
 			sesion.getTransaction().commit();
@@ -71,7 +84,11 @@ public class CombinacionTintasDaoImpl implements CombinacionTintasDAO {
 	public List<CombinacionTintas> lista() {
 		List<CombinacionTintas> lista = new ArrayList<CombinacionTintas>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from CombinacionTintas ct where ct.activo = true order by ct.numTintas desc, ct.idCombinacionTintas asc").list();
 			sesion.getTransaction().commit();

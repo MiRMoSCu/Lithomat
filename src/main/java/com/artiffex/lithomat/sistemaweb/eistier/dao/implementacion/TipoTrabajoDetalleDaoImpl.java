@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -25,7 +26,11 @@ public class TipoTrabajoDetalleDaoImpl implements TipoTrabajoDetalleDAO {
 	public int crea(TipoTrabajoDetalle tipoTrabajoDetalle) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(tipoTrabajoDetalle);
 			sesion.getTransaction().commit();
@@ -39,7 +44,11 @@ public class TipoTrabajoDetalleDaoImpl implements TipoTrabajoDetalleDAO {
 	public TipoTrabajoDetalle busca(int idTipoTrabajoDetalle) {
 		TipoTrabajoDetalle tipoTrabajoDetalle = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from TipoTrabajoDetalle ttd where ttd.idTipoTrabajoDetalle = :idTipoTrabajoDetalle");
 			query.setParameter("idTipoTrabajoDetalle", idTipoTrabajoDetalle);
@@ -55,7 +64,11 @@ public class TipoTrabajoDetalleDaoImpl implements TipoTrabajoDetalleDAO {
 
 	public void modifica(TipoTrabajoDetalle tipoTrabajoDetalle) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(tipoTrabajoDetalle);
 			sesion.getTransaction().commit();
@@ -69,7 +82,11 @@ public class TipoTrabajoDetalleDaoImpl implements TipoTrabajoDetalleDAO {
 	public List<TipoTrabajoDetalle> lista() {
 		List<TipoTrabajoDetalle> lista = new ArrayList<TipoTrabajoDetalle>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from TipoTrabajoDetalle ttd where ttd.activo = true order by ttd.idTipoTrabajoDetalle asc").list();
 			sesion.getTransaction().commit();
@@ -84,7 +101,11 @@ public class TipoTrabajoDetalleDaoImpl implements TipoTrabajoDetalleDAO {
 	public List<TipoTrabajoDetalle> listaPorPartida(int idPartida) {
 		List<TipoTrabajoDetalle> lista = new ArrayList<TipoTrabajoDetalle>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from TipoTrabajoDetalle ttd where ttd.activo = true and ttd.partida.idPartida = :idPartida order by ttd.idTipoTrabajoDetalle asc");
 			query.setParameter("idPartida", idPartida);
@@ -102,7 +123,11 @@ public class TipoTrabajoDetalleDaoImpl implements TipoTrabajoDetalleDAO {
 	public List<TipoTrabajoDetalle> listaPorEstatusOrden(int idEstatusOrden) {
 		List<TipoTrabajoDetalle> lista = new ArrayList<TipoTrabajoDetalle>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			SQLQuery query = sesion.createSQLQuery(
 					"SELECT \r\n" + 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -24,7 +25,11 @@ public class AcabadoDaoImpl implements AcabadoDAO {
 	public int crea(Acabado acabado) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(acabado);
 			sesion.getTransaction().commit();
@@ -38,7 +43,11 @@ public class AcabadoDaoImpl implements AcabadoDAO {
 	public Acabado busca(int idAcabado) {
 		Acabado acabado = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from Acabado a where a.idAcabado = :idAcabado");
 			query.setParameter("idAcabado", idAcabado);
@@ -55,7 +64,11 @@ public class AcabadoDaoImpl implements AcabadoDAO {
 	public Acabado buscaPorPartida(int idPartida) {
 		Acabado acabado = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from Acabado a where a.activo = true and a.partida.idPartida = :idPartida");
 			query.setParameter("idPartida", idPartida);
@@ -71,7 +84,11 @@ public class AcabadoDaoImpl implements AcabadoDAO {
 
 	public void modifica(Acabado acabado) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(acabado);
 			sesion.getTransaction().commit();
@@ -85,7 +102,11 @@ public class AcabadoDaoImpl implements AcabadoDAO {
 	public List<Acabado> lista() {
 		List<Acabado> lista = new ArrayList<Acabado>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from Acabado a where a.activo = true order by a.idAcabado asc").list();
 			sesion.getTransaction().commit();

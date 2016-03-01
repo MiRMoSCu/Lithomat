@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -29,7 +30,11 @@ public class TipoPapelExtendidoDaoImpl implements TipoPapelExtendidoDAO {
 	public int crea(TipoPapelExtendido tipoPapelExtendido) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(tipoPapelExtendido);
 			sesion.getTransaction().commit();
@@ -43,7 +48,11 @@ public class TipoPapelExtendidoDaoImpl implements TipoPapelExtendidoDAO {
 	public TipoPapelExtendido busca(int idTipoPapelExtendido) {
 		TipoPapelExtendido tipoPapelExtendido = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from TipoPapelExtendido tpe where tpe.idTipoPapelExtendido = :idTipoPapelExtendido");
 			query.setParameter("idTipoPapelExtendido", idTipoPapelExtendido);
@@ -59,7 +68,11 @@ public class TipoPapelExtendidoDaoImpl implements TipoPapelExtendidoDAO {
 
 	public void modifica(TipoPapelExtendido tipoPapelExtendido) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(tipoPapelExtendido);
 			sesion.getTransaction().commit();
@@ -73,7 +86,11 @@ public class TipoPapelExtendidoDaoImpl implements TipoPapelExtendidoDAO {
 	public List<TipoPapelExtendido> lista() {
 		List<TipoPapelExtendido> lista = new ArrayList<TipoPapelExtendido>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from TipoPapelExtendido tpe where tpe.activo = true order by tpe.proveedorPapel.idProveedorPapel asc, tpe.nombre asc, tpe.gramaje asc, tpe.kilogramos asc").list();
 			sesion.getTransaction().commit();
@@ -88,7 +105,11 @@ public class TipoPapelExtendidoDaoImpl implements TipoPapelExtendidoDAO {
 	public List<TipoPapelExtendido> listaPorQuery(String query, ParametrosBusquedaTipoPapelExtendido parametros) {
 		List<TipoPapelExtendido> lista = new ArrayList<TipoPapelExtendido>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery(query).setProperties(parametros).list();
 			sesion.getTransaction().commit();
@@ -102,7 +123,11 @@ public class TipoPapelExtendidoDaoImpl implements TipoPapelExtendidoDAO {
 	public int numeroRegistros(String strQuery) {
 		int numeroRegistros = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			SQLQuery query = sesion.createSQLQuery(strQuery);
 			numeroRegistros = ((BigInteger)query.uniqueResult()).intValue();
@@ -119,7 +144,11 @@ public class TipoPapelExtendidoDaoImpl implements TipoPapelExtendidoDAO {
 	public List<TipoPapelExtendidoDTO> listaPorCriteriosBusqueda(String strQuery) {
 		List<TipoPapelExtendidoDTO> lista = new ArrayList<TipoPapelExtendidoDTO>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			SQLQuery query = sesion.createSQLQuery(strQuery);
 			query.setResultTransformer(Transformers.aliasToBean(TipoPapelExtendidoDTO.class));
@@ -135,7 +164,11 @@ public class TipoPapelExtendidoDaoImpl implements TipoPapelExtendidoDAO {
 	// BORRADO LOGICO CON QUERY
 	public void borradoLogico(String strQuery) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			SQLQuery query = sesion.createSQLQuery(strQuery);
 			query.executeUpdate();

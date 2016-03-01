@@ -1,6 +1,7 @@
 package com.artiffex.lithomat.sistemaweb.eistier.dao.implementacion;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -21,7 +22,11 @@ public class CalificacionPartidaDaoImpl implements CalificacionPartidaDAO {
 	public int crea(CalificacionPartida calificacionPartida) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(calificacionPartida);
 			sesion.getTransaction().commit();
@@ -35,7 +40,11 @@ public class CalificacionPartidaDaoImpl implements CalificacionPartidaDAO {
 	public CalificacionPartida busca(int idCalificacionPartida) {
 		CalificacionPartida calificacionProcesosPartida = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from CalificacionPartida cp where cp.idCalificacionPartida = :idCalificacionPartida");
 			query.setParameter("idCalificacionPartida", idCalificacionPartida);
@@ -52,7 +61,11 @@ public class CalificacionPartidaDaoImpl implements CalificacionPartidaDAO {
 	public CalificacionPartida buscaPorPartida(int idPartida) {
 		CalificacionPartida calificacionProcesosPartida = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from CalificacionPartida cp where cp.activo = true and cp.partida.idPartida = :idPartida");
 			query.setParameter("idPartida", idPartida);
@@ -68,7 +81,11 @@ public class CalificacionPartidaDaoImpl implements CalificacionPartidaDAO {
 
 	public void modifica(CalificacionPartida calificacionPartida) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(calificacionPartida);
 			sesion.getTransaction().commit();

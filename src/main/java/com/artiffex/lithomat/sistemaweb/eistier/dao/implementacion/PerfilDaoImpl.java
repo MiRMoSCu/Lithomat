@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
@@ -38,7 +39,11 @@ public class PerfilDaoImpl implements PerfilDAO {
 	public List<Perfil> lista() {
 		List<Perfil> lista = new ArrayList<Perfil>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from Perfil p where p.activo = true order by p.idPerfil asc").list();
 			sesion.getTransaction().commit();

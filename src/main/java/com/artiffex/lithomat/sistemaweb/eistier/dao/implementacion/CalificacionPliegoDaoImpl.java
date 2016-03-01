@@ -1,6 +1,7 @@
 package com.artiffex.lithomat.sistemaweb.eistier.dao.implementacion;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -22,7 +23,11 @@ public class CalificacionPliegoDaoImpl extends GenericJdbcDAO implements Calific
 	public int crea(CalificacionPliego calificacionPliego) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(calificacionPliego);
 			sesion.getTransaction().commit();
@@ -36,7 +41,11 @@ public class CalificacionPliegoDaoImpl extends GenericJdbcDAO implements Calific
 	public CalificacionPliego buscaPorPliego(int idPliego) {
 		CalificacionPliego calificacionPliego = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from CalificacionPliego cp where cp.activo = true and cp.pliego.idPliego = :idPliego");
 			query.setParameter("idPliego", idPliego);
@@ -53,7 +62,11 @@ public class CalificacionPliegoDaoImpl extends GenericJdbcDAO implements Calific
 
 	public void modifica(CalificacionPliego calificacionPliego) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(calificacionPliego);
 			sesion.getTransaction().commit();

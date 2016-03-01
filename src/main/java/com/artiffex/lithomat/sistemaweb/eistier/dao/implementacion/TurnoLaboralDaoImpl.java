@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -24,7 +25,11 @@ public class TurnoLaboralDaoImpl implements TurnoLaboralDAO {
 	public int crea(TurnoLaboral turnoLaboral) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(turnoLaboral);
 			sesion.getTransaction().commit();
@@ -38,7 +43,11 @@ public class TurnoLaboralDaoImpl implements TurnoLaboralDAO {
 	public TurnoLaboral busca(int idTurnoLaboral) {
 		TurnoLaboral turnoLaboral = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from TurnoLaboral tl where tl.idTurnoLaboral = :idTurnoLaboral");
 			query.setParameter("idTurnoLaboral", idTurnoLaboral);
@@ -54,7 +63,11 @@ public class TurnoLaboralDaoImpl implements TurnoLaboralDAO {
 
 	public void modifica(TurnoLaboral turnoLaboral) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(turnoLaboral);
 			sesion.getTransaction().commit();
@@ -68,7 +81,11 @@ public class TurnoLaboralDaoImpl implements TurnoLaboralDAO {
 	public List<TurnoLaboral> lista() {
 		List<TurnoLaboral> lista = new ArrayList<TurnoLaboral>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from TurnoLaboral tl where tl.activo = true order by tl.idTurnoLaboral asc").list();
 			sesion.getTransaction().commit();

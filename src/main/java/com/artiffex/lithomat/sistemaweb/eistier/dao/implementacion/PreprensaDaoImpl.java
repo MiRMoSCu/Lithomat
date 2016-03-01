@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -24,7 +25,11 @@ public class PreprensaDaoImpl implements PreprensaDAO {
 	public int crea(Preprensa preprensa) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(preprensa);
 			sesion.getTransaction().commit();
@@ -38,7 +43,11 @@ public class PreprensaDaoImpl implements PreprensaDAO {
 	public Preprensa busca(int idPreprensa) {
 		Preprensa preprensa = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from Preprensa p where p.idPreprensa = :idPreprensa");
 			query.setParameter("idPreprensa", idPreprensa);
@@ -55,7 +64,11 @@ public class PreprensaDaoImpl implements PreprensaDAO {
 	public Preprensa buscaPorPartida(int idPartida) {
 		Preprensa preprensa = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from Preprensa p where p.activo = true and p.partida.idPartida = :idPartida");
 			query.setParameter("idPartida", idPartida);
@@ -71,7 +84,11 @@ public class PreprensaDaoImpl implements PreprensaDAO {
 
 	public void modifica(Preprensa preprensa) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(preprensa);
 			sesion.getTransaction().commit();
@@ -85,7 +102,11 @@ public class PreprensaDaoImpl implements PreprensaDAO {
 	public List<Preprensa> lista() {
 		List<Preprensa> lista = new ArrayList<Preprensa>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from Preprensa p where p.activo = true order by c.idPreprensa").list();
 			sesion.getTransaction().commit();

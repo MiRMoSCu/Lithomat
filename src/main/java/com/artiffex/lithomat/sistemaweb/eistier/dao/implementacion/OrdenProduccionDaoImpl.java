@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -27,7 +28,11 @@ public class OrdenProduccionDaoImpl implements OrdenProduccionDAO {
 	public int crea(OrdenProduccion ordenProduccion) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(ordenProduccion);
 			sesion.getTransaction().commit();
@@ -41,7 +46,11 @@ public class OrdenProduccionDaoImpl implements OrdenProduccionDAO {
 	public OrdenProduccion busca(int idOrdenProduccion) {
 		OrdenProduccion ordenProduccion = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from OrdenProduccion op where op.idOrdenProduccion = :idOrdenProduccion");
 			query.setParameter("idOrdenProduccion", idOrdenProduccion);
@@ -58,7 +67,11 @@ public class OrdenProduccionDaoImpl implements OrdenProduccionDAO {
 	public OrdenProduccion buscaPorNut(String nut) {
 		OrdenProduccion ordenProduccion = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from OrdenProduccion op where op.activo = true and op.nut = :nut");
 			query.setParameter("nut", nut);
@@ -74,7 +87,11 @@ public class OrdenProduccionDaoImpl implements OrdenProduccionDAO {
 
 	public void modifica(OrdenProduccion ordenProduccion) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(ordenProduccion);
 			sesion.getTransaction().commit();
@@ -88,7 +105,11 @@ public class OrdenProduccionDaoImpl implements OrdenProduccionDAO {
 	public List<OrdenProduccion> lista() {
 		List<OrdenProduccion> lista = new ArrayList<OrdenProduccion>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from OrdenProduccion op where op.activo = true order by op.idOrdenProduccion asc").list();
 			sesion.getTransaction().commit();
@@ -102,7 +123,11 @@ public class OrdenProduccionDaoImpl implements OrdenProduccionDAO {
 	public int contador(Timestamp fechaGeneracion) {
 		int contador = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			SQLQuery query = sesion.createSQLQuery("SELECT count(op.id_orden_produccion) FROM orden_produccion op WHERE DATE(op.fecha_generacion) = DATE(:fechaGeneracion)");
 			query.setParameter("fechaGeneracion", fechaGeneracion);
@@ -119,7 +144,11 @@ public class OrdenProduccionDaoImpl implements OrdenProduccionDAO {
 	public int buscaIdEstatusOrden(String nut) {
 		int idEstatusOrden = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			SQLQuery query = sesion.createSQLQuery(
 					"SELECT \r\n" + 

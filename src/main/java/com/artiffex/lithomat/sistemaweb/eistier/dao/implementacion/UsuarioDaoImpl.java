@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -24,7 +25,11 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 	public int crea(Usuario usuario) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(usuario);
 			sesion.getTransaction().commit();
@@ -38,7 +43,11 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 	public Usuario busca(int idUsuario) {
 		Usuario usuario = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from Usuario u where u.idUsuario = :idUsuario");
 			query.setParameter("idUsuario", idUsuario);
@@ -55,7 +64,11 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 	public Usuario busca(String nombreUsuario) {
 		Usuario usuario = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from Usuario u where u.usuario = :nombreUsuario");
 			query.setParameter("nombreUsuario", nombreUsuario);
@@ -71,7 +84,11 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 
 	public void modifica(Usuario usuario) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(usuario);
 			sesion.getTransaction().commit();
@@ -85,7 +102,11 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 	public List<Usuario> lista() {
 		List<Usuario> lista =new ArrayList<Usuario>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from Usuario u where u.activo = true order by u.idUsuario asc").list();
 			sesion.getTransaction().commit();

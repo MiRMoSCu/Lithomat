@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -24,7 +25,11 @@ public class DisenioDetalleDaoImpl implements DisenioDetalleDAO {
 	public int crea(DisenioDetalle disenioDetalle) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(disenioDetalle);
 			sesion.getTransaction().commit();
@@ -38,7 +43,11 @@ public class DisenioDetalleDaoImpl implements DisenioDetalleDAO {
 	public DisenioDetalle busca(int idDisenioDetalle) {
 		DisenioDetalle disenioDetalle = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from DisenioDetalle dd where dd.idDisenioDetalle = :idDisenioDetalle");
 			query.setParameter("idDisenioDetalle", idDisenioDetalle);
@@ -54,7 +63,11 @@ public class DisenioDetalleDaoImpl implements DisenioDetalleDAO {
 
 	public void modifica(DisenioDetalle disenioDetalle) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(disenioDetalle);
 			sesion.getTransaction().commit();
@@ -68,7 +81,11 @@ public class DisenioDetalleDaoImpl implements DisenioDetalleDAO {
 	public List<DisenioDetalle> lista() {
 		List<DisenioDetalle> lista = new ArrayList<DisenioDetalle>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from DisenioDetalle dd where dd.activo = true order by dd.idDisenioDetalle asc").list();
 			sesion.getTransaction().commit();
@@ -83,7 +100,11 @@ public class DisenioDetalleDaoImpl implements DisenioDetalleDAO {
 	public List<DisenioDetalle> listaPorDisenio(int idDisenio) {
 		List<DisenioDetalle> lista = new ArrayList<DisenioDetalle>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from DisenioDetalle dd where dd.activo = true and dd.disenio.idDisenio = :idDisenio order by dd.idDisenioDetalle asc");
 			query.setParameter("idDisenio", idDisenio); 

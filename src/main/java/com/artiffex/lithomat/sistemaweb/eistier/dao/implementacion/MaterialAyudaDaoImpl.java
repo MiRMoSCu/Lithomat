@@ -6,6 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -27,7 +28,11 @@ public class MaterialAyudaDaoImpl implements MaterialAyudaDAO {
 	public int crea(MaterialAyuda materialAyuda) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(materialAyuda);
 			sesion.getTransaction().commit();
@@ -41,7 +46,11 @@ public class MaterialAyudaDaoImpl implements MaterialAyudaDAO {
 	public MaterialAyuda busca(int idMaterialAyuda) {
 		MaterialAyuda materialAyuda = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from MaterialAyuda ma where ma.idMaterialAyuda = :idMaterialAyuda");
 			query.setParameter("idMaterialAyuda", idMaterialAyuda);
@@ -57,7 +66,11 @@ public class MaterialAyudaDaoImpl implements MaterialAyudaDAO {
 
 	public void modifica(MaterialAyuda materialAyuda) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(materialAyuda);
 			sesion.getTransaction().commit();
@@ -71,7 +84,11 @@ public class MaterialAyudaDaoImpl implements MaterialAyudaDAO {
 	public List<MaterialAyuda> lista() {
 		List<MaterialAyuda> lista = new ArrayList<MaterialAyuda>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from MaterialAyuda ma where ma.activo = true order by ma.idMaterialAyuda asc").list();
 			sesion.getTransaction().commit();

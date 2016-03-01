@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -24,7 +25,11 @@ public class TipoFormaTrabajoDaoImpl implements TipoFormaTrabajoDAO {
 	public int crea(TipoFormaTrabajo tipoFormaTrabajo) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(tipoFormaTrabajo);
 			sesion.getTransaction().commit();
@@ -38,7 +43,11 @@ public class TipoFormaTrabajoDaoImpl implements TipoFormaTrabajoDAO {
 	public TipoFormaTrabajo busca(int idTipoFormaTrabajo) {
 		TipoFormaTrabajo tipoFormaTrabajo = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from TipoFormaTrabajo tft where tft.idTipoFormaTrabajo = :idTipoFormaTrabajo");
 			query.setParameter("idTipoFormaTrabajo", idTipoFormaTrabajo);
@@ -54,7 +63,11 @@ public class TipoFormaTrabajoDaoImpl implements TipoFormaTrabajoDAO {
 
 	public void modifica(TipoFormaTrabajo tipoFormaTrabajo) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(tipoFormaTrabajo);
 			sesion.getTransaction().commit();
@@ -68,7 +81,11 @@ public class TipoFormaTrabajoDaoImpl implements TipoFormaTrabajoDAO {
 	public List<TipoFormaTrabajo> lista() {
 		List<TipoFormaTrabajo> lista = new ArrayList<TipoFormaTrabajo>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from TipoFormaTrabajo tft where tft.activo = true order by tft.idTipoFormaTrabajo asc").list();
 			sesion.getTransaction().commit();

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -24,7 +25,11 @@ public class ResponsableInsumoDaoImpl implements ResponsableInsumoDAO {
 	public int crea(ResponsableInsumo responsableInsumo) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(responsableInsumo);
 			sesion.getTransaction().commit();
@@ -38,7 +43,11 @@ public class ResponsableInsumoDaoImpl implements ResponsableInsumoDAO {
 	public ResponsableInsumo busca(int idResponsableInsumo) {
 		ResponsableInsumo responsableInsumo = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from ResponsableInsumo ri where ri.idResponsableInsumo = :idResponsableInsumo");
 			query.setParameter("idResponsableInsumo", idResponsableInsumo);
@@ -54,7 +63,11 @@ public class ResponsableInsumoDaoImpl implements ResponsableInsumoDAO {
 
 	public void modifica(ResponsableInsumo responsableInsumo) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(responsableInsumo);
 			sesion.getTransaction().commit();
@@ -68,7 +81,11 @@ public class ResponsableInsumoDaoImpl implements ResponsableInsumoDAO {
 	public List<ResponsableInsumo> lista() {
 		List<ResponsableInsumo> lista = new ArrayList<ResponsableInsumo>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from ResponsableInsumo ri where ri.activo = true order by ri.idResponsableInsumo asc").list();
 			sesion.getTransaction().commit();

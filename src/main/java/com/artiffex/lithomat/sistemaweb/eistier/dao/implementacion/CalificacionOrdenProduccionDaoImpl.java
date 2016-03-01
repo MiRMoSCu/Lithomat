@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.jdbc.core.RowMapper;
@@ -29,7 +30,11 @@ public class CalificacionOrdenProduccionDaoImpl extends GenericJdbcDAO implement
 	public int crea(CalificacionOrdenProduccion calificacionOrdenProduccion) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(calificacionOrdenProduccion);
 			sesion.getTransaction().commit();
@@ -43,7 +48,11 @@ public class CalificacionOrdenProduccionDaoImpl extends GenericJdbcDAO implement
 	public CalificacionOrdenProduccion buscaPorOrdenProduccion(int idOrdenProduccion) {
 		CalificacionOrdenProduccion calificacionOrdenProduccion = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from CalificacionOrdenProduccion cop where cop.ordenProduccion.idOrdenProduccion = :idOrdenProduccion");
 			query.setParameter("idOrdenProduccion", idOrdenProduccion);
@@ -59,7 +68,11 @@ public class CalificacionOrdenProduccionDaoImpl extends GenericJdbcDAO implement
 
 	public void modifica(CalificacionOrdenProduccion calificacionOrdenProduccion) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(calificacionOrdenProduccion);
 			sesion.getTransaction().commit();

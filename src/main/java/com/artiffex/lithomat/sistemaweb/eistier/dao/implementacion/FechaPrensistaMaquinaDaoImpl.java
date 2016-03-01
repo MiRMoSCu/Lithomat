@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -30,7 +31,11 @@ public class FechaPrensistaMaquinaDaoImpl implements FechaPrensistaMaquinaDAO {
 	public int crea(FechaPrensistaMaquina fechaPrensistaMaquina) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(fechaPrensistaMaquina);
 			sesion.getTransaction().commit();
@@ -48,7 +53,11 @@ public class FechaPrensistaMaquinaDaoImpl implements FechaPrensistaMaquinaDAO {
 
 	public void eliminaPorIdPliego(int idPliego) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from FechaPrensistaMaquina fpm where fpm.activo = true and fpm.pliego.idPliego = :idPliego");
 			query.setParameter("idPliego", idPliego);
@@ -70,7 +79,11 @@ public class FechaPrensistaMaquinaDaoImpl implements FechaPrensistaMaquinaDAO {
 	public List<FechaPrensistaMaquinaConcentrado> buscaFechaPrensistaMaquinaConcentrado(String strQuery) {
 		List<FechaPrensistaMaquinaConcentrado> lista = new ArrayList<FechaPrensistaMaquinaConcentrado>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			SQLQuery query = sesion.createSQLQuery(strQuery);
 			query.setResultTransformer(Transformers.aliasToBean(FechaPrensistaMaquinaConcentrado.class));
@@ -88,7 +101,11 @@ public class FechaPrensistaMaquinaDaoImpl implements FechaPrensistaMaquinaDAO {
 	public List<FechaPrensistaMaquinaDTO> buscaFechaPrensistaMaquinaDTO(String strQuery) {
 		List<FechaPrensistaMaquinaDTO> lista = new ArrayList<FechaPrensistaMaquinaDTO>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			SQLQuery query = sesion.createSQLQuery(strQuery);
 			query.setResultTransformer(Transformers.aliasToBean(FechaPrensistaMaquinaDTO.class));
@@ -105,7 +122,11 @@ public class FechaPrensistaMaquinaDaoImpl implements FechaPrensistaMaquinaDAO {
 	public int numeroRegistrosFechaPrensistaMaquina(String strQuery) {
 		int numeroRegistros = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			SQLQuery query = sesion.createSQLQuery(strQuery);
 			numeroRegistros = ((BigInteger)query.uniqueResult()).intValue();
@@ -122,7 +143,11 @@ public class FechaPrensistaMaquinaDaoImpl implements FechaPrensistaMaquinaDAO {
 	public List<FechaPrensistaMaquinaDTOGrid> listaPorRango(String strQuery) {
 		List<FechaPrensistaMaquinaDTOGrid> lista = new ArrayList<FechaPrensistaMaquinaDTOGrid>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			SQLQuery query = sesion.createSQLQuery(strQuery);
 			query.setResultTransformer(Transformers.aliasToBean(FechaPrensistaMaquinaDTOGrid.class));

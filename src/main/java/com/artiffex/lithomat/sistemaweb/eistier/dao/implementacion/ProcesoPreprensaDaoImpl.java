@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -24,7 +25,11 @@ public class ProcesoPreprensaDaoImpl implements ProcesoPreprensaDAO {
 	public int crea(ProcesoPreprensa procesoPreprensa) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(procesoPreprensa);
 			sesion.getTransaction().commit();
@@ -38,7 +43,11 @@ public class ProcesoPreprensaDaoImpl implements ProcesoPreprensaDAO {
 	public ProcesoPreprensa busca(int idProcesoPreprensa) {
 		ProcesoPreprensa procesoPreprensa = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from ProcesoPreprensa pp where pp.idProcesoPreprensa = :idProcesoPreprensa");
 			query.setParameter("idProcesoPreprensa", idProcesoPreprensa);
@@ -54,7 +63,11 @@ public class ProcesoPreprensaDaoImpl implements ProcesoPreprensaDAO {
 
 	public void modifica(ProcesoPreprensa procesoPreprensa) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(procesoPreprensa);
 			sesion.getTransaction().commit();
@@ -68,7 +81,11 @@ public class ProcesoPreprensaDaoImpl implements ProcesoPreprensaDAO {
 	public List<ProcesoPreprensa> lista() {
 		List<ProcesoPreprensa> lista = new ArrayList<ProcesoPreprensa>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from ProcesoPreprensa pp where pp.activo = true order by pp.idProcesoPreprensa asc").list();
 			sesion.getTransaction().commit();

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -28,7 +29,11 @@ public class EstatusOrdenDaoImpl implements EstatusOrdenDAO {
 	public int crea(EstatusOrden estatusOrden) {
 		int id = 0;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			id = (Integer)sesion.save(estatusOrden);
 			sesion.getTransaction().commit();
@@ -42,7 +47,11 @@ public class EstatusOrdenDaoImpl implements EstatusOrdenDAO {
 	public EstatusOrden busca(int idEstatusOrden) {
 		EstatusOrden estatusOrden = null;
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("from EstatusOrden eo where eo.idEstatusOrden = :idEstatusOrden");
 			query.setParameter("idEstatusOrden", idEstatusOrden);
@@ -58,7 +67,11 @@ public class EstatusOrdenDaoImpl implements EstatusOrdenDAO {
 
 	public void modifica(EstatusOrden estatusOrden) {
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			sesion.update(estatusOrden);
 			sesion.getTransaction().commit();
@@ -73,7 +86,11 @@ public class EstatusOrdenDaoImpl implements EstatusOrdenDAO {
 		log.info("lista()");
 		List<EstatusOrden> lista = new ArrayList<EstatusOrden>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			lista = sesion.createQuery("from EstatusOrden eo where eo.activo = true order by eo.idEstatusOrden asc").list();
 			sesion.getTransaction().commit();
@@ -88,7 +105,11 @@ public class EstatusOrdenDaoImpl implements EstatusOrdenDAO {
 	public List<EstatusOrden> listaEstatusPosible(String nut) {
 		List<EstatusOrden> listaEstatusOrden = new ArrayList<EstatusOrden>();
 		try {
-			sesion = HibernateUtil.getInstance().getCurrentSession();
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
 			sesion.beginTransaction();
 			SQLQuery query = sesion.createSQLQuery(
 					"SELECT \r\n" + 
