@@ -91,6 +91,7 @@ function paginador( obj ) {
 } // paginador
 
 
+// genera el paginador visualmente
 function carga_datos() {
 	// define el tamaño del arreglo que se muestra en el paginador
     if( numero_total_registros < tamanio_maximo_arreglo * numero_registros_por_pagina ) 

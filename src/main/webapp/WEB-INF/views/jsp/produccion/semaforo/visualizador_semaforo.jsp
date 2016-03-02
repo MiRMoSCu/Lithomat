@@ -2,12 +2,13 @@
 <%@ taglib prefix="c"	uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" 	uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:url value="/?opc=produccion"	               			var="urlMenu"/>
+<c:url value="/?opc=produccion"	               		var="urlMenu"/>
+<c:url value="/semaforo/busca_ordenes_produccion"   var="urlBuscaOrdenesProduccion"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Sem&acute;aforo por &aacute;rea</title>
+		<title>Sem&aacute;foro por &aacute;rea</title>
 		<link rel="stylesheet" href="<c:url value="/resources/css/master.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/menu.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/font.css"/>" type="text/css"></link>
@@ -20,7 +21,18 @@
         <script type="text/javascript" src="<c:url value="/resources/js/paginador.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/semaforo.js"/>"></script>
         <script type="text/javascript">
-        	var urlMenu = "${urlMenu}";
+            var numero_total_registros	        = ${numeroTotalRegistros};
+            var numero_registros_por_pagina		= ${numeroRegistrosPorPagina};
+            var tamanio_maximo_arreglo	        = ${tamanioMaximoArreglo};	// DEBE SER MAYOR A 2
+            var numero_pagina		        	= 1;						// NO DEBE MODIFICARSE
+            
+            var tamanio_arreglo		        	= 0; 	// se inicializan en carga_datos()
+            var numero_pagina_total	        	= 0; 	// se inicializan en carga_datos()
+            var mitad_tamanio_arreglo	        = 0;	// se inicializan en carga_datos()
+        </script>
+        <script type="text/javascript">
+        	var urlMenu 					= "${urlMenu}";
+        	var urlBuscaOrdenesProduccion 	= "${urlBuscaOrdenesProduccion}";
         </script>
         <script type="text/javascript">
 	        function regresa_menu() {
@@ -119,8 +131,7 @@
                                         <div id="div_paginador"></div>
                                     </div>
                                 </div>
-                                <form name="visualizador" action="" accept-charset="ISO-8859-1">
-                                    <input type="hidden" name="tipo_busqueda"               value=""/>
+                                <form name="busqueda_semaforo" action="" accept-charset="ISO-8859-1">
                                     <input type="hidden" name="numero_pagina"               value=""/>
                                     <input type="hidden" name="numero_registros_por_pagina" value=""/>
                                     <div class="div_separador_mediano">
@@ -128,6 +139,95 @@
                                     </div>
                                     <div class="titulo">
                                         <font size="5">CRITERIOS DE B&Uacute;SQUEDA</font>
+                                    </div>
+                                    <div class="linea">
+                                    	<div class="casilla">
+                                    		<div class="columna_izquierda">
+                                    			<div class="mitad_columna_izquierda">
+                                    				<div class="columna_completa">
+                                    					<table>
+                                    						<tr>
+                                    							<td width="30%">
+                                    								<input type="checkbox" name="chkbx_busca_por_nut"/>
+                                    								<span onclick="document.busqueda_semaforo.chkbx_busca_por_nut.click()" style="cursor: pointer;">NUT:</span>
+                                    							</td>
+                                    							<td>
+                                    								<input 	type="text"
+                                    										class="input"
+                                    										name="nut"
+                                    										value=""
+                                    										maxlength="10"
+                                    										onkeydown="revisaNumero(false, this.value, event, 'nueva_busqueda', null)"
+                                    								/>
+                                    							</td>
+                                    						</tr>
+                                    					</table>
+                                    				</div>
+                                    			</div>
+                                    		</div>
+                                    	</div>
+                                    </div>
+                                    <div class="linea">
+                                    	<div class="casilla">
+                                    		<div class="columna_izquierda">
+                                    			<div class="columna_completa">
+                                    				<table>
+                                    					<tr>
+                                    						<td width="20%">
+                                    							<input type="checkbox" name="chkbx_busca_por_nombre_op"/>
+                                    							<span onclick="document.busqueda_semaforo.chkbx_busca_por_nombre_op.click()" style="cursor: pointer;">Nombre:</span>
+                                    						</td>
+                                    						<td>
+                                    							<input 	type="text"
+                                    									class="input"
+                                    									name="nombre"
+                                    									value=""/>
+                                    						</td>
+                                    					</tr>
+                                    				</table>
+                                    			</div>
+                                    		</div>
+                                    		<div class="columna_derecha">
+                                    			<div class="columna_completa">
+                                    				<table>
+                                    					<tr>
+                                    						<td width="25%">
+                                    							<input type="checkbox" name="chkbx_busca_por_descripcion"/>
+                                    							<span onclick="document.busqueda_semaforo.chkbx_busca_por_descripcion.click()" style="cursor: pointer;">Descripci&oacute;n:</span>
+                                    						</td>
+                                    						<td>
+                                    							<input 	type="text"
+                                    									class="input"
+                                    									name="descripcion"
+                                    									value=""/>
+                                    						</td>
+                                    					</tr>
+                                    				</table>
+                                    			</div>
+                                    		</div>
+                                    	</div>
+                                    </div>
+                                    <div class="linea">
+                                    	<div class="casilla">
+                                    		<div class="columna_izquierda">
+                                    			<div class="columna_completa">
+                                    				<table>
+                                    					<tr>
+                                    						<td width="18%">
+                                    							<input type="checkbox" name="chkbx_busca_por_nombre_moral"/>
+                                    							<span onclick="document.busqueda_semaforo.chkbx_busca_por_nombre_moral.click()" style="cursor: pointer;">Cliente:</span>
+                                    						</td>
+                                    						<td>
+                                    							<input	type="text"
+                                    									class="input"
+                                    									name="nombre_moral"
+                                    									value=""/>
+                                    						</td>
+                                    					</tr>
+                                    				</table>
+                                    			</div>
+                                    		</div>
+                                    	</div>
                                     </div>
                                     <br/>
                                     <div class="linea">
