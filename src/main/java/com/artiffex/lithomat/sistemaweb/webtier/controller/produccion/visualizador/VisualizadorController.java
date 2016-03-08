@@ -270,7 +270,6 @@ public class VisualizadorController {
 		log.info("/obtiene_detalle_nut");
 		
 		// configuracion de los select
-		
 		List<ComboSelect> listaTipoComprobanteFiscal = tipoComprobanteFiscalService.listaComboSelect();
 		model.addAttribute("listaTipoComprobanteFiscal",listaTipoComprobanteFiscal);
 		listaTipoComprobanteFiscal = null;
@@ -308,7 +307,6 @@ public class VisualizadorController {
 		listaResponsableInsumo = null;
 		
 		// lista procesos por seccion
-		
 		Gson gson = new Gson();
 		
 		List<ComboSelect> listaProcesoDisenio = procesoDisenioService.listaComboSelect();
@@ -344,7 +342,6 @@ public class VisualizadorController {
 		gson = null;
 		
 		// informacion del jsp
-		
 		OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
 		model.addAttribute("ordenProduccion", ordenProduccion);
 		

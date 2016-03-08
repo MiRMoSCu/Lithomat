@@ -1,4 +1,20 @@
 
+
+function muestra_detalle_nut( nut ) {
+	// alert(nut);
+	Shadowbox.open({
+		content:urlObtieneDetalleNut + "?nut=" + nut,
+		player:"iframe",
+		width:1278,
+		height:804,
+		options:{
+			modal:true, // imperativo cerrar manualmente
+			overlayOpacity:0.75
+		}
+	});
+}
+
+
 function genera_tabla_dom( jsonOrdenesProduccion ) {
 	
     var table = document.createElement("table");
@@ -85,12 +101,63 @@ function genera_tabla_dom( jsonOrdenesProduccion ) {
 function nueva_busqueda() {
 	var correcto = true;
 	
-	if ( correcto ) {
-		alert("nueva busqueda correcta");
+	if ( correcto
+			&& document.busqueda_semaforo.chkbx_busca_por_nut.checked
+			&& document.busqueda_semaforo.nut.value == "" ) {
+		correcto = false;
+		alert("El campo de b\u00FAsqueda NUT no puede estar vac\u00EDo. Favor de reportarlo.");
+		document.busqueda_semaforo.nut.focus();
 	}
 	
+	if ( correcto
+			&& document.busqueda_semaforo.chkbx_busca_por_nombre_op.checked
+			&& document.busqueda_semaforo.nombre.value == "" ) {
+		correcto = false;
+		alert("El campo de b\u00FAsqueda NOMBRE no puede estar vac\u00EDo. Favor de reportarlo.");
+		document.busqueda_semaforo.nombre.focus();
+	}
+	
+	if ( correcto
+			&& document.busqueda_semaforo.chkbx_busca_por_descripcion.checked
+			&& document.busqueda_semaforo.descripcion.value == "" ) {
+		correcto = false;
+		alert("El campo de b\u00FAsqueda DESCRIPCIÓN no puede estar vac\u00EDo. Favor de reportarlo.");
+		document.busqueda_semaforo.descripcion.focus();
+	}
+	
+	if ( correcto
+			&& document.busqueda_semaforo.chkbx_busca_por_nombre_moral.checked
+			&& document.busqueda_semaforo.nombre_moral.value == "" ) {
+		correcto = false;
+		alert("El campo de b\u00FAsqueda CLIENTE no puede estar vac\u00EDo. Favor de reportarlo.");
+		document.busqueda_semaforo.nombre_moral.focus();
+	}
+	
+	if ( correcto ) {
+		numero_pagina = 1;
+		document.busqueda_semaforo.numero_pagina.value 					= numero_pagina;
+		document.busqueda_semaforo.numero_registros_por_pagina.value 	= numero_registros_por_pagina;
+		$.ajax({
+			type:"POST",
+			url:urlBuscaOrdenesProduccion,
+			data:$("[name=busqueda_semaforo]").serialize(),
+			success:function( response ) {
+				//console.log(response);
+				objJson = JSON.parse( response );
+				genera_tabla_dom( objJson.listaOrdenesProduccion );
+				numero_total_registros = objJson.numeroTotalRegistros;
+				carga_datos();
+	        	objJson = null;
+				document.body.style.cursor = "default";
+			},
+			error:function( e ) {
+				alert("\u00A1Algo sali\u00f3 mal! pero todo tiene soluci\u00f3n.");
+			}
+		});
+	}
 	delete correcto;
 }
+
 
 function realiza_consulta_paginador() {
 	document.busqueda_semaforo.numero_pagina.value 					= numero_pagina;
@@ -102,7 +169,7 @@ function realiza_consulta_paginador() {
 		success:function( response ) {
 			//console.log(response);
 			objJson = JSON.parse( response );
-			genera_tabla_dom( objJson.listaOrdenesProduccion )
+			genera_tabla_dom( objJson.listaOrdenesProduccion );
 		},
 		error:function( e ) {
 			alert("\u00A1Algo sali\u00f3 mal! pero todo tiene soluci\u00f3n.");

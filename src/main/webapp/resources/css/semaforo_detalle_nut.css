@@ -2,7 +2,7 @@
 
 #div_area {
     width: 1010px;
-    height: 3909px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ 
+    height: 3239px; 	/* aqui se modifica el alto de la hoja */
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -16,7 +16,7 @@
 
 #div_hoja {
     width: 981px;
-    height: 3880px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_area - 29 */
+    height: 3210px;		/* div_area - 29  */
     background: #FFF;
     float: left;
 }
@@ -31,13 +31,13 @@
     margin-left: auto;
     margin-right: auto;
     position: relative;
-    background: transparent; /*orange*/
+    background: transparent;
 }
 
 #div_pie {
     width: 981px;
     height: 50px;
-    background: transparent; /*green*/
+    background: transparent;
 }
 
 #div_derecha3d {
@@ -54,7 +54,7 @@
 
 #div_fondo_der {
     width: 29px;
-    height: 3849px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_hoja - 31 (div_fondo_esq_sup) */
+    height: 3179px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_hoja - 31 (div_fondo_esq_sup) */
     background-image: url('../image/s_der.png');
     background-repeat: repeat-y;
 }
@@ -111,7 +111,7 @@
 	width:865px;
     margin-left:auto;
     margin-right:auto;
-    background:transparent; /*red*/
+    background:transparent;
     display:block;
 }
 
@@ -119,7 +119,7 @@
 	width:865px;
     margin-left:auto;
     margin-right:auto;
-    background:transparent; /*red*/
+    background:transparent;
     display:block;
 }
 
@@ -216,24 +216,6 @@ table#tabla_lista_tipo_trabajo_detalle tr:hover td{
     background: transparent;
 }
 
-#div_disenio_panel_izquierdo, 
-#div_preprensa_panel_izquierdo,
-#div_transporte_panel_izquierdo, 
-#div_acabado_panel_izquierdo {
-    width: 388px;
-    height: 100%;
-    float: left;
-}
-
-#div_disenio_panel_derecho, 
-#div_preprensa_panel_derecho, 
-#div_transporte_panel_derecho,
-#div_acabado_panel_derecho {
-    width: 388px;
-    height: 100%;
-    float: right;
-}
-
 #div_select_proceso_disenio, 
 #div_select_proceso_preprensa, 
 #div_select_proceso_transporte,
@@ -269,7 +251,7 @@ select[name="select_proceso_externo"] {
 #div_contenedor_tabla_transporte_detalle, 
 #div_contenedor_tabla_acabado_detalle {
     width: 100%;
-    height: 135px;
+    height: 100%;
 }
 
 #div_tabla_lista_disenio_detalle, 

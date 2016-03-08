@@ -469,7 +469,7 @@ function aceptaModificarTTD() {
     		&& document.tipo_trabajo_detalle.frente_id_combinacion_tintas.value == "16" ) {
         // valida en frente si la tinta especial es mayor a cero, exista obligatoriamente una descripcion.
         if( document.tipo_trabajo_detalle.frente_num_tinta_especial.value == ""
-        		|| isNaN(document.tipo_trabajo_detalle.frente_num_tinta_especial)
+        		|| isNaN(document.tipo_trabajo_detalle.frente_num_tinta_especial.value)
         		|| parseInt( document.tipo_trabajo_detalle.frente_num_tinta_especial.value ) <= 0 ) {
             correcto = false;
             alert("Es necesario que exista al menos tinta especial en el frente");
@@ -542,12 +542,14 @@ function aceptaModificarTTD() {
 		document.body.style.cursor = "wait";
 		desactivaCamposFormTipoTrabajoDetalle();
 		desactivaBotonesModificarFormTipoTrabajoDetalle();
-		
+		// PARA ABRIR VENTANA MODAL NUEVAMENTE
 		var modificarPliegos = false;
 		
-		if ( document.tipo_trabajo_detalle.repeticiones_x_pliego.value != obj_ttd.repeticiones_x_pliego
-				|| document.tipo_trabajo_detalle.numero_paginas_publicacion.value != obj_ttd.numero_paginas_publicacion
-				|| document.tipo_trabajo_detalle.tamanio_pubicacion.value != obj_ttd.tamanio_publicacion ) 
+		if ( document.tipo_trabajo_detalle.repeticiones_x_pliego.value 				!= obj_ttd.repeticiones_x_pliego
+				|| document.tipo_trabajo_detalle.numero_paginas_publicacion.value 	!= obj_ttd.numero_paginas_publicacion
+				|| document.tipo_trabajo_detalle.tamanio_pubicacion.value 			!= obj_ttd.tamanio_publicacion 
+				|| document.tipo_trabajo_detalle.frente_num_tinta_especial.value 	!= obj_ttd.frente_num_tinta_especial
+				|| document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value 	!= obj_ttd.vuelta_num_tinta_especial ) 
 			modificarPliegos = true;
 		
 		if ( modificarPliegos ) {
@@ -818,3 +820,47 @@ function revisaCierreSegundaVentanaModal() {
 		});
 	}
 } // revisaCierreSegundaVentanaModal
+
+function buscaTipoPlaca( obj ) {
+    var id = obj.options[obj.selectedIndex].value;
+    $.ajax({
+        type:"POST",
+        url:urlBuscaTipoPlaca,
+        data:{id_maquina:id},
+        success:function(response) {
+            // jquery limpia select tipo_trabajo_detalle
+            $("[name='select_tipo_placa']").empty();
+            // parsea la informacion
+            var jsonObject = JSON.parse( response.textoJson );
+            $.each( jsonObject, function(i, item) {
+                //alert( item.id_tipo_placa + ' ' + item.descripcion );
+                var option = document.createElement("option");
+                option.text     = item.descripcion;
+                option.value    = item.id_tipo_placa;
+                document.forms["tipo_trabajo_detalle"].elements["select_tipo_placa"].add( option );
+                delete option;
+                // coloca opcion del tipo de placas
+                var clave			= document.tipo_trabajo_detalle.tipo_placa.value;
+       			var select 			= document.tipo_trabajo_detalle.select_tipo_placa;
+       			var encontroOpcion 	= false;
+       			for( var i=0; i<select.length; i++ ) {
+       				if( select.options[i].innerText == clave ) {
+       					select.selectedIndex	= i;
+       					encontroOpcion = true;
+       					break;
+       				}
+       			}
+       			if( !encontroOpcion ) {
+       				select.selectedIndex = 0;
+       			}
+                delete clave;
+       			delete select;
+            } );
+            delete jsonObject;
+        },
+        error:function(e) {
+            alert("No fue posible cargar lista de placas por maquina");
+        }
+    });
+    delete id;
+} // buscaTipoPlaca

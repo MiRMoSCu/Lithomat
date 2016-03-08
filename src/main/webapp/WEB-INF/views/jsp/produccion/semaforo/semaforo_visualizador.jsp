@@ -2,8 +2,9 @@
 <%@ taglib prefix="c"	uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" 	uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:url value="/?opc=produccion"	               		var="urlMenu"/>
-<c:url value="/semaforo/busca_ordenes_produccion"   var="urlBuscaOrdenesProduccion"/>
+<c:url value="/?opc=produccion"	               				var="urlMenu"/>
+<c:url value="/semaforo/busca_ordenes_produccion"   		var="urlBuscaOrdenesProduccion"/>
+<c:url value="/semaforo/obtiene_detalle_nut"   				var="urlObtieneDetalleNut"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -12,14 +13,19 @@
 		<link rel="stylesheet" href="<c:url value="/resources/css/master.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/menu.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/font.css"/>" type="text/css"></link>
-        <link rel="stylesheet" href="<c:url value="/resources/css/semaforo.css"/>" type="text/css"></link>
+        <link rel="stylesheet" href="<c:url value="/resources/shadowbox/shadowbox.css"/>" type="text/css"></link>
+        <link rel="stylesheet" href="<c:url value="/resources/css/semaforo_visualizador.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/paginador.css"/>" type="text/css"></link>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
         <script type="text/javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script type="text/javascript" src="<c:url value="/resources/shadowbox/shadowbox.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/utilidades.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/paginador.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/semaforo.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/semaforo_visualizador.js"/>"></script>
+        <script type="text/javascript">
+        	$(document).ready(function (){});
+            Shadowbox.init({});
+        </script>
         <script type="text/javascript">
             var numero_total_registros	        = ${numeroTotalRegistros};
             var numero_registros_por_pagina		= ${numeroRegistrosPorPagina};
@@ -33,6 +39,7 @@
         <script type="text/javascript">
         	var urlMenu 					= "${urlMenu}";
         	var urlBuscaOrdenesProduccion 	= "${urlBuscaOrdenesProduccion}";
+        	var urlObtieneDetalleNut		= "${urlObtieneDetalleNut}";
         </script>
         <script type="text/javascript">
 	        function regresa_menu() {
@@ -233,7 +240,7 @@
                                     <div class="linea">
                                         <div class="casilla" style="text-align:right;">
                                             <img alt="" style="cursor:pointer;" onclick="limpia();" src="<c:url value="/resources/image/boton_limpiar.jpg"/>"/>
-                                            <span style="cursor:pointer;" onclick="">&nbsp;Buscar&nbsp;</span>
+                                            <span style="cursor:pointer;" onclick="nueva_busqueda()">&nbsp;Buscar&nbsp;</span>
                                         </div>
                                     </div>
                                 </form>

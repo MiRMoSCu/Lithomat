@@ -35,7 +35,7 @@
 		<property name="hibernate.c3p0.max_size">50</property>
 		<property name="hibernate.c3p0.initialPoolSize">5</property>
 		<property name="hibernate.c3p0.acquire_increment">1</property>
-		<property name="hibernate.c3p0.timeout">6000</property>
+		<property name="hibernate.c3p0.timeout">360000</property>
 		<property name="hibernate.c3p0.idle_test_period">180</property>
 <!-- ************ END JDBC connection pool C3PO ****************-->
 <!-- La ruta es absoluta -->

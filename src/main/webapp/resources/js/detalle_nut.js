@@ -344,17 +344,17 @@ function ajaxCambiaEstatus() {
 	if( document.orden_produccion.estatus.value.toUpperCase() != "FINALIZADO" ) {
 		$.ajax({
 			type:"POST",
-			url:urlCambiaEstatusPartida,
+			url:urlCambiaEstatus,
 			data:$("[name='cambio_estatus']").serialize(),
 			success:function(response){
 				//console.log(response);
 				if(response.estatusOperacion != 0) {
 					var index = document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].selectedIndex;
 					document.forms["orden_produccion"].elements["estatus"].value = document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].options[index].text;
-					// modifica texto
+					// modifica texto en la ventana padre
 					var id_td = "td_" + document.forms["orden_produccion"].elements["nut"].value;
 					window.parent.document.getElementById(id_td).innerHTML = document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].options[index].text;
-					// modifica color
+					// modifica color en la ventana padre
 					window.parent.document.getElementById(id_td).removeAttribute("class");
 					window.parent.document.getElementById(id_td).setAttribute("class","estatus_" + document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].value);
 					// elimina la opcion de modificar la informacion.
@@ -378,7 +378,7 @@ function ajaxCambiaEstatus() {
 					document.getElementById("div_btn_modificar_offset").style.display 					= "none";
 					document.getElementById("div_btn_agregar_material_ayuda").style.display 			= "none";
 					document.getElementById("div_btn_actualizar_material_ayuda").style.display 			= "none";
-					// modifica select
+					// modifica select de cambio de estatus
 					$("[name='select_estatus_orden_produccion']").empty();
 					var jsonObject = JSON.parse(response.textoJson);
 					$.each( jsonObject, function(i, item) {
@@ -423,11 +423,3 @@ function muestraDetallePrecio() {
 	document.precio.action 	= urlObtienePrecioDetalle;
 	document.precio.submit();
 } // muestraDetallePrecio
-
-function inicializa() {
-	var select = document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"];
-	for(var i=0; i<select.length; i++) {
-		if( select.options[i].innerText == document.forms["orden_produccion"].elements["estatus"].value )
-			document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].selectedIndex = i;
-	}
-}

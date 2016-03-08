@@ -108,10 +108,6 @@ public class OrdenProduccionController {
 		model.addAttribute("listaTipoFormaTrabajo", listaTipoFormaTrabajo);
 		listaTipoFormaTrabajo = null;
 
-		//List<ComboSelect> listaTipoPapelExtendido = tipoPapelExtendidoService.listaComboSelect();
-		//model.addAttribute("listaTipoPapelExtendido", listaTipoPapelExtendido);
-		//listaTipoPapelExtendido = null;
-
 		List<ComboSelect> listaTamanioPublicacion = tamanioPublicacionService.listaComboSelect();
 		model.addAttribute("listaTamanioPublicacion", listaTamanioPublicacion);
 		listaTamanioPublicacion = null;

@@ -1163,7 +1163,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 						descripcionEntMaq.append(tipoTrabajoDetalle.getFrenteCombinacionTintas().getDescripcion());
 						if( tipoTrabajoDetalle.getFrenteNumTintaEspecial() > 0 ) {
 							descripcionEntMaq.append(" + ");
-							descripcionEntMaq.append(tipoTrabajoDetalle.getFrenteNumTintaEspecial() + tipoTrabajoDetalle.getVueltaNumTintaEspecial());
+							descripcionEntMaq.append(tipoTrabajoDetalle.getFrenteNumTintaEspecial());
 							descripcionEntMaq.append(" esp");
 						}
 						if( tipoTrabajoDetalle.getFrenteTipoBarniz().getNumEntradasMaquina() > 0 )

@@ -28,6 +28,8 @@ public class SemaforoServiceImpl implements SemaforoService {
 
 	public int numeroRegistrosPorCriterioBusqueda(ParametrosBusquedaSemaforo parametros) {
 		
+		boolean existeParametro = false;
+		
 		int idEstatusOrden = 0;
 		if ( "ROLE_DISENIO".equals( parametros.getRole() ) )
 			idEstatusOrden = ESTATUS_DISENIO;
@@ -48,19 +50,61 @@ public class SemaforoServiceImpl implements SemaforoService {
 		query.append(" FROM");
 		query.append("    orden_produccion op,");
 		query.append("    historial_estatus he,");
-		query.append("    estatus_orden eo");
+		query.append("    estatus_orden eo,");
+		query.append("    cliente c");
 		query.append(" WHERE");
-		query.append("    op.id_orden_produccion = he.id_orden_produccion");
-		query.append("        AND he.id_estatus_orden = eo.id_estatus_orden");
+		
+		if ( parametros.isBusquedaPorNut() ) {
+			if ( existeParametro )
+				query.append(" AND ");
+			query.append("    op.nut = '");
+			query.append(parametros.getNut());
+			query.append("'");
+			existeParametro = true;
+		}
+		
+		if ( parametros.isBusquedaPorNombreOrdenProduccion() ) {
+			if ( existeParametro )
+				query.append(" AND ");
+			query.append("        op.nombre LIKE '%");
+			query.append(parametros.getNombreOrdenProduccion());
+			query.append("%'");
+			existeParametro = true;
+		}
+		
+		if ( parametros.isBusquedaPorDescripcionOrdenProduccion() ) {
+			if ( existeParametro )
+				query.append(" AND ");
+			query.append("        op.descripcion LIKE '%");
+			query.append(parametros.getDescripcionOrdenProduccion());
+			query.append("%'");
+			existeParametro = true;
+		}
+		
+		if ( parametros.isBusquedaPorNombreMoral() ) {
+			if ( existeParametro )
+				query.append(" AND ");
+			query.append("        c.nombre_moral LIKE '%");
+			query.append(parametros.getNombreMoral());
+			query.append("%'");
+			existeParametro = true;
+		}
+		
+		if ( existeParametro )
+			query.append(" AND ");
+		
+		query.append("        eo.id_estatus_orden = ");
+		query.append(idEstatusOrden);
+		query.append("        AND op.activo = TRUE");
+		query.append("        AND c.id_cliente = op.id_cliente");
+		query.append("        AND he.id_orden_produccion = op.id_orden_produccion");
+		query.append("        AND eo.id_estatus_orden = he.id_estatus_orden");
 		query.append("        AND he.fecha = (SELECT ");
 		query.append("            MAX(fecha)");
 		query.append("        FROM");
 		query.append("            historial_estatus");
 		query.append("        WHERE");
 		query.append("            id_orden_produccion = he.id_orden_produccion)");
-		query.append("        AND eo.id_estatus_orden = ");
-		query.append(idEstatusOrden);
-		query.append("        AND op.activo = TRUE;");
 		
 		int numeroRegistros = semaforoDAO.numeroRegistros( query.toString() );
 		
@@ -154,7 +198,7 @@ public class SemaforoServiceImpl implements SemaforoService {
 		query.append("            historial_estatus");
 		query.append("        WHERE");
 		query.append("            id_orden_produccion = he.id_orden_produccion)");
-		query.append(" ORDER BY fecha_cotizacion DESC");
+		query.append(" ORDER BY fecha_cotizacion ASC");
 		query.append(" LIMIT ");
 		query.append(numeroRegistrosPorPagina * (numeroPagina - 1));
 		query.append(" , ");

@@ -25,21 +25,20 @@
 #div_cabecera {
     width: 1278px;
     height: 300px;
-    background: transparent; /*purple*/
+    background: transparent;
 }
 
 #div_cuerpo {
     width: 1278px;
-    background: transparent; /*orange*/
+    background: transparent;
 }
 
 #div_menu {
     width: 304px;
     height: 402px;
-    background: transparent; /*yellow*/
+    background: transparent;
     float: left;
-/*	position:fixed;*/
-    top: 377px; /*377 original*/
+    top: 377px;
 }
 
 #div_contenido {
@@ -47,19 +46,18 @@
     float: right;
     position: relative;
     right: 13px;
-    background: transparent; /*orange*/
+    background: transparent;
 }
 
 #div_pie {
     width: 1278px;
     height: 50px;
-    background: transparent; /*green*/
+    background: transparent;
 }
 
 #div_derecha3d {
     width: 29px;
     float: left;
-    /*background: purple;*/
 }
 
 #div_fondo_esq_sup {
