@@ -539,9 +539,7 @@
                                     	<input type="hidden" name="nut"						value="${ordenProduccion.nut}">
                                     	<input type="hidden" name="id_partida" 				value="">
                                     	<input type="hidden" name="id_tipo_forma_trabajo" 	value="">
-                                        <div class="div_separador_mediano">
-                                            <img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
-                                        </div>    
+                                        <br/><br/>
                                         <div class="titulo">
                                             <!--  <img alt="" src="<c:url value="/resources/image/titulo_descripcion_partida.png"/>"/> -->
                                             <font size="5">DESCRIPCI&Oacute;N DE TRABAJO</font>
@@ -787,10 +785,7 @@
                                     	<input type="hidden" name="id_maquina" 							value="">
                                     	<input type="hidden" name="id_tipo_placa" 						value="">
                                     	<input type="hidden" name="id_tipo_complejidad" 				value="">
-                                    	
-                                        <div class="div_separador_mediano">
-                                            <img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
-                                        </div>
+                                    	<br/><br/>
                                         <div class="titulo">
                                             <!--  <img alt="" src="<c:url value="/resources/image/titulo_detalle_partida.png"/>"/> -->
                                             <font size="5">DETALLE DE IMPRESI&Oacute;N</font>

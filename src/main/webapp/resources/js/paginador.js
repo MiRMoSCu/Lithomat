@@ -128,11 +128,10 @@ function carga_datos() {
         objLi.setAttribute("onclick","paginador( this );");
         objLi.setAttribute("name","arreglo");
         objLi.innerHTML = parseInt(i + 1);
-        if( i == 0 ) {
+        if( i == 0 ) 
             objLi.setAttribute("class","seleccionado");
-        } else {
+        else 
             objLi.setAttribute("class","activo");
-        }
         objUl.appendChild( objLi );
         delete objLi;
     }

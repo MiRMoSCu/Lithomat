@@ -163,6 +163,7 @@ public class DisenioDetalleController {
 		) {
 		log.info("/elimina_disenio_detalle");
 		
+		// MEJORA: LAS SIGUIENTES LINEAS PUEDEN SER UNA UNIDAD LOGICA EN EL SERVICE
 		DisenioDetalle disenioDetalle = disenioDetalleService.buscaDisenioDetalle(idDisenioDetalle);
 		disenioDetalle.setActivo(false);
 		disenioDetalleService.modificaDisenioDetalle(disenioDetalle);
@@ -173,6 +174,7 @@ public class DisenioDetalleController {
 		
 		// obtiene actualizacion de la tabla
 		jsonResponse.setTextoHTML(disenioDetalleService.listaHTMLModificacionPorDisenio(idDisenio));
+		// MEJORA: LAS SIGUIENTES LINES PUEDEN SER UNA UNIDAD LOGICA EN EL SERVICE
 		// actualiza precio
 		calificacionService.actualizaProcesosPartida(idOrdenProduccion);
 		CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionService.buscaCalificacionOrdenProduccion(idOrdenProduccion);

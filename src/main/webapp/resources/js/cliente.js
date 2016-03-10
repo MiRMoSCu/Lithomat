@@ -326,12 +326,13 @@ function genera_tabla_dom( jsonListaClientes ) {
     delete table;
 } // genera_tabla_dom
 
+
 function realiza_consulta_paginador() {
 	document.busqueda_cliente.numero_pagina.value 				= numero_pagina;
 	document.busqueda_cliente.numero_registros_por_pagina.value = numero_registros_por_pagina;
 	// limpia campos
 	limpia_form_cliente();
-	// realiza ajax con el nuevo numero de pagina solicitada; el tipo de busqueda es el mismo
+	// realiza ajax de paginador
     $.ajax({
         type:"POST",
         url:urlBuscaListaPorParametros,
@@ -346,13 +347,14 @@ function realiza_consulta_paginador() {
             alert("\u00A1Algo sali\u00f3 mal! pero no pasa nada, todo tiene soluci\u00f3n.");
         }
     });
+	
 }
 
 /*************************************************************/
 // FUNCIONES PARA LA BUSQUEDA ESPECIALIZADA
 
 function nueva_busqueda() {
-	
+
 	var correcto = true;
 	
 	if( correcto
@@ -384,7 +386,6 @@ function nueva_busqueda() {
 	}
 	
 	if( correcto ) {
-		//alert("realiza la nueva busqueda");
 		numero_pagina = 1;
 		document.busqueda_cliente.numero_pagina.value 				= numero_pagina;
 		document.busqueda_cliente.numero_registros_por_pagina.value = numero_registros_por_pagina;
@@ -431,6 +432,4 @@ function limpia_form_busqueda_cliente() {
 	// realiza nueva busqueda
 	nueva_busqueda();
 }
-
-
 

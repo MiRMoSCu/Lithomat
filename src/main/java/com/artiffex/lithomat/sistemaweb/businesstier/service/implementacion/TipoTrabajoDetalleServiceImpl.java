@@ -31,6 +31,22 @@ public class TipoTrabajoDetalleServiceImpl implements TipoTrabajoDetalleService 
 		return tipoTrabajoDetalleDAO.crea(tipoTrabajoDetalle);
 	}
 	
+	public void eliminaTipoTrabajoDetalle(int idTipoTrabajoDetalle) {
+		// elimina logicamente pliegos relacionados
+		List<Pliego> listaPliego = pliegoService.listaPliegoPorTipoTrabajoDetalle(idTipoTrabajoDetalle);
+		for (Pliego pliego : listaPliego) {
+			pliego.setActivo(false);
+			pliegoService.modificaPliego(pliego);
+			pliego = null;
+		}
+		listaPliego = null;
+		// elimina logicamente ttd
+		TipoTrabajoDetalle tipoTrabajoDetalle = tipoTrabajoDetalleDAO.busca(idTipoTrabajoDetalle);
+		tipoTrabajoDetalle.setActivo(false);
+		tipoTrabajoDetalleDAO.modifica(tipoTrabajoDetalle);
+		tipoTrabajoDetalle = null;
+	}
+	
 	public TipoTrabajoDetalle buscaTipoTrabajoDetalle(int idTipoTrabajoDetalle) {
 		return tipoTrabajoDetalleDAO.busca(idTipoTrabajoDetalle);
 	}

@@ -10,8 +10,14 @@
 <c:url value="/visualizador/obtiene_precio_neto"            var="urlObtienePrecioNeto"/>
 <c:url value="/orden_produccion/actualiza"    				var="urlActualizaOrdenProduccion"/>
 <c:url value="/partida/actualiza"    						var="urlActualizaPartida"/>
-<c:url value="/tipo_trabajo_detalle/actualiza"  			var="urlActualizaTipoTrabajoDetalle"/>
+
+
 <c:url value="/tipo_trabajo_detalle/actualiza_con_pliegos"  var="urlActualizaTipoTrabajoDetalleConPliegos"/>
+<c:url value="/tipo_trabajo_detalle/actualiza"  			var="urlActualizaTipoTrabajoDetalle"/>
+<c:url value="/tipo_trabajo_detalle/elimina"  				var="urlEliminaTipoTrabajoDetalle"/>
+
+
+
 <c:url value="/pliego/calcula"              				var="urlCalculaPliego"/>
 <c:url value="/pliego/activa_lista"            				var="urlActivaListaPliegos"/>
 <c:url value="/pliego/actualiza"            				var="urlActualizaPliego"/>
@@ -95,8 +101,9 @@
             var urlObtienePrecioNeto						= "${urlObtienePrecioNeto}";
             var urlActualizaOrdenProduccion					= "${urlActualizaOrdenProduccion}";
             var urlActualizaPartida							= "${urlActualizaPartida}";
-            var urlActualizaTipoTrabajoDetalle				= "${urlActualizaTipoTrabajoDetalle}";
             var urlActualizaTipoTrabajoDetalleConPliegos	= "${urlActualizaTipoTrabajoDetalleConPliegos}";
+            var urlActualizaTipoTrabajoDetalle				= "${urlActualizaTipoTrabajoDetalle}";
+            var urlEliminaTipoTrabajoDetalle				= "${urlEliminaTipoTrabajoDetalle}";
             var urlCalculaPliego            				= "${urlCalculaPliego}";
             var urlActivaListaPliegos						= "${urlActivaListaPliegos}";
             var urlActualizaPliego							= "${urlActualizaPliego}";
@@ -666,9 +673,27 @@
                                     	<input type="hidden" name="nut"						value="${ordenProduccion.nut}">
                                     	<input type="hidden" name="id_partida" 				value="">
                                     	<input type="hidden" name="id_tipo_forma_trabajo" 	value="">
-                                        <div class="div_separador_mediano">
-                                            <img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
-                                        </div>    
+                                        <br/><br/>
+                                        <c:if test="${historialEstatus.estatusOrden.idEstatusOrden == estatus_cotizacion}">
+                                        	<div class="linea">
+	                                        	<div class="casilla" style="text-align:right;">
+	                                        		<div id="div_btn_actualizar_partida">
+	                                        			<!-- 
+	                                        			<span style="cursor:pointer;" onclick="eliminaPartida();">
+	                                        				<font color="blue">ELIMINAR</font>
+	                                        			</span>
+	                                        			-->
+	                                        			<img id="imgBtnModificarPartida" alt="" style="cursor:pointer;" onclick="modificaPartida()" src="<c:url value="/resources/image/boton_modificar.jpg"/>"/>
+		                                        		<span id="imgBtnCancelaModificarPartida" style="cursor:pointer; display:none;" onclick="cancelaModificarPartida()">
+		                                        			<font  color="gray">CANCELAR</font>
+		                                        		</span>
+		                                        		<span id="imgBtnAceptaModificarPartida" style="cursor:pointer; display:none;" onclick="aceptaModificarPartida()">
+		                                        			<font  color="blue">ACEPTAR</font>
+		                                        		</span>
+	                                        		</div>
+	                                        	</div>
+	                                        </div>
+                                        </c:if>
                                         <div class="titulo">
                                             <!--  <img alt="" src="<c:url value="/resources/image/titulo_descripcion_partida.png"/>"/> -->
                                             <font size="5">DESCRIPCI&Oacute;N DE TRABAJO</font>
@@ -859,26 +884,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <c:if test="${historialEstatus.estatusOrden.idEstatusOrden == estatus_cotizacion}">
-                                        	<div class="linea">
-	                                        	<div class="casilla" style="text-align:right;">
-	                                        		<div id="div_btn_actualizar_partida">
-	                                        			<!-- 
-	                                        			<span style="cursor:pointer;" onclick="eliminaPartida();">
-	                                        				<font color="blue">ELIMINAR</font>
-	                                        			</span>
-	                                        			-->
-	                                        			<img id="imgBtnModificarPartida" alt="" style="cursor:pointer;" onclick="modificaPartida()" src="<c:url value="/resources/image/boton_modificar.jpg"/>"/>
-		                                        		<span id="imgBtnCancelaModificarPartida" style="cursor:pointer; display:none;" onclick="cancelaModificarPartida()">
-		                                        			<font  color="gray">CANCELAR</font>
-		                                        		</span>
-		                                        		<span id="imgBtnAceptaModificarPartida" style="cursor:pointer; display:none;" onclick="aceptaModificarPartida()">
-		                                        			<font  color="blue">ACEPTAR</font>
-		                                        		</span>
-	                                        		</div>
-	                                        	</div>
-	                                        </div>
-                                        </c:if>
                                     </form>
                                 </div>
                             <!-- div_visualizador -->
@@ -934,10 +939,25 @@
                                     	<input type="hidden" name="id_maquina" 							value="">
                                     	<input type="hidden" name="id_tipo_placa" 						value="">
                                     	<input type="hidden" name="id_tipo_complejidad" 				value="">
-                                    	
-                                        <div class="div_separador_mediano">
-                                            <img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
-                                        </div>
+                                        <br/><br/>
+                                        <c:if test="${historialEstatus.estatusOrden.idEstatusOrden == estatus_cotizacion}">
+                                        	<div class="linea">
+	                                        	<div class="casilla" style="text-align:right;">
+	                                        		<div id="div_btn_actualizar_ttd_encabezado">
+	                                        			<img id="imgBtnModificarTTD" alt="" style="cursor:pointer;" onclick="modificaTTD()" src="<c:url value="/resources/image/boton_modificar.jpg"/>">
+	                                        			<span id="imgBtnCancelaModificarTTD" style="cursor:pointer; display:none;" onclick="cancelaModificarTTD()">
+	                                        				<font color="gray">CANCELAR</font>
+	                                        			</span>
+	                                        			<span id="imgBtnAceptaEliminarTTD" style="cursor: pointer; display: none;" onclick="aceptaEliminarTTD()">
+	                                        				<font color="#FFCC00">ELIMINAR</font>
+	                                        			</span>
+	                                        			<span id="imgBtnAceptaModificarTTD" style="cursor:pointer; display:none;" onclick="aceptaModificarTTD()">
+	                                        				<font color="blue">ACEPTAR</font>
+	                                        			</span>
+	                                        		</div>
+	                                        	</div>
+	                                        </div>
+                                        </c:if>
                                         <div class="titulo">
                                             <!--  <img alt="" src="<c:url value="/resources/image/titulo_detalle_partida.png"/>"/> -->
                                             <font size="5">DETALLE DE IMPRESI&Oacute;N</font>
@@ -1536,24 +1556,6 @@
                                         		</div>
                                         	</div>
                                         </div>
-                                        <c:if test="${historialEstatus.estatusOrden.idEstatusOrden == estatus_cotizacion}">
-                                        	<div class="linea">
-                                        		<div class="div_separador_chico">
-		                                        	<img alt="" src="<c:url value="/resources/image/separador_chico.jpg"/>"/>
-		                                        </div>
-	                                        	<div class="casilla" style="text-align:right;">
-	                                        		<div id="div_btn_actualizar_ttd_encabezado">
-	                                        			<img id="imgBtnModificarTTD" alt="" style="cursor:pointer;" onclick="modificaTTD()" src="<c:url value="/resources/image/boton_modificar.jpg"/>">
-	                                        			<span id="imgBtnCancelaModificarTTD" style="cursor:pointer; display:none;" onclick="cancelaModificarTTD()">
-	                                        				<font color="gray">CANCELAR</font>
-	                                        			</span>
-	                                        			<span id="imgBtnAceptaModificarTTD" style="cursor:pointer; display:none;" onclick="aceptaModificarTTD()">
-	                                        				<font color="blue">ACEPTAR</font>
-	                                        			</span>
-	                                        		</div>
-	                                        	</div>
-	                                        </div>
-                                        </c:if>
                                     </form>
                                 </div>
 							<!-- div_visualizador_pliegos -->

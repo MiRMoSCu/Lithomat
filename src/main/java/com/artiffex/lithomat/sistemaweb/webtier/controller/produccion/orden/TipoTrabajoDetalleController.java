@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionOrdenProduccion;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.CombinacionTintas;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.JsonResponse;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Maquina;
@@ -24,6 +25,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoComplejidad;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPapelExtendido;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPlaca;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajoDetalle;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CalificacionService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PliegoService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoTrabajoDetalleService;
 import com.google.gson.Gson;
@@ -38,6 +40,8 @@ public class TipoTrabajoDetalleController {
 	private TipoTrabajoDetalleService tipoTrabajoDetalleService;
 	@Resource
 	private PliegoService pliegoService;
+	@Resource
+	private CalificacionService calificacionService;
 	
 
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
@@ -153,19 +157,28 @@ public class TipoTrabajoDetalleController {
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/elimina", method = RequestMethod.POST)
 	@ResponseBody
-	public String eliminaTipoTrabajoDetalle(
-			@RequestParam(value = "id_tipo_trabajo_detalle", required = false) Integer idTipoTrabajoDetalle
+	public JsonResponse eliminaTipoTrabajoDetalle(
+			@RequestParam(value = "id_orden_produccion",		required = false) Integer idOrdenProduccion,
+			@RequestParam(value = "id_partida", 				required = false) Integer idPartida,
+			@RequestParam(value = "id_tipo_trabajo_detalle", 	required = false) Integer idTipoTrabajoDetalle
 		) {
-		log.info("/elimina_detalle_partida");
+		log.info("/elimina_tipo_trabajo_detalle");
 		
-		TipoTrabajoDetalle tipoTrabajoDetalle =tipoTrabajoDetalleService.buscaTipoTrabajoDetalle(idTipoTrabajoDetalle);
-		tipoTrabajoDetalle.setActivo(false);
+		// elimina ttd y los pliegos
+		tipoTrabajoDetalleService.eliminaTipoTrabajoDetalle(idTipoTrabajoDetalle);
 		
-		tipoTrabajoDetalleService.modificaTipoTrabajoDetalle(tipoTrabajoDetalle);
+		// busca nueva informacion
+		JsonResponse jsonResponse = new JsonResponse();
+		jsonResponse.setEstatusOperacion(1);
+		jsonResponse.setTextoHTML(tipoTrabajoDetalleService.buscaHTML(idPartida));
 		
-		tipoTrabajoDetalle = null;
+		// actualiza precio; MEJORA: PUEDE SER UNA UNIDAD LOGICA EN EL SERVICE
+		calificacionService.actualizaPartida(idOrdenProduccion);
+		CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionService.buscaCalificacionOrdenProduccion(idOrdenProduccion);
+		jsonResponse.setPrecioNeto( calificacionOrdenProduccion.getPrecioNeto() );
+		calificacionOrdenProduccion = null;
 		
-		return "1";
+		return jsonResponse;
 	} // eliminaDetallePartida
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})

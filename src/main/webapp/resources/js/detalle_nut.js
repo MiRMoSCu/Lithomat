@@ -125,15 +125,13 @@ function buscaPartida( id_partida ){
             document.material_ayuda.id_partida.value 		= partidaJson.descripcion_partida.idPartida;
             
             // activa radio botones tipo_trabajo
-            for( var i=0; i < document.getElementsByName("tipo_trabajo").length; i++ ) {
+            for( var i=0; i < document.getElementsByName("tipo_trabajo").length; i++ ) 
                 document.getElementsByName("tipo_trabajo")[i].disabled = false;
-            }
             
             // desactiva radio botones tipo_trabajo
             for( var j=0; j < document.getElementsByName("tipo_trabajo").length; j++ ) {
-                if( document.getElementsByName("tipo_trabajo")[j].value == partidaJson.descripcion_partida.idTipoTrabajo ) {
+                if( document.getElementsByName("tipo_trabajo")[j].value == partidaJson.descripcion_partida.idTipoTrabajo ) 
                     document.getElementsByName("tipo_trabajo")[j].click();
-                }
                 document.getElementsByName("tipo_trabajo")[j].disabled = true;
             }
             document.getElementsByName("tipo_trabajo").disabled = true;
@@ -266,6 +264,9 @@ function buscaPartida( id_partida ){
             
             delete partidaJson;
             
+            // GUARDA RESULTADOS PARTIDA EN OBJETO javascript
+            obj_partida.setObjPartida();
+            
             document.getElementById("div_partida").style.display 							= "block";
             document.getElementById("div_visualizador_tipo_trabajo_detalle").style.display 	= "block";
             
@@ -328,6 +329,9 @@ function buscaTrabajoDetalle( id_tipo_trabajo_detalle ) {
             document.getElementById("div_material_ayuda").style.display						= "block";
             
             delete detallePartidaJson;
+            
+            // GUARDA RESULTADOS TTD EN OBJETO javascript
+            obj_ttd.setObjTTD();
         },
         error:function( e ) {
             console.log( e );

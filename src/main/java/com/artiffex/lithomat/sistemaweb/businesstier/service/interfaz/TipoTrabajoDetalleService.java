@@ -10,6 +10,8 @@ public interface TipoTrabajoDetalleService {
 
 	public int creaTipoTrabajoDetalle(TipoTrabajoDetalle tipoTrabajoDetalle);
 	
+	public void eliminaTipoTrabajoDetalle(int idTipoTrabajoDetalle);
+	
 	public TipoTrabajoDetalle buscaTipoTrabajoDetalle(int idTipoTrabajoDetalle);
 	
 	public TipoTrabajoDetalleDTO buscaTipoTrabajoDetalleEnDTO(int idTipoTrabajoDetalle);

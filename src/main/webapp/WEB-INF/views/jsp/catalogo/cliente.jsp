@@ -215,7 +215,7 @@
 		                                					<tr>
 		                                						<td width="33%">
 		                                							<input type="checkbox" name="chkbx_busca_por_tipo_cliente"/>
-		                                							<span style="cursor:pointer;" onclick="document.busqueda_cliente.chkbx_busca_por_clave.click()">Clave:</span>
+		                                							<span style="cursor:pointer;" onclick="document.busqueda_cliente.chkbx_busca_por_tipo_cliente.click()">Clave:</span>
 		                                						</td>
 		                                						<td>
 		                                							<select name="id_tipo_cliente" onchange="">
@@ -297,7 +297,7 @@
                                                                         class="input" 
                                                                         name="id_cliente"
                                                                         value="" 
-                                                                        readonly="readonly">
+                                                                        readonly>
                                                             </td>
                                                         </tr>
                                                     </table>

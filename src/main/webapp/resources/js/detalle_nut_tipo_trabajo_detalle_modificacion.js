@@ -3,7 +3,7 @@ var cerradoOKVentanaListaPliegos = false;
 
 var obj_ttd = {
 	
-	descripcion							: "",
+	descripcion_partida_detalle			: "",
 	alto_final 							: "",
 	ancho_final 						: "",
 	alto_extendido 						: "",
@@ -33,7 +33,7 @@ var obj_ttd = {
 	htmlListaPliegos					: "",
 		
 	setObjTTD : function() {
-		this.descripcion						= document.tipo_trabajo_detalle.descripcion_partida_detalle.value;
+		this.descripcion_partida_detalle		= document.tipo_trabajo_detalle.descripcion_partida_detalle.value;
 		this.alto_final 						= document.tipo_trabajo_detalle.alto_final.value;
 		this.ancho_final 						= document.tipo_trabajo_detalle.ancho_final.value;
 		this.alto_extendido 					= document.tipo_trabajo_detalle.alto_extendido.value;
@@ -93,13 +93,15 @@ var obj_ttd = {
 	
 function activaBotonesModificarFormTipoTrabajoDetalle() {
 	document.getElementById("imgBtnModificarTTD").style.display 		= "none";
-	document.getElementById("imgBtnAceptaModificarTTD").style.display	= "inline";
 	document.getElementById("imgBtnCancelaModificarTTD").style.display	= "inline";
+	document.getElementById("imgBtnAceptaEliminarTTD").style.display	= "inline";
+	document.getElementById("imgBtnAceptaModificarTTD").style.display	= "inline";
 } // activaBotonesModificarFormTipoTrabajoDetalle
 
 function desactivaBotonesModificarFormTipoTrabajoDetalle() {
-	document.getElementById("imgBtnAceptaModificarTTD").style.display	= "none";
 	document.getElementById("imgBtnCancelaModificarTTD").style.display	= "none";
+	document.getElementById("imgBtnAceptaEliminarTTD").style.display	= "none";
+	document.getElementById("imgBtnAceptaModificarTTD").style.display	= "none";
 	document.getElementById("imgBtnModificarTTD").style.display 		= "inline";
 } // desactivaBotonesModificarFormTipoTrabajoDetalle
 
@@ -341,10 +343,43 @@ function modificaTTD() {
 	ocultaBotonesModificarPorSeccion();
 	document.getElementById("div_btn_actualizar_ttd_encabezado").style.display = "inline";
 	// activa botones ACEPTAR y CANCELAR
-	obj_ttd.setObjTTD();
 	activaCamposFormTipoTrabajoDetalle();
 	activaBotonesModificarFormTipoTrabajoDetalle();
 } // modificaTTDEncabezado
+
+function aceptaEliminarTTD() {
+	if ( confirm("¿Esta seguro de querer eliminar este registro?") ) {
+		$.ajax({
+			type: "POST",
+			url: urlEliminaTipoTrabajoDetalle,
+			data: {
+				id_orden_produccion: document.tipo_trabajo_detalle.id_orden_produccion.value,
+				id_partida: document.tipo_trabajo_detalle.id_partida.value,
+				id_tipo_trabajo_detalle: document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value
+			},
+			success: function(response) {
+				// actualiza la tabla
+				document.getElementById("div_tabla_lista_tipo_trabajo_detalle").innerHTML = response.textoHTML;
+				// actualiza el precio
+				document.precio.precio_neto.value = "$ " + (response.precioNeto).formatMoney(2);
+				// deactiva todo
+				cancelaModificarTTD();
+				// oculta divs
+				document.getElementById("div_tipo_trabajo_detalle").style.display 				= "none";
+				document.getElementById("div_visualizador_pliegos").style.display 				= "none";
+				document.getElementById("div_visualizador_costo_extra_detalle").style.display	= "none";
+			    document.getElementById("div_costo_extra_detalle").style.display				= "none";
+				document.getElementById("div_pestania").style.display 							= "none";
+				document.getElementById("div_material_ayuda").style.display 					= "none";
+			},
+			error: function(e) {
+				cancelaModificarTTD();
+				alert("No fue posible actualizar la informaci\u00F3n.");
+				muestraBotonesModificarPorSeccion();
+			}
+		});
+	}
+} // aceptaEliminarTTD
 
 function aceptaModificarTTD() {
 	// campos ocultos
@@ -655,7 +690,7 @@ function aceptaModificarTTD() {
 				},
 				error: function() {
 					document.body.style.cursor = "default";
-					cancelaModificarTTD()
+					cancelaModificarTTD();
 					alert("No fue posible actualizar la informaci\u00F3n.");
 					muestraBotonesModificarPorSeccion();
 				}
