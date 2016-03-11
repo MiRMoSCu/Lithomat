@@ -46,6 +46,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoComple
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoComprobanteFiscalService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoFormaTrabajoService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoPapelExtendidoService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.UsuarioService;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
 import com.google.gson.Gson;
 
@@ -55,6 +56,9 @@ public class OrdenProduccionController {
 	
 	private static final Logger log = Logger.getLogger(OrdenProduccionController.class);
 	
+	
+	@Resource
+	private UsuarioService usuarioService;
 	@Resource
 	private OrdenProduccionService ordenProduccionService;
 	@Resource
@@ -99,6 +103,18 @@ public class OrdenProduccionController {
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String ordenProduccion(Locale locale, Model model) {
 		log.info("/orden_produccion");
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String strUsuario = principal.toString();
+		if ( principal instanceof UserDetails ) {
+			strUsuario = ((UserDetails)principal).getUsername();
+		}
+		principal = null;
+		
+		Usuario user = usuarioService.buscaUsuario(strUsuario);
+		model.addAttribute("idUsuario",user.getIdUsuario());
+		user = null;
+		principal = null;
 
 		List<ComboSelect> listaTipoComprobanteFiscal = tipoComprobanteFiscalService.listaComboSelect();
 		model.addAttribute("listaTipoComprobanteFiscal",listaTipoComprobanteFiscal);

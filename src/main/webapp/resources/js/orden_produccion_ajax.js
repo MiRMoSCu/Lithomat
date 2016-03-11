@@ -1,10 +1,6 @@
 
-//variables globales
-var cerradoOKVentanaListaPliegos = false;
-
 
 // funciones
-
 function searchLikeGoogle(str,event){
 	//console.log(event);
 	//alert(str);
@@ -53,7 +49,7 @@ function searchLikeGoogle(str,event){
 			preparaAjaxBuscaCliente()
 		}	
 	}
-}
+} // searchLikeGoogle
 
 
 function closeSearchLikeGoogle(){
@@ -82,8 +78,8 @@ function enterSearchLikeGoogle(event) {
 
 function ajaxBuscaCliente() {
     //alert( $('#form_cliente').serialize() );
-    document.forms["cliente"].elements["id_cliente"].blur();
-    var id_cliente = document.forms["cliente"].elements["id_cliente"].value;
+    document.cliente.id_cliente.blur();
+    var id_cliente = document.cliente.id_cliente.value;
     var correcto = true;
     if ( correcto 
     		&& id_cliente == "" ) {
@@ -104,20 +100,20 @@ function ajaxBuscaCliente() {
             success:function( response ) {
                 //console.log(response);
                 //var JSONObject = { "id_cliente":"1","id_tipo_cliente":"8","clave_cliente":"ME","nombre_representante":"Gerardo Nieto Lopez" };
-                document.forms["cliente"].elements["nombre_moral"].value           = response.nombreMoral;
-                document.forms["cliente"].elements["clave"].value                  = response.tipoCliente;
-                document.forms["cliente"].elements["nombre_representante"].value   = response.nombreRepresentante;
-                document.forms["cliente"].elements["calle"].value                  = response.calle;
-                document.forms["cliente"].elements["num_exterior"].value           = response.numExterior;
-                document.forms["cliente"].elements["num_interior"].value           = response.numInterior;
-                document.forms["cliente"].elements["colonia"].value                = response.colonia;
-                document.forms["cliente"].elements["delegacion_municipio"].value   = response.delegacionMunicipio;
-                document.forms["cliente"].elements["estado"].value                 = response.estado;
-                document.forms["cliente"].elements["codigo_postal"].value          = response.codigoPostal;
-                document.forms["cliente"].elements["rfc"].value                    = response.rfc;
-                document.forms["cliente"].elements["telefono_particular"].value    = response.telefonoParticular;
-                document.forms["cliente"].elements["telefono_movil"].value         = response.telefonoMovil;
-                document.forms["cliente"].elements["observaciones"].value          = response.observaciones;
+                document.cliente.nombre_moral.value           = response.nombreMoral;
+                document.cliente.clave.value                  = response.tipoCliente;
+                document.cliente.nombre_representante.value   = response.nombreRepresentante;
+                document.cliente.calle.value                  = response.calle;
+                document.cliente.num_exterior.value           = response.numExterior;
+                document.cliente.num_interior.value           = response.numInterior;
+                document.cliente.colonia.value                = response.colonia;
+                document.cliente.delegacion_municipio.value   = response.delegacionMunicipio;
+                document.cliente.estado.value                 = response.estado;
+                document.cliente.codigo_postal.value          = response.codigoPostal;
+                document.cliente.rfc.value                    = response.rfc;
+                document.cliente.telefono_particular.value    = response.telefonoParticular;
+                document.cliente.telefono_movil.value         = response.telefonoMovil;
+                document.cliente.observaciones.value          = response.observaciones;
                 closeSearchLikeGoogle();
                 document.body.style.cursor = "default";
             },
@@ -136,28 +132,24 @@ function ajaxBuscaCliente() {
 
 function ajaxAgregaOrdenProduccion() {
     
-    document.forms["orden_produccion"].elements["id_usuario"].value                 = "1"; // aqui debe colocarse el usuario correcto de sesion
-    document.forms["orden_produccion"].elements["id_cliente"].value                 = document.forms["cliente"].elements["id_cliente"].value;;
-    document.forms["orden_produccion"].elements["id_tipo_comprobante_fiscal"].value = document.forms["orden_produccion"].elements["select_comprobante_fiscal"].value;
-    
-    var id_cliente      = document.forms["cliente"].elements["id_cliente"].value;
-    var nombre_orden    = document.forms["orden_produccion"].elements["nombre"].value;
-    var descripcion     = document.forms["orden_produccion"].elements["descripcion"].value;
+    document.orden_produccion.id_cliente.value                 = document.cliente.id_cliente.value;;
+    document.orden_produccion.id_tipo_comprobante_fiscal.value = document.orden_produccion.select_comprobante_fiscal.value;
     
     // VALIDACIONES
     var correcto = true;
     
     // revisa que el campo id_cliente no este vacio
     if( correcto 
-    		&& id_cliente == "" ) {
+    		&& document.cliente.id_cliente.value == "" ) {
         correcto = false;
         alert("Campo Id. Cliente no puede estar vac\u00edo. Favor de informarlo.");
-        document.forms["cliente"].elements["id_cliente"].focus();
+        document.cliente.id_cliente.focus();
     }
     
     // revisa que el nombre y la descripcion de la orden no esten vacios
     if( correcto 
-    		&& ( nombre_orden == "" || descripcion == "") ) {
+    		&& ( document.orden_produccion.nombre.value == "" 
+    			|| document.orden_produccion.descripcion.value == "") ) {
         correcto = false;
         alert("Campos Nombre y Descripcion de la orden de procducci\u00f3n no pueden estar vac\u00edos. Favor de informarlos.");
     }
@@ -171,8 +163,8 @@ function ajaxAgregaOrdenProduccion() {
     if( correcto ) {
         document.body.style.cursor = "wait";
         // form cliente desactiva campos
-        document.forms["cliente"].elements["id_cliente"].readOnly               = true;
-        document.forms["cliente"].elements["nombre_moral"].readOnly             = true;
+        document.cliente.id_cliente.readOnly 	= true;
+        document.cliente.nombre_moral.readOnly  = true;
         // muestra botones desactivados
         document.getElementById("imgBtnBuscaCliente").style.cursor              = "auto";
         document.getElementById("imgBtnBuscaCliente").removeAttribute("onclick");
@@ -194,8 +186,8 @@ function ajaxAgregaOrdenProduccion() {
                         //console.log(e);
                         alert("No fue posible generar la orden de producci\u00f3n.");
                         // form cliente activa botones
-                        document.forms["cliente"].elements["id_cliente"].readOnly   = false;
-                        document.forms["cliente"].elements["nombre_moral"].readOnly = false;
+                        document.cliente.id_cliente.readOnly   = false;
+                        document.cliente.nombre_moral.readOnly = false;
                         // muestra botones originales
                         document.getElementById("imgBtnLimpiaClienteActivo").style.display      = "inline";
                         document.getElementById("imgBtnLimpiaClienteInactivo").style.display    = "none";
@@ -208,8 +200,9 @@ function ajaxAgregaOrdenProduccion() {
                 
                     default: // exito
                         // llena el campo id_orden_produccion en el form partida porque es necesario
-                        document.forms["partida"].elements["id_orden_produccion"].value     = response.idOrdenProduccion;
-                        document.forms["cotizacion"].elements["id_orden_produccion"].value  = response.idOrdenProduccion;
+                    	document.orden_produccion.id_orden_produccion.value = response.idOrdenProduccion;
+                        document.partida.id_orden_produccion.value     		= response.idOrdenProduccion;
+                        document.cotizacion.id_orden_produccion.value  		= response.idOrdenProduccion;
                         document.getElementById("div_partida").style.display = "block";
                         break;
                 }
@@ -219,8 +212,8 @@ function ajaxAgregaOrdenProduccion() {
                 document.body.style.cursor = "default";
                 alert("No fue posible generar la orden de producci\u00f3n.");
                 // form cliente activa botones
-                document.forms["cliente"].elements["id_cliente"].readOnly   = false;
-                document.forms["cliente"].elements["nombre_moral"].readOnly = false;
+                document.cliente.id_cliente.readOnly   = false;
+                document.cliente.nombre_moral.readOnly = false;
                 // muestra botones originales
                 document.getElementById("imgBtnLimpiaClienteActivo").style.display      = "inline";
                 document.getElementById("imgBtnLimpiaClienteInactivo").style.display    = "none";
@@ -232,47 +225,40 @@ function ajaxAgregaOrdenProduccion() {
             }
         });
     } // if correcto
-    
-    delete id_cliente;
-    delete nombre_orden;
-    delete descripcion;
 } // ajaxAgregaOrdenProduccion()
 
 function ajaxAgregaPartida() {
     //alert('si entro a la funcion ajax');
-    document.forms["partida"].elements["id_tipo_trabajo"].value         = $("input:radio[name=tipo_trabajo]:checked").val(); 
-    document.forms["partida"].elements["id_tipo_forma_trabajo"].value   = document.forms["partida"].elements["select_forma_trabajo"].value;
-    
-    var nombre_partida  = document.forms["partida"].elements["nombre_partida"].value;
-    var cantidad        = document.forms["partida"].elements["cantidad"].value;
-    var descripcion     = document.forms["partida"].elements["descripcion_partida"].value;
+    document.partida.id_tipo_trabajo.value         = $("input:radio[name=tipo_trabajo]:checked").val(); 
+    document.partida.id_tipo_forma_trabajo.value   = document.partida.select_forma_trabajo.value;
     
     // VALIDACIONES
     var correcto = true;
     
     // Revisa que nombre de partida, cantidad y descripcion no sean vacios
     if( correcto 
-    		&& ( nombre_partida == "" || cantidad == "" || descripcion == "" ) ) {
+    		&& ( document.partida.nombre_partida.value == "" 
+    			|| document.partida.descripcion_partida.value == "" ) ) {
         correcto = false;
-        alert("Los campos nombre, cantidad y descripci\u00f3n no pueden estar vac\u00edos. Favor de informarlos.");
+        alert("Los campos nombre y descripci\u00f3n no pueden estar vac\u00edos. Favor de informarlos.");
     }
     
     if ( correcto 
-    		&& isNaN(cantidad) ) {
+    		&& ( document.partida.cantidad.value == "" 
+    			|| isNaN(document.partida.cantidad.value ) ) ) {
     	correcto = false;
-    	alert("El campo cantidad deber ser un n\u00FAmero.");
+    	alert("El campo cantidad deber ser un n\u00FAmero válido.");
     }
     
     if( correcto && ( window.FormData !== undefined ) ) { // puede utiliza FormData
-    	console.log("entro aqui, al existente form data");
-    	
+    	//console.log("entro aqui, al existente form data");
         document.body.style.cursor = "wait";
         // desactiva campos y botones
         desactivaCamposPartida();
         desactivaBtnPartida();
         
         // para enviar file input con ajax se usa formData
-        var formData = new FormData( document.forms["partida"] );
+        var formData = new FormData( document.partida );
         $.ajax({
             type:"POST",
             url:urlAgregaPartida,
@@ -292,17 +278,18 @@ function ajaxAgregaPartida() {
                         
                     default:
                         // se llena el select tipo_placa con la primer opcion del select_maquina
-                        buscaTipoPlaca( document.forms["tipo_trabajo_detalle"].elements["select_maquina"] ); // orden_produccion.js
+                        buscaTipoPlaca( document.tipo_trabajo_detalle.select_maquina ); // orden_produccion.js
                         //console.log( response );
-                        document.forms["partida"].elements["diagrama_formacion"].disabled   = true; // si se dsactiva arriba, entonces ya no lleva datos al hacer el ajax, por eso se desactiva aqu�
+                        document.partida.diagrama_formacion.disabled   = true; // si se desactiva arriba, entonces ya no lleva datos al hacer el ajax, por eso se desactiva aqui
                         // se llenan todos los forms que necesitan saber id_partida
-                        document.forms["tipo_trabajo_detalle"].elements["id_partida"].value = response.idPartida;
-                        document.forms["disenio"].elements["id_partida"].value              = response.idPartida;
-                        document.forms["preprensa"].elements["id_partida"].value            = response.idPartida;
-                        document.forms["transporte"].elements["id_partida"].value           = response.idPartida;
-                        document.forms["acabado"].elements["id_partida"].value              = response.idPartida;
-                        document.forms["offset"].elements["id_partida"].value               = response.idPartida;
-                        document.forms["material_ayuda"].elements["id_partida"].value       = response.idPartida;
+                        document.partida.id_partida.value				= response.idPartida;
+                        document.tipo_trabajo_detalle.id_partida.value 	= response.idPartida;
+                        document.disenio.id_partida.value              	= response.idPartida;
+                        document.preprensa.id_partida.value            	= response.idPartida;
+                        document.transporte.id_partida.value           	= response.idPartida;
+                        document.acabado.id_partida.value              	= response.idPartida;
+                        document.offset.id_partida.value               	= response.idPartida;
+                        document.material_ayuda.id_partida.value       	= response.idPartida;
                         // se llena los id correspondientes a disenio, preprensa, transporte, acabado y offset
                         document.disenio.id_disenio.value 		= response.idDisenio;
                         document.preprensa.id_preprensa.value 	= response.idPreprensa;
@@ -350,8 +337,10 @@ function ajaxBuscaPapelExtendido() {
 }
 
 
+//variables globales
+var esPrimerInsercionTTD 			= true;		// VARIABLE UTILIZADA PARA FLUJO DE PROCESO EN AJAX
+var cerradoOKVentanaListaPliegos 	= false;	// VARIABLE UTILIZADA PARA GENERAR PLIEGOS
 function ajaxAgregaTipoTrabajoDetalle() {
-
     /*
     Shadowbox.open({
         content: urlCalculaPliego + '?id_tipo_trabajo_detalle=4',
@@ -362,34 +351,33 @@ function ajaxAgregaTipoTrabajoDetalle() {
                    overlayOpacity: 0.75 }
     });
     */
-    
     // se copian los datos del html a variables ocultas para poder desactivar los objetos html mas adelante y no perder su valor
-    document.forms["tipo_trabajo_detalle"].elements["cliente_proporciona_papel"].value          = document.forms["tipo_trabajo_detalle"].elements["proporciona_papel"].checked;
-    document.forms["tipo_trabajo_detalle"].elements["cliente_proporciona_tinta_especial"].value = document.forms["tipo_trabajo_detalle"].elements["proporciona_tinta_especial"].checked;
-    document.forms["tipo_trabajo_detalle"].elements["cliente_proporciona_barniz"].value         = document.forms["tipo_trabajo_detalle"].elements["proporciona_barniz"].checked;
-    document.forms["tipo_trabajo_detalle"].elements["cliente_proporciona_placas"].value         = document.forms["tipo_trabajo_detalle"].elements["proporciona_placas"].checked;
-    document.forms["tipo_trabajo_detalle"].elements["id_tamanio_publicacion"].value             = document.forms["tipo_trabajo_detalle"].elements["select_tamanio_publicacion"].value;
-    document.forms["tipo_trabajo_detalle"].elements["frente_id_combinacion_tintas"].value       = document.forms["tipo_trabajo_detalle"].elements["select_frente_combinacion_tintas"].value;
-    document.forms["tipo_trabajo_detalle"].elements["frente_id_tipo_barniz"].value              = document.forms["tipo_trabajo_detalle"].elements["select_frente_tipo_barniz"].value;
-    document.forms["tipo_trabajo_detalle"].elements["vuelta_id_combinacion_tintas"].value       = document.forms["tipo_trabajo_detalle"].elements["select_vuelta_combinacion_tintas"].value;
-    document.forms["tipo_trabajo_detalle"].elements["vuelta_id_tipo_barniz"].value              = document.forms["tipo_trabajo_detalle"].elements["select_vuelta_tipo_barniz"].value;
-    document.forms["tipo_trabajo_detalle"].elements["id_maquina"].value                         = document.forms["tipo_trabajo_detalle"].elements["select_maquina"].value;
-    document.forms["tipo_trabajo_detalle"].elements["id_tipo_placa"].value                      = document.forms["tipo_trabajo_detalle"].elements["select_tipo_placa"].value;
-    document.forms["tipo_trabajo_detalle"].elements["id_tipo_complejidad"].value                = document.forms["tipo_trabajo_detalle"].elements["select_tipo_complejidad"].value;
+    document.tipo_trabajo_detalle.cliente_proporciona_papel.value          = document.tipo_trabajo_detalle.proporciona_papel.checked;
+    document.tipo_trabajo_detalle.cliente_proporciona_tinta_especial.value = document.tipo_trabajo_detalle.proporciona_tinta_especial.checked;
+    document.tipo_trabajo_detalle.cliente_proporciona_barniz.value         = document.tipo_trabajo_detalle.proporciona_barniz.checked;
+    document.tipo_trabajo_detalle.cliente_proporciona_placas.value         = document.tipo_trabajo_detalle.proporciona_placas.checked;
+    document.tipo_trabajo_detalle.id_tamanio_publicacion.value             = document.tipo_trabajo_detalle.select_tamanio_publicacion.value;
+    document.tipo_trabajo_detalle.frente_id_combinacion_tintas.value       = document.tipo_trabajo_detalle.select_frente_combinacion_tintas.value;
+    document.tipo_trabajo_detalle.frente_id_tipo_barniz.value              = document.tipo_trabajo_detalle.select_frente_tipo_barniz.value;
+    document.tipo_trabajo_detalle.vuelta_id_combinacion_tintas.value       = document.tipo_trabajo_detalle.select_vuelta_combinacion_tintas.value;
+    document.tipo_trabajo_detalle.vuelta_id_tipo_barniz.value              = document.tipo_trabajo_detalle.select_vuelta_tipo_barniz.value;
+    document.tipo_trabajo_detalle.id_maquina.value                         = document.tipo_trabajo_detalle.select_maquina.value;
+    document.tipo_trabajo_detalle.id_tipo_placa.value                      = document.tipo_trabajo_detalle.select_tipo_placa.value;
+    document.tipo_trabajo_detalle.id_tipo_complejidad.value                = document.tipo_trabajo_detalle.select_tipo_complejidad.value;
     
-    var id_tipo_trabajo                     = document.forms["partida"].elements["id_tipo_trabajo"].value;
-    var descripcion_partida_detalle         = document.forms["tipo_trabajo_detalle"].elements["descripcion_partida_detalle"].value;
-    var alto_final                          = document.forms["tipo_trabajo_detalle"].elements["alto_final"].value;
-    var ancho_final                         = document.forms["tipo_trabajo_detalle"].elements["ancho_final"].value;
-    var repeticiones_x_pliego               = document.forms["tipo_trabajo_detalle"].elements["repeticiones_x_pliego"].value;
-    var numero_paginas_publicacion          = document.forms["tipo_trabajo_detalle"].elements["numero_paginas_publicacion"].value;
-    var descripcion_tipo_papel_extendido	= document.forms["tipo_trabajo_detalle"].elements["tipo_papel_extendido"].value;
-    var frente_id_combinacion_tintas        = document.forms["tipo_trabajo_detalle"].elements["select_frente_combinacion_tintas"].value;
-    var frente_num_tinta_especial           = document.forms["tipo_trabajo_detalle"].elements["frente_num_tinta_especial"].value;
-    var frente_descripcion_tinta_especial   = document.forms["tipo_trabajo_detalle"].elements["frente_descripcion_tinta_especial"].value;
-    var vuelta_id_combinacion_tintas        = document.forms["tipo_trabajo_detalle"].elements["select_vuelta_combinacion_tintas"].value;
-    var vuelta_num_tinta_especial           = document.forms["tipo_trabajo_detalle"].elements["vuelta_num_tinta_especial"].value;
-    var vuelta_descripcion_tinta_especial   = document.forms["tipo_trabajo_detalle"].elements["vuelta_descripcion_tinta_especial"].value;
+    var id_tipo_trabajo                     = document.partida.id_tipo_trabajo.value;
+    var descripcion_partida_detalle         = document.tipo_trabajo_detalle.descripcion_partida_detalle.value;
+    var alto_final                          = document.tipo_trabajo_detalle.alto_final.value;
+    var ancho_final                         = document.tipo_trabajo_detalle.ancho_final.value;
+    var repeticiones_x_pliego               = document.tipo_trabajo_detalle.repeticiones_x_pliego.value;
+    var numero_paginas_publicacion          = document.tipo_trabajo_detalle.numero_paginas_publicacion.value;
+    var descripcion_tipo_papel_extendido	= document.tipo_trabajo_detalle.tipo_papel_extendido.value;
+    var frente_id_combinacion_tintas        = document.tipo_trabajo_detalle.select_frente_combinacion_tintas.value;
+    var frente_num_tinta_especial           = document.tipo_trabajo_detalle.frente_num_tinta_especial.value;
+    var frente_descripcion_tinta_especial   = document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.value;
+    var vuelta_id_combinacion_tintas        = document.tipo_trabajo_detalle.select_vuelta_combinacion_tintas.value;
+    var vuelta_num_tinta_especial           = document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value;
+    var vuelta_descripcion_tinta_especial   = document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.value;
     
     // VALIDACIONES
     var correcto = true;
@@ -404,29 +392,29 @@ function ajaxAgregaTipoTrabajoDetalle() {
     		&& isNaN(alto_final) ) {
     	 correcto = false;
     	 alert("El campo alto final debe ser num\u00E9rico");
-    	 document.forms["tipo_trabajo_detalle"].elements["alto_final"].value = "";
-    	 document.forms["tipo_trabajo_detalle"].elements["alto_final"].focus();
+    	 document.tipo_trabajo_detalle.alto_final.value = "";
+    	 document.tipo_trabajo_detalle.alto_final.focus();
     }
     if ( correcto 
     		&& isNaN(ancho_final) ) {
     	 correcto = false;
     	 alert("El campo ancho final debe ser num\u00E9rico");
-    	 document.forms["tipo_trabajo_detalle"].elements["ancho_final"].value = "";
-    	 document.forms["tipo_trabajo_detalle"].elements["ancho_final"].focus();
+    	 document.tipo_trabajo_detalle.ancho_final.value = "";
+    	 document.tipo_trabajo_detalle.ancho_final.focus();
     }
     if ( correcto 
-    		&& isNaN(document.forms["tipo_trabajo_detalle"].elements["alto_extendido"].value)) {
+    		&& isNaN(document.tipo_trabajo_detalle.alto_extendido.value)) {
     	 correcto = false;
     	 alert("El campo alto extendido debe ser num\u00E9rico");
-    	 document.forms["tipo_trabajo_detalle"].elements["alto_extendido"].value = "";
-    	 document.forms["tipo_trabajo_detalle"].elements["alto_extendido"].focus();
+    	 document.tipo_trabajo_detalle.alto_extendido.value = "";
+    	 document.tipo_trabajo_detalle.alto_extendido.focus();
     }
     if ( correcto 
-    		&& isNaN(document.forms["tipo_trabajo_detalle"].elements["ancho_extendido"].value)) {
+    		&& isNaN(document.tipo_trabajo_detalle.ancho_extendido.value)) {
     	 correcto = false;
     	 alert("El campo ancho extendido debe ser num\u00E9rico");
-    	 document.forms["tipo_trabajo_detalle"].elements["ancho_extendido"].value = "";
-    	 document.forms["tipo_trabajo_detalle"].elements["ancho_extendido"].focus();
+    	 document.ipo_trabajo_detalle.ancho_extendido.value = "";
+    	 document.tipo_trabajo_detalle.ancho_extendido.focus();
     }
     
     // corte inicial
@@ -454,7 +442,7 @@ function ajaxAgregaTipoTrabajoDetalle() {
             			|| parseInt( repeticiones_x_pliego ) <= 0 ) ) {
                 correcto = false;
                 alert("El n\u00famero de repeticiones deber ser un n\u00famero positivo mayor de cero");
-                document.forms["tipo_trabajo_detalle"].elements["repeticiones_x_pliego"].focus();
+                document.tipo_trabajo_detalle.repeticiones_x_pliego.focus();
             }
             break;
         
@@ -466,14 +454,14 @@ function ajaxAgregaTipoTrabajoDetalle() {
             			|| parseInt( numero_paginas_publicacion )%4 != 0 ) ) {
                 correcto = false;
                 alert("El n\u00famero de p\u00e1ginas deber ser un n\u00famero positivo mayor de cero y multiplo de 4");
-                document.forms["tipo_trabajo_detalle"].elements["numero_paginas_publicacion"].focus();
+                document.tipo_trabajo_detalle.numero_paginas_publicacion.focus();
             }
             
             if( correcto
-            		&& document.forms["tipo_trabajo_detalle"].elements["select_tamanio_publicacion"].value == "1" ) {
+            		&& document.tipo_trabajo_detalle.elementsselect_tamanio_publicacion.value == "1" ) {
                 correcto = false;
                 alert("El tama\u00f1o de la publicaci\u00f3n debe ser especificado");
-                document.forms["tipo_trabajo_detalle"].elements["select_tamanio_publicacion"].focus();
+                document.tipo_trabajo_detalle.select_tamanio_publicacion.focus();
             }
             break;
             
@@ -489,7 +477,7 @@ function ajaxAgregaTipoTrabajoDetalle() {
     		&& descripcion_tipo_papel_extendido == "" ) {
     	correcto = false;
     	alert("Favor de especificar el tipo de papel");
-    	document.forms["tipo_trabajo_detalle"].elements["tipo_papel_extendido"].focus();
+    	document.tipo_trabajo_detalle.tipo_papel_extendido.focus();
     }
     
     // valida que si no hay tinta normal en frente, debe forzosamente haber tinta especial en frente
@@ -501,7 +489,7 @@ function ajaxAgregaTipoTrabajoDetalle() {
         		|| parseInt( frente_num_tinta_especial ) <= 0 ) {
             correcto = false;
             alert("Es necesario que exista al menos tinta especial en el frente");
-            document.forms["tipo_trabajo_detalle"].elements["frente_num_tinta_especial"].focus();
+            document.tipo_trabajo_detalle.frente_num_tinta_especial.focus();
         }   
     }
    
@@ -510,21 +498,21 @@ function ajaxAgregaTipoTrabajoDetalle() {
     		&& frente_num_tinta_especial == "" ) {
     	correcto = false;
     	alert("El numero de frente tinta especial debe ser cero");
-    	document.forms["tipo_trabajo_detalle"].elements["frente_num_tinta_especial"].focus();
+    	document.tipo_trabajo_detalle.frente_num_tinta_especial.focus();
     }
     if ( correcto 
     		&& frente_num_tinta_especial != ""
     		&& isNaN( frente_num_tinta_especial ) ) {
     	correcto = false;
     	alert("El dato de frente tinta especial debe ser un numero");
-    	document.forms["tipo_trabajo_detalle"].elements["frente_num_tinta_especial"].focus();
+    	document.tipo_trabajo_detalle.frente_num_tinta_especial.focus();
     }
     if ( correcto 
     		&& parseInt( frente_num_tinta_especial ) > 0 
     		&& frente_descripcion_tinta_especial == "" ) {
     	correcto = false;
     	alert("El numero de frente tinta especial es mayor a cero; debe especificar la descripcion de frente tinta especial");
-    	document.forms["tipo_trabajo_detalle"].elements["frente_descripcion_tinta_especial"].focus();
+    	document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.focus();
     }
     if ( correcto
     		&& frente_descripcion_tinta_especial != "" 
@@ -532,7 +520,7 @@ function ajaxAgregaTipoTrabajoDetalle() {
     				|| parseInt( frente_num_tinta_especial ) < 0 ) ) {
     	correcto = false;
     	alert("Tiene especificada una descripcion de frente tinta especial; debe especificar que frente tinta especial es al menos 1");
-    	document.forms["tipo_trabajo_detalle"].elements["frente_num_tinta_especial"].focus();
+    	document.tipo_trabajo_detalle.frente_num_tinta_especial.focus();
     }
     
     // valida que informacion de vuelta num tinta especial
@@ -540,28 +528,28 @@ function ajaxAgregaTipoTrabajoDetalle() {
     		&& vuelta_num_tinta_especial == "" ) {
     	correcto = false;
     	alert("El numero de vuelta tinta especial debe ser cero");
-    	document.forms["tipo_trabajo_detalle"].elements["vuelta_num_tinta_especial"].focus();
+    	document.tipo_trabajo_detalle.vuelta_num_tinta_especial.focus();
     }
     if ( correcto 
     		&& vuelta_num_tinta_especial != ""
     		&& isNaN( vuelta_num_tinta_especial ) ) {
     	correcto = false;
     	alert("El dato de vuelta tinta especial debe ser un numero");
-    	document.forms["tipo_trabajo_detalle"].elements["vuelta_num_tinta_especial"].focus();
+    	document.tipo_trabajo_detalle.vuelta_num_tinta_especial.focus();
     }
     if ( correcto 
     		&& parseInt( vuelta_num_tinta_especial ) > 0 
     		&& vuelta_descripcion_tinta_especial == "" ) {
     	correcto = false;
     	alert("El numero de vuelta tinta especial es mayor a cero; debe especificar la descripcion de vuelta tinta especial");
-    	document.forms["tipo_trabajo_detalle"].elements["vuelta_descripcion_tinta_especial"].focus();
+    	document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.focus();
     }
     if ( correcto
     		&& vuelta_descripcion_tinta_especial != "" 
     		&& ( parseInt( vuelta_num_tinta_especial ) == 0 || parseInt( vuelta_num_tinta_especial ) < 0 ) ) {
     	correcto = false;
     	alert("Tiene especificada una descripcion de vuelta tinta especial; debe especificar que vuelta tinta especial es al menos 1");
-    	document.forms["tipo_trabajo_detalle"].elements["vuelta_num_tinta_especial"].focus();
+    	document.tipo_trabajo_detalle.vuelta_num_tinta_especial.focus();
     }
     
     
@@ -572,10 +560,10 @@ function ajaxAgregaTipoTrabajoDetalle() {
         desactivaBtnTipoTrabajoDetalle();
         
         $.ajax({
-            type:"POST",
-            url:urlAgregaTipoTrabajoDetalle,
-            data:$("[name='tipo_trabajo_detalle']").serialize(),
-            success:function( response ) { 
+            type: "POST",
+            url: esPrimerInsercionTTD ? urlAgregaTipoTrabajoDetalle : urlActualizaDetallePartida,
+            data: $("[name='tipo_trabajo_detalle']").serialize(),
+            success: function( response ) { 
                 //var json = JSON.stringify(eval("(" + response + ")"));    // forma de convertir cadenas a json
                 //var json = JSON.parse(response);                          // forma de convertir cadenas a json
                 switch( response.estatusOperacion ) {
@@ -589,14 +577,16 @@ function ajaxAgregaTipoTrabajoDetalle() {
                         break;
                         
                     default:
-                        document.forms["visualizador_pliegos"].elements["id_tipo_trabajo_detalle"].value = response.idTipoTrabajoDetalle;
-                    	document.forms["costo_extra_detalle"].elements["id_tipo_trabajo_detalle"].value = response.idTipoTrabajoDetalle;
+                    	if ( esPrimerInsercionTTD ) {
+                    		document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value	= response.idTipoTrabajoDetalle;
+                            document.visualizador_pliegos.id_tipo_trabajo_detalle.value = response.idTipoTrabajoDetalle;
+                        	document.costo_extra_detalle.id_tipo_trabajo_detalle.value 	= response.idTipoTrabajoDetalle;
+                    	}
                         // cambia cursor
                         document.body.style.cursor = "default";
-                        
                         // abre ventana modal
                         Shadowbox.open({
-                            content:urlCalculaPliego + "?id_tipo_trabajo_detalle=" + response.idTipoTrabajoDetalle,
+                            content:urlCalculaPliego + "?id_tipo_trabajo_detalle=" + document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value,
                             //content: "<form method='post' action='" + urlCalculaPliego + "' target='hidden_iframe'><input type='hidden' name='id_tipo_trabajo_detalle' value='" + response.id_tipo_trabajo_detalle + "'></input</form><iframe name='hidden_iframe'></iframe>",
                             player:"iframe",
                             width:630,
@@ -604,13 +594,13 @@ function ajaxAgregaTipoTrabajoDetalle() {
                             options:{ 
                             	modal: true,
                                 overlayOpacity: 0.75,
-                                onClose: revisaCierreVentanaModal 
+                                onClose: revisaCierreVentanaModal // al cerrar esta ventana, se manda llamar revisaCierreVentanaModal()
                             }
                         });
                         break;
                 }
             },
-            error:function(e) {
+            error: function(e) {
                 //console.log(e);
                 document.body.style.cursor = "default";
                 alert("No fue posible generar el detalle de partida");
@@ -636,8 +626,9 @@ function ajaxAgregaTipoTrabajoDetalle() {
 } // ajaxAgregaDetallePartida()
 
 
+//esta funciona se manda llamar en la funcion response ok de la funcion ajax de ajaxAgregaTipoTrabajoDetalle()
 function revisaCierreVentanaModal() { 
-// esta funciona se manda llamar en la funcion response ok de la funcion ajax de ajaxAgregaDetallePartida()
+	// la variable evaluada en este if, se modifica en pliego.js
     if( cerradoOKVentanaListaPliegos ) {
         document.getElementById("div_visualizador_pliegos").style.display       		= "block";
         document.getElementById("div_costo_extra_detalle").style.display 				= "block";
@@ -645,31 +636,14 @@ function revisaCierreVentanaModal() {
         document.getElementById("div_nuevo_tipo_trabajo_detalle").style.display 		= "block";
     } else {
         // la ventana no se cerro con el boton agregar
-        // 1) se debe eliminar el registro de tipo_trabajo_detalle, porque fue insertado, pero no es correcto
-        $.ajax({
-            type:"POST",
-            url:urlEliminaDetallePartida,
-            data:{id_tipo_trabajo_detalle:document.forms["visualizador_pliegos"].elements["id_tipo_trabajo_detalle"].value},
-            success:function( response ) { 
-                switch( response ) {
-                    case 0: // error, no se pudo eliminar registro tipo_trabajo_detalle
-                        alert("No fue posible eliminar el detalle de partida");
-                        break;
-                    default:
-                        // activa campos y botones
-                        activaCamposTipoTrabajoDetalle();
-                        activaBtnTipoTrabajoDetalle();
-                        break;
-                }
-            },
-            error:function(e) {
-                //console.log(e);
-                alert("No fue posible ejecutar eliminacion de detalle de partida");
-            }
-        });
+    	// se debe permitir la modificacion del registro TTD
+    	esPrimerInsercionTTD = false;
+    	// activa campos y botones
+        activaCamposTipoTrabajoDetalle();
+        activaBtnTipoTrabajoDetalle();
     } // if cerradoCorrectamente
     cerradoOKVentanaListaPliegos = false;
-} // revisaVentanaModal()
+}
 
 
 function ajaxUnidadCostoExtra() {
@@ -679,14 +653,14 @@ function ajaxUnidadCostoExtra() {
 		data:{id_costo_extra:$("[name=select_costo_extra]").val()},
 		success:function(response) {
 			//alert(response);
-			document.forms["costo_extra_detalle"].elements["nombre_unidad_medida"].value = response;
+			document.costo_extra_detalle.nombre_unidad_medida.value = response;
 		},
 		error:function(e) {
 			console.log(e);
 			document.costo_extra_detalle.nombre_unidad_medida.value = "-";
 		}
 	});
-} // ajaxUnidadCostoExtra
+}
 
 
 function ajaxAgregaCostoExtraDetalle() {
@@ -695,31 +669,31 @@ function ajaxAgregaCostoExtraDetalle() {
 	var correcto = true;
 	
 	if( correcto 
-			&& document.forms["costo_extra_detalle"].elements["cantidad"].value == "" ) {
+			&& document.costo_extra_detalle.cantidad.value == "" ) {
 		correcto = false;
 		alert("Es necesario especificar la cantidad de costo extra");
-		document.forms["costo_extra_detalle"].elements["cantidad"].focus();
+		document.costo_extra_detalle.cantidad.focus();
 	}
 	
 	if ( correcto 
-			&& isNaN(document.forms["costo_extra_detalle"].elements["cantidad"].value) ) {
+			&& isNaN(document.costo_extra_detalle.cantidad.value) ) {
 		correcto = false;
 		alert("La cantidad de costo extra debe ser un n\u00FAmero entero");
-		document.forms["costo_extra_detalle"].elements["cantidad"].focus();
+		document.costo_extra_detalle.cantidad.focus();
 	}
 	
 	if( correcto 
-			&& document.forms["costo_extra_detalle"].elements["select_costo_extra"].selectedIndex == "-1" ) {
+			&& document.costo_extra_detalle.select_costo_extra.selectedIndex == "-1" ) {
 		correcto = false;
 		alert("Es necesario especificar el costo extra");
-		document.forms["costo_extra_detalle"].elements["select_costo_extra"].focus();
+		document.costo_extra_detalle.select_costo_extra.focus();
 	}
 	
 	if( correcto 
-			&& document.forms["costo_extra_detalle"].elements["select_responsable_insumo"].selectedIndex == "-1" ) {
+			&& document.costo_extra_detalle.select_responsable_insumo.selectedIndex == "-1" ) {
 		correcto = false;
 		alert("Es necesario especificar el responsable del insumo");
-		document.forms["costo_extra_detalle"].elements["select_costo_extra"].focus();
+		document.costo_extra_detalle.select_costo_extra.focus();
 	}
 	
 	if( correcto ) {
@@ -727,8 +701,8 @@ function ajaxAgregaCostoExtraDetalle() {
 		// desactiva campos y botones
 		desactivaBtnCostoExtraDetalle();
 		// copia valores a input hidden
-		document.forms["costo_extra_detalle"].elements["id_costo_extra"].value 		= $("[name=select_costo_extra]").val();
-		document.forms["costo_extra_detalle"].elements["id_responsable_insumo"].value = $("[name=select_responsable_insumo]").val();
+		document.costo_extra_detalle.id_costo_extra.value 			= $("[name=select_costo_extra]").val();
+		document.costo_extra_detalle.id_responsable_insumo.value 	= $("[name=select_responsable_insumo]").val();
 		
 		$.ajax({
 			type:"POST",
@@ -738,7 +712,7 @@ function ajaxAgregaCostoExtraDetalle() {
 				// actualiza tabla html
 				document.getElementById("div_tabla_costo_extra_tipo_trabajo").innerHTML = response.textoHTML;
 				// elimina la opcion del select
-				document.forms["costo_extra_detalle"].elements["select_costo_extra"].remove( document.forms["costo_extra_detalle"].elements["select_costo_extra"].selectedIndex );
+				document.costo_extra_detalle.select_costo_extra.remove( document.costo_extra_detalle.select_costo_extra.selectedIndex );
 				// limpia los campos
 				limpiaCamposCostoExtraDetalle();
 				activaBtnCostoExtraDetalle();
@@ -756,26 +730,6 @@ function ajaxAgregaCostoExtraDetalle() {
 } // ajaxAgregaCostoExtraDetalle
 
 
-function preparaNuevoTipoTrabajoDetalle() {
-    // busca la informacion del div div_visualizador_tipo_trabajo_detalle 
-    ajaxBuscaTipoTrabajoDetalle();
-    // se guarda la informacion id_partida antes de limpiar todo
-    var id_partida = document.forms["tipo_trabajo_detalle"].elements["id_partida"].value;
-    // limpia form div_tipo_trabajo_detalle y div_costo_extra_detalle
-    limpiaFormTipoTrabajoDetalle();
-    limpiaFormCostoExtraDetalle();
-    // oculta divs no necesarios
-    document.getElementById("div_visualizador_pliegos").style.display       		= "none";
-    document.getElementById("div_visualizador_costo_extra_detalle").style.display 	= "none";
-    document.getElementById("div_costo_extra_detalle").style.display       		= "none";
-    document.getElementById("div_nuevo_tipo_trabajo_detalle").style.display 		= "none";
-    // inicializa el form tipo_trabajo_detalle
-    document.forms["tipo_trabajo_detalle"].elements["id_partida"].value = id_partida;
-    document.forms["tipo_trabajo_detalle"].elements["descripcion_partida_detalle"].focus();
-    // elimina variable de inicializacion
-    delete id_partida;
-} // preparaNuevoTipoTrabajoDetalle()
-
 
 function muestraDetalleArea() {
 	// desactiva campos del formulario costo extra detalle y desactiva boton agregar costo extra detalle
@@ -791,13 +745,13 @@ function muestraDetalleArea() {
     document.getElementById("div_material_ayuda").style.display             = "block";
     document.getElementById("div_nueva_partida").style.display              = "block";
     document.getElementById("div_cotizar").style.display                    = "block";
-} // muestra_detalle_area()
+}
 
 
 function ajaxAgregaDisenio() {
 	// EL REGISTRO EN BASE DE DATOS YA SE INGRESO, SOLO ES NECESARIO MODIFICAR SU CONTENIDO
 	
-    var indicacion_tarea = document.forms["disenio"].elements["indicacion_tarea_realizar"].value;
+    var indicacion_tarea = document.disenio.indicacion_tarea_realizar.value;
     
     // VALIDACIONES
     var correcto = true;
@@ -807,7 +761,7 @@ function ajaxAgregaDisenio() {
     		&& indicacion_tarea == "" ) {
         correcto = false;
         alert("Es necesario especificar las indicaciones");
-        document.forms["disenio"].elements["indicacion_tarea_realizar"].focus();
+        document.disenio.indicacion_tarea_realizar.focus();
     }
     
     if( correcto ) {
@@ -833,12 +787,12 @@ function ajaxAgregaDisenio() {
                         
                     default:
                         // establece id_disenio
-                        document.forms["disenio_detalle"].elements["id_disenio"].value = response.idDisenio;
+                        document.disenio_detalle.id_disenio.value = response.idDisenio;
                         // activa campos y botones
                         activaCamposDisenioDetalle();
                         activaBtnDisenioDetalle();
                         // focus campo
-                        document.forms["disenio_detalle"].elements["select_proceso_disenio"].focus();
+                        document.disenio_detalle.select_proceso_disenio.focus();
                         // cambia cursor
                         document.body.style.cursor = "default";
                         break;
@@ -862,19 +816,19 @@ function ajaxAgregaDisenio() {
 
 function ajaxAgregaDisenioDetalle() {
     
-    var cantidad            = document.forms["disenio_detalle"].elements["cantidad"].value;
-    var especificaciones    = document.forms["disenio_detalle"].elements["especificaciones"].value;
-    var precio_total_pesos  = document.forms["disenio_detalle"].elements["precio_total_pesos"].value.trim();
+    var cantidad            = document.disenio_detalle.cantidad.value;
+    var especificaciones    = document.disenio_detalle.especificaciones.value;
+    var precio_total_pesos  = document.disenio_detalle.precio_total_pesos.value.trim();
     
     // VALIDACIONES
     var correcto = true;
     
     // esta seleccionado alguna opcion del select
     if( correcto 
-    		&& document.forms["disenio_detalle"].elements["select_proceso_disenio"].selectedIndex == "-1" ) {
+    		&& document.disenio_detalle.select_proceso_disenio.selectedIndex == "-1" ) {
         correcto = false;
         alert("Es necesario especificar el tipo detalle del dise\u00f1o");
-        document.forms["disenio_detalle"].elements["select_proceso_disenio"].focus();
+        document.disenio_detalle.select_proceso_disenio.focus();
     }
     
     // se especifica la cantidad y debe ser mayor a cero
@@ -882,7 +836,7 @@ function ajaxAgregaDisenioDetalle() {
     		&& ( cantidad == "" || isNaN(cantidad) || parseInt( cantidad ) <= 0 )  ) {
         correcto = false;
         alert("Es necesario especificar la cantidad mayor a cero");
-        document.forms["disenio_detalle"].elements["cantidad"].focus();
+        document.disenio_detalle.cantidad.focus();
     }
     
     // se dan las especificaciones del trabajo
@@ -890,7 +844,7 @@ function ajaxAgregaDisenioDetalle() {
     		&& especificaciones == "" ) {
         correcto = false;
         alert("Es necesario dar alguna especificaci\u00f3n");
-        document.forms["disenio_detalle"].elements["especificaciones"].focus();
+        document.disenio_detalle.especificaciones.focus();
     }
     
     // valida que sea obligatorio el campo y ademas numero flotante
@@ -898,13 +852,13 @@ function ajaxAgregaDisenioDetalle() {
     		&& isNaN(precio_total_pesos) ) {
     	correcto = false;
         alert("Es necesario un numero correcto en precio");
-        document.forms["disenio_detalle"].elements["precio_total_pesos"].focus();
+        document.disenio_detalle.precio_total_pesos.focus();
     }
     if( correcto 
     		&& ( !$.isNumeric( precio_total_pesos ) || isNaN(precio_total_pesos) ) ) {
         correcto = false;
         alert("Es necesario un numero correcto en precio");
-        document.forms["disenio_detalle"].elements["precio_total_pesos"].focus();
+        document.disenio_detalle.precio_total_pesos.focus();
     }
     
     if( correcto ) {
@@ -930,7 +884,7 @@ function ajaxAgregaDisenioDetalle() {
                         // actualiza la tabla html
                         document.getElementById("div_tabla_disenio_detalle").innerHTML = response.textoHTML;
                         // elimina la opcion del select
-                        document.forms["disenio_detalle"].elements["select_proceso_disenio"].remove( document.forms["disenio_detalle"].elements["select_proceso_disenio"].selectedIndex );
+                        document.disenio_detalle.select_proceso_disenio.remove( document.disenio_detalle.select_proceso_disenio.selectedIndex );
                         // limpia campos y avtiva botones
                         limpiaCamposFormDisenioDetalle();
                         activaBtnDisenioDetalle();
@@ -957,7 +911,7 @@ function ajaxAgregaDisenioDetalle() {
 function ajaxAgregaPreprensa() {
 	// EL REGISTRO EN BASE DE DATOS YA SE INGRESO, SOLO ES NECESARIO MODIFICAR SU CONTENIDO
 	
-    var indicacion_tarea = document.forms["preprensa"].elements["indicacion_tarea_realizar"].value;
+    var indicacion_tarea = document.preprensa.indicacion_tarea_realizar.value;
     
     // VALIDACIONES
     var correcto = true;
@@ -966,7 +920,7 @@ function ajaxAgregaPreprensa() {
     		&& indicacion_tarea == "" ) {
         correcto = false;
         alert("Es necesario especificar las indicaciones");
-        document.forms["preprensa"].elements["indicacion_tarea_realizar"].focus();
+        document.preprensa.indicacion_tarea_realizar.focus();
     }
     
     if( correcto ) {
@@ -992,12 +946,12 @@ function ajaxAgregaPreprensa() {
                 
                     default:
                         // establece id_preprensa
-                        document.forms["preprensa_detalle"].elements["id_preprensa"].value = response.idPreprensa;
+                        document.preprensa_detalle.id_preprensa.value = response.idPreprensa;
                         // activa campos y botones
                         activaCamposPreprensaDetalle();
                         activaBtnPreprensaDetalle();
                         // focus campo
-                        document.forms["preprensa_detalle"].elements["select_proceso_preprensa"].focus();
+                        document.preprensa_detalle.select_proceso_preprensa.focus();
                         // cambia cursor
                         document.body.style.cursor = "default";
                         break;
@@ -1021,19 +975,19 @@ function ajaxAgregaPreprensa() {
 
 function ajaxAgregaPreprensaDetalle() {
     
-    var cantidad            = document.forms["preprensa_detalle"].elements["cantidad"].value;
-    var especificaciones    = document.forms["preprensa_detalle"].elements["especificaciones"].value;
-    var precio_total_pesos  = document.forms["preprensa_detalle"].elements["precio_total_pesos"].value.trim();
+    var cantidad            = document.preprensa_detalle.cantidad.value;
+    var especificaciones    = document.preprensa_detalle.especificaciones.value;
+    var precio_total_pesos  = document.preprensa_detalle.precio_total_pesos.value.trim();
     
     // VALIDACIONES
     var correcto = true;
     
     // esta seleccionado alguna opcion del select
     if( correcto
-    		&& document.forms["preprensa_detalle"].elements["select_proceso_preprensa"].selectedIndex == "-1" ) {
+    		&& document.preprensa_detalle.select_proceso_preprensa.selectedIndex == "-1" ) {
         correcto = false;
         alert("Es necesario especificar el tipo detalle de preprensa");
-        document.forms["preprensa_detalle"].elements["select_proceso_preprensa"].focus();
+        document.preprensa_detalle.select_proceso_preprensa.focus();
     }
     
     // se especifica la cantidad y debe ser mayor a cero
@@ -1041,13 +995,13 @@ function ajaxAgregaPreprensaDetalle() {
     		&& isNaN(cantidad) ) {
     	correcto = false;
         alert("Es necesario especificar un n\u00FAmero correcto en cantidad");
-        document.forms["preprensa_detalle"].elements["cantidad"].focus();
+        document.preprensa_detalle.cantidad.focus();
     }
     if( correcto 
     		&& ( cantidad == "" || isNaN(cantidad) || parseInt( cantidad ) <= 0 ) ) {
         correcto = false;
         alert("Es necesario especificar la cantidad mayor a cero");
-        document.forms["preprensa_detalle"].elements["cantidad"].focus();
+        document.preprensa_detalle.cantidad.focus();
     }
     
     // se dan las especificaciones del trabajo
@@ -1055,7 +1009,7 @@ function ajaxAgregaPreprensaDetalle() {
     		&& especificaciones == "" ) {
         correcto = false;
         alert("Es necesario dar alguna especificaci\u00f3n");
-        document.forms["preprensa_detalle"].elements["especificaciones"].focus();
+        document.preprensa_detalle.especificaciones.focus();
     }
     
     // valida que sea obligatorio el campo y ademas numero flotante
@@ -1063,7 +1017,7 @@ function ajaxAgregaPreprensaDetalle() {
     		&& ( !$.isNumeric( precio_total_pesos || isNaN(precio_total_pesos ) ) ) ) {
         correcto = false;
         alert("Es necesario un n\u00FAmero correcto en precio");
-        document.forms["preprensa_detalle"].elements["precio_total_pesos"].focus();
+        document.preprensa_detalle.precio_total_pesos.focus();
     }
     
     if( correcto ) {
@@ -1089,7 +1043,7 @@ function ajaxAgregaPreprensaDetalle() {
                         // actualiza la tabla html
                         document.getElementById("div_tabla_preprensa_detalle").innerHTML = response.textoHTML;
                         // elimina la opcion del select
-                        document.forms["preprensa_detalle"].elements["select_proceso_preprensa"].remove( document.forms["preprensa_detalle"].elements["select_proceso_preprensa"].selectedIndex );
+                        document.preprensa_detalle.select_proceso_preprensa.remove( document.preprensa_detalle.select_proceso_preprensa.selectedIndex );
                         // limpia campos y avtiva botones
                         limpiaCamposFormPreprensaDetalle();
                         activaBtnPreprensaDetalle();
@@ -1116,7 +1070,7 @@ function ajaxAgregaPreprensaDetalle() {
 function ajaxAgregaTransporte() {
 	// EL REGISTRO EN BASE DE DATOS YA SE INGRESO, SOLO ES NECESARIO MODIFICAR SU CONTENIDO
 	
-    var indicacion_tarea = document.forms["transporte"].elements["indicacion_tarea_realizar"].value;
+    var indicacion_tarea = document.transporte.indicacion_tarea_realizar.value;
     
     // VALIDACIONES
     var correcto = true;
@@ -1125,7 +1079,7 @@ function ajaxAgregaTransporte() {
     		&& indicacion_tarea == "" ) {
         correcto = false;
         alert("Es necesario especificar las indicaciones");
-        document.forms["transporte"].elements["indicacion_tarea_realizar"].focus();
+        document.transporte.indicacion_tarea_realizar.focus();
     }
     
     if( correcto ) {
@@ -1151,12 +1105,12 @@ function ajaxAgregaTransporte() {
                     
                     default:
                         // establece id_transporte
-                        document.forms["transporte_detalle"].elements["id_transporte"].value = response.idTransporte;
+                        document.transporte_detalle.id_transporte.value = response.idTransporte;
                         // activa botones del form
                         activaCamposTransporteDetalle();
                         activaBtnTransporteDetalle();
                         // focus campo
-                        document.forms["transporte_detalle"].elements["select_proceso_transporte"].focus();
+                        document.transporte_detalle.select_proceso_transporte.focus();
                         // cambia cursor
                         document.body.style.cursor = "default";
                         break;
@@ -1180,19 +1134,19 @@ function ajaxAgregaTransporte() {
 
 function ajaxAgregaTransporteDetalle() {
     
-    var cantidad            = document.forms["transporte_detalle"].elements["cantidad"].value;
-    var especificaciones    = document.forms["transporte_detalle"].elements["especificaciones"].value;
-    var precio_total_pesos  = document.forms["transporte_detalle"].elements["precio_total_pesos"].value.trim();
+    var cantidad            = document.transporte_detalle.cantidad.value;
+    var especificaciones    = document.transporte_detalle.especificaciones.value;
+    var precio_total_pesos  = document.transporte_detalle.precio_total_pesos.value.trim();
     
     // VALIDACIONES
     var correcto = true;
     
     // esta seleccionado alguna opcion del select
     if( correcto 
-    		&& document.forms["transporte_detalle"].elements["select_proceso_transporte"].selectedIndex == "-1" ) {
+    		&& document.transporte_detalle.select_proceso_transporte.selectedIndex == "-1" ) {
         correcto = false;
         alert("Es necesario especificar el tipo detalle del transporte");
-        document.forms["transporte_detalle"].elements["select_proceso_transporte"].focus();
+        document.transporte_detalle.select_proceso_transporte.focus();
     }
     
     // se especifica la cantidad y debe ser mayor a cero
@@ -1200,7 +1154,7 @@ function ajaxAgregaTransporteDetalle() {
     		&& ( cantidad == "" || isNaN(cantidad) || parseInt( cantidad ) <= 0 ) ) {
         correcto = false;
         alert("Es necesario especificar la cantidad mayor a cero");
-        document.forms["transporte_detalle"].elements["cantidad"].focus();
+        document.transporte_detalle.cantidad.focus();
     }
     
     // se dan las especifiaciones del trabajo
@@ -1208,7 +1162,7 @@ function ajaxAgregaTransporteDetalle() {
     		&& especificaciones == "" ) {
         correcto = false;
         alert("Es necesario dar alguna especificaci\u00f3n");
-        document.forms["transporte_detalle"].elements["especificaciones"].focus();
+        document.transporte_detalle.especificaciones.focus();
     }
     
     // valida que sea obligatorio el campo y ademas numero flotante
@@ -1216,7 +1170,7 @@ function ajaxAgregaTransporteDetalle() {
     		&& ( !$.isNumeric( precio_total_pesos || isNaN(precio_total_pesos)) ) ) {
         correcto = false;
         alert("Es necesario un numero correcto en precio");
-        document.forms["transporte_detalle"].elements["precio_total_pesos"].focus();
+        document.transporte_detalle.precio_total_pesos.focus();
     }
     
     if( correcto ) {
@@ -1242,7 +1196,7 @@ function ajaxAgregaTransporteDetalle() {
                         // actualiza la tabla html
                         document.getElementById("div_tabla_transporte_detalle").innerHTML = response.textoHTML;
                         // elimina la opcion del select
-                        document.forms["transporte_detalle"].elements["select_proceso_transporte"].remove( document.forms["transporte_detalle"].elements["select_proceso_transporte"].selectedIndex );
+                        document.transporte_detalle.select_proceso_transporte.remove( document.transporte_detalle.select_proceso_transporte.selectedIndex );
                         // limpia campos y activa botones
                         limpiaCamposFormTransporteDetalle();
                         activaBtnTransporteDetalle();
@@ -1269,7 +1223,7 @@ function ajaxAgregaTransporteDetalle() {
 function ajaxAgregaAcabado() {
 	// EL REGISTRO EN BASE DE DATOS YA SE INGRESO, SOLO ES NECESARIO MODIFICAR SU CONTENIDO
 	
-    var indicacion_tarea = document.forms["acabado"].elements["indicacion_tarea_realizar"].value;
+    var indicacion_tarea = document.acabado.indicacion_tarea_realizar.value;
     
     // VALIDACIONES
     var correcto = true;
@@ -1277,7 +1231,7 @@ function ajaxAgregaAcabado() {
     if( indicacion_tarea == "" ) {
         correcto = false;
         alert("Es necesario especificar las indicaciones");
-        document.forms["acabado"].elements["indicacion_tarea_realizar"].focus();
+        document.acabado.indicacion_tarea_realizar.focus();
     }
     
     if( correcto ) {
@@ -1303,12 +1257,12 @@ function ajaxAgregaAcabado() {
                 
                     default:
                         // establece id_acabado
-                        document.forms["acabado_detalle"].elements["id_acabado"].value = response.idAcabado;
+                        document.acabado_detalle.id_acabado.value = response.idAcabado;
                         // activa botones del form
                         activaCamposAcabadoDetalle();
                         activaBtnAcabadoDetalle();
                         // focus campo
-                        document.forms["acabado_detalle"].elements["select_proceso_externo"].focus();
+                        document.acabado_detalle.select_proceso_externo.focus();
                         // cambia cursor
                         document.body.style.cursor = "default";
                         break;
@@ -1332,19 +1286,19 @@ function ajaxAgregaAcabado() {
 
 function ajaxAgregaAcabadoDetalle() {
 
-    var cantidad            = document.forms["acabado_detalle"].elements["cantidad_proceso_externo"].value;
-    var especificaciones    = document.forms["acabado_detalle"].elements["especificaciones"].value;
-    var precio_total_pesos  = document.forms["acabado_detalle"].elements["precio_total_pesos"].value.trim();
+    var cantidad            = document.acabado_detalle.cantidad_proceso_externo.value;
+    var especificaciones    = document.acabado_detalle.especificaciones.value;
+    var precio_total_pesos  = document.acabado_detalle.precio_total_pesos.value.trim();
     
     // VALIDACIONES
     var correcto = true;
     
     // esta seleccionado alguna opcion del select
     if( correcto
-    		&& document.forms["acabado_detalle"].elements["select_proceso_externo"].selectedIndex == "-1" ) {
+    		&& document.acabado_detalle.select_proceso_externo.selectedIndex == "-1" ) {
         correcto = false;
         alert("Es necesario especificar el tipo detalle del acabado");
-        document.forms["acabado_detalle"].elements["select_proceso_acabado"].focus();
+        document.acabado_detalle.select_proceso_acabado.focus();
     }
     
     // se especifica la cantidad y debe ser mayor a cero
@@ -1352,7 +1306,7 @@ function ajaxAgregaAcabadoDetalle() {
     		&& ( cantidad == "" || isNaN(cantidad) || parseInt( cantidad ) <= 0 ) ) {
         correcto = false;
         alert("Es necesario especificar la cantidad mayor a cero");
-        document.forms["acabado_detalle"].elements["cantidad_proceso_externo"].focus();
+        document.acabado_detalle.cantidad_proceso_externo.focus();
     }
     
     // se dan las especifiaciones del trabajo
@@ -1360,7 +1314,7 @@ function ajaxAgregaAcabadoDetalle() {
     		&& especificaciones == "" ) {
         correcto = false;
         alert("Es necesario dar alguna especificaci\u00f3n");
-        document.forms["acabado_detalle"].elements["especificaciones"].focus();
+        document.acabado_detalle.especificaciones.focus();
     }
     
     // valida que sea obligatorio el campo y ademas numero flotante
@@ -1368,7 +1322,7 @@ function ajaxAgregaAcabadoDetalle() {
     		&& ( !$.isNumeric( precio_total_pesos || isNaN(precio_total_pesos) ) ) ){
         correcto = false;
         alert("Es necesario un numero correcto en precio");
-        document.forms["acabado_detalle"].elements["precio_total_pesos"].focus();
+        document.acabado_detalle.precio_total_pesos.focus();
     }
     
     if( correcto ) {
@@ -1394,7 +1348,7 @@ function ajaxAgregaAcabadoDetalle() {
                         // actualiza la tabla html
                         document.getElementById("div_tabla_acabado_detalle").innerHTML = response.textoHTML;
                         // elimina la opcion del select
-                        document.forms["acabado_detalle"].elements["select_proceso_externo"].remove( document.forms["acabado_detalle"].elements["select_proceso_externo"].selectedIndex );
+                        document.acabado_detalle.select_proceso_externo.remove( document.acabado_detalle.select_proceso_externo.selectedIndex );
                         // limpia form y activa botones
                         limpiaCamposFormAcabadoDetalle();
                         activaBtnAcabadoDetalle();
@@ -1421,7 +1375,7 @@ function ajaxAgregaAcabadoDetalle() {
 function ajaxAgregaOffset() {
 	// EL REGISTRO EN BASE DE DATOS YA SE INGRESO, SOLO ES NECESARIO MODIFICAR SU CONTENIDO
 	
-    var indicacion_tarea = document.forms["offset"].elements["indicacion_tarea_realizar"].value;
+    var indicacion_tarea = document.offset.indicacion_tarea_realizar.value;
     
     // VALIDACIONES
     var correcto = true;
@@ -1429,7 +1383,7 @@ function ajaxAgregaOffset() {
     if( indicacion_tarea == "" ) {
         correcto = false;
         alert("Es necesario especificar las indicaciones");
-        document.forms["offset"].elements["indicacion_tarea_realizar"].focus();
+        document.offset.indicacion_tarea_realizar.focus();
     }
     
     if( correcto ) {
@@ -1479,30 +1433,30 @@ function ajaxAgregaOffset() {
 
 function ajaxAgregaMaterialAyuda() {
     
-    var observaciones = document.forms["material_ayuda"].elements["observaciones"].value;
+    var observaciones = document.material_ayuda.observaciones.value;
     
     // VALIDACIONES
     var correcto = true;
     
     if( correcto 
-    		&& document.forms["material_ayuda"].elements["select_material_ayuda"].selectedIndex == "-1" ) {
+    		&& document.material_ayuda.select_material_ayuda.selectedIndex == "-1" ) {
         correcto = false;
         alert("Es necesario especificar el tipo de material de ayuda");
-        document.forms["material_ayuda"].elements["select_material_ayuda"].focus();
+        document.material_ayuda.select_material_ayuda.focus();
     }
     
     if( correcto 
-    		&& document.forms["material_ayuda"].elements["select_responsable_insumo"].selectedIndex == "-1" ) {
+    		&& document.material_ayuda.select_responsable_insumo.selectedIndex == "-1" ) {
         correcto = false;
         alert("Es necesario especificar el responsable del material de ayuda");
-        document.forms["material_ayuda"].elements["select_responsable_insumo"].focus();
+        document.material_ayuda.select_responsable_insumo.focus();
     }
     
     if( correcto 
     		&& observaciones == "" ) {
         correcto = false;
         alert("Es necesario especificar las observaciones del material de ayuda");
-        document.forms["material_ayuda"].elements["observaciones"].focus();
+        document.material_ayuda.observaciones.focus();
     }
     
     if( correcto ) {
@@ -1511,12 +1465,12 @@ function ajaxAgregaMaterialAyuda() {
         desactivaBtnMaterialAyuda();
         
         // copia de valores aqui porque quiza no haya un click antes
-        var index_select_material_ayuda = document.forms["material_ayuda"].elements["select_material_ayuda"].selectedIndex;
-        document.forms["material_ayuda"].elements["id_material_ayuda"].value = document.forms["material_ayuda"].elements["select_material_ayuda"].options[index_select_material_ayuda].value;
+        var index_select_material_ayuda = document.material_ayuda.select_material_ayuda.selectedIndex;
+        document.material_ayuda.id_material_ayuda.value = document.material_ayuda.select_material_ayuda.options[index_select_material_ayuda].value;
         delete index_select_material_ayuda;
         
-        var index_select_responsable_insumo = document.forms["material_ayuda"].elements["select_responsable_insumo"].selectedIndex;
-        document.forms["material_ayuda"].elements["id_responsable_insumo"].value = document.forms["material_ayuda"].elements["select_responsable_insumo"].options[index_select_responsable_insumo].value;
+        var index_select_responsable_insumo = document.material_ayuda.select_responsable_insumo.selectedIndex;
+        document.material_ayuda.id_responsable_insumo.value = document.material_ayuda.select_responsable_insumo.options[index_select_responsable_insumo].value;
         delete index_select_responsable_insumo;
         
         $.ajax({
@@ -1535,7 +1489,7 @@ function ajaxAgregaMaterialAyuda() {
                         // actualiza la tabla html
                         document.getElementById("div_tabla_material_ayuda").innerHTML = response.textoHTML;
                         // elimina la opcion del select
-                        document.forms["material_ayuda"].elements["select_material_ayuda"].remove( document.forms["material_ayuda"].elements["select_material_ayuda"].selectedIndex );
+                        document.material_ayuda.select_material_ayuda.remove( document.material_ayuda.select_material_ayuda.selectedIndex );
                         // limpia el campo de observaciones
                         limpiaCamposFormMaterialAyuda();
                         activaBtnMaterialAyuda();
@@ -1557,11 +1511,32 @@ function ajaxAgregaMaterialAyuda() {
 } // ajaxAgregaMaterialAyuda()
 
 
-function ajaxBuscaTipoTrabajoDetalle() {
+function preparaNuevoTipoTrabajoDetalle() {
+    // busca la informacion del div div_visualizador_tipo_trabajo_detalle 
+    ajaxBuscaListaTipoTrabajoDetalle();
+    // se guarda la informacion id_partida antes de limpiar todo
+    var id_partida = document.tipo_trabajo_detalle.id_partida.value;
+    // limpia form div_tipo_trabajo_detalle y div_costo_extra_detalle
+    limpiaFormTipoTrabajoDetalle();
+    limpiaFormCostoExtraDetalle();
+    // oculta divs no necesarios
+    document.getElementById("div_visualizador_pliegos").style.display       		= "none";
+    document.getElementById("div_visualizador_costo_extra_detalle").style.display 	= "none";
+    document.getElementById("div_costo_extra_detalle").style.display       			= "none";
+    document.getElementById("div_nuevo_tipo_trabajo_detalle").style.display 		= "none";
+    // inicializa el form tipo_trabajo_detalle
+    document.tipo_trabajo_detalle.id_partida.value = id_partida;
+    document.tipo_trabajo_detalle.descripcion_partida_detalle.focus();
+    // elimina variable de inicializacion
+    delete id_partida;
+}
+
+
+function ajaxBuscaListaTipoTrabajoDetalle() {
     $.ajax({
         type:"POST",
-        url:urlBuscaTipoTrabajoDetalle,
-        data:{id_partida:document.forms["tipo_trabajo_detalle"].elements["id_partida"].value},
+        url:urlBuscaListaTipoTrabajoDetalle,
+        data:{id_partida:document.tipo_trabajo_detalle.id_partida.value},
         success:function( response ) {
             switch( response.estatusOperacion ) {
                 case 1:
@@ -1581,11 +1556,11 @@ function ajaxBuscaTipoTrabajoDetalle() {
 } // ajaxBuscaTipoTrabajoDetalle()
 
 
-function ajaxBuscaPartidas() {
+function ajaxBuscaListaPartidas() {
     $.ajax({
         type:"POST",
-        url:urlBuscaPartida,
-        data:{id_orden_produccion:document.forms["partida"].elements["id_orden_produccion"].value},
+        url:urlBuscaListaPartida,
+        data:{id_orden_produccion:document.partida.id_orden_produccion.value},
         success:function( response ) {
             switch( response.estatusOperacion ) {
                 case 1:
@@ -1602,15 +1577,15 @@ function ajaxBuscaPartidas() {
             alert("Error, no fue posible mostrar las partidas");
         }
     });
-} // ajaxBuscaPartidas()
+}
 
 
 function preparaNuevaPartida() {
     // busca la informacion del div_tabla_lista_partidas
-    ajaxBuscaPartidas();
+    ajaxBuscaListaPartidas();
     
     // se guarda la informacion de id_orden_produccion antes de limpiar todo
-    var id_orden_produccion = document.forms["partida"].elements["id_orden_produccion"].value;
+    var id_orden_produccion = document.partida.id_orden_produccion.value;
     
     // limpia el form partida
     limpiaFormPartida();
@@ -1642,9 +1617,9 @@ function preparaNuevaPartida() {
     limpiaFormMaterialAyuda();
     
     // inicializa el form partida
-    document.forms["partida"].elements["id_orden_produccion"].value = id_orden_produccion;
-    document.forms["partida"].elements["tipo_trabajo"][0].click();
-    document.forms["partida"].elements["nombre_partida"].focus();
+    document.partida.id_orden_produccion.value = id_orden_produccion;
+    document.partida.tipo_trabajo[0].click();
+    document.partida.nombre_partida.focus();
     
     // elimina variable de inicializacion
     delete id_orden_produccion;
@@ -1661,7 +1636,7 @@ function preparaNuevaPartida() {
 
 
 function cotizar() {
-    document.forms["cotizacion"].action = urlCalificacionOrdenProduccion;
+    document.cotizacion.action = urlCalificacionOrdenProduccion;
     //document.forms['cotizacion'].method = "POST";
-    document.forms["cotizacion"].submit();
-} // cotizar()
+    document.cotizacion.submit();
+}

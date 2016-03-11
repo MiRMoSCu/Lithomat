@@ -1,3 +1,4 @@
+
 function limpiaCamposFormDisenioDetalle() {
 	document.disenio_detalle.id_proceso_disenio.value 	= "";
 	document.disenio_detalle.detalle.value 				= "";
@@ -6,7 +7,7 @@ function limpiaCamposFormDisenioDetalle() {
 	document.disenio_detalle.especificaciones.value 	= "";
 	// limpia select
 	$("[name='select_proceso_disenio']").empty();
-} // limpiaCamposFormDisenioDetalle
+}
 
 function activaCamposFormDisenioDetalle() {
 	// activa select
@@ -19,7 +20,7 @@ function activaCamposFormDisenioDetalle() {
 	document.disenio_detalle.cantidad.style.background 				= "#fff";
 	document.disenio_detalle.precio_total_pesos.style.background 	= "#fff";
 	document.disenio_detalle.especificaciones.style.background 		= "#fff";
-} // activaCamposFormDisenioDetalle
+}
 	
 function desactivaCamposFormDisenioDetalle() {
 	// desactiva select
@@ -32,21 +33,19 @@ function desactivaCamposFormDisenioDetalle() {
 	document.disenio_detalle.cantidad.style.background 				= "transparent";
 	document.disenio_detalle.precio_total_pesos.style.background 	= "transparent";
 	document.disenio_detalle.especificaciones.style.background 		= "transparent";
-} // desactivaCamposFormDisenioDetalle
+}
 
 function activaBotonesAgregarFormDisenioDetalle() {
 	document.getElementById("imgBtnAgregarDisenioDetalle").style.display 		= "none";
-	document.getElementById("imgBtnAgregarDisenioDetalle").style.display 		= "none";
 	document.getElementById("imgBtnAceptaAgregarDisenioDetalle").style.display 	= "inline";
 	document.getElementById("imgBtnCancelaAgregarDisenioDetalle").style.display = "inline";
-} // activaBotonesModificarFormDisenioDetalle
+}
 	
 function desactivaBotonesAgregarFormDisenioDetalle() {
 	document.getElementById("imgBtnAgregarDisenioDetalle").style.display 		= "inline";
-	document.getElementById("imgBtnAgregarDisenioDetalle").style.display 		= "inline";
 	document.getElementById("imgBtnAceptaAgregarDisenioDetalle").style.display 	= "none";
 	document.getElementById("imgBtnCancelaAgregarDisenioDetalle").style.display = "none";
-} // desactivaBotonesModificarFormDisenioDetalle
+}
 
 function generaListaDisenioDetalle() {
 	// genera el arreglo
@@ -78,7 +77,7 @@ function selectDisenioDetalleClick(obj) {
 		document.disenio_detalle.id_proceso_disenio.value 	= obj.options[obj.selectedIndex].value;
 		document.disenio_detalle.detalle.value 				= obj.options[obj.selectedIndex].text;
     }	
-} // selectDisenioDetalleClick
+}
 
 function agregaDisenioDetalle() {
 	ocultaBotonesModificarPorSeccion();
@@ -89,7 +88,7 @@ function agregaDisenioDetalle() {
 	activaCamposFormDisenioDetalle();
 	// muestra botones ACEPTAR y CANCELAR
 	activaBotonesAgregarFormDisenioDetalle();
-} // agregaDisenioDetalle
+}
 
 function aceptaAgregarDisenioDetalle() {
 	
@@ -178,4 +177,4 @@ function cancelaAgregarDisenioDetalle() {
 	desactivaBotonesAgregarFormDisenioDetalle();
 	// muestra botones Modificar
 	muestraBotonesModificarPorSeccion();
-} // cancelaAgregarDisenioDetalle
+}

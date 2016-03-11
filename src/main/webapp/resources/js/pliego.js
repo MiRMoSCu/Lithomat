@@ -191,7 +191,7 @@ function actualizaHtml() {
     if( res != "" ) {
         document.body.style.cursor = "default";
         window.parent.document.getElementById("div_tabla_lista_pliegos").innerHTML = res;
-        window.parent.cerradoOKVentanaListaPliegos = true; // variable global que se utiliza en: cotizador_ajax:ajaxAgregaDetallePartida();
+        window.parent.cerradoOKVentanaListaPliegos = true; // variable global que se utiliza en: cotizador_ajax: ajaxAgregaTipoTrabajoDetalle();
         window.parent.Shadowbox.setup();
         window.parent.Shadowbox.close();
     }

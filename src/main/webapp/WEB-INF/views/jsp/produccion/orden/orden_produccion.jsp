@@ -8,12 +8,12 @@
 <c:url value="/cliente/busca"               				var="urlBuscaCliente"/>
 <c:url value="/orden_produccion/agrega"     				var="urlAgregaOrdenProduccion"/>
 <c:url value="/partida/agrega"              				var="urlAgregaPartida"/>
-<c:url value="/partida/busca"               				var="urlBuscaPartida"/>
+<c:url value="/partida/busca"               				var="urlBuscaListaPartida"/>
 <c:url value="/tipo_placa/busca"            				var="urlBuscaTipoPlaca"/>
 <c:url value="/tipo_papel_extendido/ventana/lista"          var="urlBuscaTipoPapel"/>
 <c:url value="/tipo_trabajo_detalle/agrega" 				var="urlAgregaTipoTrabajoDetalle"/>
-<c:url value="/tipo_trabajo_detalle/elimina"    			var="urlEliminaDetallePartida"/>
-<c:url value="/tipo_trabajo_detalle/busca"  				var="urlBuscaTipoTrabajoDetalle"/>
+<c:url value="/tipo_trabajo_detalle/actualiza"    			var="urlActualizaDetallePartida"/>
+<c:url value="/tipo_trabajo_detalle/busca"  				var="urlBuscaListaTipoTrabajoDetalle"/>
 <c:url value="/pliego/calcula"              				var="urlCalculaPliego"/>
 <c:url value="/costo_extra_detalle/busca_unidad_medida" 	var="urlBuscaUnidadMedidaCostoExtra"/>
 <c:url value="/costo_extra_detalle/agrega_en_op" 			var="urlAgregaCostoExtra"/>
@@ -67,12 +67,12 @@
             var urlBuscaCliente             	= "${urlBuscaCliente}";
             var urlAgregaOrdenProduccion    	= "${urlAgregaOrdenProduccion}";
             var urlAgregaPartida            	= "${urlAgregaPartida}";
-            var urlBuscaPartida             	= "${urlBuscaPartida}";
+            var urlBuscaListaPartida            = "${urlBuscaListaPartida}";
             var urlBuscaTipoPlaca           	= "${urlBuscaTipoPlaca}";
             var urlBuscaTipoPapel				= "${urlBuscaTipoPapel}";
             var urlAgregaTipoTrabajoDetalle 	= "${urlAgregaTipoTrabajoDetalle}";
-            var urlEliminaDetallePartida    	= "${urlEliminaDetallePartida}";
-            var urlBuscaTipoTrabajoDetalle  	= "${urlBuscaTipoTrabajoDetalle}";
+            var urlActualizaDetallePartida    	= "${urlActualizaDetallePartida}";
+            var urlBuscaListaTipoTrabajoDetalle = "${urlBuscaListaTipoTrabajoDetalle}";
             var urlCalculaPliego            	= "${urlCalculaPliego}";
             var urlBuscaUnidadMedidaCostoExtra	= "${urlBuscaUnidadMedidaCostoExtra}";
             var urlAgregaCostoExtra				= "${urlAgregaCostoExtra}";
@@ -568,7 +568,8 @@
 <!-- div_orden_produccion -->
                             <div id="div_orden_produccion">
                                 <form name="orden_produccion" action="" accept-charset="ISO-8859-1">
-                                    <input type="hidden" name="id_usuario"                  value=""/>
+                                	<input type="hidden" name="id_orden_produccion"			value=""/>
+                                    <input type="hidden" name="id_usuario"                  value="${idUsuario}"/>
                                     <input type="hidden" name="id_cliente"                  value=""/>
                                     <input type="hidden" name="id_tipo_comprobante_fiscal"  value=""/>
                                     <div class="div_separador_grande">
@@ -711,6 +712,7 @@
 <!-- div_partida, display:none; -->
                             <div id="div_partida" style="display:none;">
                                 <form name="partida" action="" accept-charset="ISO-8859-1" enctype="multipart/form-data">
+                                	<input type="hidden" name="id_partida" 				value=""/>
                                     <input type="hidden" name="id_orden_produccion"     value=""/>
                                     <input type="hidden" name="id_tipo_trabajo"         value=""/>
                                     <input type="hidden" name="id_tipo_forma_trabajo"   value=""/>
@@ -821,7 +823,7 @@
                                                     <div class="columna_completa">
                                                         <table>
                                                             <tr>
-                                                                <td width="1%">Tipo:</td>
+                                                                <td width="1%">Formaci&oacute;n:</td>
                                                                 <td>
                                                                     <select name="select_forma_trabajo">
                                                                         <c:forEach var="tft" items="${listaTipoFormaTrabajo}">
@@ -970,6 +972,7 @@
 <!-- div_detalle_partida = tipo_trabajo_detalle,  display:none; -->
                             <div id="div_tipo_trabajo_detalle" style="display:none;">
                                 <form name="tipo_trabajo_detalle" action="" accept-charset="ISO-8859-1">
+                                	<input type="hidden" name="id_tipo_trabajo_detalle" 			value=""/>
                                     <input type="hidden" name="id_partida"                          value=""/>
                                     <input type="hidden" name="cliente_proporciona_papel"           value=""/>
                                     <input type="hidden" name="cliente_proporciona_tinta"           value=""/>

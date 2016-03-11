@@ -154,6 +154,27 @@ public class TipoTrabajoDetalleController {
 		return jsonResponse;
 	} // agregaDetallePartida
 	
+
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
+	@RequestMapping(value = "/agrega_olvidado", method = RequestMethod.POST, headers = "Accept=application/json")
+	@ResponseBody
+	public JsonResponse agregaTipoTrabajoDetalleOlvidado() {
+		log.info("/agrega_tipo_trabajo_detalle_olvidado");
+		
+		
+		
+		System.out.println("entro a agregar titpo trabajo detalle olvidado");
+		
+		
+		
+		
+		
+		
+		
+		return null;
+	}
+	
+	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/elimina", method = RequestMethod.POST)
 	@ResponseBody
@@ -164,7 +185,7 @@ public class TipoTrabajoDetalleController {
 		) {
 		log.info("/elimina_tipo_trabajo_detalle");
 		
-		// elimina ttd y los pliegos
+		// elimina ttd y sus pliegos relacionados
 		tipoTrabajoDetalleService.eliminaTipoTrabajoDetalle(idTipoTrabajoDetalle);
 		
 		// busca nueva informacion
@@ -180,6 +201,7 @@ public class TipoTrabajoDetalleController {
 		
 		return jsonResponse;
 	} // eliminaDetallePartida
+	
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/busca", method = RequestMethod.POST, headers = "Accept=application/json")
@@ -269,6 +291,7 @@ public class TipoTrabajoDetalleController {
 		
 		return null;
 	}
+	
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/actualiza_con_pliegos", method = RequestMethod.POST)

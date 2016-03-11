@@ -4,6 +4,8 @@ function ocultaBotonesModificarPorSeccion() {
 		document.getElementById("div_btn_actualizar_orden_produccion").style.display 	= "none";
 	if ( document.getElementById("div_btn_actualizar_partida") )
 		document.getElementById("div_btn_actualizar_partida").style.display 			= "none";
+	if ( document.getElementById("div_btn_agregar_ttd_encabezado") )
+		document.getElementById("div_btn_agregar_ttd_encabezado").style.display 		= "none";
 	if ( document.getElementById("div_btn_actualizar_ttd_encabezado") )
 		document.getElementById("div_btn_actualizar_ttd_encabezado").style.display 		= "none";
 	if ( document.getElementById("div_btn_actualizar_pliego") )
@@ -42,6 +44,9 @@ function ocultaBotonesModificarPorSeccion() {
 		document.getElementById("div_btn_agregar_material_ayuda").style.display 		= "none";
 	if ( document.getElementById("div_btn_actualizar_material_ayuda") )
 		document.getElementById("div_btn_actualizar_material_ayuda").style.display 		= "none";
+	
+	document.getElementById("imgBtnModificarEstatus").style.display 					= "none";
+	document.getElementById("imgBtnRevisarCostos").style.display 						= "none";
 } // ocultaBotonesModificarPorSeccion
 
 function muestraBotonesModificarPorSeccion() {
@@ -49,6 +54,8 @@ function muestraBotonesModificarPorSeccion() {
 		document.getElementById("div_btn_actualizar_orden_produccion").style.display 	= "inline";
 	if ( document.getElementById("div_btn_actualizar_partida") )
 		document.getElementById("div_btn_actualizar_partida").style.display 			= "inline";
+	if ( document.getElementById("div_btn_agregar_ttd_encabezado") )
+		document.getElementById("div_btn_agregar_ttd_encabezado").style.display 		= "inline";
 	if ( document.getElementById("div_btn_actualizar_ttd_encabezado") )
 		document.getElementById("div_btn_actualizar_ttd_encabezado").style.display 		= "inline";
 	if ( document.getElementById("div_btn_actualizar_pliego") )
@@ -87,5 +94,8 @@ function muestraBotonesModificarPorSeccion() {
 		document.getElementById("div_btn_agregar_material_ayuda").style.display 		= "inline";
 	if ( document.getElementById("div_btn_actualizar_material_ayuda") )
 		document.getElementById("div_btn_actualizar_material_ayuda").style.display 		= "inline";
+	
+	document.getElementById("imgBtnModificarEstatus").style.display 					= "inline";
+	document.getElementById("imgBtnRevisarCostos").style.display 						= "inline";
 } // muestraBotonesModificarPorSeccion
 
