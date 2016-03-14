@@ -13,7 +13,8 @@ public class CombinacionTintas implements Serializable {
 	private String descripcion;
 	private boolean activo;
 	// esta clase esta relacionada [uno a muchos] con las tablas:
-	private Set<TipoTrabajoDetalle> tipoTrabajoDetalle = new HashSet<TipoTrabajoDetalle>();
+	private Set<TipoTrabajoDetalle> frenteTipoTrabajoDetalle = new HashSet<TipoTrabajoDetalle>();
+	private Set<TipoTrabajoDetalle> vueltaTipoTrabajoDetalle = new HashSet<TipoTrabajoDetalle>();
 	
 	
 	public int getIdCombinacionTintas() {
@@ -40,11 +41,18 @@ public class CombinacionTintas implements Serializable {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	public Set<TipoTrabajoDetalle> getTipoTrabajoDetalle() {
-		return tipoTrabajoDetalle;
+	public Set<TipoTrabajoDetalle> getFrenteTipoTrabajoDetalle() {
+		return frenteTipoTrabajoDetalle;
 	}
-	public void setTipoTrabajoDetalle(Set<TipoTrabajoDetalle> tipoTrabajoDetalle) {
-		this.tipoTrabajoDetalle = tipoTrabajoDetalle;
+	public void setFrenteTipoTrabajoDetalle(
+			Set<TipoTrabajoDetalle> frenteTipoTrabajoDetalle) {
+		this.frenteTipoTrabajoDetalle = frenteTipoTrabajoDetalle;
 	}
-		
+	public Set<TipoTrabajoDetalle> getVueltaTipoTrabajoDetalle() {
+		return vueltaTipoTrabajoDetalle;
+	}
+	public void setVueltaTipoTrabajoDetalle(
+			Set<TipoTrabajoDetalle> vueltaTipoTrabajoDetalle) {
+		this.vueltaTipoTrabajoDetalle = vueltaTipoTrabajoDetalle;
+	}
 }

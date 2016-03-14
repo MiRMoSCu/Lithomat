@@ -1,6 +1,4 @@
 
-var cerradoOKVentanaListaPliegos = false;
-
 var obj_ttd = {
 	
 	descripcion_partida_detalle			: "",
@@ -59,7 +57,7 @@ var obj_ttd = {
 		this.maquina 							= document.tipo_trabajo_detalle.maquina.value;
 		this.tipo_placa 						= document.tipo_trabajo_detalle.tipo_placa.value;
 		this.tipo_complejidad 					= document.tipo_trabajo_detalle.tipo_complejidad.value;
-	}, // setObjTTD
+	},
 	
 	setFormTTD : function() {
 		document.tipo_trabajo_detalle.descripcion_partida_detalle.value			= this.descripcion_partida_detalle;
@@ -88,7 +86,7 @@ var obj_ttd = {
 		document.tipo_trabajo_detalle.maquina.value 							= this.maquina;
 		document.tipo_trabajo_detalle.tipo_placa.value 							= this.tipo_placa;
 		document.tipo_trabajo_detalle.tipo_complejidad.value 					= this.tipo_complejidad;
-	} //setFormTTD
+	}
 } // obj_ttd_encabezado
 	
 function activaBotonesModificarFormTipoTrabajoDetalle() {
@@ -96,256 +94,37 @@ function activaBotonesModificarFormTipoTrabajoDetalle() {
 	document.getElementById("imgBtnCancelaModificarTTD").style.display	= "inline";
 	document.getElementById("imgBtnAceptaEliminarTTD").style.display	= "inline";
 	document.getElementById("imgBtnAceptaModificarTTD").style.display	= "inline";
-} // activaBotonesModificarFormTipoTrabajoDetalle
+}
 
 function desactivaBotonesModificarFormTipoTrabajoDetalle() {
 	document.getElementById("imgBtnCancelaModificarTTD").style.display	= "none";
 	document.getElementById("imgBtnAceptaEliminarTTD").style.display	= "none";
 	document.getElementById("imgBtnAceptaModificarTTD").style.display	= "none";
 	document.getElementById("imgBtnModificarTTD").style.display 		= "inline";
-} // desactivaBotonesModificarFormTipoTrabajoDetalle
+}
 
 function activaCamposFormTipoTrabajoDetalle() {
-	// activa los checkbox segun resultado
-	//alert( document.tipo_trabajo_detalle.proporciona_papel.value );
-	document.tipo_trabajo_detalle.checkbox_proporciona_papel.checked 			= document.tipo_trabajo_detalle.proporciona_papel.value=="Si"?true:false;
-	document.tipo_trabajo_detalle.checkbox_proporciona_placas.checked 			= document.tipo_trabajo_detalle.proporciona_placas.value=="Si"?true:false;
-	document.tipo_trabajo_detalle.checkbox_proporciona_tinta_especial.checked 	= document.tipo_trabajo_detalle.proporciona_tinta_especial.value=="Si"?true:false;
-	document.tipo_trabajo_detalle.checkbox_proporciona_barniz.checked 			= document.tipo_trabajo_detalle.proporciona_barniz.value=="Si"?true:false;
-	
-	// coloca los select en la opcion indicada.
-	// select tipo_papel
-	var clave	= document.tipo_trabajo_detalle.tipo_papel.value;
-	var select 	= document.tipo_trabajo_detalle.select_tipo_papel_extendido;
-	for( var i=0; i<select.length; i++ ) {
-		if( select.options[i].text == clave ) {
-			select.selectedIndex	= i;
-			break;
-		}
-	}
-	
-	// select tamanio_publicacion
-	clave	= document.tipo_trabajo_detalle.tamanio_pubicacion.value;
-	select 	= document.tipo_trabajo_detalle.select_tamanio_publicacion;
-	for( var i=0; i<select.length; i++ ) {
-		if( select.options[i].text == clave ) {
-			select.selectedIndex	= i;
-			break;
-		}
-	}
-	
-	// select frente_combinacion_tintas
-	clave	= document.tipo_trabajo_detalle.frente_combinacion_tintas.value;
-	select 	= document.tipo_trabajo_detalle.select_frente_combinacion_tintas;
-	for( var i=0; i<select.length; i++ ) {
-		if( select.options[i].text == clave ) {
-			select.selectedIndex	= i;
-			break;
-		}
-	}
-	
-	// select frente_tipo_barniz
-	clave	= document.tipo_trabajo_detalle.frente_tipo_barniz.value;
-	select 	= document.tipo_trabajo_detalle.select_frente_tipo_barniz;
-	for( var i=0; i<select.length; i++ ) {
-		if( select.options[i].text == clave ) {
-			select.selectedIndex	= i;
-			break;
-		}
-	}
-	
-	// select vuelta_combinacion_tintas
-	clave	= document.tipo_trabajo_detalle.vuelta_combinacion_tintas.value;
-	select 	= document.tipo_trabajo_detalle.select_vuelta_combinacion_tintas;
-	for( var i=0; i<select.length; i++ ) {
-		if( select.options[i].text == clave ) {
-			select.selectedIndex	= i;
-			break;
-		}
-	}
-	
-	// select vuelta_tipo_barniz
-	clave	= document.tipo_trabajo_detalle.vuelta_tipo_barniz.value;
-	select 	= document.tipo_trabajo_detalle.select_vuelta_tipo_barniz;
-	for( var i=0; i<select.length; i++ ) {
-		if( select.options[i].text == clave ) {
-			select.selectedIndex	= i;
-			break;
-		}
-	}
-	
-	//  select maquina
-	clave	= document.tipo_trabajo_detalle.maquina.value;
-	select 	= document.tipo_trabajo_detalle.select_maquina;
-	for( var i=0; i<select.length; i++ ) {
-		if( select.options[i].text == clave ) {
-			select.selectedIndex	= i;
-			break;
-		}
-	}
-	
-	// ajax para buscar tipo_placa	
-	buscaTipoPlaca( document.tipo_trabajo_detalle.select_maquina );
-	
-	// select tipo_placa
-	clave 	= document.tipo_trabajo_detalle.tipo_placa.value;
-	select	= document.tipo_trabajo_detalle.select_tipo_placa;
-	var encontroOpcion 	= false;
-	for( var i=0; i<select.length; i++ ) {
-		if( select.options[i].text == clave ) {
-			select.selectedIndex	= i;
-			encontroOpcion = true;
-			break;
-		}
-	}
-	if( !encontroOpcion ) {
-		select.selectedIndex	= 0;
-	}
-	delete encontroOpcion;
-	
-	// select tipo_complejidad
-	clave 	= document.tipo_trabajo_detalle.tipo_complejidad.value;
-	select 	= document.tipo_trabajo_detalle.select_tipo_complejidad;
-	for( var i=0; i<select.length; i++ ) {
-		if( select.options[i].text == clave ) {
-			select.selectedIndex	= i;
-			break;
-		}
-	}
-	
-	// -------
-	delete clave;
-	delete select;
-	
-	// muestra los checkbox
-	document.tipo_trabajo_detalle.proporciona_papel.style.display 					= "none";
-	document.tipo_trabajo_detalle.checkbox_proporciona_papel.style.display 			= "inline";
-	document.tipo_trabajo_detalle.proporciona_placas.style.display 					= "none";
-	document.tipo_trabajo_detalle.checkbox_proporciona_placas.style.display 		= "inline";
-	document.tipo_trabajo_detalle.proporciona_tinta_especial.style.display 			= "none";
-	document.tipo_trabajo_detalle.checkbox_proporciona_tinta_especial.style.display = "inline";
-	document.tipo_trabajo_detalle.proporciona_barniz.style.display 					= "none";
-	document.tipo_trabajo_detalle.checkbox_proporciona_barniz.style.display 		= "inline";
-	// muestra los select
-	document.tipo_trabajo_detalle.tipo_papel.style.display 							= "none";
-	document.tipo_trabajo_detalle.select_tipo_papel_extendido.style.display 		= "inline";
-	document.tipo_trabajo_detalle.tamanio_pubicacion.style.display 					= "none";
-	document.tipo_trabajo_detalle.select_tamanio_publicacion.style.display 			= "inline";
-	document.tipo_trabajo_detalle.frente_combinacion_tintas.style.display 			= "none";
-	document.tipo_trabajo_detalle.select_frente_combinacion_tintas.style.display 	= "inline";
-	document.tipo_trabajo_detalle.frente_tipo_barniz.style.display 					= "none";
-	document.tipo_trabajo_detalle.select_frente_tipo_barniz.style.display 			= "inline";
-	document.tipo_trabajo_detalle.vuelta_combinacion_tintas.style.display 			= "none";
-	document.tipo_trabajo_detalle.select_vuelta_combinacion_tintas.style.display 	= "inline";
-	document.tipo_trabajo_detalle.vuelta_tipo_barniz.style.display 					= "none";
-	document.tipo_trabajo_detalle.select_vuelta_tipo_barniz.style.display 			= "inline";
-	document.tipo_trabajo_detalle.maquina.style.display 							= "none";
-	document.tipo_trabajo_detalle.select_maquina.style.display 						= "inline";
-	document.tipo_trabajo_detalle.tipo_placa.style.display 							= "none";
-	document.tipo_trabajo_detalle.select_tipo_placa.style.display 					= "inline";
-	document.tipo_trabajo_detalle.tipo_complejidad.style.display 					= "none";
-	document.tipo_trabajo_detalle.select_tipo_complejidad.style.display 			= "inline";
-	
-	// desactiva readOnly
-	document.tipo_trabajo_detalle.descripcion_partida_detalle.readOnly 			= false;
-	document.tipo_trabajo_detalle.alto_final.readOnly 							= false;
-	document.tipo_trabajo_detalle.ancho_final.readOnly 							= false;
-	document.tipo_trabajo_detalle.alto_extendido.readOnly 						= false;
-	document.tipo_trabajo_detalle.ancho_extendido.readOnly 						= false;
-	document.tipo_trabajo_detalle.repeticiones_x_pliego.readOnly 				= false;
-	document.tipo_trabajo_detalle.numero_paginas_publicacion.readOnly 			= false;
-	document.tipo_trabajo_detalle.alto_corte_inicial.readOnly					= false;
-	document.tipo_trabajo_detalle.ancho_corte_inicial.readOnly					= false;
-	document.tipo_trabajo_detalle.frente_num_tinta_especial.readOnly 			= false;
-	document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.readOnly 	= false;
-	document.tipo_trabajo_detalle.vuelta_num_tinta_especial.readOnly 			= false;
-	document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.readOnly 	= false;
-	
-	// cambia el color campos text
-	document.tipo_trabajo_detalle.descripcion_partida_detalle.style.background 			= "#fff";
-	document.tipo_trabajo_detalle.alto_final.style.background 							= "#fff";
-	document.tipo_trabajo_detalle.ancho_final.style.background 							= "#fff";
-	document.tipo_trabajo_detalle.alto_extendido.style.background 						= "#fff";
-	document.tipo_trabajo_detalle.ancho_extendido.style.background 						= "#fff";
-	document.tipo_trabajo_detalle.repeticiones_x_pliego.style.background 				= "#fff";
-	document.tipo_trabajo_detalle.numero_paginas_publicacion.style.background 			= "#fff";
-	document.tipo_trabajo_detalle.alto_corte_inicial.style.background					= "#fff";
-	document.tipo_trabajo_detalle.ancho_corte_inicial.style.background					= "#fff";
-	document.tipo_trabajo_detalle.frente_num_tinta_especial.style.background 			= "#fff";
-	document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.style.background 	= "#fff";
-	document.tipo_trabajo_detalle.vuelta_num_tinta_especial.style.background 			= "#fff";
-	document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.style.background 	= "#fff";
-} // activaCamposFormTipoTrabajoDetalle
+	copiaValorDeTextACheckbox();
+	copiaValorDeTextASelect();
+	muestraCheckbox();
+	muestraSelect();
+	desactivaReadonlyCamposVisibles();
+	aplicaColorFFFCamposVisibles();
+}
 
 function desactivaCamposFormTipoTrabajoDetalle() {
-	// oculta input checkbox
-	document.tipo_trabajo_detalle.checkbox_proporciona_papel.style.display 			= "none";
-	document.tipo_trabajo_detalle.proporciona_papel.style.display 					= "inline";
-	document.tipo_trabajo_detalle.checkbox_proporciona_placas.style.display 		= "none";
-	document.tipo_trabajo_detalle.proporciona_placas.style.display 					= "inline";
-	document.tipo_trabajo_detalle.checkbox_proporciona_tinta_especial.style.display = "none";
-	document.tipo_trabajo_detalle.proporciona_tinta_especial.style.display 			= "inline";
-	document.tipo_trabajo_detalle.checkbox_proporciona_barniz.style.display 		= "none";
-	document.tipo_trabajo_detalle.proporciona_barniz.style.display 					= "inline";
-	
-	// oculta input select
-	document.tipo_trabajo_detalle.select_tipo_papel_extendido.style.display 		= "none";
-	document.tipo_trabajo_detalle.tipo_papel.style.display 							= "inline";
-	document.tipo_trabajo_detalle.select_tamanio_publicacion.style.display 			= "none";
-	document.tipo_trabajo_detalle.tamanio_pubicacion.style.display 					= "inline";
-	document.tipo_trabajo_detalle.select_frente_combinacion_tintas.style.display 	= "none";
-	document.tipo_trabajo_detalle.frente_combinacion_tintas.style.display 			= "inline";
-	document.tipo_trabajo_detalle.select_frente_tipo_barniz.style.display 			= "none";
-	document.tipo_trabajo_detalle.frente_tipo_barniz.style.display 					= "inline";
-	document.tipo_trabajo_detalle.select_vuelta_combinacion_tintas.style.display 	= "none";
-	document.tipo_trabajo_detalle.vuelta_combinacion_tintas.style.display 			= "inline";
-	document.tipo_trabajo_detalle.select_vuelta_tipo_barniz.style.display 			= "none";
-	document.tipo_trabajo_detalle.vuelta_tipo_barniz.style.display 					= "inline";
-	document.tipo_trabajo_detalle.select_maquina.style.display 						= "none";
-	document.tipo_trabajo_detalle.maquina.style.display 							= "inline";
-	document.tipo_trabajo_detalle.select_tipo_placa.style.display 					= "none";
-	document.tipo_trabajo_detalle.tipo_placa.style.display 							= "inline";
-	document.tipo_trabajo_detalle.select_tipo_complejidad.style.display 			= "none";
-	document.tipo_trabajo_detalle.tipo_complejidad.style.display 					= "inline";
-	
-	// activa readOnly
-	document.tipo_trabajo_detalle.descripcion_partida_detalle.readOnly 			= true;
-	document.tipo_trabajo_detalle.alto_final.readOnly 							= true;
-	document.tipo_trabajo_detalle.ancho_final.readOnly 							= true;
-	document.tipo_trabajo_detalle.alto_extendido.readOnly 						= true;
-	document.tipo_trabajo_detalle.ancho_extendido.readOnly 						= true;
-	document.tipo_trabajo_detalle.repeticiones_x_pliego.readOnly 				= true;
-	document.tipo_trabajo_detalle.numero_paginas_publicacion.readOnly 			= true;
-	document.tipo_trabajo_detalle.alto_corte_inicial.readOnly					= true;
-	document.tipo_trabajo_detalle.ancho_corte_inicial.readOnly					= true;
-	document.tipo_trabajo_detalle.frente_num_tinta_especial.readOnly 			= true;
-	document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.readOnly 	= true;
-	document.tipo_trabajo_detalle.vuelta_num_tinta_especial.readOnly 			= true;
-	document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.readOnly 	= true;
-	
-	// cambio el color de campos text
-	document.tipo_trabajo_detalle.descripcion_partida_detalle.style.background 			= "transparent";
-	document.tipo_trabajo_detalle.alto_final.style.background 							= "transparent";
-	document.tipo_trabajo_detalle.ancho_final.style.background 							= "transparent";
-	document.tipo_trabajo_detalle.alto_extendido.style.background 						= "transparent";
-	document.tipo_trabajo_detalle.ancho_extendido.style.background 						= "transparent";
-	document.tipo_trabajo_detalle.repeticiones_x_pliego.style.background 				= "transparent";
-	document.tipo_trabajo_detalle.numero_paginas_publicacion.style.background 			= "transparent";
-	document.tipo_trabajo_detalle.alto_corte_inicial.style.background					= "transparent";
-	document.tipo_trabajo_detalle.ancho_corte_inicial.style.background					= "transparent";
-	document.tipo_trabajo_detalle.frente_num_tinta_especial.style.background 			= "transparent";
-	document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.style.background 	= "transparent";
-	document.tipo_trabajo_detalle.vuelta_num_tinta_especial.style.background 			= "transparent";
-	document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.style.background 	= "transparent";
-} // desactivaCamposFormTipoTrabajoDetalle
+	ocultaCheckbox();
+	ocultaSelect();
+	activaReadonlyCamposVisibles();
+	aplicaColorTransparentCamposVisibles();
+}
 
 function modificaTTD() {
 	ocultaBotonesModificarPorSeccion();
 	document.getElementById("div_btn_actualizar_ttd_encabezado").style.display = "inline";
-	// activa botones ACEPTAR y CANCELAR
 	activaCamposFormTipoTrabajoDetalle();
 	activaBotonesModificarFormTipoTrabajoDetalle();
-} // modificaTTDEncabezado
+}
 
 function aceptaEliminarTTD() {
 	if ( confirm("¿Esta seguro de querer eliminar este registro?") ) {
@@ -373,234 +152,64 @@ function aceptaEliminarTTD() {
 				document.getElementById("div_material_ayuda").style.display 					= "none";
 			},
 			error: function(e) {
+				console.log("ERROR aceptaEliminarTTD.ajax");
 				cancelaModificarTTD();
 				alert("No fue posible actualizar la informaci\u00F3n.");
 				muestraBotonesModificarPorSeccion();
 			}
 		});
 	}
-} // aceptaEliminarTTD
+}
 
+// variable global
+var cerradoOKVentanaListaPliegos = false;
 function aceptaModificarTTD() {
-	// campos ocultos
-	document.tipo_trabajo_detalle.cliente_proporciona_papel.value 			= document.tipo_trabajo_detalle.checkbox_proporciona_papel.checked;
-	document.tipo_trabajo_detalle.cliente_proporciona_placas.value 			= document.tipo_trabajo_detalle.checkbox_proporciona_placas.checked;
-	document.tipo_trabajo_detalle.cliente_proporciona_tinta_especial.value 	= document.tipo_trabajo_detalle.checkbox_proporciona_tinta_especial.checked;
-	document.tipo_trabajo_detalle.cliente_proporciona_barniz.value 			= document.tipo_trabajo_detalle.checkbox_proporciona_barniz.checked;
-	document.tipo_trabajo_detalle.id_tipo_papel_extendido.value				= document.tipo_trabajo_detalle.select_tipo_papel_extendido.value;
-	document.tipo_trabajo_detalle.id_tamanio_publicacion.value				= document.tipo_trabajo_detalle.select_tamanio_publicacion.value;
-	document.tipo_trabajo_detalle.frente_id_combinacion_tintas.value		= document.tipo_trabajo_detalle.select_frente_combinacion_tintas.value;
-	document.tipo_trabajo_detalle.frente_id_tipo_barniz.value				= document.tipo_trabajo_detalle.select_frente_tipo_barniz.value;
-	document.tipo_trabajo_detalle.vuelta_id_combinacion_tintas.value		= document.tipo_trabajo_detalle.select_vuelta_combinacion_tintas.value;
-	document.tipo_trabajo_detalle.vuelta_id_tipo_barniz.value				= document.tipo_trabajo_detalle.select_vuelta_tipo_barniz.value;
-	document.tipo_trabajo_detalle.id_maquina.value							= document.tipo_trabajo_detalle.select_maquina.value;
-	document.tipo_trabajo_detalle.id_tipo_placa.value						= document.tipo_trabajo_detalle.select_tipo_placa.value;
-	document.tipo_trabajo_detalle.id_tipo_complejidad.value					= document.tipo_trabajo_detalle.select_tipo_complejidad.value;
-	
-	// genera la informacion de los input checkbox
-	document.tipo_trabajo_detalle.proporciona_papel.value 			= document.tipo_trabajo_detalle.checkbox_proporciona_papel.checked?"Si":"No";
-	document.tipo_trabajo_detalle.proporciona_placas.value 			= document.tipo_trabajo_detalle.checkbox_proporciona_placas.checked?"Si":"No";
-	document.tipo_trabajo_detalle.proporciona_tinta_especial.value 	= document.tipo_trabajo_detalle.checkbox_proporciona_tinta_especial.checked?"Si":"No";
-	document.tipo_trabajo_detalle.proporciona_barniz.value 			= document.tipo_trabajo_detalle.checkbox_proporciona_barniz.checked?"Si":"No";
-	
-	// guarda la informacion de los select en los input correspondientes
-	document.tipo_trabajo_detalle.tipo_papel.value 					= document.tipo_trabajo_detalle.select_tipo_papel_extendido.options[document.tipo_trabajo_detalle.select_tipo_papel_extendido.selectedIndex].text;
-	document.tipo_trabajo_detalle.tamanio_pubicacion.value 			= document.tipo_trabajo_detalle.select_tamanio_publicacion.options[document.tipo_trabajo_detalle.select_tamanio_publicacion.selectedIndex].text;;
-	document.tipo_trabajo_detalle.frente_combinacion_tintas.value 	= document.tipo_trabajo_detalle.select_frente_combinacion_tintas.options[document.tipo_trabajo_detalle.select_frente_combinacion_tintas.selectedIndex].text;
-	document.tipo_trabajo_detalle.frente_tipo_barniz.value 			= document.tipo_trabajo_detalle.select_frente_tipo_barniz.options[document.tipo_trabajo_detalle.select_frente_tipo_barniz.selectedIndex].text;
-	document.tipo_trabajo_detalle.vuelta_combinacion_tintas.value 	= document.tipo_trabajo_detalle.select_vuelta_combinacion_tintas.options[document.tipo_trabajo_detalle.select_vuelta_combinacion_tintas.selectedIndex].text;
-	document.tipo_trabajo_detalle.vuelta_tipo_barniz.value 			= document.tipo_trabajo_detalle.select_vuelta_tipo_barniz.options[document.tipo_trabajo_detalle.select_vuelta_tipo_barniz.selectedIndex].text;
-	document.tipo_trabajo_detalle.maquina.value 					= document.tipo_trabajo_detalle.select_maquina.options[document.tipo_trabajo_detalle.select_maquina.selectedIndex].text;
-	document.tipo_trabajo_detalle.tipo_placa.value 					= document.tipo_trabajo_detalle.select_tipo_placa.options[document.tipo_trabajo_detalle.select_tipo_placa.selectedIndex].text;
-	document.tipo_trabajo_detalle.tipo_complejidad.value 			= document.tipo_trabajo_detalle.select_tipo_complejidad.options[document.tipo_trabajo_detalle.select_tipo_complejidad.selectedIndex].text;
-	
-	var correcto = true;
-	
-	if ( document.tipo_trabajo_detalle.descripcion_partida_detalle.value == "" ) {
-		correcto = false;
-		alert("El campo descripcion no puede estar vacio. Favor de informarlo");
-	}
-	// Revisa que ancho y alto no este vacios
-	if( correcto 
-			&& isNaN(document.tipo_trabajo_detalle.alto_final.value) ) {
-		correcto = false;
-		alert("El campo alto debe ser un numero. Favor de informarlo");
-		document.tipo_trabajo_detalle.alto_final.value.focus();
-	}
-	if ( correcto
-			&& isNaN(document.tipo_trabajo_detalle.ancho_final.value ) ) {
-		correcto = false;
-		alert("El campo ancho debe ser un numero. Favor de informarlo");
-		document.tipo_trabajo_detalle.ancho_final.focus(); 
-	}
-	if ( correcto
-			&& isNaN(document.tipo_trabajo_detalle.alto_extendido.value) ) {
-		correcto = false;
-		alert("El campo alto extendido debe ser un numero. Favor de informarlo");
-		document.tipo_trabajo_detalle.alto_extendido.value.focus();
-	}
-	if ( correcto
-			&& isNaN(document.tipo_trabajo_detalle.ancho_extendido.value ) ) {
-		correcto = false;
-		alert("El campo ancho extendido debe ser un numero. Favor de informarlo");
-		document.tipo_trabajo_detalle.ancho_extendido.focus(); 
-	}
-	
-	if ( correcto
-			&& (document.tipo_trabajo_detalle.alto_corte_inicial.value == ""
-					|| isNaN(document.tipo_trabajo_detalle.alto_corte_inicial.value) )  ) {
-		correcto = false;
-		alert("El campo Alto Corte Inicial debe ser un numero valido. Favor de informarlo");
-		document.tipo_trabajo_detalle.alto_corte_inicial.focus();
-	}
-	if ( correcto
-			&& (document.tipo_trabajo_detalle.ancho_corte_inicial.value == ""
-					|| isNaN(document.tipo_trabajo_detalle.ancho_corte_inicial.value) )  ) {
-		correcto = false;
-		alert("El campo Ancho Corte Inicial debe ser un numero valido. Favor de informarlo");
-		document.tipo_trabajo_detalle.ancho_corte_inicial.focus();
-	}
-	
-    switch( parseInt( document.partida.tipo_trabajo.value ) ) {
-        case 1:
-            if( correcto
-            		&& ( document.tipo_trabajo_detalle.repeticiones_x_pliego.value == ""
-            		|| isNaN( document.tipo_trabajo_detalle.repeticiones_x_pliego.value )
-            		|| parseInt( document.tipo_trabajo_detalle.repeticiones_x_pliego.value ) <= 0 ) ) {
-                correcto = false;
-                alert("El n\u00famero de repeticiones deber ser un n\u00famero positivo mayor de cero");
-                document.tipo_trabajo_detalle.repeticiones_x_pliego.focus();
-            }
-            break;
-        
-        case 2:
-            if( correcto 
-            		&& ( document.tipo_trabajo_detalle.numero_paginas_publicacion.value == ""
-            		|| isNaN( document.tipo_trabajo_detalle.numero_paginas_publicacion.value )
-            		|| parseInt( document.tipo_trabajo_detalle.numero_paginas_publicacion.value ) <= 0 
-            		|| parseInt( document.tipo_trabajo_detalle.numero_paginas_publicacion.value )%4 != 0 ) ) {
-                correcto = false;
-                alert("El n\u00famero de p\u00e1ginas deber ser un n\u00famero positivo mayor de cero y multiplo de 4");
-                document.tipo_trabajo_detalle.numero_paginas_publicacion.focus();
-            }
-            
-            if( correcto
-            		&& document.tipo_trabajo_detalle.select_tamanio_publicacion.value == "1" ) {
-                correcto = false;
-                alert("El tama\u00f1o de la publicaci\u00f3n debe ser especificado");
-                document.forms["tipo_trabajo_detalle"].elements["select_tamanio_publicacion"].focus();
-            }
-            break;
-            
-        case 3:
-            break;
-            
-        default:
-            break;
-    } // switch validacion tipo trabajo
-    
-     // valida que si no hay tinta normal en frente, debe forzosamente haber tinta especial en frente
-    if( correcto 
-    		&& document.tipo_trabajo_detalle.frente_id_combinacion_tintas.value == "16" ) {
-        // valida en frente si la tinta especial es mayor a cero, exista obligatoriamente una descripcion.
-        if( document.tipo_trabajo_detalle.frente_num_tinta_especial.value == ""
-        		|| isNaN(document.tipo_trabajo_detalle.frente_num_tinta_especial.value)
-        		|| parseInt( document.tipo_trabajo_detalle.frente_num_tinta_especial.value ) <= 0 ) {
-            correcto = false;
-            alert("Es necesario que exista al menos tinta especial en el frente");
-            document.tipo_trabajo_detalle.frente_num_tinta_especial.focus();
-        }   
-    }
-    
-    // valida que informacion de frente num tinta especial
-    if ( correcto 
-    		&& document.tipo_trabajo_detalle.frente_num_tinta_especial.value == "" ) {
-    	correcto = false;
-    	alert("El numero de frente tinta especial debe ser cero");
-    	document.tipo_trabajo_detalle.frente_num_tinta_especial.focus();
-    }
-    if ( correcto 
-    		&& document.tipo_trabajo_detalle.frente_num_tinta_especial.value != ""
-    		&& isNaN( document.tipo_trabajo_detalle.frente_num_tinta_especial.value ) ) {
-    	correcto = false;
-    	alert("El dato de frente tinta especial debe ser un numero");
-    	document.tipo_trabajo_detalle.frente_num_tinta_especial.focus();
-    }
-    if ( correcto 
-    		&& parseInt( document.tipo_trabajo_detalle.frente_num_tinta_especial.value ) > 0 
-    		&& document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.value == "" ) {
-    	correcto = false;
-    	alert("El numero de frente tinta especial es mayor a cero; debe especificar la descripcion de frente tinta especial");
-    	document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.focus();
-    }
-    if ( correcto
-    		&& document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.value != "" 
-    		&& ( parseInt( document.tipo_trabajo_detalle.frente_num_tinta_especial.value ) == 0 
-    				|| parseInt( document.tipo_trabajo_detalle.frente_num_tinta_especial.value ) < 0 ) ) {
-    	correcto = false;
-    	alert("Tiene especificada una descripcion de frente tinta especial; debe especificar que frente tinta especial es al menos 1");
-    	document.tipo_trabajo_detalle.frente_num_tinta_especial.focus();
-    }
-    
- // valida que informacion de vuelta num tinta especial
-    if ( correcto 
-    		&& document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value == "" ) {
-    	correcto = false;
-    	alert("El numero de vuelta tinta especial debe ser cero");
-    	document.tipo_trabajo_detalle.vuelta_num_tinta_especial.focus();
-    }
-    if ( correcto 
-    		&& document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value != ""
-    		&& isNaN( document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value ) ) {
-    	correcto = false;
-    	alert("El dato de vuelta tinta especial debe ser un numero");
-    	document.tipo_trabajo_detalle.vuelta_num_tinta_especial.focus();
-    }
-    if ( correcto 
-    		&& parseInt( document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value ) > 0 
-    		&& document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.value == "" ) {
-    	correcto = false;
-    	alert("El numero de vuelta tinta especial es mayor a cero; debe especificar la descripcion de vuelta tinta especial");
-    	document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.focus();
-    }
-    if ( correcto
-    		&& document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.value != "" 
-    		&& ( parseInt( document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value ) == 0 
-    				|| parseInt( document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value ) < 0 ) ) {
-    	correcto = false;
-    	alert("Tiene especificada una descripcion de vuelta tinta especial; debe especificar que vuelta tinta especial es al menos 1");
-    	document.tipo_trabajo_detalle.vuelta_num_tinta_especial.focus();
-    }
-    
-	if( correcto ) {
+	// guarda informacion en los campos ocultos
+	copiaValorDeCheckboxAHidden();
+	copiaValorDeSelectAHidden();
+	copiaValorDeCheckboxAText();
+	copiaValorDeSelectAText();
+	// validacion
+	if( validaDatosFormTTD() ) {
 		// realiza ajax
 		document.body.style.cursor = "wait";
 		desactivaCamposFormTipoTrabajoDetalle();
 		desactivaBotonesModificarFormTipoTrabajoDetalle();
-		// PARA ABRIR VENTANA MODAL NUEVAMENTE
-		var modificarPliegos = false;
 		
-		if ( document.tipo_trabajo_detalle.repeticiones_x_pliego.value 				!= obj_ttd.repeticiones_x_pliego
-				|| document.tipo_trabajo_detalle.numero_paginas_publicacion.value 	!= obj_ttd.numero_paginas_publicacion
-				|| document.tipo_trabajo_detalle.tamanio_pubicacion.value 			!= obj_ttd.tamanio_publicacion 
-				|| document.tipo_trabajo_detalle.frente_num_tinta_especial.value 	!= obj_ttd.frente_num_tinta_especial
-				|| document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value 	!= obj_ttd.vuelta_num_tinta_especial ) 
-			modificarPliegos = true;
+		// PARA ABRIR VENTANA MODAL DE CALCULO DE PLIEGOS NUEVAMENTE
+		var modificarPliegosNuevamente = false;
+		switch( parseInt( document.partida.id_tipo_trabajo.value ) ) {
+			case 1:  // flyer/poster
+				if ( document.tipo_trabajo_detalle.repeticiones_x_pliego.value != obj_ttd.repeticiones_x_pliego )
+					modificarPliegosNuevamente = true;
+				break;
+			case 2: // publicacion/revista/libro
+				if ( document.tipo_trabajo_detalle.numero_paginas_publicacion.value != obj_ttd.numero_paginas_publicacion
+						|| document.tipo_trabajo_detalle.tamanio_pubicacion.value != obj_ttd.tamanio_publicacion )
+					modificarPliegosNuevamente = true;
+				break;
+			case 3:	// otro
+				break;
+			default:
+				console.log("No entro al switch");
+				break;
+		}
 		
-		if ( modificarPliegos ) {
+		if ( modificarPliegosNuevamente ) {
 			// es necesario modificar la cantidad de pliegos y papel porque:
 			// a) modifico el numero de repeticiones que caben en cada papel
 			// b) modifico el numero de hojas de la publicacion
 			// c) modifico el tamaño de la publicacion
 			$.ajax({
-				type:'POST',
-				url:urlActualizaTipoTrabajoDetalleConPliegos,
-				data:$("[name=tipo_trabajo_detalle]").serialize(),
-				success:function(response) {
+				type: "POST",
+				url: urlActualizaTipoTrabajoDetalleConPliegos,
+				data: $("[name=tipo_trabajo_detalle]").serialize(),
+				success: function(response) {
 					//console.log(response);
 					document.body.style.cursor = "default";
 					switch(response.estatusOperacion) {
 						case 0: // error
+							console.log("ERROR aceptaModificarTTD.if.ajax.switch.case0");
 							cancelaModificarTTD();
 							alert("No fue posible actualizar la informacion.");
 							break;
@@ -626,6 +235,7 @@ function aceptaModificarTTD() {
 					muestraBotonesModificarPorSeccion();
 				},
 				error: function() {
+					console.log("ERROR aceptaModificarTTD.if.ajax");
 					document.body.style.cursor = "default";
 					cancelaModificarTTD()
 					alert("No fue posible actualizar la informaci\u00F3n.");
@@ -636,18 +246,21 @@ function aceptaModificarTTD() {
 			// no es necesario modificar informacion respecto a cantidad de pliegos
 			// no es necesario modificar informacion respecto a cantidad de papel
 			$.ajax({
-				type:'POST',
-				url:urlActualizaTipoTrabajoDetalle,
-				data:$("[name=tipo_trabajo_detalle]").serialize(),
-				success:function(response) {
+				type: "POST",
+				url: urlActualizaTipoTrabajoDetalle,
+				data: $("[name=tipo_trabajo_detalle]").serialize(),
+				success: function(response) {
 					//console.log(response);
 					document.body.style.cursor = "default";
 					switch(response.estatusOperacion) {
 						case 0: // error
+							console.log("ERROR aceptaModificarTTD.else.ajax.switch.case0");
 							cancelaModificarTTD();
 							alert("No fue posible actualizar la informacion.");
 							break;
 						default: // exito
+							// GUARDA RESULTADOS PARTIDA EN OBJETO javascript
+							obj_ttd.setObjTTD();
 							document.body.style.cursor = "default";
 							// obtiene el precio neto
 							$.ajax({
@@ -658,6 +271,8 @@ function aceptaModificarTTD() {
 									nut:document.tipo_trabajo_detalle.nut.value
 								},
 								success:function(response){
+									// GUARDA RESULTADOS TTD EN OBJETO javascript PARA NO OLVIDARLOS, porque todo salio correcto
+						            obj_ttd.setObjTTD();
 									// actualiza html
 									var descripcion				= "td_" + document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value + "_descripcion";
 									var repeticiones_x_pliego 	= "td_" + document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value + "_repeticiones_x_pliego";
@@ -689,6 +304,7 @@ function aceptaModificarTTD() {
 					muestraBotonesModificarPorSeccion();
 				},
 				error: function() {
+					console.log("ERROR aceptaModificarTTD.if.ajax");
 					document.body.style.cursor = "default";
 					cancelaModificarTTD();
 					alert("No fue posible actualizar la informaci\u00F3n.");
@@ -696,21 +312,15 @@ function aceptaModificarTTD() {
 				}
 			});
 		}
+		delete modificarPliegosNuevamente;
 	}
 	delete correcto;
 } // aceptaModificarTTDEncabezado
 
-function cancelaModificarTTD() {
-	obj_ttd.setFormTTD();
-	desactivaBotonesModificarFormTipoTrabajoDetalle();
-	desactivaCamposFormTipoTrabajoDetalle();
-	// activa botones de modificar en las areas restantes
-	muestraBotonesModificarPorSeccion();
-} // cancelaModificarTTDEncabezado
 
 function revisaCierreSegundaVentanaModal() {
-	//alert("cerro la segunda ventana modal");
-	//alert("el valor de la bandera es: " + cerradoOKVentanaListaPliegos);
+	// alert("cerro la segunda ventana modal");
+	// alert("el valor de la bandera es: " + cerradoOKVentanaListaPliegos);
 	if( cerradoOKVentanaListaPliegos ) {
 		// Ok.
 		//alert("entro al if");
@@ -722,6 +332,8 @@ function revisaCierreSegundaVentanaModal() {
 				nut:document.tipo_trabajo_detalle.nut.value
 			},
 			success:function(response){
+				// GUARDA RESULTADOS PARTIDA EN OBJETO javascript
+				obj_ttd.setObjTTD();
 				// actualiza html
 				var descripcion				= "td_" + document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value + "_descripcion";
 				var repeticiones_x_pliego 	= "td_" + document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value + "_repeticiones_x_pliego";
@@ -744,6 +356,7 @@ function revisaCierreSegundaVentanaModal() {
 				muestraBotonesModificarPorSeccion();
 			},
 			error:function(e){
+				console.log("ERROR revisaCierreSegundaVentanaModal.if.ajax");
 				alert("No fue posible obtener precio neto");
 				muestraBotonesModificarPorSeccion();
 			}
@@ -759,43 +372,15 @@ function revisaCierreSegundaVentanaModal() {
 		
 		// 1)
 		obj_ttd.setFormTTD();
-		
 		// 2)
 		activaCamposFormTipoTrabajoDetalle();
-		
-		document.tipo_trabajo_detalle.cliente_proporciona_papel.value 			= document.tipo_trabajo_detalle.checkbox_proporciona_papel.checked;
-		document.tipo_trabajo_detalle.cliente_proporciona_placas.value 			= document.tipo_trabajo_detalle.checkbox_proporciona_placas.checked;
-		document.tipo_trabajo_detalle.cliente_proporciona_tinta_especial.value 	= document.tipo_trabajo_detalle.checkbox_proporciona_tinta_especial.checked;
-		document.tipo_trabajo_detalle.cliente_proporciona_barniz.value 			= document.tipo_trabajo_detalle.checkbox_proporciona_barniz.checked;
-		document.tipo_trabajo_detalle.id_tipo_papel_extendido.value				= document.tipo_trabajo_detalle.select_tipo_papel_extendido.value;
-		document.tipo_trabajo_detalle.id_tamanio_publicacion.value				= document.tipo_trabajo_detalle.select_tamanio_publicacion.value;
-		document.tipo_trabajo_detalle.frente_id_combinacion_tintas.value		= document.tipo_trabajo_detalle.select_frente_combinacion_tintas.value;
-		document.tipo_trabajo_detalle.frente_id_tipo_barniz.value				= document.tipo_trabajo_detalle.select_frente_tipo_barniz.value;
-		document.tipo_trabajo_detalle.vuelta_id_combinacion_tintas.value		= document.tipo_trabajo_detalle.select_vuelta_combinacion_tintas.value;
-		document.tipo_trabajo_detalle.vuelta_id_tipo_barniz.value				= document.tipo_trabajo_detalle.select_vuelta_tipo_barniz.value;
-		document.tipo_trabajo_detalle.id_maquina.value							= document.tipo_trabajo_detalle.select_maquina.value;
-		document.tipo_trabajo_detalle.id_tipo_placa.value						= document.tipo_trabajo_detalle.select_tipo_placa.value;
-		
-		// genera la informacion de los input checkbox
-		document.tipo_trabajo_detalle.proporciona_papel.value 			= document.tipo_trabajo_detalle.checkbox_proporciona_papel.checked?"Si":"No";
-		document.tipo_trabajo_detalle.proporciona_placas.value 			= document.tipo_trabajo_detalle.checkbox_proporciona_placas.checked?"Si":"No";
-		document.tipo_trabajo_detalle.proporciona_tinta_especial.value 	= document.tipo_trabajo_detalle.checkbox_proporciona_tinta_especial.checked?"Si":"No";
-		document.tipo_trabajo_detalle.proporciona_barniz.value 			= document.tipo_trabajo_detalle.checkbox_proporciona_barniz.checked?"Si":"No";
-		
-		// guarda la informacion de los select en los input correspondientes
-		document.tipo_trabajo_detalle.tipo_papel.value 					= document.tipo_trabajo_detalle.select_tipo_papel_extendido.options[document.tipo_trabajo_detalle.select_tipo_papel_extendido.selectedIndex].text;
-		document.tipo_trabajo_detalle.tamanio_pubicacion.value 			= document.tipo_trabajo_detalle.select_tamanio_publicacion.options[document.tipo_trabajo_detalle.select_tamanio_publicacion.selectedIndex].text;;
-		document.tipo_trabajo_detalle.frente_combinacion_tintas.value 	= document.tipo_trabajo_detalle.select_frente_combinacion_tintas.options[document.tipo_trabajo_detalle.select_frente_combinacion_tintas.selectedIndex].text;
-		document.tipo_trabajo_detalle.frente_tipo_barniz.value 			= document.tipo_trabajo_detalle.select_frente_tipo_barniz.options[document.tipo_trabajo_detalle.select_frente_tipo_barniz.selectedIndex].text;
-		document.tipo_trabajo_detalle.vuelta_combinacion_tintas.value 	= document.tipo_trabajo_detalle.select_vuelta_combinacion_tintas.options[document.tipo_trabajo_detalle.select_vuelta_combinacion_tintas.selectedIndex].text;
-		document.tipo_trabajo_detalle.vuelta_tipo_barniz.value 			= document.tipo_trabajo_detalle.select_vuelta_tipo_barniz.options[document.tipo_trabajo_detalle.select_vuelta_tipo_barniz.selectedIndex].text;
-		document.tipo_trabajo_detalle.maquina.value 					= document.tipo_trabajo_detalle.select_maquina.options[document.tipo_trabajo_detalle.select_maquina.selectedIndex].text;
-		document.tipo_trabajo_detalle.tipo_placa.value 					= document.tipo_trabajo_detalle.select_tipo_placa.options[document.tipo_trabajo_detalle.select_tipo_placa.selectedIndex].text;
-		
-		// desactiva campos
+		// copia la informacion en campos ocultos
+		copiaValorDeCheckboxAHidden();
+		copiaValorDeSelectAHidden();
+		copiaValorDeCheckboxAText();
+		copiaValorDeSelectAText();
 		desactivaCamposFormTipoTrabajoDetalle();
 		desactivaBotonesModificarFormTipoTrabajoDetalle();
-		
 		// realiza ajax
 		// 3)
 		$.ajax({
@@ -806,12 +391,12 @@ function revisaCierreSegundaVentanaModal() {
 				document.body.style.cursor = "default";
 				switch(response.estatusOperacion) {
 					case 0: // error
+						console.log("ERROR revisaCierreSegundaVentanaModal.else.ajax1.switch.case0");
 						cancelaModificarTTD();
 						alert("No fue posible actualizar la informaci\u00F3n.");
 						break;
 						
 					default: // exito
-			
 	        			//alert("activa pliegos eliminados");
 	        			$.ajax({
 	        				type:"POST",
@@ -834,11 +419,13 @@ function revisaCierreSegundaVentanaModal() {
 		             					document.precio.precio_neto.value = "$ " + (response.precioNeto).formatMoney(2);		
 		             				},
 		             				error:function(e){
+		             					console.log("ERROR revisaCierreSegundaVentanaModal.else.ajax3");
 		             					alert("No fue posible obtener precio neto");
 		             				}
 		             			});
 	        				},
 	        				error:function(e){
+	        					console.log("ERROR revisaCierreSegundaVentanaModal.else.ajax2");
 	        					alert("error activando pliegos");
 	        				}
 	        			});
@@ -847,8 +434,11 @@ function revisaCierreSegundaVentanaModal() {
 				muestraBotonesModificarPorSeccion();
 			},
 			error: function() {
+				console.log("ERROR revisaCierreSegundaVentanaModal.else.ajax1");
 				document.body.style.cursor = "default";
-				cancelaModificarTTD()
+				cancelaModificarTTD();
+				// oculta DIVS
+				ocultaDiv(); // funcion en detalle_ttd_agrega.js
 				alert("No fue posible actualizar la informaci\u00F3n.");
 				muestraBotonesModificarPorSeccion();
 			}
@@ -856,46 +446,10 @@ function revisaCierreSegundaVentanaModal() {
 	}
 } // revisaCierreSegundaVentanaModal
 
-function buscaTipoPlaca( obj ) {
-    var id = obj.options[obj.selectedIndex].value;
-    $.ajax({
-        type:"POST",
-        url:urlBuscaTipoPlaca,
-        data:{id_maquina:id},
-        success:function(response) {
-            // jquery limpia select tipo_trabajo_detalle
-            $("[name='select_tipo_placa']").empty();
-            // parsea la informacion
-            var jsonObject = JSON.parse( response.textoJson );
-            $.each( jsonObject, function(i, item) {
-                //alert( item.id_tipo_placa + ' ' + item.descripcion );
-                var option = document.createElement("option");
-                option.text     = item.descripcion;
-                option.value    = item.id_tipo_placa;
-                document.forms["tipo_trabajo_detalle"].elements["select_tipo_placa"].add( option );
-                delete option;
-                // coloca opcion del tipo de placas
-                var clave			= document.tipo_trabajo_detalle.tipo_placa.value;
-       			var select 			= document.tipo_trabajo_detalle.select_tipo_placa;
-       			var encontroOpcion 	= false;
-       			for( var i=0; i<select.length; i++ ) {
-       				if( select.options[i].innerText == clave ) {
-       					select.selectedIndex	= i;
-       					encontroOpcion = true;
-       					break;
-       				}
-       			}
-       			if( !encontroOpcion ) {
-       				select.selectedIndex = 0;
-       			}
-                delete clave;
-       			delete select;
-            } );
-            delete jsonObject;
-        },
-        error:function(e) {
-            alert("No fue posible cargar lista de placas por maquina");
-        }
-    });
-    delete id;
-} // buscaTipoPlaca
+function cancelaModificarTTD() {
+	obj_ttd.setFormTTD();
+	desactivaBotonesModificarFormTipoTrabajoDetalle();
+	desactivaCamposFormTipoTrabajoDetalle();
+	muestraBotonesModificarPorSeccion();
+}
+

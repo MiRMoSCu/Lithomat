@@ -86,7 +86,7 @@ public class PliegoController {
 		tipoTrabajoDetalle 	= null;
 		pliego 				= null;
 
-		return pliegoService.buscaHTML(idTipoTrabajoDetalle);
+		return pliegoService.listaHTMLModificacion(idTipoTrabajoDetalle);
 	} // agregaPliego
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})

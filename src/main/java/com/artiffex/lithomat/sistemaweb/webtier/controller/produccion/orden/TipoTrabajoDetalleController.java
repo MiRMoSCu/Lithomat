@@ -77,7 +77,7 @@ public class TipoTrabajoDetalleController {
 			@RequestParam(value = "id_tipo_complejidad", 				required = false) Integer idTipoComplejidad
 		) {
 		log.info("/agrega_tipo_trabajo_detalle");
-
+		
 		Timestamp fechaGeneracion = new Timestamp(Calendar.getInstance().getTimeInMillis());
 
 		TipoTrabajoDetalle tipoTrabajoDetalle = new TipoTrabajoDetalle();
@@ -97,8 +97,8 @@ public class TipoTrabajoDetalleController {
 			TipoPapelExtendido tipoPapelExtendido = new TipoPapelExtendido();
 			tipoPapelExtendido.setIdTipoPapelExtendido(idTipoPapelExtendido);
 		tipoTrabajoDetalle.setTipoPapelExtendido(tipoPapelExtendido);
-		tipoTrabajoDetalle.setRepeticionesXPliego(repeticionesXPliego == null ? 0 : repeticionesXPliego);
-		tipoTrabajoDetalle.setNumeroPaginasPublicacion(numeroPaginasPublicacion == null ? 0 : numeroPaginasPublicacion);
+		tipoTrabajoDetalle.setRepeticionesXPliego(repeticionesXPliego==null?0:repeticionesXPliego);
+		tipoTrabajoDetalle.setNumeroPaginasPublicacion(numeroPaginasPublicacion==null?0:numeroPaginasPublicacion);
 			TamanioPublicacion tamanioPublicacion = new TamanioPublicacion();
 			tamanioPublicacion.setIdTamanioPublicacion(idTamanioPublicacion);
 		tipoTrabajoDetalle.setTamanioPublicacion(tamanioPublicacion);
@@ -107,7 +107,7 @@ public class TipoTrabajoDetalleController {
 			CombinacionTintas frenteCombinacionTintas = new CombinacionTintas();
 			frenteCombinacionTintas.setIdCombinacionTintas(frenteIdCombinacionTintas);
 		tipoTrabajoDetalle.setFrenteCombinacionTintas(frenteCombinacionTintas);
-		tipoTrabajoDetalle.setFrenteNumTintaEspecial(frenteNumTintaEspecial == null ? 0 : frenteNumTintaEspecial);
+		tipoTrabajoDetalle.setFrenteNumTintaEspecial(frenteNumTintaEspecial==null?0:frenteNumTintaEspecial);
 		tipoTrabajoDetalle.setFrenteDescripcionTintaEspecial(frenteDescripcionTintaEspecial);
 			TipoBarniz frenteTipoBarniz = new TipoBarniz();
 			frenteTipoBarniz.setIdTipoBarniz(frenteIdTipoBarniz);
@@ -115,7 +115,7 @@ public class TipoTrabajoDetalleController {
 			CombinacionTintas vueltaCombinacionTintas = new CombinacionTintas();
 			vueltaCombinacionTintas.setIdCombinacionTintas(vueltaIdCombinacionTintas);
 		tipoTrabajoDetalle.setVueltaCombinacionTintas(vueltaCombinacionTintas);
-		tipoTrabajoDetalle.setVueltaNumTintaEspecial(vueltaNumTintaEspecial == null ? 0 : vueltaNumTintaEspecial);
+		tipoTrabajoDetalle.setVueltaNumTintaEspecial(vueltaNumTintaEspecial==null?0:vueltaNumTintaEspecial);
 		tipoTrabajoDetalle.setVueltaDescripcionTintaEspecial(vueltaDescripcionTintaEspecial);
 			TipoBarniz vueltaTipoBarniz = new TipoBarniz();
 			vueltaTipoBarniz.setIdTipoBarniz(vueltaIdTipoBarniz);
@@ -153,26 +153,6 @@ public class TipoTrabajoDetalleController {
 		
 		return jsonResponse;
 	} // agregaDetallePartida
-	
-
-	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
-	@RequestMapping(value = "/agrega_olvidado", method = RequestMethod.POST, headers = "Accept=application/json")
-	@ResponseBody
-	public JsonResponse agregaTipoTrabajoDetalleOlvidado() {
-		log.info("/agrega_tipo_trabajo_detalle_olvidado");
-		
-		
-		
-		System.out.println("entro a agregar titpo trabajo detalle olvidado");
-		
-		
-		
-		
-		
-		
-		
-		return null;
-	}
 	
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
@@ -267,23 +247,34 @@ public class TipoTrabajoDetalleController {
 		tipoTrabajoDetalle.setClienteProporcionaBarniz(clienteProporcionaBarniz);
 		tipoTrabajoDetalle.setClienteProporcionaPlacas(clienteProporcionaPlacas);
 		tipoTrabajoDetalle.getTipoPapelExtendido().setIdTipoPapelExtendido(idTipoPapelExtendido);
-		tipoTrabajoDetalle.setRepeticionesXPliego(repeticionesXPliego);
-		tipoTrabajoDetalle.setNumeroPaginasPublicacion(numeroPaginasPublicacion);
+		tipoTrabajoDetalle.setRepeticionesXPliego(repeticionesXPliego==null?0:repeticionesXPliego);
+		tipoTrabajoDetalle.setNumeroPaginasPublicacion(numeroPaginasPublicacion==null?0:numeroPaginasPublicacion);
 		tipoTrabajoDetalle.getTamanioPublicacion().setIdTamanioPublicacion(idTamanioPublicacion);
 		tipoTrabajoDetalle.setAltoCorteInicial(altoCorteInicial);
 		tipoTrabajoDetalle.setAnchoCorteInicial(anchoCorteInicial);
-		tipoTrabajoDetalle.getFrenteCombinacionTintas().setIdCombinacionTintas(frenteIdCombinacionTintas);
-		tipoTrabajoDetalle.setFrenteNumTintaEspecial(frenteNumTintaEspecial);
+			CombinacionTintas frenteCombinacionTintas = new CombinacionTintas();
+			frenteCombinacionTintas.setIdCombinacionTintas(frenteIdCombinacionTintas);
+		tipoTrabajoDetalle.setFrenteCombinacionTintas(frenteCombinacionTintas);
+			frenteCombinacionTintas = null;
+		tipoTrabajoDetalle.setFrenteNumTintaEspecial(frenteNumTintaEspecial==null?0:frenteNumTintaEspecial);
 		tipoTrabajoDetalle.setFrenteDescripcionTintaEspecial(frenteDescripcionTintaEspecial);
-		tipoTrabajoDetalle.getFrenteTipoBarniz().setIdTipoBarniz(frenteIdTipoBarniz);
-		tipoTrabajoDetalle.getVueltaCombinacionTintas().setIdCombinacionTintas(vueltaIdCombinacionTintas);
-		tipoTrabajoDetalle.setVueltaNumTintaEspecial(vueltaNumTintaEspecial);
+			TipoBarniz frenteTipoBarniz = new TipoBarniz();
+			frenteTipoBarniz.setIdTipoBarniz(frenteIdTipoBarniz);
+		tipoTrabajoDetalle.setFrenteTipoBarniz(frenteTipoBarniz);
+			frenteTipoBarniz = null;
+			CombinacionTintas vueltaCombinacionTintas = new CombinacionTintas();
+			vueltaCombinacionTintas.setIdCombinacionTintas(vueltaIdCombinacionTintas);
+		tipoTrabajoDetalle.setVueltaCombinacionTintas(vueltaCombinacionTintas);
+			vueltaCombinacionTintas = null;
+		tipoTrabajoDetalle.setVueltaNumTintaEspecial(vueltaNumTintaEspecial==null?0:vueltaNumTintaEspecial);
 		tipoTrabajoDetalle.setVueltaDescripcionTintaEspecial(vueltaDescripcionTintaEspecial);
-		tipoTrabajoDetalle.getVueltaTipoBarniz().setIdTipoBarniz(vueltaIdTipoBarniz);
+			TipoBarniz vueltaTipoBarniz = new TipoBarniz();
+			vueltaTipoBarniz.setIdTipoBarniz(vueltaIdTipoBarniz);
+		tipoTrabajoDetalle.setVueltaTipoBarniz(vueltaTipoBarniz);
+			vueltaTipoBarniz = null;
 		tipoTrabajoDetalle.getMaquina().setIdMaquina(idMaquina);
 		tipoTrabajoDetalle.getTipoPlaca().setIdTipoPlaca(idTipoPlaca);
 		tipoTrabajoDetalle.getTipoComplejidad().setIdTipoComplejidad(idTipoComplejidad);
-		
 		tipoTrabajoDetalleService.modificaTipoTrabajoDetalle(tipoTrabajoDetalle);
 		
 		JsonResponse jsonResponse = new JsonResponse();
@@ -341,19 +332,31 @@ public class TipoTrabajoDetalleController {
 		tipoTrabajoDetalle.setClienteProporcionaBarniz(clienteProporcionaBarniz);
 		tipoTrabajoDetalle.setClienteProporcionaPlacas(clienteProporcionaPlacas);
 		tipoTrabajoDetalle.getTipoPapelExtendido().setIdTipoPapelExtendido(idTipoPapelExtendido);
-		tipoTrabajoDetalle.setRepeticionesXPliego(repeticionesXPliego);
-		tipoTrabajoDetalle.setNumeroPaginasPublicacion(numeroPaginasPublicacion);
+		tipoTrabajoDetalle.setRepeticionesXPliego(repeticionesXPliego==null?0:repeticionesXPliego);
+		tipoTrabajoDetalle.setNumeroPaginasPublicacion(numeroPaginasPublicacion==null?0:numeroPaginasPublicacion);
 		tipoTrabajoDetalle.getTamanioPublicacion().setIdTamanioPublicacion(idTamanioPublicacion);
 		tipoTrabajoDetalle.setAltoCorteInicial(altoCorteInicial);
 		tipoTrabajoDetalle.setAnchoCorteInicial(anchoCorteInicial);
-		tipoTrabajoDetalle.getFrenteCombinacionTintas().setIdCombinacionTintas(frenteIdCombinacionTintas);
-		tipoTrabajoDetalle.setFrenteNumTintaEspecial(frenteNumTintaEspecial);
+			CombinacionTintas frenteCombinacionTintas = new CombinacionTintas();
+			frenteCombinacionTintas.setIdCombinacionTintas(frenteIdCombinacionTintas);
+		tipoTrabajoDetalle.setFrenteCombinacionTintas(frenteCombinacionTintas);
+			frenteCombinacionTintas = null;
+		tipoTrabajoDetalle.setFrenteNumTintaEspecial(frenteNumTintaEspecial==null?0:frenteNumTintaEspecial);
 		tipoTrabajoDetalle.setFrenteDescripcionTintaEspecial(frenteDescripcionTintaEspecial);
-		tipoTrabajoDetalle.getFrenteTipoBarniz().setIdTipoBarniz(frenteIdTipoBarniz);
-		tipoTrabajoDetalle.getVueltaCombinacionTintas().setIdCombinacionTintas(vueltaIdCombinacionTintas);
-		tipoTrabajoDetalle.setVueltaNumTintaEspecial(vueltaNumTintaEspecial);
+			TipoBarniz frenteTipoBarniz = new TipoBarniz();
+			frenteTipoBarniz.setIdTipoBarniz(frenteIdTipoBarniz);
+		tipoTrabajoDetalle.setFrenteTipoBarniz(frenteTipoBarniz);
+			frenteTipoBarniz = null;
+			CombinacionTintas vueltaCombinacionTintas = new CombinacionTintas();
+			vueltaCombinacionTintas.setIdCombinacionTintas(vueltaIdCombinacionTintas);
+		tipoTrabajoDetalle.setVueltaCombinacionTintas(vueltaCombinacionTintas);
+			vueltaCombinacionTintas = null;
+		tipoTrabajoDetalle.setVueltaNumTintaEspecial(vueltaNumTintaEspecial==null?0:vueltaNumTintaEspecial);
 		tipoTrabajoDetalle.setVueltaDescripcionTintaEspecial(vueltaDescripcionTintaEspecial);
-		tipoTrabajoDetalle.getVueltaTipoBarniz().setIdTipoBarniz(vueltaIdTipoBarniz);
+			TipoBarniz vueltaTipoBarniz = new TipoBarniz();
+			vueltaTipoBarniz.setIdTipoBarniz(vueltaIdTipoBarniz);
+		tipoTrabajoDetalle.setVueltaTipoBarniz(vueltaTipoBarniz);
+			vueltaTipoBarniz = null;
 		tipoTrabajoDetalle.getMaquina().setIdMaquina(idMaquina);
 		tipoTrabajoDetalle.getTipoPlaca().setIdTipoPlaca(idTipoPlaca);
 		tipoTrabajoDetalle.getTipoComplejidad().setIdTipoComplejidad(idTipoComplejidad);
@@ -364,7 +367,7 @@ public class TipoTrabajoDetalleController {
 		jsonResponse.setEstatusOperacion(1);
 		
 		// INSTRUCCIONES:
-		// elimina los pliegos ya existentes porque hay nueva informacion y debe calcularse  nuevos pliegos
+		// elimina los pliegos ya existentes porque hay nueva informacion y deben calcularse nuevos pliegos
 		// y se elimina logicamente la calificacion de esos pliegos ya existentes.
 		// POR TANTO, SI ACEPTA LOS NUEVOS PLIEGOS:
 		// 1) se debe saber cuales son los pliegos eliminados

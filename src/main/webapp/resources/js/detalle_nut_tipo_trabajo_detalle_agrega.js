@@ -1,70 +1,42 @@
 
-function limpiaMuestraCamposFormTipoTrabajoDetalle() {
-	// campos ocultos
-	document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value = "";
-	// chnk
-	document.tipo_trabajo_detalle.checkbox_proporciona_papel.checked 			= false;
-	document.tipo_trabajo_detalle.checkbox_proporciona_placas.checked 			= false;
-	document.tipo_trabajo_detalle.checkbox_proporciona_tinta_especial.checked 	= false;
-	document.tipo_trabajo_detalle.checkbox_proporciona_barniz.checked 			= false;
-	// muestra los checkbox
-	document.tipo_trabajo_detalle.proporciona_papel.style.display 					= "none";
-	document.tipo_trabajo_detalle.checkbox_proporciona_papel.style.display 			= "inline";
-	document.tipo_trabajo_detalle.proporciona_placas.style.display 					= "none";
-	document.tipo_trabajo_detalle.checkbox_proporciona_placas.style.display 		= "inline";
-	document.tipo_trabajo_detalle.proporciona_tinta_especial.style.display 			= "none";
-	document.tipo_trabajo_detalle.checkbox_proporciona_tinta_especial.style.display = "inline";
-	document.tipo_trabajo_detalle.proporciona_barniz.style.display 					= "none";
-	document.tipo_trabajo_detalle.checkbox_proporciona_barniz.style.display 		= "inline";
-	// muestra los select
-	document.tipo_trabajo_detalle.tipo_papel.style.display 							= "none";
-	document.tipo_trabajo_detalle.select_tipo_papel_extendido.style.display 		= "inline";
-	document.tipo_trabajo_detalle.tamanio_pubicacion.style.display 					= "none";
-	document.tipo_trabajo_detalle.select_tamanio_publicacion.style.display 			= "inline";
-	document.tipo_trabajo_detalle.frente_combinacion_tintas.style.display 			= "none";
-	document.tipo_trabajo_detalle.select_frente_combinacion_tintas.style.display 	= "inline";
-	document.tipo_trabajo_detalle.frente_tipo_barniz.style.display 					= "none";
-	document.tipo_trabajo_detalle.select_frente_tipo_barniz.style.display 			= "inline";
-	document.tipo_trabajo_detalle.vuelta_combinacion_tintas.style.display 			= "none";
-	document.tipo_trabajo_detalle.select_vuelta_combinacion_tintas.style.display 	= "inline";
-	document.tipo_trabajo_detalle.vuelta_tipo_barniz.style.display 					= "none";
-	document.tipo_trabajo_detalle.select_vuelta_tipo_barniz.style.display 			= "inline";
-	document.tipo_trabajo_detalle.maquina.style.display 							= "none";
-	document.tipo_trabajo_detalle.select_maquina.style.display 						= "inline";
-	document.tipo_trabajo_detalle.tipo_placa.style.display 							= "none";
-	document.tipo_trabajo_detalle.select_tipo_placa.style.display 					= "inline";
-	document.tipo_trabajo_detalle.tipo_complejidad.style.display 					= "none";
-	document.tipo_trabajo_detalle.select_tipo_complejidad.style.display 			= "inline";
-	// ajax para buscar tipo placa segun select tipo maquina
-	buscaTipoPlaca( document.tipo_trabajo_detalle.select_maquina );
-	// limpia campos visibles
-	document.tipo_trabajo_detalle.descripcion_partida_detalle.value 		= "";
-	document.tipo_trabajo_detalle.alto_final.value 							= "";
-	document.tipo_trabajo_detalle.ancho_final.value 						= "";
-	document.tipo_trabajo_detalle.alto_extendido.value 						= "";
-	document.tipo_trabajo_detalle.ancho_extendido.value 					= "";
-	document.tipo_trabajo_detalle.numero_paginas_publicacion.value 			= "";
-	document.tipo_trabajo_detalle.alto_corte_inicial.value 					= "0";
-	document.tipo_trabajo_detalle.ancho_corte_inicial.value 				= "0";
-	document.tipo_trabajo_detalle.frente_num_tinta_especial.value 			= "0";
-	document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.value 	= "";
-	document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value 			= "0";
-	document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.value 	= "";
-	// desactiva readOnly
-	document.tipo_trabajo_detalle.descripcion_partida_detalle.readOnly 			= false;
-	document.tipo_trabajo_detalle.alto_final.readOnly 							= false;
-	document.tipo_trabajo_detalle.ancho_final.readOnly 							= false;
-	document.tipo_trabajo_detalle.alto_extendido.readOnly 						= false;
-	document.tipo_trabajo_detalle.ancho_extendido.readOnly 						= false;
-	document.tipo_trabajo_detalle.repeticiones_x_pliego.readOnly 				= false;
-	document.tipo_trabajo_detalle.numero_paginas_publicacion.readOnly 			= false;
-	document.tipo_trabajo_detalle.alto_corte_inicial.readOnly					= false;
-	document.tipo_trabajo_detalle.ancho_corte_inicial.readOnly					= false;
-	document.tipo_trabajo_detalle.frente_num_tinta_especial.readOnly 			= false;
-	document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.readOnly 	= false;
-	document.tipo_trabajo_detalle.vuelta_num_tinta_especial.readOnly 			= false;
-	document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.readOnly 	= false;
+function ocultaDiv() {
+	document.getElementById("div_tipo_trabajo_detalle").style.display 				= "none";
+	document.getElementById("div_visualizador_pliegos").style.display 				= "none";
+	document.getElementById("div_visualizador_costo_extra_detalle").style.display	= "none";
+    document.getElementById("div_costo_extra_detalle").style.display				= "none";
+	document.getElementById("div_pestania").style.display 							= "none";
+	document.getElementById("div_material_ayuda").style.display 					= "none";
 }
+
+function muestraDiv() {
+	document.getElementById("div_tipo_trabajo_detalle").style.display 				= "block";
+	document.getElementById("div_visualizador_pliegos").style.display 				= "block";
+	document.getElementById("div_visualizador_costo_extra_detalle").style.display	= "block";
+    document.getElementById("div_costo_extra_detalle").style.display				= "block";
+	document.getElementById("div_pestania").style.display 							= "block";
+	document.getElementById("div_material_ayuda").style.display 					= "block";
+}
+
+function limpiaYActivaCamposFormTipoTrabajoDetalle() {
+	document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value = "";
+	inicializaCheckbox( false );
+	inicializaSelect();
+	muestraCheckbox();
+	muestraSelect();
+	buscaTipoPlaca( document.tipo_trabajo_detalle.select_maquina );
+	inicializaBlancosCamposVisibles();
+	desactivaReadonlyCamposVisibles();
+	aplicaColorFFFCamposVisibles();
+} // limpiaYActivaCamposFormTipoTrabajoDetalle
+
+function limpiaYDesactivaCamposFormTipoTrabajoDetalle() {
+	inicializaCheckbox( false );
+	ocultaCheckbox();
+	ocultaSelect();
+	inicializaBlancosCamposVisibles();
+	activaReadonlyCamposVisibles()
+	aplicaColorTransparentCamposVisibles();
+} // limpiaYDesactivaCamposFormTipoTrabajoDetalle
 
 
 function activaBotonesAgregarFormTTD() {
@@ -81,85 +53,190 @@ function desactivaBotonesAgregarFormTTD() {
 
 
 function agregaTTD() {
+	ocultaBotonesModificarPorSeccion();
+	document.getElementById("div_btn_agregar_ttd_encabezado").style.display = "inline";
+	// ocultar divs que estan abajo de la seccion tipo trabajo detalle
+	ocultaDiv();
 	// elimina permiso para seleccionar PARTIDA  Y TTD; variable declarada en detalle_nut.js
 	puedeSeleccionarPartida				= false;
 	puedeSeleccionarTipoTrabajoDetalle 	= false;
 	// elimina estilo de tabla que permite seleccionar ttd
 	var styleSheetList = document.styleSheets;
-	styleSheetList[3].cssRules[19].style.cursor = "default";
-	styleSheetList[3].cssRules[19].style.backgroundColor = "transparent";
-	styleSheetList[3].cssRules[19].style.color = "#898987";
+	styleSheetList[3].cssRules[19].style.cursor 			= "default";
+	styleSheetList[3].cssRules[19].style.backgroundColor 	= "transparent";
+	styleSheetList[3].cssRules[19].style.color 				= "#898987";
+	delete styleSheetList;
 	//NO BORRAR: // console.log( styleSheetList );
 	//NO BORRAR: // console.log( styleSheetList[3].cssRules[19].cssText );
 	//NO BORRAR: // console.log( "cursor: " + styleSheetList[3].cssRules[19].style.cursor );
 	//NO BORRAR: // console.log( "backgroundColor: " + styleSheetList[3].cssRules[19].style.backgroundColor );
 	//NO BORRAR: // console.log( "color: " + styleSheetList[3].cssRules[19].style.color );
-	delete styleSheetList;
-	// oculta botones de modificacion
-	ocultaBotonesModificarPorSeccion();
-	document.getElementById("div_btn_agregar_ttd_encabezado").style.display = "inline";
-	// ocultar divs que estan abajo de la seccion tipo trabajo detalle
-	document.getElementById("div_tipo_trabajo_detalle").style.display 				= "none";
-	document.getElementById("div_visualizador_pliegos").style.display 				= "none";
-	document.getElementById("div_visualizador_costo_extra_detalle").style.display	= "none";
-    document.getElementById("div_costo_extra_detalle").style.display				= "none";
-	document.getElementById("div_pestania").style.display 							= "none";
-	document.getElementById("div_material_ayuda").style.display 					= "none";
 	// limpia y activa campos del form
-	limpiaMuestraCamposFormTipoTrabajoDetalle();
+	limpiaYActivaCamposFormTipoTrabajoDetalle();
 	// muestra el form TTD
 	document.getElementById("div_tipo_trabajo_detalle").style.display = "block";
 	// muestra botones ACEPTAR y CANCELAR
 	activaBotonesAgregarFormTTD()
 }
 
+
+var esPrimerInsercionTTD 			= true;
+var cerradoOKVentanaListaPliegos 	= false;
 function aceptaAgregarTTD() {
-	//alert("listo para agregar informacion");
-	
-	
+	// se copian los datos del html a variables ocultas para poder desactivar los objetos html mas adelante y no perder su valor
+	copiaValorDeCheckboxAHidden();
+	copiaValorDeSelectAHidden();
 	// validacion
-	var correcto = true;
-	
-	
-	
-	
-	if ( correcto ) {
-		// 1) realiza ajax ttd
-		// 2) dentro de respuesta ajax realiza la apertura de la ventana modal de generacion de pliegos
-		// 3) si acepta, todo correcto, muestra informacion completa de toda OT
-		// 4) sino, activa campos ttd para nueva corrección
-		alert("realiza ajax");
-		alert("apertura ventana modal de pliegos");
-		alert
+	if ( validaDatosFormTTD() ) {
+		// realiza ajac
+		document.body.style.cursor = "wait";
+		desactivaCamposFormTipoTrabajoDetalle();
+		desactivaBotonesModificarFormTipoTrabajoDetalle();
+		
+		$.ajax({
+            type: "POST",
+            url: esPrimerInsercionTTD ? urlAgregaTipoTrabajoDetalle : urlActualizaTipoTrabajoDetalle,
+            data: $("[name='tipo_trabajo_detalle']").serialize(),
+            success: function( response ) { 
+                //var json = JSON.stringify(eval("(" + response + ")"));    // forma de convertir cadenas a json
+                //var json = JSON.parse(response);                          // forma de convertir cadenas a json
+                switch( response.estatusOperacion ) {
+                    case 0: // error
+                        //console.log(e);
+                    	console.log("ERROR aceptaAgregarTTD.ajax.switch.case0");
+                        document.body.style.cursor = "default";
+                        alert("No fue posible generar el detalle de impresion");
+                        ocultaDiv();
+                        limpiaYDesactivaCamposFormTipoTrabajoDetalle();
+                        desactivaBotonesAgregarFormTTD();
+        				muestraBotonesModificarPorSeccion();
+                        break;
+                        
+                    default:
+                    	// GUARDA RESULTADOS PARTIDA EN OBJETO javascript
+        				obj_ttd.setObjTTD();
+                    console.log( obj_ttd );
+                    	// verifica que sea primera insercion para copiar idttd a los demas devis
+                    	if ( esPrimerInsercionTTD ) {
+                    		document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value	= response.idTipoTrabajoDetalle;
+                            document.visualizador_pliegos.id_tipo_trabajo_detalle.value = response.idTipoTrabajoDetalle;
+                        	document.costo_extra_detalle.id_tipo_trabajo_detalle.value 	= response.idTipoTrabajoDetalle;
+                    	}
+                        // cambia cursor
+                        document.body.style.cursor = "default";
+                        // abre ventana modal de pliegos
+                        Shadowbox.open({
+                            content:urlCalculaPliego + "?id_tipo_trabajo_detalle=" + document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value,
+                            //content: "<form method='post' action='" + urlCalculaPliego + "' target='hidden_iframe'><input type='hidden' name='id_tipo_trabajo_detalle' value='" + response.id_tipo_trabajo_detalle + "'></input</form><iframe name='hidden_iframe'></iframe>",
+                            player:"iframe",
+                            width:630,
+                            height:700,
+                            options:{ 
+                            	modal: true,
+                                overlayOpacity: 0.75,
+                                onClose: revisaCierreTerceraVentanaModal // al cerrar esta ventana, se manda llamar revisaCierreVentanaModal()
+                            }
+                        });
+                        break;
+                }
+            },
+            error: function(e) {
+                //console.log(e);
+            	console.log("ERROR aceptaAgregarTTD.ajax");
+                document.body.style.cursor = "default";
+                alert("No fue posible generar el detalle de impresion");
+                ocultaDiv();
+                limpiaYDesactivaCamposFormTipoTrabajoDetalle();
+                desactivaBotonesAgregarFormTTD();
+				muestraBotonesModificarPorSeccion();
+            }
+        });
+	} // if correcto	
+} // aceptaAgregarTTD
+
+function revisaCierreTerceraVentanaModal() {
+	// alert("cerro la tercera ventana modal");
+	// alert("el valor de la bandera es: " + cerradoOKVentanaListaPliegos);
+	if( cerradoOKVentanaListaPliegos ) {
+		// Ok.
+		// ACTUALIZA TABLA TTD
+		$.ajax({
+			type: "POST",
+			url: urlBuscaTipoTrabajoDetalle,
+			data: {id_partida: document.tipo_trabajo_detalle.id_partida.value},
+			success: function( response ) {
+				// actualiza tabla
+				document.getElementById("div_tabla_lista_tipo_trabajo_detalle").innerHTML = response.textoHTML;
+	            // ACTUALIZA PRECIO
+	            $.ajax({
+	    			type: "POST",
+	    			url: urlObtienePrecioNeto,
+	    			data: {
+	    				id_orden_produccion: document.tipo_trabajo_detalle.id_orden_produccion.value,
+	    				nut: document.tipo_trabajo_detalle.nut.value
+	    			},
+	    			success: function( response ){
+	    				// GUARDA RESULTADOS TTD EN OBJETO javascript PARA NO OLVIDARLOS, porque todo fue correcto
+	    	            obj_ttd.setObjTTD();
+	    				// se acaba de agregar registro, entonces ya no es primera insercion.
+	    				esPrimerInsercionTTD = false;
+	    				// actualiza precio
+	    				document.precio.precio_neto.value = "$ " + (response.precioNeto).formatMoney(2);
+	    				copiaValorDeCheckboxAText();
+	    				// guarda la informacion de los select en los input correspondientes
+	    				copiaValorDeSelectAText();
+	    				// muestra secciones
+	    				muestraDiv();
+	    				// desctiva botones cancelar y aceptar
+	    				desactivaBotonesAgregarFormTTD();
+	    				// muestra botones modificacion
+	    				muestraBotonesModificarPorSeccion();
+	    				// activa estilos para permitir seleccionar el registro
+	    				var styleSheetList = document.styleSheets;
+	    				styleSheetList[3].cssRules[19].style.cursor 			= "pointer";
+	    				styleSheetList[3].cssRules[19].style.backgroundColor 	= "#99CCFF";
+	    				styleSheetList[3].cssRules[19].style.color 				= "#000";
+	    				delete styleSheetList;
+	    				// activa permiso para seleccionar TTD; variable declarada en detalle_nut.js
+	    				puedeSeleccionarPartida				= true;
+	    				puedeSeleccionarTipoTrabajoDetalle 	= true;
+	    			},
+	    			error: function(e){
+	    				console.log("ERROR revisaCierreTerceraVentanaModal.ajax2");
+	    				alert("No fue posible obtener precio neto");
+	    				muestraBotonesModificarPorSeccion();
+	    			}
+	    		});
+			},
+			error: function( e ) {
+				console.log("ERROR revisaCierreTerceraVentanaModal.ajax1");
+				document.body.style.cursor = "default";
+                alert("No fue posible comunicarse con el servidor");
+			}
+		});
+		// inicializa variable
+		cerradoOKVentanaListaPliegos = false;
+	} else {
+		// la ventana no se cerro con el boton agregar
+    	// se debe permitir la modificacion del registro TTD
+    	esPrimerInsercionTTD = false;
+    	// permite modificar nuevamente la informacion
+    	activaCamposFormTipoTrabajoDetalle();
 	}
-	
-	
-	
-}
+} // revisaCierreTerceraVentanaModal
 
 function cancelaAgregarTTD() {
-	// limpia los campos del formulario ttd
-	
-	// desactiva campos del form
-	
-	// desactiva botones ACEPTAR y CANCELAR
+	ocultaDiv();
+	limpiaYDesactivaCamposFormTipoTrabajoDetalle();
 	desactivaBotonesAgregarFormTTD();
-	// muestra botones Modificar por seccion
-	muestraBotonesModificarPorSeccion();
-	// activa estilos para permitir seleccionar el registro
-	var styleSheetList = document.styleSheets;
-	styleSheetList[3].cssRules[19].style.cursor = "pointer";
-	styleSheetList[3].cssRules[19].style.backgroundColor = "#99CCFF";
-	styleSheetList[3].cssRules[19].style.color = "#000";
-	delete styleSheetList;
 	// activa permiso para seleccionar TTD; variable declarada en detalle_nut.js
 	puedeSeleccionarPartida				= true;
 	puedeSeleccionarTipoTrabajoDetalle 	= true;
-	// ocultar divs que estan abajo de la seccion tipo trabajo detalle
-	document.getElementById("div_tipo_trabajo_detalle").style.display 				= "none";
-	document.getElementById("div_visualizador_pliegos").style.display 				= "none";
-	document.getElementById("div_visualizador_costo_extra_detalle").style.display	= "none";
-    document.getElementById("div_costo_extra_detalle").style.display				= "none";
-	document.getElementById("div_pestania").style.display 							= "none";
-	document.getElementById("div_material_ayuda").style.display 					= "none";
+	// activa estilos para permitir seleccionar el registro
+	var styleSheetList = document.styleSheets;
+	styleSheetList[3].cssRules[19].style.cursor 			= "pointer";
+	styleSheetList[3].cssRules[19].style.backgroundColor 	= "#99CCFF";
+	styleSheetList[3].cssRules[19].style.color 				= "#000";
+	delete styleSheetList;
+	muestraBotonesModificarPorSeccion();
 }

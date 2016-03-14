@@ -365,52 +365,43 @@ function ajaxAgregaTipoTrabajoDetalle() {
     document.tipo_trabajo_detalle.id_tipo_placa.value                      = document.tipo_trabajo_detalle.select_tipo_placa.value;
     document.tipo_trabajo_detalle.id_tipo_complejidad.value                = document.tipo_trabajo_detalle.select_tipo_complejidad.value;
     
-    var id_tipo_trabajo                     = document.partida.id_tipo_trabajo.value;
-    var descripcion_partida_detalle         = document.tipo_trabajo_detalle.descripcion_partida_detalle.value;
-    var alto_final                          = document.tipo_trabajo_detalle.alto_final.value;
-    var ancho_final                         = document.tipo_trabajo_detalle.ancho_final.value;
-    var repeticiones_x_pliego               = document.tipo_trabajo_detalle.repeticiones_x_pliego.value;
-    var numero_paginas_publicacion          = document.tipo_trabajo_detalle.numero_paginas_publicacion.value;
-    var descripcion_tipo_papel_extendido	= document.tipo_trabajo_detalle.tipo_papel_extendido.value;
-    var frente_id_combinacion_tintas        = document.tipo_trabajo_detalle.select_frente_combinacion_tintas.value;
-    var frente_num_tinta_especial           = document.tipo_trabajo_detalle.frente_num_tinta_especial.value;
-    var frente_descripcion_tinta_especial   = document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.value;
-    var vuelta_id_combinacion_tintas        = document.tipo_trabajo_detalle.select_vuelta_combinacion_tintas.value;
-    var vuelta_num_tinta_especial           = document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value;
-    var vuelta_descripcion_tinta_especial   = document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.value;
-    
     // VALIDACIONES
     var correcto = true;
     
     // Revisa que descripcion, ancho y alto no este vacios
     if( correcto 
-    		&& descripcion_partida_detalle == "" ) {
+    		&& document.tipo_trabajo_detalle.descripcion_partida_detalle.value == "" ) {
         correcto = false;
         alert("El campo descripci\u00f3n no puede estar vac\u00edo. Favor de informarlos.");
+        document.tipo_trabajo_detalle.descripcion_partida_detalle.focus();
     }
-    if ( correcto 
-    		&& isNaN(alto_final) ) {
+    if ( correcto
+			&& ( document.tipo_trabajo_detalle.alto_final.value == ""
+				|| isNaN( document.tipo_trabajo_detalle.alto_final.value ) ) ) {
     	 correcto = false;
     	 alert("El campo alto final debe ser num\u00E9rico");
     	 document.tipo_trabajo_detalle.alto_final.value = "";
     	 document.tipo_trabajo_detalle.alto_final.focus();
     }
-    if ( correcto 
-    		&& isNaN(ancho_final) ) {
+    if ( correcto
+			&& ( document.tipo_trabajo_detalle.ancho_final.value == ""
+				|| isNaN( document.tipo_trabajo_detalle.ancho_final.value ) ) ) {
     	 correcto = false;
     	 alert("El campo ancho final debe ser num\u00E9rico");
     	 document.tipo_trabajo_detalle.ancho_final.value = "";
     	 document.tipo_trabajo_detalle.ancho_final.focus();
     }
     if ( correcto 
-    		&& isNaN(document.tipo_trabajo_detalle.alto_extendido.value)) {
+    		&& ( document.tipo_trabajo_detalle.alto_extendido.value == ""
+    			|| isNaN( document.tipo_trabajo_detalle.alto_extendido.value ) ) ) {
     	 correcto = false;
     	 alert("El campo alto extendido debe ser num\u00E9rico");
     	 document.tipo_trabajo_detalle.alto_extendido.value = "";
     	 document.tipo_trabajo_detalle.alto_extendido.focus();
     }
     if ( correcto 
-    		&& isNaN(document.tipo_trabajo_detalle.ancho_extendido.value)) {
+    		&& ( document.tipo_trabajo_detalle.ancho_extendido.value == ""
+    			|| isNaN( document.tipo_trabajo_detalle.ancho_extendido.value ) ) ) {
     	 correcto = false;
     	 alert("El campo ancho extendido debe ser num\u00E9rico");
     	 document.ipo_trabajo_detalle.ancho_extendido.value = "";
@@ -420,9 +411,10 @@ function ajaxAgregaTipoTrabajoDetalle() {
     // corte inicial
     if ( correcto
     		&& ( document.tipo_trabajo_detalle.alto_corte_inicial.value == "" 
-    				|| isNaN(document.tipo_trabajo_detalle.alto_corte_inicial.value) ) ) {
+    				|| isNaN( document.tipo_trabajo_detalle.alto_corte_inicial.value ) ) ) {
     	correcto = false;
     	alert("El campo Alto Corte Inicial debe ser num\u00E9rico");
+    	document.tipo_trabajo_detalle.alto_corte_inicial.value = "";
     	document.tipo_trabajo_detalle.alto_corte_inicial.focus();
     }
     if ( correcto
@@ -430,16 +422,17 @@ function ajaxAgregaTipoTrabajoDetalle() {
     				|| isNaN(document.tipo_trabajo_detalle.ancho_corte_inicial.value) ) ) {
     	correcto = false;
     	alert("El campo Ancho Corte Inicial debe ser num\u00E9rico");
+    	document.tipo_trabajo_detalle.ancho_corte_inicial.value = ""
     	document.tipo_trabajo_detalle.ancho_corte_inicial.focus();
     }
     
     // Valida que el numero de repeticiones por flyer o paginas de revista sea mayor que cero
-    switch( parseInt( id_tipo_trabajo ) ) {
+    switch( parseInt( document.partida.id_tipo_trabajo.value ) ) {
         case 1:
             if( correcto 
-            		&& ( repeticiones_x_pliego == "" 
-            			|| isNaN(repeticiones_x_pliego) 
-            			|| parseInt( repeticiones_x_pliego ) <= 0 ) ) {
+            		&& ( document.tipo_trabajo_detalle.repeticiones_x_pliego.value == "" 
+            			|| isNaN( document.tipo_trabajo_detalle.repeticiones_x_pliego.value ) 
+            			|| parseInt( document.tipo_trabajo_detalle.repeticiones_x_pliego.value ) <= 0 ) ) {
                 correcto = false;
                 alert("El n\u00famero de repeticiones deber ser un n\u00famero positivo mayor de cero");
                 document.tipo_trabajo_detalle.repeticiones_x_pliego.focus();
@@ -448,10 +441,10 @@ function ajaxAgregaTipoTrabajoDetalle() {
         
         case 2:
             if( correcto
-            		&& ( numero_paginas_publicacion == ""
-            			|| isNaN( numero_paginas_publicacion )
-            			|| parseInt( numero_paginas_publicacion ) <= 0 
-            			|| parseInt( numero_paginas_publicacion )%4 != 0 ) ) {
+            		&& ( document.tipo_trabajo_detalle.numero_paginas_publicacion.value == ""
+            			|| isNaN( document.tipo_trabajo_detalle.numero_paginas_publicacion.value )
+            			|| parseInt( document.tipo_trabajo_detalle.numero_paginas_publicacion.value ) <= 0 
+            			|| parseInt( document.tipo_trabajo_detalle.numero_paginas_publicacion.value )%4 != 0 ) ) {
                 correcto = false;
                 alert("El n\u00famero de p\u00e1ginas deber ser un n\u00famero positivo mayor de cero y multiplo de 4");
                 document.tipo_trabajo_detalle.numero_paginas_publicacion.focus();
@@ -472,9 +465,10 @@ function ajaxAgregaTipoTrabajoDetalle() {
             break;
     } // switch validacion tipo trabajo
     
+    
     // valida que existe papel
     if( correcto 
-    		&& descripcion_tipo_papel_extendido == "" ) {
+    		&& document.tipo_trabajo_detalle.tipo_papel_extendido.value == "" ) {
     	correcto = false;
     	alert("Favor de especificar el tipo de papel");
     	document.tipo_trabajo_detalle.tipo_papel_extendido.focus();
@@ -482,42 +476,42 @@ function ajaxAgregaTipoTrabajoDetalle() {
     
     // valida que si no hay tinta normal en frente, debe forzosamente haber tinta especial en frente
     if( correcto 
-    		&& frente_id_combinacion_tintas == "16" ) {
+    		&& document.tipo_trabajo_detalle.select_frente_combinacion_tintas.value == "16" ) {
         // valida en frente si la tinta especial es mayor a cero, exista obligatoriamente una descripcion.
-        if( frente_num_tinta_especial == "" 
-        		|| isNaN( frente_num_tinta_especial )
-        		|| parseInt( frente_num_tinta_especial ) <= 0 ) {
+        if( document.tipo_trabajo_detalle.frente_num_tinta_especial.value == "" 
+        		|| isNaN( document.tipo_trabajo_detalle.frente_num_tinta_especial.value )
+        		|| parseInt( document.tipo_trabajo_detalle.frente_num_tinta_especial.value ) <= 0 ) {
             correcto = false;
             alert("Es necesario que exista al menos tinta especial en el frente");
             document.tipo_trabajo_detalle.frente_num_tinta_especial.focus();
         }   
     }
    
-    // valida que informacion de frente num tinta especial
+    // valida informacion de frente num tinta especial
     if ( correcto 
-    		&& frente_num_tinta_especial == "" ) {
+    		&& document.tipo_trabajo_detalle.frente_num_tinta_especial.value == "" ) {
     	correcto = false;
     	alert("El numero de frente tinta especial debe ser cero");
     	document.tipo_trabajo_detalle.frente_num_tinta_especial.focus();
     }
     if ( correcto 
-    		&& frente_num_tinta_especial != ""
-    		&& isNaN( frente_num_tinta_especial ) ) {
+    		&& document.tipo_trabajo_detalle.frente_num_tinta_especial.value != ""
+    		&& isNaN( document.tipo_trabajo_detalle.frente_num_tinta_especial.value ) ) {
     	correcto = false;
     	alert("El dato de frente tinta especial debe ser un numero");
     	document.tipo_trabajo_detalle.frente_num_tinta_especial.focus();
     }
     if ( correcto 
-    		&& parseInt( frente_num_tinta_especial ) > 0 
-    		&& frente_descripcion_tinta_especial == "" ) {
+    		&& parseInt( document.tipo_trabajo_detalle.frente_num_tinta_especial.value ) > 0 
+    		&& document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.value == "" ) {
     	correcto = false;
     	alert("El numero de frente tinta especial es mayor a cero; debe especificar la descripcion de frente tinta especial");
     	document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.focus();
     }
     if ( correcto
-    		&& frente_descripcion_tinta_especial != "" 
-    		&& ( parseInt( frente_num_tinta_especial ) == 0 
-    				|| parseInt( frente_num_tinta_especial ) < 0 ) ) {
+    		&& document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.value != "" 
+    		&& ( parseInt( document.tipo_trabajo_detalle.frente_num_tinta_especial.value ) == 0 
+    				|| parseInt( document.tipo_trabajo_detalle.frente_num_tinta_especial.value ) < 0 ) ) {
     	correcto = false;
     	alert("Tiene especificada una descripcion de frente tinta especial; debe especificar que frente tinta especial es al menos 1");
     	document.tipo_trabajo_detalle.frente_num_tinta_especial.focus();
@@ -525,33 +519,33 @@ function ajaxAgregaTipoTrabajoDetalle() {
     
     // valida que informacion de vuelta num tinta especial
     if ( correcto 
-    		&& vuelta_num_tinta_especial == "" ) {
+    		&& document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value == "" ) {
     	correcto = false;
     	alert("El numero de vuelta tinta especial debe ser cero");
     	document.tipo_trabajo_detalle.vuelta_num_tinta_especial.focus();
     }
     if ( correcto 
-    		&& vuelta_num_tinta_especial != ""
-    		&& isNaN( vuelta_num_tinta_especial ) ) {
+    		&& document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value != ""
+    		&& isNaN( document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value ) ) {
     	correcto = false;
     	alert("El dato de vuelta tinta especial debe ser un numero");
     	document.tipo_trabajo_detalle.vuelta_num_tinta_especial.focus();
     }
     if ( correcto 
-    		&& parseInt( vuelta_num_tinta_especial ) > 0 
-    		&& vuelta_descripcion_tinta_especial == "" ) {
+    		&& parseInt( document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value ) > 0 
+    		&& document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.value == "" ) {
     	correcto = false;
     	alert("El numero de vuelta tinta especial es mayor a cero; debe especificar la descripcion de vuelta tinta especial");
     	document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.focus();
     }
     if ( correcto
-    		&& vuelta_descripcion_tinta_especial != "" 
-    		&& ( parseInt( vuelta_num_tinta_especial ) == 0 || parseInt( vuelta_num_tinta_especial ) < 0 ) ) {
+    		&& document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.value != "" 
+    		&& ( parseInt( document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value ) == 0 
+    				|| parseInt( document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value ) < 0 ) ) {
     	correcto = false;
     	alert("Tiene especificada una descripcion de vuelta tinta especial; debe especificar que vuelta tinta especial es al menos 1");
     	document.tipo_trabajo_detalle.vuelta_num_tinta_especial.focus();
     }
-    
     
     if( correcto ) {
         document.body.style.cursor = "wait";
@@ -561,7 +555,7 @@ function ajaxAgregaTipoTrabajoDetalle() {
         
         $.ajax({
             type: "POST",
-            url: esPrimerInsercionTTD ? urlAgregaTipoTrabajoDetalle : urlActualizaDetallePartida,
+            url: esPrimerInsercionTTD ? urlAgregaTipoTrabajoDetalle : urlActualizaTipoTrabajoDetalle,
             data: $("[name='tipo_trabajo_detalle']").serialize(),
             success: function( response ) { 
                 //var json = JSON.stringify(eval("(" + response + ")"));    // forma de convertir cadenas a json
@@ -611,18 +605,6 @@ function ajaxAgregaTipoTrabajoDetalle() {
         });
     } // if correcto
     
-    delete descripcion_partida_detalle;
-    delete alto_final;
-    delete ancho_final;
-    delete id_tipo_trabajo;
-    delete repeticiones_x_pliego;
-    delete numero_paginas_publicacion;
-    delete frente_id_combinacion_tintas;
-    delete frente_num_tinta_especial;
-    delete frente_descripcion_tinta_especial;
-    delete vuelta_id_combinacion_tintas;
-    delete vuelta_num_tinta_especial;
-    delete vuelta_descripcion_tinta_especial;        
 } // ajaxAgregaDetallePartida()
 
 
@@ -644,6 +626,8 @@ function revisaCierreVentanaModal() {
     } // if cerradoCorrectamente
     cerradoOKVentanaListaPliegos = false;
 }
+
+function setCamposPliego( idPliego, noPliego, rebases, medianiles, pinzas, hojasSobrantes, observaciones ) { } // para que la pagina no marque error de javascript
 
 
 function ajaxUnidadCostoExtra() {

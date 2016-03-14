@@ -564,7 +564,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 					
 					CalificacionPliego calificacionPliego = calificacionPliegoDAO.buscaPorPliego(pliego.getIdPliego());
 					if ( calificacionPliego == null ) {
-						// SE HA MODIFICADO TipoTrabajoDetalle
+						// SE HA MODIFICADO TipoTrabajoDetalle y sus PLIEGOS
 						// se han creado nuevos pliegos
 						// NULL = Rehacer la calificacion viene de un cambio tipo trabajo detalle
 						// crear calificacion para pliego
@@ -596,7 +596,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 						
 						calificacionPliegoDAO.crea(calificacionPliego);
 					} else {
-						// SE HA MODIFICADO Partida
+						// SE HA MODIFICADO TipoTrabajoDetalle y sus PLIEGOS
 						// calificacion pliegos existe
 						// NOT NULL = rehacer la calificacion viene de un cambio en partida
 						// modificar calificacion de un pliego existente
@@ -637,15 +637,29 @@ public class CalificacionServiceImpl implements CalificacionService {
 				// modificacion de registro
 				CalificacionTrabajoDetalle calificacionTrabajoDetalle = calificacionTrabajoDetalleDAO.buscaPorTipoTrabajoDetalle(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());
 				
-				calificacionTrabajoDetalle.setTipoTrabajoDetalleCosteTotal(tipoTrabajoDetalleCosteTotal);
-				calificacionTrabajoDetalle.setPapelCosteTotal(trabajoDetallePapelCosteTotal);
-				calificacionTrabajoDetalle.setPlacasCosteTotal(trabajoDetallePlacasCosteTotal);
-				calificacionTrabajoDetalle.setTintaCosteTotal(trabajoDetalleTintaCosteTotal);
-				calificacionTrabajoDetalle.setTintaEspecialCosteTotal(trabajoDetalleTintaEspecialCosteTotal);
-				calificacionTrabajoDetalle.setFrenteBarnizCosteTotal(trabajoDetalleFrenteBarnizCosteTotal);
-				calificacionTrabajoDetalle.setVueltaBarnizCosteTotal(trabajoDetalleVueltaBarnizCosteTotal);
-				
-				calificacionTrabajoDetalleDAO.modifica(calificacionTrabajoDetalle);
+				if ( calificacionTrabajoDetalle == null ) {
+					calificacionTrabajoDetalle = new CalificacionTrabajoDetalle();
+					calificacionTrabajoDetalle.setTipoTrabajoDetalle(tipoTrabajoDetalle);
+					calificacionTrabajoDetalle.setTipoTrabajoDetalleCosteTotal(tipoTrabajoDetalleCosteTotal);
+					calificacionTrabajoDetalle.setPapelCosteTotal(trabajoDetallePapelCosteTotal);
+					calificacionTrabajoDetalle.setPlacasCosteTotal(trabajoDetallePlacasCosteTotal);
+					calificacionTrabajoDetalle.setTintaCosteTotal(trabajoDetalleTintaCosteTotal);
+					calificacionTrabajoDetalle.setTintaEspecialCosteTotal(trabajoDetalleTintaEspecialCosteTotal);
+					calificacionTrabajoDetalle.setFrenteBarnizCosteTotal(trabajoDetalleFrenteBarnizCosteTotal);
+					calificacionTrabajoDetalle.setVueltaBarnizCosteTotal(trabajoDetalleVueltaBarnizCosteTotal);
+					
+					calificacionTrabajoDetalleDAO.crea(calificacionTrabajoDetalle);
+				} else {
+					calificacionTrabajoDetalle.setTipoTrabajoDetalleCosteTotal(tipoTrabajoDetalleCosteTotal);
+					calificacionTrabajoDetalle.setPapelCosteTotal(trabajoDetallePapelCosteTotal);
+					calificacionTrabajoDetalle.setPlacasCosteTotal(trabajoDetallePlacasCosteTotal);
+					calificacionTrabajoDetalle.setTintaCosteTotal(trabajoDetalleTintaCosteTotal);
+					calificacionTrabajoDetalle.setTintaEspecialCosteTotal(trabajoDetalleTintaEspecialCosteTotal);
+					calificacionTrabajoDetalle.setFrenteBarnizCosteTotal(trabajoDetalleFrenteBarnizCosteTotal);
+					calificacionTrabajoDetalle.setVueltaBarnizCosteTotal(trabajoDetalleVueltaBarnizCosteTotal);
+					
+					calificacionTrabajoDetalleDAO.modifica(calificacionTrabajoDetalle);
+				}
 				
 				calificacionTrabajoDetalle 	= null;
 				tipoTrabajoDetalle			= null;

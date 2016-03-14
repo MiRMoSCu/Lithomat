@@ -108,10 +108,10 @@ function buscaPartida( id_partida ){
 		document.getElementById("div_material_ayuda").style.display 					= "none";
 		
 	    $.ajax({
-	        type:"POST",
-	        url:urlObtienePartida,
-	        data:{id_partida:id_partida},
-	        success:function( response ) {
+	        type: "POST",
+	        url: urlObtienePartida,
+	        data: {id_partida:id_partida},
+	        success: function( response ) {
 	        	/* var json =  '{"descripcion_partida":{"id_tipo_trabajo":1,"nombre":"abc"},' +
 	                            '"disenio":{"indicaciones":"a1","materiales_recibe":"a2","observaciones":"a3","tabla_disenio":"<table><tr><td>exito</td></tr></table>"}}'; */
 	        	//console.log(response);
@@ -131,6 +131,7 @@ function buscaPartida( id_partida ){
 	                document.getElementsByName("tipo_trabajo")[i].disabled = false;
 	            
 	            // desactiva radio botones tipo_trabajo
+	            document.partida.id_tipo_trabajo.value = partidaJson.descripcion_partida.idTipoTrabajo;
 	            for( var j=0; j < document.getElementsByName("tipo_trabajo").length; j++ ) {
 	                if( document.getElementsByName("tipo_trabajo")[j].value == partidaJson.descripcion_partida.idTipoTrabajo ) 
 	                    document.getElementsByName("tipo_trabajo")[j].click();
@@ -267,13 +268,13 @@ function buscaPartida( id_partida ){
 	            delete partidaJson;
 	            
 	            // GUARDA RESULTADOS PARTIDA EN OBJETO javascript
-	            obj_partida.setObjPartida();
+	            obj_ttd.setObjTTD();
 	            
 	            document.getElementById("div_partida").style.display 							= "block";
 	            document.getElementById("div_visualizador_tipo_trabajo_detalle").style.display 	= "block";
 	            
 	        },
-	        error:function( e ) {
+	        error: function( e ) {
 	            console.log( e );
 	            alert("No fue posible encontrar informaci\u00f3n");
 	        }
@@ -289,10 +290,10 @@ function buscaTrabajoDetalle( id_tipo_trabajo_detalle ) {
 	if ( puedeSeleccionarTipoTrabajoDetalle ) {
 	    //alert( id_tipo_trabajo_detalle );
 	    $.ajax({
-	        type:"POST",
-	        url:urlObtieneTipoTrabajoDetalle,
-	        data:{id_tipo_trabajo_detalle:id_tipo_trabajo_detalle},
-	        success:function( response ) {
+	        type: "POST",
+	        url: urlObtieneTipoTrabajoDetalle,
+	        data: {id_tipo_trabajo_detalle:id_tipo_trabajo_detalle},
+	        success: function( response ) {
 	        	//console.log(response);
 	        	// set id_tipo_trabajo_detalle
 	        	document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value = id_tipo_trabajo_detalle;
@@ -338,10 +339,10 @@ function buscaTrabajoDetalle( id_tipo_trabajo_detalle ) {
 	            
 	            delete detallePartidaJson;
 	            
-	            // GUARDA RESULTADOS TTD EN OBJETO javascript
+	            // GUARDA RESULTADOS TTD EN OBJETO javascript PARA NO OLVIDARLOS
 	            obj_ttd.setObjTTD();
 	        },
-	        error:function( e ) {
+	        error: function( e ) {
 	            console.log( e );
 	            alert("No fue posible encontrar informaci\u00f3n");
 	        }

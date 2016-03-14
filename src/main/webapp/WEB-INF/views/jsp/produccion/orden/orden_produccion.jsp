@@ -12,7 +12,7 @@
 <c:url value="/tipo_placa/busca"            				var="urlBuscaTipoPlaca"/>
 <c:url value="/tipo_papel_extendido/ventana/lista"          var="urlBuscaTipoPapel"/>
 <c:url value="/tipo_trabajo_detalle/agrega" 				var="urlAgregaTipoTrabajoDetalle"/>
-<c:url value="/tipo_trabajo_detalle/actualiza"    			var="urlActualizaDetallePartida"/>
+<c:url value="/tipo_trabajo_detalle/actualiza"    			var="urlActualizaTipoTrabajoDetalle"/>
 <c:url value="/tipo_trabajo_detalle/busca"  				var="urlBuscaListaTipoTrabajoDetalle"/>
 <c:url value="/pliego/calcula"              				var="urlCalculaPliego"/>
 <c:url value="/costo_extra_detalle/busca_unidad_medida" 	var="urlBuscaUnidadMedidaCostoExtra"/>
@@ -71,7 +71,7 @@
             var urlBuscaTipoPlaca           	= "${urlBuscaTipoPlaca}";
             var urlBuscaTipoPapel				= "${urlBuscaTipoPapel}";
             var urlAgregaTipoTrabajoDetalle 	= "${urlAgregaTipoTrabajoDetalle}";
-            var urlActualizaDetallePartida    	= "${urlActualizaDetallePartida}";
+            var urlActualizaTipoTrabajoDetalle  = "${urlActualizaTipoTrabajoDetalle}";
             var urlBuscaListaTipoTrabajoDetalle = "${urlBuscaListaTipoTrabajoDetalle}";
             var urlCalculaPliego            	= "${urlCalculaPliego}";
             var urlBuscaUnidadMedidaCostoExtra	= "${urlBuscaUnidadMedidaCostoExtra}";

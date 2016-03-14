@@ -10,17 +10,11 @@
 <c:url value="/visualizador/obtiene_precio_neto"            var="urlObtienePrecioNeto"/>
 <c:url value="/orden_produccion/actualiza"    				var="urlActualizaOrdenProduccion"/>
 <c:url value="/partida/actualiza"    						var="urlActualizaPartida"/>
-
-
-<c:url value="/tipo_trabajo_detalle/agrega_olvidado"  		var="urlAgregaTipoTrabajoDetalleOlvidado"/>
-
-
+<c:url value="/tipo_trabajo_detalle/agrega"  				var="urlAgregaTipoTrabajoDetalle"/>
 <c:url value="/tipo_trabajo_detalle/actualiza_con_pliegos"  var="urlActualizaTipoTrabajoDetalleConPliegos"/>
 <c:url value="/tipo_trabajo_detalle/actualiza"  			var="urlActualizaTipoTrabajoDetalle"/>
 <c:url value="/tipo_trabajo_detalle/elimina"  				var="urlEliminaTipoTrabajoDetalle"/>
-
-
-
+<c:url value="/tipo_trabajo_detalle/busca"  				var="urlBuscaTipoTrabajoDetalle"/>
 <c:url value="/pliego/calcula"              				var="urlCalculaPliego"/>
 <c:url value="/pliego/activa_lista"            				var="urlActivaListaPliegos"/>
 <c:url value="/pliego/actualiza"            				var="urlActualizaPliego"/>
@@ -67,6 +61,7 @@
         <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_modificacion.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_orden_produccion_modificacion.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_partida_modificacion.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_tipo_trabajo_detalle.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_tipo_trabajo_detalle_agrega.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_tipo_trabajo_detalle_modificacion.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_pliego_modificacion.js"/>"></script>
@@ -105,10 +100,11 @@
             var urlObtienePrecioNeto						= "${urlObtienePrecioNeto}";
             var urlActualizaOrdenProduccion					= "${urlActualizaOrdenProduccion}";
             var urlActualizaPartida							= "${urlActualizaPartida}";
-            var urlAgregaTipoTrabajoDetalleOlvidado			= "${urlAgregaTipoTrabajoDetalleOlvidado}";
+            var urlAgregaTipoTrabajoDetalle					= "${urlAgregaTipoTrabajoDetalle}";
             var urlActualizaTipoTrabajoDetalleConPliegos	= "${urlActualizaTipoTrabajoDetalleConPliegos}";
             var urlActualizaTipoTrabajoDetalle				= "${urlActualizaTipoTrabajoDetalle}";
             var urlEliminaTipoTrabajoDetalle				= "${urlEliminaTipoTrabajoDetalle}";
+            var urlBuscaTipoTrabajoDetalle					= "${urlBuscaTipoTrabajoDetalle}";
             var urlCalculaPliego            				= "${urlCalculaPliego}";
             var urlActivaListaPliegos						= "${urlActivaListaPliegos}";
             var urlActualizaPliego							= "${urlActualizaPliego}";
@@ -676,6 +672,7 @@
                                     	<input type="hidden" name="id_orden_produccion" 	value="${ordenProduccion.idOrdenProduccion}">
                                     	<input type="hidden" name="nut"						value="${ordenProduccion.nut}">
                                     	<input type="hidden" name="id_partida" 				value="">
+                                    	<input type="hidden" name="id_tipo_trabajo" 		value="">
                                     	<input type="hidden" name="id_tipo_forma_trabajo" 	value="">
                                         <br/><br/> <!-- CUANDO ESTE EL BOTON; SOLO DEBE TENER UN <BR> -->
                                         <div class="titulo">

@@ -33,9 +33,15 @@
 			<type name="boolean"/>
 		</property>
 		<!-- relaciones de identidad uno a muchos que esta clase mantiene con otras clases -->
-		<set name="tipoTrabajoDetalle" table="tipo_trabajo_detalle" inverse="true" lazy="true" fetch="select">
+		<set name="frenteTipoTrabajoDetalle" table="tipo_trabajo_detalle" inverse="true" lazy="true" fetch="select">
 			<key>
-				<column name="id_tipo_barniz" not-null="true"/>
+				<column name="frente_id_tipo_barniz" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajoDetalle"/>
+		</set>
+		<set name="vueltaTipoTrabajoDetalle" table="tipo_trabajo_detalle" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="vuelta_id_tipo_barniz" not-null="true"/>
 			</key>
 			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajoDetalle"/>
 		</set>
