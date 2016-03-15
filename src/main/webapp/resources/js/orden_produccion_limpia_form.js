@@ -309,25 +309,36 @@ function limpiaFormCostoExtraDetalle() {
 	document.costo_extra_detalle.id_tipo_trabajo_detalle.value 	= "";
 	document.costo_extra_detalle.id_costo_extra.value 			= "";
 	document.costo_extra_detalle.id_responsable_insumo.value 	= "";
+	// inicializa select
+	$("[name='select_costo_extra']").empty();
+    jsonObject = JSON.parse( strJsonListaCostosExtra );
+    $.each( jsonObject, function(i, item){
+        var option = document.createElement("option");
+        option.value    = item.value;
+        option.text     = item.text;
+        document.getElementById("select_costo_extra").add( option );
+        delete option;
+    });
+    delete jsonObject;
+    // limpia tabla de costo extra detalle
+	document.getElementById("div_tabla_costo_extra_tipo_trabajo").innerHTML = "<table><tr><th>Id.<\/th><th>Costo Extra<\/th><th>Responsable<\/th><th>Cantidad<\/th><th>Especificaci&oacute;n<\/th></tr><tr class=\"l1\"><td><\/td><td><\/td><td><\/td><td><\/td><td><\/td><\/tr><\/table>";
 	limpiaCamposCostoExtraDetalle();
 	activaCamposCostoExtraDetalle();
 	activaBtnCostoExtraDetalle();
-	// limpia tabla de costo extra detalle
-	document.getElementById("div_tabla_costo_extra_tipo_trabajo").innerHTML = "<table><tr><th>Id.<\/th><th>Costo Extra<\/th><th>Responsable<\/th><th>Cantidad<\/th><th>Especificaci&oacute;n<\/th></tr><tr class=\"l1\"><td><\/td><td><\/td><td><\/td><td><\/td><td><\/td><\/tr><\/table>";
 }
 
 
 function activaCamposCostoExtraDetalle() {
 	document.costo_extra_detalle.select_costo_extra.disabled 			= false;
 	document.costo_extra_detalle.select_responsable_insumo.disabled 	= false;
-	document.costo_extra_detalle.cantidad.readOnly 					= false;
+	document.costo_extra_detalle.cantidad.readOnly 						= false;
 	document.costo_extra_detalle.especificacion.readOnly 				= false;
 }
 
 function desactivaCamposCostoExtraDetalle() {
 	document.costo_extra_detalle.select_costo_extra.disabled 			= true;
 	document.costo_extra_detalle.select_responsable_insumo.disabled 	= true;
-	document.costo_extra_detalle.cantidad.readOnly 					= true;
+	document.costo_extra_detalle.cantidad.readOnly 						= true;
 	document.costo_extra_detalle.especificacion.readOnly 				= true;
 }
 

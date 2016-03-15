@@ -18,10 +18,12 @@ public interface CostoExtraDetalleService {
 	
 	public List<CostoExtraDetalle> listaCostoExtraDetallePorPartida(int idPartida);
 	
+	public List<CostoExtraDetalle> listaCostoExtraDetallePorTipoTrabajoDetalle(int idTipoTrabajoDetalle);
+	
 	public String buscaHTML(int idTipoTrabajoDetalle);
 	
 	public String listaHTMLModificacion(int idTipoTrabajoDetalle);
 	
-	public String listaHTMLProcesosYPrecioConPorcentajeCliente(int idPartida, float porcentajeCliente);
+	public String listaHTMLProcesosYPrecioConPorcentajeCliente(int idTipoTrabajoDetalle, float porcentajeCliente);
 	
 }

@@ -9,6 +9,7 @@ public class RemisionTrabajoDetalle implements Serializable {
 	
 	private String descripcion;
 	private double tipoTrabajoDetalleCosteTotal;
+	private double costosExtraCosteTotal;
 	private List<RemisionPliego> listaRemisionPliego;
 	
 	
@@ -23,6 +24,12 @@ public class RemisionTrabajoDetalle implements Serializable {
 	}
 	public void setTipoTrabajoDetalleCosteTotal(double tipoTrabajoDetalleCosteTotal) {
 		this.tipoTrabajoDetalleCosteTotal = tipoTrabajoDetalleCosteTotal;
+	}
+	public double getCostosExtraCosteTotal() {
+		return costosExtraCosteTotal;
+	}
+	public void setCostosExtraCosteTotal(double costosExtraCosteTotal) {
+		this.costosExtraCosteTotal = costosExtraCosteTotal;
 	}
 	public List<RemisionPliego> getListaRemisionPliego() {
 		return listaRemisionPliego;

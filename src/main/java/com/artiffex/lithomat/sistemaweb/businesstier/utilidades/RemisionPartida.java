@@ -16,7 +16,6 @@ public class RemisionPartida implements Serializable {
 	private double transporteCosteTotal;
 	private double acabadoCosteTotal;
 	private double offsetCosteTotal;
-	private double costoExtraTotal;
 	private List<RemisionTrabajoDetalle> listaRemisionTrabajoDetalle;
 	
 	
@@ -73,12 +72,6 @@ public class RemisionPartida implements Serializable {
 	}
 	public void setOffsetCosteTotal(double offsetCosteTotal) {
 		this.offsetCosteTotal = offsetCosteTotal;
-	}
-	public double getCostoExtraTotal() {
-		return costoExtraTotal;
-	}
-	public void setCostoExtraTotal(double costoExtraTotal) {
-		this.costoExtraTotal = costoExtraTotal;
 	}
 	public List<RemisionTrabajoDetalle> getListaRemisionTrabajoDetalle() {
 		return listaRemisionTrabajoDetalle;

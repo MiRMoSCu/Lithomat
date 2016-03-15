@@ -140,7 +140,7 @@ public class CostoExtraDetalleController {
 			// obtiene actualizacion de la tabla
 			jsonResponse.setTextoHTML( costoExtraDetalleService.listaHTMLModificacion(idTipoTrabajoDetalle) );
 			// actualiza el precio
-			calificacionService.actualizaProcesosPartida(idOrdenProduccion);
+			calificacionService.actualizaPartida(idOrdenProduccion);
 			CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionService.buscaCalificacionOrdenProduccion(idOrdenProduccion);
 			jsonResponse.setPrecioNeto( calificacionOrdenProduccion.getPrecioNeto() );
 			calificacionOrdenProduccion = null;
@@ -173,7 +173,7 @@ public class CostoExtraDetalleController {
 		// obtiene actualizacion de la tabla
 		jsonResponse.setTextoHTML( costoExtraDetalleService.listaHTMLModificacion(idTipoTrabajoDetalle) );
 		// actualiza el precio
-		calificacionService.actualizaProcesosPartida(idOrdenProduccion);
+		calificacionService.actualizaPartida(idOrdenProduccion);
 		CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionService.buscaCalificacionOrdenProduccion(idOrdenProduccion);
 		jsonResponse.setPrecioNeto( calificacionOrdenProduccion.getPrecioNeto() );
 		calificacionOrdenProduccion = null;
@@ -202,7 +202,7 @@ public class CostoExtraDetalleController {
 		// obtiene actualizacion de la tabla
 		jsonResponse.setTextoHTML( costoExtraDetalleService.listaHTMLModificacion(idTipoTrabajoDetalle) );
 		// actualiza el precio
-		calificacionService.actualizaProcesosPartida(idOrdenProduccion);
+		calificacionService.actualizaPartida(idOrdenProduccion);
 		CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionService.buscaCalificacionOrdenProduccion(idOrdenProduccion);
 		jsonResponse.setPrecioNeto( calificacionOrdenProduccion.getPrecioNeto() );
 		calificacionOrdenProduccion = null;

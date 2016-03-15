@@ -89,11 +89,13 @@
             var urlCalificacionOrdenProduccion  = "${urlCalificacionOrdenProduccion}";
         </script>
         <script type="text/javascript">
+        	// usan comillas simples porque dentro de su contenido utilizan comillas dobles.
             var strJsonListaProcesoDisenio      = '${jsonListaProcesoDisenio}';
             var strJsonListaProcesoPreprensa    = '${jsonListaProcesoPreprensa}';
             var strJsonListaProcesoTransporte   = '${jsonListaProcesoTransporte}';
             var strJsonListaProcesoExterno      = '${jsonListaProcesoExterno}';
             var strJsonListaMaterialAyuda       = '${jsonListaMaterialAyuda}';
+            var strJsonListaCostosExtra			= '${jsonListaCostosExtra}';
         </script>
         <script type="text/javascript">
             function regresa_menu() {
@@ -1686,7 +1688,7 @@
 		                                					<tr>
 		                                						<td width="41%">Costo Extra:</td>
 		                                						<td>
-		                                							<select name="select_costo_extra" onchange="ajaxUnidadCostoExtra()">
+		                                							<select name="select_costo_extra" id="select_costo_extra" onchange="ajaxUnidadCostoExtra()">
 		                                								<c:forEach var="costoExtra" items="${listaCostoExtra}">
 	                                                                        <option value="${costoExtra.value}">${costoExtra.text}</option>
 	                                                                    </c:forEach>

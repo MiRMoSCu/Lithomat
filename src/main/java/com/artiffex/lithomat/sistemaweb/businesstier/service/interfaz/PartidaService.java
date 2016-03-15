@@ -27,8 +27,6 @@ public interface PartidaService {
 	
 	public float obtieneAcabadoCosteTotal(int idPartida);
 	
-	public float obtieneCostoExtraCosteTotal(int idPartida);
-	
 	public String buscaHTML(int idOrdenProduccion);
 	
 	public void actualizaPartida(Partida partida);

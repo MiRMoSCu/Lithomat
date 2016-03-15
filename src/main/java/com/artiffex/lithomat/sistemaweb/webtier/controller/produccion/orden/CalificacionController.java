@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.CalificacionCostosExtraDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.CalificacionPartidaDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.CalificacionPliegoDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.CalificacionProcesosDTO;
@@ -171,6 +172,7 @@ public class CalificacionController {
 		double tintaEspecialCosteTotal		= ctd.getTintaEspecialCosteTotal() * (1 + porcentajeCliente);
 		double frenteBarnizCosteTotal		= ctd.getFrenteBarnizCosteTotal() * (1 + porcentajeCliente);
 		double vueltaBarnizCosteTotal		= ctd.getVueltaBarnizCosteTotal() * (1 + porcentajeCliente);
+		double costosExtraCosteTotal 		= ctd.getCostosExtraCosteTotal() * (1 + porcentajeCliente);
 		
 		CalificacionTrabajoDetalleDTO ctdDTO = new CalificacionTrabajoDetalleDTO();
 		
@@ -181,6 +183,7 @@ public class CalificacionController {
 		ctdDTO.setTintaEspecialCosteTotal(tintaEspecialCosteTotal);
 		ctdDTO.setFrenteBarnizCosteTotal(frenteBarnizCosteTotal);
 		ctdDTO.setVueltaBarnizCosteTotal(vueltaBarnizCosteTotal);
+		ctdDTO.setCostosExtraCosteTotal(costosExtraCosteTotal);
 		ctdDTO.setDescripcion(tipoTrabajoDetalle.getDescripcion());
 		ctdDTO.setMaquinaDescripcion(tipoTrabajoDetalle.getMaquina().getNombre());
 		ctdDTO.setRepeticionesXPliego(tipoTrabajoDetalle.getRepeticionesXPliego());
@@ -310,6 +313,31 @@ public class CalificacionController {
 		return cpDTO;
 	}
 	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
+	@RequestMapping(value = "/resumen_costos_extra", method = RequestMethod.POST)
+	@ResponseBody
+	public CalificacionCostosExtraDTO resumenCalificacionCostosExtra(
+			@RequestParam(value = "nut", 						required = false) String nut,
+			@RequestParam(value = "id_tipo_trabajo_detalle", 	required = false) Integer idTipoTrabajoDetalle
+		) {
+		OrdenProduccion ordenProduccion = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
+		CalificacionOrdenProduccion calificacionOrdenProduccion = calificacionService.buscaCalificacionOrdenProduccion(ordenProduccion.getIdOrdenProduccion());
+		float porcentajeCliente = calificacionOrdenProduccion.getTipoClientePrecio() / calificacionOrdenProduccion.getTipoClienteFactorDivisor();
+		calificacionOrdenProduccion	= null;
+		ordenProduccion 			= null;
+		
+		CalificacionTrabajoDetalle calificacionTrabajoDetalle = calificacionService.buscaCalificacionTrabajoDetalle(idTipoTrabajoDetalle);
+		
+		double costosExtraCosteTotal = calificacionTrabajoDetalle.getCostosExtraCosteTotal() * ( 1 + porcentajeCliente );
+		
+		CalificacionCostosExtraDTO cce = new CalificacionCostosExtraDTO();
+		cce.setCostosExtraCosteTotal(costosExtraCosteTotal);
+		cce.setHtmlTablaCostosExtra( costosExtrasDetalleService.listaHTMLProcesosYPrecioConPorcentajeCliente(idTipoTrabajoDetalle, porcentajeCliente) );
+		calificacionTrabajoDetalle = null;
+		
+		return cce;
+	}
+	
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
 	@RequestMapping(value = "/resumen_procesos", method = RequestMethod.POST)
@@ -328,17 +356,14 @@ public class CalificacionController {
 		
 		CalificacionPartida calificacionPartida = calificacionService.buscaCalificacionPartida(idPartida);
 		
-		double procesosPartidaCosteTotal = calificacionPartida.getProcesosPartidaCosteTotal() * (1 + porcentajeCliente);
+		double procesosPartidaCosteTotal = calificacionPartida.getProcesosPartidaCosteTotal() * ( 1 + porcentajeCliente );
 		
 		CalificacionProcesosDTO cpp = new CalificacionProcesosDTO();
-		
 		cpp.setProcesosPartidaCosteTotal(procesosPartidaCosteTotal);
-		cpp.setHtmlTablaCostosExtras( costosExtrasDetalleService.listaHTMLProcesosYPrecioConPorcentajeCliente(idPartida, porcentajeCliente) );
 		cpp.setHtmlTablaProcesosDisenio( disenioDetalleService.listaHTMLProcesosYPrecioConPorcentajeCliente(idPartida, porcentajeCliente) );
 		cpp.setHtmlTablaProcesosPreprensa( preprensaDetalleService.listaHTMLProcesosYPrecioConPorcentajeCliente(idPartida, porcentajeCliente) );
 		cpp.setHtmlTablaProcesosTransporte( transporteDetalleService.listaHTMLProcesosYPrecioConPorcentajeCliente(idPartida, porcentajeCliente) );
 		cpp.setHtmlTablaProcesosAcabado( acabadoDetalleService.listaHTMLProcesosYPrecioConPorcentajeCliente(idPartida, porcentajeCliente) );
-		
 		calificacionPartida = null;
 		
 		return cpp;

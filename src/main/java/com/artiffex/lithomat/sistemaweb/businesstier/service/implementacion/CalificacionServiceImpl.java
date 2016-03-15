@@ -133,7 +133,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 			double transporteCosteTotal 		= 0;
 			double acabadoCosteTotal			= 0;
 			double offsetCosteTotal 			= 0;
-			double costoExtraTotal 				= 0;
 			
 			List<TipoTrabajoDetalle> listaTipoTrabajoDetalle = tipoTrabajoDetalleService.listaTipoTrabajoDetallePorPartida(partida.getIdPartida());
 			for(TipoTrabajoDetalle tipoTrabajoDetalle : listaTipoTrabajoDetalle ) {
@@ -147,6 +146,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 				double trabajoDetalleTintaEspecialCosteTotal	= 0;
 				double trabajoDetalleFrenteBarnizCosteTotal		= 0;
 				double trabajoDetalleVueltaBarnizCosteTotal		= 0;
+				double trabajoDetalleCostosExtraCosteTotal		= 0;
 				// * tipo complejidad
 				int idTipoComplejidad = tipoTrabajoDetalle.getTipoComplejidad().getIdTipoComplejidad();
 				// * maquina
@@ -231,7 +231,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 					tipoTrabajoDetalleCosteTotal += pliegoCosteTotal;
 					
 					CalificacionPliego calificacionPliego = new CalificacionPliego();
-					
 					calificacionPliego.setPliego(pliego);
 					calificacionPliego.setPliegoCosteTotal(pliegoCosteTotal);
 					calificacionPliego.setHojasRequeridasOriginal(hojasRequeridasOriginal);
@@ -256,7 +255,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 					calificacionPliego.setVueltaBarnizPrecioUnitario(vueltaBarnizPrecioUnitario);
 					calificacionPliego.setVueltaBarnizCosteTotal(vueltaBarnizCosteTotal);
 					calificacionPliego.setActivo(true);
-					
 					calificacionPliegoDAO.crea(calificacionPliego);
 					
 					calificacionPliego 	= null;
@@ -264,12 +262,15 @@ public class CalificacionServiceImpl implements CalificacionService {
 				}
 				listaPliego = null;
 				
+				// calculo costo extras
+				trabajoDetalleCostosExtraCosteTotal = tipoTrabajoDetalleService.obtieneCostosExtraCosteTotal(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());
+				
 				// sumatoria coste impresion
-				impresionPartidaCosteTotal += tipoTrabajoDetalleCosteTotal;
+				tipoTrabajoDetalleCosteTotal += trabajoDetalleCostosExtraCosteTotal;
+				impresionPartidaCosteTotal 	+= tipoTrabajoDetalleCosteTotal;
 				
 				// creacion de registro calificacion trabajo detalle
 				CalificacionTrabajoDetalle calificacionTrabajoDetalle = new CalificacionTrabajoDetalle();
-
 				calificacionTrabajoDetalle.setTipoTrabajoDetalle(tipoTrabajoDetalle);
 				calificacionTrabajoDetalle.setTipoTrabajoDetalleCosteTotal(tipoTrabajoDetalleCosteTotal);
 				calificacionTrabajoDetalle.setPapelCosteTotal(trabajoDetallePapelCosteTotal);
@@ -278,6 +279,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 				calificacionTrabajoDetalle.setTintaEspecialCosteTotal(trabajoDetalleTintaEspecialCosteTotal);
 				calificacionTrabajoDetalle.setFrenteBarnizCosteTotal(trabajoDetalleFrenteBarnizCosteTotal);
 				calificacionTrabajoDetalle.setVueltaBarnizCosteTotal(trabajoDetalleVueltaBarnizCosteTotal);
+				calificacionTrabajoDetalle.setCostosExtraCosteTotal(trabajoDetalleCostosExtraCosteTotal);
 				calificacionTrabajoDetalle.setActivo(true);
 
 				calificacionTrabajoDetalleDAO.crea(calificacionTrabajoDetalle);
@@ -295,7 +297,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 			transporteCosteTotal 		= partidaService.obtieneTransporteCosteTotal(partida.getIdPartida());
 			acabadoCosteTotal 			= partidaService.obtieneAcabadoCosteTotal(partida.getIdPartida());
 			offsetCosteTotal 			= 0;
-			costoExtraTotal 			= partidaService.obtieneCostoExtraCosteTotal(partida.getIdPartida());
 			
 			// obtencion del precio total procesos
 			procesosPartidaCosteTotal += disenioCosteTotal;
@@ -303,7 +304,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 			procesosPartidaCosteTotal += transporteCosteTotal;
 			procesosPartidaCosteTotal += acabadoCosteTotal;
 			procesosPartidaCosteTotal += offsetCosteTotal;
-			procesosPartidaCosteTotal += costoExtraTotal;
 
 			// obtencion del precio total: impresion + procesos
 			partidaCosteTotal += procesosPartidaCosteTotal;
@@ -313,7 +313,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 			
 			// creacion de registro
 			CalificacionPartida calificacionPartida = new CalificacionPartida();
-			
 			calificacionPartida.setPartida(partida);
 			calificacionPartida.setCantidadOriginal(partida.getCantidad());
 			calificacionPartida.setPartidaCosteTotal(partidaCosteTotal);
@@ -324,9 +323,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 			calificacionPartida.setTransporteCosteTotal(transporteCosteTotal);
 			calificacionPartida.setAcabadoCosteTotal(acabadoCosteTotal);
 			calificacionPartida.setOffsetCosteTotal(offsetCosteTotal);
-			calificacionPartida.setCostoExtraTotal(costoExtraTotal);
 			calificacionPartida.setActivo(true);
-			
 			calificacionPartidaDAO.crea(calificacionPartida);
 			
 			calificacionPartida = null;
@@ -348,7 +345,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 		// *** ***** ***
 		// creacion de registro
 		CalificacionOrdenProduccion calificacionOrdenProduccion = new CalificacionOrdenProduccion();
-			
 		calificacionOrdenProduccion.setOrdenProduccion(ordenProduccion);
 		calificacionOrdenProduccion.setPrecioBruto(precioBruto);
 		calificacionOrdenProduccion.setTipoClientePrecio(ordenProduccion.getCliente().getTipoCliente().getPrecio());
@@ -359,7 +355,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 		calificacionOrdenProduccion.setPrecioNeto(precioNeto);
 		calificacionOrdenProduccion.setFechaGeneracion(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 		calificacionOrdenProduccion.setActivo(true);
-
 		calificacionOrdenProduccionDAO.crea(calificacionOrdenProduccion);
 		
 		calificacionOrdenProduccion	= null;
@@ -465,7 +460,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 			double transporteCosteTotal 		= 0;
 			double acabadoCosteTotal			= 0;
 			double offsetCosteTotal 			= 0;
-			double costoExtraTotal 				= 0;
 			
 			List<TipoTrabajoDetalle> listaTipoTrabajoDetalle = tipoTrabajoDetalleService.listaTipoTrabajoDetallePorPartida(partida.getIdPartida());
 			for(TipoTrabajoDetalle tipoTrabajoDetalle : listaTipoTrabajoDetalle ) {
@@ -479,6 +473,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 				double trabajoDetalleTintaEspecialCosteTotal	= 0;
 				double trabajoDetalleFrenteBarnizCosteTotal		= 0;
 				double trabajoDetalleVueltaBarnizCosteTotal		= 0;
+				double trabajoDetalleCostosExtraCosteTotal		= 0;
 				// * tipo complejidad
 				int idTipoComplejidad = tipoTrabajoDetalle.getTipoComplejidad().getIdTipoComplejidad();
 				// * maquina
@@ -593,7 +588,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 						calificacionPliego.setVueltaBarnizPrecioUnitario(vueltaBarnizPrecioUnitario);
 						calificacionPliego.setVueltaBarnizCosteTotal(vueltaBarnizCosteTotal);
 						calificacionPliego.setActivo(true);
-						
 						calificacionPliegoDAO.crea(calificacionPliego);
 					} else {
 						// SE HA MODIFICADO TipoTrabajoDetalle y sus PLIEGOS
@@ -622,7 +616,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 						calificacionPliego.setVueltaBarnizNumEntMaq(vueltaBarnizNumEntMaq);
 						calificacionPliego.setVueltaBarnizPrecioUnitario(vueltaBarnizPrecioUnitario);
 						calificacionPliego.setVueltaBarnizCosteTotal(vueltaBarnizCosteTotal);
-						
 						calificacionPliegoDAO.modifica(calificacionPliego);
 					}
 					
@@ -631,8 +624,12 @@ public class CalificacionServiceImpl implements CalificacionService {
 				}
 				listaPliego = null;
 				
+				// calculo costo extras
+				trabajoDetalleCostosExtraCosteTotal = tipoTrabajoDetalleService.obtieneCostosExtraCosteTotal(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());
+				
 				// sumatoria coste impresion
-				impresionPartidaCosteTotal += tipoTrabajoDetalleCosteTotal;
+				tipoTrabajoDetalleCosteTotal += trabajoDetalleCostosExtraCosteTotal;
+				impresionPartidaCosteTotal 	+= tipoTrabajoDetalleCosteTotal;
 				
 				// modificacion de registro
 				CalificacionTrabajoDetalle calificacionTrabajoDetalle = calificacionTrabajoDetalleDAO.buscaPorTipoTrabajoDetalle(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());
@@ -647,7 +644,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 					calificacionTrabajoDetalle.setTintaEspecialCosteTotal(trabajoDetalleTintaEspecialCosteTotal);
 					calificacionTrabajoDetalle.setFrenteBarnizCosteTotal(trabajoDetalleFrenteBarnizCosteTotal);
 					calificacionTrabajoDetalle.setVueltaBarnizCosteTotal(trabajoDetalleVueltaBarnizCosteTotal);
-					
+					calificacionTrabajoDetalle.setCostosExtraCosteTotal(trabajoDetalleCostosExtraCosteTotal);
 					calificacionTrabajoDetalleDAO.crea(calificacionTrabajoDetalle);
 				} else {
 					calificacionTrabajoDetalle.setTipoTrabajoDetalleCosteTotal(tipoTrabajoDetalleCosteTotal);
@@ -657,7 +654,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 					calificacionTrabajoDetalle.setTintaEspecialCosteTotal(trabajoDetalleTintaEspecialCosteTotal);
 					calificacionTrabajoDetalle.setFrenteBarnizCosteTotal(trabajoDetalleFrenteBarnizCosteTotal);
 					calificacionTrabajoDetalle.setVueltaBarnizCosteTotal(trabajoDetalleVueltaBarnizCosteTotal);
-					
+					calificacionTrabajoDetalle.setCostosExtraCosteTotal(trabajoDetalleCostosExtraCosteTotal);
 					calificacionTrabajoDetalleDAO.modifica(calificacionTrabajoDetalle);
 				}
 				
@@ -674,7 +671,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 			transporteCosteTotal 		= partidaService.obtieneTransporteCosteTotal(partida.getIdPartida());
 			acabadoCosteTotal 			= partidaService.obtieneAcabadoCosteTotal(partida.getIdPartida());
 			offsetCosteTotal 			= 0;
-			costoExtraTotal 			= partidaService.obtieneCostoExtraCosteTotal(partida.getIdPartida());
 			
 			// obtencion del precio total procesos
 			procesosPartidaCosteTotal += disenioCosteTotal;
@@ -682,7 +678,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 			procesosPartidaCosteTotal += transporteCosteTotal;
 			procesosPartidaCosteTotal += acabadoCosteTotal;
 			procesosPartidaCosteTotal += offsetCosteTotal;
-			procesosPartidaCosteTotal += costoExtraTotal;
 			
 			// obtencion del precio total: impresion + procesos
 			partidaCosteTotal += procesosPartidaCosteTotal;
@@ -702,8 +697,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 			calificacionPartida.setTransporteCosteTotal(transporteCosteTotal);
 			calificacionPartida.setAcabadoCosteTotal(acabadoCosteTotal);
 			calificacionPartida.setOffsetCosteTotal(offsetCosteTotal);
-			calificacionPartida.setCostoExtraTotal(costoExtraTotal);
-			
 			calificacionPartidaDAO.modifica(calificacionPartida);
 			
 			calificacionPartida = null;
@@ -739,7 +732,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 		calificacionOrdenProduccion.setPrecioClienteConDescuento(precioClienteConDescuento);
 		calificacionOrdenProduccion.setPrecioNeto(precioNeto);
 		calificacionOrdenProduccion.setFechaGeneracion(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-
 		calificacionOrdenProduccionDAO.modifica(calificacionOrdenProduccion);
 
 		calificacionOrdenProduccion	= null;
@@ -782,7 +774,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 			double transporteCosteTotal 		= partidaService.obtieneTransporteCosteTotal(partida.getIdPartida());
 			double acabadoCosteTotal 			= partidaService.obtieneAcabadoCosteTotal(partida.getIdPartida());
 			double offsetCosteTotal 			= 0;
-			double costoExtraTotal 				= partidaService.obtieneCostoExtraCosteTotal(partida.getIdPartida());
 			
 			// obtencion del precio total procesos
 			procesosPartidaCosteTotal += disenioCosteTotal;
@@ -790,7 +781,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 			procesosPartidaCosteTotal += transporteCosteTotal;
 			procesosPartidaCosteTotal += acabadoCosteTotal;
 			procesosPartidaCosteTotal += offsetCosteTotal;
-			procesosPartidaCosteTotal += costoExtraTotal;
 			
 			// obtencion del precio total: impresion + procesos
 			partidaCosteTotal += procesosPartidaCosteTotal;
@@ -806,8 +796,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 			calificacionPartida.setTransporteCosteTotal(transporteCosteTotal);
 			calificacionPartida.setAcabadoCosteTotal(acabadoCosteTotal);
 			calificacionPartida.setOffsetCosteTotal(offsetCosteTotal);
-			calificacionPartida.setCostoExtraTotal(costoExtraTotal);
-			
 			calificacionPartidaDAO.modifica(calificacionPartida); // UPDATE
 			
 			calificacionPartida = null;
@@ -843,7 +831,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 		calificacionOrdenProduccion.setPrecioClienteConDescuento(precioClienteConDescuento);
 		calificacionOrdenProduccion.setPrecioNeto(precioNeto);
 		calificacionOrdenProduccion.setFechaGeneracion(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-
 		calificacionOrdenProduccionDAO.modifica(calificacionOrdenProduccion);
 
 		calificacionOrdenProduccion	= null;
@@ -874,7 +861,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 			float precioNeto = porcentajeTipoComprobante == 0 ? precioClienteConDescuento : porcentajeComprobante;
 			//System.out.println(precioNeto);
 		calificacionOrdenProduccion.setPrecioNeto(precioNeto);
-		
 		calificacionOrdenProduccionDAO.modifica(calificacionOrdenProduccion); // UPDATE
 		
 		calificacionOrdenProduccion = null;
@@ -978,7 +964,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 			double transporteCosteTotal			= calificacionPartida.getTransporteCosteTotal() * (1 + porcentajeGananciaCliente);
 			double acabadoCosteTotal			= calificacionPartida.getAcabadoCosteTotal() * (1 + porcentajeGananciaCliente);
 			double offsetCosteTotal				= calificacionPartida.getOffsetCosteTotal() * (1 + porcentajeGananciaCliente);
-			double costoExtraTotal				= calificacionPartida.getCostoExtraTotal() * (1 + porcentajeGananciaCliente);
 			
 			calificacionPartida = null;
 			
@@ -992,7 +977,6 @@ public class CalificacionServiceImpl implements CalificacionService {
 			remisionPartida.setTransporteCosteTotal(transporteCosteTotal);
 			remisionPartida.setAcabadoCosteTotal(acabadoCosteTotal);
 			remisionPartida.setOffsetCosteTotal(offsetCosteTotal);
-			remisionPartida.setCostoExtraTotal(costoExtraTotal);
 			
 			List<RemisionTrabajoDetalle> listaRemisionTrabajoDetalle = new ArrayList<RemisionTrabajoDetalle>();
 			List<TipoTrabajoDetalle> listaTipoTrabajoDetalle = tipoTrabajoDetalleService.listaTipoTrabajoDetallePorPartida(partida.getIdPartida());
@@ -1002,12 +986,14 @@ public class CalificacionServiceImpl implements CalificacionService {
 				
 				String descripcion 					= tipoTrabajoDetalle.getDescripcion();
 				double tipoTrabajoDetalleCosteTotal	= calificacionTrabajoDetalle.getTipoTrabajoDetalleCosteTotal() * (1 + porcentajeGananciaCliente);
+				double costosExtraCosteTotal		= calificacionTrabajoDetalle.getCostosExtraCosteTotal() * (1 + porcentajeGananciaCliente);
 				
 				calificacionTrabajoDetalle	= null;
 				
 				RemisionTrabajoDetalle remisionTrabajoDetalle = new RemisionTrabajoDetalle();
 				remisionTrabajoDetalle.setDescripcion(descripcion);
 				remisionTrabajoDetalle.setTipoTrabajoDetalleCosteTotal(tipoTrabajoDetalleCosteTotal);
+				remisionTrabajoDetalle.setCostosExtraCosteTotal(costosExtraCosteTotal);
 				
 				List<RemisionPliego> listaRemisionPliego = new ArrayList<RemisionPliego>();
 				List<Pliego> listaPliego = pliegoService.listaPliegoPorTipoTrabajoDetalle(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());

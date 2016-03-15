@@ -216,6 +216,10 @@ public class CostoExtraDetalleServiceImpl implements CostoExtraDetalleService {
 		listaTipoTrabajoDetalleService = null;
 		return listaCostoExtraDetalle;
 	}
+	
+	public List<CostoExtraDetalle> listaCostoExtraDetallePorTipoTrabajoDetalle(int idTipoTrabajoDetalle) {
+		return costoExtraDetalleDAO.listaPorTipoTrabajoDetalle(idTipoTrabajoDetalle);
+	}
 
 	public String buscaHTML(int idTipoTrabajoDetalle) {
 		List<CostoExtraDetalle> lista = costoExtraDetalleDAO.listaPorTipoTrabajoDetalle(idTipoTrabajoDetalle);
@@ -385,9 +389,8 @@ public class CostoExtraDetalleServiceImpl implements CostoExtraDetalleService {
 		return html.toString();
 	}
 
-	public String listaHTMLProcesosYPrecioConPorcentajeCliente(int idPartida, float porcentajeCliente) {
+	public String listaHTMLProcesosYPrecioConPorcentajeCliente(int idTipoTrabajoDetalle, float porcentajeCliente) {
 		int cont = 0;
-		boolean listaVacia = true;
 		DecimalFormat numFormat = new DecimalFormat("'$ '#,##0.00");
 		StringBuilder html = new StringBuilder();
 		
@@ -400,51 +403,41 @@ public class CostoExtraDetalleServiceImpl implements CostoExtraDetalleService {
 		html.append("<th>Especificaci&oacute;n</th>");
 		html.append("</tr>");
 		
-		
-		List<TipoTrabajoDetalle> listaTipoTrabajoDetalleService = tipoTrabajoDetalleService.listaTipoTrabajoDetallePorPartida(idPartida);
-		for (TipoTrabajoDetalle tipoTrabajoDetalle : listaTipoTrabajoDetalleService) {
-			List<CostoExtraDetalle> listaCostoExtraDetalle = costoExtraDetalleDAO.listaPorTipoTrabajoDetalle(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());
-			if( listaCostoExtraDetalle.size() > 0 ) {
-				listaVacia = false;
-				for (CostoExtraDetalle costoExtraDetalle : listaCostoExtraDetalle) {
-					html.append("<tr class=\'");
-					if (cont % 2 == 0) {
-						html.append("l1");
-					} else {
-						html.append("l2");
-					}
-					html.append("\'>");
-					// No.
-					html.append("<td>");
-					html.append(cont + 1);
-					html.append("</td>");
-					// Costo Extra
-					html.append("<td>");
-					html.append(costoExtraDetalle.getCostoExtra().getNombre());
-					html.append("</td>");
-					// Responsable
-					html.append("<td>");
-					html.append(costoExtraDetalle.getResponsableInsumo().getNombre());
-					html.append("</td>");
-					// Precio
-					html.append("<td>");
-					html.append(numFormat.format(costoExtraDetalle.getPrecioTotalPesos() * (1 + porcentajeCliente)));
-					html.append("</td>");
-					// Especificacion
-					html.append("<td>");
-					html.append(costoExtraDetalle.getEspecificacion());
-					html.append("</td>");
-					
-					cont++;
-					costoExtraDetalle = null;
+		List<CostoExtraDetalle> listaCostoExtraDetalle = costoExtraDetalleDAO.listaPorTipoTrabajoDetalle(idTipoTrabajoDetalle);
+		if( listaCostoExtraDetalle.size() > 0 ) {
+			for (CostoExtraDetalle costoExtraDetalle : listaCostoExtraDetalle) {
+				html.append("<tr class=\'");
+				if (cont % 2 == 0) {
+					html.append("l1");
+				} else {
+					html.append("l2");
 				}
-			}				
-			listaCostoExtraDetalle = null;
-			tipoTrabajoDetalle = null;
-		}
-		listaTipoTrabajoDetalleService = null;
-	
-		if( listaVacia ) {
+				html.append("\'>");
+				// No.
+				html.append("<td>");
+				html.append(cont + 1);
+				html.append("</td>");
+				// Costo Extra
+				html.append("<td>");
+				html.append(costoExtraDetalle.getCostoExtra().getNombre());
+				html.append("</td>");
+				// Responsable
+				html.append("<td>");
+				html.append(costoExtraDetalle.getResponsableInsumo().getNombre());
+				html.append("</td>");
+				// Precio
+				html.append("<td>");
+				html.append(numFormat.format(costoExtraDetalle.getPrecioTotalPesos() * (1 + porcentajeCliente)));
+				html.append("</td>");
+				// Especificacion
+				html.append("<td>");
+				html.append(costoExtraDetalle.getEspecificacion());
+				html.append("</td>");
+				
+				cont++;
+				costoExtraDetalle = null;
+			}
+		} else {
 			html.append("<tr class=\'");
 			html.append("l1");
 			html.append("\'>");
@@ -471,6 +464,10 @@ public class CostoExtraDetalleServiceImpl implements CostoExtraDetalleService {
 		}
 		html.append("</table>");
 		
+		listaCostoExtraDetalle = null;
+		
 		return html.toString();
 	}
+
+	
 }

@@ -144,6 +144,8 @@ public class OrdenProduccionController {
 		model.addAttribute("listaTipoComplejidad", listaTipoComplejidad);
 		listaTipoComplejidad = null;
 		
+		Gson gson = new Gson();
+		
 		List<ComboSelect> listaCostoExtra = costoExtraService.listaComboSelect();
 		model.addAttribute("listaCostoExtra",listaCostoExtra);
 		if( listaCostoExtra.size() > 0 ) {
@@ -153,9 +155,9 @@ public class OrdenProduccionController {
 			costoExtra 	= null;
 			cs 				= null;
 		}
+		String jsonListaCostosExtra = gson.toJson(listaCostoExtra);
+		model.addAttribute("jsonListaCostosExtra", jsonListaCostosExtra);
 		listaCostoExtra = null;
-		
-		Gson gson = new Gson();
 
 		List<ComboSelect> listaProcesoDisenio = procesoDisenioService.listaComboSelect();
 		model.addAttribute("listaProcesoDisenio", listaProcesoDisenio);

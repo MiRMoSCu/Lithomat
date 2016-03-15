@@ -13,7 +13,6 @@ public class CalificacionProcesosDTO implements Serializable {
 	private double transporteCosteTotal;
 	private double acabadoCosteTotal;
 	private double offsetCosteTotal;
-	private double costoExtraTotal;
 	private boolean activo;
 	// campos para transferir informacion
 	private String htmlTablaCostosExtras;
@@ -64,12 +63,6 @@ public class CalificacionProcesosDTO implements Serializable {
 	}
 	public void setOffsetCosteTotal(double offsetCosteTotal) {
 		this.offsetCosteTotal = offsetCosteTotal;
-	}
-	public double getCostoExtraTotal() {
-		return costoExtraTotal;
-	}
-	public void setCostoExtraTotal(double costoExtraTotal) {
-		this.costoExtraTotal = costoExtraTotal;
 	}
 	public boolean isActivo() {
 		return activo;

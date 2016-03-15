@@ -14,6 +14,7 @@ public class CalificacionTrabajoDetalleDTO implements Serializable {
 	private double tintaEspecialCosteTotal;
 	private double frenteBarnizCosteTotal;
 	private double vueltaBarnizCosteTotal;
+	private double costosExtraCosteTotal;
 	// campos utilizados para mostrar información en pantalla
 	private String descripcion;
 	private String maquinaDescripcion;
@@ -74,6 +75,12 @@ public class CalificacionTrabajoDetalleDTO implements Serializable {
 	}
 	public void setVueltaBarnizCosteTotal(double vueltaBarnizCosteTotal) {
 		this.vueltaBarnizCosteTotal = vueltaBarnizCosteTotal;
+	}
+	public double getCostosExtraCosteTotal() {
+		return costosExtraCosteTotal;
+	}
+	public void setCostosExtraCosteTotal(double costosExtraCosteTotal) {
+		this.costosExtraCosteTotal = costosExtraCosteTotal;
 	}
 	public String getDescripcion() {
 		return descripcion;

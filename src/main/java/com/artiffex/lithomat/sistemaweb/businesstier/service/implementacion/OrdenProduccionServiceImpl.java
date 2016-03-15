@@ -207,6 +207,10 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
 					pliego = null;
 				}
 				listaPliego = null;
+				sb.append(",");
+				sb.append("{\"id\":\"CostoExtra:" + tipoTrabajoDetalle.getIdTipoTrabajoDetalle() + "\",");
+				sb.append("\"text\":\"CostoExtra\"");
+				sb.append("}");
 				sb.append("]");
 				sb.append("}");
 				if( j+1 < listaTipoTrabajoDetalle.size() )

@@ -8,8 +8,10 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.TipoTrabajoDetalleDTO;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.CostoExtraDetalle;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Pliego;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajoDetalle;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CostoExtraDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PliegoService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoPapelExtendidoService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoTrabajoDetalleService;
@@ -25,6 +27,8 @@ public class TipoTrabajoDetalleServiceImpl implements TipoTrabajoDetalleService 
 	private PliegoService pliegoService;
 	@Resource
 	private TipoPapelExtendidoService tipoPapelExtendidoService;
+	@Resource
+	private CostoExtraDetalleService costoExtraDetalleService;
 	
 
 	public int creaTipoTrabajoDetalle(TipoTrabajoDetalle tipoTrabajoDetalle) {
@@ -261,6 +265,17 @@ public class TipoTrabajoDetalleServiceImpl implements TipoTrabajoDetalleService 
 
 	public List<TipoTrabajoDetalle> listaTipoTrabajoDetallePorEstatusOrden(int idEstatusOrden) {
 		return tipoTrabajoDetalleDAO.listaPorEstatusOrden(idEstatusOrden);
+	}
+
+	public float obtieneCostosExtraCosteTotal(int idTipoTrabajoDetalle) {
+		float costeTotal = 0f;
+		List<CostoExtraDetalle> lista = costoExtraDetalleService.listaCostoExtraDetallePorTipoTrabajoDetalle(idTipoTrabajoDetalle);
+		for (CostoExtraDetalle costosExtrasDetalle : lista) {
+			costeTotal += costosExtrasDetalle.getPrecioTotalPesos();
+			costosExtrasDetalle = null;
+		}
+		lista = null;
+		return costeTotal;
 	}
 
 }

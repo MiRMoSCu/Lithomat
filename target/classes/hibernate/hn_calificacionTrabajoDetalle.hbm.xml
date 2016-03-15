@@ -40,6 +40,10 @@
 			<column name="vuelta_barniz_coste_total"/>
 			<type name="double"/>
 		</property>
+		<property name="costosExtraCosteTotal">
+			<column name="costos_extra_coste_total"/>
+			<type name="double"/>
+		</property>
 		<property name="activo">
 			<column name="activo"/>
 			<type name="boolean"/>

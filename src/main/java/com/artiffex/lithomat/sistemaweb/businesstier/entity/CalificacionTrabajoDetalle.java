@@ -15,6 +15,7 @@ public class CalificacionTrabajoDetalle implements Serializable {
 	private double tintaEspecialCosteTotal;
 	private double frenteBarnizCosteTotal;
 	private double vueltaBarnizCosteTotal;
+	private double costosExtraCosteTotal;
 	private boolean activo;
 	
 	
@@ -71,6 +72,12 @@ public class CalificacionTrabajoDetalle implements Serializable {
 	}
 	public void setVueltaBarnizCosteTotal(double vueltaBarnizCosteTotal) {
 		this.vueltaBarnizCosteTotal = vueltaBarnizCosteTotal;
+	}
+	public double getCostosExtraCosteTotal() {
+		return costosExtraCosteTotal;
+	}
+	public void setCostosExtraCosteTotal(double costosExtraCosteTotal) {
+		this.costosExtraCosteTotal = costosExtraCosteTotal;
 	}
 	public boolean isActivo() {
 		return activo;

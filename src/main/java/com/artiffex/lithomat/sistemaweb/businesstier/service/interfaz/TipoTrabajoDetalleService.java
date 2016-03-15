@@ -29,5 +29,7 @@ public interface TipoTrabajoDetalleService {
 	public String obtienePapelDescripcionBasica(int idTipoTrabajoDetalle);
 	
 	public List<TipoTrabajoDetalle> listaTipoTrabajoDetallePorEstatusOrden(int idEstatusOrden);
+	
+	public float obtieneCostosExtraCosteTotal(int idTipoTrabajoDetalle);
 
 }

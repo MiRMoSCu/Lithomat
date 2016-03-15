@@ -7,6 +7,7 @@
 <c:url value="/calificacion/resumen_partida"			var="urlResumenCalificacionPartida"/>
 <c:url value="/calificacion/resumen_trabajo_detalle"	var="urlResumenCalificacionTrabajoDetalle"/>
 <c:url value="/calificacion/resumen_pliego"				var="urlResumenCalificacionPliego"/>
+<c:url value="/calificacion/resumen_costos_extra"		var="urlResumenCalificacionCostosExtra"/>
 <c:url value="/calificacion/resumen_procesos"			var="urlResumenCalificacionProcesos"/>
 <c:url value="/reporte/ventana_condiciones_produccion"	var="urlVentanaCondicionesProduccion"/>
 <fmt:setLocale value="en_US" scope="session" />
@@ -33,6 +34,7 @@
         	var urlResumenCalificacionPartida			= "${urlResumenCalificacionPartida}";
         	var urlResumenCalificacionTrabajoDetalle 	= "${urlResumenCalificacionTrabajoDetalle}";
         	var urlResumenCalificacionPliego			= "${urlResumenCalificacionPliego}";
+        	var urlResumenCalificacionCostosExtra		= "${urlResumenCalificacionCostosExtra}";
         	var urlResumenCalificacionProcesos			= "${urlResumenCalificacionProcesos}";
         	var urlVentanaCondicionesProduccion			= "${urlVentanaCondicionesProduccion}";
         </script>
@@ -802,6 +804,35 @@
 	                                            </div>
 	                                            <div class="linea">
 	                                            	<div class="casilla">
+	                                            		<div class="mitad_columna_izquierda">
+	                                            			<div class="titulo">
+	                                            				<font size="4">COSTOS EXTRA</font>
+	                                            			</div>
+	                                            		</div>
+	                                            		<div class="columna_derecha">
+	                                            			<div class="mitad_columna_izquierda">
+	                                            				<div class="columna_completa">
+	                                            					<table>
+	                                            						<tr>
+	                                            							<td width="1%">Total:</td>
+	                                            							<td>
+	                                            								<input	type="text"
+	                                            										class="input"
+	                                            										style="text-align: right;"
+	                                            										name="costos_extra_coste_total"
+	                                            										value=""
+	                                            										onkeypress=""
+	                                            										readonly/>
+	                                            							</td>
+	                                            						</tr>
+	                                            					</table>
+	                                            				</div>
+	                                            			</div>
+	                                            		</div>
+	                                            	</div>
+	                                            </div>
+	                                            <div class="linea">
+	                                            	<div class="casilla">
 	                                            		<div class="columna_derecha">
 	                                            			<div class="mitad_columna_derecha">
 	                                            				<div class="columna_completa">
@@ -1338,17 +1369,18 @@
 	                                   			</div>
                                     		</form>
                                     	</div>
-<!-- div_procesos_acabado_detalle -->
-                                    	<div id="div_procesos_acabado_detalle" style="width:100%; height:100%; background:#fff; float:left; display:none;">
-                                    		<form name="resumen_procesos" action="" accept-charset="ISO-8859-1">
-                                    			
-                                    			
+                                    	
+                                    	
+                                    	
+<!-- div_costos_extras -->
+                                    	<div id="div_costos_extra" style="width: 100%; height: 100%; background: #fff; float: left; display: none;">
+                                    		<form name="resumen_costos_extra" action="" accept-charset="ISO-8859-1">
                                     			<div class="titulo">
-                                    				<font size="4">COSTOS EXTRAS</font>
+                                    				<font size="4">COSTOS EXTRA</font>
                                     			</div>
-                                    			<div style="width:80%; height:100px; margin-left:auto; margin-right:auto;">
+                                    			<div style="width: 80%; height: 100px; margin-left: auto; margin-right: auto;">
                                     				<div class="columna_completa">
-                                    					<div id="div_tabla_lista_costos_extras_detalle" style="width:100%; height:100%; overflow-x:scroll;">
+                                    					<div id="div_tabla_lista_costos_extra_detalle" style="width:100%; height:100%; overflow-x:scroll;">
                                     						<table>
                                     							<tr>
                                     								<th>No.</th>
@@ -1368,8 +1400,39 @@
                                     					</div>
                                     				</div>
                                     			</div>
-                                    			<br/>
-                                    		
+                                    			<div class="div_separador_chico">
+	                                            	<img alt="" src="<c:url value="/resources/image/separador_chico.jpg"/>"/>
+	                                            </div>
+	                                    		<div class="linea">
+	                                   				<div class="casilla">
+	                                   					<div class="mitad_columna_derecha">
+	                                   						<div class="columna_completa">
+	                                   							<table>
+	                                   								<tr>
+	                                   									<td width="1%">Total:</td>
+	                                   									<td>
+	                                   										<input	type="text"
+	                                   												class="input"
+	                                   												style="text-align:right;"
+	                                   												name="costos_extra_coste_total"
+	                                   												value=""
+		                                   											onkeypress=""
+		                                   											readonly/>
+	                                   									</td>
+	                                   								</tr>
+	                                   							</table>
+	                                   						</div>
+	                                   					</div>
+	                                   				</div>
+	                                   			</div>
+                                    		</form>
+                                    	</div>
+                                    	
+                                    	
+                                    	
+<!-- div_procesos_acabado_detalle -->
+                                    	<div id="div_procesos_acabado_detalle" style="width:100%; height:100%; background:#fff; float:left; display:none;">
+                                    		<form name="resumen_procesos" action="" accept-charset="ISO-8859-1">
                                     		
 	                                    		<div class="titulo">
 	                                    			<font size="4">DISE&Ntilde;O</font>

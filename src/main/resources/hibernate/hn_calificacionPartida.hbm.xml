@@ -48,10 +48,6 @@
 			<column name="offset_coste_total"/>
 			<type name="double"/>
 		</property>
-		<property name="costoExtraTotal">
-			<column name="costo_extra_total"/>
-			<type name="double"/>
-		</property>
 		<property name="activo">
 			<column name="activo"/>
 			<type name="boolean"/>
