@@ -776,7 +776,7 @@
                                                         <div class="columna_completa">
                                                             <table>
                                                                 <tr>
-                                                                    <td width="1%">Tipo:</td>
+                                                                    <td width="48%">Tipo Acabado:</td>
                                                                     <td>
                                                                         <input  type="text" 
                                                                                 class="input" 
@@ -919,38 +919,23 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    <div style="width: 800px; margin-left: auto; margin-right: auto;">
-                                    	<div class="linea" style="padding-top: 5px;">
-	                                   		<div class="casilla" style="text-align: right;">
-	                                   			<div id="div_btn_agregar_ttd_encabezado" style="display: inline;">
-	                                   				<img id="imgBtnAgregarTTD" alt="" style="cursor:pointer;" onclick="agregaTTD()" src="<c:url value="/resources/image/boton_agregar.jpg"/>">
-	                                   				<span id="imgBtnCancelaAgregarTTD" style="cursor: pointer; display: none;" onclick="cancelaAgregarTTD()">
-	                                   					<font color="gray">CANCELAR</font>
-	                                   				</span>
-	                                   				<span id="imgBtnAceptaAgregarTTD" style="cursor: pointer; display: none;" onclick="aceptaAgregarTTD()">
-	                                   					<font color="blue">ACEPTAR</font>
-	                                   				</span>
-	                                   			</div>
-	                                   		</div>
-	                                   	</div>
-                                    </div>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
+                                    <c:if test="${historialEstatus.estatusOrden.idEstatusOrden == estatus_cotizacion}">
+                                    	<div style="width: 800px; margin-left: auto; margin-right: auto;">
+	                                    	<div class="linea" style="padding-top: 5px;">
+		                                   		<div class="casilla" style="text-align: right;">
+		                                   			<div id="div_btn_agregar_ttd_encabezado" style="display: inline;">
+		                                   				<img id="imgBtnAgregarTTD" alt="" style="cursor:pointer;" onclick="agregaTTD()" src="<c:url value="/resources/image/boton_agregar.jpg"/>">
+		                                   				<span id="imgBtnCancelaAgregarTTD" style="cursor: pointer; display: none;" onclick="cancelaAgregarTTD()">
+		                                   					<font color="gray">CANCELAR</font>
+		                                   				</span>
+		                                   				<span id="imgBtnAceptaAgregarTTD" style="cursor: pointer; display: none;" onclick="aceptaAgregarTTD()">
+		                                   					<font color="blue">ACEPTAR</font>
+		                                   				</span>
+		                                   			</div>
+		                                   		</div>
+		                                   	</div>
+	                                    </div>
+                                    </c:if>
                                 </div>
 							<!-- div_tipo_trabajo_detalle -->                            
                                 <div id="div_tipo_trabajo_detalle" style="display:none;">

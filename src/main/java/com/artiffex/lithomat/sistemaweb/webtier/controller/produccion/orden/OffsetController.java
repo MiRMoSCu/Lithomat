@@ -36,9 +36,9 @@ public class OffsetController {
 		log.info("/modifica_offset");
 
 		Offset offset = offsetService.buscaOffset(idOffset);
-		offset.setIndicacionTareaRealizar(indicacionTareaRealizar);
-		offset.setMaterialesRecibe(materialesRecibe);
-		offset.setObservaciones(observaciones);
+		offset.setIndicacionTareaRealizar(indicacionTareaRealizar.replaceAll("\\r\\n|\\r|\\n", " "));
+		offset.setMaterialesRecibe(materialesRecibe.replaceAll("\\r\\n|\\r|\\n", " "));
+		offset.setObservaciones(observaciones.replaceAll("\\r\\n|\\r|\\n", " "));
 
 		offsetService.modificaOffset(offset);
 

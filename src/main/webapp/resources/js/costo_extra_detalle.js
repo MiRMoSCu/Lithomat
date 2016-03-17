@@ -5,7 +5,7 @@ function carga_datos() {
 	$("#arbol_tipo_trabajo")
 	.on("changed.jstree",function(e,data){
 			var arreglo = ("" + data.instance.get_node( data.selected[0] ).id + "").split(":");
-			if( arreglo[0] == "IdSubpartida" ) {
+			if( arreglo[0] == "IdTipoTrabajoDetalle" ) {
 				document.costo_extra_detalle.id_tipo_trabajo_detalle.value = arreglo[1];
 				document.costo_extra_detalle.tipo_trabajo_detalle.value = data.instance.get_node( data.selected[0] ).text;
 			}

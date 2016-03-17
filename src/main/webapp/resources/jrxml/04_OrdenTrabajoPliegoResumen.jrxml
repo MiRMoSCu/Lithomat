@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2016-02-25T13:39:23 -->
+<!-- 2016-03-16T02:14:01 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="04_OrdenTrabajoPliegoResumen" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ae5d9ab7-3a47-475b-86d7-e7a96fdb8fac">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
@@ -31,8 +31,7 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="55">
-			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+		<band height="60">
 			<staticText>
 				<reportElement x="2" y="0" width="20" height="55" forecolor="#073A6E" uuid="7ccbb8ca-2ed9-452d-bf5c-c36d4d04eb41">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
@@ -157,7 +156,6 @@ C,M,Y,K]]></text>
 	</pageHeader>
 	<detail>
 		<band height="25" splitType="Stretch">
-			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<textField>
 				<reportElement x="2" y="0" width="20" height="15" forecolor="#073A6E" uuid="f1dc1b44-1a6f-4beb-b76f-957764b7982c">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>

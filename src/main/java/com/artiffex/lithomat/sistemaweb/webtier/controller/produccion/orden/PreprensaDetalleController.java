@@ -50,7 +50,7 @@ public class PreprensaDetalleController {
 			procesoPreprensa.setIdProcesoPreprensa(idProcesoPreprensa);
 		preprensaDetalle.setProcesoPreprensa(procesoPreprensa);
 		preprensaDetalle.setCantidad(cantidad);
-		preprensaDetalle.setEspecificaciones(especificaciones);
+		preprensaDetalle.setEspecificaciones(especificaciones.replaceAll("\\r\\n|\\r|\\n", " "));
 		preprensaDetalle.setPrecioTotalPesos(precioTotalPesos);
 		preprensaDetalle.setActivo(true);
 
@@ -89,7 +89,7 @@ public class PreprensaDetalleController {
 			procesoPreprensa.setIdProcesoPreprensa(idProcesoPreprensa);
 		preprensaDetalle.setProcesoPreprensa(procesoPreprensa);
 		preprensaDetalle.setCantidad(cantidad);
-		preprensaDetalle.setEspecificaciones(especificaciones);
+		preprensaDetalle.setEspecificaciones(especificaciones.replaceAll("\\r\\n|\\r|\\n", " "));
 		preprensaDetalle.setPrecioTotalPesos(precioTotalPesos);
 		preprensaDetalle.setActivo(true);
 		
@@ -131,7 +131,7 @@ public class PreprensaDetalleController {
 		
 		PreprensaDetalle preprensaDetalle = preprensaDetalleService.buscaPreprensaDetalle(idPreprensaDetalle);
 		preprensaDetalle.setCantidad(cantidad);
-		preprensaDetalle.setEspecificaciones(especificaciones);
+		preprensaDetalle.setEspecificaciones(especificaciones.replaceAll("\\r\\n|\\r|\\n", " "));
 		preprensaDetalle.setPrecioTotalPesos(precioTotalPesos);
 		preprensaDetalleService.modificaPreprensaDetalle(preprensaDetalle);
 		preprensaDetalle = null;
@@ -155,7 +155,6 @@ public class PreprensaDetalleController {
 	@ResponseBody
 	public JsonResponse eliminaPreprensaDetalle(
 			@RequestParam(value = "id_orden_produccion", 	required = false) Integer idOrdenProduccion,
-			@RequestParam(value = "nut", 					required = false) String nut,
 			@RequestParam(value = "id_preprensa_detalle", 	required = false) Integer idPreprensaDetalle,
 			@RequestParam(value = "id_preprensa",			required = false) Integer idPreprensa
 		) {

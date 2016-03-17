@@ -50,7 +50,7 @@ public class DisenioDetalleController {
 			procesoDisenio.setIdProcesoDisenio(idProcesoDisenio);
 		disenioDetalle.setProcesoDisenio(procesoDisenio);
 		disenioDetalle.setCantidad(cantidad);
-		disenioDetalle.setEspecificaciones(especificaciones);
+		disenioDetalle.setEspecificaciones(especificaciones.replaceAll("\\r\\n|\\r|\\n", " "));
 		disenioDetalle.setPrecioTotalPesos(precioTotalPesos);
 		disenioDetalle.setActivo(true);
 
@@ -89,7 +89,7 @@ public class DisenioDetalleController {
 			procesoDisenio.setIdProcesoDisenio(idProcesoDisenio);
 		disenioDetalle.setProcesoDisenio(procesoDisenio);
 		disenioDetalle.setCantidad(cantidad);
-		disenioDetalle.setEspecificaciones(especificaciones);
+		disenioDetalle.setEspecificaciones(especificaciones.replaceAll("\\r\\n|\\r|\\n", " "));
 		disenioDetalle.setPrecioTotalPesos(precioTotalPesos);
 		disenioDetalle.setActivo(true);
 		
@@ -134,7 +134,7 @@ public class DisenioDetalleController {
 		
 		DisenioDetalle disenioDetalle = disenioDetalleService.buscaDisenioDetalle(idDisenioDetalle);
 		disenioDetalle.setCantidad(cantidad);
-		disenioDetalle.setEspecificaciones(especificaciones);
+		disenioDetalle.setEspecificaciones(especificaciones.replaceAll("\\r\\n|\\r|\\n", " "));
 		disenioDetalle.setPrecioTotalPesos(precioTotalPesos);
 		disenioDetalleService.modificaDisenioDetalle(disenioDetalle);
 		disenioDetalle = null;

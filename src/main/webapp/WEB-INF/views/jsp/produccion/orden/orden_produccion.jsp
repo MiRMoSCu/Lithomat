@@ -825,7 +825,7 @@
                                                     <div class="columna_completa">
                                                         <table>
                                                             <tr>
-                                                                <td width="1%">Formaci&oacute;n:</td>
+                                                                <td width="48%">Tipo Acabado:</td>
                                                                 <td>
                                                                     <select name="select_forma_trabajo">
                                                                         <c:forEach var="tft" items="${listaTipoFormaTrabajo}">

@@ -24,7 +24,7 @@
             $(document).ready(function (){});
         </script>
 		<script type="text/javascript">
-			var jsonArbol = '${jsonArbol}';
+			var jsonArbol 	= '${jsonArbol}';
 		
 			var urlBuscaUnidadMedida 	= '${urlBuscaUnidadMedida}';
 			var urlAlta 				= '${urlAlta}';

@@ -16,6 +16,6 @@ public interface TipoTrabajoDetalleDAO {
 	
 	public List<TipoTrabajoDetalle> listaPorPartida(int idPartida);
 	
-	public List<TipoTrabajoDetalle> listaPorEstatusOrden(int idEstatusOrden);
+	public List<TipoTrabajoDetalle> listaPorQuery(String strQuery);
 	
 }

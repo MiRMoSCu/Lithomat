@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2016-01-21T17:03:53 -->
+<!-- 2016-03-16T01:14:50 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdenTrabajoPartida" pageWidth="580" pageHeight="1000" columnWidth="580" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a8665aab-f47b-49c1-9a8c-fc9185390bff">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -72,11 +72,11 @@
 				<text><![CDATA[Cantidad:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="116" y="29" width="39" height="15" forecolor="#073A6E" uuid="7b46db75-b6d4-4103-b324-e93704af5af6">
+				<reportElement x="116" y="29" width="74" height="15" forecolor="#073A6E" uuid="7b46db75-b6d4-4103-b324-e93704af5af6">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{cantidad})]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -126,7 +126,7 @@
 				<textFieldExpression><![CDATA[$F{nombrePartida}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="157" y="29" width="100" height="15" forecolor="#073A6E" uuid="859774a8-5971-469b-aad4-712ab5d12c2c">
+				<reportElement x="190" y="29" width="67" height="15" forecolor="#073A6E" uuid="859774a8-5971-469b-aad4-712ab5d12c2c">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
@@ -188,7 +188,7 @@
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Tipo trabajo:]]></text>
+				<text><![CDATA[Tipo Acabado:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="116" y="77" width="428" height="15" forecolor="#073A6E" uuid="535435db-fd6a-4c39-88d1-e0e83149c502">

@@ -28,14 +28,10 @@
         	$(document).ready(function (){});
             Shadowbox.init({});
             $(function() {
-				$("[name=fecha_cotizacion_inicio]").datepicker({
-					dateFormat:'yy-mm-dd',
-				});
-			});
-            $(function() {
-				$("[name=fecha_cotizacion_fin]").datepicker({
-					dateFormat:'yy-mm-dd',
-				});
+				$("[name=fecha_cotizacion_inicio]").datepicker({dateFormat:'yy-mm-dd'});
+				$("[name=fecha_cotizacion_inicio]").datepicker("setDate",new Date());
+				$("[name=fecha_cotizacion_fin]").datepicker({dateFormat:'yy-mm-dd'});
+				$("[name=fecha_cotizacion_fin]").datepicker("setDate",new Date());
 			});
         </script>
         <script type="text/javascript">

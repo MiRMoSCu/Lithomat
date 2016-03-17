@@ -289,7 +289,7 @@
                     		content:urlVentanaColaImpresion,
                     		player:'iframe',
                     		width:600,
-                    		height:280,
+                    		height:355,
                     		options:{
                     			modal:true,
                     			overlayOpacity:0.75

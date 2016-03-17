@@ -264,7 +264,86 @@ public class TipoTrabajoDetalleServiceImpl implements TipoTrabajoDetalleService 
 	}
 
 	public List<TipoTrabajoDetalle> listaTipoTrabajoDetallePorEstatusOrden(int idEstatusOrden) {
-		return tipoTrabajoDetalleDAO.listaPorEstatusOrden(idEstatusOrden);
+		StringBuilder sb = new StringBuilder();
+		sb.append(" SELECT ");
+		sb.append("    ttd.*");
+		sb.append(" FROM");
+		sb.append("    orden_produccion op,");
+		sb.append("    partida p,");
+		sb.append("    tipo_trabajo_detalle ttd");
+		sb.append(" WHERE");
+		sb.append("    op.id_orden_produccion IN (SELECT ");
+		sb.append("            h2.id_orden_produccion");
+		sb.append("        FROM");
+		sb.append("            historial_estatus h2");
+		sb.append("        WHERE");
+		sb.append("            (h2.id_orden_produccion , h2.fecha) IN (SELECT ");
+		sb.append("                    h1.id_orden_produccion, MAX(h1.fecha)");
+		sb.append("                FROM");
+		sb.append("                    historial_estatus h1");
+		sb.append("                GROUP BY id_orden_produccion)");
+		sb.append("                AND h2.id_estatus_orden = ");
+		sb.append(idEstatusOrden);
+		sb.append("        ORDER BY h2.id_orden_produccion)");
+		sb.append("        AND p.id_orden_produccion = op.id_orden_produccion");
+		sb.append("        AND ttd.id_partida = p.id_partida");
+		sb.append("        AND op.activo = TRUE");
+		sb.append("        AND p.activo = TRUE");
+		sb.append("        AND ttd.activo = TRUE");
+		sb.append(" ORDER BY op.id_orden_produccion ASC , p.id_partida ASC , ttd.id_tipo_trabajo_detalle ASC;");
+		return tipoTrabajoDetalleDAO.listaPorQuery(sb.toString());
+	}
+	
+	public List<TipoTrabajoDetalle> listaTipoTrabajoDetallePorEstatusMaquinaFecha( int idEstatusOrden, int idMaquina, boolean aplicaTodasMaquinas, String fechaInicial, String fechaFinal) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(" SELECT ");
+		sb.append("    ttd.*");
+		sb.append(" FROM");
+		sb.append("    orden_produccion op,");
+		sb.append("    partida p,");
+		sb.append("    tipo_trabajo_detalle ttd,");
+		sb.append("    maquina m");
+		sb.append(" WHERE");
+		sb.append("    op.id_orden_produccion IN (SELECT ");
+		sb.append("            h2.id_orden_produccion");
+		sb.append("        FROM");
+		sb.append("            historial_estatus h2");
+		sb.append("        WHERE");
+		sb.append("            (h2.id_orden_produccion , h2.fecha) IN (SELECT ");
+		sb.append("                    h1.id_orden_produccion, MAX(h1.fecha)");
+		sb.append("                FROM");
+		sb.append("                    historial_estatus h1");
+		sb.append("                GROUP BY id_orden_produccion)");
+		sb.append("                AND h2.id_estatus_orden = ");
+		sb.append(idEstatusOrden);
+		
+		if ( fechaInicial.equals(fechaFinal) ) {
+			sb.append("                AND DATE(h2.fecha) = '");
+			sb.append(fechaInicial);
+			sb.append("'");
+		} else {
+			sb.append("                AND DATE(h2.fecha) between '");
+			sb.append(fechaInicial);
+			sb.append("' and '");
+			sb.append(fechaFinal);
+			sb.append("'");
+		}
+		
+		sb.append("        ORDER BY h2.id_orden_produccion)");
+		sb.append("        AND p.id_orden_produccion = op.id_orden_produccion");
+		sb.append("        AND ttd.id_partida = p.id_partida");
+		sb.append("        AND m.id_maquina = ttd.id_maquina");
+		
+		if ( !aplicaTodasMaquinas ) {
+			sb.append("        AND m.id_maquina = ");
+			sb.append(idMaquina);
+		}
+		
+		sb.append("        AND op.activo = TRUE");
+		sb.append("        AND p.activo = TRUE");
+		sb.append("        AND ttd.activo = TRUE");
+		sb.append(" ORDER BY op.id_orden_produccion ASC , p.id_partida ASC , ttd.id_tipo_trabajo_detalle ASC");
+		return tipoTrabajoDetalleDAO.listaPorQuery(sb.toString());
 	}
 
 	public float obtieneCostosExtraCosteTotal(int idTipoTrabajoDetalle) {

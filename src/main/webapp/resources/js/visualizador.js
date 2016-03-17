@@ -10,13 +10,13 @@ function limpia() {
         document.forms["visualizador"].elements["radio_tipo_busqueda"][i].checked = false;
     
     // limpia campos
-    document.forms["visualizador"].elements["nut"].value                        = "";
-    document.forms["visualizador"].elements["id_estatus_orden"].selectedIndex   = 0;
-    document.forms["visualizador"].elements["nombre"].value                     = "";
-    document.forms["visualizador"].elements["descripcion"].value                = "";
-    document.forms["visualizador"].elements["fecha_cotizacion_inicio"].value    = "";
-    document.forms["visualizador"].elements["fecha_cotizacion_fin"].value       = "";
-    document.forms["visualizador"].elements["cliente"].value                    = "";
+    document.visualizador.nut.value                        = "";
+    document.visualizador.id_estatus_orden.selectedIndex   = 0;
+    document.visualizador.nombre.value                     = "";
+    document.visualizador.descripcion.value                = "";
+    document.visualizador.fecha_cotizacion_inicio.value    = "";
+    document.visualizador.fecha_cotizacion_fin.value       = "";
+    document.visualizador.cliente.value                    = "";
     
     nueva_busqueda();
 } // limpia
@@ -129,41 +129,41 @@ function nueva_busqueda() {
     
     if ( correcto
     		&& document.getElementById("radio_nut").checked == true
-    		&& document.forms["visualizador"].elements["nut"].value == "" ) {
+    		&& document.visualizador.nut.value == "" ) {
             correcto = false;
             alert("El campo de b\u00fasqueda NUT no puede estar vac\u00edo. Favor de reportarlo.");
     }
         
     if ( correcto 
     		&& document.getElementById("radio_nombre_op").checked == true
-    		&& document.forms["visualizador"].elements["nombre"].value == "" ) {
+    		&& document.visualizador.nombre.value == "" ) {
             correcto = false;
             alert("El campo de b\u00fasqueda NOMBRE no puede estar vac\u00edo. Favor de reportarlo.");
     }
         
     if ( correcto
     		&& document.getElementById("radio_descripcion_op").checked == true
-    		&& document.forms["visualizador"].elements["descripcion"].value == "" ) {
+    		&& document.visualizador.descripcion.value == "" ) {
             correcto = false;
             alert("El campo de b\u00fasqueda DESCRIPCI\u00d3N no puede estar vac\u00edo. Favor de reportarlo.");
     }
         
     if ( correcto && document.getElementById("radio_fecha_cotizacion").checked == true ) {
-    	if ( document.forms["visualizador"].elements["fecha_cotizacion_inicio"].value == "" 
-    		|| document.forms["visualizador"].elements["fecha_cotizacion_fin"].value == "") {
+    	if ( document.visualizador.fecha_cotizacion_inicio.value == "" 
+    		|| document.visualizador.fecha_cotizacion_fin.value == "") {
 			correcto = false;
             alert("Los campoa de b\u00fasqueda FECHA COITIZACI\u00d3N no pueden estar vac\u00edos. Favor de reportarlos.");
-		} else if ( new Date(document.forms["visualizador"].elements["fecha_cotizacion_fin"].value) < new Date(document.forms["visualizador"].elements["fecha_cotizacion_inicio"].value) ) {
+		} else if (  new Date(document.visualizador.fecha_cotizacion_inicio.value) > new Date(document.visualizador.fecha_cotizacion_fin.value) ) {
 			correcto = false;
 			alert("Los campoa de b\u00fasqueda FECHA COITIZACI\u00d3N inicial deber ser menor al final. Favor de reportarlos.");
-			document.forms["visualizador"].elements["fecha_cotizacion_inicio"].value = "";
-			document.forms["visualizador"].elements["fecha_cotizacion_fin"].value = "";
+			document.visualizador.fecha_cotizacion_inicio.value = "";
+			document.visualizador.fecha_cotizacion_fin.value = "";
 		}
     }
     
     if ( correcto 
     		&& document.getElementById("radio_cliente").checked == true
-    		&& document.forms["visualizador"].elements["cliente"].value == "" ) {
+    		&& document.visualizador.cliente.value == "" ) {
             correcto = false;
             alert("El campo de b\u00fasqueda CLIENTE no puede estar vac\u00edo. Favor de reportarlo.");
     }
@@ -171,9 +171,9 @@ function nueva_busqueda() {
     if ( correcto ) {
         // realiza ajax; como es una nueva busqueda, se debe inicializar el paginador a 1 = numero de pagina
         numero_pagina = 1;
-        document.forms["visualizador"].elements["numero_pagina"].value                  = numero_pagina;
-        document.forms["visualizador"].elements["numero_registros_por_pagina"].value    = numero_registros_por_pagina;
-        document.forms["visualizador"].elements["tipo_busqueda"].value                  = document.forms["visualizador"].elements["radio_tipo_busqueda"].value;
+        document.visualizador.numero_pagina.value                  = numero_pagina;
+        document.visualizador.numero_registros_por_pagina.value    = numero_registros_por_pagina;
+        document.visualizador.tipo_busqueda.value                  = document.visualizador.radio_tipo_busqueda.value;
         $.ajax({
             type:"POST",
             url:urlBuscaOrdenesProduccion,
@@ -196,8 +196,8 @@ function nueva_busqueda() {
 
 function realiza_consulta_paginador(){
 	// realiza ajax con el nuevo numero de pagina solicitada; el tipo de busqueda es el mismo
-    document.forms["visualizador"].elements["numero_pagina"].value                  = numero_pagina;
-    document.forms["visualizador"].elements["numero_registros_por_pagina"].value    = numero_registros_por_pagina;
+    document.visualizador.numero_pagina.value                  = numero_pagina;
+    document.visualizador.numero_registros_por_pagina.value    = numero_registros_por_pagina;
     $.ajax({
         type:"POST",
         url:urlBuscaOrdenesProduccion,

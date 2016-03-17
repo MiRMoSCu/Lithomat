@@ -50,7 +50,7 @@ public class TransporteDetalleController {
 			procesoTransporte.setIdProcesoTransporte(idProcesoTransporte);
 		transporteDetalle.setProcesoTransporte(procesoTransporte);
 		transporteDetalle.setCantidad(cantidad);
-		transporteDetalle.setEspecificaciones(especificaciones);
+		transporteDetalle.setEspecificaciones(especificaciones.replaceAll("\\r\\n|\\r|\\n", " "));
 		transporteDetalle.setPrecioTotalPesos(precioTotalPesos);
 		transporteDetalle.setActivo(true);
 
@@ -89,7 +89,7 @@ public class TransporteDetalleController {
 			procesoTransporte.setIdProcesoTransporte(idProcesoTransporte);
 		transporteDetalle.setProcesoTransporte(procesoTransporte);
 		transporteDetalle.setCantidad(cantidad);
-		transporteDetalle.setEspecificaciones(especificaciones);
+		transporteDetalle.setEspecificaciones(especificaciones.replaceAll("\\r\\n|\\r|\\n", " "));
 		transporteDetalle.setPrecioTotalPesos(precioTotalPesos);
 		transporteDetalle.setActivo(true);
 		
@@ -131,7 +131,7 @@ public class TransporteDetalleController {
 		
 		TransporteDetalle transporteDetalle = transporteDetalleService.buscaTransporteDetalle(idTransporteDetalle);
 		transporteDetalle.setCantidad(cantidad);
-		transporteDetalle.setEspecificaciones(especificaciones);
+		transporteDetalle.setEspecificaciones(especificaciones.replaceAll("\\r\\n|\\r|\\n", " "));
 		transporteDetalle.setPrecioTotalPesos(precioTotalPesos);
 		transporteDetalleService.modificaTransporteDetalle(transporteDetalle);
 		transporteDetalle = null;
@@ -155,7 +155,6 @@ public class TransporteDetalleController {
 	@ResponseBody
 	public JsonResponse eliminaTransporteDetalle(
 			@RequestParam(value = "id_orden_produccion", 	required = false) Integer idOrdenProduccion,
-			@RequestParam(value = "nut", 					required = false) String nut,
 			@RequestParam(value = "id_transporte_detalle", 	required = false) Integer idTransporteDetalle,
 			@RequestParam(value = "id_transporte",			required = false) Integer idTransporte
 		) {

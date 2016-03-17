@@ -412,15 +412,14 @@ function ajaxCambiaEstatus() {
 					if( document.cambio_estatus.id_estatus_orden.value == 10 ) {
 						//abre ventana modal para guardar costo extra
 						Shadowbox.open({
-							content:urlCostoExtraDetalle + "?nut=" + document.orden_produccion.nut.value,
-							player:"iframe",
-							width:830,
-							height:580,
-							options:{
-								modal:true, // IMPERATIVO CERRAR MANUALMENTE
-								overlayOpacity:0.75
+							content: urlCostoExtraDetalle + "?nut=" + document.orden_produccion.nut.value,
+							player: "iframe",
+							width: 830,
+							height: 580,
+							options: {
+								modal: true, // IMPERATIVO CERRAR MANUALMENTE
+								overlayOpacity: 0.75,
 							}
-							
 						});
 					}
 				}

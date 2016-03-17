@@ -30,6 +30,8 @@ public interface TipoTrabajoDetalleService {
 	
 	public List<TipoTrabajoDetalle> listaTipoTrabajoDetallePorEstatusOrden(int idEstatusOrden);
 	
+	public List<TipoTrabajoDetalle> listaTipoTrabajoDetallePorEstatusMaquinaFecha(int idEstatusOrden, int idMaquina, boolean aplicaTodasMaquinas, String fechaInicial, String fechaFinal);
+	
 	public float obtieneCostosExtraCosteTotal(int idTipoTrabajoDetalle);
 
 }

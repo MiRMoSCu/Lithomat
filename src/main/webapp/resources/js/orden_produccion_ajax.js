@@ -245,9 +245,12 @@ function ajaxAgregaPartida() {
     
     if ( correcto 
     		&& ( document.partida.cantidad.value == "" 
-    			|| isNaN(document.partida.cantidad.value ) ) ) {
+    			|| isNaN( document.partida.cantidad.value )
+    			|| parseInt( document.partida.cantidad.value ) <= 0 ) ) {
     	correcto = false;
     	alert("El campo cantidad deber ser un n\u00FAmero válido.");
+    	document.partida.cantidad.focus();
+    	document.partida.cantidad.select();
     }
     
     if( correcto && ( window.FormData !== undefined ) ) { // puede utiliza FormData
@@ -436,6 +439,7 @@ function ajaxAgregaTipoTrabajoDetalle() {
                 correcto = false;
                 alert("El n\u00famero de repeticiones deber ser un n\u00famero positivo mayor de cero");
                 document.tipo_trabajo_detalle.repeticiones_x_pliego.focus();
+                document.tipo_trabajo_detalle.repeticiones_x_pliego.select();
             }
             break;
         
@@ -448,6 +452,7 @@ function ajaxAgregaTipoTrabajoDetalle() {
                 correcto = false;
                 alert("El n\u00famero de p\u00e1ginas deber ser un n\u00famero positivo mayor de cero y multiplo de 4");
                 document.tipo_trabajo_detalle.numero_paginas_publicacion.focus();
+                document.tipo_trabajo_detalle.numero_paginas_publicacion.select();
             }
             
             if( correcto
@@ -881,6 +886,7 @@ function ajaxAgregaDisenioDetalle() {
                 //console.log(e);
                 document.body.style.cursor = "default";
                 alert("No fue posible insertar indicaciones de detalle dise\u00f1o");
+                activaBtnDisenioDetalle();
             }
         });
     }
@@ -1040,6 +1046,7 @@ function ajaxAgregaPreprensaDetalle() {
                 //console.log(e);
                 document.body.style.cursor = "default";
                 alert("No fue posible insertar indicaciones de detalle preprensa");
+                activaBtnPreprensaDetalle();
             }
         });
     }
@@ -1190,9 +1197,10 @@ function ajaxAgregaTransporteDetalle() {
                 }
             },
             error:function( e ) {
-                console.log(e);
+                //console.log(e);
                 document.body.style.cursor = "default";
                 alert("No fue posible insertar indicaciones de detalle transporte");
+                activaBtnTransporteDetalle();
             }
         });
     }
@@ -1345,6 +1353,7 @@ function ajaxAgregaAcabadoDetalle() {
                 //console.log(e);
                 document.body.style.cursor = "default";
                 alert("No fue posible insertar indicaciones de acabado detalle");
+                activaBtnAcabadoDetalle();
             }
         });
     }

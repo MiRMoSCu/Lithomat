@@ -1,10 +1,7 @@
 package com.artiffex.lithomat.sistemaweb.businesstier.service.implementacion;
 
 import java.io.ByteArrayOutputStream;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -54,9 +51,9 @@ public class ReporteServiceImpl implements ReporteService {
 	private EstatusOrdenService estatusOrdenService;
 	
 	
-	private List<RegistroColaImpresionDTO> listaRegistrosColaImpresion( int idEstatusOrden ) {
+	private List<RegistroColaImpresionDTO> listaRegistrosColaImpresion( int idEstatusOrden, int idMaquina, boolean aplicaTodasMaquinas, String fechaInicial, String fechaFinal ) {
 		List<RegistroColaImpresionDTO> listaColaImpresion = new ArrayList<RegistroColaImpresionDTO>();
-		List<TipoTrabajoDetalle> listaTipoTrabajoDetalle = tipoTrabajoDetalleService.listaTipoTrabajoDetallePorEstatusOrden(idEstatusOrden);
+		List<TipoTrabajoDetalle> listaTipoTrabajoDetalle = tipoTrabajoDetalleService.listaTipoTrabajoDetallePorEstatusMaquinaFecha(idEstatusOrden, idMaquina, aplicaTodasMaquinas, fechaInicial, fechaFinal);
 		for (TipoTrabajoDetalle tipoTrabajoDetalle : listaTipoTrabajoDetalle) {
 			List<Pliego> listaPliego = pliegoService.listaPliegoPorTipoTrabajoDetalle( tipoTrabajoDetalle.getIdTipoTrabajoDetalle() );
 			for (Pliego pliego : listaPliego) {
@@ -96,16 +93,14 @@ public class ReporteServiceImpl implements ReporteService {
 	}
 	
 	
-	public byte[] obtieneExcelListaColaImpresion( int idEstatusOrden ) {
+	public byte[] obtieneExcelListaColaImpresion( int idEstatusOrden, int idMaquina, boolean aplicaTodasMaquinas, String fechaInicial, String fechaFinal ) {
 		
-		//Maquina maquina = maquinaService.buscaMaquina(idMaquina);
-		EstatusOrden estatusOrden = estatusOrdenService.buscaEstatusOrden(idEstatusOrden);
+		EstatusOrden estatusOrden 	= estatusOrdenService.buscaEstatusOrden(idEstatusOrden);
 		
 		// generacion del excel
 		HSSFWorkbook wb = new HSSFWorkbook();
 		try {
 			// estilos
-			
 				// alineacion izquierda
 			HSSFCellStyle cellStyle_izquierda = wb.createCellStyle();
 			cellStyle_izquierda.setAlignment((short)HSSFCellStyle.ALIGN_LEFT);
@@ -113,23 +108,18 @@ public class ReporteServiceImpl implements ReporteService {
 			HSSFCellStyle cellStyle_centro = wb.createCellStyle();
 			cellStyle_centro.setAlignment((short)HSSFCellStyle.ALIGN_CENTER);
 			
-				
-			
 			// crecion de la hoja
 			HSSFSheet sheet = wb.createSheet("Cola Impresion");
-			
 			
 			// CREACION FILA 0
 			HSSFRow row_0 = sheet.createRow(0);
 			// CREACION DE COLUMNAS
 			HSSFCell cell_fechs = row_0.createCell(0);
-			cell_fechs.setCellValue("FECHA:");
+			cell_fechs.setCellValue("FECHA INICIAL:");
 			cell_fechs.setCellStyle(cellStyle_izquierda);
-			
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
-			row_0.createCell(1).setCellValue( dateFormat.format( new Date( Calendar.getInstance().getTimeInMillis() ) ) );
-			dateFormat = null;
-			
+			row_0.createCell(1).setCellValue( fechaInicial );
+			row_0.createCell(2).setCellValue("FECHA FINAL:");
+			row_0.createCell(3).setCellValue(fechaFinal);
 			
 			// CREACION FILA 1
 			HSSFRow row_1 = sheet.createRow(1);
@@ -137,9 +127,7 @@ public class ReporteServiceImpl implements ReporteService {
 			HSSFCell cell_estatus = row_1.createCell(0);
 			cell_estatus.setCellValue("ESTATUS:");
 			cell_estatus.setCellStyle(cellStyle_izquierda);
-			
 			row_1.createCell(1).setCellValue( estatusOrden.getNombre() );
-			
 			
 			// CREACION DE FILA 2
 			HSSFRow row_2 = sheet.createRow(2);
@@ -197,11 +185,10 @@ public class ReporteServiceImpl implements ReporteService {
 	        cell_observaciones.setCellValue("OBSERVACIONES");
 	        cell_observaciones.setCellStyle(cellStyle_centro);
 	        
-	        
 	        // CREACION DE FILA 3 en adelante
 	        // obtencion de la lista
 	        int cont = 3;
-	        List<RegistroColaImpresionDTO> listaRegistroColaImpresion = listaRegistrosColaImpresion( idEstatusOrden );
+	        List<RegistroColaImpresionDTO> listaRegistroColaImpresion = listaRegistrosColaImpresion( idEstatusOrden, idMaquina, aplicaTodasMaquinas, fechaInicial, fechaFinal );
 	        for (RegistroColaImpresionDTO registroColaImpresionDTO : listaRegistroColaImpresion) {
 	        	HSSFRow row = sheet.createRow(cont);
 	        	row.createCell(CELDA_NUT).setCellValue( registroColaImpresionDTO.getNut() );
@@ -223,10 +210,7 @@ public class ReporteServiceImpl implements ReporteService {
 		} catch( Exception e ) {
 			System.out.println("obtieneExcelListaTipoPapelExtendido:Error al generar el archivo de excel");
 		}
-		
-		//maquina 		= null;
 		estatusOrden	= null;
-		
 		
 		// creacion del stream
 		ByteArrayOutputStream os;
@@ -239,7 +223,5 @@ public class ReporteServiceImpl implements ReporteService {
 			e.printStackTrace();
 			return null;
 		}
-		
 	}
-
 }

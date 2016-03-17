@@ -210,6 +210,8 @@ public class CostoExtraDetalleController {
 		return jsonResponse;
 	}
 	
+	
+	
 	//***********
 	// Metodos para utilizar en CostoExtra al finalizar la orden de produccion
 	
@@ -282,8 +284,12 @@ public class CostoExtraDetalleController {
 		costoExtraDetalle.setCantidad(cantidad);
 		costoExtraDetalle.setEspecificacion(especificacion);
 		costoExtraDetalle.setActivo(true);
-		
 		costoExtraDetalleService.creaCostoExtraDetalle(costoExtraDetalle);
+		
+		// actualiza el precio
+		OrdenProduccion op = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
+		calificacionService.actualizaPartida(op.getIdOrdenProduccion());
+		op = null;
 		
 		responsableInsumo = null;
 		tipoTrabajoDetalle = null;
@@ -347,6 +353,11 @@ public class CostoExtraDetalleController {
 		costoExtraDetalleService.modificaCostoExtraDetalle(costoExtraDetalle);
 		costoExtraDetalle = null;
 		
+		// actualiza el precio
+		OrdenProduccion op = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
+		calificacionService.actualizaPartida(op.getIdOrdenProduccion());
+		op = null;
+		
 		// ACTUALIZA INFORMACION DE LA PAGINA
 		// nut
 		model.addAttribute("nut",nut);
@@ -397,6 +408,11 @@ public class CostoExtraDetalleController {
 		costoExtraDetalle.setActivo(false);
 		costoExtraDetalleService.modificaCostoExtraDetalle(costoExtraDetalle);
 		costoExtraDetalle = null;
+		
+		// actualiza el precio
+		OrdenProduccion op = ordenProduccionService.buscaOrdenProduccionPorNut(nut);
+		calificacionService.actualizaPartida(op.getIdOrdenProduccion());
+		op = null;
 		
 		// ACTUALIZA INFORMACION DE LA PAGINA
 		// nut

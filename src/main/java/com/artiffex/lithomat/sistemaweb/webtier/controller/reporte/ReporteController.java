@@ -483,9 +483,9 @@ public class ReporteController {
 	}
 	
 	
-	private void colaImpresion( int idEstatusOrden, HttpServletRequest request, HttpServletResponse response ) {
+	private void colaImpresion( int idEstatusOrden, int idMaquina, boolean aplicaTodasMaquinas, String fechaInicial, String fechaFinal, HttpServletRequest request, HttpServletResponse response ) {
 		// enviar un archivo al cliente
-		byte[] documento = reporteService.obtieneExcelListaColaImpresion( idEstatusOrden );
+		byte[] documento = reporteService.obtieneExcelListaColaImpresion( idEstatusOrden, idMaquina, aplicaTodasMaquinas, fechaInicial, fechaFinal);
 		try {
 			OutputStream os = response.getOutputStream();
 			response.setHeader("Content-Disposition","attachment; filename=reporteColaImpresion.xls");
@@ -634,11 +634,15 @@ public class ReporteController {
 	@RequestMapping(value = "/cola_impresion", method = RequestMethod.POST)
 	public void colaImpresionPorMaquinaEstatusOrden(
 			@RequestParam(value = "id_estatus_orden", 	required = false) Integer idEstatusOrden,
+			@RequestParam(value = "id_maquina", 		required = false) Integer idMaquina,
+			@RequestParam(value = "todas_las_maquinas", required = false) boolean aplicaTodasMaquinas,
+			@RequestParam(value = "fecha_inicial", 		required = false) String fechaInicial,
+			@RequestParam(value = "fecha_final", 		required = false) String fechaFinal,
 			HttpServletRequest request,
 			HttpServletResponse response
 		) {
 		log.info("/cola_impresion");
-		colaImpresion(idEstatusOrden, request, response);
+		colaImpresion(idEstatusOrden, idMaquina, aplicaTodasMaquinas, fechaInicial, fechaFinal, request, response);
 	}
 	
 	
@@ -662,6 +666,7 @@ public class ReporteController {
 		model.addAttribute("listaTipoFormatoImpresion", listaTipoFormatoImpresion);
 		listaTipoFormatoImpresion = null;
 		model.addAttribute("condicionesProduccion", calificacionService.obtieneCondicionesProduccion(nut));
+		
 		return "produccion/visualizador/condiciones_produccion";
 	}
 	
@@ -674,6 +679,7 @@ public class ReporteController {
 		List<ComboSelect> listaTipoFormatoImpresion = getListaTipoFormatoImpresion();
 		model.addAttribute("listaTipoFormatoImpresion", listaTipoFormatoImpresion);
 		listaTipoFormatoImpresion = null;
+		
 		return "reporte/ventana_orden_produccion";
 	}
 	
@@ -686,6 +692,7 @@ public class ReporteController {
 		List<ComboSelect> listaTipoFormatoImpresion = getListaTipoFormatoImpresion();
 		model.addAttribute("listaTipoFormatoImpresion", listaTipoFormatoImpresion);
 		listaTipoFormatoImpresion = null;
+		
 		return "reporte/ventana_cotizacion";
 	}
 	
@@ -698,6 +705,7 @@ public class ReporteController {
 		List<ComboSelect> listaTipoFormatoImpresion = getListaTipoFormatoImpresion();
 		model.addAttribute("listaTipoFormatoImpresion", listaTipoFormatoImpresion);
 		listaTipoFormatoImpresion = null;
+		
 		return "reporte/ventana_nota_remision_factura";
 	}
 	
@@ -710,6 +718,11 @@ public class ReporteController {
 		List<ComboSelect> listaEstatusOrden = estatusOrdenService.listaComboSelect();
 		model.addAttribute("listaEstatusOrden",listaEstatusOrden);
 		listaEstatusOrden = null;
+		
+		List<ComboSelect> listaMaquina = maquinaService.listaComboSelect();
+		model.addAttribute("listaMaquina",listaMaquina);
+		listaMaquina = null;
+		
 		return "reporte/ventana_cola_impresion";
 	}
 

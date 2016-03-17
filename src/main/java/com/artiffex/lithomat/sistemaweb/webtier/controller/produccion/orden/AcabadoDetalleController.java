@@ -54,7 +54,7 @@ public class AcabadoDetalleController {
 		acabadoDetalle.setAncho(ancho);
 		acabadoDetalle.setAlto(alto);
 		acabadoDetalle.setCantidadProcesoExterno(cantidadProcesoExterno);
-		acabadoDetalle.setEspecificaciones(especificaciones);
+		acabadoDetalle.setEspecificaciones(especificaciones.replaceAll("\\r\\n|\\r|\\n", " "));
 		acabadoDetalle.setPrecioTotalPesos(precioTotalPesos);
 		acabadoDetalle.setActivo(true);
 
@@ -97,7 +97,7 @@ public class AcabadoDetalleController {
 		acabadoDetalle.setAncho(ancho);
 		acabadoDetalle.setAlto(alto);
 		acabadoDetalle.setCantidadProcesoExterno(cantidadProcesoExterno);
-		acabadoDetalle.setEspecificaciones(especificaciones);
+		acabadoDetalle.setEspecificaciones(especificaciones.replaceAll("\\r\\n|\\r|\\n", " "));
 		acabadoDetalle.setPrecioTotalPesos(precioTotalPesos);
 		acabadoDetalle.setActivo(true);
 		int resultado = acabadoDetalleService.creaAcabadoDetalle(acabadoDetalle);
@@ -141,7 +141,7 @@ public class AcabadoDetalleController {
 		acabadoDetalle.setAncho(ancho);
 		acabadoDetalle.setAlto(alto);
 		acabadoDetalle.setCantidadProcesoExterno(cantidadProcesoExterno);
-		acabadoDetalle.setEspecificaciones(especificaciones);
+		acabadoDetalle.setEspecificaciones(especificaciones.replaceAll("\\r\\n|\\r|\\n", " "));
 		acabadoDetalle.setPrecioTotalPesos(precioTotalPesos);
 		acabadoDetalleService.modificaAcabadoDetalle(acabadoDetalle);
 		acabadoDetalle = null;
@@ -165,7 +165,6 @@ public class AcabadoDetalleController {
 	@ResponseBody
 	public JsonResponse eliminaAcabadoDetalle(
 			@RequestParam(value = "id_orden_produccion", 	required = false) Integer idOrdenProduccion,
-			@RequestParam(value = "nut", 					required = false) String nut,
 			@RequestParam(value = "id_acabado_detalle", 	required = false) Integer idAcabadoDetalle,
 			@RequestParam(value = "id_acabado",				required = false) Integer idAcabado
 		) {

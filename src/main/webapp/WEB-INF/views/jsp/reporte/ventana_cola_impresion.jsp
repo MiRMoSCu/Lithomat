@@ -21,9 +21,10 @@
 			$(document).ready(function (){});
 			// inicializacion datepicker
 			$(function() {
-				$("#datepicker").datepicker({
-					dateFormat:'dd/mm/yy',
-				});
+				$("[name=fecha_inicial]").datepicker({dateFormat:'yy-mm-dd'});
+				$("[name=fecha_inicial]").datepicker("setDate",new Date());
+				$("[name=fecha_final]").datepicker({dateFormat:'yy-mm-dd'});
+				$("[name=fecha_final]").datepicker("setDate",new Date());
 			});
         </script>
         <script type="text/javascript">
@@ -37,7 +38,6 @@
                     <div id="div_contenido">
                     	<br/>
                     	<form name="reporte_cola_impresion" method="post">
-                    		<input type="hidden" name="id_estatus_orden" 	value="" />
 	                        <div class="titulo">
 	                        	<font size=5>REPORTE COLA IMPRESI&Oacute;N</font>
 	                        </div>
@@ -48,7 +48,7 @@
 	                        				<tr>
 	                        					<td width="1%">Estatus:</td>
 	                        					<td>
-	                        						<select name="select_estatus_orden">
+	                        						<select name="id_estatus_orden">
 	                        							<c:forEach var="eo" items="${listaEstatusOrden}">
 	                        								<option value="${eo.value}">${eo.text}</option>
 	                        							</c:forEach>
@@ -59,25 +59,57 @@
 	                        		</div>
 	                        	</div>
 	                        </div>
-	                        <!-- 
 	                        <div class="linea">
 	                        	<div class="casilla">
 	                        		<div class="columna_completa">
 	                        			<table>
 	                        				<tr>
-	                        					<td width="1%">Fecha:</td>
+	                        					<td width="1%">M&aacute;quina:</td>
 	                        					<td>
-	                        						<input 	type="text" 
-	                        								class="input"
-	                        								name="fecha_impresion"
-	                        								id="datepicker">
+	                        						<select name="id_maquina">
+	                        							<c:forEach var="m" items="${listaMaquina}">
+	                        								<option value="${m.value}">${m.text}</option>
+	                        							</c:forEach>
+	                        						</select>
+	                        					</td>
+	                        					<td>
+	                        						¿Todas las m&aacute;quinas?
+	                        					</td>
+	                        					<td>
+	                        						<input 	type="checkbox"
+	                        								name="todas_las_maquinas"/>
 	                        					</td>
 	                        				</tr>
 	                        			</table>
 	                        		</div>
 	                        	</div>
 	                        </div>
-	                        -->
+	                        <div class="linea">
+	                        	<div class="casilla">
+	                        		<div class="columna_completa">
+	                        			<table border="0">
+	                        				<tr>
+	                        					<td width="20%">Fecha Inicio:</td>
+	                        					<td>
+	                        						<input 	type="text"
+	                        								class="input"
+	                        								name="fecha_inicial"
+	                        								value=""
+	                        								readonly/>
+	                        					</td>
+	                        					<td width="20%">Fecha Fin:</td>
+	                        					<td>
+	                        						<input	type="text"
+	                        								class="input"
+	                        								name="fecha_final"
+	                        								value=""
+	                        								readonly/>
+	                        					</td>
+	                        				</tr>
+	                        			</table>
+	                        		</div>
+	                        	</div>
+	                        </div>
 	                        <div class="linea">
 	                        	<div class="casilla" style="text-align:right;">
 	                        		<span style="cursor:pointer;" onclick="cerrarVentana()">

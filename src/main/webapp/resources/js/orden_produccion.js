@@ -150,32 +150,50 @@ function menu(obj) {
 
 function selectDisenioDetalleClick( obj ) {
     if( obj.selectedIndex != "-1" ) {
-        document.forms["disenio_detalle"].elements["id_proceso_disenio"].value  = obj.options[obj.selectedIndex].value;
-        document.forms["disenio_detalle"].elements["detalle"].value             = obj.options[obj.selectedIndex].text;
+        document.disenio_detalle.id_proceso_disenio.value  = obj.options[obj.selectedIndex].value;
+        document.disenio_detalle.detalle.value             = obj.options[obj.selectedIndex].text;
+        // limpia campos del form
+        document.disenio_detalle.cantidad.value 			= "";
+        document.disenio_detalle.precio_total_pesos.value 	= "";
+        document.disenio_detalle.especificaciones.value 	= "";
     }
 } // selectDisenioDetalleClick()
 
 
 function selectPreprensaDetalleClick( obj ) {
     if( obj.selectedIndex != "-1" ) {
-        document.forms["preprensa_detalle"].elements["id_proceso_preprensa"].value  = obj.options[obj.selectedIndex].value;
-        document.forms["preprensa_detalle"].elements["detalle"].value               = obj.options[obj.selectedIndex].text;
+        document.preprensa_detalle.id_proceso_preprensa.value  = obj.options[obj.selectedIndex].value;
+        document.preprensa_detalle.detalle.value               = obj.options[obj.selectedIndex].text;
+        // limpia campos del form
+        document.preprensa_detalle.cantidad.value 			= "";
+        document.preprensa_detalle.precio_total_pesos.value = "";
+        document.preprensa_detalle.especificaciones.value 	= "";
     }
 } // selectPreprensaDetalleClick()
 
 
 function selectTransporteDetalleClick( obj ) {
     if( obj.selectedIndex != "-1" ) {
-        document.forms["transporte_detalle"].elements["id_proceso_transporte"].value    = obj.options[obj.selectedIndex].value;
-        document.forms["transporte_detalle"].elements["detalle"].value                  = obj.options[obj.selectedIndex].text;
+        document.transporte_detalle.id_proceso_transporte.value    = obj.options[obj.selectedIndex].value;
+        document.transporte_detalle.detalle.value                  = obj.options[obj.selectedIndex].text;
+        // limpia campos del form
+        document.transporte_detalle.cantidad.value 				= "";
+        document.transporte_detalle.precio_total_pesos.value 	= "";
+        document.transporte_detalle.especificaciones.value 		= "";
     }
 } // selectTransporteDetalleClick()
 
 
 function selectAcabadoDetalleClick( obj ) {
     if( obj.selectedIndex != "-1" ) {
-        document.forms["acabado_detalle"].elements["id_proceso_externo"].value  = obj.options[obj.selectedIndex].value;
-        document.forms["acabado_detalle"].elements["detalle"].value             = obj.options[obj.selectedIndex].text;
+        document.acabado_detalle.id_proceso_externo.value  = obj.options[obj.selectedIndex].value;
+        document.acabado_detalle.detalle.value             = obj.options[obj.selectedIndex].text;
+     // limpia campos del form
+        document.acabado_detalle.alto.value 				= "";
+        document.acabado_detalle.ancho.value 				= "";
+        document.acabado_detalle.cantidad.value 			= "";
+        document.acabado_detalle.precio_total_pesos.value	= "";
+        document.acabado_detalle.especificaciones.value 	= "";
     }
 } // selectAcabadoDetalleClick()
 
