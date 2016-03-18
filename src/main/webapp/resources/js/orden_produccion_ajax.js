@@ -579,8 +579,24 @@ function ajaxAgregaTipoTrabajoDetalle() {
                     	if ( esPrimerInsercionTTD ) {
                     		document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value	= response.idTipoTrabajoDetalle;
                             document.visualizador_pliegos.id_tipo_trabajo_detalle.value = response.idTipoTrabajoDetalle;
+                            document.descuento.id_tipo_trabajo_detalle.value			= response.idTipoTrabajoDetalle;
                         	document.costo_extra_detalle.id_tipo_trabajo_detalle.value 	= response.idTipoTrabajoDetalle;
                     	}
+                    
+                    	//console.log( response.textoJson );
+                    	// llena el select tabulador precios segun cantidad
+                    	$("[name='select_tabulador_precios']").empty();
+                    	var jsonObject = JSON.parse( response.textoJson );
+                    	$.each( jsonObject, function(i, item){
+                			var option = document.createElement("option");
+                			option.value = item.value;
+                			option.text	 = item.text;
+                			document.getElementById("select_tabulador_precios").add(option);
+                			delete option;
+                    	});
+                    	jsonObject = null;
+                    	
+                    	
                         // cambia cursor
                         document.body.style.cursor = "default";
                         // abre ventana modal
@@ -618,6 +634,7 @@ function revisaCierreVentanaModal() {
 	// la variable evaluada en este if, se modifica en pliego.js
     if( cerradoOKVentanaListaPliegos ) {
         document.getElementById("div_visualizador_pliegos").style.display       		= "block";
+        document.getElementById("div_descuento_tabulador_precios").style.display 		= "block";
         document.getElementById("div_costo_extra_detalle").style.display 				= "block";
         document.getElementById("div_visualizador_costo_extra_detalle").style.display 	= "block";
         document.getElementById("div_nuevo_tipo_trabajo_detalle").style.display 		= "block";
@@ -634,6 +651,11 @@ function revisaCierreVentanaModal() {
 
 function setCamposPliego( idPliego, noPliego, rebases, medianiles, pinzas, hojasSobrantes, observaciones ) { } // para que la pagina no marque error de javascript
 
+function ajaxAgregarDescuento() {
+	alert("ests aqui");
+	desactivaCamposDescuento();
+	desactivaBtnDescuento();
+}
 
 function ajaxUnidadCostoExtra() {
 	$.ajax({

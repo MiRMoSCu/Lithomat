@@ -104,5 +104,11 @@
 			</key>
 			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.ParametrosConfig"/>
 		</set>
+		<set name="descuentoTabuladorPrecios" table="descuento_tabulador_precios" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_tipo_precio" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.DescuentoTabuladorPrecios"/>
+		</set>
 	</class>
 </hibernate-mapping>

@@ -2,7 +2,7 @@
 
 #div_area {
     width: 1307px;
-    height: 4185px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* tamanio total */ /*3816*/
+    height: 4485px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* tamanio total */ /*3816*/
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -12,12 +12,11 @@
 
 #div_ancho {
     width: 1307px;
-    height: 4156px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_area - 29 (div_abajo3d) */
 }
 
 #div_hoja {
     width: 1278px;
-    height: 4156px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* igual a div_ancho */
+    height: 4456px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* igual a div_area - 29 */
     background: #FFF;
     float: left;
 }
@@ -37,39 +36,34 @@
 
 #div_cuerpo {
     width: 1278px;
-    height: 3806px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_hojas - 300 - 50 (div_cabecera, div_pie) */
-    background: transparent; /*orange*/
+    background: transparent;
 }
 
 #div_menu {
     width: 304px;
     height: 402px;
-    background: transparent; /*yellow*/
+    background: transparent;
     float: left;
-/*	position:fixed;*/
-    top: 377px; /*377 original*/
+    top: 377px;
 }
 
 #div_contenido {
     width: 961px;
-    height: 3806px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* igual a div_cuerpo */
     float: right;
     position: relative;
     right: 13px;
-    background: transparent; /*orange*/
+    background: transparent;
 }
 
 #div_pie {
     width: 1278px;
     height: 50px;
-    background: transparent; /*green*/
+    background: transparent;
 }
 
 #div_derecha3d {
     width: 29px;
-    height: 4156px;  /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* igual div_ancho */
     float: left;
-    /*background: purple;*/
 }
 
 #div_fondo_esq_sup {
@@ -81,7 +75,7 @@
 
 #div_fondo_der {
     width: 29px;
-    height: 4125px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_hoja - 31 (div_fondo_esq_sup) */
+    height: 4425px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_hoja - 31 (div_fondo_esq_sup) */
     background-image: url('../image/s_der.png');
     background-repeat: repeat-y;
 }
@@ -90,7 +84,6 @@
     width: 1307px;
     height: 29px;
     float: left;
-    /*background: green;*/
 }
 
 #div_fondo_esq_izq {
@@ -297,6 +290,15 @@ table#tabla_lista_pliegos {
 	overflow-x:scroll;
 }
 
+/**********/
+
+#div_descuento_tabulador_precios {
+	width:865px;
+    margin-left:auto;
+    margin-right:auto;
+    background:transparent; /*red*/
+    display:block;
+}
 
 
 

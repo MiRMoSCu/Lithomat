@@ -115,6 +115,10 @@
 			<column name="observaciones" length="250"/>
 			<type name="string"/>
 		</property>
+		<property name="aplicaDescuento">
+			<column name="aplica_descuento"/>
+			<type name="boolean"/>
+		</property>
 		<property name="fechaGeneracion">
 			<column name="fecha_generacion"/>
 			<type name="timestamp"/>
@@ -141,6 +145,12 @@
 				<column name="id_tipo_trabajo_detalle" not-null="true"/>
 			</key>
 			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionTrabajoDetalle"/>
+		</set>
+		<set name="descuentoTabuladorPrecios" table="descuento_tabulador_precios" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_tipo_trabajo_detalle" not-null="true"/>
+			</key>
+			<one-to-many class="com.artiffex.lithomat.sistemaweb.businesstier.entity.DescuentoTabuladorPrecios"/>
 		</set>
 	</class>
 </hibernate-mapping>

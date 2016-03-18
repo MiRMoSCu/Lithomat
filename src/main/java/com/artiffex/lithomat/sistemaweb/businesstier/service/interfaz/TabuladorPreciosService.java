@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.TabuladorPreciosDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TabuladorPrecios;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ParametrosBusquedaTabuladorPrecios;
 
 public interface TabuladorPreciosService {
@@ -23,5 +24,7 @@ public interface TabuladorPreciosService {
 	public float obtienePrecioUnitarioTabulador(int idTipoComplejidad, int idMaquina, int cantidad);
 	
 	public void borradoLogicoPorMaquina(int idMaquina);
+	
+	public List<ComboSelect> listaTabuladorDescendiente(int idMaquina, int idTipoComplejidad, int cantidad);
 	
 }

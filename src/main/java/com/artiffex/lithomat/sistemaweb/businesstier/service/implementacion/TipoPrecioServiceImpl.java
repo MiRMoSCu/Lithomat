@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.springframework.stereotype.Service;
 
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPrecio;
@@ -43,6 +44,22 @@ public class TipoPrecioServiceImpl implements TipoPrecioService {
 			comboSelect.setText(tipoPrecio.getNombre());
 			listaComboSelect.add(comboSelect);
 			comboSelect = null;
+		}
+		listaTipoPrecio = null;
+		return listaComboSelect;
+	}
+
+	public List<ComboSelect> listaComboSelect(int[] idTipoPrecioDeseado) {
+		List<ComboSelect> listaComboSelect = new ArrayList<ComboSelect>();
+		List<TipoPrecio> listaTipoPrecio = tipoPrecioDAO.lista();
+		for (TipoPrecio tipoPrecio : listaTipoPrecio) {
+			if ( ArrayUtils.contains(idTipoPrecioDeseado, tipoPrecio.getIdTipoPrecio()) ) {
+				ComboSelect comboSelect = new ComboSelect();
+				comboSelect.setValue(tipoPrecio.getIdTipoPrecio());
+				comboSelect.setText(tipoPrecio.getNombre());
+				listaComboSelect.add(comboSelect);
+				comboSelect = null;
+			}
 		}
 		listaTipoPrecio = null;
 		return listaComboSelect;

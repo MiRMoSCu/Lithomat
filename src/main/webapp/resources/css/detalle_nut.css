@@ -31,13 +31,13 @@
     margin-left: auto;
     margin-right: auto;
     position: relative;
-    background: transparent; /*orange*/
+    background: transparent;
 }
 
 #div_pie {
     width: 981px;
     height: 50px;
-    background: transparent; /*green*/
+    background: transparent;
 }
 
 #div_derecha3d {

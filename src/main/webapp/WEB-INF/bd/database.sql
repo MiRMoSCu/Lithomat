@@ -513,6 +513,7 @@ CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`tipo_trabajo_detalle` (
   `id_tipo_placa` INT UNSIGNED NOT NULL,
   `id_tipo_complejidad` INT UNSIGNED NOT NULL,
   `observaciones` VARCHAR(250) NULL,
+  `aplica_descuento` TINYINT(1) NULL,
   `fecha_generacion` TIMESTAMP NULL,
   `activo` TINYINT(1) NULL,
   PRIMARY KEY (`id_tipo_trabajo_detalle`),
@@ -1502,6 +1503,43 @@ CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`calificacion_pliego` (
   CONSTRAINT `fk_calificacion_pliego_pliego1`
     FOREIGN KEY (`id_pliego`)
     REFERENCES `lithomat_artiffex`.`pliego` (`id_pliego`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `lithomat_artiffex`.`tipo_descuento_tabulador_precios`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`tipo_descuento_tabulador_precios` (
+  `id_tipo_descuento_tabulador_precios` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NULL,
+  `descripcion` VARCHAR(250) NULL,
+  `activo` TINYINT(1) NULL,
+  PRIMARY KEY (`id_tipo_descuento_tabulador_precios`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `lithomat_artiffex`.`descuento_tabulador_precios`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `lithomat_artiffex`.`descuento_tabulador_precios` (
+  `id_descuento_tabulador_precios` INT NOT NULL,
+  `id_tipo_trabajo_detalle` INT UNSIGNED NOT NULL,
+  `precio_tabulador` FLOAT NULL,
+  `id_tipo_precio` INT UNSIGNED NOT NULL,
+  `activo` TINYINT(1) NULL,
+  PRIMARY KEY (`id_descuento_tabulador_precios`),
+  INDEX `fk_descuento_por_tipo_descuento_tipo_trabajo_detalle1_idx` (`id_tipo_trabajo_detalle` ASC),
+  INDEX `fk_descuento_tabulador_precios_tipo_precio1_idx` (`id_tipo_precio` ASC),
+  CONSTRAINT `fk_descuento_por_tipo_descuento_tipo_trabajo_detalle1`
+    FOREIGN KEY (`id_tipo_trabajo_detalle`)
+    REFERENCES `lithomat_artiffex`.`tipo_trabajo_detalle` (`id_tipo_trabajo_detalle`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_descuento_tabulador_precios_tipo_precio1`
+    FOREIGN KEY (`id_tipo_precio`)
+    REFERENCES `lithomat_artiffex`.`tipo_precio` (`id_tipo_precio`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

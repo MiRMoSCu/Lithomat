@@ -17,4 +17,6 @@ public interface TipoPrecioService {
 	
 	public List<ComboSelect> listaComboSelect();
 	
+	public List<ComboSelect> listaComboSelect(int[] idTipoPrecioDeseado);
+	
 }

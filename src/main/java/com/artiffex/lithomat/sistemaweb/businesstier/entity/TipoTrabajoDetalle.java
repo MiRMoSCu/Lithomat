@@ -39,12 +39,14 @@ public class TipoTrabajoDetalle implements Serializable {
 	private TipoPlaca tipoPlaca;
 	private TipoComplejidad tipoComplejidad;
 	private String observaciones;
+	private boolean aplicaDescuento;
 	private Timestamp fechaGeneracion;
 	private boolean activo;
 	// esta clase esta relacionada [uno a muchos] con las tablas:
 	private Set<Pliego> pliego = new HashSet<Pliego>();
 	private Set<CostoExtraDetalle> costoExtraDetalle = new HashSet<CostoExtraDetalle>();
 	private Set<CalificacionTrabajoDetalle> calificacionTrabajoDetalle = new HashSet<CalificacionTrabajoDetalle>();
+	private Set<DescuentoTabuladorPrecios> descuentoTabuladorPrecios = new HashSet<DescuentoTabuladorPrecios>();
 	
 	
 	public int getIdTipoTrabajoDetalle() {
@@ -230,6 +232,12 @@ public class TipoTrabajoDetalle implements Serializable {
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
+	public boolean isAplicaDescuento() {
+		return aplicaDescuento;
+	}
+	public void setAplicaDescuento(boolean aplicaDescuento) {
+		this.aplicaDescuento = aplicaDescuento;
+	}
 	public Timestamp getFechaGeneracion() {
 		return fechaGeneracion;
 	}
@@ -260,5 +268,12 @@ public class TipoTrabajoDetalle implements Serializable {
 	public void setCalificacionTrabajoDetalle(
 			Set<CalificacionTrabajoDetalle> calificacionTrabajoDetalle) {
 		this.calificacionTrabajoDetalle = calificacionTrabajoDetalle;
+	}
+	public Set<DescuentoTabuladorPrecios> getDescuentoTabuladorPrecios() {
+		return descuentoTabuladorPrecios;
+	}
+	public void setDescuentoTabuladorPrecios(
+			Set<DescuentoTabuladorPrecios> descuentoTabuladorPrecios) {
+		this.descuentoTabuladorPrecios = descuentoTabuladorPrecios;
 	}
 }

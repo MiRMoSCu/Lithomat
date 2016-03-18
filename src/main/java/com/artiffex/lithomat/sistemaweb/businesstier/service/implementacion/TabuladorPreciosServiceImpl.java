@@ -1,5 +1,6 @@
 package com.artiffex.lithomat.sistemaweb.businesstier.service.implementacion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.TabuladorPreciosDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TabuladorPrecios;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TabuladorPreciosService;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ParametrosBusquedaTabuladorPrecios;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.TabuladorPreciosDAO;
 
@@ -178,6 +180,53 @@ public class TabuladorPreciosServiceImpl implements TabuladorPreciosService {
 		query.append(";");
 		tabuladorPreciosDAO.borradoLogico(query.toString());
 		query = null;
+	}
+
+	public List<ComboSelect> listaTabuladorDescendiente(int idMaquina, int idTipoComplejidad, int cantidad) {
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(" SELECT ");
+		sb.append("    tp.id_tabulador_precios idTabuladorPrecios,");
+		sb.append("    m.nombre maquina,");
+		sb.append("    tp.nombre_insumo nombreInsumo,");
+		sb.append("    tp.descripcion,");
+		sb.append("    tp.inicio_tabulador inicioTabulador,");
+		sb.append("    tp.fin_tabulador finTabulador,");
+		sb.append("    tc.nombre tipoComplejidad,");
+		sb.append("    tp.precio,");
+		sb.append("    tipo_p.nombre tipoPrecio");
+		sb.append(" FROM");
+		sb.append("    tabulador_precios tp,");
+		sb.append("    maquina m,");
+		sb.append("    tipo_complejidad tc,");
+		sb.append("    tipo_precio tipo_p");
+		sb.append(" WHERE");
+		sb.append("    m.id_maquina = tp.id_maquina");
+		sb.append("        AND tc.id_tipo_complejidad = tp.id_tipo_complejidad");
+		sb.append("        AND tipo_p.id_tipo_precio = tp.id_tipo_precio");
+		sb.append("        AND tp.id_maquina = ");
+		sb.append(idMaquina);
+		sb.append("        AND tp.id_tipo_complejidad = ");
+		sb.append(idTipoComplejidad);
+		sb.append("        AND ");
+		sb.append(cantidad - 1);
+		sb.append(" < tp.fin_tabulador");
+		sb.append("        AND tp.activo = TRUE;");
+		
+		List<ComboSelect> listaComboSelect = new ArrayList<ComboSelect>();
+		List<TabuladorPreciosDTO> listaTabuladorPrecios = tabuladorPreciosDAO.listaPorCriteriosBusqueda(sb.toString());
+		for (TabuladorPreciosDTO tabuladorPreciosDTO : listaTabuladorPrecios) {
+			ComboSelect comboSelect = new ComboSelect();
+			comboSelect.setValue(tabuladorPreciosDTO.getIdTabuladorPrecios());
+			comboSelect.setText(Float.toString(tabuladorPreciosDTO.getPrecio()));
+			listaComboSelect.add(comboSelect);
+			comboSelect = null;
+			tabuladorPreciosDTO = null;
+		}
+		listaTabuladorPrecios = null;
+		sb = null;
+		
+		return listaComboSelect;
 	}
 
 }

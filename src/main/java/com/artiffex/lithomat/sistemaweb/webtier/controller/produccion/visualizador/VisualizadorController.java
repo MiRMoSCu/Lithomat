@@ -311,32 +311,32 @@ public class VisualizadorController {
 		
 		List<ComboSelect> listaProcesoDisenio = procesoDisenioService.listaComboSelect();
 		String jsonListaProcesoDisenio = gson.toJson(listaProcesoDisenio);
-		model.addAttribute("jsonListaProcesoDisenio",jsonListaProcesoDisenio.toString());
+		model.addAttribute("jsonListaProcesoDisenio",jsonListaProcesoDisenio);
 		listaProcesoDisenio = null;
 		
 		List<ComboSelect> listaProcesoPreprensa = procesoPreprensaService.listaComboSelect();
 		String jsonListaProcesoPreprensa = gson.toJson(listaProcesoPreprensa);
-		model.addAttribute("jsonListaProcesoPreprensa",jsonListaProcesoPreprensa.toString());
+		model.addAttribute("jsonListaProcesoPreprensa",jsonListaProcesoPreprensa);
 		listaProcesoPreprensa = null;
 		
 		List<ComboSelect> listaProcesoTransporte = procesoTransporteService.listaComboSelect();
 		String jsonListaProcesoTransporte = gson.toJson(listaProcesoTransporte);
-		model.addAttribute("jsonListaProcesoTransporte",jsonListaProcesoTransporte.toString());
+		model.addAttribute("jsonListaProcesoTransporte",jsonListaProcesoTransporte);
 		listaProcesoTransporte = null;
 		
 		List<ComboSelect> listaProcesoExterno = procesoExternoService.listaComboSelect();
 		String jsonListaProcesoExterno = gson.toJson(listaProcesoExterno);
-		model.addAttribute("jsonListaProcesoExterno",jsonListaProcesoExterno.toString());
+		model.addAttribute("jsonListaProcesoExterno",jsonListaProcesoExterno);
 		listaProcesoExterno = null;
 		
 		List<ComboSelect> listaMaterialAyuda = materialAyudaService.listaComboSelect();
 		String jsonListaMaterialAyuda = gson.toJson(listaMaterialAyuda);
-		model.addAttribute("jsonListaMaterialAyuda",jsonListaMaterialAyuda.toString());
+		model.addAttribute("jsonListaMaterialAyuda",jsonListaMaterialAyuda);
 		listaMaterialAyuda = null;
 		
 		List<ComboSelect> listaCostoExtra = costoExtraService.listaComboSelect();
 		String jsonListaCostoExtra = gson.toJson(listaCostoExtra);
-		model.addAttribute("jsonListaCostoExtra",jsonListaCostoExtra.toString());
+		model.addAttribute("jsonListaCostoExtra",jsonListaCostoExtra);
 		listaCostoExtra = null;
 		
 		gson = null;

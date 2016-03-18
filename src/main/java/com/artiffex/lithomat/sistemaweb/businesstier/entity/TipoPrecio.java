@@ -30,6 +30,7 @@ public class TipoPrecio implements Serializable {
 	private Set<ProcesoDisenio> procesoDisenio = new HashSet<ProcesoDisenio>();
 	private Set<ProcesoPreprensa> procesoPreprensa = new HashSet<ProcesoPreprensa>();
 	private Set<ParametrosConfig> parametrosConfig = new HashSet<ParametrosConfig>();
+	private Set<DescuentoTabuladorPrecios> descuentoTabuladorPrecios = new HashSet<DescuentoTabuladorPrecios>();
 	
 	
 	public int getIdTipoPrecio() {
@@ -140,5 +141,12 @@ public class TipoPrecio implements Serializable {
 	}
 	public void setParametrosConfig(Set<ParametrosConfig> parametrosConfig) {
 		this.parametrosConfig = parametrosConfig;
+	}
+	public Set<DescuentoTabuladorPrecios> getDescuentoTabuladorPrecios() {
+		return descuentoTabuladorPrecios;
+	}
+	public void setDescuentoTabuladorPrecios(
+			Set<DescuentoTabuladorPrecios> descuentoTabuladorPrecios) {
+		this.descuentoTabuladorPrecios = descuentoTabuladorPrecios;
 	}
 }

@@ -51,6 +51,7 @@
 		<mapping resource="hibernate/hn_combinacionTintas.hbm.xml"/>
 		<mapping resource="hibernate/hn_costoExtra.hbm.xml"/>
 		<mapping resource="hibernate/hn_costoExtraDetalle.hbm.xml"/>
+		<mapping resource="hibernate/hn_descuentoTabuladorPrecios.hbm.xml"/>
 		<mapping resource="hibernate/hn_disenio.hbm.xml"/>
 		<mapping resource="hibernate/hn_disenioDetalle.hbm.xml"/>
 		<mapping resource="hibernate/hn_estatusOrden.hbm.xml"/>

@@ -46,6 +46,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoComple
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoComprobanteFiscalService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoFormaTrabajoService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoPapelExtendidoService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoPrecioService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.UsuarioService;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
 import com.google.gson.Gson;
@@ -97,6 +98,8 @@ public class OrdenProduccionController {
 	private EstatusOrdenService estatusOrdenService;
 	@Resource
 	private HistorialEstatusService historialEstatusService;
+	@Resource
+	private TipoPrecioService tipoPrecioService;
 	
 
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
@@ -158,6 +161,11 @@ public class OrdenProduccionController {
 		String jsonListaCostosExtra = gson.toJson(listaCostoExtra);
 		model.addAttribute("jsonListaCostosExtra", jsonListaCostosExtra);
 		listaCostoExtra = null;
+		
+		int[] arregloTipoPrecio = {4};
+		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect(arregloTipoPrecio);
+		model.addAttribute("listaTipoPrecio",listaTipoPrecio);
+		listaTipoPrecio = null;
 
 		List<ComboSelect> listaProcesoDisenio = procesoDisenioService.listaComboSelect();
 		model.addAttribute("listaProcesoDisenio", listaProcesoDisenio);

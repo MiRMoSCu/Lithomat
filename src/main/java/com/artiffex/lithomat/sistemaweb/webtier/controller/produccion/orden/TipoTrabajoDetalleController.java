@@ -26,8 +26,11 @@ import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPapelExtendido;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPlaca;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajoDetalle;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CalificacionService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PartidaService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PliegoService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TabuladorPreciosService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoTrabajoDetalleService;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
 import com.google.gson.Gson;
 
 @Controller
@@ -42,6 +45,10 @@ public class TipoTrabajoDetalleController {
 	private PliegoService pliegoService;
 	@Resource
 	private CalificacionService calificacionService;
+	@Resource
+	private TabuladorPreciosService tabuladorPreciosService;
+	@Resource
+	private PartidaService partidaService;
 	
 
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
@@ -129,15 +136,23 @@ public class TipoTrabajoDetalleController {
 			TipoComplejidad tipoComplejidad = new TipoComplejidad();
 			tipoComplejidad.setIdTipoComplejidad(idTipoComplejidad);
 		tipoTrabajoDetalle.setTipoComplejidad(tipoComplejidad);
+		tipoTrabajoDetalle.setAplicaDescuento(false);
 		tipoTrabajoDetalle.setFechaGeneracion(fechaGeneracion);
 		tipoTrabajoDetalle.setActivo(true);
 
 		int idTipoTrabajoDetalle = tipoTrabajoDetalleService.creaTipoTrabajoDetalle(tipoTrabajoDetalle);
+		
+		partida = partidaService.buscaPartida(idPartida);
+		List<ComboSelect> listaTabulador = tabuladorPreciosService.listaTabuladorDescendiente(idMaquina, idTipoComplejidad, partida.getCantidad());
+		Gson gson = new Gson();
 
 		JsonResponse jsonResponse = new JsonResponse();
 		jsonResponse.setEstatusOperacion(idTipoTrabajoDetalle);
 		jsonResponse.setIdTipoTrabajoDetalle(idTipoTrabajoDetalle);
+		jsonResponse.setTextoJson(gson.toJson(listaTabulador));
 
+		listaTabulador			= null;
+		gson					= null;
 		fechaGeneracion 		= null;
 		partida 				= null;
 		tipoPapelExtendido 		= null;
@@ -360,7 +375,6 @@ public class TipoTrabajoDetalleController {
 		tipoTrabajoDetalle.getMaquina().setIdMaquina(idMaquina);
 		tipoTrabajoDetalle.getTipoPlaca().setIdTipoPlaca(idTipoPlaca);
 		tipoTrabajoDetalle.getTipoComplejidad().setIdTipoComplejidad(idTipoComplejidad);
-		
 		tipoTrabajoDetalleService.modificaTipoTrabajoDetalle(tipoTrabajoDetalle);
 		
 		JsonResponse jsonResponse = new JsonResponse();

@@ -160,12 +160,12 @@ public class CalificacionServiceImpl implements CalificacionService {
 					
 					// hojas requeridas redondeo --> para buscar el tabulador de precio correcto
 					int hojasRequeridasRedondeo 		= 0;
-					if (hojasRequeridasOriginal <= 1000)
+					if ( hojasRequeridasOriginal <= 1000 )
 						hojasRequeridasRedondeo = 1000;
-					else if ((hojasRequeridasOriginal % 1000) > 300)
-						hojasRequeridasRedondeo = ((hojasRequeridasOriginal / 1000) + 1) * 1000;
+					else if ( ( hojasRequeridasOriginal % 1000 ) > 300 )
+						hojasRequeridasRedondeo = ( ( hojasRequeridasOriginal / 1000 ) + 1 ) * 1000;
 					else
-						hojasRequeridasRedondeo = (hojasRequeridasOriginal / 1000) * 1000;
+						hojasRequeridasRedondeo = ( hojasRequeridasOriginal / 1000 ) * 1000;
 					
 					// precio_tabulador correspondiente a las hojas requeridas redondeadas
 					float precioUnitarioTabulador 		= tabuladorPreciosService.obtienePrecioUnitarioTabulador(idTipoComplejidad, idMaquina, hojasRequeridasRedondeo);
