@@ -294,33 +294,35 @@ function desactivaBtnTipoTrabajoDetalle() {
 //costo_extra_detalle
 
 function limpiaCamposDescuento() {
-	document.descuento.aplica_descuento.checked 				= false;
+	document.descuento.chkbx_aplica_descuento.checked 			= false;
 	document.descuento.tipo_descuento.checked 					= false;
-	document.descuento.select_tabulador_precios.selectedIndex 	= 0;
+	document.descuento.select_precio_tabulador.selectedIndex 	= 0;
 	document.descuento.precio_por_conveniencia.value 			= "";
 	document.descuento.select_tipo_precio.selectedIndex			= 0;
 }
 
 function limpiaFormDescuento() {
-	document.descuento.id_tabulador_precios.value 				= "";
-	document.descuento.id_tipo_precio.value						= "";
+	document.descuento.id_tabulador_precios.value 	= "";
+	document.descuento.aplica_descuento.value 		= "";
+	document.descuento.precio_tabulador.value		= "";
+	document.descuento.id_tipo_precio.value			= "";
 	limpiaCamposDescuento();
 }
 
 function activaCamposDescuento() {
-	document.descuento.aplica_descuento.disabled 			= false;
+	document.descuento.chkbx_aplica_descuento.disabled 		= false;
 	document.descuento.tipo_descuento[0].disabled 			= false;
 	document.descuento.tipo_descuento[1].disabled 			= false;
-	document.descuento.select_tabulador_precios.disabled 	= false;
+	document.descuento.select_precio_tabulador.disabled 	= false;
 	document.descuento.precio_por_conveniencia.readOnly 	= false;
 	document.descuento.select_tipo_precio.disabled 			= false;
 }
 
 function desactivaCamposDescuento() {
-	document.descuento.aplica_descuento.disabled 			= true;
+	document.descuento.chkbx_aplica_descuento.disabled 		= true;
 	document.descuento.tipo_descuento[0].disabled 			= true;
 	document.descuento.tipo_descuento[1].disabled 			= true;
-	document.descuento.select_tabulador_precios.disabled 	= true;
+	document.descuento.select_precio_tabulador.disabled 	= true;
 	document.descuento.precio_por_conveniencia.readOnly 	= true;
 	document.descuento.select_tipo_precio.disabled 			= true;
 }

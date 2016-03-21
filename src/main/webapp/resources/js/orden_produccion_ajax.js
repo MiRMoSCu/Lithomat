@@ -591,7 +591,7 @@ function ajaxAgregaTipoTrabajoDetalle() {
                 			var option = document.createElement("option");
                 			option.value = item.value;
                 			option.text	 = item.text;
-                			document.getElementById("select_tabulador_precios").add(option);
+                			document.getElementById("select_precio_tabulador").add(option);
                 			delete option;
                     	});
                     	jsonObject = null;
@@ -651,10 +651,53 @@ function revisaCierreVentanaModal() {
 
 function setCamposPliego( idPliego, noPliego, rebases, medianiles, pinzas, hojasSobrantes, observaciones ) { } // para que la pagina no marque error de javascript
 
-function ajaxAgregarDescuento() {
-	alert("ests aqui");
-	desactivaCamposDescuento();
-	desactivaBtnDescuento();
+function ajaxAgregaDescuento() {
+	// copia valores
+	document.descuento.aplica_descuento.value = document.descuento.chkbx_aplica_descuento.checked;
+	switch ( document.descuento.tipo_descuento.value ) {
+		case "por_tabulador":
+			document.descuento.precio_tabulador.value = document.descuento.select_precio_tabulador.value;
+			break;
+		case "por_conveniencia":
+			document.descuento.precio_tabulador.value = document.descuento.precio_por_conveniencia.value;
+			break;
+		default:
+			document.descuento.precio_tabulador.value = document.descuento.select_precio_tabulador[0].value;
+			break;
+	}
+	document.descuento.id_tipo_precio.value	= document.descuento.select_tipo_precio.value;
+	// validacion
+	var correcto = true;
+	
+	if ( correcto 
+			&& document.descuento.tipo_descuento.value == "por_conveniencia"
+			&& ( document.descuento.precio_por_conveniencia.value == "" 
+				|| isNaN(document.descuento.precio_por_conveniencia.value)
+				|| parseInt( document.descuento.precio_por_conveniencia.value ) <= 0 ) ) {
+		correcto = false;
+		alert("En necesario que el precio por convenciencia sea numero entero mayor que cero");
+		document.descuento.precio_por_conveniencia.select();
+	}
+	
+	if ( correcto && document.descuento.chkbx_aplica_descuento.checked ) {
+		if ( correcto ) {
+			$.ajax({
+				type: "POST",
+				url: urlAgregaDescuento,
+				data: $("[name=descuento]").serialize(),
+				success: function( response ) {
+					console.log( response );
+					desactivaCamposDescuento();
+					desactivaBtnDescuento();
+				},
+				error: function( e ) {
+					console.log(e);
+					alert("No fue posible generar precio especial por millar de impresión");
+				}
+			});
+		}
+	}
+	delete correcto;
 }
 
 function ajaxUnidadCostoExtra() {

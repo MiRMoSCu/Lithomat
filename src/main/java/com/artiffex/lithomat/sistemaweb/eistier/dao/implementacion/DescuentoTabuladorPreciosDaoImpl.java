@@ -1,14 +1,18 @@
 package com.artiffex.lithomat.sistemaweb.eistier.dao.implementacion;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.DescuentoTabuladorPreciosDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.DescuentoTabuladorPrecios;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.DescuentoTabuladorPreciosDAO;
 import com.artiffex.lithomat.sistemaweb.eistier.hibernate.HibernateUtil;
@@ -60,6 +64,27 @@ public class DescuentoTabuladorPreciosDaoImpl implements DescuentoTabuladorPreci
 		}
 		return descuentoTabuladorPrecios;
 	}
+	
+	public DescuentoTabuladorPreciosDTO buscaPorQuery(String queryString) {
+		DescuentoTabuladorPreciosDTO descuentoTabuladorPreciosDTO = null;
+		try {
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
+			sesion.beginTransaction();
+			SQLQuery query = sesion.createSQLQuery(queryString);
+			query.setResultTransformer(Transformers.aliasToBean(DescuentoTabuladorPreciosDTO.class));
+			descuentoTabuladorPreciosDTO = (DescuentoTabuladorPreciosDTO)query.uniqueResult();
+			sesion.getTransaction().commit();
+			query = null;
+		} catch ( Exception e ) {
+			log.error(e.getMessage());
+			sesion.getTransaction().rollback();
+		}
+		return descuentoTabuladorPreciosDTO;
+	}
 
 	public void modifica(DescuentoTabuladorPrecios descuentoTabuladorPrecios) {
 		try {
@@ -95,4 +120,25 @@ public class DescuentoTabuladorPreciosDaoImpl implements DescuentoTabuladorPreci
 		}
 		return lista;
 	}
+
+	public float buscaFloatPorQuery(String queryString) {
+		float resultadoFlotante = 0;
+		try {
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
+			sesion.beginTransaction();
+			SQLQuery query = sesion.createSQLQuery(queryString);
+			resultadoFlotante = ((BigDecimal)query.uniqueResult()).floatValue();
+			sesion.getTransaction().commit();
+			query = null;
+		} catch ( Exception e ) {
+			log.error(e.getMessage());
+			sesion.getTransaction().rollback();
+		}
+		return resultadoFlotante;
+	}
+	
 }

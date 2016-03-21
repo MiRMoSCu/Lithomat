@@ -27,6 +27,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.entity.HistorialEstatus;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.JsonResponse;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.OrdenProduccion;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Partida;
+import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajoDetalle;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.AcabadoDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.AcabadoService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CalificacionService;
@@ -34,6 +35,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.ClienteSer
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CombinacionTintasService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CostoExtraDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CostoExtraService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.DescuentoTabuladorPreciosService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.DisenioDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.DisenioService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.EstatusOrdenService;
@@ -52,6 +54,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.ProcesoExt
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.ProcesoPreprensaService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.ProcesoTransporteService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.ResponsableInsumoService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TabuladorPreciosService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TamanioPublicacionService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoBarnizService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoComplejidadService;
@@ -144,6 +147,10 @@ public class VisualizadorController {
 	private MaterialAyudaService materialAyudaService;
 	@Resource
 	private ResponsableInsumoService responsableInsumoService;
+	@Resource
+	private DescuentoTabuladorPreciosService descuentoTabuladorPreciosService;
+	@Resource
+	private TabuladorPreciosService tabuladorPreciosService;
 	
 	
 	/*
@@ -460,17 +467,24 @@ public class VisualizadorController {
 		JsonResponse jsonResponse = new JsonResponse();
 		jsonResponse.setEstatusOperacion(1);
 
-		TipoTrabajoDetalleDTO tipoTrabajoDetalle = tipoTrabajoDetalleService.buscaTipoTrabajoDetalleEnDTO(idTipoTrabajoDetalle);
+		TipoTrabajoDetalle tipoTrabajoDetalle		= tipoTrabajoDetalleService.buscaTipoTrabajoDetalle(idTipoTrabajoDetalle);
+		TipoTrabajoDetalleDTO tipoTrabajoDetalleDTO = tipoTrabajoDetalleService.buscaTipoTrabajoDetalleEnDTO(idTipoTrabajoDetalle);
 
 		Gson gson = new Gson();
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("{");
 		sb.append("\"tipo_trabajo_detalle\":");
-		sb.append(gson.toJson(tipoTrabajoDetalle));
+		sb.append(gson.toJson(tipoTrabajoDetalleDTO));
 		sb.append(",");
 		sb.append("\"lista_pliegos\":");
 		sb.append("\"" + pliegoService.listaHTMLModificacion(idTipoTrabajoDetalle) + "\"");
+		sb.append(",");
+		sb.append("\"aplica_descuento\":");
+		sb.append(gson.toJson(descuentoTabuladorPreciosService.buscaPorTipoTrabajoDetalle(idTipoTrabajoDetalle)));
+		sb.append(",");
+		sb.append("\"lista_tabulador\":");
+		sb.append(gson.toJson( tabuladorPreciosService.listaTabuladorDescendiente(tipoTrabajoDetalle.getMaquina().getIdMaquina(), tipoTrabajoDetalle.getTipoComplejidad().getIdTipoComplejidad(), tipoTrabajoDetalle.getPartida().getCantidad() ) ) );
 		sb.append(",");
 		sb.append("\"lista_costo_extra_detalle\":");
 		sb.append("\"" + costoExtraDetalleService.listaHTMLModificacion(idTipoTrabajoDetalle) + "\"");
@@ -478,9 +492,10 @@ public class VisualizadorController {
 
 		jsonResponse.setTextoJson(sb.toString());
 		
-		tipoTrabajoDetalle = null;
-		gson = null;
-		sb = null;
+		tipoTrabajoDetalleDTO 	= null;
+		tipoTrabajoDetalle		= null;
+		gson 					= null;
+		sb 						= null;
 
 		return jsonResponse;
 	} // obtieneTipoTrabajoDetalle

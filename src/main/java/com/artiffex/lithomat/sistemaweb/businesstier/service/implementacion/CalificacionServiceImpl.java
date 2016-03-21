@@ -35,6 +35,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajoDetalle;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.AcabadoDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.AcabadoService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CalificacionService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.DescuentoTabuladorPreciosService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.DisenioDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.DisenioService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.MaterialAyudaXPartidaService;
@@ -107,6 +108,8 @@ public class CalificacionServiceImpl implements CalificacionService {
 	private MaterialAyudaXPartidaService materialAyudaXPartidaService;
 	@Resource
 	private TintaEspecialService tintaEspecialService;
+	@Resource
+	private DescuentoTabuladorPreciosService descuentoTabuladorPreciosService;
 	
 	
 	
@@ -162,13 +165,17 @@ public class CalificacionServiceImpl implements CalificacionService {
 					int hojasRequeridasRedondeo 		= 0;
 					if ( hojasRequeridasOriginal <= 1000 )
 						hojasRequeridasRedondeo = 1000;
-					else if ( ( hojasRequeridasOriginal % 1000 ) > 300 )
+					else if ( ( hojasRequeridasOriginal % 1000 ) > 300 ) // 300 DEBERIA SER UN PARAMETRO CONFIGURABLE
 						hojasRequeridasRedondeo = ( ( hojasRequeridasOriginal / 1000 ) + 1 ) * 1000;
 					else
 						hojasRequeridasRedondeo = ( hojasRequeridasOriginal / 1000 ) * 1000;
 					
 					// precio_tabulador correspondiente a las hojas requeridas redondeadas
-					float precioUnitarioTabulador 		= tabuladorPreciosService.obtienePrecioUnitarioTabulador(idTipoComplejidad, idMaquina, hojasRequeridasRedondeo);
+					float precioUnitarioTabulador = 0;
+					if ( tipoTrabajoDetalle.isAplicaDescuento() ) 
+						precioUnitarioTabulador = descuentoTabuladorPreciosService.buscaPrecioPorTipoTrabajoDetalle(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());
+					else 
+						precioUnitarioTabulador = tabuladorPreciosService.obtienePrecioUnitarioTabulador(idTipoComplejidad, idMaquina, hojasRequeridasRedondeo);
 					
 					// papel
 					int papelCantidadTotal 				= pliego.getHojasTotales();
@@ -495,7 +502,11 @@ public class CalificacionServiceImpl implements CalificacionService {
 						hojasRequeridasRedondeo = (hojasRequeridasOriginal / 1000) * 1000;
 					
 					// precio_tabulador correspondiente a las hojas requeridas redondeadas
-					float precioUnitarioTabulador 		= tabuladorPreciosService.obtienePrecioUnitarioTabulador(idTipoComplejidad, idMaquina, hojasRequeridasRedondeo);
+					float precioUnitarioTabulador = 0;
+					if ( tipoTrabajoDetalle.isAplicaDescuento() ) 
+						precioUnitarioTabulador = descuentoTabuladorPreciosService.buscaPrecioPorTipoTrabajoDetalle(tipoTrabajoDetalle.getIdTipoTrabajoDetalle());
+					else 
+						precioUnitarioTabulador = tabuladorPreciosService.obtienePrecioUnitarioTabulador(idTipoComplejidad, idMaquina, hojasRequeridasRedondeo);
 					
 					// papel
 					int papelCantidadTotal 				= pliego.getHojasTotales();

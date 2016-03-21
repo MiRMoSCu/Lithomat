@@ -2,6 +2,7 @@ package com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz;
 
 import java.util.List;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.DescuentoTabuladorPreciosDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.DescuentoTabuladorPrecios;
 
 public interface DescuentoTabuladorPreciosDAO {
@@ -10,8 +11,12 @@ public interface DescuentoTabuladorPreciosDAO {
 	
 	public DescuentoTabuladorPrecios busca(int idDescuentoTabuladorPrecios);
 	
+	public DescuentoTabuladorPreciosDTO buscaPorQuery(String queryString);
+		
 	public void modifica(DescuentoTabuladorPrecios descuentoTabuladorPrecios);
 	
 	public List<DescuentoTabuladorPrecios> lista();
+	
+	public float buscaFloatPorQuery(String queryString);
 
 }

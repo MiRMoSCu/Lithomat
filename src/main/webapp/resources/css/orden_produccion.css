@@ -2,7 +2,7 @@
 
 #div_area {
     width: 1307px;
-    height: 4485px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* tamanio total */ /*3816*/
+    height: 4315px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* tamanio total */ /*3816*/
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -16,7 +16,7 @@
 
 #div_hoja {
     width: 1278px;
-    height: 4456px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* igual a div_area - 29 */
+    height: 4286px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* igual a div_area - 29 */
     background: #FFF;
     float: left;
 }
@@ -75,7 +75,7 @@
 
 #div_fondo_der {
     width: 29px;
-    height: 4425px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_hoja - 31 (div_fondo_esq_sup) */
+    height: 4255px; /*AQUI SE MODIFICA LO ALTO DE LA HOJA*/ /* div_hoja - 31 (div_fondo_esq_sup) */
     background-image: url('../image/s_der.png');
     background-repeat: repeat-y;
 }

@@ -102,6 +102,7 @@ function buscaPartida( id_partida ){
 		// oculta divs
 		document.getElementById("div_tipo_trabajo_detalle").style.display 				= "none";
 		document.getElementById("div_visualizador_pliegos").style.display 				= "none";
+		document.getElementById("div_descuento_tabulador_precios").style.display 		= "none";
 		document.getElementById("div_visualizador_costo_extra_detalle").style.display	= "none";
 	    document.getElementById("div_costo_extra_detalle").style.display				= "none";
 		document.getElementById("div_pestania").style.display 							= "none";
@@ -140,32 +141,32 @@ function buscaPartida( id_partida ){
 	            document.getElementsByName("tipo_trabajo").disabled = true;
 	            
 	            // completa campos
-	            document.forms["partida"].elements["nombre_partida"].value                  = partidaJson.descripcion_partida.nombrePartida;
-	            document.forms["partida"].elements["cantidad"].value                        = partidaJson.descripcion_partida.cantidad;
-	            document.forms["partida"].elements["forma_trabajo"].value                   = partidaJson.descripcion_partida.nombreTipoFormaTrabajo;
-	            document.forms["partida"].elements["descripcion_partida"].value             = partidaJson.descripcion_partida.descripcionPartida;
-	            document.forms["partida"].elements["observaciones_generales"].value         = partidaJson.descripcion_partida.observacionesGenerales;
-	            document.forms["partida"].elements["observaciones_aprobacion"].value        = partidaJson.descripcion_partida.observacionesAprobacion;
-	            document.forms["disenio"].elements["id_disenio"].value       				= partidaJson.disenio.idDisenio;
-	            document.forms["disenio"].elements["indicacion_tarea_realizar"].value       = partidaJson.disenio.indicacionTareaRealizar;
-	            document.forms["disenio"].elements["materiales_recibe"].value               = partidaJson.disenio.materialesRecibe;
-	            document.forms["disenio"].elements["observaciones"].value                   = partidaJson.disenio.observaciones;
-	            document.forms["preprensa"].elements["id_preprensa"].value     				= partidaJson.preprensa.idPreprensa;
-	            document.forms["preprensa"].elements["indicacion_tarea_realizar"].value     = partidaJson.preprensa.indicacionTareaRealizar;
-	            document.forms["preprensa"].elements["materiales_recibe"].value             = partidaJson.preprensa.materialesRecibe;
-	            document.forms["preprensa"].elements["observaciones"].value                 = partidaJson.preprensa.observaciones;
-	            document.forms["transporte"].elements["id_transporte"].value    			= partidaJson.transporte.idTransporte;
-	            document.forms["transporte"].elements["indicacion_tarea_realizar"].value    = partidaJson.transporte.indicacionTareaRealizar;
-	            document.forms["transporte"].elements["materiales_recibe"].value            = partidaJson.transporte.materialesRecibe;
-	            document.forms["transporte"].elements["observaciones"].value                = partidaJson.transporte.observaciones;
-	            document.forms["acabado"].elements["id_acabado"].value       				= partidaJson.acabado.idAcabado;
-	            document.forms["acabado"].elements["indicacion_tarea_realizar"].value       = partidaJson.acabado.indicacionTareaRealizar;
-	            document.forms["acabado"].elements["materiales_recibe"].value               = partidaJson.acabado.materialesRecibe;
-	            document.forms["acabado"].elements["observaciones"].value                   = partidaJson.acabado.observaciones;
-	            document.forms["offset"].elements["id_offset"].value        				= partidaJson.offset.idOffset;
-	            document.forms["offset"].elements["indicacion_tarea_realizar"].value        = partidaJson.offset.indicacionTareaRealizar;
-	            document.forms["offset"].elements["materiales_recibe"].value                = partidaJson.offset.materialesRecibe;
-	            document.forms["offset"].elements["observaciones"].value                    = partidaJson.offset.observaciones;
+	            document.partida.nombre_partida.value 				= partidaJson.descripcion_partida.nombrePartida;
+	            document.partida.cantidad.value						= partidaJson.descripcion_partida.cantidad;
+	            document.partida.forma_trabajo.value 				= partidaJson.descripcion_partida.nombreTipoFormaTrabajo;
+	            document.partida.descripcion_partida.value 			= partidaJson.descripcion_partida.descripcionPartida;
+	            document.partida.observaciones_generales.value		= partidaJson.descripcion_partida.observacionesGenerales;
+	            document.partida.observaciones_aprobacion.value		= partidaJson.descripcion_partida.observacionesAprobacion;
+	            document.disenio.id_disenio.value					= partidaJson.disenio.idDisenio;
+	            document.disenio.indicacion_tarea_realizar.value	= partidaJson.disenio.indicacionTareaRealizar;
+	            document.disenio.materiales_recibe.value			= partidaJson.disenio.materialesRecibe;
+	            document.disenio.observaciones.value				= partidaJson.disenio.observaciones;
+	            document.preprensa.id_preprensa.value				= partidaJson.preprensa.idPreprensa;
+	            document.preprensa.indicacion_tarea_realizar.value  = partidaJson.preprensa.indicacionTareaRealizar;
+	            document.preprensa.materiales_recibe.value			= partidaJson.preprensa.materialesRecibe;
+	            document.preprensa.observaciones.value				= partidaJson.preprensa.observaciones;
+	            document.transporte.id_transporte.value				= partidaJson.transporte.idTransporte;
+	            document.transporte.indicacion_tarea_realizar.value	= partidaJson.transporte.indicacionTareaRealizar;
+	            document.transporte.materiales_recibe.value			= partidaJson.transporte.materialesRecibe;
+	            document.transporte.observaciones.value				= partidaJson.transporte.observaciones;
+	            document.acabado.id_acabado.value					= partidaJson.acabado.idAcabado;
+	            document.acabado.indicacion_tarea_realizar.value	= partidaJson.acabado.indicacionTareaRealizar;
+	            document.acabado.materiales_recibe.value			= partidaJson.acabado.materialesRecibe;
+	            document.acabado.observaciones.value				= partidaJson.acabado.observaciones;
+	            document.offset.id_offset.value						= partidaJson.offset.idOffset;
+	            document.offset.indicacion_tarea_realizar.value		= partidaJson.offset.indicacionTareaRealizar;
+	            document.offset.materiales_recibe.value				= partidaJson.offset.materialesRecibe;
+	            document.offset.observaciones.value					= partidaJson.offset.observaciones;
 	          
 	            // asignacion de las tablas de detalle_partida
 	            document.getElementById("div_tabla_lista_disenio_detalle").innerHTML		= partidaJson.disenio_detalle;
@@ -178,40 +179,40 @@ function buscaPartida( id_partida ){
 	            document.getElementById("div_tabla_lista_tipo_trabajo_detalle").innerHTML   = partidaJson.lista_subpartidas;
 	            
 	            // limpia campos de tipo_trabajo_detalle
-	            document.forms["tipo_trabajo_detalle"].elements["proporciona_papel"].disabled               = false;
-	            document.forms["tipo_trabajo_detalle"].elements["proporciona_placas"].disabled              = false;
-	            document.forms["tipo_trabajo_detalle"].elements["proporciona_tinta_especial"].disabled      = false;
-	            document.forms["tipo_trabajo_detalle"].elements["proporciona_barniz"].disabled              = false;
-	            document.forms["tipo_trabajo_detalle"].elements["descripcion_partida_detalle"].value        = "";
-	            document.forms["tipo_trabajo_detalle"].elements["alto_final"].value                         = "";
-	            document.forms["tipo_trabajo_detalle"].elements["ancho_final"].value                        = "";
-	            document.forms["tipo_trabajo_detalle"].elements["alto_extendido"].value                     = "";
-	            document.forms["tipo_trabajo_detalle"].elements["ancho_extendido"].value                    = "";
-	            document.forms["tipo_trabajo_detalle"].elements["proporciona_papel"].checked                = false;
-	            document.forms["tipo_trabajo_detalle"].elements["proporciona_placas"].checked               = false;
-	            document.forms["tipo_trabajo_detalle"].elements["proporciona_tinta_especial"].checked       = false;
-	            document.forms["tipo_trabajo_detalle"].elements["proporciona_barniz"].checked               = false;
-	            document.forms["tipo_trabajo_detalle"].elements["tipo_papel"].value                         = "";
-	            document.forms["tipo_trabajo_detalle"].elements["repeticiones_x_pliego"].value              = "";
-	            document.forms["tipo_trabajo_detalle"].elements["numero_paginas_publicacion"].value         = "";
-	            document.forms["tipo_trabajo_detalle"].elements["tamanio_pubicacion"].value                 = "";
-	            document.forms["tipo_trabajo_detalle"].elements["alto_corte_inicial"].value                 = "";
-	            document.forms["tipo_trabajo_detalle"].elements["ancho_corte_inicial"].value                = "";
-	            document.forms["tipo_trabajo_detalle"].elements["frente_combinacion_tintas"].value          = "";
-	            document.forms["tipo_trabajo_detalle"].elements["frente_num_tinta_especial"].value          = "";
-	            document.forms["tipo_trabajo_detalle"].elements["frente_descripcion_tinta_especial"].value  = "";
-	            document.forms["tipo_trabajo_detalle"].elements["frente_tipo_barniz"].value                 = "";
-	            document.forms["tipo_trabajo_detalle"].elements["vuelta_combinacion_tintas"].value          = "";
-	            document.forms["tipo_trabajo_detalle"].elements["vuelta_num_tinta_especial"].value          = "";
-	            document.forms["tipo_trabajo_detalle"].elements["vuelta_descripcion_tinta_especial"].value  = "";
-	            document.forms["tipo_trabajo_detalle"].elements["vuelta_tipo_barniz"].value                 = "";
-	            document.forms["tipo_trabajo_detalle"].elements["maquina"].value                            = "";
-	            document.forms["tipo_trabajo_detalle"].elements["tipo_placa"].value                         = "";
+	            document.tipo_trabajo_detalle.proporciona_papel.disabled               = false;
+	            document.tipo_trabajo_detalle.proporciona_placas.disabled              = false;
+	            document.tipo_trabajo_detalle.proporciona_tinta_especial.disabled      = false;
+	            document.tipo_trabajo_detalle.proporciona_barniz.disabled              = false;
+	            document.tipo_trabajo_detalle.descripcion_partida_detalle.value        = "";
+	            document.tipo_trabajo_detalle.alto_final.value                         = "";
+	            document.tipo_trabajo_detalle.ancho_final.value                        = "";
+	            document.tipo_trabajo_detalle.alto_extendido.value                     = "";
+	            document.tipo_trabajo_detalle.ancho_extendido.value                    = "";
+	            document.tipo_trabajo_detalle.proporciona_papel.checked                = false;
+	            document.tipo_trabajo_detalle.proporciona_placas.checked               = false;
+	            document.tipo_trabajo_detalle.proporciona_tinta_especial.checked       = false;
+	            document.tipo_trabajo_detalle.proporciona_barniz.checked               = false;
+	            document.tipo_trabajo_detalle.tipo_papel.value                         = "";
+	            document.tipo_trabajo_detalle.repeticiones_x_pliego.value              = "";
+	            document.tipo_trabajo_detalle.numero_paginas_publicacion.value         = "";
+	            document.tipo_trabajo_detalle.tamanio_pubicacion.value                 = "";
+	            document.tipo_trabajo_detalle.alto_corte_inicial.value                 = "";
+	            document.tipo_trabajo_detalle.ancho_corte_inicial.value                = "";
+	            document.tipo_trabajo_detalle.frente_combinacion_tintas.value          = "";
+	            document.tipo_trabajo_detalle.frente_num_tinta_especial.value          = "";
+	            document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.value  = "";
+	            document.tipo_trabajo_detalle.frente_tipo_barniz.value                 = "";
+	            document.tipo_trabajo_detalle.vuelta_combinacion_tintas.value          = "";
+	            document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value          = "";
+	            document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.value  = "";
+	            document.tipo_trabajo_detalle.vuelta_tipo_barniz.value                 = "";
+	            document.tipo_trabajo_detalle.maquina.value                            = "";
+	            document.tipo_trabajo_detalle.tipo_placa.value                         = "";
 	            
-	            document.forms["tipo_trabajo_detalle"].elements["proporciona_papel"].disabled               = true;
-	            document.forms["tipo_trabajo_detalle"].elements["proporciona_placas"].disabled              = true;
-	            document.forms["tipo_trabajo_detalle"].elements["proporciona_tinta_especial"].disabled      = true;
-	            document.forms["tipo_trabajo_detalle"].elements["proporciona_barniz"].disabled              = true;
+	            document.tipo_trabajo_detalle.proporciona_papel.disabled               = true;
+	            document.tipo_trabajo_detalle.proporciona_placas.disabled              = true;
+	            document.tipo_trabajo_detalle.proporciona_tinta_especial.disabled      = true;
+	            document.tipo_trabajo_detalle.proporciona_barniz.disabled              = true;
 	            
 	            document.getElementById("div_tabla_lista_pliegos").innerHTML = 
 	            	"<table id=\"tabla_lista_pliegos\">" +
@@ -294,44 +295,50 @@ function buscaTrabajoDetalle( id_tipo_trabajo_detalle ) {
 	        url: urlObtieneTipoTrabajoDetalle,
 	        data: {id_tipo_trabajo_detalle:id_tipo_trabajo_detalle},
 	        success: function( response ) {
-	        	//console.log(response);
+	        	console.log(response);
 	        	// set id_tipo_trabajo_detalle
 	        	document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value = id_tipo_trabajo_detalle;
 	        	document.visualizador_pliegos.id_tipo_trabajo_detalle.value	= id_tipo_trabajo_detalle;
 	        	document.costo_extra_detalle.id_tipo_trabajo_detalle.value 	= id_tipo_trabajo_detalle;
 	        	
 	            var detallePartidaJson = JSON.parse( response.textoJson );
-	            document.forms["tipo_trabajo_detalle"].elements["descripcion_partida_detalle"].value        = detallePartidaJson.tipo_trabajo_detalle.descripcion;
-	            document.forms["tipo_trabajo_detalle"].elements["alto_final"].value                         = detallePartidaJson.tipo_trabajo_detalle.altoFinal;
-	            document.forms["tipo_trabajo_detalle"].elements["ancho_final"].value                        = detallePartidaJson.tipo_trabajo_detalle.anchoFinal;
-	            document.forms["tipo_trabajo_detalle"].elements["alto_extendido"].value                     = detallePartidaJson.tipo_trabajo_detalle.altoExtendido;
-	            document.forms["tipo_trabajo_detalle"].elements["ancho_extendido"].value                    = detallePartidaJson.tipo_trabajo_detalle.anchoExtendido;
-	            document.forms["tipo_trabajo_detalle"].elements["proporciona_papel"].value                	= detallePartidaJson.tipo_trabajo_detalle.clienteProporcionaPapel==true?"Si":"No";
-	            document.forms["tipo_trabajo_detalle"].elements["proporciona_placas"].value               	= detallePartidaJson.tipo_trabajo_detalle.clienteProporcionaPlacas==true?"Si":"No";
-	            document.forms["tipo_trabajo_detalle"].elements["proporciona_tinta_especial"].value       	= detallePartidaJson.tipo_trabajo_detalle.clienteProporcionaTintaEspecial==true?"Si":"No";
-	            document.forms["tipo_trabajo_detalle"].elements["proporciona_barniz"].value               	= detallePartidaJson.tipo_trabajo_detalle.clienteProporcionaBarniz==true?"Si":"No";
-	            document.forms["tipo_trabajo_detalle"].elements["tipo_papel"].value                         = detallePartidaJson.tipo_trabajo_detalle.descripcionTipoPapelExtendido;
-	            document.forms["tipo_trabajo_detalle"].elements["repeticiones_x_pliego"].value              = detallePartidaJson.tipo_trabajo_detalle.repeticionesXPliego;
-	            document.forms["tipo_trabajo_detalle"].elements["numero_paginas_publicacion"].value         = detallePartidaJson.tipo_trabajo_detalle.numeroPaginasPublicacion;
-	            document.forms["tipo_trabajo_detalle"].elements["tamanio_pubicacion"].value                 = detallePartidaJson.tipo_trabajo_detalle.descripcionTamanioPublicacion;
-	            document.forms["tipo_trabajo_detalle"].elements["alto_corte_inicial"].value                 = detallePartidaJson.tipo_trabajo_detalle.altoCorteInicial;
-	            document.forms["tipo_trabajo_detalle"].elements["ancho_corte_inicial"].value                = detallePartidaJson.tipo_trabajo_detalle.anchoCorteInicial;
-	            document.forms["tipo_trabajo_detalle"].elements["frente_combinacion_tintas"].value          = detallePartidaJson.tipo_trabajo_detalle.frenteDescripcionNumTintas;
-	            document.forms["tipo_trabajo_detalle"].elements["frente_num_tinta_especial"].value          = detallePartidaJson.tipo_trabajo_detalle.frenteNumTintaEspecial;
-	            document.forms["tipo_trabajo_detalle"].elements["frente_descripcion_tinta_especial"].value  = detallePartidaJson.tipo_trabajo_detalle.frenteDescripcionTintaEspecial;
-	            document.forms["tipo_trabajo_detalle"].elements["frente_tipo_barniz"].value                 = detallePartidaJson.tipo_trabajo_detalle.frenteDescripcionTipoBarniz;
-	            document.forms["tipo_trabajo_detalle"].elements["vuelta_combinacion_tintas"].value          = detallePartidaJson.tipo_trabajo_detalle.vueltaDescripcionNumTintas;
-	            document.forms["tipo_trabajo_detalle"].elements["vuelta_num_tinta_especial"].value          = detallePartidaJson.tipo_trabajo_detalle.vueltaNumTintaEspecial;
-	            document.forms["tipo_trabajo_detalle"].elements["vuelta_descripcion_tinta_especial"].value  = detallePartidaJson.tipo_trabajo_detalle.vueltaDescripcionTintaEspecial;
-	            document.forms["tipo_trabajo_detalle"].elements["vuelta_tipo_barniz"].value                 = detallePartidaJson.tipo_trabajo_detalle.vueltaDescripcionTipoBarniz;
-	            document.forms["tipo_trabajo_detalle"].elements["maquina"].value                            = detallePartidaJson.tipo_trabajo_detalle.nombreMaquina;
-	            document.forms["tipo_trabajo_detalle"].elements["tipo_placa"].value                         = detallePartidaJson.tipo_trabajo_detalle.descripcionPlaca;
-	            document.forms["tipo_trabajo_detalle"].elements["tipo_complejidad"].value                   = detallePartidaJson.tipo_trabajo_detalle.descripcionComplejidad;
+	            document.tipo_trabajo_detalle.descripcion_partida_detalle.value			= detallePartidaJson.tipo_trabajo_detalle.descripcion;
+	            document.tipo_trabajo_detalle.alto_final.value							= detallePartidaJson.tipo_trabajo_detalle.altoFinal;
+	            document.tipo_trabajo_detalle.ancho_final.value							= detallePartidaJson.tipo_trabajo_detalle.anchoFinal;
+	            document.tipo_trabajo_detalle.alto_extendido.value						= detallePartidaJson.tipo_trabajo_detalle.altoExtendido;
+	            document.tipo_trabajo_detalle.ancho_extendido.value						= detallePartidaJson.tipo_trabajo_detalle.anchoExtendido;
+	            document.tipo_trabajo_detalle.proporciona_papel.value					= detallePartidaJson.tipo_trabajo_detalle.clienteProporcionaPapel==true?"Si":"No";
+	            document.tipo_trabajo_detalle.proporciona_placas.value					= detallePartidaJson.tipo_trabajo_detalle.clienteProporcionaPlacas==true?"Si":"No";
+	            document.tipo_trabajo_detalle.proporciona_tinta_especial.value			= detallePartidaJson.tipo_trabajo_detalle.clienteProporcionaTintaEspecial==true?"Si":"No";
+	            document.tipo_trabajo_detalle.proporciona_barniz.value					= detallePartidaJson.tipo_trabajo_detalle.clienteProporcionaBarniz==true?"Si":"No";
+	            document.tipo_trabajo_detalle.tipo_papel.value							= detallePartidaJson.tipo_trabajo_detalle.descripcionTipoPapelExtendido;
+	            document.tipo_trabajo_detalle.repeticiones_x_pliego.value				= detallePartidaJson.tipo_trabajo_detalle.repeticionesXPliego;
+	            document.tipo_trabajo_detalle.numero_paginas_publicacion.value			= detallePartidaJson.tipo_trabajo_detalle.numeroPaginasPublicacion;
+	            document.tipo_trabajo_detalle.tamanio_pubicacion.value					= detallePartidaJson.tipo_trabajo_detalle.descripcionTamanioPublicacion;
+	            document.tipo_trabajo_detalle.alto_corte_inicial.value					= detallePartidaJson.tipo_trabajo_detalle.altoCorteInicial;
+	            document.tipo_trabajo_detalle.ancho_corte_inicial.value					= detallePartidaJson.tipo_trabajo_detalle.anchoCorteInicial;
+	            document.tipo_trabajo_detalle.frente_combinacion_tintas.value			= detallePartidaJson.tipo_trabajo_detalle.frenteDescripcionNumTintas;
+	            document.tipo_trabajo_detalle.frente_num_tinta_especial.value			= detallePartidaJson.tipo_trabajo_detalle.frenteNumTintaEspecial;
+	            document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.value	= detallePartidaJson.tipo_trabajo_detalle.frenteDescripcionTintaEspecial;
+	            document.tipo_trabajo_detalle.frente_tipo_barniz.value					= detallePartidaJson.tipo_trabajo_detalle.frenteDescripcionTipoBarniz;
+	            document.tipo_trabajo_detalle.vuelta_combinacion_tintas.value			= detallePartidaJson.tipo_trabajo_detalle.vueltaDescripcionNumTintas;
+	            document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value			= detallePartidaJson.tipo_trabajo_detalle.vueltaNumTintaEspecial;
+	            document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.value	= detallePartidaJson.tipo_trabajo_detalle.vueltaDescripcionTintaEspecial;
+	            document.tipo_trabajo_detalle.vuelta_tipo_barniz.value					= detallePartidaJson.tipo_trabajo_detalle.vueltaDescripcionTipoBarniz;
+	            document.tipo_trabajo_detalle.maquina.value								= detallePartidaJson.tipo_trabajo_detalle.nombreMaquina;
+	            document.tipo_trabajo_detalle.tipo_placa.value							= detallePartidaJson.tipo_trabajo_detalle.descripcionPlaca;
+	            document.tipo_trabajo_detalle.tipo_complejidad.value					= detallePartidaJson.tipo_trabajo_detalle.descripcionComplejidad;
+	            
+	            // modificacion del form descuento
+	            
+	            
+	            
 	            
 	            document.getElementById("div_tabla_lista_pliegos").innerHTML                    = detallePartidaJson.lista_pliegos;
 	            document.getElementById("div_tabla_costo_extra_tipo_trabajo").innerHTML         = detallePartidaJson.lista_costo_extra_detalle;
 	            document.getElementById("div_tipo_trabajo_detalle").style.display 				= "block";
 	            document.getElementById("div_visualizador_pliegos").style.display				= "block";
+	            document.getElementById("div_descuento_tabulador_precios").style.display 		= "block";
 	            document.getElementById("div_visualizador_costo_extra_detalle").style.display	= "block";
 	            document.getElementById("div_costo_extra_detalle").style.display				= "block";
 	            document.getElementById("div_pestania").style.display							= "block";
@@ -351,8 +358,8 @@ function buscaTrabajoDetalle( id_tipo_trabajo_detalle ) {
 } // buscaTrabajoDetalle
 
 function ajaxCambiaEstatus() {
-	document.forms["cambio_estatus"].elements["id_orden_produccion"].value 	= document.forms["orden_produccion"].elements["id_orden_produccion"].value;
-	document.forms["cambio_estatus"].elements["id_estatus_orden"].value 	= document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].value;
+	document.cambio_estatus.id_orden_produccion.value 	= document.orden_produccion.id_orden_produccion.value;
+	document.cambio_estatus.id_estatus_orden.value 	= document.cambio_estatus.select_estatus_orden_produccion.value;
 	
 	// evitar el doble ingreso de registros en finalizado
 	if( document.orden_produccion.estatus.value.toUpperCase() != "FINALIZADO" ) {
@@ -363,17 +370,18 @@ function ajaxCambiaEstatus() {
 			success:function(response){
 				//console.log(response);
 				if(response.estatusOperacion != 0) {
-					var index = document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].selectedIndex;
-					document.forms["orden_produccion"].elements["estatus"].value = document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].options[index].text;
+					var index = document.cambio_estatus.select_estatus_orden_produccion.selectedIndex;
+					document.orden_produccion.estatus.value = document.cambio_estatus.select_estatus_orden_produccion.options[index].text;
 					// modifica texto en la ventana padre
-					var id_td = "td_" + document.forms["orden_produccion"].elements["nut"].value;
-					window.parent.document.getElementById(id_td).innerHTML = document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].options[index].text;
+					var id_td = "td_" + document.orden_produccion.nut.value;
+					window.parent.document.getElementById(id_td).innerHTML = document.cambio_estatus.select_estatus_orden_produccion.options[index].text;
 					// modifica color en la ventana padre
 					window.parent.document.getElementById(id_td).removeAttribute("class");
-					window.parent.document.getElementById(id_td).setAttribute("class","estatus_" + document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].value);
+					window.parent.document.getElementById(id_td).setAttribute("class","estatus_" + document.cambio_estatus.select_estatus_orden_produccion.value);
 					// elimina la opcion de modificar la informacion.
 					document.getElementById("div_btn_actualizar_orden_produccion").style.display 		= "none";
 					document.getElementById("div_btn_actualizar_partida").style.display 				= "none";
+					document.getElementById("div_btn_agregar_ttd_encabezado").style.display 			= "none";
 					document.getElementById("div_btn_actualizar_ttd_encabezado").style.display 			= "none";
 					document.getElementById("div_btn_agregar_costo_extra_detalle").style.display 		= "none";
 					document.getElementById("div_btn_actualizar_costo_extra_detalle").style.display 	= "none";
@@ -400,7 +408,7 @@ function ajaxCambiaEstatus() {
 		                var option = document.createElement("option");
 		                option.text     = item.text;
 		                option.value    = item.value;
-		                document.forms["cambio_estatus"].elements["select_estatus_orden_produccion"].add( option );
+		                document.cambio_estatus.select_estatus_orden_produccion.add( option );
 		                delete option;
 		            } );
 		            delete jsonObject;

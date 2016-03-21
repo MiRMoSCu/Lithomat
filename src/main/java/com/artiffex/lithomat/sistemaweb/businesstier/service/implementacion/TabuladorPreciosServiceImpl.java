@@ -217,7 +217,7 @@ public class TabuladorPreciosServiceImpl implements TabuladorPreciosService {
 		List<TabuladorPreciosDTO> listaTabuladorPrecios = tabuladorPreciosDAO.listaPorCriteriosBusqueda(sb.toString());
 		for (TabuladorPreciosDTO tabuladorPreciosDTO : listaTabuladorPrecios) {
 			ComboSelect comboSelect = new ComboSelect();
-			comboSelect.setValue(tabuladorPreciosDTO.getIdTabuladorPrecios());
+			comboSelect.setValue((int)tabuladorPreciosDTO.getPrecio());
 			comboSelect.setText(Float.toString(tabuladorPreciosDTO.getPrecio()));
 			listaComboSelect.add(comboSelect);
 			comboSelect = null;

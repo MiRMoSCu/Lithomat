@@ -14,6 +14,7 @@
 <c:url value="/tipo_trabajo_detalle/agrega" 				var="urlAgregaTipoTrabajoDetalle"/>
 <c:url value="/tipo_trabajo_detalle/actualiza"    			var="urlActualizaTipoTrabajoDetalle"/>
 <c:url value="/tipo_trabajo_detalle/busca"  				var="urlBuscaListaTipoTrabajoDetalle"/>
+<c:url value="/tipo_trabajo_detalle/agrega_descuento"  		var="urlAgregaDescuento"/>
 <c:url value="/pliego/calcula"              				var="urlCalculaPliego"/>
 <c:url value="/costo_extra_detalle/busca_unidad_medida" 	var="urlBuscaUnidadMedidaCostoExtra"/>
 <c:url value="/costo_extra_detalle/agrega_en_op" 			var="urlAgregaCostoExtra"/>
@@ -73,6 +74,7 @@
             var urlAgregaTipoTrabajoDetalle 	= "${urlAgregaTipoTrabajoDetalle}";
             var urlActualizaTipoTrabajoDetalle  = "${urlActualizaTipoTrabajoDetalle}";
             var urlBuscaListaTipoTrabajoDetalle = "${urlBuscaListaTipoTrabajoDetalle}";
+            var urlAgregaDescuento				= "${urlAgregaDescuento}";
             var urlCalculaPliego            	= "${urlCalculaPliego}";
             var urlBuscaUnidadMedidaCostoExtra	= "${urlBuscaUnidadMedidaCostoExtra}";
             var urlAgregaCostoExtra				= "${urlAgregaCostoExtra}";
@@ -677,7 +679,7 @@
 
                             
 <!-- div_visualizador_partidas, display:none; -->
-                            <div id="div_visualizador_partidas" style="display:none;">
+                            <div id="div_visualizador_partidas" style="display:block;">
                                 <div class="div_separador_mediano">
                                     <img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
                                 </div>
@@ -712,7 +714,7 @@
 
                             
 <!-- div_partida, display:none; -->
-                            <div id="div_partida" style="display:none;">
+                            <div id="div_partida" style="display:block;">
                                 <form name="partida" action="" accept-charset="ISO-8859-1" enctype="multipart/form-data">
                                 	<input type="hidden" name="id_partida" 				value=""/>
                                     <input type="hidden" name="id_orden_produccion"     value=""/>
@@ -926,7 +928,7 @@
 
 
 <!-- div_visualizador_tipo_trabajo_detalle, display:none; -->
-                            <div id="div_visualizador_tipo_trabajo_detalle" style="display:none;">
+                            <div id="div_visualizador_tipo_trabajo_detalle" style="display:block;">
                                 <div class="div_separador_mediano">
                                     <img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
                                 </div>
@@ -972,7 +974,7 @@
 
                             
 <!-- div_tipo_trabajo_detalle = tipo_trabajo_detalle,  display:none; -->
-                            <div id="div_tipo_trabajo_detalle" style="display:none;">
+                            <div id="div_tipo_trabajo_detalle" style="display:block;">
                                 <form name="tipo_trabajo_detalle" action="" accept-charset="ISO-8859-1">
                                 	<input type="hidden" name="id_tipo_trabajo_detalle" 			value=""/>
                                     <input type="hidden" name="id_partida"                          value=""/>
@@ -1542,7 +1544,7 @@
 
 
 <!-- div_visualizador_pliegos, display:none; -->
-                            <div id="div_visualizador_pliegos" style="display:none;">
+                            <div id="div_visualizador_pliegos" style="display:block;">
                                 <form name="visualizador_pliegos" action="" accept-charset="ISO-8859-1">
                                     <input type="hidden" name="id_tipo_trabajo_detalle" value=""/>
                                     <div class="div_separador_chico">
@@ -1622,17 +1624,18 @@
                             
                             
 <!-- div_descuento_tabulador_precios, display:none;  -->
-							<div id="div_descuento_tabulador_precios" style="display: none;">
+							<div id="div_descuento_tabulador_precios" style="display:block;">
 								<div class="div_separador_mediano">
 									<img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
 								</div>
 								<div class="titulo">
-									<font size="5">¿DESEA PRECIO ESPECIAL POR MILLAR DE IMPRESI&Oacute;N?</font>
+									<font size="5">¿DESEA APLICAR PRECIO POR MILLAR DE IMPRESI&Oacute;N?</font>
 								</div>
 								<form name="descuento" action="" accept-charset="ISO-8859-1">
-									<input type="hidden" name="id_tipo_trabajo_detalle" value=""/>
-									<input type="hidden" name="id_tabulador_precios" 	value=""/>
-									<input type="hidden" name="id_tipo_precio" 			value=""/>
+									<input type="hidden" name="id_tipo_trabajo_detalle" 	value=""/>
+									<input type="hidden" name="aplica_descuento" 			value=""/>
+									<input type="hidden" name="precio_tabulador" 			value=""/>
+									<input type="hidden" name="id_tipo_precio" 				value=""/>
 									<div class="linea">
 										<div class="casilla">
 											<div class="columna_izquierda">
@@ -1641,10 +1644,10 @@
 														<table>
 															<tr>
 																<td width="65%">
-																	<span style="cursor: pointer;" onclick="document.descuento.aplica_descuento.click()">¿Aplica descuento?:</span></td>
+																	<span style="cursor: pointer;" onclick="document.descuento.chkbx_aplica_descuento.click()">¿Aplica descuento?:</span></td>
 																<td>
 																	<input type="checkbox"
-																			name="aplica_descuento"/>
+																			name="chkbx_aplica_descuento"/>
 																</td>
 															</tr>
 														</table>
@@ -1657,13 +1660,14 @@
 																<td width="1%">
 																	<input 	type="radio"
 																			name="tipo_descuento"
-																			value="por_tabulador"/>
+																			value="por_tabulador"
+																			checked/>
 																</td>
 																<td width="1%">
 																	<span style="cursor: pointer;" onclick="document.getElementsByName('tipo_descuento')[0].click()">Tabulador:</span>
 																</td>
 																<td>
-																	<select name="select_tabulador_precios" id="select_tabulador_precios"></select>
+																	<select name="select_precio_tabulador" id="select_precio_tabulador"></select>
 																</td>
 															</tr>
 														</table>
@@ -1715,7 +1719,7 @@
 									<div class="linea" style="text-align: right;">
 										<img id="imgBtnLimpiarDescuentoActivo" 		alt="" style="cursor: pointer;" src="<c:url value="/resources/image/boton_limpiar.jpg"/>" onclick="limpiaCamposDescuento()">
 										<img id="imgBtnLimpiarDescuentoInactivo"	alt="" style="display: none;" 	src="<c:url value="/resources/image/boton_limpiar_des.jpg"/>">
-										<img id="imgBtnAgregarDescuentoActivo" 		alt="" style="cursor: pointer;" src="<c:url value="/resources/image/boton_agregar.jpg"/>"  onclick="ajaxAgregarDescuento()">
+										<img id="imgBtnAgregarDescuentoActivo" 		alt="" style="cursor: pointer;" src="<c:url value="/resources/image/boton_agregar.jpg"/>"  onclick="ajaxAgregaDescuento()">
 										<img id="imgBtnAgregarDescuentoInactivo" 	alt="" style="display: none;" 	src="<c:url value="/resources/image/boton_agregar_des.jpg"/>">
 									</div>
 								</form>
@@ -1729,7 +1733,7 @@
                             
                             
 <!-- div_visualizador_costo_extra_detalle, display:none; -->
-                            <div id="div_visualizador_costo_extra_detalle" style="display:none;">
+                            <div id="div_visualizador_costo_extra_detalle" style="display:block;">
                             	<div class="div_separador_mediano">
                                     <img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
                                 </div>
@@ -1775,8 +1779,10 @@
                                 	</div>
                                 </div>
                             </div>
+                            
 <!-- div_costo_extra_detalle, display:none; -->
-							<div id="div_costo_extra_detalle" style="display:none;">
+
+							<div id="div_costo_extra_detalle" style="display:block;">
 								<form name="costo_extra_detalle" action="" accept-charset="ISO-8859-1">
 									<input type="hidden" name="id_tipo_trabajo_detalle" value=""/>
 									<input type="hidden" name="id_costo_extra" 			value=""/>
@@ -1902,7 +1908,7 @@
 
                             
 <!-- div_nuevo_tipo_trabajo_detalle, display:none;  -->
-                            <div id="div_nuevo_tipo_trabajo_detalle" style="display:none;">
+                            <div id="div_nuevo_tipo_trabajo_detalle" style="display:block;">
                                 <div class="div_separador_mediano">
                                     <img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
                                 </div>
@@ -1923,7 +1929,7 @@
                             
                             
 <!-- div_pestania, display:none; -->
-                            <div id="div_pestania" style="display:none;">
+                            <div id="div_pestania" style="display:block;">
                                 <div class="div_separador_grande">
                                     <img alt="" src="<c:url value="/resources/image/separador_grande.png"/>"/>
                                 </div>
@@ -2877,7 +2883,7 @@
 
                                 
 <!-- div_material_ayuda, display:none; -->
-                            <div id="div_material_ayuda" style="display:none;">
+                            <div id="div_material_ayuda" style="display:block;">
                                 <form name="material_ayuda" action="" accept-charset="ISO-8859-1">
                                     <input type="hidden" name="id_partida"              value=""/>
                                     <input type="hidden" name="id_material_ayuda"       value=""/>
@@ -2994,7 +3000,7 @@
                             
 
 <!-- div_nueva_partida, display:none;  -->
-                            <div id="div_nueva_partida" style="display:none;">
+                            <div id="div_nueva_partida" style="display:block;">
                                 <div class="div_separador_mediano">
                                     <img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
                                 </div>
@@ -3013,7 +3019,7 @@
                             
 
 <!-- div_cotizar, display:none;  -->
-                            <div id="div_cotizar" style="display:none;">
+                            <div id="div_cotizar" style="display:block;">
                                 <form name="cotizacion" action="" accept-charset="ISO-8859-1" method="POST">
                                     <input type="hidden" name="id_orden_produccion" value=""/>
                                     <div class="div_separador_grande">

@@ -435,7 +435,9 @@
                                         </div>
                                     </form>
                                 </div>
-							<!-- div_orden_produccion -->                                
+                                
+<!-- div_orden_produccion -->
+							                                
                                 <div id="div_orden_produccion">
                                     <form name="orden_produccion" action="" accept-charset="ISO-8859-1">
                                     	<input type="hidden" name="id_orden_produccion" 		value="${ordenProduccion.idOrdenProduccion}"/>
@@ -620,7 +622,9 @@
                                         </c:if>
                                     </form>
                                 </div>
-                            <!-- div_visualizador_partidas -->
+                                
+<!-- div_visualizador_partidas, display: block -->
+                            
                                 <div id="div_visualizador_partidas" style="display:block;">
                                     <div class="div_separador_mediano">
                                         <img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
@@ -666,7 +670,9 @@
                                         </div>
                                     </div>
                                 </div>
-                            <!-- div_partida -->
+                                
+<!-- div_partida, display: none -->
+                            
                                 <div id="div_partida" style="display:none;">
                                     <form name="partida" action="" accept-charset="ISO-8859-1">
                                     	<input type="hidden" name="id_orden_produccion" 	value="${ordenProduccion.idOrdenProduccion}">
@@ -887,7 +893,9 @@
                                         </c:if>
                                     </form>
                                 </div>
-                            <!-- div_visualizador -->
+                                
+<!-- div_visualizador, display: none -->
+                            
                                 <div id="div_visualizador_tipo_trabajo_detalle" style="display:none;">
                                     <div class="div_separador_mediano">
                                     	<img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
@@ -937,7 +945,9 @@
 	                                    </div>
                                     </c:if>
                                 </div>
-							<!-- div_tipo_trabajo_detalle -->                            
+                                
+<!-- div_tipo_trabajo_detalle, display: none -->
+                            
                                 <div id="div_tipo_trabajo_detalle" style="display:none;">
                                     <form name="tipo_trabajo_detalle" action="" accept-charset="ISO-8859-1">
                                     	<input type="hidden" name="id_orden_produccion" 				value="${ordenProduccion.idOrdenProduccion}"/>
@@ -1576,7 +1586,9 @@
                                         </c:if>
                                     </form>
                                 </div>
-							<!-- div_visualizador_pliegos -->
+                                
+<!-- div_visualizador_pliegos, display: none -->
+
                                 <div id="div_visualizador_pliegos" style="display:none;">
                                     <form name="visualizador_pliegos" action="" accept-charset="ISO-8859-1">
                                     	<input type="hidden" name="id_orden_produccion" value="${ordenProduccion.idOrdenProduccion}"/>
@@ -1792,7 +1804,112 @@
                                         <br/>
                                     </form>
                                 </div>
+                                
+<!-- div_descuento_tabulador_precios, display: none -->
+
+								<div id="div_descuento_tabulador_precios" style="display:none;">
+									<div class="div_separador_mediano">
+										<img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
+									</div>
+									<div class="titulo">
+										<font size="5">¿DESEA APLICAR PRECIO POR MILLAR DE IMPRESI&Oacute;N?</font>
+									</div>
+									<form name="descuento" action="" accept-charset="ISO-8859-1">
+										<input type="hidden" name="id_tipo_trabajo_detalle" 	value=""/>
+										<input type="hidden" name="aplica_descuento" 			value=""/>
+										<input type="hidden" name="precio_tabulador" 			value=""/>
+										<input type="hidden" name="id_tipo_precio" 				value=""/>
+										<div class="linea">
+											<div class="casilla">
+												<div class="columna_izquierda">
+													<div class="mitad_columna_izquierda">
+														<div class="columna_completa">
+															<table>
+																<tr>
+																	<td width="65%">
+																		<span style="cursor: pointer;" onclick="document.descuento.chkbx_aplica_descuento.click()">¿Aplica descuento?:</span></td>
+																	<td>
+																		<input type="checkbox"
+																				name="chkbx_aplica_descuento"/>
+																	</td>
+																</tr>
+															</table>
+														</div>
+													</div>
+													<div class="mitad_columna_derecha">
+														<div class="columna_completa">
+															<table>
+																<tr>
+																	<td width="1%">
+																		<input 	type="radio"
+																				name="tipo_descuento"
+																				value="por_tabulador"
+																				checked/>
+																	</td>
+																	<td width="1%">
+																		<span style="cursor: pointer;" onclick="document.getElementsByName('tipo_descuento')[0].click()">Tabulador:</span>
+																	</td>
+																	<td>
+																		<select name="select_precio_tabulador" id="select_precio_tabulador"></select>
+																	</td>
+																</tr>
+															</table>
+														</div>
+													</div>
+												</div>
+												<div class="columna_derecha">
+													<div class="mitad_columna_izquierda">
+														<div class="columna_completa">
+															<table>
+																<tr>
+																	<td width="1%">
+																		<input 	type="radio"
+																				name="tipo_descuento"
+																				value="por_conveniencia"/>
+																	</td>
+																	<td width="1%">
+																		<span style="cursor: pointer;" onclick="document.getElementsByName('tipo_descuento')[1].click()">Conveniencia:</span>
+																	</td>
+																	<td>
+																		<input 	type="text"
+																				class="input"
+																				name="precio_por_conveniencia"
+																				onkeydown="revisaNumero(true, this.value, event, 'null', 'null')"/>
+																	</td>
+																</tr>
+															</table>
+														</div>
+													</div>
+													<div class="mitad_columna_derecha">
+														<div class="columna_completa">
+															<table>
+																<tr>
+																	<td width="41%">Tipo precio:</td>
+																	<td>
+																		<select name="select_tipo_precio">
+																			<c:forEach var="tp" items="${listaTipoPrecio}">
+																				<option value="${tp.value}">${tp.text}</option>
+																			</c:forEach>
+																		</select>
+																	</td>
+																</tr>
+															</table>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="linea" style="text-align: right;">
+											<img id="imgBtnLimpiarDescuentoActivo" 		alt="" style="cursor: pointer;" src="<c:url value="/resources/image/boton_limpiar.jpg"/>" onclick="limpiaCamposDescuento()">
+											<img id="imgBtnLimpiarDescuentoInactivo"	alt="" style="display: none;" 	src="<c:url value="/resources/image/boton_limpiar_des.jpg"/>">
+											<img id="imgBtnAgregarDescuentoActivo" 		alt="" style="cursor: pointer;" src="<c:url value="/resources/image/boton_agregar.jpg"/>"  onclick="ajaxAgregaDescuento()">
+											<img id="imgBtnAgregarDescuentoInactivo" 	alt="" style="display: none;" 	src="<c:url value="/resources/image/boton_agregar_des.jpg"/>">
+										</div>
+									</form>
+								</div>
+                                
 <!-- div_visualizador_costo_extra_detalle, display:none; -->
+
 								<div id="div_visualizador_costo_extra_detalle" style="display:none;">
 	                            	<div class="div_separador_mediano">
 	                                    <img alt="" src="<c:url value="/resources/image/separador_mediano.jpg"/>"/>
@@ -1860,7 +1977,9 @@
 		                                </div>
 	                                </c:if>
 	                            </div>
-	<!-- div_costo_extra_detalle, display:none; -->
+	                            
+<!-- div_costo_extra_detalle, display:none; -->
+	
 								<div id="div_costo_extra_detalle" style="display:none;">
 									<form name="costo_extra_detalle" action="" accept-charset="ISO-8859-1">
 										<input type="hidden" name="id_orden_produccion"		value="${ordenProduccion.idOrdenProduccion}"/>
@@ -1992,8 +2111,10 @@
 			                                </div>
 		                                </c:if>
 	                                </form>
-								</div>  
-							<!-- div_pestania -->
+								</div>
+								  
+<!-- div_pestania, display: none -->
+							
                                 <div id="div_pestania" style="display:none;">
                                     <div class="div_separador_grande">
                                         <img alt="" src="<c:url value="/resources/image/separador_grande.png"/>"/>
@@ -3046,7 +3167,9 @@
                                         </div>
                                     </div>
                                 </div>
-							<!-- div_material_ayuda -->
+                                
+<!-- div_material_ayuda, display: none -->
+							
                                 <div id="div_material_ayuda" style="display:none;">
                                     <form name="material_ayuda" action="" accept-charset="ISO-8859-1">
                                     	<input type="hidden" name="id_material_ayuda_x_partida"	value=""/>
@@ -3171,8 +3294,10 @@
                                         </div>
                                     </form>
                                 </div>
-							<!-- div_cambio_estatus -->
-                                <div id="div_cambio_estatus" style="display:block;">
+                                
+<!-- div_cambio_estatus, display: block -->
+							
+                                <div id="div_cambio_estatus" style="display: block;">
                                 	<div class="div_separador_grande">
                                         <img alt="" src="<c:url value="/resources/image/separador_grande.png"/>"/>
                                     </div>
