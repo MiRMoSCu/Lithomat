@@ -595,6 +595,7 @@ function ajaxAgregaTipoTrabajoDetalle() {
                 			delete option;
                     	});
                     	jsonObject = null;
+                    	document.descuento.precio_tabulador.value = $("#select_precio_tabulador").val();
                     	
                     	
                         // cambia cursor
@@ -653,30 +654,19 @@ function setCamposPliego( idPliego, noPliego, rebases, medianiles, pinzas, hojas
 
 function ajaxAgregaDescuento() {
 	// copia valores
-	document.descuento.aplica_descuento.value = document.descuento.chkbx_aplica_descuento.checked;
-	switch ( document.descuento.tipo_descuento.value ) {
-		case "por_tabulador":
-			document.descuento.precio_tabulador.value = document.descuento.select_precio_tabulador.value;
-			break;
-		case "por_conveniencia":
-			document.descuento.precio_tabulador.value = document.descuento.precio_por_conveniencia.value;
-			break;
-		default:
-			document.descuento.precio_tabulador.value = document.descuento.select_precio_tabulador[0].value;
-			break;
-	}
-	document.descuento.id_tipo_precio.value	= document.descuento.select_tipo_precio.value;
+	document.descuento.aplica_descuento.value 	= document.descuento.chkbx_aplica_descuento.checked;
+	document.descuento.id_tipo_precio.value		= document.descuento.select_tipo_precio.value;
 	// validacion
 	var correcto = true;
 	
 	if ( correcto 
-			&& document.descuento.tipo_descuento.value == "por_conveniencia"
-			&& ( document.descuento.precio_por_conveniencia.value == "" 
-				|| isNaN(document.descuento.precio_por_conveniencia.value)
-				|| parseInt( document.descuento.precio_por_conveniencia.value ) <= 0 ) ) {
+			&& ( document.descuento.precio_tabulador.value == "" 
+				|| isNaN(document.descuento.precio_tabulador.value)
+				|| parseInt( document.descuento.precio_tabulador.value ) <= 0 ) ) {
 		correcto = false;
 		alert("En necesario que el precio por convenciencia sea numero entero mayor que cero");
-		document.descuento.precio_por_conveniencia.select();
+		document.descuento.precio_tabulador.focus();
+		document.descuento.precio_tabulador.select();
 	}
 	
 	if ( correcto && document.descuento.chkbx_aplica_descuento.checked ) {

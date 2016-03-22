@@ -34,6 +34,7 @@ public class TipoTrabajoDetalleDTO implements Serializable {
 	private String nombreMaquina;
 	private String descripcionPlaca;
 	private String descripcionComplejidad;
+	private boolean aplicaDescuento;
 	
 	
 	public int getIdTipoTrabajoDetalle() {
@@ -208,5 +209,11 @@ public class TipoTrabajoDetalleDTO implements Serializable {
 	}
 	public void setDescripcionComplejidad(String descripcionComplejidad) {
 		this.descripcionComplejidad = descripcionComplejidad;
+	}
+	public boolean isAplicaDescuento() {
+		return aplicaDescuento;
+	}
+	public void setAplicaDescuento(boolean aplicaDescuento) {
+		this.aplicaDescuento = aplicaDescuento;
 	}
 }

@@ -61,6 +61,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoComple
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoComprobanteFiscalService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoFormaTrabajoService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoPapelExtendidoService;
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoPrecioService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoTrabajoDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TransporteDetalleService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TransporteService;
@@ -151,6 +152,8 @@ public class VisualizadorController {
 	private DescuentoTabuladorPreciosService descuentoTabuladorPreciosService;
 	@Resource
 	private TabuladorPreciosService tabuladorPreciosService;
+	@Resource
+	private TipoPrecioService tipoPrecioService;
 	
 	
 	/*
@@ -315,6 +318,11 @@ public class VisualizadorController {
 		
 		// lista procesos por seccion
 		Gson gson = new Gson();
+		
+		int[] arregloTipoPrecio = {4};
+		List<ComboSelect> listaTipoPrecio = tipoPrecioService.listaComboSelect(arregloTipoPrecio);
+		model.addAttribute("listaTipoPrecio",listaTipoPrecio);
+		listaTipoPrecio = null;
 		
 		List<ComboSelect> listaProcesoDisenio = procesoDisenioService.listaComboSelect();
 		String jsonListaProcesoDisenio = gson.toJson(listaProcesoDisenio);
@@ -481,9 +489,9 @@ public class VisualizadorController {
 		sb.append("\"" + pliegoService.listaHTMLModificacion(idTipoTrabajoDetalle) + "\"");
 		sb.append(",");
 		sb.append("\"aplica_descuento\":");
-		sb.append(gson.toJson(descuentoTabuladorPreciosService.buscaPorTipoTrabajoDetalle(idTipoTrabajoDetalle)));
+		sb.append(gson.toJson(descuentoTabuladorPreciosService.buscaPorTipoTrabajoDetalleEnDTO(idTipoTrabajoDetalle)));
 		sb.append(",");
-		sb.append("\"lista_tabulador\":");
+		sb.append("\"lista_tabulador_precios\":");
 		sb.append(gson.toJson( tabuladorPreciosService.listaTabuladorDescendiente(tipoTrabajoDetalle.getMaquina().getIdMaquina(), tipoTrabajoDetalle.getTipoComplejidad().getIdTipoComplejidad(), tipoTrabajoDetalle.getPartida().getCantidad() ) ) );
 		sb.append(",");
 		sb.append("\"lista_costo_extra_detalle\":");

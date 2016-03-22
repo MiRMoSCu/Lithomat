@@ -18,6 +18,9 @@
 <c:url value="/pliego/calcula"              				var="urlCalculaPliego"/>
 <c:url value="/pliego/activa_lista"            				var="urlActivaListaPliegos"/>
 <c:url value="/pliego/actualiza"            				var="urlActualizaPliego"/>
+
+<c:url value="/descuento_por_tabulador/actualiza" 			var="urlActualizaDescuento"/>
+
 <c:url value="/costo_extra_detalle/ventana" 				var="urlCostoExtraDetalle"/>
 <c:url value="/costo_extra_detalle/busca_unidad_medida" 	var="urlBuscaUnidadMedidaCostoExtra"/>
 <c:url value="/costo_extra_detalle/agrega_olvidado" 		var="urlAgregaCostoExtraDetalleOlvidado"/>
@@ -65,6 +68,7 @@
         <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_tipo_trabajo_detalle_agrega.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_tipo_trabajo_detalle_modificacion.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_pliego_modificacion.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_descuento_modificacion.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_costo_extra_detalle_agrega.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_costo_extra_detalle_modificacion.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/detalle_nut_disenio_modificacion.js"/>"></script>
@@ -108,6 +112,7 @@
             var urlCalculaPliego            				= "${urlCalculaPliego}";
             var urlActivaListaPliegos						= "${urlActivaListaPliegos}";
             var urlActualizaPliego							= "${urlActualizaPliego}";
+            var urlActualizaDescuento						= "${urlActualizaDescuento}";
             var urlCostoExtraDetalle						= "${urlCostoExtraDetalle}";
             var urlBuscaUnidadMedidaCostoExtra				= "${urlBuscaUnidadMedidaCostoExtra}";
             var urlAgregaCostoExtraDetalleOlvidado			= "${urlAgregaCostoExtraDetalleOlvidado}";
@@ -1815,10 +1820,10 @@
 										<font size="5">¿DESEA APLICAR PRECIO POR MILLAR DE IMPRESI&Oacute;N?</font>
 									</div>
 									<form name="descuento" action="" accept-charset="ISO-8859-1">
-										<input type="hidden" name="id_tipo_trabajo_detalle" 	value=""/>
-										<input type="hidden" name="aplica_descuento" 			value=""/>
-										<input type="hidden" name="precio_tabulador" 			value=""/>
-										<input type="hidden" name="id_tipo_precio" 				value=""/>
+										<input type="hidden" name="id_orden_produccion"				value="${ordenProduccion.idOrdenProduccion}"/>
+										<input type="hidden" name="id_tipo_trabajo_detalle" 		value=""/>
+										<input type="hidden" name="aplica_descuento" 				value=""/>
+										<input type="hidden" name="id_tipo_precio" 					value=""/>
 										<div class="linea">
 											<div class="casilla">
 												<div class="columna_izquierda">
@@ -1829,8 +1834,16 @@
 																	<td width="65%">
 																		<span style="cursor: pointer;" onclick="document.descuento.chkbx_aplica_descuento.click()">¿Aplica descuento?:</span></td>
 																	<td>
-																		<input type="checkbox"
-																				name="chkbx_aplica_descuento"/>
+																		<input	type="text"
+																				class="input"
+																				name="input_aplica_descuento"
+																				style="display: inline;"
+																				value=""
+																				readonly/>
+																		<input 	type="checkbox"
+																				class="input"
+																				name="chkbx_aplica_descuento"
+																				style="display: none;"/>
 																	</td>
 																</tr>
 															</table>
@@ -1840,17 +1853,18 @@
 														<div class="columna_completa">
 															<table>
 																<tr>
-																	<td width="1%">
-																		<input 	type="radio"
-																				name="tipo_descuento"
-																				value="por_tabulador"
-																				checked/>
-																	</td>
-																	<td width="1%">
-																		<span style="cursor: pointer;" onclick="document.getElementsByName('tipo_descuento')[0].click()">Tabulador:</span>
-																	</td>
+																	<td width="1%">Tabulador:</td>
 																	<td>
-																		<select name="select_precio_tabulador" id="select_precio_tabulador"></select>
+																		<input	type="text"
+																				class="input"
+																				name="input_tabulador"
+																				style="display: inline;"
+																				value=""
+																				readonly/>
+																		<select name="select_precio_tabulador" 
+																				id="select_precio_tabulador"  
+																				onchange="document.descuento.precio_tabulador.value = this.value"
+																				style="display: none;"></select>
 																	</td>
 																</tr>
 															</table>
@@ -1862,19 +1876,14 @@
 														<div class="columna_completa">
 															<table>
 																<tr>
-																	<td width="1%">
-																		<input 	type="radio"
-																				name="tipo_descuento"
-																				value="por_conveniencia"/>
-																	</td>
-																	<td width="1%">
-																		<span style="cursor: pointer;" onclick="document.getElementsByName('tipo_descuento')[1].click()">Conveniencia:</span>
-																	</td>
+																	<td width="69%">Precio seleccionado:</td>
 																	<td>
 																		<input 	type="text"
 																				class="input"
-																				name="precio_por_conveniencia"
-																				onkeydown="revisaNumero(true, this.value, event, 'null', 'null')"/>
+																				name="precio_tabulador"
+																				maxlength="5"
+																				onkeydown="revisaNumero(true, this.value, event, 'null', 'null')"
+																				readonly/>
 																	</td>
 																</tr>
 															</table>
@@ -1886,7 +1895,13 @@
 																<tr>
 																	<td width="41%">Tipo precio:</td>
 																	<td>
-																		<select name="select_tipo_precio">
+																		<input type="text"
+																				class="input"
+																				name="tipo_precio"
+																				style="display: inline;"
+																				readonly/>
+																		<select name="select_tipo_precio" id="select_tipo_precio"
+																				style="display: none;">
 																			<c:forEach var="tp" items="${listaTipoPrecio}">
 																				<option value="${tp.value}">${tp.text}</option>
 																			</c:forEach>
@@ -1899,12 +1914,21 @@
 												</div>
 											</div>
 										</div>
-										<div class="linea" style="text-align: right;">
-											<img id="imgBtnLimpiarDescuentoActivo" 		alt="" style="cursor: pointer;" src="<c:url value="/resources/image/boton_limpiar.jpg"/>" onclick="limpiaCamposDescuento()">
-											<img id="imgBtnLimpiarDescuentoInactivo"	alt="" style="display: none;" 	src="<c:url value="/resources/image/boton_limpiar_des.jpg"/>">
-											<img id="imgBtnAgregarDescuentoActivo" 		alt="" style="cursor: pointer;" src="<c:url value="/resources/image/boton_agregar.jpg"/>"  onclick="ajaxAgregaDescuento()">
-											<img id="imgBtnAgregarDescuentoInactivo" 	alt="" style="display: none;" 	src="<c:url value="/resources/image/boton_agregar_des.jpg"/>">
-										</div>
+										<c:if test="${historialEstatus.estatusOrden.idEstatusOrden == estatus_cotizacion}">
+											<div class="linea">
+												<div class="casilla" style="text-align: right;">
+													<div id="div_btn_actualizar_descuento">
+														<img id="imgBtnModificarDescuento" alt="" style="cursor: pointer;" onclick="modificaDescuento()" src="<c:url value="/resources/image/boton_modificar.jpg"/>"/>
+														<span id="imgBtnCancelaModificarDescuento" style="cursor: pointer; display: none;" onclick="cancelaModificarDescuento()">
+															<font color="gray">CANCELAR</font>
+														</span>
+														<span id="imgBtnAceptaModificarDescuento" style="cursor: pointer; display: none;" onclick="aceptaModificarDescuento()">
+															<font color="blue">ACEPTAR</font>
+														</span>
+													</div>
+												</div>
+											</div>
+										</c:if>
 									</form>
 								</div>
                                 

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionOrdenProduccion;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.CombinacionTintas;
-import com.artiffex.lithomat.sistemaweb.businesstier.entity.DescuentoTabuladorPrecios;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.JsonResponse;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Maquina;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.Partida;
@@ -25,10 +24,8 @@ import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoBarniz;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoComplejidad;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPapelExtendido;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPlaca;
-import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoPrecio;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.TipoTrabajoDetalle;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CalificacionService;
-import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.DescuentoTabuladorPreciosService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PartidaService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.PliegoService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TabuladorPreciosService;
@@ -52,8 +49,7 @@ public class TipoTrabajoDetalleController {
 	private TabuladorPreciosService tabuladorPreciosService;
 	@Resource
 	private PartidaService partidaService;
-	@Resource
-	private DescuentoTabuladorPreciosService descuentoTabuladorPreciosService;
+	
 	
 
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
@@ -402,39 +398,5 @@ public class TipoTrabajoDetalleController {
 		
 		return jsonResponse;
 	} // actualizaTipoTrabajoDetalle
-	
-	
-	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
-	@RequestMapping(value = "/agrega_descuento", method = RequestMethod.POST)
-	@ResponseBody
-	public int agregaDescuento(
-			@RequestParam(value = "id_tipo_trabajo_detalle", required = false) Integer idTipoTrabajoDetalle,
-			@RequestParam(value = "aplica_descuento", required = false) boolean aplicaDescuento,
-			@RequestParam(value = "precio_tabulador", required = false) Integer precioTabulador,
-			@RequestParam(value = "id_tipo_precio", required = false) Integer idTipoPrecio
-		) {
-		log.info("/agrega_descuento");
-		
-		DescuentoTabuladorPrecios descuentoTabuladorPrecios = new DescuentoTabuladorPrecios();
-			TipoTrabajoDetalle tipoTrabajoDetalle = new TipoTrabajoDetalle();
-			tipoTrabajoDetalle.setIdTipoTrabajoDetalle(idTipoTrabajoDetalle);
-		descuentoTabuladorPrecios.setTipoTrabajoDetalle(tipoTrabajoDetalle);
-		descuentoTabuladorPrecios.setPrecioTabulador(precioTabulador);
-			TipoPrecio tipoPrecio = new TipoPrecio();
-			tipoPrecio.setIdTipoPrecio(idTipoPrecio);
-		descuentoTabuladorPrecios.setTipoPrecio(tipoPrecio);
-		descuentoTabuladorPrecios.setActivo(true);
-		descuentoTabuladorPreciosService.crea(descuentoTabuladorPrecios);
-		
-		tipoTrabajoDetalle = tipoTrabajoDetalleService.buscaTipoTrabajoDetalle(idTipoTrabajoDetalle);
-		tipoTrabajoDetalle.setAplicaDescuento(true);
-		tipoTrabajoDetalleService.modificaTipoTrabajoDetalle(tipoTrabajoDetalle);
-		
-		tipoPrecio 					= null;
-		tipoTrabajoDetalle 			= null;
-		descuentoTabuladorPrecios 	= null;
-		
-		return 1;
-	}
 	
 }

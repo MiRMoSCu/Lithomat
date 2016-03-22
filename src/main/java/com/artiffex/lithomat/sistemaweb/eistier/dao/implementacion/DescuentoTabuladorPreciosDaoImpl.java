@@ -65,6 +65,27 @@ public class DescuentoTabuladorPreciosDaoImpl implements DescuentoTabuladorPreci
 		return descuentoTabuladorPrecios;
 	}
 	
+	public DescuentoTabuladorPrecios buscaPorTipoTrabajoDetalle(int idTipoTrabajoDetalle) {
+		DescuentoTabuladorPrecios descuentoTabuladorPrecios = null;
+		try {
+			try {
+				sesion = HibernateUtil.getInstance().getCurrentSession();
+			} catch ( HibernateException he ) {
+				sesion = HibernateUtil.getInstance().openSession();
+			}
+			sesion.beginTransaction();
+			Query query = sesion.createQuery("from DescuentoTabuladorPrecios dtp where dtp.tipoTrabajoDetalle.idTipoTrabajoDetalle = :idTipoTrabajoDetalle");
+			query.setParameter("idTipoTrabajoDetalle", idTipoTrabajoDetalle);
+			descuentoTabuladorPrecios = (DescuentoTabuladorPrecios)query.uniqueResult();
+			sesion.getTransaction().commit();
+			query = null;
+		} catch ( Exception e ) {
+			log.error(e.getMessage());
+			sesion.getTransaction().rollback();
+		}
+		return descuentoTabuladorPrecios;
+	}
+	
 	public DescuentoTabuladorPreciosDTO buscaPorQuery(String queryString) {
 		DescuentoTabuladorPreciosDTO descuentoTabuladorPreciosDTO = null;
 		try {
@@ -120,7 +141,7 @@ public class DescuentoTabuladorPreciosDaoImpl implements DescuentoTabuladorPreci
 		}
 		return lista;
 	}
-
+	
 	public float buscaFloatPorQuery(String queryString) {
 		float resultadoFlotante = 0;
 		try {

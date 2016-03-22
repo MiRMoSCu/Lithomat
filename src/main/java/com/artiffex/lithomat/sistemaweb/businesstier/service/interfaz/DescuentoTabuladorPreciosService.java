@@ -9,7 +9,11 @@ public interface DescuentoTabuladorPreciosService {
 	
 	public void modifica(DescuentoTabuladorPrecios descuentoTabuladorPrecios);
 	
-	public DescuentoTabuladorPreciosDTO buscaPorTipoTrabajoDetalle(int idTipoTrabajoDetalle);
+	public DescuentoTabuladorPrecios busca(int idDescuentoTabuladorPrecios);
+	
+	public DescuentoTabuladorPrecios buscaPorTipoTrabajoDetalle(int idTipoTrabajoDetalle);
+	
+	public DescuentoTabuladorPreciosDTO buscaPorTipoTrabajoDetalleEnDTO(int idTipoTrabajoDetalle);
 	
 	public float buscaPrecioPorTipoTrabajoDetalle(int idTipoTrabajoDetalle);
 

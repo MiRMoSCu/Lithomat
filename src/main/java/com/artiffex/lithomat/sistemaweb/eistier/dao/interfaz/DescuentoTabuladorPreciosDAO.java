@@ -11,6 +11,8 @@ public interface DescuentoTabuladorPreciosDAO {
 	
 	public DescuentoTabuladorPrecios busca(int idDescuentoTabuladorPrecios);
 	
+	public DescuentoTabuladorPrecios buscaPorTipoTrabajoDetalle(int idTipoTrabajoDetalle);
+	
 	public DescuentoTabuladorPreciosDTO buscaPorQuery(String queryString);
 		
 	public void modifica(DescuentoTabuladorPrecios descuentoTabuladorPrecios);

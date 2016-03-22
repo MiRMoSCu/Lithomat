@@ -97,6 +97,7 @@ function desactivaBotonesModificarFormPartida() {
 } // desactivaBotonesMoidificaFormPartida
 
 function modificaPartida() {
+	obj_partida.setObjPartida();
 	ocultaBotonesModificarPorSeccion();
 	document.getElementById("div_btn_actualizar_partida").style.display = "inline";
 	activaBotonesModificarFormPartida();

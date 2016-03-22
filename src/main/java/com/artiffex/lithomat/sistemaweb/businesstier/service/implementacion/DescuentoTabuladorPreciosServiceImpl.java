@@ -23,7 +23,15 @@ public class DescuentoTabuladorPreciosServiceImpl implements DescuentoTabuladorP
 		descuentoTabuladorPreciosDAO.modifica(descuentoTabuladorPrecios);
 	}
 	
-	public DescuentoTabuladorPreciosDTO buscaPorTipoTrabajoDetalle(int idTipoTrabajoDetalle) {
+	public DescuentoTabuladorPrecios busca(int idDescuentoTabuladorPrecios) {
+		return descuentoTabuladorPreciosDAO.busca(idDescuentoTabuladorPrecios);
+	}
+
+	public DescuentoTabuladorPrecios buscaPorTipoTrabajoDetalle(int idTipoTrabajoDetalle) {
+		return descuentoTabuladorPreciosDAO.buscaPorTipoTrabajoDetalle(idTipoTrabajoDetalle);
+	}
+	
+	public DescuentoTabuladorPreciosDTO buscaPorTipoTrabajoDetalleEnDTO(int idTipoTrabajoDetalle) {
 		DescuentoTabuladorPreciosDTO dtpDTO = null;
 		StringBuilder sb = new StringBuilder();
 		sb.append(" SELECT ");

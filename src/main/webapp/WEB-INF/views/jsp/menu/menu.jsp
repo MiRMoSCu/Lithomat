@@ -45,7 +45,7 @@
 <!-- SEGURIDAD -->
 <c:url value="/cambio_estatus/ventana"					var="urlVentanaCambioEstatus" />
 <c:url value="/contrasenia/ventana"						var="urlVentanaCambioContrasenia" />
-<c:url value="/descuento/ventana"						var="urlVentanaDescuento" />
+<c:url value="/descuento_general/ventana"				var="urlVentanaDescuento" />
 <c:url value="/perfil/catalogo/lista" 					var="urlPerfil" />
 <c:url value="/perfil_x_usuario/catalogo/lista" 		var="urlPerfilXUsuario" />
 <c:url value="/usuario/catalogo/lista" 					var="urlUsuario" />

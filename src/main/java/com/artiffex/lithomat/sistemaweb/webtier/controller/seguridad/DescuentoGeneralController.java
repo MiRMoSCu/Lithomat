@@ -23,10 +23,10 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.OrdenProdu
 import com.google.gson.Gson;
 
 @Controller
-@RequestMapping("/descuento")
-public class DescuentoController {
+@RequestMapping("/descuento_general")
+public class DescuentoGeneralController {
 	
-	private static final Logger log = Logger.getLogger(DescuentoController.class);
+	private static final Logger log = Logger.getLogger(DescuentoGeneralController.class);
 	
 	@Resource
 	private OrdenProduccionService ordenProduccionService;

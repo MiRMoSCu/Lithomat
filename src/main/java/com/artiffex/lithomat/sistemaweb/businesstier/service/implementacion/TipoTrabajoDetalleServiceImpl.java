@@ -102,6 +102,7 @@ public class TipoTrabajoDetalleServiceImpl implements TipoTrabajoDetalleService 
 		tipoTrabajoDetalleDTO.setNombreMaquina(tipoTrabajoDetalle.getMaquina().getNombre());
 		tipoTrabajoDetalleDTO.setDescripcionPlaca(tipoTrabajoDetalle.getTipoPlaca().getDescripcion());
 		tipoTrabajoDetalleDTO.setDescripcionComplejidad(tipoTrabajoDetalle.getTipoComplejidad().getNombre());
+		tipoTrabajoDetalleDTO.setAplicaDescuento(tipoTrabajoDetalle.isAplicaDescuento());
 		
 		tipoTrabajoDetalle = null;
 		return tipoTrabajoDetalleDTO;

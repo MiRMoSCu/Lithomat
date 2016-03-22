@@ -295,47 +295,67 @@ function buscaTrabajoDetalle( id_tipo_trabajo_detalle ) {
 	        url: urlObtieneTipoTrabajoDetalle,
 	        data: {id_tipo_trabajo_detalle:id_tipo_trabajo_detalle},
 	        success: function( response ) {
-	        	console.log(response);
+	        	//console.log(response);
 	        	// set id_tipo_trabajo_detalle
 	        	document.tipo_trabajo_detalle.id_tipo_trabajo_detalle.value = id_tipo_trabajo_detalle;
 	        	document.visualizador_pliegos.id_tipo_trabajo_detalle.value	= id_tipo_trabajo_detalle;
+	        	document.descuento.id_tipo_trabajo_detalle.value			= id_tipo_trabajo_detalle;
 	        	document.costo_extra_detalle.id_tipo_trabajo_detalle.value 	= id_tipo_trabajo_detalle;
 	        	
-	            var detallePartidaJson = JSON.parse( response.textoJson );
-	            document.tipo_trabajo_detalle.descripcion_partida_detalle.value			= detallePartidaJson.tipo_trabajo_detalle.descripcion;
-	            document.tipo_trabajo_detalle.alto_final.value							= detallePartidaJson.tipo_trabajo_detalle.altoFinal;
-	            document.tipo_trabajo_detalle.ancho_final.value							= detallePartidaJson.tipo_trabajo_detalle.anchoFinal;
-	            document.tipo_trabajo_detalle.alto_extendido.value						= detallePartidaJson.tipo_trabajo_detalle.altoExtendido;
-	            document.tipo_trabajo_detalle.ancho_extendido.value						= detallePartidaJson.tipo_trabajo_detalle.anchoExtendido;
-	            document.tipo_trabajo_detalle.proporciona_papel.value					= detallePartidaJson.tipo_trabajo_detalle.clienteProporcionaPapel==true?"Si":"No";
-	            document.tipo_trabajo_detalle.proporciona_placas.value					= detallePartidaJson.tipo_trabajo_detalle.clienteProporcionaPlacas==true?"Si":"No";
-	            document.tipo_trabajo_detalle.proporciona_tinta_especial.value			= detallePartidaJson.tipo_trabajo_detalle.clienteProporcionaTintaEspecial==true?"Si":"No";
-	            document.tipo_trabajo_detalle.proporciona_barniz.value					= detallePartidaJson.tipo_trabajo_detalle.clienteProporcionaBarniz==true?"Si":"No";
-	            document.tipo_trabajo_detalle.tipo_papel.value							= detallePartidaJson.tipo_trabajo_detalle.descripcionTipoPapelExtendido;
-	            document.tipo_trabajo_detalle.repeticiones_x_pliego.value				= detallePartidaJson.tipo_trabajo_detalle.repeticionesXPliego;
-	            document.tipo_trabajo_detalle.numero_paginas_publicacion.value			= detallePartidaJson.tipo_trabajo_detalle.numeroPaginasPublicacion;
-	            document.tipo_trabajo_detalle.tamanio_pubicacion.value					= detallePartidaJson.tipo_trabajo_detalle.descripcionTamanioPublicacion;
-	            document.tipo_trabajo_detalle.alto_corte_inicial.value					= detallePartidaJson.tipo_trabajo_detalle.altoCorteInicial;
-	            document.tipo_trabajo_detalle.ancho_corte_inicial.value					= detallePartidaJson.tipo_trabajo_detalle.anchoCorteInicial;
-	            document.tipo_trabajo_detalle.frente_combinacion_tintas.value			= detallePartidaJson.tipo_trabajo_detalle.frenteDescripcionNumTintas;
-	            document.tipo_trabajo_detalle.frente_num_tinta_especial.value			= detallePartidaJson.tipo_trabajo_detalle.frenteNumTintaEspecial;
-	            document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.value	= detallePartidaJson.tipo_trabajo_detalle.frenteDescripcionTintaEspecial;
-	            document.tipo_trabajo_detalle.frente_tipo_barniz.value					= detallePartidaJson.tipo_trabajo_detalle.frenteDescripcionTipoBarniz;
-	            document.tipo_trabajo_detalle.vuelta_combinacion_tintas.value			= detallePartidaJson.tipo_trabajo_detalle.vueltaDescripcionNumTintas;
-	            document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value			= detallePartidaJson.tipo_trabajo_detalle.vueltaNumTintaEspecial;
-	            document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.value	= detallePartidaJson.tipo_trabajo_detalle.vueltaDescripcionTintaEspecial;
-	            document.tipo_trabajo_detalle.vuelta_tipo_barniz.value					= detallePartidaJson.tipo_trabajo_detalle.vueltaDescripcionTipoBarniz;
-	            document.tipo_trabajo_detalle.maquina.value								= detallePartidaJson.tipo_trabajo_detalle.nombreMaquina;
-	            document.tipo_trabajo_detalle.tipo_placa.value							= detallePartidaJson.tipo_trabajo_detalle.descripcionPlaca;
-	            document.tipo_trabajo_detalle.tipo_complejidad.value					= detallePartidaJson.tipo_trabajo_detalle.descripcionComplejidad;
+	            var tipoTrabajoDetalleJson = JSON.parse( response.textoJson );
 	            
-	            // modificacion del form descuento
+	            // actualizacion form tipo_trabajo_detalle
+	            document.tipo_trabajo_detalle.descripcion_partida_detalle.value			= tipoTrabajoDetalleJson.tipo_trabajo_detalle.descripcion;
+	            document.tipo_trabajo_detalle.alto_final.value							= tipoTrabajoDetalleJson.tipo_trabajo_detalle.altoFinal;
+	            document.tipo_trabajo_detalle.ancho_final.value							= tipoTrabajoDetalleJson.tipo_trabajo_detalle.anchoFinal;
+	            document.tipo_trabajo_detalle.alto_extendido.value						= tipoTrabajoDetalleJson.tipo_trabajo_detalle.altoExtendido;
+	            document.tipo_trabajo_detalle.ancho_extendido.value						= tipoTrabajoDetalleJson.tipo_trabajo_detalle.anchoExtendido;
+	            document.tipo_trabajo_detalle.proporciona_papel.value					= tipoTrabajoDetalleJson.tipo_trabajo_detalle.clienteProporcionaPapel==true?"Si":"No";
+	            document.tipo_trabajo_detalle.proporciona_placas.value					= tipoTrabajoDetalleJson.tipo_trabajo_detalle.clienteProporcionaPlacas==true?"Si":"No";
+	            document.tipo_trabajo_detalle.proporciona_tinta_especial.value			= tipoTrabajoDetalleJson.tipo_trabajo_detalle.clienteProporcionaTintaEspecial==true?"Si":"No";
+	            document.tipo_trabajo_detalle.proporciona_barniz.value					= tipoTrabajoDetalleJson.tipo_trabajo_detalle.clienteProporcionaBarniz==true?"Si":"No";
+	            document.tipo_trabajo_detalle.tipo_papel.value							= tipoTrabajoDetalleJson.tipo_trabajo_detalle.descripcionTipoPapelExtendido;
+	            document.tipo_trabajo_detalle.repeticiones_x_pliego.value				= tipoTrabajoDetalleJson.tipo_trabajo_detalle.repeticionesXPliego;
+	            document.tipo_trabajo_detalle.numero_paginas_publicacion.value			= tipoTrabajoDetalleJson.tipo_trabajo_detalle.numeroPaginasPublicacion;
+	            document.tipo_trabajo_detalle.tamanio_pubicacion.value					= tipoTrabajoDetalleJson.tipo_trabajo_detalle.descripcionTamanioPublicacion;
+	            document.tipo_trabajo_detalle.alto_corte_inicial.value					= tipoTrabajoDetalleJson.tipo_trabajo_detalle.altoCorteInicial;
+	            document.tipo_trabajo_detalle.ancho_corte_inicial.value					= tipoTrabajoDetalleJson.tipo_trabajo_detalle.anchoCorteInicial;
+	            document.tipo_trabajo_detalle.frente_combinacion_tintas.value			= tipoTrabajoDetalleJson.tipo_trabajo_detalle.frenteDescripcionNumTintas;
+	            document.tipo_trabajo_detalle.frente_num_tinta_especial.value			= tipoTrabajoDetalleJson.tipo_trabajo_detalle.frenteNumTintaEspecial;
+	            document.tipo_trabajo_detalle.frente_descripcion_tinta_especial.value	= tipoTrabajoDetalleJson.tipo_trabajo_detalle.frenteDescripcionTintaEspecial;
+	            document.tipo_trabajo_detalle.frente_tipo_barniz.value					= tipoTrabajoDetalleJson.tipo_trabajo_detalle.frenteDescripcionTipoBarniz;
+	            document.tipo_trabajo_detalle.vuelta_combinacion_tintas.value			= tipoTrabajoDetalleJson.tipo_trabajo_detalle.vueltaDescripcionNumTintas;
+	            document.tipo_trabajo_detalle.vuelta_num_tinta_especial.value			= tipoTrabajoDetalleJson.tipo_trabajo_detalle.vueltaNumTintaEspecial;
+	            document.tipo_trabajo_detalle.vuelta_descripcion_tinta_especial.value	= tipoTrabajoDetalleJson.tipo_trabajo_detalle.vueltaDescripcionTintaEspecial;
+	            document.tipo_trabajo_detalle.vuelta_tipo_barniz.value					= tipoTrabajoDetalleJson.tipo_trabajo_detalle.vueltaDescripcionTipoBarniz;
+	            document.tipo_trabajo_detalle.maquina.value								= tipoTrabajoDetalleJson.tipo_trabajo_detalle.nombreMaquina;
+	            document.tipo_trabajo_detalle.tipo_placa.value							= tipoTrabajoDetalleJson.tipo_trabajo_detalle.descripcionPlaca;
+	            document.tipo_trabajo_detalle.tipo_complejidad.value					= tipoTrabajoDetalleJson.tipo_trabajo_detalle.descripcionComplejidad;
 	            
+	            // actualizacion del form descuento
+	            	// llena el select tabulador precios
+	            $("[name='select_tabulador_precios']").empty();
+	            $.each( tipoTrabajoDetalleJson.lista_tabulador_precios, function(i, item){
+        			var option = document.createElement("option");
+        			option.value = item.value;
+        			option.text	 = item.text;
+        			document.getElementById("select_precio_tabulador").add(option);
+        			delete option;
+            	});
+	            	// llena form descuento
+	            if ( tipoTrabajoDetalleJson.aplica_descuento != null ) {
+		            document.descuento.input_aplica_descuento.value 		= tipoTrabajoDetalleJson.tipo_trabajo_detalle.aplicaDescuento==true?"Si":"No";
+		            document.descuento.precio_tabulador.value 				= tipoTrabajoDetalleJson.aplica_descuento.precioTabulador;
+		            document.descuento.tipo_precio.value 					= tipoTrabajoDetalleJson.aplica_descuento.tipoPrecio;
+	            } else {
+	            	document.descuento.input_aplica_descuento.value 		= "No";
+	            }
 	            
+	            // actualiza listas
+	            document.getElementById("div_tabla_lista_pliegos").innerHTML                    = tipoTrabajoDetalleJson.lista_pliegos;
+	            document.getElementById("div_tabla_costo_extra_tipo_trabajo").innerHTML         = tipoTrabajoDetalleJson.lista_costo_extra_detalle;
 	            
-	            
-	            document.getElementById("div_tabla_lista_pliegos").innerHTML                    = detallePartidaJson.lista_pliegos;
-	            document.getElementById("div_tabla_costo_extra_tipo_trabajo").innerHTML         = detallePartidaJson.lista_costo_extra_detalle;
+	            // muestra divs
 	            document.getElementById("div_tipo_trabajo_detalle").style.display 				= "block";
 	            document.getElementById("div_visualizador_pliegos").style.display				= "block";
 	            document.getElementById("div_descuento_tabulador_precios").style.display 		= "block";
@@ -344,7 +364,7 @@ function buscaTrabajoDetalle( id_tipo_trabajo_detalle ) {
 	            document.getElementById("div_pestania").style.display							= "block";
 	            document.getElementById("div_material_ayuda").style.display						= "block";
 	            
-	            delete detallePartidaJson;
+	            delete tipoTrabajoDetalleJson;
 	            
 	            // GUARDA RESULTADOS TTD EN OBJETO javascript PARA NO OLVIDARLOS
 	            obj_ttd.setObjTTD();
