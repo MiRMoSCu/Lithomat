@@ -10,7 +10,6 @@
 		<link rel="stylesheet" href="<c:url value="/resources/css/master.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/font.css"/>" type="text/css"></link>
 		<link rel="stylesheet" href="<c:url value="/resources/css/cotizacion_ventana_cotizacion_express.css"/>" type="text/css"></link>
-        <script type="text/javascript" src="<c:url value="/resources/js/cotizacion_ventana_cotizacion_express.js"/>"></script>
         <style type="text/css">
         	.columna_izquierda {
 				width: 211px;
@@ -26,7 +25,7 @@
         </style>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/utilidades.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/ventana_cotizacion_express.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/cotizacion_ventana_cotizacion_express.js"/>"></script>
         <script type="text/javascript">
 	     	// inicializacion jquery
 			$(document).ready(function (){});
@@ -39,7 +38,7 @@
                     <div id="div_contenido">
                     	<br/>
                        	<div id="div_cotizacion_express">
-                       		<form name="cotizador" action="" accept-charset="ISO-8859-1">
+                       		<form name="cotizador_express" action="" accept-charset="ISO-8859-1">
                        			<div class="titulo">
 	                        		<font size="5">COTIZACI&Oacute;N EXPRESS: IMPRESI&Oacute;N</font>
 	                        	</div>
@@ -74,7 +73,7 @@
 	                        								<input	type="text"
 	                        										class="input"
 	                        										name="cantidad"
-	                        										value="1"
+	                        										value=""
 	                        										onkeydown="revisaNumero(false, this.value, event, 'buscarNut', null)"/>
 	                        							</td>
 	                        						</tr>
@@ -90,7 +89,7 @@
 	                        								<input	type="text"
 	                        										class="input"
 	                        										name="numero_pliegos"
-	                        										value="2"
+	                        										value=""
 	                        										onkeydown="revisaNumero(true, this.value, event, 'buscarNut', null)"/>
 	                        							</td>
 	                        						</tr>
@@ -107,11 +106,11 @@
 	                        						<tr>
 	                        							<td width="57%">No. Tintas Frente:</td>
 	                        							<td>
-	                        								<input	type="text"
-	                        										class="input"
-	                        										name="frente_numero_tintas"
-	                        										value="3"
-	                        										onkeydown="revisaNumero(false, this.value, event, 'buscarNut', null)"/>
+	                        								<select name="frente_id_combinacion_tintas" id="frente_id_combinacion_tintas">
+	                        									<c:forEach var="ct" items="${listaCombinacionTintas}">
+	                        										<option value="${ct.value}">${ct.text}</option>
+	                        									</c:forEach>
+	                        								</select>
 	                        							</td>
 	                        						</tr>
 	                        					</table>
@@ -123,11 +122,11 @@
 	                        						<tr>
 	                        							<td width="57%">No. Tintas Vuelta:</td>
 	                        							<td>
-	                        								<input	type="text"
-	                        										class="input"
-	                        										name="vuelta_numero_tintas"
-	                        										value="4"
-	                        										onkeydown="revisaNumero(false, this.value, event, 'buscarNut', null)"/>
+	                        								<select name="vuelta_id_combinacion_tintas" id="vuelta_id_combinacion_tintas">
+	                        									<c:forEach var="ct" items="${listaCombinacionTintas}">
+	                        										<option value="${ct.value}">${ct.text}</option>
+	                        									</c:forEach>
+	                        								</select>
 	                        							</td>
 	                        						</tr>
 	                        					</table>
@@ -179,7 +178,7 @@
 	                        						<tr>
 	                        							<td width="45%">Barniz Frente:</td>
 	                        							<td>
-	                        								<select name="frente_id_combinacion_tintas" id="frente_id_oombinacion_tintas">
+	                        								<select name="frente_id_tipo_barniz" id="frente_id_tipo_barniz">
 	                        									<c:forEach var="ct" items="${listaTipoBarniz}">
 	                        										<option value="${ct.value}">${ct.text}</option>
 	                        									</c:forEach>
@@ -195,7 +194,7 @@
 	                        						<tr>
 	                        							<td width="45%">Barniz Vuelta:</td>
 	                        							<td>
-	                        								<select name="vuelta_id_combinacion_tintas" id="vuelta_id_combinacion_tintas">
+	                        								<select name="vuelta_id_tipo_barniz" id="vuelta_id_tipo_barniz">
 	                        									<c:forEach var="ct" items="${listaTipoBarniz}">
 	                        										<option value="${ct.value}">${ct.text}</option>
 	                        									</c:forEach>

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CombinacionTintasService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoBarnizService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoClienteService;
 import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
@@ -26,6 +27,8 @@ public class CotizacionExpressController {
 	@Resource
 	private TipoClienteService tipoClienteService;
 	@Resource
+	private CombinacionTintasService combinacionTintasService;
+	@Resource
 	private TipoBarnizService tipoBarnizService;
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
@@ -36,6 +39,10 @@ public class CotizacionExpressController {
 		List<ComboSelect> listaTipoCliente = tipoClienteService.listaComboSelect();
 		model.addAttribute("listaTipoCliente", listaTipoCliente);
 		listaTipoCliente = null;
+		
+		List<ComboSelect> listaCombinacionTintas = combinacionTintasService.listaComboSelect();
+		model.addAttribute("listaCombinacionTintas", listaCombinacionTintas);
+		listaCombinacionTintas = null;
 		
 		List<ComboSelect> listaTipoBarniz = tipoBarnizService.listaComboSelect();
 		model.addAttribute("listaTipoBarniz", listaTipoBarniz);
