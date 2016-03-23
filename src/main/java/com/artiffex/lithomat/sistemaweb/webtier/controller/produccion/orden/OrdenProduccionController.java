@@ -57,7 +57,6 @@ public class OrdenProduccionController {
 	
 	private static final Logger log = Logger.getLogger(OrdenProduccionController.class);
 	
-	
 	@Resource
 	private UsuarioService usuarioService;
 	@Resource

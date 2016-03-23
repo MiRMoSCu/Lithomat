@@ -42,7 +42,7 @@ public class CambioContraseniaController {
 		model.addAttribute("nombreCompleto", nombreCompleto);
 		usuario = null;
 		
-		return "seguridad/ventana_cambio_contrasenia";
+		return "seguridad/ventana_seguridad_cambio_contrasenia";
 	}
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR","ROLE_PRODUCCION","ROLE_DISENIO","ROLE_PREPRENSA","ROLE_TRANSPORTE","ROLE_PROCESO_EXTERNO","ROLE_ACABADO","ROLE_CLIENTE"})

@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 <!-- PRODUCCION -->
+<c:url value="/cotizacion_express/" 					var="urlCotizacionExpress" />
 <c:url value="/orden_produccion/" 						var="urlOrdenProduccion" />
 <c:url value="/visualizador/" 							var="urlVisualizador" />
 <c:url value="/semaforo/" 								var="urlSemaforo" />
@@ -68,6 +69,7 @@
 	<security:authorize access="hasRole('ROLE_ROOT')">
        	<script type="text/javascript">
        	// *** Produccion
+       		var urlCotizacionExpress			= "${urlCotizacionExpress}";
         	var urlOrdenProduccion 				= "${urlOrdenProduccion}";	
         	var urlVisualizador					= "${urlVisualizador}";
         	var urlCruceInformacion				= "${urlCruceInformacion}";
@@ -121,6 +123,7 @@
 	<security:authorize access="hasRole('ROLE_ADMIN')">
 		<script type="text/javascript">
 		// *** Produccion
+			var urlCotizacionExpress			= "${urlCotizacionExpress}";
         	var urlOrdenProduccion 				= "${urlOrdenProduccion}";	
         	var urlVisualizador					= "${urlVisualizador}";
         	var urlCruceInformacion				= "${urlCruceInformacion}";
@@ -166,6 +169,7 @@
 	<security:authorize access="hasRole('ROLE_COTIZADOR')">
 		<script type="text/javascript">
 		// *** Produccion
+			var urlCotizacionExpress			= "${urlCotizacionExpress}";
         	var urlOrdenProduccion 				= "${urlOrdenProduccion}";	
         	var urlVisualizador					= "${urlVisualizador}";
         // *** Reportes
@@ -227,6 +231,18 @@
             
             function menu( opcion ) {
                 switch( opcion ) {
+                	case 'cotizacion_express':
+                		Shadowbox.open({
+                    		content:urlCotizacionExpress,
+                    		player:'iframe',
+                    		width:600,
+                    		height:730,
+                    		options:{
+                    			modal:true,
+                    			overlayOpacity:0.75
+                    		}
+                    	});
+                		break;
                     case 'orden_produccion':
                         document.forms["opcion_menu"].action = urlOrdenProduccion;
                         document.forms["opcion_menu"].method = "post";
@@ -301,7 +317,7 @@
                     		content:urlFechaPrensistaMaquina,
                     		player:'iframe',
                     		width:1278,
-                    		height:804,
+                    		height:904,
                     		options:{
                     			modal:true,
                     			overlayOpacity:0.75
@@ -570,8 +586,11 @@
                                 			<div class="titulo_menu">
                                 				PRODUCCI&Oacute;N
                                 			</div>
+                                			<div id="div_opcion_cotizacion_express" class="boton_dinamico" onclick="menu('cotizacion_express')">
+                                				<span class="texto_boton">Cotizaci&oacute;n Express</span>                                			
+                                			</div>
 	                                		<div id="div_opcion_orden_produccion" class="boton_dinamico" onclick="menu('orden_produccion');">
-	                              					<span class="texto_boton">Orden Producci&oacute;n</span>
+	                              				<span class="texto_boton">Orden Producci&oacute;n</span>
 	                               			</div>
 	                               			<div id="div_opcion_visualizador" class="boton_dinamico" onclick="menu('visualizador');">
 	                               				<span class="texto_boton">Visualizador</span>
@@ -714,6 +733,9 @@
                                 	<security:authorize access="hasRole('ROLE_ADMIN')">
                                 		<div id="div_pestania_produccion" style="display:block; background-color: transparent;">
                                 			<div class="titulo_menu">PRODUCCI&Oacute;N</div>
+                                			<div id="div_opcion_cotizacion_express" class="boton_dinamico" onclick="menu('cotizacion_express')">
+                                				<span class="texto_boton">Cotizaci&oacute;n Express</span>                                			
+                                			</div>
                                 			<div id="div_opcion_orden_produccion" class="boton_dinamico" onclick="menu('orden_produccion');">
                                					<span class="texto_boton">Orden Producci&oacute;n</span>
                                 			</div>
@@ -834,6 +856,9 @@
                                 	<security:authorize access="hasRole('ROLE_COTIZADOR')">
                                 		<div id="div_pestania_produccion" style="display:block; background-color: transparent;">
                                 			<div class="titulo_menu">PRODUCCI&Oacute;N</div>
+                                			<div id="div_opcion_cotizacion_express" class="boton_dinamico" onclick="menu('cotizacion_express')">
+                                				<span class="texto_boton">Cotizaci&oacute;n Express</span>                                			
+                                			</div>
                                 			<div id="div_opcion_orden_produccion" class="boton_dinamico" onclick="menu('orden_produccion');">
                                					<span class="texto_boton">Orden Producci&oacute;n</span>
                                 			</div>

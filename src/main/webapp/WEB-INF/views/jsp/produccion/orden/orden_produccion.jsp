@@ -1,4 +1,3 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" 	prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" 			prefix="c"%>
@@ -29,6 +28,7 @@
 <c:url value="/offset/modifica"             				var="urlModificaOffset"/>
 <c:url value="/material_ayuda_x_partida/agrega"				var="urlAgregaMaterialAyuda"/>
 <c:url value="/calificacion/produccion"						var="urlCalificacionOrdenProduccion"/>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1"></meta>
@@ -1104,7 +1104,6 @@
                                                                 </td>
                                                                 <td>
                                                                     <input  type="checkbox" 
-                                                                            class="input"
                                                                             name="proporciona_papel"/>
                                                                 </td>
                                                             </tr>
@@ -1120,7 +1119,6 @@
                                                                 </td>
                                                                 <td>
                                                                     <input  type="checkbox" 
-                                                                            class="input"
                                                                             name="proporciona_placas"/>
                                                                 </td>
                                                             </tr>
@@ -1138,7 +1136,6 @@
                                                                 </td>
                                                                 <td>
                                                                     <input  type="checkbox" 
-                                                                            class="input"
                                                                             name="proporciona_tinta_especial"/>
                                                                 </td>
                                                             </tr>
@@ -1154,7 +1151,6 @@
                                                                 </td>
                                                                 <td>
                                                                     <input  type="checkbox" 
-                                                                            class="input"
                                                                             name="proporciona_barniz"/>
                                                                 </td>
                                                             </tr>
@@ -1645,7 +1641,6 @@
 																	<span style="cursor: pointer;" onclick="document.descuento.chkbx_aplica_descuento.click()">¿Aplica descuento?:</span></td>
 																<td>
 																	<input 	type="checkbox"
-																			class="input"
 																			name="chkbx_aplica_descuento"/>
 																</td>
 															</tr>

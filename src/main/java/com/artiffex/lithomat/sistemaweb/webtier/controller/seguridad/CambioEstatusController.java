@@ -52,7 +52,7 @@ public class CambioEstatusController {
 		model.addAttribute("listaEstatusOrden", listaEstatusOrden);
 		listaEstatusOrden = null;
 		
-		return "seguridad/ventana_cambio_estatus";
+		return "seguridad/ventana_seguridad_cambio_estatus";
 	}
 	
 	@Secured({"ROLE_ROOT","ROLE_ADMIN"})

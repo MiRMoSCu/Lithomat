@@ -18,9 +18,7 @@
 <c:url value="/pliego/calcula"              				var="urlCalculaPliego"/>
 <c:url value="/pliego/activa_lista"            				var="urlActivaListaPliegos"/>
 <c:url value="/pliego/actualiza"            				var="urlActualizaPliego"/>
-
 <c:url value="/descuento_por_tabulador/actualiza" 			var="urlActualizaDescuento"/>
-
 <c:url value="/costo_extra_detalle/ventana" 				var="urlCostoExtraDetalle"/>
 <c:url value="/costo_extra_detalle/busca_unidad_medida" 	var="urlBuscaUnidadMedidaCostoExtra"/>
 <c:url value="/costo_extra_detalle/agrega_olvidado" 		var="urlAgregaCostoExtraDetalleOlvidado"/>
@@ -1091,7 +1089,6 @@
                                                                                 value=""
                                                                                 readOnly/>
                                                                         <input 	type="checkbox"
-                                                                        		class="input"
                                                                         		name="checkbox_proporciona_papel"
                                                                         		style="display:none;">
                                                                     </td>
@@ -1112,7 +1109,6 @@
                                                                                 value=""
                                                                                 readOnly/>
                                                                         <input 	type="checkbox"
-                                                                        		class="input"
                                                                         		name="checkbox_proporciona_placas"
                                                                         		style="display:none;">
                                                                     </td>
@@ -1135,7 +1131,6 @@
                                                                                 value=""
                                                                                 readOnly/>
                                                                         <input	type="checkbox"
-                                                                        		class="input"
                                                                         		name="checkbox_proporciona_tinta_especial"
                                                                         		style="display:none;">
                                                                     </td>
@@ -1156,7 +1151,6 @@
                                                                                 value=""
                                                                                 readOnly/>
                                                                         <input	type="checkbox"
-                                                                        		class="input"
                                                                         		name="checkbox_proporciona_barniz"
                                                                         		style="display:none;">
                                                                     </td>
@@ -1841,7 +1835,6 @@
 																				value=""
 																				readonly/>
 																		<input 	type="checkbox"
-																				class="input"
 																				name="chkbx_aplica_descuento"
 																				style="display: none;"/>
 																	</td>

@@ -12,10 +12,10 @@
 		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 		<!-- PERSONALES -->
-		<link rel="stylesheet" href="<c:url value="/resources/css/ventana_cola_impresion.css"/>" type="text/css"></link>
+		<link rel="stylesheet" href="<c:url value="/resources/css/ventana_reporte_cola_impresion.css"/>" type="text/css"></link>
 		<link rel="stylesheet" href="<c:url value="/resources/css/master.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/font.css"/>" type="text/css"></link>
-        <script type="text/javascript" src="<c:url value="/resources/js/ventana_cola_impresion.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/ventana_reporte_cola_impresion.js"/>"></script>
         <script type="text/javascript">
 			// inicializacion jquery
 			$(document).ready(function (){});

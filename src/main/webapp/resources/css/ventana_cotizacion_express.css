@@ -1,0 +1,77 @@
+#div_area {
+    width:528px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 77px;
+}
+
+#div_ancho {
+    width: 528px;
+}
+
+#div_hoja {
+    width: 499px;
+    height: 552px; /* AQUI SE MODIFICA TAMAÑO*/ /*517 original*/
+    float: left;
+    background-color: #fff;
+}
+
+#div_derecha3d {
+    width: 29px;
+    float: left;
+}
+
+#div_fondo_esq_sup {
+    width: 29px;
+    height: 31px;
+    background-image: url('../image/s_esq_sup.png');
+    background-repeat: no-repeat;
+}
+
+#div_fondo_der{
+    width: 29px;
+    height: 521px;	/* div_hoja - 31 */
+    background-image: url('../image/s_der.png');
+    background-repeat: repeat-y;
+}
+
+#div_abajo3d {
+    width: 528px;
+    height: 29px;
+    float: left;
+}
+
+#div_fondo_esq_izq {
+    width: 32px;
+    height: 29px;
+    float: left;
+    background-image: url('../image/s_esq_izq.png');
+}
+
+#div_fondo_abajo {
+    width: 467px;
+    height: 29px;
+    float: left;
+    background-image: url('../image/s_inf.png');
+}
+
+#div_fondo_esq_der {
+    width: 29px;
+    height: 29px;
+    float: left;
+    background-image: url('../image/s_esq_der.png');
+}
+
+/***/
+
+#div_contenido {
+    width: 455px;
+    position: relative;
+    background-color: transparent;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
