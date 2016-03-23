@@ -40,7 +40,7 @@ public class DescuentoGeneralController {
 	@RequestMapping(value = "/ventana", method = RequestMethod.GET)
 	public String ventanaDescuento( Model model ) throws IOException {
 		log.info("/ventana_descuento");
-		return "seguridad/ventana_seguridad_descuento";
+		return "seguridad/ventana_descuento";
 	}
 	
 	@Secured("ROLE_ROOT")

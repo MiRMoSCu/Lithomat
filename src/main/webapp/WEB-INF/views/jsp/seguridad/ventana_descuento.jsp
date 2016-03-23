@@ -11,7 +11,7 @@
 		<title>Descuento</title>
 		<link rel="stylesheet" href="<c:url value="/resources/css/master.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/font.css"/>" type="text/css"></link>
-		<link rel="stylesheet" href="<c:url value="/resources/css/ventana_seguridad_descuento.css"/>" type="text/css"></link>
+		<link rel="stylesheet" href="<c:url value="/resources/css/seguridad_ventana_descuento.css"/>" type="text/css"></link>
         <style type="text/css">
         	.columna_izquierda {
 				width: 211px;
@@ -27,7 +27,7 @@
         </style>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/utilidades.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/ventana_descuento.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/seguridad_ventana_descuento.js"/>"></script>
         <script type="text/javascript">
 	     	// inicializacion jquery
 			$(document).ready(function (){});

@@ -7,7 +7,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Cambio contrae&ntilde;ia</title>
-		<link rel="stylesheet" href="<c:url value="/resources/css/ventana_seguridad_cambio_contrasenia.css"/>" type="text/css"></link>
+		<link rel="stylesheet" href="<c:url value="/resources/css/seguridad_ventana_cambio_contrasenia.css"/>" type="text/css"></link>
 		<link rel="stylesheet" href="<c:url value="/resources/css/master.css"/>" type="text/css"></link>
 	    <link rel="stylesheet" href="<c:url value="/resources/css/font.css"/>" type="text/css"></link>
 	    <style type="text/css">
@@ -26,7 +26,7 @@
 			
         </style>
 	    <script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/ventana_cambio_contrasenia.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/seguridad_ventana_cambio_contrasenia.js"/>"></script>
         <script type="text/javascript">
 	     	// inicializacion jquery
 			$(document).ready(function (){});

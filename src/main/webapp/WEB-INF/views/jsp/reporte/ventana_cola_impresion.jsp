@@ -1,26 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:url value="/reporte/existe_nut"			var="urlExisteNut"/>
-<c:url value="/reporte/orden_produccion"	var="urlExportaReporteOrdenProduccion"/>
+<c:url value="/reporte/cola_impresion"	var="urlExportaReporteColaImpresion"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Reporte Orden Producci&oacute;n</title>
-		<link rel="stylesheet" href="<c:url value="/resources/css/ventana_reporte_orden_produccion.css"/>" type="text/css"></link>
+		<title>Cola Impresi&oacute;n</title>
+		<!-- DATEPICKER -->
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+		<!-- PERSONALES -->
+		<link rel="stylesheet" href="<c:url value="/resources/css/reporte_ventana_cola_impresion.css"/>" type="text/css"></link>
 		<link rel="stylesheet" href="<c:url value="/resources/css/master.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/font.css"/>" type="text/css"></link>
-        <script type="text/javascript" src="<c:url value="/resources/js/jquery-1_9_1.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/utilidades.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/ventana_reporte_orden_produccion.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/reporte_ventana_cola_impresion.js"/>"></script>
         <script type="text/javascript">
 			// inicializacion jquery
 			$(document).ready(function (){});
+			// inicializacion datepicker
+			$(function() {
+				$("[name=fecha_inicial]").datepicker({dateFormat:'yy-mm-dd'});
+				$("[name=fecha_inicial]").datepicker("setDate",new Date());
+				$("[name=fecha_final]").datepicker({dateFormat:'yy-mm-dd'});
+				$("[name=fecha_final]").datepicker("setDate",new Date());
+			});
         </script>
         <script type="text/javascript">
-        	var urlExisteNut						= "${urlExisteNut}";
-        	var urlExportaReporteOrdenProduccion	= "${urlExportaReporteOrdenProduccion}";
+        	var urlExportaReporteColaImpresion = '${urlExportaReporteColaImpresion}';
         </script>
 	</head>
 	<body>
@@ -29,40 +37,20 @@
                 <div id="div_hoja">
                     <div id="div_contenido">
                     	<br/>
-                    	<form name="reporte_orden_produccion" method="post" target="_blank">
-                    		<input type="hidden" name="id_tipo_formato_impresion" value="" />
+                    	<form name="reporte_cola_impresion" method="post">
 	                        <div class="titulo">
-	                        	<font size=5>REPORTE ORDEN PRODUCCI&Oacute;N</font>
+	                        	<font size=5>REPORTE COLA IMPRESI&Oacute;N</font>
 	                        </div>
 	                        <div class="linea">
 	                        	<div class="casilla">
 	                        		<div class="columna_completa">
 	                        			<table>
 	                        				<tr>
-	                        					<td width="1%">NUT:</td>
+	                        					<td width="1%">Estatus:</td>
 	                        					<td>
-	                        						<input	type="text"
-	                        								class="input"
-	                        								name="nut"
-	                        								maxlength="10"
-	                        								onkeydown="revisaNumero(false, this.value, event, 'enviarFormulario', null)"
-	                        								value=""/>
-	                        					</td>
-	                        				</tr>
-	                        			</table>
-	                        		</div>
-	                        	</div>
-	                        </div>
-	                        <div class="linea">
-	                        	<div class="casilla">
-	                        		<div class="columna_completa">
-	                        			<table>
-	                        				<tr>
-	                        					<td width="27%">Opci&oacute;n impresi&oacute;n:</td>
-	                        					<td>
-	                        						<select name="select_tipo_formato_impresion">
-	                        							<c:forEach var="c" items="${listaTipoFormatoImpresion}">
-	                        								<option value="${c.value}">${c.text}</option>
+	                        						<select name="id_estatus_orden">
+	                        							<c:forEach var="eo" items="${listaEstatusOrden}">
+	                        								<option value="${eo.value}">${eo.text}</option>
 	                        							</c:forEach>
 	                        						</select>
 	                        					</td>
@@ -71,8 +59,56 @@
 	                        		</div>
 	                        	</div>
 	                        </div>
-	                        <div style="display: none;">
-	                        	<input type="text" value="" name="bug"/>
+	                        <div class="linea">
+	                        	<div class="casilla">
+	                        		<div class="columna_completa">
+	                        			<table>
+	                        				<tr>
+	                        					<td width="1%">M&aacute;quina:</td>
+	                        					<td>
+	                        						<select name="id_maquina">
+	                        							<c:forEach var="m" items="${listaMaquina}">
+	                        								<option value="${m.value}">${m.text}</option>
+	                        							</c:forEach>
+	                        						</select>
+	                        					</td>
+	                        					<td>
+	                        						¿Todas las m&aacute;quinas?
+	                        					</td>
+	                        					<td>
+	                        						<input 	type="checkbox"
+	                        								name="todas_las_maquinas"/>
+	                        					</td>
+	                        				</tr>
+	                        			</table>
+	                        		</div>
+	                        	</div>
+	                        </div>
+	                        <div class="linea">
+	                        	<div class="casilla">
+	                        		<div class="columna_completa">
+	                        			<table border="0">
+	                        				<tr>
+	                        					<td width="20%">Fecha Inicio:</td>
+	                        					<td>
+	                        						<input 	type="text"
+	                        								class="input"
+	                        								name="fecha_inicial"
+	                        								value=""
+	                        								readonly/>
+	                        					</td>
+	                        					<td width="20%">Fecha Fin:</td>
+	                        					<td>
+	                        						<input	type="text"
+	                        								class="input"
+	                        								name="fecha_final"
+	                        								value=""
+	                        								readonly/>
+	                        					</td>
+	                        				</tr>
+	                        			</table>
+	                        		</div>
+	                        	</div>
 	                        </div>
 	                        <div class="linea">
 	                        	<div class="casilla" style="text-align:right;">

@@ -680,7 +680,7 @@ public class ReporteController {
 		model.addAttribute("listaTipoFormatoImpresion", listaTipoFormatoImpresion);
 		listaTipoFormatoImpresion = null;
 		
-		return "reporte/ventana_reporte_orden_produccion";
+		return "reporte/ventana_orden_produccion";
 	}
 	
 	
@@ -693,7 +693,7 @@ public class ReporteController {
 		model.addAttribute("listaTipoFormatoImpresion", listaTipoFormatoImpresion);
 		listaTipoFormatoImpresion = null;
 		
-		return "reporte/ventana_reporte_cotizacion";
+		return "reporte/ventana_cotizacion";
 	}
 	
 	
@@ -706,7 +706,7 @@ public class ReporteController {
 		model.addAttribute("listaTipoFormatoImpresion", listaTipoFormatoImpresion);
 		listaTipoFormatoImpresion = null;
 		
-		return "reporte/ventana_reporte_nota_remision_factura";
+		return "reporte/ventana_nota_remision_factura";
 	}
 	
 	
@@ -723,7 +723,7 @@ public class ReporteController {
 		model.addAttribute("listaMaquina",listaMaquina);
 		listaMaquina = null;
 		
-		return "reporte/ventana_reporte_cola_impresion";
+		return "reporte/ventana_cola_impresion";
 	}
 
 }

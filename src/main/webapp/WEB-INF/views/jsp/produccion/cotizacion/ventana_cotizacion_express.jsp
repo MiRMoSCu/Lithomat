@@ -9,8 +9,8 @@
 		<title>Cotizaci&oacute;n Express</title>
 		<link rel="stylesheet" href="<c:url value="/resources/css/master.css"/>" type="text/css"></link>
         <link rel="stylesheet" href="<c:url value="/resources/css/font.css"/>" type="text/css"></link>
-		<link rel="stylesheet" href="<c:url value="/resources/css/ventana_cotizacion_express.css"/>" type="text/css"></link>
-        <script type="text/javascript" src="<c:url value="/resources/js/ventana_cotizacion_express.js"/>"></script>
+		<link rel="stylesheet" href="<c:url value="/resources/css/cotizacion_ventana_cotizacion_express.css"/>" type="text/css"></link>
+        <script type="text/javascript" src="<c:url value="/resources/js/cotizacion_ventana_cotizacion_express.js"/>"></script>
         <style type="text/css">
         	.columna_izquierda {
 				width: 211px;
