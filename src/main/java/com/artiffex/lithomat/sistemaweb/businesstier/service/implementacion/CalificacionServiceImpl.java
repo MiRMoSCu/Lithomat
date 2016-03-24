@@ -159,16 +159,16 @@ public class CalificacionServiceImpl implements CalificacionService {
 				for (Pliego pliego : listaPliego) {
 					
 					// hojas requeridas original 
-					int hojasRequeridasOriginal 		= pliego.getHojasRequeridas();
+					int hojasRequeridasOriginal = pliego.getHojasRequeridas();
 					
 					// hojas requeridas redondeo --> para buscar el tabulador de precio correcto
-					int hojasRequeridasRedondeo 		= 0;
+					int hojasRequeridasRedondeo = 0;
 					if ( hojasRequeridasOriginal <= 1000 )
 						hojasRequeridasRedondeo = 1000;
 					else if ( ( hojasRequeridasOriginal % 1000 ) > 300 ) // 300 DEBERIA SER UN PARAMETRO CONFIGURABLE
 						hojasRequeridasRedondeo = ( ( hojasRequeridasOriginal / 1000 ) + 1 ) * 1000;
 					else
-						hojasRequeridasRedondeo = ( hojasRequeridasOriginal / 1000 ) * 1000;
+						hojasRequeridasRedondeo = hojasRequeridasOriginal;
 					
 					// precio_tabulador correspondiente a las hojas requeridas redondeadas
 					float precioUnitarioTabulador = 0;
@@ -499,7 +499,7 @@ public class CalificacionServiceImpl implements CalificacionService {
 					else if ((hojasRequeridasOriginal % 1000) > 300)
 						hojasRequeridasRedondeo = ((hojasRequeridasOriginal / 1000) + 1) * 1000;
 					else
-						hojasRequeridasRedondeo = (hojasRequeridasOriginal / 1000) * 1000;
+						hojasRequeridasRedondeo = hojasRequeridasOriginal;
 					
 					// precio_tabulador correspondiente a las hojas requeridas redondeadas
 					float precioUnitarioTabulador = 0;

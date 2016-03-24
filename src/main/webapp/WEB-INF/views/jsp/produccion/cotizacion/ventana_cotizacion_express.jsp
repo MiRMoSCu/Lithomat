@@ -2,6 +2,8 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" 	prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" 			prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" 	prefix="fn"%>
+<c:url value="/cotizacion_express/calcula"        			var="urlCalculaCotizacion"/>
+<c:url value="/tipo_placa/busca"            				var="urlBuscaTipoPlaca"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -30,8 +32,12 @@
 	     	// inicializacion jquery
 			$(document).ready(function (){});
         </script>
+        <script type="text/javascript">
+        	var urlCalculaCotizacion 	= "${urlCalculaCotizacion}";
+        	var urlBuscaTipoPlaca		= "${urlBuscaTipoPlaca}";
+        </script>
 	</head>
-	<body>
+	<body onload="buscaTipoPlaca(document.cotizador_express.id_maquina)">
 		<div id="div_area">
             <div id="div_ancho">
                 <div id="div_hoja">
@@ -58,6 +64,22 @@
 		                        						</td>
 		                        					</tr>
 		                        				</table>
+	                        				</div>
+	                        			</div>
+	                        			<div class="columna_derecha">
+	                        				<div class="columna_completa">
+	                        					<table>
+	                        						<tr>
+	                        							<td width="1%">M&aacute;quina:</td>
+	                        							<td>
+	                        								<select name="id_maquina" id="id_maquina" onchange="buscaTipoPlaca(this)">
+		                        								<c:forEach var="m" items="${listaMaquina}">
+		                        									<option value="${m.value}">${m.text}</option>
+		                        								</c:forEach>
+		                        							</select>
+	                        							</td>
+	                        						</tr>
+	                        					</table>
 	                        				</div>
 	                        			</div>
 	                        		</div>
@@ -208,11 +230,25 @@
 	                        	</div>
 	                        	<div class="linea">
 	                        		<div class="casilla">
+	                        			<div class="columna_izquierda">
+	                        				<div class="columna_completa">
+	                        					<table>
+	                        						<tr>
+	                        							<td width="1%">Placa:</td>
+	                        							<td>
+	                        								<select name="id_tipo_placa" id="id_tipo_placa"></select>
+	                        							</td>
+	                        						</tr>
+	                        					</table>
+	                        				</div>
+	                        			</div>
 	                        			<div class="columna_derecha">
 	                        				<div class="columna_completa">
 	                        					<table>
 	                        						<tr>
-	                        							<td width="78%">¿Vuelta mismas placas?:</td>
+	                        							<td width="78%">
+	                        								<span style="cursor:pointer;" onclick="document.cotizador_express.vuelta_mismas_placas.click()">¿Vuelta mismas placas?:</span>
+	                        							</td>
 	                        							<td>
 	                        								<input	type="checkbox"
 	                        										name="vuelta_mismas_placas"/>
@@ -246,13 +282,12 @@
 	                        				<div class="columna_completa">
 	                        					<table>
 		                        					<tr>
-		                        						<td width="43%">P. Unit. Tinta:</td>
+		                        						<td width="1%">Tinta:</td>
 		                        						<td>
 		                        							<input	type="text"
 		                        									class="input"
-		                        									style="text-align: right;"
-		                        									name="tinta_precio_unitario"
-		                        									value="$ 0.00"
+		                        									name="tinta_descripcion"
+		                        									value=""
 		                        									readonly/>
 		                        						</td>
 		                        					</tr>
@@ -268,7 +303,7 @@
 	                        								<input	type="text"
 		                        									class="input"
 		                        									style="text-align: right;"
-		                        									name="tinta_precio_total"
+		                        									name="tinta_coste_total"
 		                        									value="$ 0.00"
 		                        									readonly/>
 	                        							</td>
@@ -284,13 +319,12 @@
 	                        				<div class="columna_completa">
 	                        					<table>
 		                        					<tr>
-		                        						<td width="57%">P. Unit. Tinta Esp:</td>
+		                        						<td width="1%">TintaEsp:</td>
 		                        						<td>
 		                        							<input	type="text"
 		                        									class="input"
-		                        									style="text-align: right;"
-		                        									name="tinta_especial_precio_unitario"
-		                        									value="$ 0.00"
+		                        									name="tinta_especial_descripcion"
+		                        									value=""
 		                        									readonly/>
 		                        						</td>
 		                        					</tr>
@@ -306,7 +340,7 @@
 	                        								<input	type="text"
 		                        									class="input"
 		                        									style="text-align: right;"
-		                        									name="tinta_especial_precio_total"
+		                        									name="tinta_especial_coste_total"
 		                        									value="$ 0.00"
 		                        									readonly/>
 	                        							</td>
@@ -322,13 +356,12 @@
 	                        				<div class="columna_completa">
 	                        					<table>
 		                        					<tr>
-		                        						<td width="48%">P. Unit. Barniz:</td>
+		                        						<td width="1%">Barniz:</td>
 		                        						<td>
 		                        							<input	type="text"
 		                        									class="input"
-		                        									style="text-align: right;"
-		                        									name="barniz_precio_unitario"
-		                        									value="$ 0.00"
+		                        									name="barniz_descripcion"
+		                        									value=""
 		                        									readonly/>
 		                        						</td>
 		                        					</tr>
@@ -344,7 +377,7 @@
 	                        								<input	type="text"
 		                        									class="input"
 		                        									style="text-align: right;"
-		                        									name="barniz_precio_total"
+		                        									name="barniz_coste_total"
 		                        									value="$ 0.00"
 		                        									readonly/>
 	                        							</td>
@@ -360,13 +393,12 @@
 	                        				<div class="columna_completa">
 	                        					<table>
 		                        					<tr>
-		                        						<td width="50%">P. Unit. Placas:</td>
+		                        						<td width="1%">Placas:</td>
 		                        						<td>
 		                        							<input	type="text"
 		                        									class="input"
-		                        									style="text-align: right;"
-		                        									name="placas_precio_unitario"
-		                        									value="$ 0.00"
+		                        									name="placas_descripcion"
+		                        									value=""
 		                        									readonly/>
 		                        						</td>
 		                        					</tr>
@@ -382,7 +414,7 @@
 	                        								<input	type="text"
 		                        									class="input"
 		                        									style="text-align: right;"
-		                        									name="placas_precio_total"
+		                        									name="placas_coste_total"
 		                        									value="$ 0.00"
 		                        									readonly/>
 	                        							</td>
@@ -403,7 +435,7 @@
 	                        								<input	type="text"
 		                        									class="input"
 		                        									style="text-align: right;"
-		                        									name="coste_total"
+		                        									name="cotizacion_coste_total"
 		                        									value="$ 0.00"
 		                        									readonly/>
 	                        							</td>
