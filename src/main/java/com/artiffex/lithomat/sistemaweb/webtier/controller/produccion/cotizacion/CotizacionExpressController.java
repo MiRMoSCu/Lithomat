@@ -113,18 +113,41 @@ public class CotizacionExpressController {
 		int numeroPlacas = 0;
 		
 		// TINTA
+		int tintaNumEntMaq = 0;
 		CombinacionTintas frenteCombinacionTintas = combinacionTintasService.buscaCombinacionTintas(frenteIdCombinacionTintas);
-		int frenteTintaEntradasMaquina = frenteCombinacionTintas.getNumTintas();
-		numeroPlacas += frenteTintaEntradasMaquina;
-		frenteCombinacionTintas = null;
-		
 		CombinacionTintas vueltaCombinacionTintas = combinacionTintasService.buscaCombinacionTintas(vueltaIdCombinacionTintas);
-		int vueltaTintaEntradasMaquina = vueltaCombinacionTintas.getNumTintas();
-		if ( !vueltaMismasPlacas )
+		if ( vueltaMismasPlacas ) {
+			String descripcionTintaFrente = frenteCombinacionTintas.getDescripcion();
+			String descripcionTintaVuelta = vueltaCombinacionTintas.getDescripcion();
+			StringBuilder cadenaFinal = new StringBuilder();
+			if ( frenteCombinacionTintas.getNumTintas() > 0 ) 
+				for ( int i = 0; i < descripcionTintaFrente.length(); i++ ) { 
+					try {
+						cadenaFinal.append(descripcionTintaFrente.charAt(i));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			if ( vueltaCombinacionTintas.getNumTintas() > 0 ) 
+				for ( int i = 0; i < descripcionTintaVuelta.length(); i++ ) { 
+					try {
+						if ( cadenaFinal.toString().indexOf(descripcionTintaVuelta.charAt(i)) == -1 )
+							cadenaFinal.append(descripcionTintaVuelta.charAt(i));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			tintaNumEntMaq = descripcionTintaVuelta.length();
+			numeroPlacas = descripcionTintaVuelta.length();
+		} else {
+			int frenteTintaEntradasMaquina = frenteCombinacionTintas.getNumTintas();
+			int vueltaTintaEntradasMaquina = vueltaCombinacionTintas.getNumTintas();
+			tintaNumEntMaq = frenteTintaEntradasMaquina + vueltaTintaEntradasMaquina;
+			numeroPlacas += frenteTintaEntradasMaquina;
 			numeroPlacas += vueltaTintaEntradasMaquina;
+		}
+		frenteCombinacionTintas = null;
 		vueltaCombinacionTintas = null;
-		
-		int tintaNumEntMaq = frenteTintaEntradasMaquina + vueltaTintaEntradasMaquina;
 		float tintaPrecioUnitario = precioUnitarioTabulador;
 		float tintaCosteTotal = numeroPliegos * cantidadRedondeada * tintaNumEntMaq * tintaPrecioUnitario;
 		
@@ -144,22 +167,32 @@ public class CotizacionExpressController {
 		// BARNIZ
 		TipoBarniz frenteTipoBarniz = tipoBarnizService.buscaTipoBarniz(frenteIdTipoBarniz);
 		int frenteBarnizNumEnt = frenteTipoBarniz.getNumEntradasMaquina();
-		numeroPlacas += frenteTipoBarniz.getNumPlacas();
 		float frenteBarnizPrecioUnitario = precioUnitarioTabulador * ( 1 + (frenteTipoBarniz.getPrecio() / frenteTipoBarniz.getTipoPrecio().getFactorDivisor() ) );
 		float frenteBarnizCosteTotal = numeroPliegos * cantidadRedondeada * frenteBarnizNumEnt * frenteBarnizPrecioUnitario;
-		frenteTipoBarniz = null;
 		
 		cotizacionCosteTotal += frenteBarnizCosteTotal;
 		
 		TipoBarniz vueltaTipoBarniz = tipoBarnizService.buscaTipoBarniz(vueltaIdTipoBarniz);
 		int vueltaBarnizNumEnt = vueltaTipoBarniz.getNumEntradasMaquina();
-		if ( !vueltaMismasPlacas )
-			numeroPlacas += vueltaTipoBarniz.getNumPlacas();
 		float vueltaBarnizPrecioUnitario = precioUnitarioTabulador * ( 1 + (vueltaTipoBarniz.getPrecio() / vueltaTipoBarniz.getTipoPrecio().getFactorDivisor() ) );
 		float vueltaBarnizCosteTotal = numeroPliegos * cantidadRedondeada * vueltaBarnizNumEnt* vueltaBarnizPrecioUnitario;
-		vueltaTipoBarniz = null;
 		
 		cotizacionCosteTotal += vueltaBarnizCosteTotal;
+		
+		if ( vueltaMismasPlacas ) {
+			if ( frenteTipoBarniz.getIdTipoBarniz() == vueltaTipoBarniz.getIdTipoBarniz() )
+				numeroPlacas += frenteTipoBarniz.getNumPlacas();
+			else if ( frenteTipoBarniz.getNumPlacas() > 0 )
+				numeroPlacas += frenteTipoBarniz.getNumPlacas();
+			else if ( vueltaTipoBarniz.getNumPlacas() > 0 )
+				numeroPlacas += vueltaTipoBarniz.getNumPlacas();
+		} else {
+			numeroPlacas += frenteTipoBarniz.getNumPlacas();
+			numeroPlacas += vueltaTipoBarniz.getNumPlacas();
+		}
+		
+		frenteTipoBarniz = null;
+		vueltaTipoBarniz = null;
 		
 		// PLACAS
 		TipoPlaca tipoPlaca = tipoPlacaService.buscaTipoPlaca(idTipoPlaca);

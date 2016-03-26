@@ -253,12 +253,24 @@ public class PliegoServiceImpl implements PliegoService {
 					
 					//System.out.println( cadenaFinal );
 					
-					// FRENTE
+					// TRATAMIENTO DE FRENTE Y VUELTA AL MISMO TIEMPO
+						// tinta
 					int fteVtaNumEntMaqTinta 			= cadenaFinal.length();
-					int fteVtaNumEntMaqTintaEspecial	= (tipoTrabajoDetalle.getFrenteNumTintaEspecial() + tipoTrabajoDetalle.getVueltaNumTintaEspecial());
+						// tinta especial
+					int fteVtaNumEntMaqTintaEspecial	= 0;
+					if ( tipoTrabajoDetalle.getFrenteDescripcionTintaEspecial().trim().equalsIgnoreCase(tipoTrabajoDetalle.getVueltaDescripcionTintaEspecial().trim() ) )
+						fteVtaNumEntMaqTintaEspecial 	= tipoTrabajoDetalle.getFrenteNumTintaEspecial();
+					else 
+						fteVtaNumEntMaqTintaEspecial	= (tipoTrabajoDetalle.getFrenteNumTintaEspecial() + tipoTrabajoDetalle.getVueltaNumTintaEspecial());
+						// barniz
 					int fteVtaNumPlacasBarniz			= 0;
-					if( tipoTrabajoDetalle.getFrenteTipoBarniz().getNumPlacas() > 0 || tipoTrabajoDetalle.getVueltaTipoBarniz().getNumPlacas() > 0 )
-						fteVtaNumPlacasBarniz 			= 1;
+					if ( tipoTrabajoDetalle.getFrenteTipoBarniz().getIdTipoBarniz() == tipoTrabajoDetalle.getVueltaTipoBarniz().getIdTipoBarniz() )
+						fteVtaNumPlacasBarniz 			= tipoTrabajoDetalle.getFrenteTipoBarniz().getNumPlacas();
+					else if ( tipoTrabajoDetalle.getFrenteTipoBarniz().getNumPlacas() > 0 )
+						fteVtaNumPlacasBarniz			= tipoTrabajoDetalle.getFrenteTipoBarniz().getNumPlacas();
+					else if( tipoTrabajoDetalle.getVueltaTipoBarniz().getNumPlacas() > 0 )
+						fteVtaNumPlacasBarniz			= tipoTrabajoDetalle.getVueltaTipoBarniz().getNumPlacas();
+						// placas
 					int fteVtaNumPlacas 				= fteVtaNumEntMaqTinta + fteVtaNumEntMaqTintaEspecial + fteVtaNumPlacasBarniz;
 
 					pliegoInsert.setFrenteNumEntradasMaquinaTinta(cadenaFinal.length());
