@@ -636,8 +636,8 @@ function revisaCierreVentanaModal() {
     if( cerradoOKVentanaListaPliegos ) {
         document.getElementById("div_visualizador_pliegos").style.display       		= "block";
         document.getElementById("div_descuento_tabulador_precios").style.display 		= "block";
-        document.getElementById("div_costo_extra_detalle").style.display 				= "block";
         document.getElementById("div_visualizador_costo_extra_detalle").style.display 	= "block";
+        document.getElementById("div_costo_extra_detalle").style.display 				= "block";
         document.getElementById("div_nuevo_tipo_trabajo_detalle").style.display 		= "block";
     } else {
         // la ventana no se cerro con el boton agregar
@@ -1569,6 +1569,7 @@ function preparaNuevoTipoTrabajoDetalle() {
     limpiaFormCostoExtraDetalle();
     // oculta divs no necesarios
     document.getElementById("div_visualizador_pliegos").style.display       		= "none";
+    document.getElementById("div_descuento_tabulador_precios").style.display 		= "none";
     document.getElementById("div_visualizador_costo_extra_detalle").style.display 	= "none";
     document.getElementById("div_costo_extra_detalle").style.display       			= "none";
     document.getElementById("div_nuevo_tipo_trabajo_detalle").style.display 		= "none";
@@ -1642,6 +1643,7 @@ function preparaNuevaPartida() {
     document.getElementById("div_visualizador_tipo_trabajo_detalle").style.display  = "none";
     document.getElementById("div_tipo_trabajo_detalle").style.display               = "none";
     document.getElementById("div_visualizador_pliegos").style.display               = "none";
+    document.getElementById("div_descuento_tabulador_precios").style.display 		= "none";
     document.getElementById("div_visualizador_costo_extra_detalle").style.display  	= "none";
     document.getElementById("div_costo_extra_detalle").style.display              	= "none";
     document.getElementById("div_pestania").style.display                           = "none";
