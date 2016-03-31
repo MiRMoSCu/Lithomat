@@ -6,10 +6,12 @@ public class CotizadorExpressDTO implements Serializable {
 
 	private static final long serialVersionUID = 7379811967908856425L;
 	
+	private String papelDescripcion;
 	private String tintaDescripcion;
 	private String tintaEspecialDescripcion;
 	private String barnizDescripcion;
 	private String placasDescripcion;
+	private float papelCosteTotal;
 	private float tintaCosteTotal;
 	private float tintaEspecialCosteTotal;
 	private float barnizCosteTotal;
@@ -17,6 +19,12 @@ public class CotizadorExpressDTO implements Serializable {
 	private float cotizacionCosteTotal;
 	
 	
+	public String getPapelDescripcion() {
+		return papelDescripcion;
+	}
+	public void setPapelDescripcion(String papelDescripcion) {
+		this.papelDescripcion = papelDescripcion;
+	}
 	public String getTintaDescripcion() {
 		return tintaDescripcion;
 	}
@@ -40,6 +48,12 @@ public class CotizadorExpressDTO implements Serializable {
 	}
 	public void setPlacasDescripcion(String placasDescripcion) {
 		this.placasDescripcion = placasDescripcion;
+	}
+	public float getPapelCosteTotal() {
+		return papelCosteTotal;
+	}
+	public void setPapelCosteTotal(float papelCosteTotal) {
+		this.papelCosteTotal = papelCosteTotal;
 	}
 	public float getTintaCosteTotal() {
 		return tintaCosteTotal;

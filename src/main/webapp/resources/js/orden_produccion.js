@@ -5,9 +5,9 @@
 $(document).ready(function () {
 
     // inicializacion
-    $("#div_especificaciones_papel_tipo_flyer").addClass("activo");
-    $("#div_especificaciones_papel_tipo_revista").hide();
-    $("#div_especificaciones_papel_tipo_otro").hide();
+    //$("#div_especificaciones_papel_tipo_flyer").addClass("activo");
+    //$("#div_especificaciones_papel_tipo_revista").hide();
+    //$("#div_especificaciones_papel_tipo_otro").hide();
 
     // listener radio boton
     var radioBotonAnterior = $("input[type='radio'][name='tipo_trabajo']:checked").val();
@@ -18,27 +18,25 @@ $(document).ready(function () {
         //alert( divActivo.parent().size() ); // busca dentro del objeto DOM
         if (radioBotonAnterior != radioBotonActual) {
         	if ($("input[type=radio][name='tipo_trabajo']:checked").val() == "1") {
-                $("#div_especificaciones_papel_tipo_flyer").addClass("activo");
-                $("#div_especificaciones_papel_tipo_flyer").slideDown("slow");
-                radioBotonAnterior = $("input[type=radio][name='tipo_trabajo']:checked").val();
+                //$("#div_especificaciones_papel_tipo_flyer").addClass("activo");
+                //$("#div_especificaciones_papel_tipo_flyer").slideDown("slow");
                 document.getElementById("numero_paginas_publicacion").style.display = "none";
                 document.getElementById("tamanio_publicacion").style.display        = "none";
                 document.getElementById("repeticiones_flyer").style.display         = "block";
             } else if ($("input[type=radio][name='tipo_trabajo']:checked").val() == "2") {
-                $("#div_especificaciones_papel_tipo_revista").addClass("activo");
-                $("#div_especificaciones_papel_tipo_revista").slideDown("slow");
-                radioBotonAnterior = $("input[type=radio][name='tipo_trabajo']:checked").val();
+                //$("#div_especificaciones_papel_tipo_revista").addClass("activo");
+                //$("#div_especificaciones_papel_tipo_revista").slideDown("slow");
                 document.getElementById("repeticiones_flyer").style.display         = "none";
                 document.getElementById("numero_paginas_publicacion").style.display = "block";
                 document.getElementById("tamanio_publicacion").style.display        = "block";
             } else if ($("input[type=radio][name='tipo_trabajo']:checked").val() == "3") {
-                $("#div_especificaciones_papel_tipo_otro").addClass("activo");
-                $("#div_especificaciones_papel_tipo_otro").slideDown("slow");
-                radioBotonAnterior = $("input[type=radio][name='tipo_trabajo']:checked").val();
+                //$("#div_especificaciones_papel_tipo_otro").addClass("activo");
+                //$("#div_especificaciones_papel_tipo_otro").slideDown("slow");
                 document.getElementById("repeticiones_flyer").style.display         = "none";
                 document.getElementById("numero_paginas_publicacion").style.display = "none";
                 document.getElementById("tamanio_publicacion").style.display        = "none";
             }
+        	radioBotonAnterior = $("input[type=radio][name='tipo_trabajo']:checked").val();
         }
     });
 

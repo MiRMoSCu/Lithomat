@@ -236,7 +236,7 @@
                     		content:urlCotizacionExpress,
                     		player:'iframe',
                     		width:600,
-                    		height:730,
+                    		height:870,
                     		options:{
                     			modal:true,
                     			overlayOpacity:0.75

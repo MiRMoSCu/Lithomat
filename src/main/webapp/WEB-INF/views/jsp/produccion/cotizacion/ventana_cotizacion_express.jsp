@@ -30,7 +30,28 @@
         <script type="text/javascript" src="<c:url value="/resources/js/cotizacion_ventana_cotizacion_express.js"/>"></script>
         <script type="text/javascript">
 	     	// inicializacion jquery
-			$(document).ready(function (){});
+			$(document).ready(function () {
+				var radioBotonAnterior = $("input[type='radio'][name='id_tipo_trabajo']:checked").val();
+				$(":radio[name='id_tipo_trabajo']").click(function(event) {
+					var radioBotonActual = event.currentTarget.value;
+					if( radioBotonActual != radioBotonAnterior ) {
+						if ($("input[type=radio][name='id_tipo_trabajo']:checked").val() == "1") {
+							document.getElementById("div_tipo_trabajo_flyer").style.display = "inline";
+							document.getElementById("div_tipo_trabajo_revista").style.display = "none";
+							document.getElementById("div_tipo_trabajo_otro").style.display = "none";
+						} else if ($("input[type=radio][name='id_tipo_trabajo']:checked").val() == "2") {
+							document.getElementById("div_tipo_trabajo_flyer").style.display = "none";
+							document.getElementById("div_tipo_trabajo_revista").style.display = "inline";
+							document.getElementById("div_tipo_trabajo_otro").style.display = "none";
+						} else if ($("input[type=radio][name='id_tipo_trabajo']:checked").val() == "3") {
+							document.getElementById("div_tipo_trabajo_flyer").style.display = "none";
+							document.getElementById("div_tipo_trabajo_revista").style.display = "none";
+							document.getElementById("div_tipo_trabajo_otro").style.display = "inline";
+						}
+		        		radioBotonAnterior = $("input[type='radio'][name='id_tipo_trabajo']:checked").val();
+					}
+	        	});
+			});
         </script>
         <script type="text/javascript">
         	var urlCalculaCotizacion 	= "${urlCalculaCotizacion}";
@@ -70,13 +91,13 @@
 	                        				<div class="columna_completa">
 	                        					<table>
 	                        						<tr>
-	                        							<td width="1%">M&aacute;quina:</td>
+	                        							<td width="1%">Cantidad:</td>
 	                        							<td>
-	                        								<select name="id_maquina" id="id_maquina" onchange="buscaTipoPlaca(this)">
-		                        								<c:forEach var="m" items="${listaMaquina}">
-		                        									<option value="${m.value}">${m.text}</option>
-		                        								</c:forEach>
-		                        							</select>
+	                        								<input	type="text"
+	                        										class="input"
+	                        										name="cantidad"
+	                        										value=""
+	                        										onkeydown="revisaNumero(false, this.value, event, null, null)"/>
 	                        							</td>
 	                        						</tr>
 	                        					</table>
@@ -86,37 +107,176 @@
 	                        	</div>
 	                        	<div class="linea">
 	                        		<div class="casilla">
-	                        			<div class="columna_izquierda">
-	                        				<div class="columna_completa">
-	                        					<table>
-	                        						<tr>
-	                        							<td width="1%">Cantidad:</td>
-	                        							<td>
-	                        								<input	type="text"
-	                        										class="input"
-	                        										name="cantidad"
-	                        										value=""
-	                        										onkeydown="revisaNumero(false, this.value, event, 'buscarNut', null)"/>
-	                        							</td>
-	                        						</tr>
-	                        					</table>
-	                        				</div>
+	                        			<div class="columna_completa">
+	                        				<table>
+	                        					<tr>
+	                        						<td width="33%">
+	                        							<div style=" width: 78%; margin-left: auto; margin-right: auto;">
+	                        								<table>
+		                        								<tr>
+		                        									<td width="1%">
+		                        										<input type="radio" name="id_tipo_trabajo" value="1" checked/>
+		                        									</td>
+		                        									<td>
+		                        										<span style="cursor: pointer;" onclick="document.getElementsByName('id_tipo_trabajo')[0].click()">Flyer/P&oacute;ster</span>
+		                        									</td>
+		                        								</tr>
+		                        							</table>
+	                        							</div>
+	                        						</td>
+	                        						<td width="33%">
+	                        							<div style="width: 80%; margin-left: auto; margin-right: auto;">
+	                        								<table>
+		                        								<tr>
+		                        									<td width="1%">
+		                        										<input type="radio" name="id_tipo_trabajo" value="2"/>
+		                        									</td>
+		                        									<td>
+		                        										<span style="cursor: pointer;" onclick="document.getElementsByName('id_tipo_trabajo')[1].click()">Revista/Libro</span>
+		                        									</td>
+		                        								</tr>
+		                        							</table>
+	                        							</div>
+	                        						</td>
+	                        						<td width="33%">
+	                        							<div style="width: 45%; margin-left: auto; margin-right: auto;">
+	                        								<table>
+		                        								<tr>
+		                        									<td width="1%">
+		                        										<input type="radio" name="id_tipo_trabajo" value="3"/>
+		                        									</td>
+		                        									<td>
+		                        										<span style="cursor: pointer;" onclick="document.getElementsByName('id_tipo_trabajo')[2].click()">Otro</span>
+		                        									</td>
+		                        								</tr>
+		                        							</table>
+	                        							</div>
+	                        						</td>
+	                        					</tr>
+	                        				</table>
 	                        			</div>
-	                        			<div class="columna_derecha">
-	                        				<div class="columna_completa">
-	                        					<table>
-	                        						<tr>
-	                        							<td width="40%">No. Pliegos:</td>
-	                        							<td>
-	                        								<input	type="text"
-	                        										class="input"
-	                        										name="numero_pliegos"
-	                        										value=""
-	                        										onkeydown="revisaNumero(true, this.value, event, 'buscarNut', null)"/>
-	                        							</td>
-	                        						</tr>
-	                        					</table>
-	                        				</div>
+	                        		</div>
+	                        	</div>
+	                        	<div id="div_tipo_trabajo_flyer" style="display: inline;">
+	                        		<div class="linea">
+			                        	<div class="casilla">
+			                        		<div class="columna_izquierda">
+			                        			<div class="columna_completa">
+			                        				<table>
+			                        					<tr>
+			                        						<td width="1%">Repeticiones:</td>
+			                        						<td>
+			                        							<input	type="text"
+			                        									class="input"
+			                        									name="repeticiones_x_pliego"
+			                        									value="0"
+			                        									onkeydown="revisaNumero(false, this.value, event, null, null)"/>
+			                        						</td>
+			                        					</tr>
+			                        				</table>
+			                        			</div>
+			                        		</div>
+			                        		<div class="columna_derecha">
+			                        			<div class="columna_completa"></div>
+			                        		</div>
+			                        	</div>
+			                        </div>
+	                        	</div>
+	                        	<div id="div_tipo_trabajo_revista" style="display: none;">
+	                        		<div class="linea">
+			                        	<div class="casilla">
+			                        		<div class="columna_izquierda">
+			                        			<div class="columna_completa">
+			                        				<table>
+			                        					<tr>
+			                        						<td width="55%">N&uacute;mero P&aacute;ginas:</td>
+			                        						<td>
+			                        							<input 	type="text"
+			                        									class="input"
+			                        									name="numero_paginas_publicacion"
+			                        									value="0"
+			                        									onkeydown="revisaNumero(false, this.value, event, null, null)"/>
+			                        						</td>
+			                        					</tr>
+			                        				</table>
+			                        			</div>
+			                        		</div>
+			                        		<div class="columna_derecha">
+			                        			<div class="columna_completa">
+			                        				<table>
+			                        					<tr>
+			                        						<td width="1%">Tama&ntilde;o:</td>
+			                        						<td>
+			                        							<select name="id_tamanio_publicacion" id="id_tamanio_publicacion">
+			                        								<c:forEach var="ltp" items="${listaTamanioPublicacion}">
+			                        									<option value="${ltp.value}">${ltp.text}</option>
+			                        								</c:forEach>
+			                        							</select>
+			                        						</td>
+			                        					</tr>
+			                        				</table>
+			                        			</div>
+			                        		</div>
+			                        	</div>
+			                        </div>
+	                        	</div>
+	                        	<div id="div_tipo_trabajo_otro" style="display: none;">
+	                        		<div class="linea">
+		                        		<div class="casilla">
+		                        			<div class="columna_izquierda">
+		                        				<div class="columna_completa">
+		                        					<table>
+		                        						<tr>
+		                        							<td width="40%">No. Pliegos:</td>
+		                        							<td>
+		                        								<input	type="text"
+		                        										class="input"
+		                        										name="numero_pliegos"
+		                        										value="0"
+		                        										onkeydown="revisaNumero(true, this.value, event, null, null)"/>
+		                        							</td>
+		                        						</tr>
+	                        						</table>
+		                        				</div>
+		                        			</div>
+		                        			<div class="columna_derecha">
+			                        			<div class="columna_completa"></div>
+			                        		</div>
+		                        		</div>
+		                        	</div>
+	                        	</div>
+	                        	<div class="linea">
+	                        		<div class="casilla">
+	                        			<div class="columna_completa">
+	                        				<table>
+	                        					<tr>
+	                        						<td width="1%">
+	                        							<input type="checkbox" name="incluye_costo_papel" checked/>
+	                        						</td>
+	                        						<td width="1%">
+	                        							<span style="cursor: pointer;" onclick="document.cotizador_express.incluye_costo_papel.click()">Papel:</span>
+	                        						</td>
+	                        						<td>
+	                        							<select name="id_tipo_papel_extendido" id="id_tipo_papel_extendido">
+	                        								<c:forEach var="ltpe" items="${listaTipoPapelExtendido}">
+	                        									<option value="${ltpe.value}">${ltpe.text}</option>
+	                        								</c:forEach>
+	                        							</select>
+	                        						</td>
+	                        						<!-- 
+	                        						<td>
+	                        							<input	type="text"
+	                        									class="input"
+	                        									name="descripcion_papel"
+	                        									value=""
+	                        									readonly/>
+	                        						</td>
+	                        						<td>
+	                        							<img id="imgBtnBuscaPapelExtendido" alt="" style="cursor: pointer;" onclick="alert('hola papel')" src="<c:url value="/resources/image/lupa.png"/>"/>
+	                        						</td>
+	                        						-->
+	                        					</tr>
+	                        				</table>
 	                        			</div>
 	                        		</div>
 	                        	</div>
@@ -168,7 +328,7 @@
 	                        										class="input"
 	                        										name="frente_numero_tinta_especial"
 	                        										value="0"
-	                        										onkeydown="revisaNumero(false, this.value, event, 'buscarNut', null)"/>
+	                        										onkeydown="revisaNumero(false, this.value, event, null, null)"/>
 	                        							</td>
 	                        						</tr>
 	                        					</table>
@@ -184,7 +344,7 @@
 	                        										class="input"
 	                        										name="vuelta_numero_tinta_especial"
 	                        										value="0"
-	                        										onkeydown="revisaNumero(false, this.value, event, 'buscarNut', null)"/>
+	                        										onkeydown="revisaNumero(false, this.value, event, null, null)"/>
 	                        							</td>
 	                        						</tr>
 	                        					</table>
@@ -234,9 +394,13 @@
 	                        				<div class="columna_completa">
 	                        					<table>
 	                        						<tr>
-	                        							<td width="1%">Placa:</td>
+	                        							<td width="1%">M&aacute;quina:</td>
 	                        							<td>
-	                        								<select name="id_tipo_placa" id="id_tipo_placa"></select>
+	                        								<select name="id_maquina" id="id_maquina" onchange="buscaTipoPlaca(this)">
+		                        								<c:forEach var="m" items="${listaMaquina}">
+		                        									<option value="${m.value}">${m.text}</option>
+		                        								</c:forEach>
+		                        							</select>
 	                        							</td>
 	                        						</tr>
 	                        					</table>
@@ -245,6 +409,27 @@
 	                        			<div class="columna_derecha">
 	                        				<div class="columna_completa">
 	                        					<table>
+	                        						<tr>
+	                        							<td width="1%">
+	                        								<input type="checkbox" name="incluye_costo_placa" checked/>
+	                        							</td>
+	                        							<td width="1%">
+	                        								<span style="cursor: pointer;" onclick="document.cotizador_express.incluye_costo_placa.click()">Placa:</span>
+	                        							</td>
+	                        							<td>
+	                        								<select name="id_tipo_placa" id="id_tipo_placa"></select>
+	                        							</td>
+	                        						</tr>
+	                        					</table>
+	                        				</div>
+	                        			</div>
+	                        		</div>
+	                        	</div>
+	                        	<div class="linea">
+		                        	<div class="casilla">
+		                        		<div class="columna_derecha">
+		                        			<div class="columna_completa">
+		                        				<table>
 	                        						<tr>
 	                        							<td width="78%">
 	                        								<span style="cursor:pointer;" onclick="document.cotizador_express.vuelta_mismas_placas.click()">¿Vuelta mismas placas?:</span>
@@ -255,10 +440,10 @@
 	                        							</td>
 	                        						</tr>
 	                        					</table>
-	                        				</div>
-	                        			</div>
-	                        		</div>
-	                        	</div>
+		                        			</div>
+		                        		</div>
+		                        	</div>
+		                        </div>
 	                        	<br/>
 	                        	<div class="linea">
 	                        		<div class="casilla" style="text-align: right;">
@@ -275,6 +460,43 @@
 	                        	</div>
 	                        	<div class="div_separador_chico">
 		                        	<img alt="" src="<c:url value="/resources/image/separador_chico.jpg"/>"/>
+		                        </div>
+		                        <div class="linea">
+		                        	<div class="casilla">
+		                        		<div class="columna_izquierda">
+		                        			<div class="columna_completa">
+		                        				<table>
+		                        					<tr>
+		                        						<td width="1%">Papel:</td>
+		                        						<td>
+		                        							<input 	type="text"
+		                        									class="input"
+		                        									name="papel_descripcion"
+		                        									value=""
+		                        									readonly/>
+		                        						</td>
+		                        					</tr>
+		                        				</table>
+		                        			</div>
+		                        		</div>
+		                        		<div class="columna_derecha">
+		                        			<div class="columna_completa">
+		                        				<table>
+		                        					<tr>
+		                        						<td width="39%">Total Papel:</td>
+		                        						<td>
+		                        							<input	type="text"
+		                        									class="input"
+		                        									style="text-align: right;"
+		                        									name="papel_coste_total"
+		                        									value="$ 0.00"
+		                        									readonly/>
+		                        						</td>
+		                        					</tr>
+		                        				</table>
+		                        			</div>
+		                        		</div>
+		                        	</div>
 		                        </div>
 	                        	<div class="linea">
 	                        		<div class="casilla">

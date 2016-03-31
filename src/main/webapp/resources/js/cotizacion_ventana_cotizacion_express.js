@@ -35,24 +35,33 @@ function cierraVentana() {
 
 function limpiaForm() {
 	// campos generacion
+	document.cotizador_express.id_tipo_trabajo.value 						= 1;
 	document.cotizador_express.id_tipo_cliente.selectedIndex 				= 0;
-	document.cotizador_express.id_maquina.selectedIndex 					= 0;
 	document.cotizador_express.cantidad.value 								= "";
+	document.cotizador_express.repeticiones_x_pliego.value 					= "";
+	document.cotizador_express.numero_paginas_publicacion.value 			= "";
+	document.cotizador_express.id_tamanio_publicacion.selectedIndex 		= 0;
 	document.cotizador_express.numero_pliegos.value 						= "";
+	document.cotizador_express.incluye_costo_papel.checked 					= true;
+	document.cotizador_express.id_tipo_papel_extendido.selectedIndex 		= 0;
 	document.cotizador_express.frente_id_combinacion_tintas.selectedIndex 	= 0;
-	document.cotizador_express.vuelta_id_combinacion_tintas.selectedIndex 	= 0;
 	document.cotizador_express.frente_numero_tinta_especial.value 			= "0";
-	document.cotizador_express.vuelta_numero_tinta_especial.value 			= "0";
 	document.cotizador_express.frente_id_tipo_barniz.selectedIndex 			= 0;
+	document.cotizador_express.vuelta_id_combinacion_tintas.selectedIndex 	= 0;
+	document.cotizador_express.vuelta_numero_tinta_especial.value 			= "0";
 	document.cotizador_express.vuelta_id_tipo_barniz.selectedIndex 			= 0;
+	document.cotizador_express.id_maquina.selectedIndex 					= 0;
+	document.cotizador_express.incluye_costo_placa.checked 					= true;
 	document.cotizador_express.id_tipo_placa.selectedIndex 					= 0;
 	document.cotizador_express.vuelta_mismas_placas.checked 				= false;
 	// campos resultado
+	document.cotizador_express.papel_descripcion.value 				= "";
 	document.cotizador_express.tinta_descripcion.value 				= "";
 	document.cotizador_express.tinta_especial_descripcion.value 	= "";
 	document.cotizador_express.barniz_descripcion.value 			= "";
 	document.cotizador_express.placas_descripcion.value 			= "";
 	
+	document.cotizador_express.papel_coste_total.value 				= "$ 0.00";
 	document.cotizador_express.tinta_coste_total.value 				= "$ 0.00";
 	document.cotizador_express.tinta_especial_coste_total.value 	= "$ 0.00";
 	document.cotizador_express.barniz_coste_total.value 			= "$ 0.00";
@@ -62,42 +71,107 @@ function limpiaForm() {
 }
 
 function muestraInformacionCosto(response) {
+	document.cotizador_express.papel_descripcion.value				= response.papelDescripcion;
 	document.cotizador_express.tinta_descripcion.value 				= response.tintaDescripcion;
 	document.cotizador_express.tinta_especial_descripcion.value 	= response.tintaEspecialDescripcion;
 	document.cotizador_express.barniz_descripcion.value 			= response.barnizDescripcion;
 	document.cotizador_express.placas_descripcion.value 			= response.placasDescripcion;
 	
+	document.cotizador_express.papel_coste_total.value				= "$ " + (response.papelCosteTotal).formatMoney(2);
 	document.cotizador_express.tinta_coste_total.value 				= "$ " + (response.tintaCosteTotal).formatMoney(2);
 	document.cotizador_express.tinta_especial_coste_total.value 	= "$ " + (response.tintaEspecialCosteTotal).formatMoney(2);
 	document.cotizador_express.barniz_coste_total.value 			= "$ " + (response.barnizCosteTotal).formatMoney(2);
 	document.cotizador_express.placas_coste_total.value 			= "$ " + (response.placasCosteTotal).formatMoney(2);
 	document.cotizador_express.cotizacion_coste_total.value 		= "$ " + (response.cotizacionCosteTotal).formatMoney(2);
+	
+	// estilo papel
+	if (!document.cotizador_express.incluye_costo_papel.checked) 
+		document.cotizador_express.papel_coste_total.style.textDecoration = "line-through";
+	else
+		document.cotizador_express.papel_coste_total.style.textDecoration = "none";
+	// estilo placa
+	if (!document.cotizador_express.incluye_costo_placa.checked)
+		document.cotizador_express.placas_coste_total.style.textDecoration = "line-through";
+	else
+		document.cotizador_express.placas_coste_total.style.textDecoration = "none";
+		
 }
 
 function buscaCotizacionExpress() {
 	// validacion
 	var correcto = true;
 	
+	// validacion cantidad
 	if ( correcto
 			&& (document.cotizador_express.cantidad.value == ""
 				|| isNaN(document.cotizador_express.cantidad.value) 
 				|| document.cotizador_express.cantidad.value <= 0) ) {
 		correcto = false;
-		alert("La cantidad debe ser un número entero mayor a cero");
+		alert("La cantidad debe ser un número entero mayor a cero. Favor de informalo.");
 		document.cotizador_express.cantidad.focus();
 		document.cotizador_express.cantidad.selected();
 	}
 	
-	if ( correcto
-			&& (document.cotizador_express.numero_pliegos.value == ""
-				|| isNaN(document.cotizador_express.numero_pliegos.value)
-				|| document.cotizador_express.numero_pliegos.value <=0 ) ) {
-		correcto = false;
-		alert("El numero de pliegos debe ser un número mayor a cero");
-		document.cotizador_express.numero_pliegos.focus();
-		document.cotizador_express.numero_pliegos.selected();
+	// validaciones por tipo trabajo
+	switch (document.cotizador_express.id_tipo_trabajo.value) {
+		case "1":
+			document.cotizador_express.numero_paginas_publicacion.value = 0;
+			document.cotizador_express.numero_pliegos.value 			= 0;
+			if (correcto 
+					&& (document.cotizador_express.repeticiones_x_pliego.value == ""
+						|| isNaN(document.cotizador_express.repeticiones_x_pliego.value)
+						|| parseInt(document.cotizador_express.repeticiones_x_pliego.value) <= 0)) {
+				correcto = false;
+				alert("El número de repeticiones deber ser un numero mayor a cero. Favor de informarlo.");
+				document.cotizador_express.repeticiones_x_pliego.focus();
+				document.cotizador_express.repeticiones_x_pliego.select();
+			}
+			break;
+		case "2":
+			document.cotizador_express.repeticiones_x_pliego.value 	= 0;
+			document.cotizador_express.numero_pliegos.value 		= 0;
+			if (correcto
+					&& (document.cotizador_express.numero_paginas_publicacion.value == ""
+						|| isNaN(document.cotizador_express.numero_paginas_publicacion.value)
+						|| parseInt(document.cotizador_express.numero_paginas_publicacion.value) <= 0)
+						|| parseInt(document.cotizador_express.numero_paginas_publicacion.value)%4 != 0) {
+				correcto = false;
+				alert("El número de páginas deber ser un numero mayor a cero y multiplo de 4. Favor de informarlo.");
+				document.cotizador_express.numero_paginas_publicacion.focus();
+				document.cotizador_express.numero_paginas_publicacion.select();
+			}
+			if (correcto
+					&& document.cotizador_express.id_tamanio_publicacion.value == "1") {
+				correcto = false;
+				alert("El tamaño de la publicaci&oacute;n no puede ser 'No Aplica'");
+				document.cotizador_express.id_tamanio_publicacion.focus();
+			}
+			break;
+		case "3":
+			document.cotizador_express.repeticiones_x_pliego.value 		= 0;
+			document.cotizador_express.numero_paginas_publicacion.value = 0;
+			if (correcto
+					&& (document.cotizador_express.numero_pliegos.value == ""
+						|| isNaN(document.cotizador_express.numero_pliegos.value)
+						|| parseInt(document.cotizador_express.numero_pliegos.value) <= 0)) {
+				correcto = false;
+				alert("El número de pliegos deber ser un numero mayor a cero. Favor de informarlo.");
+				document.cotizador_express.numero_pliegos.focus();
+				document.cotizador_express.numero_pliegos.select();
+			}
+			break;
 	}
 	
+	/*
+	// validacion papel
+	if (correcto
+			&& document.cotizador_express.incluye_costo_papel.checked
+			&& document.cotizador_express.descripcion_papel.value == "") {
+		correcto = false;
+		alert("La descripcion de papel no puede estar vacía. Favor de informarlo.");
+	}
+	*/
+		
 	if ( correcto ) {
 		$.ajax({
 			type:"POST",

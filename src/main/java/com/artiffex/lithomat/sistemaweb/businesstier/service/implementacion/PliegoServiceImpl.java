@@ -114,7 +114,7 @@ public class PliegoServiceImpl implements PliegoService {
 				List<TamanioPublicacion> listaTamanio = tamanioPublicacionService.listaDecimales();
 				// cantidad de pliegos = ( cantidad de paginas de publicacion / hojas tamanio revista )
 				// double cantidad_pliegos = (double) 56 / 32;
-				double cantidadPliegos = (double) tipoTrabajoDetalle.getNumeroPaginasPublicacion() / tipoTrabajoDetalle.getTamanioPublicacion().getNumeroPaginas();
+				double cantidadPliegos = (double)tipoTrabajoDetalle.getNumeroPaginasPublicacion() / (double)tipoTrabajoDetalle.getTamanioPublicacion().getNumeroPaginas();
 				int contadorPaginas = 0;
 				for (TamanioPublicacion tamanio : listaTamanio) {
 					do {
@@ -166,9 +166,8 @@ public class PliegoServiceImpl implements PliegoService {
 							hojasRequeridas 	= 0;
 							hojasSobrantes 		= 0;
 							hojasTotales 		= 0;
-						} else {
+						} else 
 							break;
-						}// if
 					} while (cantidadPliegos > 0);
 				}// for
 				papelSobrante = null;

@@ -1566,6 +1566,7 @@ function preparaNuevoTipoTrabajoDetalle() {
     var id_partida = document.tipo_trabajo_detalle.id_partida.value;
     // limpia form div_tipo_trabajo_detalle y div_costo_extra_detalle
     limpiaFormTipoTrabajoDetalle();
+    limpiaFormDescuento();
     limpiaFormCostoExtraDetalle();
     // oculta divs no necesarios
     document.getElementById("div_visualizador_pliegos").style.display       		= "none";
@@ -1654,6 +1655,7 @@ function preparaNuevaPartida() {
     
     // limpia los campos de los forms ocultos
     limpiaFormTipoTrabajoDetalle();
+    limpiaFormDescuento();
     limpiaFormCostoExtraDetalle();
     limpiaFormDisenio();
     limpiaFormDisenioDetalle();

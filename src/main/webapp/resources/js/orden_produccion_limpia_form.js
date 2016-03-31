@@ -304,6 +304,8 @@ function limpiaFormDescuento() {
 	document.descuento.aplica_descuento.value 		= "";
 	document.descuento.id_tipo_precio.value			= "";
 	limpiaCamposDescuento();
+	activaCamposDescuento();
+	activaBtnDescuento();
 }
 
 function activaCamposDescuento() {

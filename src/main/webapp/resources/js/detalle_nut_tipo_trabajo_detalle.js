@@ -455,7 +455,7 @@ function validaDatosFormTTD() {
 	        }
 	        
 	        if( correcto
-	        		&& document.tipo_trabajo_detalle.elementsselect_tamanio_publicacion.value == "1" ) {
+	        		&& document.tipo_trabajo_detalle.select_tamanio_publicacion.value == "1" ) {
 	            correcto = false;
 	            alert("El tama\u00f1o de la publicaci\u00f3n debe ser especificado");
 	            document.tipo_trabajo_detalle.select_tamanio_publicacion.focus();
