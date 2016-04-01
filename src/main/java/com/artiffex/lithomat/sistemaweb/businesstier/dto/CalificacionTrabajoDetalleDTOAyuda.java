@@ -1,4 +1,4 @@
-package com.artiffex.lithomat.sistemaweb.ayuda;
+package com.artiffex.lithomat.sistemaweb.businesstier.dto;
 
 import java.io.Serializable;
 

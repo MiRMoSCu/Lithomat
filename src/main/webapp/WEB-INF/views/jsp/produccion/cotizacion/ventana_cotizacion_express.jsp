@@ -445,8 +445,8 @@
 		                        	</div>
 		                        </div>
 	                        	<br/>
-	                        	<div class="linea">
-	                        		<div class="casilla" style="text-align: right;">
+	                        	<div>
+	                        		<div style="text-align: right;">
 	                        			<span style="cursor: pointer;" onclick="cierraVentana()">
 	                        				<font color="gray">&nbsp;CANCELAR&nbsp;</font>
 	                        			</span>
@@ -665,6 +665,14 @@
 	                        					</table>
 	                        				</div>
 	                        			</div>
+	                        		</div>
+	                        	</div>
+	                        	<br/>
+	                        	<div>
+	                        		<div style="text-align: right;">
+	                        			<span style="cursor: pointer;" onclick="impresionCotizacionExpress()">
+	                        				<font color="gray">&nbsp;IMPRIMIR&nbsp;</font>
+	                        			</span>
 	                        		</div>
 	                        	</div>
                        		</form>

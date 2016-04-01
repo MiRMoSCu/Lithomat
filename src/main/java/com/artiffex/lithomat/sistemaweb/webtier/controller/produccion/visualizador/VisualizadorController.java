@@ -173,7 +173,7 @@ public class VisualizadorController {
 		int tipoBusqueda = BUSQUEDA_DEFAULT;
 
 		// variables de configuracion del paginador
-		int numeroRegistrosPorPagina 	= 3;
+		int numeroRegistrosPorPagina 	= 7;
 		int tamanioMaximoArreglo 		= 7;
 		int numeroPagina 				= 1;
 

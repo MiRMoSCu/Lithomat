@@ -11,14 +11,14 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.artiffex.lithomat.sistemaweb.ayuda.CalificacionTrabajoDetalleDTOAyuda;
-import com.artiffex.lithomat.sistemaweb.ayuda.OrdenProduccionDTOAyuda;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.AcabadoDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.AcabadoDetalleDTO;
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.CalificacionTrabajoDetalleDTOAyuda;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.DisenioDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.DisenioDetalleDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.MaterialAyudaDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.OffsetDTO;
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.OrdenProduccionDTOAyuda;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.PreprensaDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.PreprensaDetalleDTO;
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.ReporteCotizacionDTO;

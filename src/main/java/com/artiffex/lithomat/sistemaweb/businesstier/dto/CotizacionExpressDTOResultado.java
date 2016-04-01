@@ -2,7 +2,7 @@ package com.artiffex.lithomat.sistemaweb.businesstier.dto;
 
 import java.io.Serializable;
 
-public class CotizadorExpressDTO implements Serializable {
+public class CotizacionExpressDTOResultado implements Serializable {
 
 	private static final long serialVersionUID = 7379811967908856425L;
 	

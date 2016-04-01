@@ -36,10 +36,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.artiffex.lithomat.sistemaweb.ayuda.CalificacionTrabajoDetalleDTOAyuda;
-import com.artiffex.lithomat.sistemaweb.ayuda.OrdenProduccionDTOAyuda;
 import com.artiffex.lithomat.sistemaweb.ayuda.Persona;
 import com.artiffex.lithomat.sistemaweb.ayuda.Telefono;
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.CalificacionTrabajoDetalleDTOAyuda;
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.OrdenProduccionDTOAyuda;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.CalificacionService;
 
 @Controller

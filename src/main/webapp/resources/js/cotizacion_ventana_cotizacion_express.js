@@ -37,11 +37,11 @@ function limpiaForm() {
 	// campos generacion
 	document.cotizador_express.id_tipo_trabajo.value 						= 1;
 	document.cotizador_express.id_tipo_cliente.selectedIndex 				= 0;
-	document.cotizador_express.cantidad.value 								= "";
-	document.cotizador_express.repeticiones_x_pliego.value 					= "";
-	document.cotizador_express.numero_paginas_publicacion.value 			= "";
+	document.cotizador_express.cantidad.value 								= "0";
+	document.cotizador_express.repeticiones_x_pliego.value 					= "0";
+	document.cotizador_express.numero_paginas_publicacion.value 			= "0";
 	document.cotizador_express.id_tamanio_publicacion.selectedIndex 		= 0;
-	document.cotizador_express.numero_pliegos.value 						= "";
+	document.cotizador_express.numero_pliegos.value 						= "0";
 	document.cotizador_express.incluye_costo_papel.checked 					= true;
 	document.cotizador_express.id_tipo_papel_extendido.selectedIndex 		= 0;
 	document.cotizador_express.frente_id_combinacion_tintas.selectedIndex 	= 0;
@@ -68,6 +68,22 @@ function limpiaForm() {
 	document.cotizador_express.placas_coste_total.value 			= "$ 0.00";
 	
 	document.cotizador_express.cotizacion_coste_total.value 		= "$ 0.00";
+}
+
+function limpiaCamposCosteTotal() {
+	document.cotizador_express.papel_descripcion.value 				= "";
+	document.cotizador_express.tinta_descripcion.value 				= "";
+	document.cotizador_express.tinta_especial_descripcion.value 	= "";
+	document.cotizador_express.barniz_descripcion.value 			= "";
+	document.cotizador_express.placas_descripcion.value 			= "";
+	
+	document.cotizador_express.papel_coste_total.value 				= "";
+	document.cotizador_express.tinta_coste_total.value 				= "";
+	document.cotizador_express.tinta_especial_coste_total.value 	= "";
+	document.cotizador_express.barniz_coste_total.value 			= "";
+	document.cotizador_express.placas_coste_total.value 			= "";
+	
+	document.cotizador_express.cotizacion_coste_total.value 		= "";
 }
 
 function muestraInformacionCosto(response) {
@@ -159,6 +175,28 @@ function buscaCotizacionExpress() {
 				document.cotizador_express.numero_pliegos.focus();
 				document.cotizador_express.numero_pliegos.select();
 			}
+			
+			var arr_tamanio_publicacion = ["1", "0.5", "0.25", "0.125", "0.0625", "0.03125"];
+			var n_pliegos = parseFloat(document.cotizador_express.numero_pliegos.value);
+			var index, tamanio_publicacion;
+			for (index = 0; index < arr_tamanio_publicacion.length; index++) {
+				if (n_pliegos > 0) {
+					do {
+						tamanio_publicacion = parseFloat(arr_tamanio_publicacion[index]);
+						if (n_pliegos >= tamanio_publicacion) 
+							n_pliegos -= tamanio_publicacion;
+						else
+							break;
+					} while (n_pliegos > 0);
+				} else
+					break;
+			}
+			if ( n_pliegos != 0 ) {
+				correcto = false;
+				alert("El número de pliegos no es válido");
+				document.cotizador_express.numero_pliegos.focus();
+				document.cotizador_express.numero_pliegos.select();
+			}
 			break;
 	}
 	
@@ -173,20 +211,37 @@ function buscaCotizacionExpress() {
 	*/
 		
 	if ( correcto ) {
+		document.body.style.cursor="wait";
 		$.ajax({
 			type:"POST",
 			url:urlCalculaCotizacion,
 			data:$("[name=cotizador_express]").serialize(),
 			success:function( response ) {
 				//console.log(response);
-				muestraInformacionCosto(response);
+				limpiaCamposCosteTotal();
+				setTimeout(function(){
+					muestraInformacionCosto(response);
+				},50);
+				document.body.style.cursor="default";
 			},
 			error: function( e ) {
 				console.log(e);
 				alert("No fue posible conectarse con el servidor");
+				document.body.style.cursor="default";
 			}
 		});
 	}
 	
 	delete correcto;
 }
+
+function impresionCotizacionExpress() {
+	
+}
+
+
+
+
+
+
+

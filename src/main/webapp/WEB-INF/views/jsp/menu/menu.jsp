@@ -235,8 +235,8 @@
                 		Shadowbox.open({
                     		content:urlCotizacionExpress,
                     		player:'iframe',
-                    		width:600,
-                    		height:870,
+                    		width:660,
+                    		height:820,
                     		options:{
                     			modal:true,
                     			overlayOpacity:0.75

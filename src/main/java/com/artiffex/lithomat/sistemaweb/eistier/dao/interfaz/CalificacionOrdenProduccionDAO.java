@@ -2,8 +2,8 @@ package com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz;
 
 import java.util.List;
 
-import com.artiffex.lithomat.sistemaweb.ayuda.CalificacionTrabajoDetalleDTOAyuda;
-import com.artiffex.lithomat.sistemaweb.ayuda.OrdenProduccionDTOAyuda;
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.CalificacionTrabajoDetalleDTOAyuda;
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.OrdenProduccionDTOAyuda;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionOrdenProduccion;
 
 public interface CalificacionOrdenProduccionDAO {

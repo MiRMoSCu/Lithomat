@@ -1551,7 +1551,9 @@
 	                                <br>
 	                                <div class="linea">
 	                                    <div class="casilla" style="text-align:right;">
-                                    		<span style="cursor:pointer;" onclick="condicionesProduccion();">Impresi&oacute;n</span>
+                                    		<span style="cursor:pointer;" onclick="condicionesProduccion();">
+                                    			<font color="gray">&nbsp;IMPRESI&Oacute;N&nbsp;</font>
+                                    		</span>
 	                                    </div>
 	                                </div>
 	                            </div>
@@ -1569,7 +1571,7 @@
 		                                    <div class="linea">
 		                                    	<div class="casilla" style="text-align:right;">
 		                                    		<span style="cursor:pointer;" onclick="muestraDetalleOP();">
-		                                  				ACEPTAR
+		                                  				<font color="gray">&nbsp;ACEPTAR&nbsp;</font>
 		                                  			</span>	
 		                                    	</div>
 		                                    </div>

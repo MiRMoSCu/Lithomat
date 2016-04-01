@@ -3,7 +3,7 @@
     margin-left: auto;
     margin-right: auto;
     position: relative;
-    top: 77px;
+    top: 50px;
 }
 
 #div_ancho {
@@ -12,7 +12,7 @@
 
 #div_hoja {
     width: 499px;
-    height: 692px; /* AQUI SE MODIFICA TAMAÑO*/ /*552 original*/
+    height: 700px; /* AQUI SE MODIFICA TAMAÑO*/ /*552 original*/
     float: left;
     background-color: #fff;
 }
@@ -31,7 +31,7 @@
 
 #div_fondo_der{
     width: 29px;
-    height: 661px;	/* div_hoja - 31 */
+    height: 669px;	/* div_hoja - 31 */
     background-image: url('../image/s_der.png');
     background-repeat: repeat-y;
 }

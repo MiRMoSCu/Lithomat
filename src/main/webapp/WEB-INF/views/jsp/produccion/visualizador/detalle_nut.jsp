@@ -3346,7 +3346,7 @@
 		                                    <div class="linea">
 	                                    		<div class="casilla" style="text-align:right;">
 	                                    			<span id="imgBtnModificarEstatus" style="cursor:pointer;" onclick="ajaxCambiaEstatus();">
-	                                    				MODIFICAR
+	                                    				<font color="blue">&nbsp;MODIFICAR&nbsp;</font>
 	                                    			</span>
 		                                    	</div>
 		                                    </div>
@@ -3380,7 +3380,7 @@
 	                                		<div class="linea">
 		                                   		<div class="casilla" style="text-align:right;">
 	                                    			<span id="imgBtnRevisarCostos" style="cursor:pointer;" onclick="muestraDetallePrecio();">
-	                                    				REVISAR
+	                                    				<font color="gray">&nbsp;REVISAR&nbsp;</font>
 	                                    			</span>
 		                                    	</div>
 		                                    </div>

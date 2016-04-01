@@ -11,8 +11,8 @@ import org.hibernate.Session;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.artiffex.lithomat.sistemaweb.ayuda.CalificacionTrabajoDetalleDTOAyuda;
-import com.artiffex.lithomat.sistemaweb.ayuda.OrdenProduccionDTOAyuda;
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.CalificacionTrabajoDetalleDTOAyuda;
+import com.artiffex.lithomat.sistemaweb.businesstier.dto.OrdenProduccionDTOAyuda;
 import com.artiffex.lithomat.sistemaweb.businesstier.entity.CalificacionOrdenProduccion;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.CalificacionOrdenProduccionDAO;
 import com.artiffex.lithomat.sistemaweb.eistier.dao.interfaz.GenericJdbcDAO;

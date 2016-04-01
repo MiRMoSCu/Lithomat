@@ -117,58 +117,61 @@ public class PliegoServiceImpl implements PliegoService {
 				double cantidadPliegos = (double)tipoTrabajoDetalle.getNumeroPaginasPublicacion() / (double)tipoTrabajoDetalle.getTamanioPublicacion().getNumeroPaginas();
 				int contadorPaginas = 0;
 				for (TamanioPublicacion tamanio : listaTamanio) {
-					do {
-						if (cantidadPliegos >= tamanio.getNumeroDecimal()) {
-							float numeroDecimal = tamanio.getNumeroDecimal();
-							hojasRequeridas = (int) Math.ceil(numeroDecimal * cantidad);
-								papelSobrante.setInicioTabulador(hojasRequeridas + 1);
-								papelSobrante.setFinTabulador(hojasRequeridas - 1);
-								papelSobrante.setFrenteNumTinta(frenteNumTinta);
-								papelSobrante.setVueltaNumTinta(vueltaNumTinta);
-								papelSobrante.setTintaEspecial(frenteNumTintaEspecial > 0 || vueltaNumTintaEspecial > 0 ? true : false);
-							hojasSobrantes = papelSobranteService.buscaHojasSobrante(papelSobrante);
-							hojasTotales = hojasRequeridas + hojasSobrantes;
-							
-							Pliego pliegoRevista = new Pliego();
-							pliegoRevista.setNumeroDecimal(numeroDecimal);
-							pliegoRevista.setHojasRequeridas(hojasRequeridas);
-							pliegoRevista.setHojasSobrantes(hojasSobrantes);
-							pliegoRevista.setHojasTotales(hojasTotales);
-								StringBuilder observaciones = new StringBuilder();
-								observaciones.append("Pag: ");
-									contadorPaginas = contadorPaginas + 1;
-								observaciones.append(contadorPaginas);
-								observaciones.append(" - ");
-									float paginasCalculadas = tipoTrabajoDetalle.getTamanioPublicacion().getNumeroPaginas() * tamanio.getNumeroDecimal();
-									contadorPaginas = (contadorPaginas + (int) paginasCalculadas - 1);
-								observaciones.append(contadorPaginas);
-								observaciones.append(".");
-							pliegoRevista.setObservaciones(observaciones.toString());
-								TipoVuelta tipoVueltaRevista = new TipoVuelta();
-								if (tamanio.getNumeroDecimal() >= 1) {
-									pliegoRevista.setVueltaMismasPlacas(false);
-										tipoVueltaRevista.setIdTipoVuelta(1);
-										tipoVueltaRevista.setNombre("No aplica");
-									pliegoRevista.setTipoVuelta(tipoVueltaRevista);
-								} else {
-									pliegoRevista.setVueltaMismasPlacas(true);
-										tipoVueltaRevista.setIdTipoVuelta(2);
-										tipoVueltaRevista.setNombre("Normal");
-									pliegoRevista.setTipoVuelta(tipoVueltaRevista);
-								}
-							listaPliego.add(pliegoRevista);
-	
-							cantidadPliegos -= numeroDecimal;
-	
-							observaciones 		= null;
-							tipoVueltaRevista	= null;
-							pliegoRevista 		= null;
-							hojasRequeridas 	= 0;
-							hojasSobrantes 		= 0;
-							hojasTotales 		= 0;
-						} else 
-							break;
-					} while (cantidadPliegos > 0);
+					if (cantidadPliegos > 0) {
+						do {
+							if (cantidadPliegos >= tamanio.getNumeroDecimal()) {
+								float numeroDecimal = tamanio.getNumeroDecimal();
+								hojasRequeridas = (int) Math.ceil(numeroDecimal * cantidad);
+									papelSobrante.setInicioTabulador(hojasRequeridas + 1);
+									papelSobrante.setFinTabulador(hojasRequeridas - 1);
+									papelSobrante.setFrenteNumTinta(frenteNumTinta);
+									papelSobrante.setVueltaNumTinta(vueltaNumTinta);
+									papelSobrante.setTintaEspecial(frenteNumTintaEspecial > 0 || vueltaNumTintaEspecial > 0 ? true : false);
+								hojasSobrantes = papelSobranteService.buscaHojasSobrante(papelSobrante);
+								hojasTotales = hojasRequeridas + hojasSobrantes;
+								
+								Pliego pliegoRevista = new Pliego();
+								pliegoRevista.setNumeroDecimal(numeroDecimal);
+								pliegoRevista.setHojasRequeridas(hojasRequeridas);
+								pliegoRevista.setHojasSobrantes(hojasSobrantes);
+								pliegoRevista.setHojasTotales(hojasTotales);
+									StringBuilder observaciones = new StringBuilder();
+									observaciones.append("Pag: ");
+										contadorPaginas = contadorPaginas + 1;
+									observaciones.append(contadorPaginas);
+									observaciones.append(" - ");
+										float paginasCalculadas = tipoTrabajoDetalle.getTamanioPublicacion().getNumeroPaginas() * tamanio.getNumeroDecimal();
+										contadorPaginas = (contadorPaginas + (int) paginasCalculadas - 1);
+									observaciones.append(contadorPaginas);
+									observaciones.append(".");
+								pliegoRevista.setObservaciones(observaciones.toString());
+									TipoVuelta tipoVueltaRevista = new TipoVuelta();
+									if (tamanio.getNumeroDecimal() >= 1) {
+										pliegoRevista.setVueltaMismasPlacas(false);
+											tipoVueltaRevista.setIdTipoVuelta(1);
+											tipoVueltaRevista.setNombre("No aplica");
+										pliegoRevista.setTipoVuelta(tipoVueltaRevista);
+									} else {
+										pliegoRevista.setVueltaMismasPlacas(true);
+											tipoVueltaRevista.setIdTipoVuelta(2);
+											tipoVueltaRevista.setNombre("Normal");
+										pliegoRevista.setTipoVuelta(tipoVueltaRevista);
+									}
+								listaPliego.add(pliegoRevista);
+		
+								cantidadPliegos -= numeroDecimal;
+		
+								observaciones 		= null;
+								tipoVueltaRevista	= null;
+								pliegoRevista 		= null;
+								hojasRequeridas 	= 0;
+								hojasSobrantes 		= 0;
+								hojasTotales 		= 0;
+							} else 
+								break;
+						} while (cantidadPliegos > 0);
+					} else 
+						break;
 				}// for
 				papelSobrante = null;
 				break;
