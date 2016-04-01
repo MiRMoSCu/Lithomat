@@ -1,10 +1,16 @@
 package com.artiffex.lithomat.sistemaweb.webtier.controller.produccion.cotizacion;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.security.access.annotation.Secured;
@@ -31,7 +37,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
 public class CotizacionExpressController {
 
 	private static final Logger log = Logger.getLogger(CotizacionExpressController.class);
-
+	
 	@Resource
 	private TipoClienteService tipoClienteService;
 	@Resource
@@ -129,7 +135,76 @@ public class CotizacionExpressController {
 		
 		CotizacionExpressDTOResultado cotizadorExpressResultado = cotizacionExpressService.calculaCotizacionExpress(cotizacionExpressDTOVariables);
 		
+		cotizacionExpressDTOVariables = null;
 		return cotizadorExpressResultado;
 	}
 	
+	
+	@Secured({"ROLE_ROOT","ROLE_ADMIN","ROLE_COTIZADOR"})
+	@RequestMapping(value = "/reporte_excel", method = RequestMethod.POST)
+	public void impresionCotizacionExpress(
+			@RequestParam(value = "id_tipo_cliente", 				required = false) int idTipoCliente,
+			@RequestParam(value = "cantidad", 						required = false) int cantidad,
+			@RequestParam(value = "id_tipo_trabajo", 				required = false) int idTipoTrabajo,
+			@RequestParam(value = "repeticiones_x_pliego", 			required = false) int repeticionesXPliego,
+			@RequestParam(value = "numero_paginas_publicacion", 	required = false) int numeroPaginasPublicacion,
+			@RequestParam(value = "id_tamanio_publicacion", 		required = false) int idTamanioPublicacion,
+			@RequestParam(value = "numero_pliegos", 				required = false) float numeroPliegos,
+			@RequestParam(value = "incluye_costo_papel", 			required = false) boolean incluyeCostoPapel,
+			@RequestParam(value = "id_tipo_papel_extendido", 		required = false) int idTipoPapelExtendido,
+			@RequestParam(value = "frente_id_combinacion_tintas", 	required = false) int frenteIdCombinacionTintas,
+			@RequestParam(value = "frente_numero_tinta_especial", 	required = false) int frenteNumeroTintaEspecial,
+			@RequestParam(value = "frente_id_tipo_barniz", 			required = false) int frenteIdTipoBarniz,
+			@RequestParam(value = "vuelta_id_combinacion_tintas", 	required = false) int vueltaIdCombinacionTintas,
+			@RequestParam(value = "vuelta_numero_tinta_especial", 	required = false) int vueltaNumeroTintaEspecial,
+			@RequestParam(value = "vuelta_id_tipo_barniz", 			required = false) int vueltaIdTipoBarniz,
+			@RequestParam(value = "id_maquina", 					required = false) int idMaquina,
+			@RequestParam(value = "incluye_costo_placa", 			required = false) boolean incluyeCostoPlaca,
+			@RequestParam(value = "id_tipo_placa", 					required = false) int idTipoPlaca,
+			@RequestParam(value = "vuelta_mismas_placas", 			required = false) boolean vueltaMismasPlacas,
+			HttpServletRequest request, 
+			HttpServletResponse response
+		) {
+		CotizacionExpressDTOVariables cotizacionExpressDTOVariables = new CotizacionExpressDTOVariables();
+		cotizacionExpressDTOVariables.setIdTipoCliente(idTipoCliente);
+		cotizacionExpressDTOVariables.setCantidad(cantidad);
+		cotizacionExpressDTOVariables.setIdTipoTrabajo(idTipoTrabajo);
+		cotizacionExpressDTOVariables.setRepeticionesXPliego(repeticionesXPliego);
+		cotizacionExpressDTOVariables.setNumeroPaginasPublicacion(numeroPaginasPublicacion);
+		cotizacionExpressDTOVariables.setIdTamanioPublicacion(idTamanioPublicacion);
+		cotizacionExpressDTOVariables.setNumeroPliegos(numeroPliegos);
+		cotizacionExpressDTOVariables.setIncluyeCostoPapel(incluyeCostoPapel);
+		cotizacionExpressDTOVariables.setIdTipoPapelExtendido(idTipoPapelExtendido);
+		cotizacionExpressDTOVariables.setFrenteIdCombinacionTintas(frenteIdCombinacionTintas);
+		cotizacionExpressDTOVariables.setFrenteNumeroTintaEspecial(frenteNumeroTintaEspecial);
+		cotizacionExpressDTOVariables.setFrenteIdTipoBarniz(frenteIdTipoBarniz);
+		cotizacionExpressDTOVariables.setVueltaIdCombinacionTintas(vueltaIdCombinacionTintas);
+		cotizacionExpressDTOVariables.setVueltaNumeroTintaEspecial(vueltaNumeroTintaEspecial);
+		cotizacionExpressDTOVariables.setVueltaIdTipoBarniz(vueltaIdTipoBarniz);
+		cotizacionExpressDTOVariables.setIdMaquina(idMaquina);
+		cotizacionExpressDTOVariables.setIncluyeCostoPlaca(incluyeCostoPlaca);
+		cotizacionExpressDTOVariables.setIdTipoPlaca(idTipoPlaca);
+		cotizacionExpressDTOVariables.setVueltaMismasPlacas(vueltaMismasPlacas);
+		
+		byte[] documento = cotizacionExpressService.obtieneExcelCotizacionExpress(cotizacionExpressDTOVariables);
+		
+		try {
+			Calendar calendar = Calendar.getInstance();
+			Date date = calendar.getTime();
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			
+			OutputStream os = response.getOutputStream();
+			response.setHeader("Content-Disposition","attachment; filename=cotizacionExpress" + dateFormat.format(date) + ".xls");
+			response.setContentType("application/vnd.ms-excel");
+			response.setContentLength( documento.length );
+			os.write( documento );
+			os.flush();
+		} catch( Exception e ) {
+			log.error("Error al enviar el archivo de excel");
+			e.printStackTrace();
+		} finally {
+			cotizacionExpressDTOVariables = null;
+			documento = null;
+		}
+	}
 }

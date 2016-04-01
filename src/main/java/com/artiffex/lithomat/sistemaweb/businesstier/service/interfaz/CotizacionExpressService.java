@@ -6,5 +6,7 @@ import com.artiffex.lithomat.sistemaweb.businesstier.dto.CotizacionExpressDTOVar
 public interface CotizacionExpressService {
 	
 	public CotizacionExpressDTOResultado calculaCotizacionExpress(CotizacionExpressDTOVariables cotizacionExpressDTOVariables);
+	
+	public byte[] obtieneExcelCotizacionExpress(CotizacionExpressDTOVariables cotizacionExpressDTOVariables);
 
 }

@@ -1,10 +1,16 @@
 package com.artiffex.lithomat.sistemaweb.businesstier.service.implementacion;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.stereotype.Service;
 
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.CotizacionExpressDTOResultado;
@@ -57,7 +63,7 @@ public class CotizacionExpressServiceImpl implements CotizacionExpressService {
 	public CotizacionExpressDTOResultado calculaCotizacionExpress(CotizacionExpressDTOVariables cotizacionExpressDTOVariables) {
 		
 		// INICIALIZACION DE OBJETOS
-		CotizacionExpressDTOResultado cotizadorExpress 	= new CotizacionExpressDTOResultado();
+		CotizacionExpressDTOResultado cotizadorExpressDTOResultado 	= new CotizacionExpressDTOResultado();
 		CombinacionTintas frenteCombinacionTintas 		= combinacionTintasService.buscaCombinacionTintas(cotizacionExpressDTOVariables.getFrenteIdCombinacionTintas());
 		CombinacionTintas vueltaCombinacionTintas 		= combinacionTintasService.buscaCombinacionTintas(cotizacionExpressDTOVariables.getVueltaIdCombinacionTintas());
 		TipoCliente tipoCliente 						= tipoClienteService.buscaTipoCliente(cotizacionExpressDTOVariables.getIdTipoCliente());
@@ -248,18 +254,18 @@ public class CotizacionExpressServiceImpl implements CotizacionExpressService {
 				
 				
 				// COTIZACION
-				cotizadorExpress.setPapelDescripcion(cantidadImpresion + " + " + hojasSobrantes + " [" + String.format("%.3f", precioUnitarioTipoPapelExtendido) + "]");
-				cotizadorExpress.setTintaDescripcion(tintaNumEntMaq + " [" + String.format("%.3f", tintaPrecioUnitario) + "]");
-				cotizadorExpress.setTintaEspecialDescripcion(tintaEspecialNumEntMaq + " [" + String.format("%.3f", tintaEspecialPrecioUnitario) + "]" );
-				cotizadorExpress.setBarnizDescripcion("F:" + frenteBarnizNumEnt + " [" + String.format("%.3f", frenteBarnizPrecioUnitario) + "] V:" + vueltaBarnizNumEnt + " [" + String.format("%.3f", vueltaBarnizPrecioUnitario) + "]");
-				cotizadorExpress.setPlacasDescripcion(numeroPlacas + " [" + String.format("%.2f", placasPrecioUnitario) + "]" );
+				cotizadorExpressDTOResultado.setPapelDescripcion(cantidadImpresion + " + " + hojasSobrantes + " [" + String.format("%.3f", precioUnitarioTipoPapelExtendido) + "]");
+				cotizadorExpressDTOResultado.setTintaDescripcion(tintaNumEntMaq + " [" + String.format("%.3f", tintaPrecioUnitario) + "]");
+				cotizadorExpressDTOResultado.setTintaEspecialDescripcion(tintaEspecialNumEntMaq + " [" + String.format("%.3f", tintaEspecialPrecioUnitario) + "]" );
+				cotizadorExpressDTOResultado.setBarnizDescripcion("F:" + frenteBarnizNumEnt + " [" + String.format("%.3f", frenteBarnizPrecioUnitario) + "] V:" + vueltaBarnizNumEnt + " [" + String.format("%.3f", vueltaBarnizPrecioUnitario) + "]");
+				cotizadorExpressDTOResultado.setPlacasDescripcion(numeroPlacas + " [" + String.format("%.2f", placasPrecioUnitario) + "]" );
 				
-				cotizadorExpress.setPapelCosteTotal(papelCosteTotal);
-				cotizadorExpress.setTintaCosteTotal(tintaCosteTotal);
-				cotizadorExpress.setTintaEspecialCosteTotal(tintaEspecialCosteTotal);
-				cotizadorExpress.setBarnizCosteTotal(frenteBarnizCosteTotal + vueltaBarnizCosteTotal);
-				cotizadorExpress.setPlacasCosteTotal(placasCosteTotal);
-				cotizadorExpress.setCotizacionCosteTotal(cotizacionCosteTotal);
+				cotizadorExpressDTOResultado.setPapelCosteTotal(papelCosteTotal);
+				cotizadorExpressDTOResultado.setTintaCosteTotal(tintaCosteTotal);
+				cotizadorExpressDTOResultado.setTintaEspecialCosteTotal(tintaEspecialCosteTotal);
+				cotizadorExpressDTOResultado.setBarnizCosteTotal(frenteBarnizCosteTotal + vueltaBarnizCosteTotal);
+				cotizadorExpressDTOResultado.setPlacasCosteTotal(placasCosteTotal);
+				cotizadorExpressDTOResultado.setCotizacionCosteTotal(cotizacionCosteTotal);
 				
 				break;
 			case TIPO_TRABAJO_REVISTA:
@@ -440,18 +446,18 @@ public class CotizacionExpressServiceImpl implements CotizacionExpressService {
 					cotizacionGranCosteTotal += placasCosteTotal;
 				
 				// COTIZACION
-				cotizadorExpress.setPapelDescripcion(papelCantidadTotal + " + " + papelSobranteCantidadTotal + " [" + String.format("%.3f", precioUnitarioTipoPapelExtendido) + "]" );
-				cotizadorExpress.setTintaDescripcion(tintaDescripcion.toString());
-				cotizadorExpress.setTintaEspecialDescripcion(tintaEspecialDescripcion.toString());
-				cotizadorExpress.setBarnizDescripcion(barnizDescripcion.toString());
-				cotizadorExpress.setPlacasDescripcion(numeroPlacas + " [" + String.format("%.2f", placasPrecioUnitario) + "]");
+				cotizadorExpressDTOResultado.setPapelDescripcion(papelCantidadTotal + " + " + papelSobranteCantidadTotal + " [" + String.format("%.3f", precioUnitarioTipoPapelExtendido) + "]" );
+				cotizadorExpressDTOResultado.setTintaDescripcion(tintaDescripcion.toString());
+				cotizadorExpressDTOResultado.setTintaEspecialDescripcion(tintaEspecialDescripcion.toString());
+				cotizadorExpressDTOResultado.setBarnizDescripcion(barnizDescripcion.toString());
+				cotizadorExpressDTOResultado.setPlacasDescripcion(numeroPlacas + " [" + String.format("%.2f", placasPrecioUnitario) + "]");
 				
-				cotizadorExpress.setPapelCosteTotal(papelCosteTotal);
-				cotizadorExpress.setTintaCosteTotal(tintaGranCosteTotal);
-				cotizadorExpress.setTintaEspecialCosteTotal(tintaEspecialGranCosteTotal);
-				cotizadorExpress.setBarnizCosteTotal(barnizGranCosteTotal);
-				cotizadorExpress.setPlacasCosteTotal(placasCosteTotal);
-				cotizadorExpress.setCotizacionCosteTotal(cotizacionGranCosteTotal);
+				cotizadorExpressDTOResultado.setPapelCosteTotal(papelCosteTotal);
+				cotizadorExpressDTOResultado.setTintaCosteTotal(tintaGranCosteTotal);
+				cotizadorExpressDTOResultado.setTintaEspecialCosteTotal(tintaEspecialGranCosteTotal);
+				cotizadorExpressDTOResultado.setBarnizCosteTotal(barnizGranCosteTotal);
+				cotizadorExpressDTOResultado.setPlacasCosteTotal(placasCosteTotal);
+				cotizadorExpressDTOResultado.setCotizacionCosteTotal(cotizacionGranCosteTotal);
 				
 				tamanioPublicacion = null;
 				break;
@@ -625,18 +631,18 @@ public class CotizacionExpressServiceImpl implements CotizacionExpressService {
 					cotizacionGranCosteTotal += placasCosteTotal;
 				
 				// COTIZACION
-				cotizadorExpress.setPapelDescripcion(papelCantidadTotal + " + " + papelSobranteCantidadTotal + " [" + String.format("%.3f", precioUnitarioTipoPapelExtendido) + "]" );
-				cotizadorExpress.setTintaDescripcion(tintaDescripcion.toString());
-				cotizadorExpress.setTintaEspecialDescripcion(tintaEspecialDescripcion.toString());
-				cotizadorExpress.setBarnizDescripcion(barnizDescripcion.toString());
-				cotizadorExpress.setPlacasDescripcion(numeroPlacas + " [" + String.format("%.2f", placasPrecioUnitario) + "]");
+				cotizadorExpressDTOResultado.setPapelDescripcion(papelCantidadTotal + " + " + papelSobranteCantidadTotal + " [" + String.format("%.3f", precioUnitarioTipoPapelExtendido) + "]" );
+				cotizadorExpressDTOResultado.setTintaDescripcion(tintaDescripcion.toString());
+				cotizadorExpressDTOResultado.setTintaEspecialDescripcion(tintaEspecialDescripcion.toString());
+				cotizadorExpressDTOResultado.setBarnizDescripcion(barnizDescripcion.toString());
+				cotizadorExpressDTOResultado.setPlacasDescripcion(numeroPlacas + " [" + String.format("%.2f", placasPrecioUnitario) + "]");
 				
-				cotizadorExpress.setPapelCosteTotal(papelCosteTotal);
-				cotizadorExpress.setTintaCosteTotal(tintaGranCosteTotal);
-				cotizadorExpress.setTintaEspecialCosteTotal(tintaEspecialGranCosteTotal);
-				cotizadorExpress.setBarnizCosteTotal(barnizGranCosteTotal);
-				cotizadorExpress.setPlacasCosteTotal(placasCosteTotal);
-				cotizadorExpress.setCotizacionCosteTotal(cotizacionGranCosteTotal);
+				cotizadorExpressDTOResultado.setPapelCosteTotal(papelCosteTotal);
+				cotizadorExpressDTOResultado.setTintaCosteTotal(tintaGranCosteTotal);
+				cotizadorExpressDTOResultado.setTintaEspecialCosteTotal(tintaEspecialGranCosteTotal);
+				cotizadorExpressDTOResultado.setBarnizCosteTotal(barnizGranCosteTotal);
+				cotizadorExpressDTOResultado.setPlacasCosteTotal(placasCosteTotal);
+				cotizadorExpressDTOResultado.setCotizacionCosteTotal(cotizacionGranCosteTotal);
 				
 				tamanioPublicacion = null;
 				break;
@@ -657,7 +663,113 @@ public class CotizacionExpressServiceImpl implements CotizacionExpressService {
 		tintaEspecialDescripcion 	= null;
 		barnizDescripcion			= null;
 		
-		return cotizadorExpress;
+		return cotizadorExpressDTOResultado;
+	}
+
+
+	public byte[] obtieneExcelCotizacionExpress(CotizacionExpressDTOVariables cotizacionExpressDTOVariables) {
+		CotizacionExpressDTOResultado cotizadorExpressDTOResultado = calculaCotizacionExpress(cotizacionExpressDTOVariables);
+		
+		// generacion del excel
+		HSSFWorkbook wb = new HSSFWorkbook();
+		try {
+			// estilos
+				// alineacion izquierda
+			HSSFCellStyle cellStyle_izquierda = wb.createCellStyle();
+			cellStyle_izquierda.setAlignment((short)HSSFCellStyle.ALIGN_LEFT);
+				// alineacion centro
+			HSSFCellStyle cellStyle_centro = wb.createCellStyle();
+			cellStyle_centro.setAlignment((short)HSSFCellStyle.ALIGN_CENTER);
+			
+			// crecion de la hoja
+			HSSFSheet sheet = wb.createSheet("Cotizacion Express");
+			
+			// CREACION FILA 1
+			HSSFRow row_0 = sheet.createRow(0);
+			// CREACION DE COLUMNAS
+			row_0.createCell(1).setCellValue( "DESCRIPCION" );
+			row_0.createCell(2).setCellValue( "PRECIO" );
+						
+			
+			// CREACION FILA 1
+			HSSFRow row_1 = sheet.createRow(1);
+			// CREACION DE COLUMNAS
+			HSSFCell cell_papel = row_1.createCell(0);
+			cell_papel.setCellValue("PAPEL:");
+			cell_papel.setCellStyle(cellStyle_izquierda);
+			row_1.createCell(1).setCellValue( cotizadorExpressDTOResultado.getPapelDescripcion() );
+			//row_1.createCell(2).setCellValue( String.format("%.2f", cotizadorExpressDTOResultado.getPapelCosteTotal() ) );
+			row_1.createCell(2).setCellValue( cotizadorExpressDTOResultado.getPapelCosteTotal() );
+			if (!cotizacionExpressDTOVariables.isIncluyeCostoPapel())
+				row_1.createCell(3).setCellValue("ESTE PRECIO NO APLICA EN LA SUMATORIA");
+			
+			// CREACION FILA 2
+			HSSFRow row_2 = sheet.createRow(2);
+			// CREACION DE COLUMNAS
+			HSSFCell cell_tinta = row_2.createCell(0);
+			cell_tinta.setCellValue("TINTA:");
+			cell_tinta.setCellStyle(cellStyle_izquierda);
+			row_2.createCell(1).setCellValue( cotizadorExpressDTOResultado.getTintaDescripcion() );
+			//row_2.createCell(2).setCellValue( String.format("%.2f", cotizadorExpressDTOResultado.getTintaCosteTotal() ) );
+			row_2.createCell(2).setCellValue( cotizadorExpressDTOResultado.getTintaCosteTotal() );
+			
+			// CREACION FILA 3
+			HSSFRow row_3 = sheet.createRow(3);
+			// CREACION DE COLUMNAS
+			HSSFCell cell_tinta_esp = row_3.createCell(0);
+			cell_tinta_esp.setCellValue("TINTA ESPECIAL:");
+			cell_tinta_esp.setCellStyle(cellStyle_izquierda);
+			row_3.createCell(1).setCellValue( cotizadorExpressDTOResultado.getTintaEspecialDescripcion() );
+			//row_3.createCell(2).setCellValue( String.format("%.2f", cotizadorExpressDTOResultado.getTintaEspecialCosteTotal() ) );
+			row_3.createCell(2).setCellValue( cotizadorExpressDTOResultado.getTintaEspecialCosteTotal() );
+			
+			// CREACION FILA 4
+			HSSFRow row_4 = sheet.createRow(4);
+			// CREACION DE COLUMNAS
+			HSSFCell cell_tinta_barniz = row_4.createCell(0);
+			cell_tinta_barniz.setCellValue("BARNIZ:");
+			cell_tinta_barniz.setCellStyle(cellStyle_izquierda);
+			row_4.createCell(1).setCellValue( cotizadorExpressDTOResultado.getBarnizDescripcion() );
+			//row_4.createCell(2).setCellValue( String.format("%.2f", cotizadorExpressDTOResultado.getBarnizCosteTotal() ) );
+			row_4.createCell(2).setCellValue( cotizadorExpressDTOResultado.getBarnizCosteTotal() );
+			
+			// CREACION FILA 5
+			HSSFRow row_5 = sheet.createRow(5);
+			// CREACION DE COLUMNAS
+			HSSFCell cell_tinta_placas = row_5.createCell(0);
+			cell_tinta_placas.setCellValue("PLACAS:");
+			cell_tinta_placas.setCellStyle(cellStyle_izquierda);
+			row_5.createCell(1).setCellValue( cotizadorExpressDTOResultado.getPlacasDescripcion() );
+			//row_5.createCell(2).setCellValue( String.format("%.2f", cotizadorExpressDTOResultado.getPlacasCosteTotal() ) );
+			row_5.createCell(2).setCellValue(cotizadorExpressDTOResultado.getPlacasCosteTotal() );
+			if (!cotizacionExpressDTOVariables.isIncluyeCostoPlaca())
+				row_5.createCell(3).setCellValue("ESTE PRECIO NO APLICA EN LA SUMATORIA");
+			
+			// CREACION FILA 6
+			HSSFRow row_6 = sheet.createRow(6);
+			// CREACION DE COLUMNAS
+			HSSFCell cell_tinta_precio_total = row_6.createCell(0);
+			cell_tinta_precio_total.setCellValue("PRECIO TOTAL:");
+			cell_tinta_precio_total.setCellStyle(cellStyle_izquierda);
+			//row_6.createCell(2).setCellValue( String.format("%.2f", cotizadorExpressDTOResultado.getCotizacionCosteTotal() ) );
+			row_6.createCell(2).setCellValue( cotizadorExpressDTOResultado.getCotizacionCosteTotal() );
+			
+			wb.close();
+		} catch( Exception e ) {
+			System.out.println("obtieneExcelCotizacionExpress:Error al generar el archivo de excel");
+		}
+		
+		// creacion del stream
+		ByteArrayOutputStream os;
+		try {
+			os = new ByteArrayOutputStream();
+			wb.write(os);
+			return os.toByteArray();
+		} catch( Exception e ) {
+			System.out.println("obtieneExcelCotizacionExpress:Error al convertir a stream");
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

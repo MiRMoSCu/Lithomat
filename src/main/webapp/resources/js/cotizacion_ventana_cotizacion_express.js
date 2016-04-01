@@ -113,7 +113,7 @@ function muestraInformacionCosto(response) {
 		
 }
 
-function buscaCotizacionExpress() {
+function validaFormulario() {
 	// validacion
 	var correcto = true;
 	
@@ -209,8 +209,12 @@ function buscaCotizacionExpress() {
 		alert("La descripcion de papel no puede estar vacía. Favor de informarlo.");
 	}
 	*/
+	return correcto;
+}
+
+function buscaCotizacionExpress() {
 		
-	if ( correcto ) {
+	if (validaFormulario()) {
 		document.body.style.cursor="wait";
 		$.ajax({
 			type:"POST",
@@ -236,7 +240,11 @@ function buscaCotizacionExpress() {
 }
 
 function impresionCotizacionExpress() {
-	
+	if (validaFormulario()) {
+		document.cotizador_express.method = "POST";
+		document.cotizador_express.action = urlReporteExcel;
+		document.cotizador_express.submit();
+	}
 }
 
 
