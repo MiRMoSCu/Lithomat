@@ -34,25 +34,25 @@
 					"SELECT 
 					    u.usuario username, p.nombre authority
 					FROM
-					    perfil_x_usuario pfu,
+					    perfil_x_usuario pxu,
 					    usuario u,
 					    perfil p
 					WHERE
-					    pfu.id_usuario = u.id_usuario
-					        AND pfu.id_perfil = p.id_perfil
-					        AND pfu.activo = TRUE
+					    pxu.id_usuario = u.id_usuario
+					        AND pxu.id_perfil = p.id_perfil
+					        AND pxu.activo = TRUE
 					        and u.usuario = ?" 
 				users-by-username-query=
 					"SELECT 
 					    u.usuario username, u.contrasenia password, u.activo enabled
 					FROM
-					    perfil_x_usuario pfu,
+					    perfil_x_usuario pxu,
 					    usuario u,
 					    perfil p
 					WHERE
-					    pfu.id_usuario = u.id_usuario
-					        AND pfu.id_perfil = p.id_perfil
-					        AND pfu.activo = TRUE
+					    pxu.id_usuario = u.id_usuario
+					        AND pxu.id_perfil = p.id_perfil
+					        AND pxu.activo = TRUE
 					        AND u.usuario = ?" />
 		</security:authentication-provider>
 	</security:authentication-manager>
