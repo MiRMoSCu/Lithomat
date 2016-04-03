@@ -39,6 +39,10 @@ public class TipoTrabajoDetalleController {
 	
 	private static final Logger log = Logger.getLogger(TipoTrabajoDetalleController.class);
 	
+	private static final int TIPO_TRABAJO_FLYER 	= 1;
+	private static final int TIPO_TRABAJO_REVISTA 	= 2;
+	private static final int TIPO_TRABAJO_OTRO 		= 3;
+	
 	@Resource
 	private TipoTrabajoDetalleService tipoTrabajoDetalleService;
 	@Resource
@@ -144,9 +148,29 @@ public class TipoTrabajoDetalleController {
 		int idTipoTrabajoDetalle = tipoTrabajoDetalleService.creaTipoTrabajoDetalle(tipoTrabajoDetalle);
 		
 		partida = partidaService.buscaPartida(idPartida);
-		List<ComboSelect> listaTabulador = tabuladorPreciosService.listaTabuladorDescendiente(idMaquina, idTipoComplejidad, partida.getCantidad());
+		
+		int cantidadTabulador = 0;
+		switch (partida.getTipoTrabajo().getIdTipoTrabajo()) {
+			case TIPO_TRABAJO_FLYER:
+				cantidadTabulador = partida.getCantidad() / tipoTrabajoDetalle.getRepeticionesXPliego();
+				break;
+			case TIPO_TRABAJO_REVISTA:
+				float cantidadPliegos = (float)tipoTrabajoDetalle.getNumeroPaginasPublicacion() / (float)tipoTrabajoDetalle.getTamanioPublicacion().getNumeroPaginas();
+				if ( cantidadPliegos >= 1 )
+					cantidadTabulador = partida.getCantidad();
+				else
+					cantidadTabulador = (int)(partida.getCantidad() * cantidadPliegos);
+				break;
+			case TIPO_TRABAJO_OTRO:
+				cantidadTabulador = 1000;
+				break;
+			default:
+				cantidadTabulador = 1000;
+				break;
+		}
+		
+		List<ComboSelect> listaTabulador = tabuladorPreciosService.listaTabuladorDescendiente(idMaquina, idTipoComplejidad, cantidadTabulador);
 		Gson gson = new Gson();
-
 		JsonResponse jsonResponse = new JsonResponse();
 		jsonResponse.setEstatusOperacion(idTipoTrabajoDetalle);
 		jsonResponse.setIdTipoTrabajoDetalle(idTipoTrabajoDetalle);
@@ -293,10 +317,37 @@ public class TipoTrabajoDetalleController {
 		tipoTrabajoDetalle.getTipoComplejidad().setIdTipoComplejidad(idTipoComplejidad);
 		tipoTrabajoDetalleService.modificaTipoTrabajoDetalle(tipoTrabajoDetalle);
 		
-		JsonResponse jsonResponse = new JsonResponse();
-		jsonResponse.setEstatusOperacion(1);
+		Partida partida = partidaService.buscaPartida(idPartida);
 		
-		return null;
+		int cantidadTabulador = 0;
+		switch (partida.getTipoTrabajo().getIdTipoTrabajo()) {
+			case TIPO_TRABAJO_FLYER:
+				cantidadTabulador = partida.getCantidad() / tipoTrabajoDetalle.getRepeticionesXPliego();
+				break;
+			case TIPO_TRABAJO_REVISTA:
+				float cantidadPliegos = tipoTrabajoDetalle.getNumeroPaginasPublicacion() / (float)tipoTrabajoDetalle.getTamanioPublicacion().getNumeroPaginas();
+				if ( cantidadPliegos >= 1 )
+					cantidadTabulador = partida.getCantidad();
+				else
+					cantidadTabulador = (int)(partida.getCantidad() * cantidadPliegos);
+				break;
+			case TIPO_TRABAJO_OTRO:
+				cantidadTabulador = 1000;
+				break;
+			default:
+				cantidadTabulador = 1000;
+				break;
+		}
+		
+		List<ComboSelect> listaTabulador = tabuladorPreciosService.listaTabuladorDescendiente(idMaquina, idTipoComplejidad, cantidadTabulador);
+		Gson gson = new Gson();
+		JsonResponse jsonResponse = new JsonResponse();
+		jsonResponse.setEstatusOperacion(idTipoTrabajoDetalle);
+		jsonResponse.setIdTipoTrabajoDetalle(idTipoTrabajoDetalle);
+		jsonResponse.setTextoJson(gson.toJson(listaTabulador));
+		gson = null;
+		
+		return jsonResponse;
 	}
 	
 	

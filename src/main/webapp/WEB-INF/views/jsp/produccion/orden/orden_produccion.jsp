@@ -817,7 +817,8 @@
                                                                             class="input" 
                                                                             name="cantidad"
                                                                             value="" 
-                                                                            onkeydown="revisaNumero(false, this.value, event, null, null)"/>
+                                                                            onkeydown="revisaNumero(false, this.value, event, null, null)"
+                                                                            onfocus="this.select()"/>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -1258,6 +1259,7 @@
                                     										name="alto_corte_inicial"
                                     										value="0"
                                     										maxlength="4"
+                                    										onfocus="this.select()"
                                     										onkeydown="revisaNumero(true, this.value, event, null, null)"/>
                                     							</td>
                                     						</tr>
@@ -1275,6 +1277,7 @@
                                     										name="ancho_corte_inicial"
                                     										value="0"
                                     										maxlength="4"
+                                    										onfocus="this.select()"
                                     										onkeydown="revisaNumero(true, this.value, event, null, null)"/>
                                     							</td>
                                     						</tr>
@@ -1337,6 +1340,7 @@
                                                                             class="input"
                                                                             name="frente_num_tinta_especial" 
                                                                             value="0"
+                                                                            onfocus="this.select()"
                                                                             onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                                 </td>
                                                             </tr>
@@ -1415,6 +1419,7 @@
                                                                             class="input"
                                                                             name="vuelta_num_tinta_especial" 
                                                                             value="0"
+                                                                            onfocus="this.select()"
                                                                             onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                                 </td>
                                                             </tr>

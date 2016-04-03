@@ -108,7 +108,10 @@ public class CotizacionExpressController {
 			@RequestParam(value = "id_maquina", 					required = false) int idMaquina,
 			@RequestParam(value = "incluye_costo_placa", 			required = false) boolean incluyeCostoPlaca,
 			@RequestParam(value = "id_tipo_placa", 					required = false) int idTipoPlaca,
-			@RequestParam(value = "vuelta_mismas_placas", 			required = false) boolean vueltaMismasPlacas
+			@RequestParam(value = "vuelta_mismas_placas", 			required = false) boolean vueltaMismasPlacas,
+			@RequestParam(value = "aplica_precio_tabulador", 		required = false) boolean aplicaPrecioTabulador,
+			@RequestParam(value = "precio_tabulador", 				required = false) int precioTabulador,
+			@RequestParam(value = "costos_extra", 					required = false) float costosExtra
 		) {
 		log.info("/calcula_cotizacion");
 		
@@ -132,6 +135,9 @@ public class CotizacionExpressController {
 		cotizacionExpressDTOVariables.setIncluyeCostoPlaca(incluyeCostoPlaca);
 		cotizacionExpressDTOVariables.setIdTipoPlaca(idTipoPlaca);
 		cotizacionExpressDTOVariables.setVueltaMismasPlacas(vueltaMismasPlacas);
+		cotizacionExpressDTOVariables.setAplicaPrecioTabulador(aplicaPrecioTabulador);
+		cotizacionExpressDTOVariables.setPrecioTabulador(precioTabulador);
+		cotizacionExpressDTOVariables.setCostosExtra(costosExtra);
 		
 		CotizacionExpressDTOResultado cotizadorExpressResultado = cotizacionExpressService.calculaCotizacionExpress(cotizacionExpressDTOVariables);
 		
@@ -162,6 +168,9 @@ public class CotizacionExpressController {
 			@RequestParam(value = "incluye_costo_placa", 			required = false) boolean incluyeCostoPlaca,
 			@RequestParam(value = "id_tipo_placa", 					required = false) int idTipoPlaca,
 			@RequestParam(value = "vuelta_mismas_placas", 			required = false) boolean vueltaMismasPlacas,
+			@RequestParam(value = "aplica_precio_tabulador", 		required = false) boolean aplicaPrecioTabulador,
+			@RequestParam(value = "precio_tabulador", 				required = false) int precioTabulador,
+			@RequestParam(value = "costos_extra", 					required = false) float costosExtra,
 			HttpServletRequest request, 
 			HttpServletResponse response
 		) {
@@ -185,6 +194,9 @@ public class CotizacionExpressController {
 		cotizacionExpressDTOVariables.setIncluyeCostoPlaca(incluyeCostoPlaca);
 		cotizacionExpressDTOVariables.setIdTipoPlaca(idTipoPlaca);
 		cotizacionExpressDTOVariables.setVueltaMismasPlacas(vueltaMismasPlacas);
+		cotizacionExpressDTOVariables.setAplicaPrecioTabulador(aplicaPrecioTabulador);
+		cotizacionExpressDTOVariables.setPrecioTabulador(precioTabulador);
+		cotizacionExpressDTOVariables.setCostosExtra(costosExtra);
 		
 		byte[] documento = cotizacionExpressService.obtieneExcelCotizacionExpress(cotizacionExpressDTOVariables);
 		
@@ -196,8 +208,8 @@ public class CotizacionExpressController {
 			OutputStream os = response.getOutputStream();
 			response.setHeader("Content-Disposition","attachment; filename=cotizacionExpress" + dateFormat.format(date) + ".xls");
 			response.setContentType("application/vnd.ms-excel");
-			response.setContentLength( documento.length );
-			os.write( documento );
+			response.setContentLength(documento.length);
+			os.write(documento);
 			os.flush();
 		} catch( Exception e ) {
 			log.error("Error al enviar el archivo de excel");

@@ -66,6 +66,7 @@ function limpiaForm() {
 	document.cotizador_express.tinta_especial_coste_total.value 	= "$ 0.00";
 	document.cotizador_express.barniz_coste_total.value 			= "$ 0.00";
 	document.cotizador_express.placas_coste_total.value 			= "$ 0.00";
+	document.cotizador_express.costos_extra_corte_total.value 		= "$ 0.00";
 	
 	document.cotizador_express.cotizacion_coste_total.value 		= "$ 0.00";
 }
@@ -87,6 +88,17 @@ function limpiaCamposCosteTotal() {
 }
 
 function muestraInformacionCosto(response) {
+	$("[name='select_precio_tabulador']").empty();
+	var jsonObject = JSON.parse( response.textoJson );
+	$.each( jsonObject, function(i, item){
+		var option = document.createElement("option");
+		option.value = item.value;
+		option.text	 = item.text;
+		document.getElementById("select_precio_tabulador").add(option);
+		delete option;
+	});
+	jsonObject = null;
+	
 	document.cotizador_express.papel_descripcion.value				= response.papelDescripcion;
 	document.cotizador_express.tinta_descripcion.value 				= response.tintaDescripcion;
 	document.cotizador_express.tinta_especial_descripcion.value 	= response.tintaEspecialDescripcion;
@@ -98,6 +110,8 @@ function muestraInformacionCosto(response) {
 	document.cotizador_express.tinta_especial_coste_total.value 	= "$ " + (response.tintaEspecialCosteTotal).formatMoney(2);
 	document.cotizador_express.barniz_coste_total.value 			= "$ " + (response.barnizCosteTotal).formatMoney(2);
 	document.cotizador_express.placas_coste_total.value 			= "$ " + (response.placasCosteTotal).formatMoney(2);
+	document.cotizador_express.costos_extra_coste_total.value 		= "$ " + (response.costosExtraTotal).formatMoney(2);
+	
 	document.cotizador_express.cotizacion_coste_total.value 		= "$ " + (response.cotizacionCosteTotal).formatMoney(2);
 	
 	// estilo papel
@@ -209,6 +223,18 @@ function validaFormulario() {
 		alert("La descripcion de papel no puede estar vacía. Favor de informarlo.");
 	}
 	*/
+	
+	if (correcto
+			&& document.cotizador_express.aplica_precio_tabulador.checked
+			&& (document.cotizador_express.precio_tabulador.value == ""
+				|| isNaN(document.cotizador_express.precio_tabulador.value)
+				|| parseInt(document.cotizador_express.precio_tabulador.value) <= 0)) {
+		correcto = false;
+		alert("El precio del tabulador deber ser un número mayor a cero");
+		document.cotizador_express.precio_tabulador.focus();
+		document.cotizador_express.precio_tabulador.select();
+	}
+	
 	return correcto;
 }
 

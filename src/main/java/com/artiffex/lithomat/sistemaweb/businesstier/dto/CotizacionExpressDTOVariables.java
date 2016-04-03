@@ -25,6 +25,9 @@ public class CotizacionExpressDTOVariables implements Serializable {
 	private boolean incluyeCostoPlaca;
 	private int idTipoPlaca;
 	private boolean vueltaMismasPlacas;
+	private boolean aplicaPrecioTabulador;
+	private int precioTabulador;
+	private float costosExtra;
 	
 	
 	public int getIdTipoCliente() {
@@ -140,5 +143,23 @@ public class CotizacionExpressDTOVariables implements Serializable {
 	}
 	public void setVueltaMismasPlacas(boolean vueltaMismasPlacas) {
 		this.vueltaMismasPlacas = vueltaMismasPlacas;
+	}
+	public boolean isAplicaPrecioTabulador() {
+		return aplicaPrecioTabulador;
+	}
+	public void setAplicaPrecioTabulador(boolean aplicaPrecioTabulador) {
+		this.aplicaPrecioTabulador = aplicaPrecioTabulador;
+	}
+	public int getPrecioTabulador() {
+		return precioTabulador;
+	}
+	public void setPrecioTabulador(int precioTabulador) {
+		this.precioTabulador = precioTabulador;
+	}
+	public float getCostosExtra() {
+		return costosExtra;
+	}
+	public void setCostosExtra(float costosExtra) {
+		this.costosExtra = costosExtra;
 	}
 }

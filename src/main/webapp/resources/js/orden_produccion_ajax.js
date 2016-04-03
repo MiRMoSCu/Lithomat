@@ -565,6 +565,7 @@ function ajaxAgregaTipoTrabajoDetalle() {
             success: function( response ) { 
                 //var json = JSON.stringify(eval("(" + response + ")"));    // forma de convertir cadenas a json
                 //var json = JSON.parse(response);                          // forma de convertir cadenas a json
+            	console.log(response);
                 switch( response.estatusOperacion ) {
                     case 0: // error
                         //console.log(e);
@@ -585,7 +586,7 @@ function ajaxAgregaTipoTrabajoDetalle() {
                     
                     	//console.log( response.textoJson );
                     	// llena el select tabulador precios segun cantidad
-                    	$("[name='select_tabulador_precios']").empty();
+                    	$("[name='select_precio_tabulador']").empty();
                     	var jsonObject = JSON.parse( response.textoJson );
                     	$.each( jsonObject, function(i, item){
                 			var option = document.createElement("option");

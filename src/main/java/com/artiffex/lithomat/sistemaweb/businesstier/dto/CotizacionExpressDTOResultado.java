@@ -16,7 +16,9 @@ public class CotizacionExpressDTOResultado implements Serializable {
 	private float tintaEspecialCosteTotal;
 	private float barnizCosteTotal;
 	private float placasCosteTotal;
+	private float costosExtraTotal;
 	private float cotizacionCosteTotal;
+	private String textoJson;
 	
 	
 	public String getPapelDescripcion() {
@@ -79,10 +81,22 @@ public class CotizacionExpressDTOResultado implements Serializable {
 	public void setPlacasCosteTotal(float placasCosteTotal) {
 		this.placasCosteTotal = placasCosteTotal;
 	}
+	public float getCostosExtraTotal() {
+		return costosExtraTotal;
+	}
+	public void setCostosExtraTotal(float costosExtraTotal) {
+		this.costosExtraTotal = costosExtraTotal;
+	}
 	public float getCotizacionCosteTotal() {
 		return cotizacionCosteTotal;
 	}
 	public void setCotizacionCosteTotal(float cotizacionCosteTotal) {
 		this.cotizacionCosteTotal = cotizacionCosteTotal;
+	}
+	public String getTextoJson() {
+		return textoJson;
+	}
+	public void setTextoJson(String textoJson) {
+		this.textoJson = textoJson;
 	}
 }

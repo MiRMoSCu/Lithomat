@@ -50,6 +50,9 @@
 							document.getElementById("div_tipo_trabajo_otro").style.display = "inline";
 						}
 		        		radioBotonAnterior = $("input[type='radio'][name='id_tipo_trabajo']:checked").val();
+		        		// limpia campos descuento por abulador
+		        		document.cotizador_express.aplica_precio_tabulador.checked  = false;
+		        		document.cotizador_express.precio_tabulador.value 			= "0";
 					}
 	        	});
 			});
@@ -99,7 +102,8 @@
 	                        										class="input"
 	                        										name="cantidad"
 	                        										value=""
-	                        										onkeydown="revisaNumero(false, this.value, event, null, null)"/>
+	                        										onkeydown="revisaNumero(false, this.value, event, null, null)"
+	                        										onfocus="this.select()"/>
 	                        							</td>
 	                        						</tr>
 	                        					</table>
@@ -172,6 +176,7 @@
 			                        									class="input"
 			                        									name="repeticiones_x_pliego"
 			                        									value="0"
+			                        									onfocus="this.select()"
 			                        									onkeydown="revisaNumero(false, this.value, event, null, null)"/>
 			                        						</td>
 			                        					</tr>
@@ -197,6 +202,7 @@
 			                        									class="input"
 			                        									name="numero_paginas_publicacion"
 			                        									value="0"
+			                        									onfocus="this.select()"
 			                        									onkeydown="revisaNumero(false, this.value, event, null, null)"/>
 			                        						</td>
 			                        					</tr>
@@ -235,6 +241,7 @@
 		                        										class="input"
 		                        										name="numero_pliegos"
 		                        										value="0"
+		                        										onfocus="this.select()"
 		                        										onkeydown="revisaNumero(true, this.value, event, null, null)"/>
 		                        							</td>
 		                        						</tr>
@@ -330,6 +337,7 @@
 	                        										class="input"
 	                        										name="frente_numero_tinta_especial"
 	                        										value="0"
+	                        										onfocus="this.select()"
 	                        										onkeydown="revisaNumero(false, this.value, event, null, null)"/>
 	                        							</td>
 	                        						</tr>
@@ -346,6 +354,7 @@
 	                        										class="input"
 	                        										name="vuelta_numero_tinta_especial"
 	                        										value="0"
+	                        										onfocus="this.select()"
 	                        										onkeydown="revisaNumero(false, this.value, event, null, null)"/>
 	                        							</td>
 	                        						</tr>
@@ -446,6 +455,69 @@
 		                        		</div>
 		                        	</div>
 		                        </div>
+		                        <div class="linea">
+		                        	<div class="casilla">
+		                        		<div class="columna_izquierda">
+		                        			<div class="columna_completa">
+		                        				<table>
+			                        				<tr>
+			                        					<td width="1%">Tabulador:</td>
+		                        						<td>
+		                        							<select 	name="select_precio_tabulador" 
+		                        										id="select_precio_tabulador"
+		                        										onchange="document.cotizador_express.precio_tabulador.value = this.value"></select>
+		                        						</td>
+			                        				</tr>
+			                        			</table>
+		                        			</div>
+		                        		</div>
+		                        		<div class="columna_derecha">
+		                        			<div class="columna_completa">
+		                        				<table>
+		                        					<tr>
+		                        						<td width="1%">
+		                        							<input 	type="checkbox"
+		                        									name="aplica_precio_tabulador"/>
+		                        						</td>
+		                        						<td width="63%">
+		                        							<span style="cursor: pointer;" onclick="document.cotizador_express.aplica_precio_tabulador.click()">Aplica Precio Millar:</span>
+		                        						</td>
+			                        					<td>
+			                        						<input	type="text"
+		                        									class="input"
+		                        									name="precio_tabulador"
+		                        									value="0"
+		                        									maxlength="3"
+		                        									onkeydown="revisaNumero(false, this.value, event, null, null)"
+		                        									onfocus="this.select()"/>
+			                        					</td>
+		                        					</tr>
+		                        				</table>
+		                        			</div>
+		                        		</div>
+		                        	</div>
+		                        </div>
+		                        <div class="linea">
+		                        	<div class="casilla">
+		                        		<div class="columna_derecha">
+		                        			<div class="columna_completa">
+		                        				<table>
+		                        					<tr>
+		                        						<td width="43%">Costos Extra:</td>
+		                        						<td>
+		                        							<input 	type="text"
+			                        								class="input"
+			                        								name="costos_extra"
+			                        								value="0"
+			                        								onfocus="this.select()"
+			                        								onkeydown="revisaNumero(true, this.value, event, null, null)"/>
+		                        						</td>
+		                        					</tr>
+		                        				</table>
+		                        			</div>
+		                        		</div>
+		                        	</div>
+		                        </div>
 	                        	<br/>
 	                        	<div>
 	                        		<div style="text-align: right;">
@@ -463,6 +535,7 @@
 	                        	<div class="div_separador_chico">
 		                        	<img alt="" src="<c:url value="/resources/image/separador_chico.jpg"/>"/>
 		                        </div>
+		                        
 		                        <div class="linea">
 		                        	<div class="casilla">
 		                        		<div class="columna_izquierda">
@@ -639,6 +712,27 @@
 		                        									class="input"
 		                        									style="text-align: right;"
 		                        									name="placas_coste_total"
+		                        									value="$ 0.00"
+		                        									readonly/>
+	                        							</td>
+	                        						</tr>
+	                        					</table>
+	                        				</div>
+	                        			</div>
+	                        		</div>
+	                        	</div>
+	                        	<div class="linea">
+	                        		<div class="casilla">
+	                        			<div class="columna_derecha">
+	                        				<div class="columna_completa">
+	                        					<table>
+	                        						<tr>
+	                        							<td width="61%">Total Costos Extra:</td>
+	                        							<td>
+	                        								<input	type="text"
+		                        									class="input"
+		                        									style="text-align: right;"
+		                        									name="costos_extra_coste_total"
 		                        									value="$ 0.00"
 		                        									readonly/>
 	                        							</td>

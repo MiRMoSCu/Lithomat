@@ -32,6 +32,8 @@ import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoBarniz
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoClienteService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoPapelExtendidoService;
 import com.artiffex.lithomat.sistemaweb.businesstier.service.interfaz.TipoPlacaService;
+import com.artiffex.lithomat.sistemaweb.businesstier.utilidades.ComboSelect;
+import com.google.gson.Gson;
 
 @Service("cotizacionExpressService")
 public class CotizacionExpressServiceImpl implements CotizacionExpressService {
@@ -39,6 +41,8 @@ public class CotizacionExpressServiceImpl implements CotizacionExpressService {
 	private static final int TIPO_TRABAJO_FLYER 	= 1;
 	private static final int TIPO_TRABAJO_REVISTA 	= 2;
 	private static final int TIPO_TRABAJO_OTRO 		= 3;
+	
+	private static final int TIPO_COMPLEJIDAD_SENCILLA = 1;
 	
 	@Resource
 	private TipoClienteService tipoClienteService;
@@ -136,8 +140,12 @@ public class CotizacionExpressServiceImpl implements CotizacionExpressService {
 					cantidadRedondeada = cantidadImpresion;
 				
 				// PRECIO TABULADOR
-				precioUnitarioTabulador = tabuladorPreciosService.obtienePrecioUnitarioTabulador( 1, cotizacionExpressDTOVariables.getIdMaquina(), cantidadRedondeada );
-				precioUnitarioTabulador = precioUnitarioTabulador * (1 + porcentajeGananciaCliente);
+				if (cotizacionExpressDTOVariables.isAplicaPrecioTabulador()) {
+					precioUnitarioTabulador = ((float)cotizacionExpressDTOVariables.getPrecioTabulador() / (float)1000) * (1 + porcentajeGananciaCliente);
+				} else {
+					precioUnitarioTabulador = tabuladorPreciosService.obtienePrecioUnitarioTabulador( 1, cotizacionExpressDTOVariables.getIdMaquina(), cantidadRedondeada );
+					precioUnitarioTabulador = precioUnitarioTabulador * (1 + porcentajeGananciaCliente);
+				}
 				
 				// CALCULO PAPEL SOBRANTE
 				papelSobrante = new PapelSobrante();
@@ -252,6 +260,8 @@ public class CotizacionExpressServiceImpl implements CotizacionExpressService {
 				if (cotizacionExpressDTOVariables.isIncluyeCostoPlaca())
 					cotizacionCosteTotal += placasCosteTotal;
 				
+				// COSTOS EXTRA
+				cotizacionCosteTotal += cotizacionExpressDTOVariables.getCostosExtra();
 				
 				// COTIZACION
 				cotizadorExpressDTOResultado.setPapelDescripcion(cantidadImpresion + " + " + hojasSobrantes + " [" + String.format("%.3f", precioUnitarioTipoPapelExtendido) + "]");
@@ -265,6 +275,7 @@ public class CotizacionExpressServiceImpl implements CotizacionExpressService {
 				cotizadorExpressDTOResultado.setTintaEspecialCosteTotal(tintaEspecialCosteTotal);
 				cotizadorExpressDTOResultado.setBarnizCosteTotal(frenteBarnizCosteTotal + vueltaBarnizCosteTotal);
 				cotizadorExpressDTOResultado.setPlacasCosteTotal(placasCosteTotal);
+				cotizadorExpressDTOResultado.setCostosExtraTotal(cotizacionExpressDTOVariables.getCostosExtra());
 				cotizadorExpressDTOResultado.setCotizacionCosteTotal(cotizacionCosteTotal);
 				
 				break;
@@ -295,8 +306,12 @@ public class CotizacionExpressServiceImpl implements CotizacionExpressService {
 								else 
 									cantidadRedondeada = cantidadImpresion;
 								
-								precioUnitarioTabulador = tabuladorPreciosService.obtienePrecioUnitarioTabulador( 1, cotizacionExpressDTOVariables.getIdMaquina(), cantidadRedondeada );
-								precioUnitarioTabulador = precioUnitarioTabulador * (1 + porcentajeGananciaCliente);
+								if (cotizacionExpressDTOVariables.isAplicaPrecioTabulador()) {
+									precioUnitarioTabulador = ((float)cotizacionExpressDTOVariables.getPrecioTabulador() / (float)1000) * (1 + porcentajeGananciaCliente);
+								} else {
+									precioUnitarioTabulador = tabuladorPreciosService.obtienePrecioUnitarioTabulador( 1, cotizacionExpressDTOVariables.getIdMaquina(), cantidadRedondeada );
+									precioUnitarioTabulador = precioUnitarioTabulador * (1 + porcentajeGananciaCliente);
+								}
 								
 								// CALCULO PAPEL SOBRANTE
 								papelSobrante = new PapelSobrante();
@@ -445,6 +460,9 @@ public class CotizacionExpressServiceImpl implements CotizacionExpressService {
 				if (cotizacionExpressDTOVariables.isIncluyeCostoPlaca())
 					cotizacionGranCosteTotal += placasCosteTotal;
 				
+				// COSTOS EXTRA
+				cotizacionGranCosteTotal += cotizacionExpressDTOVariables.getCostosExtra();
+				
 				// COTIZACION
 				cotizadorExpressDTOResultado.setPapelDescripcion(papelCantidadTotal + " + " + papelSobranteCantidadTotal + " [" + String.format("%.3f", precioUnitarioTipoPapelExtendido) + "]" );
 				cotizadorExpressDTOResultado.setTintaDescripcion(tintaDescripcion.toString());
@@ -457,6 +475,7 @@ public class CotizacionExpressServiceImpl implements CotizacionExpressService {
 				cotizadorExpressDTOResultado.setTintaEspecialCosteTotal(tintaEspecialGranCosteTotal);
 				cotizadorExpressDTOResultado.setBarnizCosteTotal(barnizGranCosteTotal);
 				cotizadorExpressDTOResultado.setPlacasCosteTotal(placasCosteTotal);
+				cotizadorExpressDTOResultado.setCostosExtraTotal(cotizacionExpressDTOVariables.getCostosExtra());
 				cotizadorExpressDTOResultado.setCotizacionCosteTotal(cotizacionGranCosteTotal);
 				
 				tamanioPublicacion = null;
@@ -481,8 +500,12 @@ public class CotizacionExpressServiceImpl implements CotizacionExpressService {
 								else 
 									cantidadRedondeada = cantidadImpresion;
 								
-								precioUnitarioTabulador = tabuladorPreciosService.obtienePrecioUnitarioTabulador( 1, cotizacionExpressDTOVariables.getIdMaquina(), cantidadRedondeada );
-								precioUnitarioTabulador = precioUnitarioTabulador * (1 + porcentajeGananciaCliente);
+								if (cotizacionExpressDTOVariables.isAplicaPrecioTabulador()) {
+									precioUnitarioTabulador = ((float)cotizacionExpressDTOVariables.getPrecioTabulador() / (float)1000) * (1 + porcentajeGananciaCliente);
+								} else {
+									precioUnitarioTabulador = tabuladorPreciosService.obtienePrecioUnitarioTabulador( 1, cotizacionExpressDTOVariables.getIdMaquina(), cantidadRedondeada );
+									precioUnitarioTabulador = precioUnitarioTabulador * (1 + porcentajeGananciaCliente);
+								}
 								
 								// CALCULO PAPEL SOBRANTE
 								papelSobrante = new PapelSobrante();
@@ -630,6 +653,9 @@ public class CotizacionExpressServiceImpl implements CotizacionExpressService {
 				if (cotizacionExpressDTOVariables.isIncluyeCostoPlaca())
 					cotizacionGranCosteTotal += placasCosteTotal;
 				
+				// COSTOS EXTRA
+				cotizacionGranCosteTotal += cotizacionExpressDTOVariables.getCostosExtra();
+				
 				// COTIZACION
 				cotizadorExpressDTOResultado.setPapelDescripcion(papelCantidadTotal + " + " + papelSobranteCantidadTotal + " [" + String.format("%.3f", precioUnitarioTipoPapelExtendido) + "]" );
 				cotizadorExpressDTOResultado.setTintaDescripcion(tintaDescripcion.toString());
@@ -642,6 +668,7 @@ public class CotizacionExpressServiceImpl implements CotizacionExpressService {
 				cotizadorExpressDTOResultado.setTintaEspecialCosteTotal(tintaEspecialGranCosteTotal);
 				cotizadorExpressDTOResultado.setBarnizCosteTotal(barnizGranCosteTotal);
 				cotizadorExpressDTOResultado.setPlacasCosteTotal(placasCosteTotal);
+				cotizadorExpressDTOResultado.setCostosExtraTotal(cotizacionExpressDTOVariables.getCostosExtra());
 				cotizadorExpressDTOResultado.setCotizacionCosteTotal(cotizacionGranCosteTotal);
 				
 				tamanioPublicacion = null;
@@ -649,6 +676,35 @@ public class CotizacionExpressServiceImpl implements CotizacionExpressService {
 			default:
 				break;
 		}
+		
+		// calculo select_tabulador
+		int cantidadTabulador = 0;
+		switch (cotizacionExpressDTOVariables.getIdTipoTrabajo()) {
+			case TIPO_TRABAJO_FLYER:
+				cantidadTabulador = cotizacionExpressDTOVariables.getCantidad() / cotizacionExpressDTOVariables.getRepeticionesXPliego();
+				break;
+			case TIPO_TRABAJO_REVISTA:
+				tamanioPublicacion = tamanioPublicacionService.buscaTamanioPublicacion(cotizacionExpressDTOVariables.getIdTamanioPublicacion());
+				float cantidadPliegos = cotizacionExpressDTOVariables.getNumeroPaginasPublicacion() / (float)tamanioPublicacion.getNumeroPaginas();
+				if ( cantidadPliegos >= 1 )
+					cantidadTabulador = cotizacionExpressDTOVariables.getCantidad();
+				else
+					cantidadTabulador = (int)(cotizacionExpressDTOVariables.getCantidad() * cantidadPliegos);
+				break;
+			case TIPO_TRABAJO_OTRO:
+				if (cotizacionExpressDTOVariables.getNumeroPliegos() >= 1)
+					cantidadTabulador = cotizacionExpressDTOVariables.getCantidad();
+				else
+					cantidadTabulador = (int) (cotizacionExpressDTOVariables.getCantidad() * cotizacionExpressDTOVariables.getNumeroPliegos()); 
+				break;
+			default:
+				cantidadTabulador = 1000;
+				break;
+		}
+		
+		List<ComboSelect> listaTabulador = tabuladorPreciosService.listaTabuladorDescendiente(cotizacionExpressDTOVariables.getIdMaquina(), TIPO_COMPLEJIDAD_SENCILLA, cantidadTabulador);
+		Gson gson = new Gson();
+		cotizadorExpressDTOResultado.setTextoJson(gson.toJson(listaTabulador));
 		
 		frenteCombinacionTintas 	= null;
 		vueltaCombinacionTintas 	= null;
@@ -662,6 +718,7 @@ public class CotizacionExpressServiceImpl implements CotizacionExpressService {
 		tintaDescripcion 			= null;
 		tintaEspecialDescripcion 	= null;
 		barnizDescripcion			= null;
+		gson 						= null;
 		
 		return cotizadorExpressDTOResultado;
 	}
@@ -748,11 +805,21 @@ public class CotizacionExpressServiceImpl implements CotizacionExpressService {
 			// CREACION FILA 6
 			HSSFRow row_6 = sheet.createRow(6);
 			// CREACION DE COLUMNAS
-			HSSFCell cell_tinta_precio_total = row_6.createCell(0);
+			HSSFCell cell_costos_extra = row_6.createCell(0);
+			cell_costos_extra.setCellValue("COSTOS EXTRA:");
+			cell_costos_extra.setCellStyle(cellStyle_izquierda);
+			//row_6.createCell(2).setCellValue( String.format("%.2f", cotizadorExpressDTOResultado.getPlacasCosteTotal() ) );
+			row_6.createCell(2).setCellValue(cotizadorExpressDTOResultado.getCostosExtraTotal() );
+						
+			
+			// CREACION FILA 7
+			HSSFRow row_7 = sheet.createRow(7);
+			// CREACION DE COLUMNAS
+			HSSFCell cell_tinta_precio_total = row_7.createCell(0);
 			cell_tinta_precio_total.setCellValue("PRECIO TOTAL:");
 			cell_tinta_precio_total.setCellStyle(cellStyle_izquierda);
-			//row_6.createCell(2).setCellValue( String.format("%.2f", cotizadorExpressDTOResultado.getCotizacionCosteTotal() ) );
-			row_6.createCell(2).setCellValue( cotizadorExpressDTOResultado.getCotizacionCosteTotal() );
+			//row_7.createCell(2).setCellValue( String.format("%.2f", cotizadorExpressDTOResultado.getCotizacionCosteTotal() ) );
+			row_7.createCell(2).setCellValue( cotizadorExpressDTOResultado.getCotizacionCosteTotal() );
 			
 			wb.close();
 		} catch( Exception e ) {
