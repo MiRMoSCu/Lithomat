@@ -16,15 +16,14 @@
 		<security:intercept-url pattern="/login.jsp*" access="permitAll" />
 		<security:intercept-url pattern="/resources/**" access="permitAll" />
 		<security:intercept-url pattern="/**" access="isAuthenticated()" />
-		<security:form-login 
-			login-page="/login.jsp"
+		<security:form-login login-page="/login.jsp"
 			username-parameter="usuario" 
 			password-parameter="contrasenia"
 			authentication-failure-url="/login.jsp?error" />
-			<!--  authentication-failure-handler-ref="serverErrorHandler" /> -->
-			<security:session-management>
-				<security:concurrency-control max-sessions="1"/>
-			</security:session-management>
+		<!--  authentication-failure-handler-ref="serverErrorHandler" /> -->
+		<security:session-management>
+			<security:concurrency-control max-sessions="1"/>
+		</security:session-management>
 	</security:http>
 	
 	<security:authentication-manager>
@@ -58,6 +57,6 @@
 		</security:authentication-provider>
 	</security:authentication-manager>
 	
-	<security:global-method-security secured-annotations="enabled" />
+	<security:global-method-security secured-annotations="enabled"/>
 	
 </beans>
