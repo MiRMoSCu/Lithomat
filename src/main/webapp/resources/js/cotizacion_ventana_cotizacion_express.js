@@ -66,7 +66,7 @@ function limpiaForm() {
 	document.cotizador_express.tinta_especial_coste_total.value 	= "$ 0.00";
 	document.cotizador_express.barniz_coste_total.value 			= "$ 0.00";
 	document.cotizador_express.placas_coste_total.value 			= "$ 0.00";
-	document.cotizador_express.costos_extra_corte_total.value 		= "$ 0.00";
+	document.cotizador_express.costos_extra_coste_total.value 		= "$ 0.00";
 	
 	document.cotizador_express.cotizacion_coste_total.value 		= "$ 0.00";
 }
