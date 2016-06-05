@@ -129,7 +129,7 @@
                                                         <tr>
                                                             <td width="1%">Nombre:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="nombre" value=""/>
+                                                                <input type="text" class="input" name="nombre" maxlength="45" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>

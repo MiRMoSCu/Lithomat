@@ -143,7 +143,7 @@
                                                         <tr>
                                                             <td width="58%">N&uacute;mero de tintas:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="num_tintas"
+                                                                <input type="text" class="input" name="num_tintas" maxlength="2"
                                                                        value="" 
                                                                        onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
@@ -157,7 +157,7 @@
                                                         <tr>
                                                             <td width="1%">Descripci&oacute;n:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="descripcion" value=""/>
+                                                                <input type="text" class="input" name="descripcion" maxlength="10" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>

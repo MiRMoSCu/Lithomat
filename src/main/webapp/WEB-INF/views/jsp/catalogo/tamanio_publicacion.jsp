@@ -139,7 +139,7 @@
                                                         <tr>
                                                             <td width="1%">Nombre:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="nombre" value=""/>
+                                                                <input type="text" class="input" name="nombre" maxlength="45" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -151,7 +151,7 @@
                                                         <tr>
                                                             <td width="67%">Tama&ntilde;o de fracci&oacute;n:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="tamanio_fraccion" value=""/>
+                                                                <input type="text" class="input" name="tamanio_fraccion" maxlength="10" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -161,7 +161,7 @@
                                                         <tr>
                                                             <td width="67%">N&uacute;mero de p&aacute;ginas:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="numero_paginas"
+                                                                <input type="text" class="input" name="numero_paginas" maxlength="3"
                                                                        value="" 
                                                                        onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
@@ -179,7 +179,7 @@
                                                         <tr>
                                                             <td width="56%">N&uacute;mero d&eacute;cimal:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="numero_decimal"
+                                                                <input type="text" class="input" name="numero_decimal" maxlength="15"
                                                                        value="" 
                                                                        onkeydown="revisaNumero(true, this.value, event, null, null)"/>
                                                             </td>
@@ -191,7 +191,7 @@
                                                         <tr>
                                                             <td width="62%">N&uacute;mero de doblez:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="numero_doblez"
+                                                                <input type="text" class="input" name="numero_doblez" maxlength="2"
                                                                        value="" 
                                                                        onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>

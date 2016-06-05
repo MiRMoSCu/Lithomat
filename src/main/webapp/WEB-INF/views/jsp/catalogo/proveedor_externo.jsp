@@ -156,7 +156,7 @@
                                                         <tr>
                                                             <td width="22%">Raz&oacute;n social:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="razon_social"
+                                                                <input type="text" class="input" name="razon_social" maxlength="80"
                                                                        value=""/>
                                                             </td>
                                                         </tr>
@@ -169,7 +169,7 @@
                                                         <tr>
                                                             <td width="1%">Calle:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="calle" value=""/>
+                                                                <input type="text" class="input" name="calle" maxlength="45" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -179,7 +179,7 @@
                                                         <tr>
                                                             <td width="47%">Num. exterior:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="num_exterior"
+                                                                <input type="text" class="input" name="num_exterior" maxlength="15"
                                                                        value=""/>
                                                             </td>
                                                         </tr>
@@ -196,7 +196,7 @@
                                                         <tr>
                                                             <td width="45%">Num. interior:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="num_interior" value=""/>
+                                                                <input type="text" class="input" name="num_interior" maxlength="15" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -206,7 +206,7 @@
                                                         <tr>
                                                             <td width="1%">Colonia:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="colonia" value=""/>
+                                                                <input type="text" class="input" name="colonia" maxlength="45" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -218,7 +218,7 @@
                                                         <tr>
                                                             <td width="1%">Delegaci&oacute;n:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="delegacion" value=""/>
+                                                                <input type="text" class="input" name="delegacion" maxlength="45" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -228,7 +228,7 @@
                                                         <tr>
                                                             <td width="1%">Estado:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="estado" value=""/>
+                                                                <input type="text" class="input" name="estado" maxlength="45" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -244,7 +244,7 @@
                                                         <tr>
                                                             <td width="48%">C&oacute;digo Postal:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="codigo_postal" value=""/>
+                                                                <input type="text" class="input" name="codigo_postal" maxlength="10" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -254,7 +254,7 @@
                                                         <tr>
                                                             <td width="1%">Tel&eacute;fono:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="telefono" value=""/>
+                                                                <input type="text" class="input" name="telefono" maxlength="20" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -266,7 +266,7 @@
                                                         <tr>
                                                             <td width="1%">Observaciones:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="observaciones" value=""/>
+                                                                <input type="text" class="input" name="observaciones" maxlength="250" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>

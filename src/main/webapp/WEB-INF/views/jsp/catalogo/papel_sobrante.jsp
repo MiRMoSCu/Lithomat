@@ -149,11 +149,12 @@
                                                 <div class="mitad_columna_izquierda">
                                                     <table>
                                                         <tr>
-                                                            <td width="34%">Tab inicio:</td>
+                                                            <td width="53%">Tabulador inicio:</td>
                                                             <td>
                                                                 <input  type="text"
                                                                         class="input"
                                                                         name="inicio_tabulador"
+                                                                        maxlength="10"
                                                                         value=""
                                                                         onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
@@ -163,11 +164,12 @@
                                                 <div class="mitad_columna_derecha">
                                                     <table>
                                                         <tr>
-                                                            <td width="26%">Tab fin:</td>
+                                                            <td width="45%">Tabulador fin:</td>
                                                             <td>
                                                                 <input  type="text"
                                                                         class="input"
                                                                         name="fin_tabulador"
+                                                                        maxlength="10"
                                                                         value=""
                                                                         onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
@@ -184,6 +186,7 @@
                                                                 <input  type="text"
                                                                         class="input"
                                                                         name="num_tinta_frente"
+                                                                        maxlength="2"
                                                                         value=""
                                                                         onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
@@ -198,6 +201,7 @@
                                                                 <input  type="text"
                                                                         class="input"
                                                                         name="num_tinta_vuelta"
+                                                                        maxlength="2"
                                                                         value=""
                                                                         onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
@@ -244,6 +248,7 @@
                                                                 <input  type="text"
                                                                         class="input"
                                                                         name="hojas_sobrante"
+                                                                        maxlength="6"
                                                                         value=""
                                                                         onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>

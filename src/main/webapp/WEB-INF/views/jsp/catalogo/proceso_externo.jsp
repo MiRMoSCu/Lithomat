@@ -119,7 +119,7 @@
                                         </div>
                                     </div>
                                     <div class="titulo">
-                                        <img alt="" src="resources/image/titulo_detalle.png"/>
+                                        <img alt="" src="<c:url value="/resources/image/titulo_detalle.png"/>"/>
                                     </div>
                                     <div class="linea">
                                         <div class="casilla">
@@ -157,7 +157,7 @@
                                                         <tr>
                                                             <td width="1%">Nombre:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="nombre_proceso" value=""/>
+                                                                <input type="text" class="input" name="nombre_proceso" maxlength="45" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -173,7 +173,7 @@
                                                         <tr>
                                                             <td width="1%">Observaciones:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="observaciones" value=""/>
+                                                                <input type="text" class="input" name="observaciones" maxlength="250" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -185,7 +185,7 @@
                                                         <tr>
                                                             <td width="1%">Precio:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="precio" value=""
+                                                                <input type="text" class="input" name="precio" maxlength="10" value=""
                                                                        onkeydown="revisaNumero(true, this.value, event, null, null)"/>
                                                             </td>
                                                         </tr>

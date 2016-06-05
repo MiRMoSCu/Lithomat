@@ -460,13 +460,13 @@
                     	document.forms["opcion_menu"].method = "post";
                     	document.forms[0].submit();
                     	break;
-                    case 'turno_laboral':
-                    	document.forms["opcion_menu"].action = urlTurnoLaboral;
+                    case 'tipo_vuelta':
+                    	document.forms["opcion_menu"].action = urlTipoVuelta;
                     	document.forms["opcion_menu"].method = "post";
                     	document.forms[0].submit();
                     	break;
-                    case 'tipo_vuelta':
-                    	document.forms["opcion_menu"].action = urlTipoVuelta;
+                    case 'turno_laboral':
+                    	document.forms["opcion_menu"].action = urlTurnoLaboral;
                     	document.forms["opcion_menu"].method = "post";
                     	document.forms[0].submit();
                     	break;
@@ -694,14 +694,14 @@
                                 			<div id="div_opcion_tipo_placa" class="boton_dinamico" onclick="menu('tipo_placa');">
                                 				<span class="texto_boton">Tipo placa</span>
                                 			</div>
-                                			<div id="div_opcion_tipo_vuelta" class="boton_dinamico" onclick="menu('tipo_vuelta');">
-                                				<span class="texto_boton">Tipo vuelta</span>
-                                			</div>
                                 			<div id="div_opcion_tipo_precio" class="boton_dinamico" onclick="menu('tipo_precio');">
                                 				<span class="texto_boton">Tipo precio</span>
                                 			</div>
                                 			<div id="div_opcion_tipo_trabajo" class="boton_dinamico" onclick="menu('tipo_trabajo');">
                                 				<span class="texto_boton">Tipo trabajo</span>
+                                			</div>
+                                			<div id="div_opcion_tipo_vuelta" class="boton_dinamico" onclick="menu('tipo_vuelta');">
+                                				<span class="texto_boton">Tipo vuelta</span>
                                 			</div>
                                 			<div id="div_opcion_turno_laboral" class="boton_dinamico" onclick="menu('turno_laboral');">
                                 				<span class="texto_boton">Turno laboral</span>

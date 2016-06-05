@@ -143,7 +143,7 @@
                                                         <tr>
                                                             <td width="1%">Nombre:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="nombre" value=""/>
+                                                                <input type="text" class="input" name="nombre" maxlength="45" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -155,7 +155,7 @@
                                                         <tr>
                                                             <td width="42%">Ap. Paterno:</td>
                                                             <td>
-                                                                <input  type="text" class="input" name="ap_paterno" value=""/>
+                                                                <input  type="text" class="input" name="ap_paterno" maxlength="45" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -165,7 +165,7 @@
                                                         <tr>
                                                             <td width="43%">Ap. Materno:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="ap_materno" value=""/>
+                                                                <input type="text" class="input" name="ap_materno" maxlength="45" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -181,7 +181,7 @@
                                                         <tr>
                                                             <td width="1%">Usuario:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="usuario" value=""/>
+                                                                <input type="text" class="input" name="usuario" maxlength="45" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -191,7 +191,7 @@
                                                         <tr>
                                                             <td width="1%">Contraseña:</td>
                                                             <td>
-                                                            	<input type="text" class="input" name="contrasenia" value=""/>
+                                                            	<input type="text" class="input" name="contrasenia" maxlength="45" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>

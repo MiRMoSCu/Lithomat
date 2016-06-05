@@ -133,7 +133,7 @@
                                                         <tr>
                                                             <td width="1%">Nombre:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="nombre" value=""/>
+                                                                <input type="text" class="input" name="nombre" maxlength="45" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -145,7 +145,7 @@
                                                         <tr>
                                                             <td width="55%">Apellido paterno:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="ap_paterno" value=""/>
+                                                                <input type="text" class="input" name="ap_paterno" maxlength="45" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -155,7 +155,7 @@
                                                         <tr>
                                                             <td width="58%">Apellido materno:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="ap_materno" value=""/>
+                                                                <input type="text" class="input" name="ap_materno" maxlength="45" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>

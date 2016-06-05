@@ -151,7 +151,7 @@
                                                         <tr>
                                                             <td width="1%">Nombre:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="nombre" value=""/>
+                                                                <input type="text" class="input" name="nombre" maxlength="45" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -163,7 +163,7 @@
                                                         <tr>
                                                             <td width="1%">Descripci&oacute;n:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="descripcion" value=""/>
+                                                                <input type="text" class="input" name="descripcion" maxlength="80" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -179,7 +179,7 @@
                                                         <tr>
                                                             <td width="54%">N&uacute;mero colores:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="num_colores"
+                                                                <input type="text" class="input" name="num_colores" maxlength="2"
                                                                        value="" 
                                                                        onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
@@ -189,9 +189,9 @@
                                                 <div class="mitad_columna_derecha">
                                                     <table>
                                                         <tr>
-                                                            <td width="35%">Alto placa:</td>
+                                                            <td width="53%">Alto placa (cm):</td>
                                                             <td>
-                                                                <input type="text" class="input" name="alto_placa"
+                                                                <input type="text" class="input" name="alto_placa" maxlength="3"
                                                                        value="" 
                                                                        onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
@@ -203,9 +203,9 @@
                                                 <div class="mitad_columna_izquierda">
                                                     <table>
                                                         <tr>
-                                                            <td width="43%">Ancho placa:</td>
+                                                            <td width="60%">Ancho placa (cm):</td>
                                                             <td>
-                                                                <input type="text" class="input" name="ancho_placa"
+                                                                <input type="text" class="input" name="ancho_placa" maxlength="3"
                                                                        value="" 
                                                                        onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
@@ -221,9 +221,9 @@
                                             	<div class="mitad_columna_izquierda">
                                                     <table>
                                                         <tr>
-                                                            <td width="49%">Alto min papel:</td>
+                                                            <td width="65%">Alto min papel (cm):</td>
                                                             <td>
-                                                                <input type="text" class="input" name="alto_min_papel"
+                                                                <input type="text" class="input" name="alto_min_papel" maxlength="3"
                                                                        value="" 
                                                                        onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
@@ -233,9 +233,9 @@
                                                 <div class="mitad_columna_derecha">
                                                     <table>
                                                         <tr>
-                                                            <td width="57%">Ancho min papel:</td>
+                                                            <td width="75%">Ancho min papel (cm):</td>
                                                             <td>
-                                                                <input type="text" class="input" name="ancho_min_papel"
+                                                                <input type="text" class="input" name="ancho_min_papel" maxlength="3"
                                                                        value="" 
                                                                        onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
@@ -247,9 +247,9 @@
                                                 <div class="mitad_columna_izquierda">
                                                     <table>
                                                         <tr>
-                                                            <td width="51%">Alto max papel:</td>
+                                                            <td width="68%">Alto max papel (cm):</td>
                                                             <td>
-                                                                <input type="text" class="input" name="alto_max_papel"
+                                                                <input type="text" class="input" name="alto_max_papel" maxlength="3"
                                                                        value="" 
                                                                        onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>
@@ -259,9 +259,9 @@
                                                 <div class="mitad_columna_derecha">
                                                     <table>
                                                         <tr>
-                                                            <td width="59%">Ancho max papel:</td>
+                                                            <td width="75%">Ancho max papel (cm):</td>
                                                             <td>
-                                                                <input type="text" class="input" name="ancho_max_papel"
+                                                                <input type="text" class="input" name="ancho_max_papel" maxlength="3"
                                                                        value="" 
                                                                        onkeydown="revisaNumero(false, this.value, event, null, null)"/>
                                                             </td>

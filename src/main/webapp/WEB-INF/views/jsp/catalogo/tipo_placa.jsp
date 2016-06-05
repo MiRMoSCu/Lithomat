@@ -154,7 +154,7 @@
                                                         <tr>
                                                             <td width="1%">Descripci&oacute;n:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="descripcion" value=""/>
+                                                                <input type="text" class="input" name="descripcion" maxlength="45" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -170,7 +170,7 @@
                                                         <tr>
                                                             <td width="1%">Precio:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="precio" value=""
+                                                                <input type="text" class="input" name="precio" maxlength="10" value=""
                                                                        onkeydown="revisaNumero(true, this.value, event, null, null)"/>
                                                             </td>
                                                         </tr>

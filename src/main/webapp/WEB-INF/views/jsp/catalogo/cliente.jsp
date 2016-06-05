@@ -324,9 +324,10 @@
                                                             <td width="1%">Nombre:</td>
                                                             <td>
                                                                 <input  type="text" 
-                                                                        class="input" 
-                                                                        name="nombre_moral" 
-                                                                        value=""/>
+                                                                		class="input" 
+                                                                		name="nombre_moral"
+                                                                		maxlength="80" 
+                                                                		value="" />
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -343,9 +344,10 @@
                                                             <td width="1%">Representante:</td>
                                                             <td>
                                                                 <input  type="text" 
-                                                                        class="input" 
-                                                                        name="nombre_representante"
-                                                                        value=""/>
+                                                                		class="input" 
+                                                                		name="nombre_representante"
+                                                                		maxlength="80" 
+                                                                		value="" />
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -360,6 +362,7 @@
                                                                 <input  type="text"
                                                                         class="input"
                                                                         name="puesto"
+                                                                        maxlength="200"
                                                                         value=""/>
                                                             </td>
                                                         </tr>
@@ -379,6 +382,7 @@
                                                                 <input  type="text" 
                                                                         class="input" 
                                                                         name="calle" 
+                                                                        maxlength="60"
                                                                         value=""/>
                                                             </td>
                                                         </tr>
@@ -391,7 +395,8 @@
                                                             <td>
                                                                 <input  type="text" 
                                                                         class="input" 
-                                                                        name="num_exterior" 
+                                                                        name="num_exterior"
+                                                                        maxlength="15" 
                                                                         value=""/>
                                                             </td>
                                                         </tr>
@@ -407,6 +412,7 @@
                                                                 <input  type="text" 
                                                                         class="input" 
                                                                         name="num_interior" 
+                                                                        maxlength="15"
                                                                         value=""/>
                                                             </td>
                                                         </tr>
@@ -420,6 +426,7 @@
                                                                 <input  type="text" 
                                                                         class="input" 
                                                                         name="colonia" 
+                                                                        maxlength="60"
                                                                         value=""/>
                                                             </td>
                                                         </tr>
@@ -439,6 +446,7 @@
                                                                 <input  type="text" 
                                                                         class="input" 
                                                                         name="delegacion_municipio" 
+                                                                        maxlength="45"
                                                                         value=""/>
                                                             </td>
                                                         </tr>
@@ -452,6 +460,7 @@
                                                                 <input  type="text" 
                                                                         class="input" 
                                                                         name="estado" 
+                                                                        maxlength="45"
                                                                         value=""/>
                                                             </td>
                                                         </tr>
@@ -467,6 +476,7 @@
                                                                 <input  type="text" 
                                                                         class="input" 
                                                                         name="codigo_postal" 
+                                                                        maxlength="10"
                                                                         value=""/>
                                                             </td>
                                                         </tr>
@@ -480,6 +490,7 @@
                                                                 <input  type="text"
                                                                         class="input"
                                                                         name="pais"
+                                                                        maxlength="45"
                                                                         value=""/>
                                                             </td>
                                                         </tr>
@@ -499,6 +510,7 @@
                                                                 <input  type="text" 
                                                                         class="input" 
                                                                         name="rfc" 
+                                                                        maxlength="25"
                                                                         value=""/>
                                                             </td>
                                                         </tr>
@@ -512,6 +524,7 @@
                                                                 <input  type="text"
                                                                         class="input"
                                                                         name="telefono_particular"
+                                                                        maxlength="20"
                                                                         value=""/>
                                                             </td>
                                                         </tr>
@@ -527,6 +540,7 @@
                                                                 <input  type="text"
                                                                         class="input"
                                                                         name="telefono_movil"
+                                                                        maxlength="20"
                                                                         value=""/>
                                                             </td>
                                                         </tr>
@@ -540,6 +554,7 @@
                                                                 <input  type="text"
                                                                         class="input"
                                                                         name="email"
+                                                                        maxlength="120"
                                                                         value=""/>
                                                             </td>
                                                         </tr>
@@ -559,6 +574,7 @@
                                                                 <input  type="text" 
                                                                         class="input" 
                                                                         name="observaciones" 
+                                                                        maxlength="250"
                                                                         value=""/>
                                                             </td>
                                                         </tr>

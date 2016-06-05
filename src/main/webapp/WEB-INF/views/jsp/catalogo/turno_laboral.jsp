@@ -137,7 +137,7 @@
                                                         <tr>
                                                             <td width="1%">Descripci&oacute;n:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="descripcion" value=""/>
+                                                                <input type="text" class="input" name="descripcion" maxlength="45" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -149,7 +149,7 @@
                                                         <tr>
                                                             <td width="37%">Hora inicio:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="hora_inicio" value=""/>
+                                                                <input type="text" class="input" name="hora_inicio" maxlength="8" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -159,7 +159,7 @@
                                                         <tr>
                                                             <td width="29%">Hora fin:</td>
                                                             <td>
-                                                                <input type="text" class="input" name="hora_fin" value=""/>
+                                                                <input type="text" class="input" name="hora_fin" maxlength="8" value=""/>
                                                             </td>
                                                         </tr>
                                                     </table>
