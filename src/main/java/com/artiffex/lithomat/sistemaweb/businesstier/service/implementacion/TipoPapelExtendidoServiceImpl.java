@@ -10,13 +10,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 
 import com.artiffex.lithomat.sistemaweb.businesstier.dto.TipoPapelExtendidoDTO;
@@ -392,52 +392,52 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 
 	public byte[] obtieneExcelListaTipoPapelExtendido() {
 		// generacion del excel
-		HSSFWorkbook wb = new HSSFWorkbook();
+		SXSSFWorkbook wb = new SXSSFWorkbook();
 		try {
 			// estilos
 				// alineacion centro
-			HSSFCellStyle cellStyle_centro = wb.createCellStyle();
-			cellStyle_centro.setAlignment((short)HSSFCellStyle.ALIGN_CENTER);
+			CellStyle cellStyle_centro = wb.createCellStyle();
+			cellStyle_centro.setAlignment((short)CellStyle.ALIGN_CENTER);
 			
 			// crecion de la hoja
-			HSSFSheet sheet = wb.createSheet("Papel");
+			Sheet sheet = wb.createSheet("Papel");
 			// creacion de fila 1
-			HSSFRow row = sheet.createRow(0);
+			Row row = sheet.createRow(0);
 			// creacion de celdas fila 1
 				// celda A (0)
-			HSSFCell cell_id = row.createCell(0);
+			Cell cell_id = row.createCell(0);
 			cell_id.setCellValue("ID");
 	        cell_id.setCellStyle(cellStyle_centro);
 	        	// celda B (1)
-	        HSSFCell cell_proveedor = row.createCell(1);
+	        Cell cell_proveedor = row.createCell(1);
 	        cell_proveedor.setCellValue("PROVEEDOR");
 	        cell_proveedor.setCellStyle(cellStyle_centro);
 	        	// celda C (2)
-	        HSSFCell cell_nombre = row.createCell(2);
+	        Cell cell_nombre = row.createCell(2);
 	        cell_nombre.setCellValue("NOMBRE");
 	        cell_nombre.setCellStyle(cellStyle_centro);
 	        	// celda D (3)
-	        HSSFCell cell_gramaje = row.createCell(3);
+	        Cell cell_gramaje = row.createCell(3);
 	        cell_gramaje.setCellValue("GRAMAJE");
 	        cell_gramaje.setCellStyle(cellStyle_centro);
 	        	// celda E (4)
-	        HSSFCell cell_kilogramos = row.createCell(4);
+	        Cell cell_kilogramos = row.createCell(4);
 	        cell_kilogramos.setCellValue("KILOGRAMOS");
 	        cell_kilogramos.setCellStyle(cellStyle_centro);
 	    		// celda G (5)
-	        HSSFCell cell_alto = row.createCell(5);
+	        Cell cell_alto = row.createCell(5);
 	        cell_alto.setCellValue("ALTO");
 	        cell_alto.setCellStyle(cellStyle_centro);
 	        	// celda F (6)
-	        HSSFCell cell_ancho = row.createCell(6);
+	        Cell cell_ancho = row.createCell(6);
 	        cell_ancho.setCellValue("ANCHO");
 	        cell_ancho.setCellStyle(cellStyle_centro);
 	        	// celda H (7)
-	        HSSFCell cell_precio = row.createCell(7);
+	        Cell cell_precio = row.createCell(7);
 	        cell_precio.setCellValue("PRECIO");
 	        cell_precio.setCellStyle(cellStyle_centro);
 	        	// celda I (8)
-	        HSSFCell cell_unidad = row.createCell(8);
+	        Cell cell_unidad = row.createCell(8);
 	        cell_unidad.setCellValue("UNIDAD");
 	        cell_unidad.setCellStyle(cellStyle_centro);
 	        
@@ -460,7 +460,7 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 				tipoPapelExtendido = null;
 			}
 			listaPapelExcel = null;
-			wb.close();
+			//wb.close();
 		} catch( Exception e ) {
 			System.out.println("obtieneExcelListaTipoPapelExtendido:Error al generar el archivo de excel");
 		}
@@ -470,6 +470,8 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 		try {
 			os = new ByteArrayOutputStream();
 			wb.write(os);
+			wb.dispose();
+			wb.close();
 			return os.toByteArray();
 		} catch( Exception e ) {
 			System.out.println("obtieneExcelListaTipoPapelExtendido:Error al convertir a stream");
@@ -489,9 +491,9 @@ public class TipoPapelExtendidoServiceImpl implements TipoPapelExtendidoService 
 			try {
 				FileInputStream fis = new FileInputStream( new File(path) );
 				// Get the workbook instance for XLS file 
-	            HSSFWorkbook workbook = new HSSFWorkbook(fis);
+	            XSSFWorkbook workbook = new XSSFWorkbook(fis);
 	            // Get first sheet from the workbook
-	            HSSFSheet sheet = workbook.getSheetAt(0);
+	            XSSFSheet sheet = workbook.getSheetAt(0);
 	            // Iterate through each rows from first sheet
 	            Iterator<Row> rowIterator = sheet.iterator();
 	            while(rowIterator.hasNext()) {

@@ -9,7 +9,7 @@
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.max_allowed_packet">50M</property>
 <!-- LOCAL DATABASE -->
-   
+
 		<property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/lithomat_artiffex</property>
 		<property name="hibernate.connection.username">root</property>
 
@@ -29,7 +29,8 @@
 		<property name="hibernate.enable_lazy_load_no_trans">true</property>
 		<property name="hibernate.query.factory_class">org.hibernate.hql.internal.classic.ClassicQueryTranslatorFactory</property>
 		<property name="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
-<!--************** JDBC connection pool C3PO *****************-->
+
+<!--************** JDBC connection pool C3PO for Hibernate *****************-->
 		<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
 		<property name="hibernate.c3p0.min_size">10</property>
 		<property name="hibernate.c3p0.max_size">50</property>
@@ -37,6 +38,7 @@
 		<property name="hibernate.c3p0.acquire_increment">1</property>
 		<property name="hibernate.c3p0.timeout">360000</property>
 		<property name="hibernate.c3p0.idle_test_period">180</property>
+
 <!-- ************ END JDBC connection pool C3PO ****************-->
 <!-- La ruta es absoluta -->
 		<mapping resource="hibernate/hn_acabado.hbm.xml"/>

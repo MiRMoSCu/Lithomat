@@ -580,8 +580,8 @@
                             <div id="div_formulario">
                                 <form name="opcion_menu" action="" accept-charset="ISO-8859-1">
                                 	<div id="div_pestania">
-                                	
                                 	<security:authorize access="hasRole('ROLE_ROOT')">
+	<!-- ROLE_ROOT -->
                                 		<div id="div_pestania_produccion" style="display:block; background-color: transparent;">
                                 			<div class="titulo_menu">
                                 				PRODUCCI&Oacute;N
@@ -731,6 +731,7 @@
                                 	</security:authorize>
                                 	
                                 	<security:authorize access="hasRole('ROLE_ADMIN')">
+	<!-- ROLE_ADMIN -->
                                 		<div id="div_pestania_produccion" style="display:block; background-color: transparent;">
                                 			<div class="titulo_menu">PRODUCCI&Oacute;N</div>
                                 			<div id="div_opcion_cotizacion_express" class="boton_dinamico" onclick="menu('cotizacion_express')">
@@ -854,6 +855,7 @@
                                 	</security:authorize>
                                 	
                                 	<security:authorize access="hasRole('ROLE_COTIZADOR')">
+	<!-- ROLE_COTIZADOR -->
                                 		<div id="div_pestania_produccion" style="display:block; background-color: transparent;">
                                 			<div class="titulo_menu">PRODUCCI&Oacute;N</div>
                                 			<div id="div_opcion_cotizacion_express" class="boton_dinamico" onclick="menu('cotizacion_express')">
@@ -896,6 +898,7 @@
                                 	</security:authorize>
                                 	
                                 	<security:authorize access="hasAnyRole('ROLE_DISENIO','ROLE_PREPRENSA','ROLE_TRANSPORTE','ROLE_PROCESO_EXTERNO','ROLE_ACABADO','ROLE_CLIENTE')">
+	<!-- ROLE_DISENIO, ROLE_PREPRENSA, ROLE_TRANSPORTE, ROLE_PROCESO_EXTERNO, ROLE_ACABADO, ROLE_CLIENTE -->
                                 		<div id="div_pestania_produccion" style="display:block; background-color: transparent;">
                                 			<div class="titulo_menu">PRODUCCI&Oacute;N</div>
                                 			<div id="div_opcion_semaforo" class="boton_dinamico" onclick="menu('semaforo');">

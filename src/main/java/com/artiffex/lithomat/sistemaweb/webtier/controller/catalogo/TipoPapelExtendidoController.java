@@ -354,8 +354,8 @@ public class TipoPapelExtendidoController {
 		byte[] documento = tipoPapelExtendidoService.obtieneExcelListaTipoPapelExtendido();
 		try {
 			OutputStream os = response.getOutputStream();
-			response.setHeader("Content-Disposition","attachment; filename=tipo_papel_extendido.xls");
-			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition","attachment; filename=tipo_papel_extendido.xlsx");
+			response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 			response.setContentLength( documento.length );
 			os.write( documento );
 			os.flush();
@@ -416,7 +416,7 @@ public class TipoPapelExtendidoController {
 				        System.out.println("isInMemory:" 	+ isInMemory);
 				        System.out.println("sizeInBytes:" 	+ sizeInBytes);
 				        
-				        if( contentType.equals("application/vnd.ms-excel") ) {
+				        if( contentType.equals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") ) {
 				        	boolean writeToFile = true;
 					        // Process a file upload
 				        	StringBuilder path 	= null;
@@ -437,7 +437,7 @@ public class TipoPapelExtendidoController {
 					        	path.append( request.getSession().getServletContext().getRealPath("/") );
 					        	path.append("/resources/temporal/");
 					        	path.append( dateFormat.format(date) );
-					        	path.append(".xls");
+					        	path.append(".xlsx");
 					        	
 					        	file = new File( path.toString() );
 					        	item.write(file);

@@ -15,9 +15,8 @@
 		<property name="url" value="${database.url}"/>
 		<property name="driverClassName" value="${database.driver}"/>
 	</bean>
-
-	<bean id="transactionManager" 
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
 	
